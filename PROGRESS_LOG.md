@@ -109,3 +109,12 @@ Brief + snapshot -> journal/daily_runs.log) and "ZarX Evening Snapshot" daily 21
 chokes on LF-only bats, fixed and re-gated: zero errors). Limitation recorded: laptop
 must be on and awake at run time; missed runs are skipped (manual run any time is valid).
 Reading the log: use UTF-8 (e.g. `Get-Content journal\daily_runs.log -Encoding UTF8`).
+
+## 2026-07-19 — Snapshots at every 4h close + ROADMAP.md handoff
+
+Commander's request: snapshot cadence raised from 2x to 6x daily — Task Scheduler now
+fires run_snapshot.bat at every 4h candle close (01:05/05:05/13:05/17:05/21:05 PKT,
+morning 09:05 covered by the full ritual). API cost ~18/800 daily credits. ROADMAP.md
+written: complete state, build queue (lab → grader → Context Deck → Carry Monitor →
+sealed gauntlet), standing answers, daily ritual, provenance — the single handoff
+document for any future session/model.
