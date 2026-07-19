@@ -42,8 +42,8 @@ jobs:
         run: |
           git config user.name "zarx-cloud-watchman"
           git config user.email "actions@github.com"
-          git pull --rebase origin main
           git add journal/snapshots.csv
           git diff --cached --quiet && echo "No new rows" && exit 0
           git commit -m "cloud: snapshot $(date -u '+%Y-%m-%d %H:%M') UTC"
+          git pull --rebase origin main
           git push origin main
