@@ -100,3 +100,12 @@ User's daily ritual (Pakistan time): run Brief + snapshot ~09:05 PKT (after the
 09:00 candle close; timestamps inside are UTC = PKT-5).
 **Next:** lab/ (honest backtester around rule-signals), then trade-logging half of the
 journal, then Carry Monitor.
+
+## 2026-07-19 — Part 7: Automation — Zar X runs itself (GATE PASSED)
+
+Windows Task Scheduler registered: "ZarX Morning Brief" daily 09:05 PKT (full ritual:
+Brief + snapshot -> journal/daily_runs.log) and "ZarX Evening Snapshot" daily 21:05 PKT
+(extra evidence row). run_daily.bat / run_snapshot.bat added (ASCII/CRLF endings — cmd
+chokes on LF-only bats, fixed and re-gated: zero errors). Limitation recorded: laptop
+must be on and awake at run time; missed runs are skipped (manual run any time is valid).
+Reading the log: use UTF-8 (e.g. `Get-Content journal\daily_runs.log -Encoding UTF8`).
