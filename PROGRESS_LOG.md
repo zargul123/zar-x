@@ -89,3 +89,14 @@ offline instruments self-report without stopping the Brief.
 UP-trend Chaotic; SOL $76.24 MIXED Chaotic. All instruments reporting.
 **Stage 1 status:** data ✅ indicators ✅ risk ✅ regime ✅ Brief ✅ — remaining: lab/ port
 (honest backtester redesigned around rule-signals) + journal, then Layer 7 Carry Monitor.
+
+## 2026-07-19 — Part 6: journal/ snapshots — the black box (GATE PASSED)
+
+`python journal/snapshot.py` appends one row per asset to journal/snapshots.csv:
+UTC time, price, trend state, RSI, ATR(%), regime reading. Purpose: score the
+instruments against reality later ("said UP on the 15th — what happened?"). First
+entries recorded live (BTC UP/Ranging, ETH UP/Chaotic, SOL MIXED/Chaotic).
+User's daily ritual (Pakistan time): run Brief + snapshot ~09:05 PKT (after the
+09:00 candle close; timestamps inside are UTC = PKT-5).
+**Next:** lab/ (honest backtester around rule-signals), then trade-logging half of the
+journal, then Carry Monitor.
