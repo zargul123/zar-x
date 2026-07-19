@@ -7,17 +7,18 @@ from pathlib import Path
 from pkg_resources import get_distribution, DistributionNotFound
 
 
-_dist = get_distribution("pandas_ta")
+# ZarX vendor patch: this copy runs without pip metadata (e.g. on CI),
+# so the distribution lookup must not be fatal. Version is pinned to the
+# exact vendored release.
 try:
-    # Normalize case for Windows systems
+    _dist = get_distribution("pandas_ta")
     here = Path(_dist.location) / __file__
     if not here.exists():
         # not installed, but there is another version that *is*
         raise DistributionNotFound
+    version = __version__ = _dist.version
 except DistributionNotFound:
-    __version__ = "Please install this project with setup.py"
-
-version = __version__ = _dist.version
+    version = __version__ = "0.3.14b0"
 
 Imports = {
     "alphaVantage-api": find_spec("alphaVantageAPI") is not None,
