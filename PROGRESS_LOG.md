@@ -200,3 +200,9 @@ autonomously (21:03/21:04 UTC). Zar X now has a redundant watch: laptop Task Sch
 Evidence viewable from mobile: GitHub app → zar-x → journal/snapshots.csv. Known
 cosmetic: Node.js deprecation annotation from GitHub's own actions — harmless, bump
 checkout/setup-python versions in a calm session.
+
+## 2026-07-20 — CHECK_STATUS.bat: one-click health check
+
+Double-click shows: each laptop alarm's last run time with OK/never/error-code verdict,
+the six newest black-box rows, and the reminder that the cloud guard is checked at the
+repo's latest-commit line on GitHub. Window stays open until a key is pressed.
