@@ -38,6 +38,9 @@ jobs:
       - name: Take snapshot
         env:
           TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          # The exact pandas_ta 0.3.14b0 from the laptop travels with the
+          # repo (vendor/) — PyPI no longer serves it. Same code everywhere.
+          PYTHONPATH: ${{ github.workspace }}/vendor
         run: python journal/snapshot.py
 
       - name: Commit evidence back to the black box

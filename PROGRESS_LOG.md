@@ -179,3 +179,12 @@ Missed shot fired as catch-up: success (result 0), rows landed 01:32 PKT (BTC $6
 UP/Ranging; ETH $1,864 UP/Chaotic; SOL $75.96 MIXED/Chaotic). Also this session:
 OneDrive mobile sync in both bats (OneDrive\ZarX) and the Cloud Watchman workflow
 (pending user's GitHub secret + test run).
+
+## 2026-07-20 — Cloud fix: vendored pandas_ta (zero-behavior-change option)
+
+Cloud install failed because pandas-ta 0.3.14b0 is no longer served by PyPI (only 0.4.x
+for Python >=3.12 exists). Chosen fix per Commander's "no morning surprises" rule:
+vendor the EXACT library copy from the laptop's environment into vendor/pandas_ta
+(0.86 MB, verified importable and version 0.3.14b0). Cloud workflow points PYTHONPATH at
+vendor/; requirements slimmed. Local system untouched — indicators smoke gate re-run to
+confirm: PASSED unchanged.
