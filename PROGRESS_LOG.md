@@ -151,3 +151,9 @@ after 24h" — fail-honest behavior verified. First real grades appear 2026-07-2
 **7-day observation plan:** system self-grades daily; Commander may ask "zar x, review
 the journal" any day; full week-1 review ~2026-07-26. Build queue continues unchanged
 (lab next) in parallel sessions.
+
+## 2026-07-19 — Automation upgrade: catch-up on wake
+
+All six scheduled tasks set to StartWhenAvailable=true: if the laptop was closed/asleep
+at an alarm time, the run fires automatically the moment the laptop wakes. Missed-hour
+gaps remain harmless (grader scores whatever rows exist); no user action ever needed.
