@@ -21,3 +21,9 @@ research from the final Fable session).
 
 **Next:** Stage 1 Phase 0 — port `data/` module + smoke test. Deliverable gate:
 one command prints live BTC/ETH/SOL candles.
+
+## 2026-07-19 — GitHub home + Ship Laws
+
+Repo connected and pushed: github.com/zargul123/zar-x (branch main). SHIP_LAWS.md added —
+the Commander's six laws: everything recorded with results and reasons; code in isolated
+parts; fail-safe parts with smoke tests; gates before tests; explain-then-commit; THE PROMISE.
