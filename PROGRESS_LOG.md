@@ -128,3 +128,13 @@ Execute=cmd.exe, Arguments=/c "quoted path" — immune to spaces. Verified by te
 through the real scheduler: snapshot wrote 3 rows autonomously at 21:10 PKT
 (BTC $64,522 UP/Ranging; ETH $1,869 UP/Chaotic; SOL $76.05 MIXED/Chaotic) — Zar X's
 first fully autonomous action.
+
+## 2026-07-19 — Part 8: the Trade Planner (GATE PASSED)
+
+Commander's feedback: "trend UP alone is nothing — where is my stop loss?" → built
+cockpit/plan.py: the pilot states asset/direction/capital (+optional risk% and entry),
+Zar X answers the full disciplined plan from live data: SL, TP, exact size, money lost
+if wrong, gained if right, weather context. Clarified the two outputs: snapshots = the
+science notebook (for the future grader), the Brief + Planner = the pilot's tools.
+**Gate:** live plan for long BTC on $500 → SL/TP correct sides, 25% cap engaged,
+loss-if-wrong $1.41 (0.28% of capital). PASSED.
