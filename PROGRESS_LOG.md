@@ -34,3 +34,16 @@ Kimi's structural-edge contribution adopted (funding carry monitor as instrument
 prediction). Build order fixed: Hull → Carry Monitor → context instruments → gauntlet
 slots last. Win%×payoff−costs reading law recorded. Phase 0 (data compartment port)
 begins now. Gate: one command prints live BTC/ETH/SOL candles.
+
+## 2026-07-19 — PHASE 0 COMPLETE: data compartment alive (GATE PASSED)
+
+Ported from museum: TwelveData fetch (429-retry, 65s wait), pagination with 8s pacing,
+Yahoo fallback, hold-out end_date cutoff — into `data/market_data.py` (clean candles ONLY;
+indicators deliberately left for their own compartment per Law 2). `config.py` created as
+single source of settings; `.env` key installed (gitignored). Fail-safe pattern in place:
+"DATA INSTRUMENT OFFLINE" instead of crashes.
+
+**Gate result:** `python data/smoke_test.py` → live candles for all three assets
+(BTC $64,510.71 / ETH $1,869.61 / SOL $76.12 at 2026-07-19 12:00). PASSED.
+
+**Next:** indicators/ compartment port + smoke test.
