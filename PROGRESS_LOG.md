@@ -68,3 +68,13 @@ reasons: trailing stop (2026 data showed it cut winners/kept losers), should_exe
 **Gate:** live BTC long plan on $1000 → SL<entry<TP, R:R 1.33 as configured, cap engaged
 correctly ($250 position, $2.49 risk). PASSED.
 **Next:** regime/ compartment (vane with per-timeframe calibration).
+
+## 2026-07-19 — Part 4: regime/ compartment — the weather vane (GATE PASSED)
+
+Ported with three lessons applied: per-timeframe entropy dials (4h = calibrated 1.96;
+1h = 1.5), fail-honest "Uncalibrated" for undialed timeframes, stateless per-reading
+replay (fixes the museum's shared-EMA cross-asset contamination bug). HONEST STATUS in
+docstring: context instrument, NOT proven alpha (failed fresh-year P&L rescue test).
+**Gate:** live BTC 4h → "Ranging" (entropy 1.952 vs dial 1.96, ADX 23.3); 1d correctly
+answers "Uncalibrated". PASSED.
+**Next:** lab/ (honest backtester redesigned around rule-signals) OR cockpit Morning Brief.

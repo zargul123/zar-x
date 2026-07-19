@@ -38,3 +38,19 @@ RISK_CONFIG = {
     'default_sl_atr': 1.5,         # stop-loss distance in ATRs (proven defaults)
     'default_tp_atr': 2.0,         # take-profit distance in ATRs
 }
+
+# --- Regime vane (Layer 2: context instrument, NOT proven alpha) ---
+# Entropy thresholds are PER-TIMEFRAME (Zargul 2.0 lesson: a 1h-tuned dial
+# saturates on 4h and stamps everything Chaotic). 4h value = p70 of the
+# 2023-2025 calibration study (see museum analyze_regime_4h.py). Timeframes
+# without a calibrated value report "Uncalibrated" instead of guessing.
+REGIME_CONFIG = {
+    'adx_trending_threshold': 25,
+    'entropy_window': 50,
+    'entropy_smoothing_alpha': 0.1,
+    'entropy_bin_edge': 0.005,           # ±0.5% return buckets (proven)
+    'entropy_chaotic_thresholds': {      # per-timeframe calibrated dials
+        '1h': 1.5,                       # original 1h-era value
+        '4h': 1.96,                      # calibrated 2026-07-19 (p70 pre-2026)
+    },
+}
