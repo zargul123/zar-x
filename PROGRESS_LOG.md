@@ -188,3 +188,15 @@ vendor the EXACT library copy from the laptop's environment into vendor/pandas_t
 (0.86 MB, verified importable and version 0.3.14b0). Cloud workflow points PYTHONPATH at
 vendor/; requirements slimmed. Local system untouched — indicators smoke gate re-run to
 confirm: PASSED unchanged.
+
+## 2026-07-20 — THE CLOUD WATCHMAN IS ALIVE (GATE PASSED)
+
+After four honest onion layers (dirty-worktree ordering bug → PyPI no longer serves
+pandas-ta 0.3.14b0 → vendored the laptop's exact library copy → patched its non-fatal
+version lookup), the workflow ran green: commits 22f9b35/661a6cb authored by
+zarx-cloud-watchman — GitHub's runner fetched live data and committed snapshot rows
+autonomously (21:03/21:04 UTC). Zar X now has a redundant watch: laptop Task Scheduler
+(6× daily + Brief + grader at 09:05) AND cloud every 4h independent of the laptop.
+Evidence viewable from mobile: GitHub app → zar-x → journal/snapshots.csv. Known
+cosmetic: Node.js deprecation annotation from GitHub's own actions — harmless, bump
+checkout/setup-python versions in a calm session.
