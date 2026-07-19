@@ -118,3 +118,13 @@ morning 09:05 covered by the full ritual). API cost ~18/800 daily credits. ROADM
 written: complete state, build queue (lab → grader → Context Deck → Carry Monitor →
 sealed gauntlet), standing answers, daily ritual, provenance — the single handoff
 document for any future session/model.
+
+## 2026-07-19 — Automation incident & fix: the missing-quotes trap (RESOLVED, verified by fire)
+
+The first scheduled run (21:05) failed with 0x80070002 "file not found": schtasks stored
+the bat path WITHOUT quotes, so Windows read it only to the first space ("...\zargul").
+Fix: all six tasks recreated via native PowerShell cmdlets (Register-ScheduledTask) with
+Execute=cmd.exe, Arguments=/c "quoted path" — immune to spaces. Verified by test-firing
+through the real scheduler: snapshot wrote 3 rows autonomously at 21:10 PKT
+(BTC $64,522 UP/Ranging; ETH $1,869 UP/Chaotic; SOL $76.05 MIXED/Chaotic) — Zar X's
+first fully autonomous action.
