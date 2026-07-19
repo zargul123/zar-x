@@ -78,3 +78,14 @@ docstring: context instrument, NOT proven alpha (failed fresh-year P&L rescue te
 **Gate:** live BTC 4h → "Ranging" (entropy 1.952 vs dial 1.96, ADX 23.3); 1d correctly
 answers "Uncalibrated". PASSED.
 **Next:** lab/ (honest backtester redesigned around rule-signals) OR cockpit Morning Brief.
+
+## 2026-07-19 — Part 5: THE MORNING BRIEF IS ALIVE (Stage 1 core deliverable)
+
+`python cockpit/brief.py` → full live briefing, 3/3 assets: price + 24h change, trend
+state (EMA50/200), RSI momentum, ATR volatility, weather reading (calibrated vane), and
+a disciplined example risk plan per asset. Assembled purely through compartment doorways;
+offline instruments self-report without stopping the Brief.
+**First-ever live Brief (2026-07-19 20:41):** BTC $64,580 UP-trend Ranging; ETH $1,874
+UP-trend Chaotic; SOL $76.24 MIXED Chaotic. All instruments reporting.
+**Stage 1 status:** data ✅ indicators ✅ risk ✅ regime ✅ Brief ✅ — remaining: lab/ port
+(honest backtester redesigned around rule-signals) + journal, then Layer 7 Carry Monitor.
