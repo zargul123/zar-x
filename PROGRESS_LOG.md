@@ -57,3 +57,14 @@ error. CORE_COLUMNS contract published for consumers.
 **Gate:** live BTC 300 candles → all 12 core columns, RSI 54.8 in range, ATR $497 positive,
 trend check works (price ABOVE EMA-200). PASSED.
 **Next:** risk/ compartment (SL/TP/size calculator) port.
+
+## 2026-07-19 — Part 3: risk/ compartment — the Discipline Engine (GATE PASSED)
+
+Ported from museum RiskManager: ATR calc + ATR-based SL/TP levels (faithful). Sizing
+UPGRADED to the stop-distance formula (size = risk money / stop distance — the math that
+makes ~40%-wrong survivable), with a 25% max-position cap. Deliberately NOT ported, with
+reasons: trailing stop (2026 data showed it cut winners/kept losers), should_execute
+(dead AI-prediction pipeline). RISK_CONFIG added to config.py (1% risk default).
+**Gate:** live BTC long plan on $1000 → SL<entry<TP, R:R 1.33 as configured, cap engaged
+correctly ($250 position, $2.49 risk). PASSED.
+**Next:** regime/ compartment (vane with per-timeframe calibration).

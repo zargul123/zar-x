@@ -30,3 +30,11 @@ TIMEFRAME_MAP = {
 
 # Yahoo Finance fallback: how much history each timeframe may request
 YAHOO_PERIOD_MAP = {'1h': '60d', '4h': '120d', '1d': '2y', '15m': '30d'}
+
+# --- Risk doctrine (Layer 1: the Discipline Engine) ---
+RISK_CONFIG = {
+    'risk_per_trade': 0.01,        # risk 1% of capital per trade (default)
+    'max_position_fraction': 0.25, # never put more than 25% of capital in one trade
+    'default_sl_atr': 1.5,         # stop-loss distance in ATRs (proven defaults)
+    'default_tp_atr': 2.0,         # take-profit distance in ATRs
+}
