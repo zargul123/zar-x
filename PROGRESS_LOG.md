@@ -27,3 +27,10 @@ one command prints live BTC/ETH/SOL candles.
 Repo connected and pushed: github.com/zargul123/zar-x (branch main). SHIP_LAWS.md added —
 the Commander's six laws: everything recorded with results and reasons; code in isolated
 parts; fail-safe parts with smoke tests; gates before tests; explain-then-commit; THE PROMISE.
+
+## 2026-07-19 — Amendment 1: Layer 7 Carry Monitor, Build Order A
+
+Kimi's structural-edge contribution adopted (funding carry monitor as instrument, not
+prediction). Build order fixed: Hull → Carry Monitor → context instruments → gauntlet
+slots last. Win%×payoff−costs reading law recorded. Phase 0 (data compartment port)
+begins now. Gate: one command prints live BTC/ETH/SOL candles.

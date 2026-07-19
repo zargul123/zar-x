@@ -69,3 +69,21 @@ Most retail traders lose to overtrading, oversizing, leverage, fees, and trading
 
 ## Process laws (carried from the prediction chapter)
 Explain before change · commit after change · gates before tests · budget sealed · every result to PROGRESS_LOG · Kimi consulted at phase gates · new repo per user's rule (strategy change = new program; port only proven organs)
+
+## AMENDMENT 1 (2026-07-19, adopted from Kimi adviser) — Layer 7 + build order
+
+**Layer 7 — Carry Monitor (structural, adopted from Kimi's "honest map"):** delta-neutral
+funding-rate carry (hold spot, short perpetual, collect funding) monitored across
+exchanges; cockpit reports current annualized carry and flags attractive/thin/negative.
+NOT a prediction — needs no gauntlet win-rate, only risk math. Carved caveats: requires
+real capital on a derivatives exchange; yield modest and variable; funding can flip
+negative; exchange counterparty risk is real (FTX lesson). Small, boring, real.
+
+**Reading law for all stat cards:** win rate alone is meaningless —
+win% × payoff ratio − costs is the only equation. (Our own 1h data: 50.2% wins at
+0.70/1.04 payoff = negative.)
+
+**BUILD ORDER A (final):** Hull → Layer 7 Carry Monitor → behavioral context instruments
+(Layers 4-6 as information) → the 3 sealed gauntlet slots last. THE PROMISE unchanged.
+Concessions recorded: Layers 1-2 = survival precondition, not profit; "60%" target
+retired — the market sets bars.
