@@ -47,3 +47,13 @@ single source of settings; `.env` key installed (gitignored). Fail-safe pattern 
 (BTC $64,510.71 / ETH $1,869.61 / SOL $76.12 at 2026-07-19 12:00). PASSED.
 
 **Next:** indicators/ compartment port + smoke test.
+
+## 2026-07-19 — Part 2: indicators/ compartment (GATE PASSED)
+
+Ported the proven Elite indicator set (rsi, macd, bbands, adx, mfi, atr + cores=0 memory
+fix) from the museum, added ema_20/50/200 for Brief trend state, kept time features and
+cleanup order. Fail-safe: returns candles untouched + "INDICATORS INSTRUMENT OFFLINE" on
+error. CORE_COLUMNS contract published for consumers.
+**Gate:** live BTC 300 candles → all 12 core columns, RSI 54.8 in range, ATR $497 positive,
+trend check works (price ABOVE EMA-200). PASSED.
+**Next:** risk/ compartment (SL/TP/size calculator) port.
