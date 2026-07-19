@@ -138,3 +138,16 @@ if wrong, gained if right, weather context. Clarified the two outputs: snapshots
 science notebook (for the future grader), the Brief + Planner = the pilot's tools.
 **Gate:** live plan for long BTC on $500 → SL/TP correct sides, 25% cap engaged,
 loss-if-wrong $1.41 (0.28% of capital). PASSED.
+
+## 2026-07-19 — Part 9: THE GRADER — the system now checks itself (GATE PASSED)
+
+ROADMAP queue item #2 (first half) built on Commander's request: run the existing system
+7 days and have it verify its own basic readings automatically. journal/grader.py scores
+every snapshot trend claim (UP/DOWN) against what price actually did 6 candles (24h)
+later; MIXED rows carry no claim; young rows honestly reported as "not yet gradable".
+Wired into the 09:05 daily ritual — every morning: Brief → snapshot → self-exam, all in
+daily_runs.log. **Gate:** first run correctly reports 12 claims / 0 gradable / "come back
+after 24h" — fail-honest behavior verified. First real grades appear 2026-07-20+.
+**7-day observation plan:** system self-grades daily; Commander may ask "zar x, review
+the journal" any day; full week-1 review ~2026-07-26. Build queue continues unchanged
+(lab next) in parallel sessions.
