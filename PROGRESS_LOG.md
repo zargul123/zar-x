@@ -169,3 +169,13 @@ timestamps make duplicates harmless).
 **Gate (pending):** requires TWELVEDATA_API_KEY added by the Commander as a GitHub
 Actions secret, then one manual workflow run must commit rows. Mobile OneDrive sync of
 local reports also added to both runner bats (OneDrive\ZarX).
+
+## 2026-07-20 — Incident: 01:05 snapshot skipped on battery (RESOLVED, verified)
+
+The 01:05 PKT alarm did not fire despite the laptop being awake: Windows' default task
+condition "do not start if on batteries" blocked it (laptop was unplugged). Fix:
+DisallowStartIfOnBatteries and StopIfGoingOnBatteries set to false on all six tasks.
+Missed shot fired as catch-up: success (result 0), rows landed 01:32 PKT (BTC $64,501
+UP/Ranging; ETH $1,864 UP/Chaotic; SOL $75.96 MIXED/Chaotic). Also this session:
+OneDrive mobile sync in both bats (OneDrive\ZarX) and the Cloud Watchman workflow
+(pending user's GitHub secret + test run).
