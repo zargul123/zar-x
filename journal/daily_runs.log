@@ -104,3 +104,12 @@ C:\Users\hp\miniconda3\envs\tfdml\lib\site-packages\pandas_ta\__init__.py:7: Use
 📓 SOL-USD: recorded — $76.05, MIXED, Chaotic
 
 🗃️ 3 row(s) appended to snapshots.csv
+ 
+---- evening snapshot 19-Jul-2026 23:53:37.28 ---- 
+C:\Users\hp\miniconda3\envs\tfdml\lib\site-packages\pandas_ta\__init__.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution, DistributionNotFound
+📓 BTC-USD: recorded — $64,403.99, UP, Ranging
+📓 ETH-USD: recorded — $1,859.64, UP, Chaotic
+📓 SOL-USD: recorded — $75.68, MIXED, Chaotic
+
+🗃️ 3 row(s) appended to snapshots.csv

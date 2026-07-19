@@ -1,0 +1,49 @@
+# Zar X — cloud watchman.
+# GitHub's own runner takes a market snapshot at every 4h candle close
+# (5 minutes past, giving the data provider time to serve the candle)
+# and commits the new evidence rows back into the repository.
+# The laptop keeps its local ritual; this is the always-on double.
+
+name: Cloud Snapshot
+
+on:
+  schedule:
+    - cron: '5 0,4,8,12,16,20 * * *'   # UTC = every 4h candle close +5min
+  workflow_dispatch: {}                 # manual test button / trigger
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cloud-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install parts
+        run: pip install -r requirements.txt
+
+      - name: Take snapshot
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+        run: python journal/snapshot.py
+
+      - name: Commit evidence back to the black box
+        run: |
+          git config user.name "zarx-cloud-watchman"
+          git config user.email "actions@github.com"
+          git pull --rebase origin main
+          git add journal/snapshots.csv
+          git diff --cached --quiet && echo "No new rows" && exit 0
+          git commit -m "cloud: snapshot $(date -u '+%Y-%m-%d %H:%M') UTC"
+          git push origin main

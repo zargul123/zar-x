@@ -157,3 +157,15 @@ the journal" any day; full week-1 review ~2026-07-26. Build queue continues unch
 All six scheduled tasks set to StartWhenAvailable=true: if the laptop was closed/asleep
 at an alarm time, the run fires automatically the moment the laptop wakes. Missed-hour
 gaps remain harmless (grader scores whatever rows exist); no user action ever needed.
+
+## 2026-07-20 — Part 10: the Cloud Watchman (deployed; gate pending secret)
+
+Commander's request: snapshots must not depend on the laptop. GitHub Actions workflow
+(.github/workflows/cloud_snapshot.yml) runs journal/snapshot.py on GitHub's own runner
+at every 4h candle close (+5min, UTC cron) and commits new evidence rows back to the
+repo — viewable from the phone anywhere via the GitHub app/site. requirements.txt added
+for the cloud runner. Laptop ritual continues in parallel (double coverage; snapshot
+timestamps make duplicates harmless).
+**Gate (pending):** requires TWELVEDATA_API_KEY added by the Commander as a GitHub
+Actions secret, then one manual workflow run must commit rows. Mobile OneDrive sync of
+local reports also added to both runner bats (OneDrive\ZarX).
