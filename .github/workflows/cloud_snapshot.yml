@@ -43,12 +43,18 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}/vendor
         run: python journal/snapshot.py
 
+      - name: Grade the claims (self-exam on the complete cloud diary)
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          PYTHONPATH: ${{ github.workspace }}/vendor
+        run: python journal/grader.py | tee journal/cloud_grader_report.txt
+
       - name: Commit evidence back to the black box
         run: |
           git config user.name "zarx-cloud-watchman"
           git config user.email "actions@github.com"
-          git add journal/snapshots.csv
+          git add journal/snapshots.csv journal/cloud_grader_report.txt
           git diff --cached --quiet && echo "No new rows" && exit 0
-          git commit -m "cloud: snapshot $(date -u '+%Y-%m-%d %H:%M') UTC"
+          git commit -m "cloud: snapshot + grades $(date -u '+%Y-%m-%d %H:%M') UTC"
           git pull --rebase origin main
           git push origin main

@@ -206,3 +206,11 @@ checkout/setup-python versions in a calm session.
 Double-click shows: each laptop alarm's last run time with OK/never/error-code verdict,
 the six newest black-box rows, and the reminder that the cloud guard is checked at the
 repo's latest-commit line on GitHub. Window stays open until a key is pressed.
+
+## 2026-07-20 — Cloud self-grading (Commander's design insight)
+
+Commander spotted the gap: the cloud gathers the most complete diary (laptop sleeps;
+cloud doesn't) but only the laptop graded. Cloud workflow now runs the Grader after
+every snapshot and commits journal/cloud_grader_report.txt — an always-fresh graded
+report card on the GitHub page, phone-readable. Laptop keeps grading its own diary at
+09:05; Friday's review merges both. Two watchmen, both now self-examining.
