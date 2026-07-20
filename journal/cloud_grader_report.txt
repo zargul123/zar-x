@@ -1,8 +1,8 @@
 ========================================================
   ZAR X GRADER — trend-claim report card
 ========================================================
-  Claims on file      : 39
-  Not yet gradable    : 39 (younger than 24h of market)
+  Claims on file      : 42
+  Not yet gradable    : 42 (younger than 24h of market)
   No directional claim: 0 (MIXED)
   GRADED              : 0
   Verdict: come back after the market has had 24h to answer.
