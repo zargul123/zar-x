@@ -214,3 +214,73 @@ cloud doesn't) but only the laptop graded. Cloud workflow now runs the Grader af
 every snapshot and commits journal/cloud_grader_report.txt — an always-fresh graded
 report card on the GitHub page, phone-readable. Laptop keeps grading its own diary at
 09:05; Friday's review merges both. Two watchmen, both now self-examining.
+
+## 2026-07-20 — MASTER PLAN v1 (brainstorm, agreed)
+
+Visual artifact: claude.ai/code/artifact/edd0e5a4-34c4-493e-9f0f-4c87db3fc204
+Synthesized from our roadmap + Kimi's detailed build manual + user's decisions.
+
+**Nine phases:**
+0. Foundation — DONE (the 7 live compartments + automation)
+1. Honesty Check — NOW. + Data Validator; + old LSTM as a silent GRADED observer.
+   (Regime v2 complexity — Hurst/fractal/voting — HELD until this evidence speaks.)
+2. The Lab — sealed-vault data split, walk-forward, cost simulator, Monte Carlo,
+   regime breakdown, lie detector. Gate: must catch a deliberately-bad dummy strategy.
+3. Context Deck — fear&greed, funding, news headlines, event calendar, war-warnings.
+   Shown as RAW pieces, NOT a fake-precise blended score. (Fixes the war blind spot.)
+4. Carry Monitor — delta-neutral funding carry; structural income, no gauntlet needed.
+5. Trade Logger & Mirror — one-command log, psychology tracking, monthly you-vs-system.
+6. The Gauntlet — 3 sealed trials (Turtle / Funding-fade / Cycle), gates locked BEFORE
+   testing (Kimi reviews). Only survivors give real buy/sell signals.
+7. Proving Voyage — paper trading at the pilot's pace. USER DECISION: NO 4-trades/month
+   cap (system informs, never blocks). 1% risk shown, not forced. Learning = human review
+   only, never silent auto-tuning.
+8. Permanent Loop — daily brief → decision → track → monthly review, for years.
+
+**Three-Voice Courtroom:** ZarX instruments + old LSTM observer + gauntlet survivors,
+all graded side by side, all silent until proven.
+
+**Two ghosts CUT (with reasons):** (a) self-tuning autopilot — with ~50 paper trades/yr
+you fit noise; the LSTM had 26,000 examples and still failed, so 50 fails faster; learning
+stays human-in-the-loop at review time. (b) fake-precise blended "context score" mixing
+unproven signals with invented weights — show raw pieces, let the pilot judge.
+
+**Creed:** part-time, not competing with institutions; test everything; 2-year horizon;
+50% of earnings → schools & hospitals.
+
+## 2026-07-20 — ARCHITECT CRITIQUE (senior-architect review of the plan)
+
+Cold review found the plan's philosophy/gates/sequencing sound, but the unglamorous
+plumbing layer missing and one live security wound. Fix these BEFORE new features:
+
+**Critical missing architecture:**
+1. Two-writers problem: laptop + cloud both append the SAME snapshots.csv → recurring
+   merge conflicts (hit again during THIS very session). Fix: split by writer
+   (snapshots_cloud.csv / snapshots_local.csv), grader merges + de-duplicates.
+2. Grader has NO duplicate protection → weekend manual test-fires (rows at 21:03 AND
+   21:04, etc.) will pollute the week-1 report card. Fix: candle-identity rule
+   (asset + timeframe + candle-open-time = ONE claim; extras discarded).
+3. Phase-1 gate "beat a coin flip" is the WRONG baseline in an up-drifting market (a
+   parrot that always says UP scores 55-60% with zero skill). Fix: grader also scores an
+   "always-UP parrot" column; gate becomes "beats the parrot," not "beats the coin."
+4. No frozen historical data store → the Sealed Vault is rhetorical (a live API returns
+   today's data, not a fixed past). Fix: one-time checksummed backfill, stored, immutable.
+5. LSTM observer (Voice 2) lives in a different repo/env — needs a bridge/adapter spec
+   (predict-only harness writing into ZarX journal, keyed by candle identity).
+6. No strategy versioning — a survivor's track record must not carry across a parameter
+   change. Fix: stamp name + parameter-fingerprint + code-version on every signal.
+
+**Security / scaling blind spots:**
+- 🔴 API KEY LEAK: TwelveData error messages print the full request URL including
+  apikey=...; daily_runs.log is git-TRACKED + pushed + OneDrive-synced, and the museum
+  archive logs also contain it. Both repos private (moderate, not critical). Fix: redact
+  key from error prints, untrack daily_runs.log, ROTATE the key (free, 2 min).
+- GitHub Actions pinned by floating tag (@v4/@v5) with write access → pin to commit SHAs
+  (soft, low urgency).
+- Phase-2 compute (walk-forward × Monte Carlo 10k × strategies on laptop CPU) only viable
+  with the frozen local store (#4) + vectorized simulation.
+- Evidence file grows ~2,200 commits/yr; the writer-split (#1) also relieves this.
+
+**Immediate order:** (1) security hygiene ~30min → (2) BEFORE Friday: grader dedup +
+parrot baseline → (3) split black box by writer → (4) frozen backfill → (5) spec LSTM
+adapter → (6) defer the rest. Plan's ordering otherwise correct.

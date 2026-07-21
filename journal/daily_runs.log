@@ -140,3 +140,30 @@ C:\Users\hp\miniconda3\envs\tfdml\lib\site-packages\pandas_ta\__init__.py:7: Use
 📓 SOL-USD: recorded — $76.23, MIXED, Chaotic
 
 🗃️ 3 row(s) appended to snapshots.csv
+ 
+---- evening snapshot 20-Jul-2026 17:05:01.55 ---- 
+C:\Users\hp\miniconda3\envs\tfdml\lib\site-packages\pandas_ta\__init__.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution, DistributionNotFound
+📓 BTC-USD: recorded — $64,726.00, UP, Ranging
+📓 ETH-USD: recorded — $1,879.94, UP, Chaotic
+📓 SOL-USD: recorded — $76.83, UP, Chaotic
+
+🗃️ 3 row(s) appended to snapshots.csv
+ 
+---- evening snapshot 21-Jul-2026 11:13:55.54 ---- 
+C:\Users\hp\miniconda3\envs\tfdml\lib\site-packages\pandas_ta\__init__.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution, DistributionNotFound
+📓 BTC-USD: recorded — $65,722.01, UP, Ranging
+📓 ETH-USD: recorded — $1,931.97, UP, Chaotic
+📓 SOL-USD: recorded — $78.46, UP, Chaotic
+
+🗃️ 3 row(s) appended to snapshots.csv
+ 
+---- evening snapshot 21-Jul-2026 13:05:03.33 ---- 
+C:\Users\hp\miniconda3\envs\tfdml\lib\site-packages\pandas_ta\__init__.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution, DistributionNotFound
+📓 BTC-USD: recorded — $66,236.00, UP, Ranging
+📓 ETH-USD: recorded — $1,935.11, UP, Ranging
+📓 SOL-USD: recorded — $78.52, UP, Chaotic
+
+🗃️ 3 row(s) appended to snapshots.csv
