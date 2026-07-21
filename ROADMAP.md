@@ -11,7 +11,8 @@ SHIP_LAWS.md (how we build), EDGE_STACK_RESEARCH.md (why), PROGRESS_LOG.md (hist
 | Risk — Discipline Engine (ATR SL/TP, stop-distance sizing, 25% cap) | risk/calculator.py | ✅ |
 | Regime vane (per-TF dials: 4h=1.96 calibrated; fail-honest) | regime/vane.py | ✅ |
 | Morning Brief (the user's daily tool) | cockpit/brief.py | ✅ |
-| Journal snapshots (the black box) | journal/snapshot.py → snapshots.csv | ✅ |
+| Journal snapshots (the black box, split by writer: laptop → snapshots_local.csv, cloud → snapshots_cloud.csv, legacy snapshots.csv frozen) | journal/snapshot.py | ✅ |
+| Grader v2 (merges all notebooks, candle-identity de-dup, always-UP parrot baseline) | journal/grader.py | ✅ |
 | Automation (Task Scheduler: brief 09:05 PKT; snapshots at every 4h close) | run_daily.bat / run_snapshot.bat | ✅ |
 
 Run environment: `C:\Users\hp\miniconda3\envs\tfdml\python.exe` with `PYTHONUTF8=1`.

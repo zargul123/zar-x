@@ -8,6 +8,11 @@ what actually happened?"). Records are evidence; evidence beats memory.
 
 Fail-safe: an asset whose instruments are offline is skipped and reported;
 the snapshot continues for the rest.
+
+Two watchmen, two notebooks: the laptop writes snapshots_local.csv, the
+cloud runner writes snapshots_cloud.csv. Both appending to one file caused
+recurring git merge conflicts (architect review #1); the grader merges and
+de-duplicates them at reading time. Legacy snapshots.csv is frozen evidence.
 """
 import sys
 import os
@@ -17,8 +22,10 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import ASSETS
 
-SNAPSHOT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                             'snapshots.csv')
+_IS_CLOUD = os.environ.get('GITHUB_ACTIONS') == 'true'
+SNAPSHOT_FILE = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    'snapshots_cloud.csv' if _IS_CLOUD else 'snapshots_local.csv')
 FIELDS = ['utc_time', 'asset', 'timeframe', 'close', 'trend', 'rsi',
           'atr', 'atr_pct', 'regime', 'entropy', 'adx']
 

@@ -313,3 +313,32 @@ baseline yet, duplicates not yet filtered. Exactly why the repairs come first.
 2. Grader honesty: candle-identity de-dup + always-UP parrot baseline (BEFORE Friday)
 3. Split the black box by writer (snapshots_cloud.csv / snapshots_local.csv, grader merges)
 Then: Friday week-1 review → Phase 2 the Lab (frozen vault backfill first).
+
+## 2026-07-21 — THE THREE REPAIRS (architect critique items 1-3) — ALL GATES PASSED
+
+**Repair 1 — security hygiene (committed 08a64ef):** every error print in
+data/market_data.py now passes through _redact() (the API key becomes
+***REDACTED*** before it can reach any log); journal/daily_runs.log untracked
++ gitignored. History audit ran first: the key had NEVER actually landed in
+this repo's commits — the door is sealed before the leak, not after. Gate:
+forced request failure printed no key; live smoke test unchanged (3/3 assets).
+STILL OPEN (Commander's 2 minutes): rotate the TwelveData key (the museum
+repo's old logs may hold it), update .env + the GitHub Actions secret.
+
+**Repair 2 — grader honesty (v2):** candle-identity rule (asset + timeframe +
+candle-open-time = ONE claim, earliest row wins) + always-UP parrot baseline.
+Gate (synthetic): 4 rows across 2 writers → 2 unique claims. Gate (live): the
+weekend's "24/24 = 100%" collapsed to 69 rows → 36 unique claims → 13 graded,
+and the parrot ALSO scored 100% (18/18) → verdict: "system does NOT beat the
+parrot." The inflated report card is dead; this is the honest bar for Friday.
+
+**Repair 3 — black box split by writer:** laptop now writes
+snapshots_local.csv, cloud writes snapshots_cloud.csv (writer identity =
+GITHUB_ACTIONS env var); legacy snapshots.csv frozen as evidence; grader v2
+merges all three notebooks at reading time. The recurring merge-conflict
+disease is structurally cured (no two writers share a file). Bats + workflow +
+CHECK_STATUS.bat updated to the new filenames. Gate: live local snapshot wrote
+3 rows to snapshots_local.csv; cloud-identity check picks snapshots_cloud.csv.
+
+**Next:** Commander rotates the key → Friday week-1 review (2026-07-26, on
+honest numbers) → Phase 2 the Lab, starting with the frozen vault backfill.

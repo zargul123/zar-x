@@ -53,7 +53,7 @@ jobs:
         run: |
           git config user.name "zarx-cloud-watchman"
           git config user.email "actions@github.com"
-          git add journal/snapshots.csv journal/cloud_grader_report.txt
+          git add journal/snapshots_cloud.csv journal/cloud_grader_report.txt
           git diff --cached --quiet && echo "No new rows" && exit 0
           git commit -m "cloud: snapshot + grades $(date -u '+%Y-%m-%d %H:%M') UTC"
           git pull --rebase origin main
