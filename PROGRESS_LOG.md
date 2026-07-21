@@ -284,3 +284,32 @@ plumbing layer missing and one live security wound. Fix these BEFORE new feature
 **Immediate order:** (1) security hygiene ~30min → (2) BEFORE Friday: grader dedup +
 parrot baseline → (3) split black box by writer → (4) frozen backfill → (5) spec LSTM
 adapter → (6) defer the rest. Plan's ordering otherwise correct.
+
+## 2026-07-21 — Brainstorm clarifications recorded (the tool doorway + the five adopted tools)
+
+**The Tool Doorway Rule (Commander asked when price-action math tools join):**
+- As INFORMATION on the Brief (describe the chart, no buy/sell): may be added almost
+  anytime, cheaply, a few per session — including any tool the Commander names.
+- As SIGNALS (anything that says buy/sell): must pass through the Lab first and earn an
+  honest stat card. No tool skips this — not RSI, not Fibonacci, not any guru's favorite.
+- Therefore: small instrument additions can trickle in from next week; the BIG toolbox
+  expansion happens right after the Lab exists, so every tool arrives with proof attached.
+
+**Five adopted tools confirmed, each with its phase:**
+1. Data Validator — Phase 1 (quality inspector at the data door)
+2. Cost Simulator — Phase 2, in the Lab (our 1h-scar made into a tool: every simulated
+   trade pays real fees/slippage)
+3. Monte Carlo Stress Test — Phase 2, in the Lab (reshuffle trades 10,000× — luck detector)
+4. Walk-Forward Testing — Phase 2, in the Lab (many windows; the +3.53/-0.87 lesson
+   made into a machine)
+5. Human-vs-Machine + Psychology — Phase 5, Trade Logger & Mirror (grades the pilot)
+
+**Cloud status:** ran fully autonomous 24h+ (7+ consecutive watches, zero errors). First
+real grades: 24/24 correct (100%) — read with the parrot warning: up-drifting market, no
+baseline yet, duplicates not yet filtered. Exactly why the repairs come first.
+
+**NEXT WORK SESSION (start here):** the three repairs, in order —
+1. Security hygiene: redact API key from error prints, untrack daily_runs.log, rotate key
+2. Grader honesty: candle-identity de-dup + always-UP parrot baseline (BEFORE Friday)
+3. Split the black box by writer (snapshots_cloud.csv / snapshots_local.csv, grader merges)
+Then: Friday week-1 review → Phase 2 the Lab (frozen vault backfill first).
