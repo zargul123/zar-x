@@ -1,13 +1,13 @@
 ========================================================
   ZAR X GRADER — trend-claim report card
 ========================================================
-  Claims on file      : 54
-  Not yet gradable    : 24 (younger than 24h of market)
-  No directional claim: 9 (MIXED)
-  GRADED              : 21
-  CORRECT             : 21  (100.0%)
-    BTC-USD: 10/10 (100%)
-    ETH-USD: 10/10 (100%)
+  Claims on file      : 57
+  Not yet gradable    : 21 (younger than 24h of market)
+  No directional claim: 12 (MIXED)
+  GRADED              : 24
+  CORRECT             : 24  (100.0%)
+    BTC-USD: 11/11 (100%)
+    ETH-USD: 12/12 (100%)
     SOL-USD: 1/1 (100%)
   (Reading law: accuracy alone is not edge — payoff and
    costs decide money. This grades honesty, not profit.)
