@@ -160,6 +160,17 @@ each appearing as a new section on the Morning Brief.
    score, no invented weights (the cut ghost stays cut).
 4. Event calendar (manual JSON file the Commander can edit + known recurring
    events: FOMC, CPI dates).
+5. WHALE WATCH (the Commander's requested gap-closer): what the big money is
+   doing, from FREE sources only — pick at build time from: exchange
+   netflow/large-transaction data (free tiers of blockchain explorer APIs),
+   Bitcoin exchange reserve trends, and the funding+open-interest combination
+   (crowd positioning) already collected in #2. Plain-words line on the Brief
+   ("large holders moved ~X BTC to exchanges this week — historically
+   selling-side behavior"). INFORMATION ONLY. True wallet-by-wallet whale
+   tracking is paid/unreliable; we show the honest free footprint, not a
+   fake x-ray. IF no free source proves reliable at build time → the
+   instrument reports "whale watch: no honest free source available" rather
+   than showing garbage — and the Commander decides if it's worth paying for.
 GATE per instrument: appears on the Brief with live data; unplugging the
 internet (or a bad key) degrades to "offline" without breaking the Brief.
 - IF a free API dies or paywalls → mark instrument offline, log it, move on.
@@ -237,6 +248,19 @@ PROCEDURE per slot: implement signal() → Lab full pipeline → verdict.
   did it hit SL or TP first? Running honest P&L per strategy.
 - WEEKLY: one-line report on the Brief ("Turtle: 3 signals, 2 wins, paper
   P&L +1.8% after costs").
+- SELF-JUDGMENT (the Commander's requirement — the system must say "I was
+  wrong, and HERE is where"): extend the grader into
+  `journal/signal_report.py`, run automatically every week:
+  1. Every closed signal graded WIN (hit TP) / LOSS (hit SL) / EXPIRED, with
+     honest P&L after costs.
+  2. The CONFESSION section — automatic, no mercy: worst 3 signals of the
+     period listed with date, what it said, what happened, money lost;
+     accuracy broken down by asset, by regime at signal time, and by
+     day-of-week. This is where patterns of failure become visible.
+  3. PROMISE vs REALITY line: live profit factor vs the profit factor this
+     strategy showed in the gauntlet ("promised PF 1.3, delivering 0.9").
+  All of it lands on the Brief and in the log; nothing is hidden when the
+  news is bad — bad weeks are printed exactly like good weeks.
 - EXIT GATE after 8 weeks: live-proving Profit Factor within 70% of its
   hold-out PF AND ≥ 10 signals. IF worse → 4-week extension, once. Still
   worse → the survivor dies with honors (obituary in the log); if no
@@ -255,10 +279,44 @@ session (Opus recommended). Quarterly: re-verify vault checksums, re-run
 survivors through the Lab on the newest frozen data (edge decay check —
 IF a survivor's rolling 6-month PF < 1.0, it is retired with honors;
 retirement is announced on the Brief, not hidden).
-Learning stays HUMAN-IN-THE-LOOP: the system proposes nothing by itself;
-improvements come from review sessions, and every change to anything that
-signals goes back through the Lab. Self-tuning autopilot remains a cut
-ghost forever (50 trades/year cannot teach a machine; it can only overfit).
+## THE LEARNING LOOP (how the system teaches itself — the safe way)
+
+The Commander asked: "can it teach itself by the results?" The honest
+answer, built into this plan:
+
+- WHAT IS AUTOMATIC (the system does alone, forever): grading every claim
+  and every signal, the weekly CONFESSION report, the promise-vs-reality
+  line, accuracy broken down by regime/asset/time. The system DIAGNOSES
+  itself completely without help — it always knows and says where it was
+  wrong. That evidence pile IS the teacher.
+- WHAT NEEDS THE COMMANDER (one review session, monthly/quarterly): reading
+  the diagnosis and approving any change. The session proposes ("Turtle
+  loses every Chaotic-regime signal — add the regime filter?"), the
+  Commander decides, and the changed strategy goes BACK THROUGH THE LAB as
+  a new fingerprint with a fresh track record.
+- WHY IT NEVER SILENTLY RE-TUNES ITSELF: with ~50 signals a year, a machine
+  that adjusts itself on results learns the noise, not the market — the
+  LSTM had 26,000 examples and still memorized instead of learning; 50
+  would fool itself faster. Silent self-tuning is how a system starts lying
+  to its pilot. So: self-DIAGNOSIS automatic and total; self-MODIFICATION
+  never without the Lab and the Commander. This is the cut-ghost law
+  (recorded 2026-07-20) and it protects the one thing Zar X is built on:
+  that its numbers can be trusted.
+
+## KNOWN GAPS (honest list — so nobody pretends they don't exist)
+
+1. Whale wallet-by-wallet tracking: only the free footprint is shown
+   (Phase 3 #5); the full x-ray is paid and often unreliable anyway.
+2. The human chart-eye (patterns, "feel", experience from the books):
+   cannot be honestly backtested — that is the PILOT's contribution by
+   design. The system gives instruments; the Commander gives judgment.
+3. Black swans (war, exchange collapse, hack): no system predicts them.
+   Our defenses are the 1% risk law, the event calendar, war-warnings on
+   the Context Deck, and the regime vane noticing chaos AFTER it starts —
+   damage control, not prophecy.
+4. Signals live only in the 3 gauntlet slots (THE PROMISE). If the market
+   changes so much that a retired survivor's family of ideas stops working,
+   the answer is the cockpit + pilot, not a fourth slot.
 
 ---
 
