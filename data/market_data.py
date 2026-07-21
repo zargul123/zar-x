@@ -24,6 +24,16 @@ from config import (
 )
 
 
+def _redact(text):
+    """Strip the API key from any message before it reaches a print/log.
+    Error messages from requests include the full URL (apikey=... inside);
+    daily_runs.log is synced off-machine, so the key must never enter it."""
+    text = str(text)
+    if TWELVEDATA_API_KEY:
+        text = text.replace(TWELVEDATA_API_KEY, '***REDACTED***')
+    return text
+
+
 class MarketData:
     def __init__(self):
         self.session = requests.Session()
@@ -62,7 +72,7 @@ class MarketData:
                 r.raise_for_status()
                 return r.json()
             except requests.exceptions.RequestException as e:
-                print(f"⚠️ TwelveData request failed for {symbol}: {e}")
+                print(f"⚠️ TwelveData request failed for {symbol}: {_redact(e)}")
                 return None
             except json.JSONDecodeError:
                 print(f"⚠️ TwelveData JSON decode error for {symbol}")
@@ -84,7 +94,7 @@ class MarketData:
             df.dropna(subset=['open', 'high', 'low', 'close'], inplace=True)
             return df
         except Exception as e:
-            print(f"❌ Error parsing TwelveData response for {symbol}: {e}")
+            print(f"❌ Error parsing TwelveData response for {symbol}: {_redact(e)}")
             return pd.DataFrame()
 
     # ------------------------------------------------------------------ #
@@ -104,7 +114,7 @@ class MarketData:
                 df = df[~df.index.duplicated(keep='first')]
             return df
         except Exception as e:
-            print(f"⚠️ Yahoo fallback failed for {symbol}: {e}")
+            print(f"⚠️ Yahoo fallback failed for {symbol}: {_redact(e)}")
             return pd.DataFrame()
 
     # ------------------------------------------------------------------ #
@@ -125,7 +135,7 @@ class MarketData:
                 df = df.tail(int(limit))
             return df
         except Exception as e:
-            print(f"🔌 DATA INSTRUMENT OFFLINE for {symbol}: {e}")
+            print(f"🔌 DATA INSTRUMENT OFFLINE for {symbol}: {_redact(e)}")
             return None
 
     def get_history(self, symbol, timeframe='4h', days=365, end_date=None):
@@ -167,5 +177,5 @@ class MarketData:
                   f"{full.index[0].date()} → {full.index[-1].date()}")
             return full
         except Exception as e:
-            print(f"🔌 DATA INSTRUMENT OFFLINE for {symbol} history: {e}")
+            print(f"🔌 DATA INSTRUMENT OFFLINE for {symbol} history: {_redact(e)}")
             return None
