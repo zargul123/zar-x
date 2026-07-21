@@ -1,0 +1,3 @@
+# cmd chokes on LF-only bat files (2026-07-19 incident, PROGRESS_LOG).
+# Force CRLF on checkout for bats everywhere, forever.
+*.bat text eol=crlf
