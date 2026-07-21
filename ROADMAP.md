@@ -1,5 +1,7 @@
 # ZAR X — ROADMAP & HANDOFF
 *The single document a new session (any model) reads to continue the work.
+FOR PHASE 2 AND BEYOND: follow EXECUTION_PLAN.md — exact steps, gates, and
+if/then orders for every phase. It outranks improvisation.*
 State as of 2026-07-19 night. Read with README.md (mission + THE PROMISE),
 SHIP_LAWS.md (how we build), EDGE_STACK_RESEARCH.md (why), PROGRESS_LOG.md (history).*
 

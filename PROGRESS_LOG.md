@@ -342,3 +342,16 @@ CHECK_STATUS.bat updated to the new filenames. Gate: live local snapshot wrote
 
 **Next:** Commander rotates the key → Friday week-1 review (2026-07-26, on
 honest numbers) → Phase 2 the Lab, starting with the frozen vault backfill.
+
+## 2026-07-21 — EXECUTION_PLAN.md: the step-by-step orders for Phases 2-8
+
+Commander's request: a plan so exact that any model (Opus, Sonnet) can follow
+it to the point, with if/then branches for everything that can go wrong.
+Written and committed as EXECUTION_PLAN.md: Phase 2 Lab in 5 gated steps
+(Frozen Vault → Data Validator → honest engine with the three-dummies gate
+including a planted look-ahead cheat → lie detectors → end-to-end exit gate),
+then Context Deck / Carry Monitor / Trade Logger & Mirror / sealed Gauntlet
+(gates locked in writing BEFORE any test) / Proving Voyage / Permanent Loop.
+Includes the standing IF/THEN table (gates outrank models; too-good results =
+hunt the leak first; THE PROMISE wins every argument) and a CURRENT POSITION
+MARKER line each session must update. ROADMAP.md now points to it.
