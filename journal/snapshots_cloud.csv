@@ -1,0 +1,4 @@
+utc_time,asset,timeframe,close,trend,rsi,atr,atr_pct,regime,entropy,adx
+2026-07-21 11:48,BTC-USD,4h,66332.77,UP,67.8,664.99,1.00,Ranging,1.945,19.7
+2026-07-21 11:48,ETH-USD,4h,1934.92,UP,71.9,24.69,1.28,Ranging,1.956,21.7
+2026-07-21 11:48,SOL-USD,4h,78.35,UP,66.9,0.98,1.25,Chaotic,1.986,23.1
