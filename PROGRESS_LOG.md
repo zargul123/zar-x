@@ -2639,3 +2639,117 @@ make, which is what "up to you" meant in the first place.**
 
 **Next: NOT Step 3.2b. Step 3.2 is reopened and the funding gate needs
 rebuilding around what the pilot reads, not around what the parser returns.**
+
+---
+
+## 2026-07-26 â€” STEP 3.2-R: **GATE 3.2-R DECLARED BEFORE ANY CODE EXISTS**
+## (Law 4 â€” the pattern that survived this morning's audit, repeated on purpose)
+
+Step 3.2 was reopened hours ago by its own audit: 4 of 6 deliberate sabotages
+walked through Gate 3.2 while it reported 48/48. **This entry is committed
+ALONE, with no `.py` file in the commit, so that `git show --stat` can prove
+the bar was set before the work was done.** The previous session's central
+defence held up under audit precisely because it did this. So we do it again.
+
+**THE COMMANDER'S ORDER FOR THIS SESSION:** fix the inspector first; test
+`fear_greed.py` after; make the sabotage test permanent if the session judges
+it right. **It does â€” see (e). One thing this session, tokens are short.**
+
+### WHAT IS BEING CHANGED, AND WHAT IS NOT
+
+**ONLY the smoke-test block of `cockpit/funding.py`.** The production path â€”
+`section_text`, `read_estimate`, `read_settled`, `_parse_rate`, `_fmt_pct`,
+`_utc_hhmm`, `CONTRACTS`, `MAX_PLAUSIBLE_RATE` â€” is **NOT modified.** What the
+pilot reads must come out byte-identical in shape, and check (a) proves it.
+
+**`MAX_PLAUSIBLE_RATE` is NOT tightened in this step**, though it is measured
+and the recommendation stands. **The Commander did not rule on it and a session
+does not decide it by default.** It stays on his desk.
+
+**`cockpit/fear_greed.py` is NOT touched.** R-008 is the next session's job.
+
+### THE EDGE CASE, DEFINED BEFORE CODING (this is where it would go wrong)
+
+**Funding rates move continuously.** A check that fetches raw, then builds the
+line, then compares, can see the rate change between the two â€” and would fail
+at random on correct code. **That is the exact shape of the bug that made the
+ORIGINAL Gate 3.2 check (b) unpassable, and repeating it would be unforgivable
+on the same day it was diagnosed.**
+
+**THE RULE, FIXED NOW:** every run takes a raw snapshot **before** building the
+line and another **after**. The printed string must match the string derived by
+hand from the before-snapshot **or** the after-snapshot. **It is never allowed
+to match neither.** A drifting rate lands on one of the two; a sign flip, a
+missing Ã—100, or a miswired ticker lands on neither. **The tolerance is for
+time passing, not for being wrong.**
+
+### GATE 3.2-R â€” THE BAR (declared here; results judged against this only)
+
+**(a) THE BRIEF IS UNCHANGED.** `git diff` shows changes confined to the smoke
+    test; no production function's body is altered. `python cockpit\brief.py`
+    prints 3/3 with both Context Deck instruments, one header, F&G above
+    funding. **A gate fix that changes what the pilot reads has failed.**
+
+**(b) THE PRINTED SENTENCE IS VERIFIED, NOT THE PARSE.** For each of the three
+    assets, the smoke test independently fetches that contract's raw
+    `lastFundingRate` and derives the expected percentage string **by its own
+    arithmetic, never by calling `_fmt_pct`**, then requires that exact string
+    to appear beside that exact ticker in the live block. 3 checks.
+    **This is the check whose absence voided the 48/48.**
+
+**(c) THE SETTLEMENT TIME IS VERIFIED THE SAME WAY.** HH:MM UTC derived
+    independently from raw `nextFundingTime`, required to appear exactly.
+    1 check. (A regex proving "some digits and a colon are present" is what
+    let sabotage S5 through.)
+
+**(d) THE TICKER MAPPING IS VERIFIED.** Check (b) is performed per-asset
+    against **that asset's own contract**, so a number printed under the wrong
+    ticker fails. This is what catches S6.
+
+**(e) EXHIBIT A BECOMES PERMANENT â€” THE TEST BREAKS ITSELF, EVERY RUN.** The
+    smoke test sabotages its own helpers in memory, one at a time, and
+    **requires each sabotage to be CAUGHT**, then restores the original and
+    proves the restoration. Six mandatory sabotages, being exactly the six from
+    the audit:
+
+        S1  _fmt_pct sign flipped        (walked through the old gate)
+        S2  _fmt_pct x100 dropped        (walked through the old gate)
+        S3  _parse_rate sign flipped     (was caught)
+        S4  _parse_rate scaled x10       (was caught)
+        S5  _utc_hhmm timezone dropped   (walked through the old gate)
+        S6  CONTRACTS miswired           (walked through the old gate)
+
+    **If ANY sabotage is not caught, the smoke test FAILS and exits non-zero.**
+    6 checks + 1 restoration check. **A check nobody has tried to break is a
+    check nobody has tested â€” so from now on it is broken on every run, not
+    once by an auditor who happened to be ordered to try.**
+
+**(f) THE FOUR THAT ESCAPED MUST NOW BE CAUGHT.** S1, S2, S5 and S6 are named
+    individually in the output with their old verdict beside their new one, so
+    the fix is legible rather than merely asserted.
+
+**(g) EVERYTHING THE OLD GATE DID, IT STILL DOES.** Live block not offline,
+    three signs present, exact-identity settled check, partial-failure drill
+    naming the missing asset, offline drill degrading to one line, exit 0.
+
+**(h) NO NEW DEPENDENCY, NO NEW FILE, NO NETWORK CALL FROM THE BRIEF'S PATH.**
+    The extra fetches live in the smoke test only. The Brief's cost stays at
+    one request per asset, as its orders cap it.
+
+### PASS / FAIL
+
+**PASS = every check above green, including all six sabotages CAUGHT.**
+**Anything less is a FAIL and is not committed as a pass.** In particular:
+**if a sabotage escapes, the fix did not work, and saying "5 of 6 is better
+than 2 of 6" is the exact phrasing this ship exists to refuse.**
+
+### IF / THEN
+
+| IF | THEN |
+|---|---|
+| A drifting rate makes check (b) fail intermittently | The before/after rule above already covers it. If it STILL flaps, the check is wrong â€” **fix the check, do not add a retry until it goes green.** |
+| A sabotage cannot be caught without changing production code | **STOP and report.** Changing `section_text` to make a test pass is how the ship gets a gate that fits the code instead of code that fits the gate. |
+| Binance answers HTTP 451 / restricted | STOP, report, do not swap exchanges. |
+| The fix would change what the Brief prints | **It has failed check (a).** Revert and rethink. |
+
+**Nothing else is touched. `lab/` byte-identical, vault intact, no new files.**
