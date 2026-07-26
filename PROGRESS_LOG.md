@@ -598,3 +598,61 @@ decision — and it belongs to the Commander, not to a session — is now betwee
 the honest remaining routes: run the Lab on 1d only; start the 4h window at
 2024-01-01 and record the shortened depth; or bring in a second data source
 with the Commander's explicit yes. No session may choose this alone.
+
+## 2026-07-26 — VAULT v2 BORN HEALTHY — ALL GATES PASSED — STEP 2.3 UNBLOCKED
+
+**The Commander's decision (Route 2, on Fable's recommendation):** the 4h
+window starts at 2024-01-01 — clean data only; the 1d files keep the full
+3 years because they were never sick. Asymmetric depth by choice, not by
+accident. Forbidden throughout and never done: hand-repairing candles,
+multiplying lows by 10,000, any second data source, lowering the validator.
+
+**What changed in the ship (lab/build_vault.py only):** a named constant
+`VAULT_4H_START = '2024-01-01'` with a comment pointing at the evidence entry
+above, plus `VAULT_4H_START_REASON` — one honest sentence that is written INTO
+the MANIFEST, so the shortened window can never be mistaken for laziness by a
+future session. 4h asks from that date; 1d keeps the 1,095-day ask; the request
+carries a small day-margin and the builder then trims exactly to the line
+(26 candles trimmed per asset, reported out loud).
+
+**The sequence, as ordered:** git pull → verify_vault INTACT (known state) →
+delete lab/vault/ → rebuild. The old vault stays in git history at aa6de2d.
+
+**THE DOOR SAID YES THIS TIME. Zero FAIL verdicts at birth:**
+    BTC-USD_4h  5,624 candles  2024-01-01 → 2026-07-26   PASS
+    BTC-USD_1d  1,094 candles  2023-07-28 → 2026-07-25   PASS
+    ETH-USD_4h  5,624 candles  2024-01-01 → 2026-07-26   WARN (2 real 25%+ days)
+    ETH-USD_1d  1,094 candles  2023-07-28 → 2026-07-25   WARN (2 real 25%+ days)
+    SOL-USD_4h  5,624 candles  2024-01-01 → 2026-07-26   WARN (1 real 25%+ day)
+    SOL-USD_1d  1,094 candles  2023-07-28 → 2026-07-25   WARN (9 real 25%+ days)
+20,154 candles total. Every WARN is genuine market violence (Feb 2025, Oct 2025,
+Mar 2024) — flagged for human eyes, never deleted, exactly as the plan orders.
+
+**ALL FOUR GATES, run before the commit:**
+(a) 6 files; 4h 5,624 rows each (≥ ~4,000) starting on 2024-01-01; 1d 1,094
+    each still starting 2023-07-28 ✅
+(b) verify_vault.py INTACT for all six, run twice → byte-identical output ✅
+(c) validator.py over the whole vault → ZERO FAIL ✅
+(d) gate_2_2.py → still PASSED (clean file PASS; poisoned copy caught) ✅
+
+**AN UNPLANNED INTEGRITY PROOF (worth keeping):** the three 1d files came back
+from TwelveData with SHA-256 checksums IDENTICAL to the old vault's — byte for
+byte, a download made two hours apart. That proves two things at once: the
+source's daily history is stable, and our download-and-write pipeline is
+perfectly deterministic. The 4h checksums changed, as they must (different
+window). A vault that reproduces itself exactly is a vault whose checksums mean
+something.
+
+**Housekeeping done (the fix flagged last session):** the position marker no
+longer offers "repair/re-download the 4h files" — that option is closed by
+evidence, and the marker now says so explicitly so no future session wastes a
+run rediscovering it. `lab/vault/.gitattributes` (`* -text`, the byte-freeze
+against autocrlf) was restored from git after the rebuild — the builder does
+not create it, and without it every checksum would break on the next clone.
+
+**Old vault:** remains in git history at aa6de2d (and e63a9ca) — the diseased
+original is evidence and is not lost, merely retired.
+
+**Next:** Step 2.3 — the honest backtest engine, with the three-dummies gate
+(always-flat → 0 trades; MA-cross → full stat card; the planted look-ahead
+cheat → structurally impossible through the engine's own feed).

@@ -336,23 +336,22 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **Phase 2, Step 2.3 (backtest engine) — BLOCKED, Commander's
-decision needed on the vault (see below).**
+→ We are at: **Phase 2, Step 2.3 (backtest engine) — READY TO START.
+Vault v2 healthy at birth: 4h from 2024-01-01 (~2.6y, source glitch zone
+excluded, see log), 1d full 3y.**
 Step 2.1 (Frozen Vault) DONE 2026-07-26, GATE 2.1 PASSED.
-Step 2.2 (Data Validator) DONE 2026-07-26, GATE 2.2 PASSED first run:
-clean vault file → PASS; poisoned in-memory copy (5 candles dropped,
-2 duplicated, 1 negative price) → all three diseases named by name,
-verdict FAIL, real vault file untouched. Validator is wired into
-build_vault.py: no future vault can be born diseased.
+Step 2.2 (Data Validator) DONE 2026-07-26, GATE 2.2 PASSED first run.
+Vault v2 born 2026-07-26 (commit below), all four gates passed: 6 files
+(4h 5,624 rows each from 2024-01-01; 1d 1,094 each from 2023-07-28),
+verify INTACT twice identically, validator reports ZERO FAIL verdicts,
+gate_2_2 still passes. `validated_at_birth: true` is in the MANIFEST.
 
-**THE BLOCKER (found by the validator the hour it was built):** the
-existing vault's three 4h files are DISEASED at the source — TwelveData
-delivered 48 candles with a decimal-point glitch (BTC 42, ETH 2, SOL 4;
-e.g. BTC low = $2.93 in a $29,206 candle; 2 BTC candles have a broken
-CLOSE too). The 1d files are healthy (BTC PASS; ETH/SOL WARN on real
-volatile days only). Step 2.3 must NOT be built on FAIL data — the
-engine would trade prices that never existed. Decision required before
-2.3: repair/re-download the 4h files, or proceed on 1d only.
+**The 4h window starts at 2024-01-01 and that is permanent.** TwelveData's
+stored 4h history before then carries 48 decimal-point-glitch candles
+(last one 2023-12-20), proven reproducible — re-downloading is DEAD as a
+fix, do not attempt it again. The MANIFEST carries the reason in its own
+`vault_4h_start_reason` field. The 1d files were healthy and kept the
+full 3 years; asymmetric depth is intentional, not an oversight.
 Open items carried forward: (1) Commander still to rotate the TwelveData
 key (.env + GitHub secret); (2) vault CSVs carry NO volume column —
 TwelveData returns none for these crypto pairs; OHLC only. Any future

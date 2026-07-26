@@ -49,6 +49,26 @@ MIN_DAYS = 365              # 1 year — the floor; below this we STOP and ask
 CANDLE_SECONDS = {'4h': 4 * 3600, '1d': 24 * 3600}
 COLUMNS = ['open', 'high', 'low', 'close', 'volume']
 
+# --- The 4h window's honest starting line -----------------------------------
+# TwelveData's stored 4h history is permanently corrupted before this date: 48
+# candles carry a decimal-point glitch (BTC's low arrives divided by ~10,000).
+# Proven on 2026-07-26 by downloading all three 4h series fresh and comparing
+# candle-by-candle with the vault — the SAME 48 candles came back, so it is the
+# source's stored data, not our download. Full evidence and the list of all 48
+# are in PROGRESS_LOG.md, entry "VAULT RE-BIRTH ATTEMPTED — REFUSED BY THE
+# DOOR" (2026-07-26). The last diseased candle is 2023-12-20 12:00; from
+# 2023-12-21 onward every 4h series is clean.
+# So the 4h files begin here — not because deep history is unwanted, but
+# because the source cannot supply honest 4h candles before it. This is the
+# plan's own remedy: take the maximum HONEST depth and record it.
+# The 1d files are unaffected (healthy throughout) and keep the full 3 years.
+VAULT_4H_START = '2024-01-01'
+VAULT_4H_START_REASON = (
+    'TwelveData 4h history is corrupted before 2024-01-01 (48 decimal-point '
+    'glitch candles, last one 2023-12-20; verified reproducible on 2026-07-26 '
+    '— see PROGRESS_LOG.md). Daily files are healthy and keep the full 3 years.'
+)
+
 
 def sha256_of_file(path):
     """Checksum of the bytes actually on disk — the vault's fingerprint."""
@@ -99,13 +119,20 @@ def main():
     jobs = [(a, tf) for a in ASSETS for tf in TIMEFRAMES]
     downloaded = {}   # (asset, tf) -> DataFrame, held in memory until all arrive
 
-    print(f'\nAsking TwelveData for {TARGET_DAYS} days ({TARGET_DAYS / 365:.1f} years) '
-          f'of history, {len(jobs)} files.')
+    # The 4h timeframe cannot go further back than its honest starting line.
+    start_4h = datetime.strptime(VAULT_4H_START, '%Y-%m-%d')
+    days_4h = (now_utc - start_4h).days + 5      # small margin, trimmed exactly below
+    days_for = {'4h': days_4h, '1d': TARGET_DAYS}
+
+    print(f'\nAsking TwelveData for {len(jobs)} files:')
+    print(f'  1d — {TARGET_DAYS} days ({TARGET_DAYS / 365:.1f} years), the full ask.')
+    print(f'  4h — from {VAULT_4H_START} onward ({days_4h / 365:.1f} years).')
+    print(f'       {VAULT_4H_START_REASON}')
     print('This is slow on purpose (free tier: 8 requests a minute).\n')
 
     for i, (asset, tf) in enumerate(jobs, 1):
         print(f'[{i}/{len(jobs)}] {asset} {tf} ...')
-        df = md.get_history(asset, timeframe=tf, days=TARGET_DAYS)
+        df = md.get_history(asset, timeframe=tf, days=days_for[tf])
         if df is None or df.empty:
             print(f'\n❌ DOWNLOAD FAILED for {asset} {tf}.')
             print('Nothing has been written. The vault is only born complete —')
@@ -113,6 +140,14 @@ def main():
             return 1
 
         df = df[[c for c in COLUMNS if c in df.columns]].copy()
+        if tf == '4h':
+            # Cut exactly at the honest starting line (the request's day-margin
+            # may hand back a few candles from before it).
+            before = len(df)
+            df = df[df.index >= start_4h]
+            if before != len(df):
+                print(f'   - trimmed {before - len(df)} candle(s) from before '
+                      f'{VAULT_4H_START} (the source\'s corrupted zone)')
         df, dropped = drop_unclosed_candle(df, tf, now_utc)
         if dropped:
             print(f'   - dropped {dropped} still-forming candle(s) at the end')
@@ -178,7 +213,9 @@ def main():
             'built_utc': stamp,
             'built_by_git_commit': git_commit(),
             'source': 'TwelveData via data/market_data.py get_history()',
-            'requested_days': TARGET_DAYS,
+            'requested_days': {'1d': TARGET_DAYS, '4h': days_4h},
+            'vault_4h_start': VAULT_4H_START,
+            'vault_4h_start_reason': VAULT_4H_START_REASON,
             'timeframes': TIMEFRAMES,
             'assets': list(ASSETS),
             'unclosed_last_candle_dropped': True,

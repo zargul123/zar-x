@@ -1,9 +1,14 @@
 {
   "vault_version": 1,
-  "built_utc": "2026-07-26T09:48:44Z",
-  "built_by_git_commit": "81825f1ef5f4cbd2499297350f7bcdbea3df4841",
+  "built_utc": "2026-07-26T10:59:06Z",
+  "built_by_git_commit": "4e33ee2c86b3030f1ad5934a7f77cd49aaf67156",
   "source": "TwelveData via data/market_data.py get_history()",
-  "requested_days": 1095,
+  "requested_days": {
+    "1d": 1095,
+    "4h": 942
+  },
+  "vault_4h_start": "2024-01-01",
+  "vault_4h_start_reason": "TwelveData 4h history is corrupted before 2024-01-01 (48 decimal-point glitch candles, last one 2023-12-20; verified reproducible on 2026-07-26 \u2014 see PROGRESS_LOG.md). Daily files are healthy and keep the full 3 years.",
   "timeframes": [
     "4h",
     "1d"
@@ -14,18 +19,19 @@
     "SOL-USD"
   ],
   "unclosed_last_candle_dropped": true,
+  "validated_at_birth": true,
   "law": "These files are evidence. They are never modified, only verified.",
   "files": {
     "BTC-USD_4h.csv": {
       "asset": "BTC-USD",
       "timeframe": "4h",
-      "rows": 6568,
-      "first_candle": "2023-07-27 16:00:00",
+      "rows": 5624,
+      "first_candle": "2024-01-01 00:00:00",
       "last_candle": "2026-07-26 04:00:00",
-      "days_covered": 1094.5,
-      "years_covered": 3.0,
-      "bytes": 373953,
-      "sha256": "9d0cd7d5440d65291d446ecc4793760fbbba2daceb9d61ae964330ca23b00316"
+      "days_covered": 937.17,
+      "years_covered": 2.57,
+      "bytes": 322108,
+      "sha256": "25b0b7b8a07e41d0f9568cd8161a4bd660a27900140957efbf168857d8517a39"
     },
     "BTC-USD_1d.csv": {
       "asset": "BTC-USD",
@@ -41,13 +47,13 @@
     "ETH-USD_4h.csv": {
       "asset": "ETH-USD",
       "timeframe": "4h",
-      "rows": 6568,
-      "first_candle": "2023-07-27 16:00:00",
+      "rows": 5624,
+      "first_candle": "2024-01-01 00:00:00",
       "last_candle": "2026-07-26 04:00:00",
-      "days_covered": 1094.5,
-      "years_covered": 3.0,
-      "bytes": 345282,
-      "sha256": "57feb27e7a7bf2e20c3b4087628fcdc145867a1d541de4510702d6b9258bfd46"
+      "days_covered": 937.17,
+      "years_covered": 2.57,
+      "bytes": 296883,
+      "sha256": "61a18287b8f8902ab41fbad5522302e05ea07c7928114631d48576466efa0382"
     },
     "ETH-USD_1d.csv": {
       "asset": "ETH-USD",
@@ -63,13 +69,13 @@
     "SOL-USD_4h.csv": {
       "asset": "SOL-USD",
       "timeframe": "4h",
-      "rows": 6568,
-      "first_candle": "2023-07-27 16:00:00",
+      "rows": 5624,
+      "first_candle": "2024-01-01 00:00:00",
       "last_candle": "2026-07-26 04:00:00",
-      "days_covered": 1094.5,
-      "years_covered": 3.0,
-      "bytes": 307693,
-      "sha256": "aee6a3dfe0096f0bfb7b443e3cd17a1d273a88ee71155ca86de211daf4f34b97"
+      "days_covered": 937.17,
+      "years_covered": 2.57,
+      "bytes": 266413,
+      "sha256": "7fce9595d39640b5d5b477093f439040e60ce9b3951b35302fd8df19b24d1478"
     },
     "SOL-USD_1d.csv": {
       "asset": "SOL-USD",
