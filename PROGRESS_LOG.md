@@ -2367,3 +2367,275 @@ not see.
 
 **Next: unchanged — Part 1 (the audit, now with R-001…R-005 as its worklist),
 then Part 2 (Step 3.2b) only if Part 1 clears.**
+
+---
+
+## 2026-07-26 â€” PART 1: THE INDEPENDENT AUDIT OF STEP 3.2 â€”
+## **BAR 5 FAILED. EXHIBIT A CAUGHT THE GATE, NOT THE CODE.**
+## **STEP 3.2 REOPENS. PART 2 (Step 3.2b) DID NOT HAPPEN.**
+
+A third, fresh session sat in Fable's chair and recomputed Step 3.2 from raw
+evidence. **Three of the five bars cleared, one cleared partially, and one
+failed outright.** Under the rule this ship wrote for itself â€” *"anything less
+than five of five is NOT a clear, and 'four of five with a good explanation' is
+the phrasing this ship exists to refuse"* â€” **Part 1 does not clear**, so the
+open-interest recorder was not started. Nothing in `cockpit/` was changed.
+
+**The headline, in one sentence: the funding numbers on the Brief are CORRECT â€”
+I verified them independently against Binance â€” but the check that was supposed
+to guarantee they stay correct cannot catch the single most dangerous mistake
+it was built to catch.**
+
+### THE FIVE BARS, LOCKED BEFORE THE FIRST COMMAND RAN
+
+Written to the working notes before any command, so they could not soften:
+(1) scope and integrity; (2) both programs re-run cold; (3) sign and magnitude
+re-derived independently; (4) the four claims behind the mid-flight gate
+amendment; (5) Exhibit A â€” the check must demonstrably be able to FAIL.
+
+**A suspicion was also pre-registered, before any test ran**, so it could not be
+shaped afterwards: *the exact-identity check compares `parsed == float(raw)`,
+and `_fmt_pct` is not in that comparison; I predict a sabotaged `_fmt_pct`
+passes the smoke test.* It did.
+
+### BAR 1 â€” SCOPE AND INTEGRITY: **CLEAR**
+
+    git diff 2a73645..c301f54 --stat
+      EXECUTION_PLAN.md Â· PROGRESS_LOG.md Â· ROADMAP.md Â· SESSION_ORDERS.md
+      cockpit/brief.py (7 lines) Â· cockpit/funding.py (232, new)      and nothing else
+    lab/ touched between 2a73645 and HEAD ........... NONE
+    python lab\verify_vault.py ...................... VAULT INTACT 6/6
+    git show cbfcff4 --stat ......... PROGRESS_LOG.md + SESSION_ORDERS.md only,
+                                      NO .py FILES AT ALL
+    git log --reverse cbfcff4~1..c301f54 ... cbfcff4 THEN c301f54
+
+The previous session's central defence â€” *it amended the gate before any code
+existed* â€” **is true and checkable in one command.** The "5 wiring lines in
+brief.py" claim is literally true: one import, one print, three comment lines.
+
+### BAR 2 â€” RE-RUN COLD: **CLEAR**
+
+`python cockpit\funding.py` â†’ exit 0, all ten of its own checks green.
+`python cockpit\brief.py` â†’ 3/3, exactly ONE "CONTEXT DECK" header, Fear &
+Greed above funding, every pre-existing section intact.
+
+**The kill matrix, re-run by this session in its own harness (20/20):**
+
+    funding dead, F&G alive ... F&G normal, one honest offline line ... 3/3
+    F&G dead, funding alive ... funding normal, one honest line ....... 3/3
+    BOTH dead ................. two offline lines, deck intact ........ 3/3
+    CONTROL, both alive ....... full deck ............................. 3/3
+
+No traceback in any combination. **The numbers differed from the log and moved
+between my own runs (BTC 0.00005399 â†’ 0.00005500 within the hour). That was
+declared in advance as live data being live**, and the sign, the shape and the
+3/3 never moved.
+
+### BAR 3 â€” THE SIGN, RE-DERIVED IN MY OWN CODE: **CLEAR**
+
+Fetched from Binance by this session's own file, by hand, with no helper of the
+instrument involved:
+
+    raw '0.00005399' -> by hand +0.0054%   instrument printed BTC +0.0054%   MATCH
+    raw '0.00003618' -> by hand +0.0036%   instrument printed ETH +0.0036%   MATCH
+    raw '0.00000883' -> by hand +0.0009%   instrument printed SOL +0.0009%   MATCH
+
+Settled rates round-trip digit for digit. The Brief says "positive = longs pay
+shorts"; the opposite wording appears nowhere. **What the pilot reads today is
+the truth.** That matters for what follows: the defect found below is in the
+guard, not in the output.
+
+### BAR 4 â€” THE AMENDMENT'S FOUR CLAIMS: **PARTIAL â€” (a)(b)(d) HOLD, (c) HALF-FALSE**
+
+**(a) HOLDS.** `premiumIndex.lastFundingRate` really is a different quantity
+from the newest settled `fundingRate` â€” different timestamp AND different value
+on all three, measured:
+
+    BTCUSDT estimate '0.00005399' for 2026-07-27 00:00 UTC (in the future)
+            settled  '0.00005819' at  2026-07-26 16:00 UTC
+    ETHUSDT estimate '0.00003618'  vs settled '0.00001943'
+    SOLUSDT estimate '0.00000883'  vs settled '0.00001514'
+
+The original gate's "same number within rounding" **was genuinely unpassable.**
+The amendment was not an excuse.
+
+**(b) HOLDS, and more strongly than claimed.** Last 20 settled signs:
+
+    BTCUSDT  ++++++++-+++++++++++   2 sign changes
+    ETHUSDT  +++++++++---+++++-++   4 sign changes
+    SOLUSDT  -+++++-+---++--+-+++   9 sign changes
+
+A "the signs agree" fallback would have failed at random on correct code.
+**BTC flips too**, which the previous session did not notice.
+
+**(d) HOLDS** â€” see Bar 1.
+
+**(c) IS HALF-FALSE, AND IT IS THE HALF THAT MATTERED.** The claim was that
+`_parse_rate` and `_fmt_pct` are shared between the settled reader and the
+printed path, *therefore* the exact-identity check guards the printed path.
+`_parse_rate` is shared **and is genuinely guarded** â€” sabotaging it is caught.
+`_fmt_pct` is shared in the source **but never enters the comparison**, so
+sharing it guards nothing. **Sharing a helper is not the same as testing it,
+and the previous session's reasoning silently treated them as the same thing.**
+
+### BAR 5 â€” EXHIBIT A, THE SABOTAGE TEST: **FAILED**
+
+Six deliberate breakages, applied to a scratch copy **outside the repo**, each
+run through the instrument's own smoke test. Control (untouched copy) passed,
+so the rig is valid. `git status` clean throughout and afterwards.
+
+    S1  _fmt_pct sign flipped ....... exit 0  NOT CAUGHT  <-- prints the exact
+                                                              opposite of the truth
+    S2  _fmt_pct x100 dropped ....... exit 0  NOT CAUGHT  <-- wrong by 100x
+    S3  _parse_rate sign flipped .... exit 1  CAUGHT
+    S4  _parse_rate scaled x10 ...... exit 1  CAUGHT
+    S5  _utc_hhmm timezone dropped .. exit 0  NOT CAUGHT  <-- settlement time
+                                                              5 hours wrong
+    S6  CONTRACTS miswired .......... exit 0  NOT CAUGHT  <-- BTC shows SOL's rate
+
+**FOUR OF SIX SABOTAGES WALKED THROUGH THE GATE AND WERE CONGRATULATED.**
+The S1 output is the exhibit that should be remembered:
+
+    Funding (8h) : BTC -0.0054%  Â·  ETH -0.0036%  Â·  SOL -0.0009%
+    âœ“ BTC rate printed with a sign
+    âœ“ BTCUSDT: parsed 5.819e-05 == raw '0.00005819' â†’ -0.0058%
+    SMOKE TEST PASSED
+
+**The check prints a tick mark on a line that displays the falsehood.** It
+compares the parsed number to the raw number â€” both correct â€” and then formats
+the result through the broken helper for display, never comparing the thing it
+just printed to anything. The truth and the lie sit on the same line and it
+calls the line a pass.
+
+**THE PATTERN, WHICH IS BIGGER THAN ONE BUG.** Every check in the gate verifies
+what happens *before* the printed string is assembled. Nothing verifies the
+printed string itself, beyond "does a `+` or `-` appear somewhere near the
+ticker" and "does something match `\d\d:\d\d`". S5 and S6 were added to test
+exactly that hypothesis and both confirmed it. **This is a class of hole, not a
+single miss** â€” and it is the class that a self-grading session is least likely
+to see, because the author knows what the string is supposed to say.
+
+**Per `REVIEW_QUEUE.md` R-001's own pre-written "Failed looks like" â€” written by
+the previous session, before this audit ran â€” this fails and the 48/48 tally
+does not stand.** It is worth recording that the previous session wrote the
+condition that convicts it. That is the queue working as designed.
+
+### WHAT THE 48/48 ACTUALLY COUNTED
+
+Not fraud. Every one of the 48 checks did run and did pass. **They counted
+plumbing, not meaning** â€” that data arrives, parses, survives failure, and
+degrades honestly, all of which is true and all of which was verified again
+today. What no check covered is whether the sentence the pilot reads means what
+it says. The tally was honest arithmetic over an incomplete set, and its
+headline number made the set look complete.
+
+### THE HUNTS â€” WHAT THE GATE WAS NEVER TOLD TO CHECK
+
+**R-003 MEASURED AT LAST â€” `MAX_PLAUSIBLE_RATE = 0.05` is safe but nearly
+useless.** Binance publishes the real caps at `/fapi/v1/fundingInfo`, which no
+previous session called:
+
+    BTCUSDT  cap +/-0.00300  (0.300% per 8h)   fundingIntervalHours 8
+    ETHUSDT  cap +/-0.00300  (0.300% per 8h)   fundingIntervalHours 8
+    SOLUSDT  cap +/-0.00375  (0.375% per 8h)   fundingIntervalHours 8
+    widest cap anywhere on the exchange: 3.000% (BTCDOMUSDT, ALLUSDT)
+    largest magnitude actually observed on our three in 500 settled
+    periods each (back to 2026-02-10): 0.0535%
+
+**The guess is 13-16x LOOSER than the real cap.** The good news is the one that
+mattered: it can never refuse an honest extreme, so the failure mode R-003
+feared does not exist. The cost is that as a sanity bound it only catches
+gross nonsense â€” it would happily pass a rate 80x too large.
+
+**R-005 MEASURED.** All three contracts are on the same 8-hour funding interval
+(confirmed by `fundingInfo`, not assumed) and all three reported the identical
+`nextFundingTime` 2026-07-27 00:00 UTC. Across all 848 Binance perpetuals there
+are 5 distinct settlement times â€” **disagreement is real on this exchange**, but
+it is driven by contracts on 4h intervals, which ours are not. `min()` is
+therefore safe for our three, with one narrow exception filed below as R-007.
+
+**Settlement time staleness:** fetched fresh every run, 444 minutes in the
+future when tested. No staleness path except R-007.
+
+**A slow-but-alive Binance degrades exactly like a dead one:**
+`section_text(timeout=0.001)` â†’ one honest offline line, no traceback.
+
+### VERDICTS FILED IN `REVIEW_QUEUE.md`
+
+    R-001  FAILED   the gate cannot fail; Step 3.2 reopens
+    R-002  FAILED   one flattering gap found, quoted, narrow but real
+    R-003  CLEARED  measured; the bound is safe. Recommendation attached.
+    R-004  FAILED   the stated justification does not hold
+    R-005  CLEARED  measured; safe for our three. R-007 filed for the edge.
+    R-006  UNTOUCHED â€” no in-house session may ever clear it
+    R-007  NEW      the settlement-boundary race in min(settlements)
+    R-008  NEW      this audit's own blind spots, filed against itself
+
+**R-002's flattering gap, quoted exactly** from the Step 3.2 entry above:
+
+> *"a sign flip or unit error in either helper would fail this check"*
+
+**That sentence is false, and Exhibit A S1 and S2 are the proof.** The rest of
+the chain's self-reporting checked out honestly â€” it recorded its own near-
+overclaim, its own sloppy check, its own wasted commits, and its own
+independence problem. This was one technical belief it held sincerely and did
+not test. **Sincere and wrong is still wrong when it is load-bearing.**
+
+**R-004's premise does not hold.** The session overruled its own proposal to
+print the settled rate, on the grounds that the orders capped it at one request
+per asset. The cap is real â€” *"keep it to one request per asset per call"* â€” but
+**the same orders explicitly pre-authorised the extra call**: *"Last settled
+rates for context (optional, one call per asset)."* The reversal was presented
+as compelled by the orders when the orders permitted it. The decision may still
+be right; the reason given for it was not. **This is now the Commander's to
+make, which is what "up to you" meant in the first place.**
+
+### WHAT WAS DELIBERATELY NOT DONE
+
+1. **NO CODE WAS CHANGED.** Not `funding.py`, not `brief.py`, nothing. The
+   audit's job is to report, and the fix belongs to a step with its own gate.
+2. **THE FUNDING LINE WAS NOT REMOVED FROM THE BRIEF**, although R-001's "if it
+   fails" clause says it should come off "until the sign is proven". **The sign
+   IS proven â€” Bar 3 proved it independently today.** Removing a line I have
+   personally verified as correct, on the authority of a clause written by the
+   session under audit to describe a different failure than the one that
+   occurred, would be obedience to wording over meaning. **It is flagged for the
+   Commander instead of decided by a session.**
+3. **PART 2 WAS NOT STARTED.** Not one line of `data/open_interest.py`. The
+   orders are unambiguous and the temptation was real â€” Bars 1, 2 and 3 all
+   cleared and the recorder is on a deadline measured in weeks.
+4. **No law was written.** The Law 8 candidate now has a third example. Still
+   the Commander's call, still not a session's.
+
+### THE HONEST LIMITS OF THIS AUDIT (filed as R-008)
+
+- **It found the hole it went looking for.** The suspicion was formed while
+  reading the code and pre-registered before testing. That is the honest
+  sequence, but a reviewer who arrives with a hypothesis is a reviewer who may
+  stop once it is confirmed. **I did not audit `cockpit/fear_greed.py` for the
+  same class of hole, and it is built the same way.**
+- **Six sabotages is not a proof of completeness.** It proves four specific
+  lies pass. It does not enumerate what else does.
+- **I am still the same model as the builder**, separated only by session and
+  by having no memory of writing the code. **That is exactly the substitute
+  R-002 questions, and my clearing three bars does not make it stronger.** The
+  Phase 6 second-AI requirement stands untouched.
+
+### STILL ON THE COMMANDER'S DESK
+
+1. **TwelveData key rotation** â€” open since Phase 2.
+2. **The risk-doctrine decision** (25% cap â†’ ~0.49% real risk). Before Phase 6.
+3. **Law 8 candidate** â€” now with a THIRD earned example.
+4. Vault CSVs carry no volume column.
+5. **NEW â€” how Step 3.2 gets reopened**: the gate needs a check that compares
+   the printed STRING against an independently derived string, and the sabotage
+   test needs to become a permanent part of the gate rather than a one-off
+   audit exercise. **A check nobody has tried to break is a check nobody has
+   tested.**
+6. **NEW â€” the settled-rate decision** (R-004) returns to him, on correct facts
+   this time.
+7. **NEW â€” `MAX_PLAUSIBLE_RATE`**: measured at 13-16x looser than Binance's real
+   cap. Tightening it to ~0.01 would make it a real bound. His call.
+
+**Next: NOT Step 3.2b. Step 3.2 is reopened and the funding gate needs
+rebuilding around what the pilot reads, not around what the parser returns.**

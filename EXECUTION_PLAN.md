@@ -347,12 +347,32 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **PHASE 3 IN PROGRESS — Step 3.2 DONE 2026-07-26, GATE 3.2
-PASSED 48/48. NEXT SESSION HAS TWO PARTS: (1) the independent audit of Step
-3.2, sitting in Fable's chair — mandatory, cold, recomputing from raw evidence;
-(2) Step 3.2b, the open-interest recorder, ONLY IF the audit clears. Orders and
-Gate 3.2b are written and committed in SESSION_ORDERS.md, with every claim
-about the OI endpoints MEASURED first.**
+→ We are at: **PHASE 3 — STEP 3.2 IS REOPENED. THE AUDIT RAN 2026-07-26 AND
+DID NOT CLEAR: 3 of 5 bars passed, 1 partial, and BAR 5 (Exhibit A, the
+sabotage test) FAILED — 4 of 6 deliberate breakages walked through Gate 3.2
+while it reported 48/48. THE 48/48 TALLY IS VOID. Step 3.2b (the open-interest
+recorder) was NOT started, exactly as the orders required.**
+
+**WHAT IS AND IS NOT BROKEN.** The funding numbers on the Brief are CORRECT —
+re-derived independently against Binance the same day, sign and magnitude
+matching digit for digit. **The defect is in the GUARD, not the output:** every
+check verified what happens before the printed string is assembled, and nothing
+verified the string itself. A sign-flipped `_fmt_pct`, a dropped ×100, a
+timezone-less `_utc_hhmm` and a miswired contract map all passed. **The funding
+line was deliberately NOT removed from the Brief** — that is on the Commander's
+desk, because removing a line proven correct on the authority of a clause
+written by the session under audit would be obedience to wording over meaning.
+
+**NEXT SESSION: rebuild Gate 3.2 around what the pilot READS, not what the
+parser returns — a check that compares the printed STRING to an independently
+derived string, plus the sabotage exercise made PERMANENT rather than a one-off
+audit. Then, and only then, Step 3.2b.** Full verdicts in `REVIEW_QUEUE.md`
+(R-001 FAILED, R-002 FAILED, R-003 CLEARED, R-004 FAILED, R-005 CLEARED, R-007
+and R-008 newly filed) and in the `PROGRESS_LOG.md` audit entry.
+
+**Gate 3.2b and its orders remain written and valid in SESSION_ORDERS.md, with
+every claim about the OI endpoints MEASURED first. The 30-day open-interest
+window is still expiring; that deadline did not pause for this audit.**
 
 **Gate 3.2b's endpoints were probed BEFORE the gate was written** — applying
 the same morning's lesson that gates get written from assumption too. The find

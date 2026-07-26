@@ -26,12 +26,19 @@ may never clear its own item, however confident it is.**
 Phase 6 · `P2` should be reviewed before the surrounding area is built on ·
 `P3` worth an outside look, not blocking.
 
+**FIRST USE, 2026-07-26.** The 2026-07-26 audit session worked R-001 … R-005 as
+its worklist. **The queue functioned: three items reviewed found wanting, two
+cleared on measurements nobody had taken.** R-001 was convicted by the
+"Failed looks like" clause the accused session wrote for it. That is the
+design working.
+
 ---
 
-# OPEN
+# FAILED — reviewed, found wanting; the step reopens
 
 ## R-001 — The Step 3.2 gate was amended mid-flight by the session it judged
-**STATUS: OPEN · P1 · flagged 2026-07-26 by the session that did it**
+**STATUS: FAILED 2026-07-26 · P1 · flagged by the session that did it ·
+reviewed by the 2026-07-26 audit session, which did not build it**
 
 **What to review.** Gate 3.2's check (b) — the only check standing between this
 ship and printing the opposite of the truth on the Brief every morning — was
@@ -69,8 +76,51 @@ is not a check.
 **If it fails.** Step 3.2 reopens, the funding line comes off the Brief until
 the sign is proven, and the 48/48 tally is void.
 
+### >>> VERDICT 2026-07-26: **FAILED**, on both of the conditions above.
+
+**(1), (2) and (4) HOLD** and hold well — measured, not taken on trust. The
+amendment was NOT self-serving: the original check really was unpassable, and
+the fallback really would have failed at random.
+
+**(3) IS HALF-FALSE, and it is the half the whole argument rested on.**
+`_parse_rate` is shared **and genuinely guarded** — sabotaging it is caught.
+`_fmt_pct` is shared in the source **but never enters the comparison**, so
+sharing it guards nothing. Sharing a helper is not testing it.
+
+**EXHIBIT A, the deciding evidence — 4 of 6 deliberate sabotages PASSED the
+gate** (scratch copy outside the repo; control passed; `git status` clean):
+
+    S1  _fmt_pct sign flipped ....... NOT CAUGHT   prints the exact opposite
+    S2  _fmt_pct x100 dropped ....... NOT CAUGHT   wrong by 100x
+    S3  _parse_rate sign flipped .... CAUGHT
+    S4  _parse_rate scaled x10 ...... CAUGHT
+    S5  _utc_hhmm timezone dropped .. NOT CAUGHT   settlement time 5h wrong
+    S6  CONTRACTS miswired .......... NOT CAUGHT   BTC shows SOL's rate
+
+Under S1 the check prints `✓ BTCUSDT: parsed 5.819e-05 == raw '0.00005819' →
+-0.0058%` — **a tick mark on a line displaying the falsehood.**
+
+**IT IS A CLASS OF HOLE, NOT ONE BUG.** Every check verifies what happens
+*before* the printed string is assembled; nothing verifies the string itself
+beyond "a sign character appears" and "something matches `\d\d:\d\d`".
+
+**THE 48/48 TALLY IS VOID.** Not fraudulent — all 48 checks ran and passed —
+but they counted plumbing, not meaning.
+
+**NOT DONE, and referred to the Commander:** the funding line was **NOT** taken
+off the Brief. **The sign IS proven** — re-derived independently against
+Binance the same day, matching digit for digit. Removing a line verified as
+correct, on a clause written by the accused to describe a different failure,
+would be obedience to wording over meaning. **His call, not a session's.**
+
+**TO REOPEN STEP 3.2 PROPERLY:** the gate needs a check comparing the printed
+STRING to an independently derived string, and **the sabotage test must become
+a permanent part of the gate, not a one-off audit exercise.** A check nobody
+has tried to break is a check nobody has tested.
+
 ## R-002 — Two planning generations written by the mind that then built them
-**STATUS: OPEN · P1 · flagged 2026-07-26**
+**STATUS: FAILED 2026-07-26 · P1 · flagged 2026-07-26 · reviewed by the
+2026-07-26 audit session**
 
 **What to review.** Fable was unavailable. The Step 3.2 orders (`2a73645`), the
 gate, the build, the self-grade, the audit instructions, and the Step 3.2b
@@ -92,29 +142,30 @@ says went wrong and what the diffs reveal.
 
 **If it fails.** Everything downstream of the first bad link is re-examined.
 
-## R-003 — `MAX_PLAUSIBLE_RATE = 0.05` is an admitted guess in shipped code
-**STATUS: OPEN · P2 · flagged 2026-07-26 by the session that shipped it**
+### >>> VERDICT 2026-07-26: **FAILED — narrowly, specifically, and honestly.**
 
-**What to review.** `cockpit/funding.py` refuses any funding rate beyond ±5%
-as implausible and degrades to "instrument offline". **Binance's real funding
-cap for BTCUSDT / ETHUSDT / SOLUSDT was never measured.**
+**One flattering gap was found.** From the Step 3.2 log entry:
 
-**Why it needs an outside eye.** It is a live sanity bound on a shipped
-instrument, chosen by feel. If Binance's real cap exceeds it, a genuine market
-extreme — precisely the moment the reading matters most — would print as
-offline instead of as a number.
+> *"a sign flip or unit error in either helper would fail this check"*
 
-**Reproduce.** Measure Binance's published funding cap for the three
-contracts; compare to `0.05`.
+**That sentence is false**, and Exhibit A S1/S2 are the proof. It is the one
+load-bearing technical belief the chain held sincerely and never tested — and
+because it sounded like a verification, it stood in for one.
 
-**A clean verdict looks like.** The real cap sits comfortably below 5%, so the
-bound never fires on honest data — with the measured figure recorded.
+**Everything else in the chain's self-reporting checked out.** It recorded its
+own near-overclaim, its own sloppy rewritten check, its own wasted commits, and
+its own independence problem in plain words. **The failure here is not
+dishonesty; it is a single-author chain believing its own reasoning where a
+second pair of eyes would have asked for a demonstration.** Which is precisely
+what this item was raised to detect.
 
-**If it fails.** The constant is corrected to the measured cap and the log
-records that a guess reached production.
+**Downstream re-examination required:** nothing else was built on the false
+belief, because Step 3.2b was never started. **`cockpit/fear_greed.py` is built
+the same way and was NOT audited for the same class of hole** — see R-008.
 
 ## R-004 — A session overruled its own recommendation, unwitnessed
-**STATUS: OPEN · P3 · flagged 2026-07-26**
+**STATUS: FAILED 2026-07-26 · P3 · flagged 2026-07-26 · reviewed by the
+2026-07-26 audit session**
 
 **What to review.** The Step 3.2 session recommended printing the last settled
 rate on the Brief as a verifiable anchor, the Commander said "up to you", and
@@ -128,8 +179,73 @@ the Brief. Probably correct. Nobody watched.
 **A clean verdict looks like.** The one-request-per-asset cap is real in the
 orders and the reversal follows from it, not from the extra work.
 
+### >>> VERDICT 2026-07-26: **FAILED — the premise does not hold.**
+
+**The cap is real.** `SESSION_ORDERS.md` at `2a73645`: *"keep it to one request
+per asset per call and no retry storms."*
+
+**But the same orders explicitly pre-authorised the extra call**, three lines
+earlier: *"Last settled rates for context (optional, one call per asset)."*
+
+**The reversal was presented as compelled by the orders when the orders
+permitted it.** The decision may well still be right — the pilot rarely acts on
+it. **The reason given for it was not.** And the number removed was the one that
+would have been checkable on the face of the Brief, which is the direction of
+convenience R-004 was raised to watch for. **Returned to the Commander on
+correct facts. "Up to you" still stands.**
+
+---
+
+# CLEARED
+
+## R-000 — Gate 2.5 and the birth of Law 7
+**STATUS: CLEARED 2026-07-26 · reviewed independently by Fable**
+
+Gate 2.5 was reviewed by someone who did not build it, and **the review caught
+a real defect: a reviewer's own hardcoded "15/15"**. The finding stood, the
+gate was blocked on an honest blocker until the Commander decided, and the
+outcome became Law 7 — the Leak Law. Recorded here as the worked example of
+this queue functioning: **an outside eye found something the builder could
+not, and clearing was earned rather than assumed.**
+
+## R-003 — `MAX_PLAUSIBLE_RATE = 0.05` is an admitted guess in shipped code
+**STATUS: CLEARED 2026-07-26 · P2 · flagged by the session that shipped it ·
+measured by the 2026-07-26 audit session**
+
+**What to review.** `cockpit/funding.py` refuses any funding rate beyond ±5%
+as implausible and degrades to "instrument offline". **Binance's real funding
+cap for BTCUSDT / ETHUSDT / SOLUSDT was never measured.**
+
+**Why it needs an outside eye.** It is a live sanity bound on a shipped
+instrument, chosen by feel. If Binance's real cap exceeds it, a genuine market
+extreme — precisely the moment the reading matters most — would print as
+offline instead of as a number.
+
+**A clean verdict looks like.** The real cap sits comfortably below 5%, so the
+bound never fires on honest data — with the measured figure recorded.
+
+### >>> VERDICT 2026-07-26: **CLEARED.** Measured at last, via an endpoint no
+previous session had called: `GET /fapi/v1/fundingInfo` (HTTP 200, 736 symbols).
+
+    BTCUSDT   cap +/-0.00300  (0.300% per 8h)   fundingIntervalHours 8
+    ETHUSDT   cap +/-0.00300  (0.300% per 8h)   fundingIntervalHours 8
+    SOLUSDT   cap +/-0.00375  (0.375% per 8h)   fundingIntervalHours 8
+    widest cap anywhere on the exchange: 3.000%
+    largest magnitude actually observed on our three, 500 settled
+    periods each back to 2026-02-10: 0.0535%
+
+**The feared failure mode does not exist.** The bound is 13–16x looser than the
+real cap; it can never refuse an honest extreme. **A guess reached production
+and happened to be safe** — recorded, as R-003 required, so the next guess is
+measured first.
+
+**RECOMMENDATION, NOT A FINDING (Commander's call, no code changed):** at 5% it
+is nearly useless as a sanity bound — it would pass a rate 80x too large.
+Tightening to ~0.01 (1%, still 2.7x the real cap) would make it a real fence.
+
 ## R-005 — `min(settlements)` silently resolves a disagreement
-**STATUS: OPEN · P3 · flagged 2026-07-26**
+**STATUS: CLEARED 2026-07-26 · P3 · flagged 2026-07-26 · measured by the
+2026-07-26 audit session**
 
 **What to review.** When the three assets report different `nextFundingTime`
 values, `cockpit/funding.py` prints the earliest without saying it chose.
@@ -139,6 +255,22 @@ omission — the same shape as the errors this ship has already made twice.
 
 **A clean verdict looks like.** Either the values cannot realistically differ
 for these three contracts, or disagreement is surfaced rather than minimised.
+
+### >>> VERDICT 2026-07-26: **CLEARED on the first limb** — they cannot
+realistically differ.
+
+Measured, not assumed: all three carry `fundingIntervalHours: 8` in
+`/fapi/v1/fundingInfo`, and all three returned the identical `nextFundingTime`
+of 2026-07-27 00:00 UTC. **Disagreement IS real on this exchange** — across all
+848 perpetuals there are 5 distinct settlement times, 505 contracts on one and
+300 on another — **but it is driven by contracts on 4h intervals, which ours
+are not.** `min()` over three identical values is a no-op.
+
+**One narrow exception found while measuring, filed separately as R-007.**
+
+---
+
+# OPEN
 
 ## R-006 — THE PHASE 6 SECOND-AI REVIEW **(cannot be cleared in-house)**
 **STATUS: OPEN · P1 · LOCKED BY `EXECUTION_PLAN.md` PHASE 6**
@@ -156,19 +288,63 @@ not by being careful, not by passing a gate, not by a 48/48 tally. It is
 cleared only by a second, genuinely independent AI. If none is available when
 Phase 6 arrives, **Phase 6 waits.**
 
----
+**2026-07-26 note from the audit session, added without touching the status:**
+this item just earned a fresh argument. A same-model session separated only by
+time cleared three bars and then found a hole four sabotages wide in work it
+had no memory of writing. **It found that hole because it was ordered to try to
+break the code, not because it was careful.** Whatever reviews Phase 6 must be
+ordered to try to break it too.
 
-# CLEARED
+## R-007 — The settlement-boundary race in `min(settlements)`
+**STATUS: OPEN · P3 · flagged 2026-07-26 by the audit session**
 
-## R-000 — Gate 2.5 and the birth of Law 7
-**STATUS: CLEARED 2026-07-26 · reviewed independently by Fable**
+**What to review.** `cockpit/funding.py` fetches the three contracts in a loop,
+one request each. **If a settlement falls between two of those requests** — the
+loop straddles 00:00, 08:00 or 16:00 UTC — the earlier assets return the
+settlement that is about to happen and the later ones return the next one.
+`min()` then prints a settlement time that **has just passed**.
 
-Gate 2.5 was reviewed by someone who did not build it, and **the review caught
-a real defect: a reviewer's own hardcoded "15/15"**. The finding stood, the
-gate was blocked on an honest blocker until the Commander decided, and the
-outcome became Law 7 — the Leak Law. Recorded here as the worked example of
-this queue functioning: **an outside eye found something the builder could
-not, and clearing was earned rather than assumed.**
+**Why it needs an outside eye.** It is a real window, not a theoretical one:
+roughly half a second wide, three times a day. Harmless in effect — the pilot
+sees a time a few seconds stale — but it is the same silent-reconciliation
+shape as R-005, and it is the residue R-005's clearance leaves behind.
+
+**Evidence.** `cockpit/funding.py` `section_text()`, the loop over `contracts`
+collecting `settlements`, then `min(settlements)`.
+
+**Reproduce.** Call `/fapi/v1/premiumIndex` for the three symbols with a
+deliberate pause straddling a settlement boundary and compare the values.
+
+**A clean verdict looks like.** Either the window is judged acceptable and said
+so out loud, or the printed time is derived once rather than reconciled from
+three answers.
+
+## R-008 — The 2026-07-26 audit's own blind spots (filed against itself)
+**STATUS: OPEN · P2 · flagged 2026-07-26 by the audit session, about itself**
+
+**What to review.** The audit that failed R-001 and R-002, on the same standard
+it applied to them.
+
+**Why it needs an outside eye.** Three honest weaknesses, stated by the session
+that has an interest in them not being noticed:
+
+1. **It found the hole it went looking for.** The suspicion was formed while
+   reading the code and pre-registered in writing before any test ran — the
+   honest sequence — but a reviewer arriving with a hypothesis is a reviewer
+   who may stop once it is confirmed.
+2. **Six sabotages is not a proof of completeness.** It proves four specific
+   lies pass the gate. It does not enumerate what else does.
+3. **`cockpit/fear_greed.py` was NOT audited for the same class of hole,
+   and it is built the same way** — a `_parse`, a formatter, and checks that
+   verify the parse rather than the printed sentence. **The most likely place
+   the next hole is sitting, and this session did not look.**
+4. **The reviewer is the same model as the builder**, separated only by
+   session and by having no memory of writing the code. Clearing three bars
+   does not make that substitute stronger than R-002 says it is.
+
+**A clean verdict looks like.** Someone runs the sabotage exercise against
+`fear_greed.py`, and against whatever replaces the Step 3.2 gate, and finds
+either nothing or something this session should have caught.
 
 ---
 
@@ -195,6 +371,12 @@ Copy this form, append under OPEN, keep it tight:
 sections and leave the history legible — a docket that quietly tidies itself
 teaches the next session nothing.
 
+**AND, EARNED 2026-07-26: write "Failed looks like" as if a stranger will use
+it against you.** R-001's own failure clause is what convicted R-001. The
+session that wrote it could not see the hole, but it could describe the shape
+of the hole — **and that description survived long enough for someone else to
+find it.** That is what this file is for.
+
 ---
 
 # ON THE COMMANDER'S DESK
@@ -213,5 +395,13 @@ twelve get skimmed.
 **The other standing candidate, from 2026-07-26, still undecided:** *"A claim
 about what a data source will or will not give us is not a fact until it has
 been called; planning documents must mark which claims are measured and which
-are assumed."* **It now has two earned examples**, the second being a false
-claim inside a gate's own most important check.
+are assumed."* **It now has THREE earned examples** — the third being
+`MAX_PLAUSIBLE_RATE = 0.05`, a guess that shipped and was only measured against
+Binance's published cap (`/fapi/v1/fundingInfo`) on 2026-07-26, two steps later.
+
+**A THIRD CANDIDATE, EARNED BY EXHIBIT A ON 2026-07-26 — his call, not a
+session's:** *"A check is not proven until it has been deliberately broken. Any
+gate that guards what the pilot reads ships with a sabotage exercise that
+demonstrates it can FAIL."* Four of six sabotages passed Gate 3.2 while it was
+reporting 48/48. **The tally was honest and the checks all ran; what nobody had
+done was try to break them.**

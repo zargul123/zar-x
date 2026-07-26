@@ -13,7 +13,10 @@ AI) should open, kept short on purpose so it is actually read rather than
 skimmed. Every session files there before shipping anything it is unsure of,
 and **no session may clear its own item.**
 **NEXT BUILD SESSION: read SESSION_ORDERS.md — it carries the current step's
-exact orders (right now: Phase 3, Step 3.2, Funding rates).**
+exact orders. BUT READ THIS FIRST: the 2026-07-26 audit FAILED Gate 3.2 and
+STEP 3.2 IS REOPENED. The 48/48 tally is void; 4 of 6 deliberate sabotages
+passed that gate. The printed numbers are correct — the guard is not. Rebuild
+Gate 3.2 around what the pilot READS before Step 3.2b is touched.**
 
 ## What exists and works (all gated live, all pushed)
 | Part | File | Status |
@@ -27,7 +30,7 @@ exact orders (right now: Phase 3, Step 3.2, Funding rates).**
 | Grader v2 (merges all notebooks, candle-identity de-dup, always-UP parrot baseline) | journal/grader.py | ✅ |
 | Automation (Task Scheduler: brief 09:05 PKT; snapshots at every 4h close) | run_daily.bat / run_snapshot.bat | ✅ |
 | Context Deck — instrument 1 of 5: Fear & Greed (alternative.me, free, keyless; injectable URL, fails to one offline line) | cockpit/fear_greed.py | ✅ |
-| Context Deck — instrument 2 of 5: funding rates (Binance USDⓈ-M public, free, keyless; USDT perpetuals, sign proven against Binance's own docs; partial failure names the missing asset) | cockpit/funding.py | ✅ |
+| Context Deck — instrument 2 of 5: funding rates (Binance USDⓈ-M public, free, keyless; USDT perpetuals, partial failure names the missing asset). **PRINTS CORRECTLY — sign and magnitude re-verified against Binance raw 2026-07-26 — but GATE 3.2 IS VOID and the step is REOPENED: the gate could not catch a sign-flipped formatter.** | cockpit/funding.py | ⚠️ |
 | THE LAB, complete (Phase 2, Gates 2.1–2.5 all passed 2026-07-26): frozen checksummed vault · data validator at the only door · honest backtest engine (look-ahead impossible, costs always on, hold-out line train_end=2025-10-01) · walk-forward + Monte Carlo (seed 20260726) + regime breakdown · exit gate that caught a 1,687-parameter con artist · leak_check (Law 7's aid) | lab/ | ✅ |
 
 Run environment: `C:\Users\hp\miniconda3\envs\tfdml\python.exe` with `PYTHONUTF8=1`.
@@ -44,10 +47,13 @@ User is a non-programmer; explain in plain words; he runs commands from gray box
    (scores past snapshots against what prices did next; also monthly review of user's
    logged trades). Gate: grader correctly scores ≥2 weeks of accumulated snapshots.
 3. **Context Deck** (cockpit) — 🔨 IN PROGRESS (EXECUTION_PLAN Phase 3, 2 of 5 done):
-   ✅ Fear & Greed (alternative.me, free) 2026-07-26 · ✅ funding rates display
-   (Binance USDⓈ-M public, free) 2026-07-26 · ⏭️ **Step 3.2b — the open-interest
-   recorder (30-day window, backfill at birth) is the CURRENT step and the only
-   dataset on this ship that expires** · then news headlines (CryptoPanic free
+   ✅ Fear & Greed (alternative.me, free) 2026-07-26 — **not yet audited for the
+   class of hole found in funding (R-008)** · ⚠️ funding rates display (Binance
+   USDⓈ-M public, free) 2026-07-26 — **REOPENED by the 2026-07-26 audit; prints
+   correctly, gate void** · ⏭️ **Gate 3.2 rebuilt FIRST, then Step 3.2b — the
+   open-interest recorder (30-day window, backfill at birth), still the only
+   dataset on this ship that expires and its deadline did not pause for the
+   audit** · then news headlines (CryptoPanic free
    tier), event calendar, whale watch. Information ONLY, never signals. This closes the user's known blind spot: the system
    is math-only today; news/whales knowledge comes from the pilot until this ships.
 4. **Layer 7 — Carry Monitor** (Kimi's structural edge): delta-neutral funding carry
@@ -101,10 +107,26 @@ Two smaller traps beside it: the field is `sumOpenInterest` in the history
 endpoint but `openInterest` in the live snapshot endpoint, and the payload
 carries an unplanned `CMCCirculatingSupply`.
 
-**Still UNMEASURED, and marked as such:** Binance's real funding-rate cap for
-our three contracts. `cockpit/funding.py` refuses rates beyond ±5% as
-implausible; that bound is a guess, and it is on the next session's review list
-rather than sitting in the code disguised as a fact.
+**MEASURED 2026-07-26 by the audit session — the guess was safe, and now it is
+a fact.** Binance publishes real funding caps at `/fapi/v1/fundingInfo` (HTTP
+200, 736 symbols), an endpoint no earlier session had called:
+
+| Contract | Published cap / floor | Funding interval | Largest actually seen (500 settled periods, from 2026-02-10) |
+|---|---|---|---|
+| BTCUSDT | ±0.00300 (0.300% / 8h) | 8h | 0.0123% |
+| ETHUSDT | ±0.00300 (0.300% / 8h) | 8h | 0.0365% |
+| SOLUSDT | ±0.00375 (0.375% / 8h) | 8h | 0.0535% |
+
+`cockpit/funding.py`'s `MAX_PLAUSIBLE_RATE = 0.05` (5%) is **13–16× looser than
+the real cap**, so it can never refuse an honest extreme — the failure R-003
+feared does not exist. It is also too loose to be a useful fence (it would pass
+a rate 80× too large); tightening it to ~0.01 is **recommended and left on the
+Commander's desk, not done.**
+
+**The 8h interval on all three is why `min(settlements)` is safe** (R-005
+CLEARED) — across all 848 Binance perpetuals there are 5 distinct settlement
+times, but the disagreement comes from 4h-interval contracts, which ours are
+not.
 
 ## Standing answers to the Commander's questions (so they're never re-litigated)
 - **"How does it know what will happen?"** It doesn't. It's a weather station + cockpit:
