@@ -812,3 +812,203 @@ means. To be decided before Phase 6 — never after seeing results.
 
 **Next:** Step 2.4 — the Lie Detectors (walk_forward.py, monte_carlo.py,
 regime_report.py), all three run against this same MA-cross dummy.
+
+## 2026-07-26 — STEP 2.4: THE LIE DETECTORS — GATE 2.4 PASSED (35/35 checks)
+
+Three instruments are bolted onto the honest engine. All three read the
+engine's own output — a `BacktestResult` or the per-trade CSV — and all three
+compound `return_pct` (each trade's net result as a fraction of the equity IT
+started with), never raw dollars. Dollars carry the account history of every
+trade before them, so a window's dollar profit secretly reports trades that
+are not in the window. Percentages of own equity are the only honest unit for
+a subset.
+
+- `lab/walk_forward.py` — cuts the hold-out into 6 consecutive windows, scores
+  each alone, and asks two questions: profitable in >= 60% of windows, and did
+  any single window supply more than 50% of the profit.
+- `lab/monte_carlo.py` — reshuffles the trade sequence 10,000x, compounds every
+  path, reports the max-drawdown distribution and the 5th-percentile road.
+- `lab/regime_report.py` — breaks the card down by the `regime_at_entry` already
+  stamped on every trade. Information for the verdict, never an auto-filter.
+- `lab/trade_stats.py` — one small shared file (the only addition beyond the
+  three named instruments). All three needed the same profit-factor and
+  drawdown arithmetic on arbitrary subsets; writing it three times means three
+  places to be quietly wrong. It is written ONCE here, and it imports the
+  engine's own drawdown function rather than re-deriving it, so the Lab has a
+  single definition of "drawdown" that cannot drift.
+
+**NOTHING MOVED.** Before measuring anything, the gate re-ran the Gate 2.3
+dummy — MACross(20,50), BTC-USD 4h, train_end 2025-10-01 — and reproduced the
+hold-out card exactly: **37 trades, 14/23, win rate 37.8%, PF 0.63, max
+drawdown 7.98%, net -4.88%.**
+
+### THE WALK-FORWARD WINDOW TABLE (MA-cross hold-out, 1,789 candles)
+
+    #  from         to           candles  trades  win%     PF     SUM%     NET%   maxDD%
+    1  2025-10-01   2025-11-19      298       5   80.0    5.76    +2.44    +2.46    0.51
+    2  2025-11-19   2026-01-08      298       9   22.2    0.18    -3.26    -3.22    3.22
+    3  2026-01-08   2026-02-27      298       5   20.0    0.16    -2.01    -2.00    2.00
+    4  2026-02-27   2026-04-17      298      10   40.0    0.59    -1.77    -1.78    2.98
+    5  2026-04-17   2026-06-06      298       4   25.0    0.24    -1.02    -1.02    1.02
+    6  2026-06-06   2026-07-26      299       4   50.0    1.96    +0.68    +0.68    0.64
+    TOTAL (arithmetic sum of every trade's percent result): -4.94%
+
+37 trades in, 37 trades counted — the instrument refuses to report at all if a
+single trade fails to land in exactly one window. TEST 1: profitable in 2 of 6
+windows (33%, needs 60%) -> FAIL. **VERDICT: INCONSISTENT.**
+
+Two totals are printed per window on purpose. SUM is the arithmetic sum of the
+trades' percentages (-4.94%); NET is the same trades compounded (-4.88%). Only
+the SUM can answer "what share of the profit came from this window?", because
+the parts of a sum add up to the whole and the parts of a product do not.
+
+### THE EDGE CASE, DEFINED BEFORE THE CODE WAS WRITTEN, AND WALKED BY THE GATE
+
+The ">50% of profit" rule only means something when there IS profit. The
+MA-cross dummy lost money, so the instrument printed this instead of a number:
+
+    TEST 2 — CONCENTRATION: DOES NOT APPLY. The strategy finished the hold-out
+             at -4.94% — there is no profit to divide into shares, so asking
+             "which window carried the profit?" would be arithmetic on nothing.
+             No number is printed here because any number printed here would be
+             misleading. The verdict does not need it: a losing strategy is
+             already INCONSISTENT.
+
+Nothing was divided by a zero or negative total; no share-of-profit figure was
+invented for a loser (the gate checks that the share column is literally empty
+and that no lucky-window flag was raised); and the consistency test still ran
+and still failed honestly. A losing strategy is INCONSISTENT by definition —
+it is not consistent at anything except losing.
+
+**A window with no trades is printed as "no trades" and still counted in the
+denominator.** Silently dropping quiet windows would quietly improve the
+consistency score of every strategy that sits out a bad stretch.
+
+**The windows do not overlap.** "Rolling" means the window rolls forward
+through time, not that windows share trades. If a trade were counted twice the
+windows' shares of the profit would add to more than the profit, and the 50%
+rule would be meaningless.
+
+### THE DETECTOR MUST DETECT — THE PLANTED LUCKY WINDOW
+
+A detector that has never caught anything is decoration. So the gate builds
+SYNTHETIC trade sequences in memory (labelled as such in the output, never
+written to the vault or to results, no number from them is a market result) —
+the same technique as the poisoned vault copy in Gate 2.2.
+
+**EXHIBIT A — the disease.** 60 fabricated trades: five windows make an
+unremarkable +1.2% each, window 4 makes +40% alone. A single stat card would
+show +46% and look like an edge.
+
+    4  2025-12-24   2026-01-21       10   80.0   26.00   +40.00   +47.62    1.59   87.0% of profit
+    -> FAIL — LUCKY-WINDOW FLAG RAISED.  VERDICT: INCONSISTENT.
+    "Remove that window and the rest of the hold-out made +6.00%. That is the
+     strategy without its lucky month — treat THAT as the honest expectation."
+
+It named the right window, and — the part that matters — this sequence PASSES
+the consistency test (profitable in 6 of 6 windows). It is caught by the
+concentration test and nothing else. That is the +20% February, detected.
+
+**EXHIBIT B — the control.** A detector that flags everything is as useless as
+one that flags nothing. The same kind of fabricated sequence, profitable in all
+six windows with the profit spread evenly (biggest window 25.7%): **NOT
+flagged, verdict CONSISTENT.** The detector discriminates.
+
+**EXHIBIT C — the quiet window.** The control with window 3 emptied: the table
+printed `no trades in this window (counted, never skipped)` and the denominator
+stayed 6 windows, not 5.
+
+### MONTE CARLO — SEED 20260726 (RECORDED)
+
+The 37 hold-out trades dealt in 10,000 different orders:
+
+    the gentlest ride (best of all)    :  4.88%
+    typical ride (median)              :  6.21%
+    a rough ride  (75th percentile)    :  6.91%
+    a bad ride    (90th percentile)    :  7.58%
+    THE 5th-PERCENTILE RIDE            :  8.02%   <- the number the rule judges
+    the worst shuffle of all           : 10.46%
+    the ride history actually dealt    :  7.98%
+
+**8.02% is well under the 30% ruin line -> passes the reshuffle test.** Said
+plainly in the report: this means the ride is survivable, NOT that the strategy
+makes money. A losing strategy can pass this test comfortably by losing
+smoothly — and this one does.
+
+The 5th-percentile equity path (100 units): 100.71 -> 99.74 -> 99.79 -> 98.49
+-> 95.71 -> 94.47 -> 93.62 -> 93.44 -> 94.25 -> 95.12, deepest point 8.02%
+below its own peak. It is a real path out of the 10,000, not an interpolation.
+
+**A TRUTH THE INSTRUMENT IS NOT ALLOWED TO HIDE:** every reshuffle finishes in
+exactly the same place — measured spread between the best and worst of 10,000
+final returns: **0.000000 percentage points**. The same numbers multiplied in a
+different order give the same product. There is no "distribution of final
+returns" from a pure reshuffle; a tool that prints one is printing rounding
+dust and calling it risk. What a reshuffle changes is the ROAD, and the road is
+what this instrument measures. To answer the different question — what if the
+same edge had dealt a different HAND — a clearly separated second exhibit
+resamples WITH replacement: 5th percentile -10.49%, median -4.97%, 95th
+percentile +1.20%, and **91.3% of hands lost money**. That exhibit is
+information; the RULE is judged on the reshuffle, as the plan specifies.
+
+"5th percentile" is stated unambiguously in the report: the 5th-percentile-
+WORST outcome, i.e. the 95th percentile of the drawdown distribution — only 5
+shuffles in 100 were rougher.
+
+**REPRODUCIBILITY, PROVEN TWICE OVER.** Run twice inside the gate: identical
+numbers AND character-identical report text. Run in two separate processes: the
+entire 365-line gate output was byte-identical except the evidence filename
+(which never overwrites, by Law 5).
+
+### REGIME BREAKDOWN (hold-out, weather stamped at entry from closed candles)
+
+    regime      trades  share   win%     PF    avg win  avg loss    SUM%     NET%  maxDD%
+    Ranging         20   54.1%   30.0   0.32    +0.44     -0.59    -5.59    -5.46   6.76
+    Chaotic         13   35.1%   53.8   1.58    +0.76     -0.57    +1.96    +1.95   2.22
+    Trending         4   10.8%   25.0   0.22    +0.37     -0.56    -1.31    -1.31   1.31
+    ALL             37  100.0%   37.8   0.63    +0.60     -0.58    -4.94    -4.88   7.98
+
+The buckets add back up to the engine's own stat card exactly — the check that
+proves no trade was lost on the way into a bucket. Thin samples are marked in
+words: 4 Trending trades is "an anecdote, not a statistic".
+
+The tempting reading is "it only works in Chaotic — filter for that". The
+report refuses it in print: with three buckets one of them always looks good,
+and 13 trades is not evidence. Keeping only the flattering regime is the oldest
+form of curve-fitting there is. If a regime filter is ever added it becomes a
+NEW strategy with a NEW fingerprint and starts the Lab again from the door.
+
+### WHAT THE THREE INSTRUMENTS SAY ABOUT THE DUMMY, IN PLAIN WORDS
+
+Nothing good, which is correct — it is an unremarkable losing strategy and
+nobody claimed otherwise. It lost in 4 of 6 windows; it survives the reshuffle
+test only because it loses smoothly; the one regime where it made money holds
+13 trades. Three instruments, one honest verdict: no edge here.
+
+### GATE RUN HONESTY
+
+**The first run had one FAIL, and it was my assertion, not an instrument.** The
+gate demanded the reproduced win rate equal 37.8; the engine returned 37.84,
+which IS 37.8 to the precision the log recorded it at. The fix was to compare
+each Gate 2.3 number to the number of decimals the log actually wrote down,
+not to invent precision the record never had. No instrument code changed, and
+no engine code was touched at any point in this session.
+
+**A checksum difference, explained rather than waved away.** The per-trade CSVs
+written this session do NOT match the Gate 2.3 ones byte for byte. Cause,
+verified column by column: the `commit` stamp only — Gate 2.3's CSVs were
+written before the Gate 2.3 commit existed (3fd443c), this session's carry
+c4215bb. **All 119 trades are identical row for row in all 34 other columns.**
+That is the provenance stamp working exactly as designed. Within this session
+all four gate runs produced byte-identical CSVs.
+
+**Untouched, deliberately:** engine.py, validator.py, dummies.py, gate_2_3.py —
+not one line. Nothing outside `lab/` except this log and the plan's marker. The
+risk-doctrine open item (the 25% cap making actual risk ~0.486% instead of 1%)
+was NOT acted on — it is the Commander's decision and stays parked until before
+Phase 6.
+
+**Next:** Step 2.5 — the Phase 2 exit gate: run a deliberately-bad strategy
+through the whole pipeline end to end and show the Lab exposes it (hold-out
+collapse, walk-forward inconsistency, Monte Carlo ruin). If the Lab certifies
+the bad strategy as good, Phase 2 is not done.

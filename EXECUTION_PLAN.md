@@ -336,12 +336,30 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **Phase 2, Step 2.4 (Lie Detectors) — READY TO START.**
+→ We are at: **Phase 2, Step 2.5 (Phase 2 exit gate) — READY TO START.**
 Step 2.1 (Frozen Vault) DONE 2026-07-26, GATE 2.1 PASSED.
 Step 2.2 (Data Validator) DONE 2026-07-26, GATE 2.2 PASSED first run.
 Step 2.3 (Backtest Engine) DONE 2026-07-26, GATE 2.3 PASSED.
+Step 2.4 (Lie Detectors) DONE 2026-07-26, GATE 2.4 PASSED first run, 35/35
+checks. The MA-cross dummy's hold-out card reproduced Gate 2.3 exactly.
 
-**What Step 2.4 must bolt onto:** `lab/engine.py`, contract
+**What Step 2.5 must bolt onto (the three instruments, all built on the
+engine's output and all using `return_pct`, never dollars):**
+- `lab/walk_forward.py` — `walk_forward(result, window='holdout')` for an
+  engine result, `walk_forward_trades(df, index=None)` for any trade table.
+  Returns a report with `.text()`, `.verdict` (CONSISTENT/INCONSISTENT),
+  `.consistency_ok`, `.lucky_window_flag`, `.windows`. Non-overlapping
+  windows (each trade counted once, or shares of profit are fiction). If the
+  total is <= 0 the concentration test is REFUSED in words, never divided.
+- `lab/monte_carlo.py` — `monte_carlo_result(result)` / `monte_carlo(returns)`.
+  **RECORDED SEED: 20260726**, printed in every report; identical across
+  processes. Judge on `dd_p95` (the 5th-percentile-worst drawdown) vs the
+  30% ruin line; `ruin_flag` carries the verdict.
+- `lab/regime_report.py` — `regime_report(result)`. Information only.
+- `lab/trade_stats.py` — the one shared `summarise(trades)`; the Lab has a
+  single definition of profit factor and drawdown so they cannot drift.
+
+**What Step 2.4 bolted onto:** `lab/engine.py`, contract
 `signal(df) -> long|short|flat`, entered via `load_vault(asset, timeframe)`
 (the ONLY door — it refuses any path outside lab/vault/ and any file the
 validator FAILs). `run_backtest(...)` returns a BacktestResult with
