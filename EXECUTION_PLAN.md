@@ -336,8 +336,24 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **PHASE 2 COMPLETE (2026-07-26) — Phase 3, Step 3.1
-(Fear & Greed) READY TO START.**
+→ We are at: **PHASE 3 IN PROGRESS — Step 3.1 DONE 2026-07-26, GATE 3.1
+PASSED. Step 3.2 (Funding rates display, Binance public API) READY — funding
+recording to CSV starts the day 3.2 ships.**
+
+**Step 3.1 (Fear & Greed) DONE 2026-07-26, GATE 3.1 PASSED 45/45 on the first
+run.** `cockpit/fear_greed.py` (new) + 4 wiring lines in `cockpit/brief.py`
+were the only code touched; lab/ byte-identical, vault INTACT. The Brief's
+CONTEXT DECK now prints the crowd-mood gauge (live that day: 26 — Fear,
+yesterday 27, a week ago 28, cross-checked against alternative.me's own web
+page, 4 of 4 matching). The offline drill points an injectable base URL at an
+unresolvable `.invalid` host: the instrument degrades to one line and the
+Brief still reports 3/3 assets. **No CSV recording was built and none is
+needed** — alternative.me serves its whole history on demand (`limit=0`).
+**Step 3.2 is the opposite case: Binance does NOT serve deep funding history,
+so funding recording to CSV must start the day 3.2 ships, or Phase 6's Slot 2
+cannot be tested.** Full entry in PROGRESS_LOG.md.
+
+Phase 2, for the record:
 Step 2.5 (`lab/gate_2_5.py`) PASSED 37/37, run twice byte-identical, after
 the Commander's decision resolved its one honest blocker. The full story is
 in PROGRESS_LOG.md (three entries: the finding, the independent review, the
@@ -357,7 +373,8 @@ decision); the short version every future session must know:
   the honest strategies) runs as the reading's aid, never its substitute; the
   alarm was NOT lowered. Gate 2.5's Step 6 now asserts the measured silence —
   if that check ever fails, the ground moved and Law 7 must be re-examined.
-Phase 3 was NOT started (per the standing order not to, even on a quick pass).
+Phase 3 was not started by the Phase 2 sessions (per the standing order not
+to, even on a quick pass); it opened with Step 3.1 above.
 Step 2.1 (Frozen Vault) DONE 2026-07-26, GATE 2.1 PASSED.
 Step 2.2 (Data Validator) DONE 2026-07-26, GATE 2.2 PASSED first run.
 Step 2.3 (Backtest Engine) DONE 2026-07-26, GATE 2.3 PASSED.

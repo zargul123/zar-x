@@ -3,7 +3,8 @@ Zar X cockpit — the Morning Brief.
 
 One command: a plain-words briefing for every watched asset — price, trend
 state, momentum, volatility, and the weather report — plus a ready example
-risk plan so the pilot always sees what a disciplined trade would look like.
+risk plan so the pilot always sees what a disciplined trade would look like,
+and the Context Deck: the wider market weather, information only.
 
 Assembled ONLY from the sealed compartments' doorways (data, indicators,
 regime, risk). Facts and instrument readings — never advice, never a
@@ -19,6 +20,7 @@ from data.market_data import MarketData
 from indicators.technical import add_indicators
 from regime.vane import RegimeVane
 from risk.calculator import RiskCalculator
+from cockpit.fear_greed import section_text as fear_greed_section
 
 TIMEFRAME = '4h'
 CANDLES = 300
@@ -80,6 +82,8 @@ def run_brief() -> int:
     print("=" * 62)
     md, vane, risk = MarketData(), RegimeVane(), RiskCalculator()
     ok = sum(asset_brief(md, vane, risk, a) for a in ASSETS)
+    print(f"\n{'─' * 62}")
+    print(fear_greed_section())   # never raises; offline it says so in one line
     print(f"\n{'=' * 62}")
     print(f"  {ok}/{len(ASSETS)} instruments reporting. "
           f"Facts, not advice — the pilot decides.")

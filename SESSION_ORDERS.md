@@ -6,6 +6,15 @@ exam is at the bottom of this file and it WILL be run exactly as written, so
 build to it. When this step is done and verified, this file gets rewritten
 with the next step's orders.*
 
+> **STATUS: THESE ORDERS ARE CARRIED OUT. Step 3.1 DONE 2026-07-26, GATE 3.1
+> PASSED 45/45 on the first run** (`cockpit/fear_greed.py` + 4 wiring lines in
+> `cockpit/brief.py`; live reading 26 — Fear, cross-checked 4 of 4 against
+> alternative.me's own web page; offline drill clean, Brief 3/3 both ways).
+> Full account in PROGRESS_LOG.md; marker updated in EXECUTION_PLAN.md. Step
+> 3.2 was NOT started. This file is now history and awaits Fable's rewrite
+> with the Step 3.2 orders — a session picking it up as live orders would be
+> rebuilding work that is already done.
+
 ## READ FIRST, IN THIS ORDER, BEFORE TOUCHING ANYTHING
 
 1. `EXECUTION_PLAN.md` — the PHASE 3 block and the CURRENT POSITION MARKER

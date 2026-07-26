@@ -1470,3 +1470,191 @@ Phase 3 was NOT started in this session, per the standing order. Open items
 carried forward, still on the Commander's desk: TwelveData key rotation; the
 risk-doctrine item (25% cap -> actual risk ~0.486% not 1%) to be decided
 BEFORE Phase 6; vault CSVs carry no volume column.
+
+## 2026-07-26 — PHASE 3, STEP 3.1: THE FEAR & GREED INSTRUMENT —
+## GATE 3.1 PASSED (45/45 checks, first run)
+
+The Context Deck is open. The Morning Brief now carries one instrument of
+wider-market context beneath the three asset briefings: the crowd-mood gauge.
+It is INFORMATION. It does not say what to do, and no word in its output
+proposes a trade.
+
+### WHAT WAS BUILT — exactly two code files, as ordered
+
+- **`cockpit/fear_greed.py` (new, 156 lines).** One doorway, `section_text()`,
+  returning the Context Deck block the Brief prints. One network call, no
+  retries, 10s timeout. Every failure becomes one honest offline line.
+- **`cockpit/brief.py` (wiring, 4 added lines + 1 docstring line).** The full
+  diff: one import, two print lines placed after the per-asset briefings and
+  before the closing footer, and one sentence added to the module docstring.
+  Nothing else in the Brief was touched.
+
+**Scope, verified with `git diff` before committing:** `lab/` byte-identical
+(empty diff, zero lines), the vault verified **INTACT — all 6 files match
+their checksums**, and `data/ indicators/ regime/ risk/ signals/ config.py`
+untouched. No new dependency, no `.env` change, no key: alternative.me's index
+is free and keyless.
+
+### THE REAL API SCHEMA RECEIVED (verified at build time, not assumed)
+
+`GET https://api.alternative.me/fng/?limit=8` -> HTTP 200, `application/json`.
+The shape the orders predicted was correct, and carried **two extras the
+orders did not mention**, both recorded here because the next builder should
+not be surprised by them:
+
+    {
+      "name": "Fear and Greed Index",            <- extra, ignored
+      "data": [
+        { "value": "26",                          <- STRING, not a number
+          "value_classification": "Fear",
+          "timestamp": "1785024000",              <- STRING unix seconds, UTC midnight
+          "time_until_update": "39860" },         <- extra, NEWEST ITEM ONLY
+        { "value": "27", "value_classification": "Fear",
+          "timestamp": "1784937600" },            <- older items: 3 keys, no countdown
+        ... 8 items total, NEWEST FIRST ...
+      ],
+      "metadata": { "error": null }               <- extra, and USED (see below)
+    }
+
+What the parser does with the reality it found:
+
+- `value` and `timestamp` arrive as **strings** and are converted, never
+  trusted as numbers. A value outside 0-100 is refused, not printed.
+- **`metadata.error` is checked.** If the source ever reports its own error
+  while still answering HTTP 200, the instrument goes offline rather than
+  printing a number it cannot vouch for.
+- `time_until_update` and `name` are ignored — reading fields we do not need
+  is how a parser breaks when they move.
+- The 8 items are **re-sorted newest-first by timestamp** rather than trusting
+  the arrival order.
+- **The source's own `value_classification` is printed, never a label of our
+  own invention.** Observed live this day: 25 = "Extreme Fear" but 26 = "Fear",
+  so the boundary sits between them. Inventing our own thresholds would put a
+  different word on the Brief than the source publishes on its own page — that
+  is exactly the kind of quiet drift this ship refuses.
+- **Context values are labelled by their REAL age in days**, computed from the
+  timestamps: 1 day -> "yesterday", 7 days -> "a week ago", anything else ->
+  "N days ago". If the source ever skips a day, the Brief will say "8 days ago"
+  rather than printing a wrong word over a right number.
+
+### WHAT IT PRINTS
+
+    CONTEXT DECK
+    Fear & Greed : 26 — Fear   (yesterday 27 · a week ago 28)   [reading of 2026-07-26 UTC]
+    (crowd-mood gauge from alternative.me — information, not a signal)
+
+And when it cannot reach the source, the whole of its output is:
+
+    CONTEXT DECK
+    🔌 Fear & Greed instrument offline (ConnectionError)
+
+The failure's TYPE is named — a dead network and a changed schema are
+different problems, and the pilot should be able to tell them apart without
+opening a log.
+
+### GATE 3.1 — DECLARED BEFORE THE BUILD (Law 4), RUN AGAINST THE LIVE
+### MARKET, **PASSED 45 of 45 CHECKS ON THE FIRST RUN**
+
+**(a) Standalone run — live value, classification, week of context. PASS
+(6 checks).** Exit 0. Fetched 8 daily readings, 2026-07-19 -> 2026-07-26 UTC.
+Value **26**, inside 0-100; classification **"Fear"**; yesterday **27**; a
+week ago **28**.
+
+**(b) The value matches what alternative.me itself publishes. PASS (4
+checks).** Cross-checked not against the API a second time — that would only
+ask the same machine the same question — but against the **web page a human
+would open**, `https://alternative.me/crypto/fear-and-greed-index/`, scraped
+independently of the instrument:
+
+    what the web page published        what the instrument printed
+    Now:        26  Fear               26 — Fear
+    Yesterday:  27  Fear               yesterday 27
+    Last week:  28  Fear               a week ago 28
+    Last month: 13  Extreme Fear       (not shown on the Brief)
+
+Four for four, value AND wording. The page's own "Last week" framing is the
+same comparison the Brief prints, which is why the instrument shows it.
+
+**(c) THE OFFLINE DRILL — internet never disconnected. PASS (10 checks).**
+The instrument's base URL is injectable, so the drill points it at
+`https://zar-x-offline-drill.invalid/` — the `.invalid` top-level domain is
+reserved by the RFCs and can never resolve, so the failure is genuine and the
+Commander's connection is never touched. Result: the two-line offline block
+above, **no traceback, nothing else printed**. Then a FULL BRIEF was run with
+the instrument pointed at that dead address: **3/3 assets reporting**, exit
+code unchanged, and all six per-asset lines (Price, Trend, Momentum,
+Volatility, Weather, Example) present three times each. The dead instrument
+cost the Brief one line and nothing else.
+
+**(d) Full live Brief — new section present, every old section intact. PASS
+(20 checks across the two runs).** 3/3 assets, CONTEXT DECK present, the six
+pre-existing per-asset lines present x3, header and footer unchanged. Live
+numbers from run 1: BTC $64,684.01 (+0.78%), ETH $1,894.45 (+1.42%), SOL
+$74.99 (+1.09%), all three Ranging.
+
+**(e) Two runs back to back, both completed. PASS (2 checks + 1 baseline
+check).** Both exit 0, 6.4s and 7.5s. **Both printed index 26 — and the same
+prices, to the cent.** The gate ALLOWED the value to differ; it did not, and
+that is worth stating plainly so nobody reads it as proof of determinism:
+seven seconds apart, TwelveData returned the same last 4h candle and
+alternative.me's daily index had not turned over. Run the two an hour apart
+and the prices will move. This is live data being live, not a fixture.
+
+### DELIBERATELY NOT BUILT — AND THE 3.2 REMINDER THAT MATTERS MORE
+
+**NO CSV recording of the Fear & Greed index, on purpose.** alternative.me
+serves its FULL history on demand (`limit=0` returns every day back to 2018),
+so there is nothing here that can be lost by not collecting it. A recorder
+would be a second copy of a public archive, and a second copy is a second
+thing that can rot.
+
+**STEP 3.2 IS THE OPPOSITE CASE AND MUST NOT BE CONFUSED WITH THIS ONE.**
+Binance's free endpoint does NOT serve deep funding history. **Funding
+recording to CSV starts THE DAY 3.2 SHIPS** — every day it does not run is a
+day of history that cannot be bought back later, and Phase 6's Slot 2
+(funding-rate extreme fade) cannot be tested without it. This is the single
+most time-sensitive obligation on the ship right now.
+
+### WHAT WENT WRONG, AND THE SMALL THINGS WORTH KNOWING (Law 1)
+
+Honestly: **the gate passed on its first run and nothing failed.** That is
+recorded exactly as plainly as a failure would have been — an unbroken run of
+green is a fact about a small step, not evidence of a good session. What the
+build did meet on the way:
+
+1. **The orders' expected schema was slightly incomplete** (the three extras
+   above). Adapted and recorded, as the IF/THEN table required.
+2. **The smoke test fetches the API twice** — once to assert on the parsed
+   readings, once for the section it prints. Two requests, no retries, on an
+   endpoint with no key and no published rate limit. Chosen so the assertions
+   test real parsed values instead of pattern-matching the printed line; the
+   cost is that the printed block is a second, separate reading. Same number
+   both times today, and the index only turns over daily.
+3. **The rate-limit trap that did NOT bite, and the one deliberate pause.**
+   Three Brief runs = 9 TwelveData requests against a free tier of 8/minute.
+   Runs 1 and 2 went back to back (6 requests) with no 429. Before the third
+   (the offline-drill Brief) the gate waited 70 seconds for the window to
+   reset, so that a rate-limit retry could never be mistaken for a failure
+   caused by the new instrument.
+4. **One rewrite before any gate ran:** the smoke test's final verdict line
+   was first written as a conditional expression tangled inside an f-string —
+   it worked, but it was unreadable. Replaced with a plain if/else.
+5. **`journal/snapshots_local.csv` carries 3 uncommitted rows** from the
+   automated 12:05 snapshot run, which were already there when this session
+   opened. They were **not touched, not deleted, and deliberately NOT included
+   in this commit** so the commit's diff is exactly the four files the orders
+   allow. The evidence stays on disk for the automation's own commit (Law 5:
+   history is sacred, and this session did not write it).
+6. **The gate harness is NOT in the repository.** Only two code files could be
+   touched, and a `gate_3_1.py` would have been a third. The harness ran from
+   outside the ship; its 45 checks are itemised above in enough detail to be
+   rebuilt exactly. If a future session wants Phase 3 gates kept as code, that
+   is a decision for the Commander, not something to smuggle in under a step
+   that forbade it.
+7. **Law 7 does not bite here** and was not invoked: nothing entered the Lab,
+   no strategy was certified, no vault file was read. The signals doorway
+   stands untouched — the Context Deck describes the crowd, it never proposes
+   a position.
+
+**Step 3.2 was NOT started**, per the standing order, even though 3.1 finished
+early. One part, one gate, one commit.
