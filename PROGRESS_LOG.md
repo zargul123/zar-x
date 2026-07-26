@@ -387,3 +387,49 @@ then Context Deck / Carry Monitor / Trade Logger & Mirror / sealed Gauntlet
 Includes the standing IF/THEN table (gates outrank models; too-good results =
 hunt the leak first; THE PROMISE wins every argument) and a CURRENT POSITION
 MARKER line each session must update. ROADMAP.md now points to it.
+
+## 2026-07-26 — PHASE 2, STEP 2.1: THE FROZEN VAULT — GATE 2.1 PASSED
+
+**What was built (nothing outside lab/):**
+- `lab/build_vault.py` — one-time deep download through data/market_data.py
+  `get_history()`. All six downloads happen in memory FIRST; not one byte is
+  written unless all six arrived (the vault is only born complete). Refuses to
+  run at all if a MANIFEST already exists — a born vault is never re-born
+  (Law 5, evidence is never rewritten).
+- `lab/vault/` — 6 CSVs, 22,986 candles total, plus MANIFEST.json (rows,
+  first/last candle, days covered, byte size, SHA-256 per file, build date,
+  the git commit it was built from).
+- `lab/verify_vault.py` — recomputes every checksum, prints VAULT INTACT /
+  VAULT CORRUPTED / VAULT MISSING per file, and names any stranger file
+  sitting in the vault that the manifest does not know about. Read-only,
+  clock-free output by design.
+- `lab/vault/.gitattributes` (`* -text`) — the laptop runs
+  core.autocrlf=true; without this, git would rewrite line endings on
+  checkout and every checksum would "fail" for a reason that has nothing to
+  do with the data. The vault's bytes are now frozen on every machine.
+
+**Depth actually granted (recorded, as the plan orders): the full ask.**
+TwelveData gave 3 years on all six — 4h: 6,568 candles per asset
+(2023-07-27 → 2026-07-26); 1d: 1,094 per asset (2023-07-28 → 2026-07-25).
+Well above the 1-year floor, above the ~4,000-row 4h expectation. No thin-data
+decision needed from the Commander.
+
+**GATE 2.1 — all three conditions, run before the commit:**
+(a) all 6 files exist with plausible counts (4h 6,568 ≥ ~4,000) ✅
+(b) verify_vault.py printed INTACT for all six, exit code 0 ✅
+(c) run twice → byte-identical output (diff clean) ✅
+Extra proof, no file touched: one price digit changed in memory
+(29292.0 → 29292.1) moves the fingerprint from 9d0cd7d5... to cf96cad2... —
+the guard can actually tell, it is not just printing a nice word.
+
+**Two honest notes, neither hidden:**
+1. NO VOLUME COLUMN. TwelveData returns none for BTC/ETH/SOL-USD, so the
+   vault is OHLC only. Every future tool that wants volume must be told this
+   before it is designed, not after.
+2. The still-forming last candle was dropped from each file (its high/low/
+   close are not final). A frozen vault holds only finished candles;
+   recorded in MANIFEST as `unclosed_last_candle_dropped: true`.
+
+**Next:** Step 2.2 — the Data Validator (gaps, duplicates, impossible prices,
+absurd single-candle moves), with its two-part gate: clean vault file → PASS,
+a deliberately corrupted COPY → must name all three diseases.

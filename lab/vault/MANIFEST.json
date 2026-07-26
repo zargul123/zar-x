@@ -1,0 +1,86 @@
+{
+  "vault_version": 1,
+  "built_utc": "2026-07-26T09:48:44Z",
+  "built_by_git_commit": "81825f1ef5f4cbd2499297350f7bcdbea3df4841",
+  "source": "TwelveData via data/market_data.py get_history()",
+  "requested_days": 1095,
+  "timeframes": [
+    "4h",
+    "1d"
+  ],
+  "assets": [
+    "BTC-USD",
+    "ETH-USD",
+    "SOL-USD"
+  ],
+  "unclosed_last_candle_dropped": true,
+  "law": "These files are evidence. They are never modified, only verified.",
+  "files": {
+    "BTC-USD_4h.csv": {
+      "asset": "BTC-USD",
+      "timeframe": "4h",
+      "rows": 6568,
+      "first_candle": "2023-07-27 16:00:00",
+      "last_candle": "2026-07-26 04:00:00",
+      "days_covered": 1094.5,
+      "years_covered": 3.0,
+      "bytes": 373953,
+      "sha256": "9d0cd7d5440d65291d446ecc4793760fbbba2daceb9d61ae964330ca23b00316"
+    },
+    "BTC-USD_1d.csv": {
+      "asset": "BTC-USD",
+      "timeframe": "1d",
+      "rows": 1094,
+      "first_candle": "2023-07-28 00:00:00",
+      "last_candle": "2026-07-25 00:00:00",
+      "days_covered": 1093.0,
+      "years_covered": 2.99,
+      "bytes": 55841,
+      "sha256": "bad78bf0913b63338e14518d8657694fb03865682f6545588c2a6ccb66a62a00"
+    },
+    "ETH-USD_4h.csv": {
+      "asset": "ETH-USD",
+      "timeframe": "4h",
+      "rows": 6568,
+      "first_candle": "2023-07-27 16:00:00",
+      "last_candle": "2026-07-26 04:00:00",
+      "days_covered": 1094.5,
+      "years_covered": 3.0,
+      "bytes": 345282,
+      "sha256": "57feb27e7a7bf2e20c3b4087628fcdc145867a1d541de4510702d6b9258bfd46"
+    },
+    "ETH-USD_1d.csv": {
+      "asset": "ETH-USD",
+      "timeframe": "1d",
+      "rows": 1094,
+      "first_candle": "2023-07-28 00:00:00",
+      "last_candle": "2026-07-25 00:00:00",
+      "days_covered": 1093.0,
+      "years_covered": 2.99,
+      "bytes": 58680,
+      "sha256": "fb12c2189ac8ad838f38727941606cd325407ba606e490e984b245de254a9fdd"
+    },
+    "SOL-USD_4h.csv": {
+      "asset": "SOL-USD",
+      "timeframe": "4h",
+      "rows": 6568,
+      "first_candle": "2023-07-27 16:00:00",
+      "last_candle": "2026-07-26 04:00:00",
+      "days_covered": 1094.5,
+      "years_covered": 3.0,
+      "bytes": 307693,
+      "sha256": "aee6a3dfe0096f0bfb7b443e3cd17a1d273a88ee71155ca86de211daf4f34b97"
+    },
+    "SOL-USD_1d.csv": {
+      "asset": "SOL-USD",
+      "timeframe": "1d",
+      "rows": 1094,
+      "first_candle": "2023-07-28 00:00:00",
+      "last_candle": "2026-07-25 00:00:00",
+      "days_covered": 1093.0,
+      "years_covered": 2.99,
+      "bytes": 42159,
+      "sha256": "f51f2b56faca9cb2f89d3bd4749ab0e22e316a24e3f293e0603c3e6a73b051d2"
+    }
+  }
+}

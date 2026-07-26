@@ -1,0 +1,4 @@
+# The vault is checksummed evidence. Git must not touch a single byte of it
+# (autocrlf=true on the laptop would rewrite line endings on checkout and
+# every SHA-256 in MANIFEST.json would suddenly "fail" for no real reason).
+* -text

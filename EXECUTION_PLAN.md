@@ -336,8 +336,12 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **Phase 2, Step 2.1 (Frozen Vault) — READY TO START.**
-Week-1 review done 2026-07-26 (verdict in PROGRESS_LOG: machinery A;
-instruments 40.0% vs parrot 49.5% — description is not prediction;
-observation closed). Sole remaining pre-step: Commander rotates the
-TwelveData key (.env + GitHub secret). Next build session = Step 2.1.
+→ We are at: **Phase 2, Step 2.2 (Data Validator) — READY TO START.**
+Step 2.1 (Frozen Vault) DONE 2026-07-26, GATE 2.1 PASSED: 6 files,
+22,986 candles, full 3.0 years (4h: 6,568 rows each; 1d: 1,094 each),
+verify_vault.py printed INTACT for all six and printed identically twice.
+The Lab now reads lab/vault/ and never the live API.
+Open items carried forward: (1) Commander still to rotate the TwelveData
+key (.env + GitHub secret); (2) vault CSVs carry NO volume column —
+TwelveData returns none for these crypto pairs; OHLC only. Any future
+tool that needs volume must be told this first.
