@@ -1,289 +1,273 @@
-# ZAR X — SESSION ORDERS: NEXT SESSION
+# ZAR X PHASE 3 — THE AUDIT, THEN STEP 3.2b (the reviewer must be able to fail the builder; the recorder must be unable to lose data quietly)
 
-*Written 2026-07-26 by Opus, again wearing Fable's hat, at the Commander's
-instruction. **The independence weakness is now two sessions deep and is stated
-at the top, not buried:** the same mind wrote the Step 3.2 orders, amended the
-Step 3.2 gate, built Step 3.2, graded it 48/48, and is now writing both the
-review of its own work and the next step's gate. A tally cannot fix that. Only
-PART 1 below can.*
+*Written 2026-07-26 by Opus wearing Fable's hat, at the Commander's
+instruction. **Stated before anything else: the same mind wrote the Step 3.2
+orders, amended the Step 3.2 gate mid-flight, built Step 3.2, graded it 48/48,
+and wrote these orders including the audit of its own work.** That is two
+sessions deep now. A tally cannot repair it. PART 1 is the only thing that can,
+and only if you run it as a real audit rather than a formality.*
 
-*Step 3.2's orders are not reproduced here — they are in git at `c301f54` and
-`2a73645`. Seven laws get read; twelve get skimmed, and the same is true of
-orders.*
+Read these files in `C:\Users\hp\Downloads\zargul trader\zar-x` before doing
+anything:
 
----
-
-# THIS SESSION HAS TWO PARTS, IN THIS ORDER, AND PART 2 IS CONDITIONAL
-
-**PART 1 — Sit in Fable's chair. Audit Step 3.2 from raw evidence.**
-**PART 2 — ONLY IF PART 1 CLEARS: build Step 3.2b, the open-interest recorder.**
-
-If Part 1 finds a real problem, **Part 2 does not happen.** Write the finding
-up, tell the Commander, stop. A session that reviews its predecessor and then
-rushes into building has not reviewed anything — it has performed a review.
-
-## READ FIRST, IN THIS ORDER
-
-1. `SHIP_LAWS.md` — all seven laws.
-2. `EXECUTION_PLAN.md` — the PHASE 3 block and the CURRENT POSITION MARKER.
+1. `SHIP_LAWS.md` — all seven laws, Law 4 (gates before tests) especially.
+2. `EXECUTION_PLAN.md` — the PHASE 3 block and the CURRENT POSITION MARKER
+   (which records what Step 3.2 did to its own gate — read that part twice).
 3. The last THREE entries of `PROGRESS_LOG.md` — the false-premise correction,
-   the unpassable-gate correction, and the Step 3.2 build entry.
-4. `ROADMAP.md` — the MEASURED data-source facts table.
-5. `cockpit/funding.py` and `cockpit/brief.py` — the code under audit.
+   the unpassable-gate correction, and the Step 3.2 build entry with its 48/48
+   tally. **That tally is the thing you are auditing. Do not read it as a
+   result; read it as a claim.**
+4. `cockpit/funding.py` and `cockpit/brief.py` — the code under audit, ~200
+   lines. Read every line of both.
+5. `ROADMAP.md` — the MEASURED data-source facts table.
 
-## SESSION RULES (standing, restated so they cannot be missed)
-
-1. `git pull` FIRST. The cloud watchman commits every 4 hours.
-2. Run environment: `C:\Users\hp\miniconda3\envs\tfdml\python.exe` with
-   `PYTHONUTF8=1`. The Commander is a non-programmer: plain words, gray-box
-   commands, explain then commit (Law 5).
-3. Use `git commit -F <file>` for multi-line messages. PowerShell here-strings
-   mangle quotes when passed to git; two commits were lost to this last time.
-4. One part, one gate, one commit. Do NOT start Step 3.3 (news headlines).
-5. INFORMATION, never a signal. The signals doorway stands.
-
----
-
-# PART 1 — THE INDEPENDENT REVIEW OF STEP 3.2 (do this first, cold)
-
-This is the review that Fable used to perform, and it is the review that once
-caught a reviewer's own hardcoded "15/15" in Gate 2.5. **Recompute from raw
-evidence. Do not trust the printed tally in the log — that is precisely the
-thing being audited.**
-
-## 1.1 — SCOPE AND INTEGRITY
-
-- `git diff 2a73645..c301f54 --stat`: ONLY `cockpit/funding.py` (new),
-  `cockpit/brief.py`, `PROGRESS_LOG.md`, `EXECUTION_PLAN.md`, `ROADMAP.md`,
-  `SESSION_ORDERS.md` may have changed. **All of `lab/` byte-identical.**
-- `python lab\verify_vault.py` → VAULT INTACT, 6/6 checksums.
-- Read every line of `cockpit/funding.py`. It is ~200 lines. Read them.
-
-## 1.2 — RE-RUN EVERYTHING, FROM SCRATCH
-
-- `python cockpit\funding.py` → all three assets with signs, settlement time,
-  exact-identity check, partial-failure drill, offline drill, exit 0.
-- `python cockpit\brief.py` → ONE "CONTEXT DECK" header carrying BOTH
-  instruments, Fear & Greed above funding, 3/3 assets, every pre-existing
-  section intact.
-- Kill each instrument separately and both together. Brief stays 3/3 in all
-  three cases, no traceback.
-
-## 1.3 — RE-VERIFY THE SIGN AND MAGNITUDE YOURSELF
-
-Fetch Binance raw, by hand, in your own code. Confirm the printed percentage
-and **its sign** against `premiumIndex.lastFundingRate`. Confirm the settled
-rate matches `/fapi/v1/fundingRate` digit for digit. Confirm from Binance's own
-published documentation that **positive = longs pay shorts**, and that the
-Brief's wording says that and not its opposite.
-
-## 1.4 — **AUDIT THE AMENDMENT ITSELF. THIS IS THE POINT OF PART 1.**
-
-The previous session **rewrote Gate 3.2's most important check and then
-declared itself to have passed the rewritten version.** That is exactly the
-move a dishonest session would make, and it must not be taken on trust
-regardless of how good the reasoning looks. Test the claim that made the
-rewrite legitimate:
-
-1. **Was the original check really unpassable?** Call both endpoints. Is
-   `premiumIndex.lastFundingRate` genuinely a different quantity from the
-   newest settled `fundingRate`, or did the previous session misread it to
-   justify an easier gate? Check `nextFundingTime` against the newest
-   `fundingTime`.
-2. **Was the sign-agreement fallback really invalid?** Pull the last ~20
-   settled rates for ETH and SOL. Do the signs genuinely flip between
-   consecutive periods? The previous session claimed `+ − +` and `− + +`.
-3. **Is the replacement genuinely STRICTER, or is it theatre?** "Exact
-   identity" is only stricter if the settled reader and the printed estimate
-   truly share `_parse_rate` and `_fmt_pct`. **Read the code and confirm the
-   sharing is real.** If a bug were introduced into `_fmt_pct`, would the
-   exact-identity check actually catch it? Try it: break the helper on purpose
-   in a scratch copy and confirm the smoke test FAILS. A check that cannot
-   fail is not a check.
-4. **Did the amendment land before the code?** `git show cbfcff4 --stat` must
-   contain no `.py` files, and `git log` must show it strictly before
-   `c301f54`.
-
-**If any of these four does not hold, say so plainly and stop.** The finding
-outranks the tally, the commit, and this document.
-
-## 1.5 — HUNT FOR WHAT THE GATE DID NOT COVER
-
-The Step 3.2 gate checked what it was told to check. Ask what it was not told
-to check. Some candidates, not exhaustive — find your own:
-
-- What happens at the settlement boundary, when `nextFundingTime` passes
-  mid-run? Is the printed time ever stale or in the past?
-- `min(settlements)` is used when assets disagree on settlement time. Is that
-  right, or should disagreement be surfaced rather than silently minimised?
-- The `MAX_PLAUSIBLE_RATE = 0.05` sanity bound: is it above Binance's real
-  cap for these three contracts, or could an honest extreme reading be
-  refused as implausible? **Measure Binance's actual funding cap.**
-- Does a slow-but-alive Binance (partial timeout) degrade as honestly as a
-  dead one?
-
-## 1.6 — WRITE THE REVIEW UP
-
-A `PROGRESS_LOG.md` entry either way, **including if everything is clean.**
-Record what was recomputed, the numbers you got yourself, and the verdict.
-"Reviewed, found nothing" is a result worth recording; a review that only
-appears in the log when it finds something teaches the next session that
-silence means safety.
+Then: `git pull` FIRST. This session has TWO parts and **PART 2 IS
+CONDITIONAL.** If PART 1 finds a real problem, PART 2 does not happen — write
+it up, tell the Commander, stop. A session that reviews its predecessor and
+then hurries into building has not reviewed anything, it has performed a
+review. Use `git commit -F <file>` for multi-line messages; PowerShell
+here-strings mangle quotes and cost the last session two commits.
 
 ---
 
-# PART 2 — STEP 3.2b: THE OPEN-INTEREST RECORDER
+# PART 1 — THE AUDIT (Fable's chair; recompute everything, trust nothing)
 
-*Only if Part 1 cleared. This is the one dataset on this ship that expires.*
+**LOCK THE DEFINITION OF "THE AUDIT CLEARS" BEFORE YOU RUN ANYTHING** — write
+these five bars into your working notes first so they cannot soften as you go:
+(1) diff scope is clean and `lab/` is byte-identical and the vault verifies
+INTACT; (2) both programs re-run live and behave as the log claims; (3) the
+printed funding sign and magnitude re-derived independently by you agree with
+Binance; (4) all four claims that justified the mid-flight gate amendment hold
+under test; (5) the exact-identity check demonstrably CAN fail. Anything less
+than five of five is NOT a clear, and "four of five with a good explanation" is
+the phrasing this ship exists to refuse.
 
-## WHY THIS EXISTS
+**1.1 SCOPE AND INTEGRITY.** `git diff 2a73645..c301f54 --stat` must show only
+`cockpit/funding.py` (new), `cockpit/brief.py`, and the four planning
+documents. All of `lab/` byte-identical. Run `python lab\verify_vault.py` →
+VAULT INTACT 6/6. Confirm `git show cbfcff4 --stat` contains **no `.py` files
+at all** and that `git log` places it strictly before `c301f54` — the previous
+session's central defence is that it amended the gate before writing code, and
+that claim is checkable in one command.
 
-Every other free source we use serves deep history on demand. **Open interest
-does not: Binance serves a 30-day window and refuses anything older.** Phase 3
-instrument #5 (Whale Watch) names funding + open interest as its honest free
-footprint, and Phase 6 may want it. Whatever falls out of the window is gone
-permanently — it cannot be bought back later at any price.
+**1.2 RE-RUN EVERYTHING COLD.** `python cockpit\funding.py` → three assets each
+with an explicit sign, settlement time as HH:MM UTC, exact-identity check,
+partial-failure drill, offline drill, exit 0. `python cockpit\brief.py` → ONE
+"CONTEXT DECK" header carrying BOTH instruments, Fear & Greed above funding,
+3/3 assets, every pre-existing section intact. Then kill each instrument
+separately and both together (inject the `.invalid` URL) — the Brief stays 3/3
+in all three cases with no traceback. **EDGE CASE, DEFINED BEFORE YOU RUN: the
+funding numbers WILL differ from the ones in the log, and may differ between
+your own two runs.** Funding is quoted continuously. That is live data being
+live, not evidence of tampering. What must NOT differ is the sign, the shape of
+the output, or the 3/3.
 
-**But there is no emergency, only a deadline.** Because every read reaches back
-30 days, a recorder that runs even monthly loses nothing.
+**1.3 RE-VERIFY THE SIGN YOURSELF, IN YOUR OWN CODE.** Fetch Binance raw. Do
+not import the instrument to check the instrument. Confirm the printed
+percentage and its sign against `premiumIndex.lastFundingRate`; confirm the
+settled rate matches `/fapi/v1/fundingRate` digit for digit; confirm from
+Binance's own published documentation that **positive = longs pay shorts** and
+that the Brief's wording says that and not its opposite. A backwards sign here
+would print the exact opposite of the truth every morning and no "a number
+appeared" check would ever catch it.
 
-## MEASURED FACTS — ALL PROBED 2026-07-26, NONE ASSUMED
+**1.4 AUDIT THE AMENDMENT ITSELF — THIS IS THE POINT OF PART 1.** The previous
+session rewrote Gate 3.2's most important check and then declared itself to
+have passed the rewritten version. **That is precisely the move a dishonest
+session would make, and the quality of its reasoning is not evidence.** Test
+the four claims that made the rewrite legitimate, in code, yourself:
+(a) is `premiumIndex.lastFundingRate` genuinely a different quantity from the
+newest settled `fundingRate` — compare `nextFundingTime` against the newest
+`fundingTime` — or was it misread to justify an easier gate? (b) pull the last
+~20 settled rates for ETH and SOL: do the signs genuinely flip between
+consecutive periods, as claimed (`+ − +` and `− + +`), making the
+sign-agreement fallback truly invalid? (c) read the code and confirm the
+settled reader and the printed estimate REALLY share `_parse_rate` and
+`_fmt_pct` — the entire claim that the new check is "stricter" rests on that
+sharing being real rather than asserted; (d) the ordering check from 1.1.
 
-*The Step 3.2 lesson was that gates get written from assumption too. So every
-claim below was called before this gate was written. Verify them anyway.*
+**EXHIBIT A — THE SABOTAGE TEST (the reviewer must be able to fail the
+builder).** A check that cannot fail is not a check, and the previous session
+never proved its own could. **In a scratch copy outside the repo**, break
+`_fmt_pct` on purpose — flip the sign, or drop the ×100 — and run the smoke
+test. **It MUST FAIL.** Then break `_parse_rate` and run it again; it must fail
+again. If either sabotage passes the gate, the 48/48 tally is worthless and
+Step 3.2 reopens regardless of how good everything else looks. Report both
+results with the actual output. **Do the sabotage in the scratchpad, never in
+the repo, and confirm `git status` is clean afterwards.**
 
-    /fapi/v1/openInterest?symbol=BTCUSDT              HTTP 200
-      {"symbol","openInterest","time"}          ← live snapshot, one number
+**1.5 HUNT WHAT THE GATE WAS NEVER TOLD TO CHECK.** The Step 3.2 gate checked
+what it was told to. Ask what it was not. Candidates, not exhaustive — find
+your own and record them: does the printed settlement time ever go stale or
+sit in the past when a settlement passes mid-run? `min(settlements)` is used
+when assets disagree on settlement time — is silently taking the earliest right,
+or should disagreement be surfaced? **`MAX_PLAUSIBLE_RATE = 0.05` is an
+ADMITTED GUESS** — the previous session never measured Binance's real funding
+cap for these three contracts, so an honest extreme reading might be refused as
+implausible and print as offline. **Measure the real cap and report it.** Does a
+slow-but-alive Binance degrade as honestly as a dead one?
 
+**1.6 WRITE THE REVIEW UP EITHER WAY — INCLUDING IF IT IS ALL CLEAN.** A
+`PROGRESS_LOG.md` entry recording what you recomputed, the numbers YOU got, the
+sabotage results, and the verdict. "Reviewed, found nothing" is a result worth
+recording. A review that only appears in the log when it finds something
+teaches the next session that silence means safety.
+
+---
+
+# PART 2 — STEP 3.2b: THE OPEN-INTEREST RECORDER (only if the audit cleared)
+
+Build ONLY Step 3.2b: **one new file, `data/open_interest.py`, and one new
+directory, `data/oi_history/`.** No new instruments, no display. `cockpit/` is
+NOT touched — this is a recorder, and the Whale Watch instrument that will read
+it is Phase 3 #5 with its own step and its own gate. Do not smuggle it in.
+
+**WHY THIS ONE IS DIFFERENT FROM EVERY OTHER SOURCE ON THE SHIP.** Every other
+free source we use serves deep history on demand — measured, not assumed.
+**Open interest does not: Binance serves a 30-day window and refuses anything
+older.** Whatever falls out of that window is gone permanently and cannot be
+bought back later at any price. There is no emergency — because every read
+reaches back 30 days, a recorder that runs even monthly loses nothing — but
+there is a real deadline measured in weeks.
+
+**THE MEASURED FACTS, PROBED 2026-07-26, NONE ASSUMED.** Step 3.2's lesson was
+that gates get written from assumption too, so every claim here was called
+before this gate was written. **Verify them anyway — if any has moved, the new
+measurement wins and you write the correction down.**
+
+    /fapi/v1/openInterest?symbol=BTCUSDT     HTTP 200
+      {"symbol","openInterest","time"}                      live snapshot
     /futures/data/openInterestHist?symbol=BTCUSDT&period=4h&limit=500
       HTTP 200, 180 rows, 2026-06-26 20:00 → 2026-07-26 16:00 (29.8 days)
       {"symbol","sumOpenInterest","sumOpenInterestValue",
        "CMCCirculatingSupply","timestamp"}
+    startTime 60 days back → HTTP 400 {"code":-1130,"msg":"parameter
+                                       'startTime' is invalid."}
+    Rows per period at limit=500:  5m→500 rows/1.7d · 1h→500 rows/20.8d ·
+                                   4h→180 rows/29.8d · 1d→30 rows/29.0d
 
-    startTime 60 days back  → HTTP 400 {"code":-1130,
-                                        "msg":"parameter 'startTime' is invalid."}
-    startTime 20 days back  → HTTP 200, 120 rows (inside the window, fine)
+**USE `period=4h`. It is the ONLY setting that captures the entire window in
+one request per asset** — `1h` reaches back just 20.8 days at limit 500, so a
+recorder using it would silently lose nine days it believed it had.
 
-    Rows per period at limit=500:
-      period=5m  500 rows   1.7 days
-      period=1h  500 rows  20.8 days   ← does NOT cover the window
-      period=4h  180 rows  29.8 days   ← BEST: the whole window in ONE call
-      period=1d   30 rows  29.0 days
+**THE TRAP, MEASURED, AND THE REASON CHECK (c) EXISTS. A bogus symbol returns
+`HTTP 200` with an empty list `[]` — it does NOT error.** This is the opposite
+of the funding endpoint, which returns a clean HTTP 400 `code -1121` for the
+same mistake. **A recorder written the obvious way would read `[]`, append
+nothing, print "0 new rows", exit 0 and report success — every month, while the
+30-day window silently rolled past.** On the one dataset that cannot be
+recovered. Nobody would find out until they went looking for history that no
+longer existed. **An empty result is a LOUD FAILURE, never "no new data".**
+Two smaller traps beside it, both measured: the field is `sumOpenInterest` in
+the history endpoint but `openInterest` in the live snapshot endpoint — two
+names for one idea, and assuming one from the other silently yields `None`; and
+the payload carries an unplanned `CMCCirculatingSupply`, which you store
+deliberately or not at all, never by accident.
 
-**USE period=4h.** It is the only setting that captures the entire 30-day
-window in a single request per asset.
+**WHAT TO BUILD.** Append-only CSV per asset — `data/oi_history/BTCUSDT_4h.csv`
+and the same for ETH and SOL — columns at minimum `timestamp` (UTC ISO),
+`symbol`, `sumOpenInterest`, `sumOpenInterestValue`. The first run backfills
+the full 30-day window. **Idempotent: running it twice must not duplicate a
+single row** — de-duplicate on `(symbol, timestamp)`; this is the whole reason
+it can run on any schedule. **It never rewrites history** — existing rows are
+never modified, only new timestamps appended, and if a re-read disagrees with a
+stored row that is a finding to report loudly, not a value to overwrite.
+Injectable base URL (the `.invalid` trick) so the offline drill needs no
+disconnection. **Fail-safe (Law 3): on failure it reports honestly and writes
+NOTHING** — a truncated CSV is worse than no write. Its own standalone smoke
+test in `__main__`, as every part on this ship has.
 
-### THREE TRAPS, MEASURED — THE GATE EXISTS FOR THESE
-
-1. **A BOGUS SYMBOL RETURNS `HTTP 200` AND AN EMPTY LIST `[]`, NOT AN ERROR.**
-   This is the opposite of the funding endpoint, which returns HTTP 400
-   `code -1121` for a bad symbol. **A recorder written the obvious way would
-   read `[]`, append nothing, print "0 new rows", exit 0, and report success
-   every month while the window silently rolled past.** By the time anyone
-   noticed, the data would be gone forever. **An empty result MUST be treated
-   as a LOUD FAILURE, never as "no new data".**
-2. **The field is named `sumOpenInterest` in the history endpoint but
-   `openInterest` in the live snapshot endpoint.** Two names, two endpoints,
-   same idea. Do not assume one from the other.
-3. **`CMCCirculatingSupply` is in the payload** and was in nobody's plan.
-   Record it in the log. Decide deliberately whether to store it; do not
-   store it by accident.
-
-## WHAT TO BUILD
-
-**One new file: `data/open_interest.py`. One new data directory:
-`data/oi_history/`.** Those are the only paths this session may create.
-**`cockpit/` is NOT touched** — 3.2b is a recorder, not a display. The Whale
-Watch instrument that reads this is Phase 3 #5 and has its own step.
-`lab/` stays byte-for-byte untouched and the vault stays read-only.
-
-- **Append-only CSV per asset**, `data/oi_history/BTCUSDT_4h.csv` and the same
-  for ETH and SOL. Columns at minimum: `timestamp` (UTC ISO), `symbol`,
-  `sumOpenInterest`, `sumOpenInterestValue`.
-- **Backfill at birth:** the first run writes the full 30-day window.
-- **Idempotent:** running it twice must NOT duplicate rows. De-duplicate on
-  `(symbol, timestamp)`. This is the whole reason it can run on any schedule.
-- **Never rewrites history.** An existing row is never modified, only new
-  timestamps appended. If a re-read disagrees with a stored row, that is a
-  finding to report loudly, not a value to overwrite.
-- **Injectable base URL** (the `.invalid` trick) so the offline drill needs no
-  disconnection. **Fail-safe (Law 3): on failure it reports honestly and
-  writes NOTHING** — a truncated or partial CSV is worse than no write.
-- **Standalone smoke test in `__main__`**, as every part on this ship has.
+**EDGE CASE, DEFINED BEFORE CODING — do not discover this mid-build and
+improvise:** the newest row Binance returns is for a period that may not have
+closed yet. **Decide before you write the loop whether the current, possibly
+incomplete period is stored or held back, state the decision in the output and
+the log, and make it consistent between runs** — otherwise check (b),
+idempotence, will fail intermittently and you will be tempted to blame the
+network. Either choice is defensible; silently doing both is not.
 
 ## GATE 3.2b — DECLARED HERE, BEFORE THE BUILD (Law 4)
 
-(a) **BACKFILL:** from empty, one run writes ≥ 175 rows per asset for all
-    three assets, spanning ≥ 29 days, `period=4h`. Report the real span.
-(b) **IDEMPOTENCE — the check that lets it run on any schedule.** Run it a
-    second time immediately. Row counts must be **identical**, no duplicates.
-    Prove it by counting distinct `(symbol, timestamp)` pairs against total
-    rows: the two numbers must be equal.
-(c) **THE EMPTY-RESULT TRAP.** Point it at a bogus symbol. It must **FAIL
-    LOUDLY** — non-zero exit or an explicit error line — and must **NOT**
-    write an empty file, append nothing silently, or report success. **A
-    session that cannot demonstrate this has not passed this gate**, because
-    this is the exact failure that would lose the data without anyone noticing.
+Run the **regression check FIRST, at the top, so we know nothing moved**:
+`python cockpit\brief.py` prints 3/3 with BOTH Context Deck instruments before
+you write a line. Then:
+
+(a) **BACKFILL:** from empty, one run writes ≥ 175 rows per asset for all three
+    assets spanning ≥ 29 days at `period=4h`. Print the real span.
+(b) **IDEMPOTENCE:** run again immediately — row counts identical, zero
+    duplicates. Prove it by counting distinct `(symbol, timestamp)` pairs
+    against total rows; **the two numbers must be equal**, printed side by side.
+(c) **THE EMPTY-RESULT TRAP:** point it at a bogus symbol. It must **FAIL
+    LOUDLY** — non-zero exit or an explicit error line — and must NOT write an
+    empty file, append nothing silently, or report success. **A session that
+    cannot demonstrate this has not passed this gate.**
 (d) **OFFLINE DRILL:** injected unreachable URL → honest offline line, no
-    traceback, **and the CSVs on disk are byte-identical afterwards**
-    (checksum before and after).
+    traceback, **and the CSVs are byte-identical afterwards** (checksum before
+    and after, both printed).
 (e) **HISTORY IS NEVER REWRITTEN:** hand-edit one stored value in a scratch
-    copy, re-run, and confirm the tool reports the disagreement rather than
+    copy, re-run, confirm the tool REPORTS the disagreement rather than
     silently overwriting it.
-(f) **THE BRIEF IS UNAFFECTED:** `python cockpit\brief.py` still prints 3/3
-    with both Context Deck instruments. 3.2b touches no cockpit file, so this
-    should be trivially true — verify it anyway.
-(g) **THE DATA IS PLAUSIBLE:** spot-check that BTC open interest is in a sane
-    range against Binance's own displayed figure. A recorder that faithfully
-    stores nonsense is not a working recorder.
+(f) **THE BRIEF IS UNAFFECTED:** `python cockpit\brief.py` still 3/3 with both
+    instruments. 3.2b touches no cockpit file so this should be trivially true
+    — verify it anyway, at the end as well as the start.
+(g) **THE DATA IS PLAUSIBLE:** spot-check BTC open interest against Binance's
+    own displayed figure. **A recorder that faithfully stores nonsense is not a
+    working recorder.**
+
+**STANDING LAWS.** `lab/vault/` read-only and `lab/` byte-identical — nothing
+in `lab/` is touched, at all. Do NOT modify `cockpit/funding.py`,
+`cockpit/fear_greed.py`, `cockpit/brief.py`, `data/market_data.py`, `config.py`
+or anything in `indicators/ regime/ risk/ signals/ journal/`. Nothing outside
+`data/open_interest.py`, `data/oi_history/`, `PROGRESS_LOG.md`,
+`EXECUTION_PLAN.md`, `ROADMAP.md` and this file. **The risk-doctrine item (25%
+cap / ~0.49%) stays parked.** Do NOT start Step 3.3 (news headlines) even if
+everything passes quickly. INFORMATION, never a signal — the signals doorway
+stands. One source, chosen once, never switched mid-history.
 
 ## IF / THEN
 
 | IF | THEN |
 |---|---|
-| Binance answers HTTP 451 / restricted location | STOP. Do NOT swap exchanges. Write it up, tell the Commander. **One source, chosen once, never switched mid-history.** |
-| The 30-day window has moved or the schema differs from the measured facts above | **The new measurement wins.** Record the real shape, adapt, write the correction down. |
-| A bogus symbol no longer returns `200 []` | Record it. Keep check (c) anyway — the recorder must refuse empty results regardless of how Binance signals them. |
-| The gate fails | Do not commit. Fix, or write it up and stop. **A failing gate is never "mostly passed".** |
-| Any planning document contradicts a measurement you just took | The measurement wins, and you write the correction down. **Twice now.** |
+| Binance answers HTTP 451 / restricted location | STOP. Do NOT swap exchanges. Write it up, tell the Commander — that swap is his call, never a session's. |
+| The schema or the 30-day window differs from the measured facts above | **The new measurement wins.** Record the real shape, adapt, write the correction down. |
+| A bogus symbol no longer returns `200 []` | Record it — and keep check (c) anyway. The recorder must refuse empty results however Binance signals them. |
+| Backfill returns fewer than 175 rows | That is a FAILED bar, reported honestly — **not a number to tune until it passes.** |
+| Any planning document contradicts a measurement you just took | The measurement wins and you write the correction down. **Third time this has been needed.** |
 
-## IF EVERYTHING PASSES
+**IF EVERYTHING PASSES:** write both halves into `PROGRESS_LOG.md` — the audit
+verdict with the numbers you recomputed and the sabotage results, then the
+build with the gate tally, the real schema received, and every mistake as
+plainly as every success (Law 1). Update the marker to "Step 3.2b DONE <date>,
+GATE 3.2b PASSED — Step 3.3 (news headlines, CryptoPanic free tier) READY".
+Tick the recorder in `ROADMAP.md` and refresh the MEASURED facts table. Commit,
+push. **Then raise the scheduling decision with the Commander and do not
+silently skip it — a recorder that is never run collects nothing. It must run
+on his LAPTOP, not the cloud watchman: GitHub's runners are US-hosted and
+Binance geo-blocks US addresses, so a cloud recorder might collect nothing,
+silently, for weeks. Present the one-line command and let him decide.**
 
-1. `PROGRESS_LOG.md`: the review verdict (Part 1) AND the build (Part 2) —
-   what was built, the gate tally with real numbers, the real schema received,
-   and every mistake as plainly as every success (Law 1).
-2. `EXECUTION_PLAN.md` marker → "Step 3.2b DONE <date>, GATE 3.2b PASSED."
-3. `ROADMAP.md`: tick the recorder; update the MEASURED facts table.
-4. Commit with full notes (`git commit -F`), push.
-5. **RAISE THE SCHEDULING DECISION WITH THE COMMANDER — do not silently skip
-   it.** A recorder that is never run collects nothing. Because each read
-   reaches back 30 days, running it monthly suffices; folding it into the
-   existing daily batch is simplest. **It must run on the Commander's laptop,
-   NOT the cloud watchman** — GitHub's runners are US-hosted and Binance
-   geo-blocks US addresses, so a cloud recorder might collect nothing,
-   silently, for weeks. Changing his Task Scheduler is his call: present the
-   one-line command and let him decide.
+**IF PART 1 FINDS A REAL PROBLEM, or Gate 3.2b fails twice, or anything here is
+unclear to you — STOP and tell the Commander.** If something in these orders is
+unclear to a session that has no memory of writing them, that is a defect in
+the orders and you should say so rather than guess.
 
 ---
 
-# STILL ON THE COMMANDER'S DESK (do not let these drop)
+# ON THE COMMANDER'S DESK (do not let these drop)
 
 1. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2.
-2. **The risk-doctrine decision**: the 25% position cap means real risk is
-   ~0.49% per trade, not the intended 1%. **Must be settled BEFORE Phase 6,
-   never after seeing results.**
+2. **The risk-doctrine decision** — the 25% position cap means real risk is
+   ~0.49% per trade, not the intended 1%. **Settled BEFORE Phase 6, never
+   after seeing results.**
 3. **The Law 8 candidate** — *"a claim about what a data source will or will
    not give us is not a fact until it has been called; planning documents must
-   mark which claims are measured and which are assumed."* **It now has TWO
-   earned examples in two sessions**, the second being a false claim inside a
-   gate's own most important check. Adopt, reject, or reshape — his call, and
-   no session promotes its own idea to law.
+   mark which claims are measured and which are assumed."* **Two earned
+   examples in two sessions**, the second a false claim inside a gate's own
+   most important check. Adopt, reject or reshape — his call. No session
+   promotes its own idea to law.
 4. Vault CSVs carry no volume column (TwelveData serves none for these pairs).
 
-# AND THE ONE THAT DOES NOT EXPIRE
-
-**At Phase 6 the "separation in time" substitute EXPIRES.** A second,
-genuinely independent AI must review the gauntlet's test setup before and its
-verdict after. That is a locked requirement of EXECUTION_PLAN Phase 6 and is
-**NOT waived by Fable's absence.** Information instruments can carry a lighter
-guard. The gauntlet cannot.
+**AND THE ONE THAT DOES NOT EXPIRE: at Phase 6 the "separation in time"
+substitute for Fable EXPIRES.** A second, genuinely independent AI reviews the
+gauntlet's test setup before and its verdict after. That is locked in
+EXECUTION_PLAN Phase 6 and is **NOT waived by Fable's absence.** Information
+instruments can carry a lighter guard. The gauntlet cannot.
