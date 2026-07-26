@@ -336,11 +336,23 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **Phase 2, Step 2.2 (Data Validator) — READY TO START.**
-Step 2.1 (Frozen Vault) DONE 2026-07-26, GATE 2.1 PASSED: 6 files,
-22,986 candles, full 3.0 years (4h: 6,568 rows each; 1d: 1,094 each),
-verify_vault.py printed INTACT for all six and printed identically twice.
-The Lab now reads lab/vault/ and never the live API.
+→ We are at: **Phase 2, Step 2.3 (backtest engine) — BLOCKED, Commander's
+decision needed on the vault (see below).**
+Step 2.1 (Frozen Vault) DONE 2026-07-26, GATE 2.1 PASSED.
+Step 2.2 (Data Validator) DONE 2026-07-26, GATE 2.2 PASSED first run:
+clean vault file → PASS; poisoned in-memory copy (5 candles dropped,
+2 duplicated, 1 negative price) → all three diseases named by name,
+verdict FAIL, real vault file untouched. Validator is wired into
+build_vault.py: no future vault can be born diseased.
+
+**THE BLOCKER (found by the validator the hour it was built):** the
+existing vault's three 4h files are DISEASED at the source — TwelveData
+delivered 48 candles with a decimal-point glitch (BTC 42, ETH 2, SOL 4;
+e.g. BTC low = $2.93 in a $29,206 candle; 2 BTC candles have a broken
+CLOSE too). The 1d files are healthy (BTC PASS; ETH/SOL WARN on real
+volatile days only). Step 2.3 must NOT be built on FAIL data — the
+engine would trade prices that never existed. Decision required before
+2.3: repair/re-download the 4h files, or proceed on 1d only.
 Open items carried forward: (1) Commander still to rotate the TwelveData
 key (.env + GitHub secret); (2) vault CSVs carry NO volume column —
 TwelveData returns none for these crypto pairs; OHLC only. Any future

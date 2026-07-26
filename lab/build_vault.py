@@ -12,6 +12,9 @@ verdict repeatable.
 WHAT IT DOES
 - Downloads BTC-USD, ETH-USD, SOL-USD on the 4h and 1d timeframes, as far
   back as TwelveData will give (target 3 years, 1 year is the floor).
+- Runs every file past the Data Validator (Step 2.2) BEFORE writing anything:
+  a vault is frozen forever, so it may not be born sick. One diseased candle
+  would become a permanent lie inherited by every future backtest.
 - Writes lab/vault/{asset}_{timeframe}.csv
 - Writes lab/vault/MANIFEST.json — rows, first/last candle, SHA-256, dates.
 
@@ -32,8 +35,10 @@ import subprocess
 from datetime import datetime, timedelta, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config import ASSETS, TWELVEDATA_CONFIG
 from data.market_data import MarketData
+from validator import validate_candles
 
 VAULT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'vault')
 MANIFEST_PATH = os.path.join(VAULT_DIR, 'MANIFEST.json')
@@ -125,6 +130,18 @@ def main():
             print('or proceed knowingly thin.')
             return 1
 
+        # --- The inspector at the door (Step 2.2): a vault file must be
+        # healthy AT BIRTH. A diseased candle frozen into the vault becomes a
+        # permanent lie that every future backtest inherits. ---
+        report = validate_candles(df, timeframe=tf, name=f'{asset}_{tf}.csv')
+        print('\n'.join('   ' + line for line in report.text().splitlines()))
+        if report.verdict == 'FAIL':
+            print(f'\n🛑 STOP — {asset} {tf} arrived DISEASED (see above).')
+            print('Nothing was written. A vault is frozen forever; it may not be')
+            print('born sick. Report this to the Commander — the data source is')
+            print('handing out broken candles.')
+            return 1
+
         downloaded[(asset, tf)] = df
         if i < len(jobs):
             time.sleep(TWELVEDATA_CONFIG['chunk_pause_seconds'])
@@ -165,6 +182,8 @@ def main():
             'timeframes': TIMEFRAMES,
             'assets': list(ASSETS),
             'unclosed_last_candle_dropped': True,
+            'validated_at_birth': True,   # every file passed lab/validator.py
+
             'law': 'These files are evidence. They are never modified, only verified.',
             'files': files_manifest,
         }

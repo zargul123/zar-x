@@ -433,3 +433,71 @@ the guard can actually tell, it is not just printing a nice word.
 **Next:** Step 2.2 — the Data Validator (gaps, duplicates, impossible prices,
 absurd single-candle moves), with its two-part gate: clean vault file → PASS,
 a deliberately corrupted COPY → must name all three diseases.
+
+## 2026-07-26 — PHASE 2, STEP 2.2: THE DATA VALIDATOR — GATE 2.2 PASSED
+## …and the inspector immediately caught the vault it was built to guard
+
+**What was built (nothing outside lab/):**
+- `lab/validator.py` — the quality inspector at the door. Takes any candle
+  DataFrame and reports in plain words: missing candles (holes vs the
+  timeframe's own grid), off-grid candle times, duplicate timestamps,
+  blank/zero/negative prices, high-below-low, impossible candle shapes
+  (high not the highest, low not the lowest), impossible intra-candle moves,
+  and big-but-real swings. Verdict: PASS / WARN / FAIL. It reads only — it
+  never cleans, never deletes, never decides.
+- `lab/gate_2_2.py` — the exam, re-runnable by anyone forever.
+- `lab/build_vault.py` — wired: every downloaded file must pass the inspector
+  BEFORE a single byte is written. A vault is frozen forever, so it may not be
+  born sick. Future manifests carry `validated_at_birth: true`; the current
+  MANIFEST does NOT have that key, which is the honest record that it predates
+  the inspector.
+
+**GATE 2.2 — passed on the first run, before the commit:**
+(a) clean vault file (BTC-USD_1d.csv) → PASS ✅
+(b) a COPY of it poisoned in memory — 5 candles dropped, 2 duplicated, one
+    negative price — → all three diseases named BY NAME, verdict FAIL ✅
+    Plus a fourth check the plan did not ask for: the gate re-reads the real
+    vault file afterwards and proves it was never touched (the poison lived
+    only in memory). ✅
+
+**ONE HONEST DEPARTURE FROM THE LETTER OF THE PLAN (Commander told, not
+hidden):** the plan lists ">25% single-candle move — flag, don't delete",
+which is WARN behaviour. Real crypto does 28-33% days, so >25% alone cannot
+mean FAIL or the inspector cries wolf at the truth. But a candle that moves
+1,000,000% is not volatility, it is a broken number. So the check has two
+tiers: >25% = WARN (flagged, kept, exactly as the plan orders) and >100%
+inside one candle = FAIL ("impossible price"), which belongs to the same
+family as the plan's "zero/negative prices" — data that contradicts reality.
+Threshold is a named constant, changeable in one line.
+
+**THE FINDING — THE VAULT IS PARTLY DISEASED (Step 2.3 is blocked):**
+Run against the frozen vault, the inspector's verdicts were:
+    PASS  BTC-USD_1d.csv     — clean
+    WARN  ETH-USD_1d.csv     — 2 real volatile days (28.4%, 26.6%)
+    WARN  SOL-USD_1d.csv     — 9 real volatile days + 1 big jump
+    FAIL  BTC-USD_4h.csv     — 42 impossible candles
+    FAIL  ETH-USD_4h.csv     — 2 impossible candles
+    FAIL  SOL-USD_4h.csv     — 4 impossible candles
+48 candles arrived from TwelveData with a decimal point in the wrong place —
+the `low` divided by ~10,000. Examples: BTC 2023-07-28 12:00 shows a low of
+$2.93 inside a $29,206 candle; SOL 2023-12-12 16:00 shows a low of
+$0.00000224 inside a $68 candle. TWO BTC candles have a broken CLOSE as well
+(2023-08-01 12:00 closes at $2.8954). All 48 sit in 2023-07 → 2023-12; the
+1d files of the same period are clean, so the glitch is in the source's 4h
+series, not in our download code.
+
+**Why this matters more than it looks:** a backtest cannot tell a broken
+candle from a real crash. Any stop-loss placed above $2.93 would have been
+"hit" 42 times in BTC alone — the engine would report losses that never
+happened, or "buy the dip" at prices that never existed. This is precisely
+the "garbage in = lies out" that Step 2.2 exists to prevent. The inspector
+justified its existence within an hour of being born, against our own data.
+
+**Nothing was repaired, cleaned or deleted.** The vault is evidence and it
+still verifies INTACT (checksums unchanged, verify_vault.py re-run after all
+of today's changes). The decision — re-download the three 4h files with the
+inspector standing at the door, or run Phase 2 on daily candles only — is the
+Commander's, and it is recorded here as an open blocker on Step 2.3.
+
+**Next:** the Commander's decision on the diseased 4h files, THEN Step 2.3
+(the honest backtest engine with the three-dummies gate).
