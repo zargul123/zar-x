@@ -2753,3 +2753,150 @@ than 2 of 6" is the exact phrasing this ship exists to refuse.**
 | The fix would change what the Brief prints | **It has failed check (a).** Revert and rethink. |
 
 **Nothing else is touched. `lab/` byte-identical, vault intact, no new files.**
+
+---
+
+## 2026-07-26 â€” STEP 3.2-R: **THE INSPECTOR REBUILT â€” GATE 3.2-R PASSED**
+## **All six sabotages caught, including the four that escaped this morning**
+
+The gate was declared one commit earlier with **no `.py` file in that commit**
+(`c447852`) â€” the same pattern that survived the morning's audit, repeated
+deliberately. This entry reports the build against that pre-declared bar.
+
+### WHAT WAS CHANGED â€” AND THE PROOF THAT NOTHING ELSE WAS
+
+**One file, `cockpit/funding.py`, and inside it ONLY the `__main__` block.**
+Every helper the new gate needs is defined *inside* `if __name__ == '__main__':`
+rather than above it, specifically so the diff cannot reach the production
+path. Verified, not asserted:
+
+    git diff -U0 cockpit/funding.py | hunk headers
+      @@ -160,0 +161,146 @@   @@ -161,0 +308,3 @@   @@ -163 +312 @@
+      @@ -173,0 +323,2 @@    @@ -177,2 +327,0 @@   @@ -183,5 +332,15 @@
+      @@ -204 +363 @@       @@ -216 +375 @@      @@ -228,2 +387,3 @@
+      @@ -231 +391 @@
+    -> `if __name__ == '__main__':` is line 160. EVERY hunk begins at 160 or
+       later. `section_text`, `read_estimate`, `read_settled`, `_parse_rate`,
+       `_fmt_pct`, `_utc_hhmm`, `CONTRACTS` and `MAX_PLAUSIBLE_RATE` are
+       byte-identical.
+
+`git status` showed exactly `M cockpit/funding.py` and nothing else. No new
+file, no new dependency, no new import.
+
+### THE TWO IDEAS
+
+**1. VERIFY THE SENTENCE, NOT THE PARSE.** The new section 2 fetches each
+contract's raw `lastFundingRate` itself and derives the expected string with
+its own arithmetic â€” `"%+.4f%%" % (float(raw) * 100)` â€” then demands that exact
+string appear beside that exact ticker in the live block. **`_fmt_pct` is never
+called to judge `_fmt_pct`.** The settlement time is checked the same way
+instead of by a regex that only proved "some digits and a colon are present".
+
+**The test also holds its OWN copy of the contract map** (`GATE_CONTRACTS`).
+Reading `CONTRACTS` would have made it follow the module into a miswiring and
+confirm it â€” that is sabotage S6, and an independent check needs independent
+ground truth.
+
+**2. THE TEST BREAKS ITSELF, EVERY RUN.** Exhibit A is no longer an auditor's
+one-off. Six sabotages are applied in memory, one at a time, each required to
+be CAUGHT, each original restored afterwards and the restoration verified.
+
+### THE DRIFT RULE â€” the trap that was designed around, not discovered
+
+Funding is quoted continuously. A check that fetches raw, builds the line, then
+compares can watch the rate move between the two and **fail at random on
+correct code** â€” which is *exactly* the shape of the bug that made the original
+Gate 3.2 check (b) unpassable. Repeating it on the same day it was diagnosed
+would have been unforgivable, so the rule was fixed in the gate declaration
+before a line was written:
+
+**A snapshot is taken BEFORE the line is built and another AFTER. The printed
+string must match one or the other, and is never allowed to match neither.**
+A moving rate lands on one of the two. A sign flip, a lost Ã—100, or a miswired
+ticker lands on neither. **The tolerance is for time passing, never for being
+wrong.** Observed in the run: BTC moved 0.00004738 â†’ 0.00004600 across the
+test, and the check stayed green without flapping. Two back-to-back runs both
+passed.
+
+### GATE 3.2-R â€” THE RESULT
+
+**21 checks verified by the program:**
+
+    (1) live block not offline Â· 3 signs present Â· HH:MM stamped        5 PASS
+    (2) printed % vs Binance raw, per asset, own arithmetic             3 PASS
+    (2) printed settlement time vs raw, own arithmetic                  1 PASS
+    (3) six sabotages, each required to be CAUGHT                       6 PASS
+    (3) originals restored, clean checks pass again                     1 PASS
+    (4) exact identity, settled rate vs raw, digit for digit            3 PASS
+    (5) partial-failure drill                                           1 PASS
+    (6) offline drill                                                   1 PASS
+
+**4 more verified in the shell, not by the program** (recorded separately
+because the morning's lesson was that a tally must only count what a machine
+actually checked): diff hunks all â‰¥ line 160 Â· only one file modified Â· the
+Brief still 3/3 with both instruments under one header Â· a second back-to-back
+run identical.
+
+**SECTION 3, THE POINT OF THE WHOLE EXERCISE:**
+
+    âœ“ S1  _fmt_pct â€” sign flipped          [old gate: ESCAPED] â†’ CAUGHT
+    âœ“ S2  _fmt_pct â€” x100 dropped          [old gate: ESCAPED] â†’ CAUGHT
+    âœ“ S3  _parse_rate â€” sign flipped       [old gate: caught ] â†’ CAUGHT
+    âœ“ S4  _parse_rate â€” scaled x10         [old gate: caught ] â†’ CAUGHT
+    âœ“ S5  _utc_hhmm â€” shifted one hour     [old gate: ESCAPED] â†’ CAUGHT
+    âœ“ S6  CONTRACTS â€” tickers miswired     [old gate: ESCAPED] â†’ CAUGHT
+    âœ“ every original restored â€” the clean checks pass again afterwards
+
+**The four that escaped at 48/48 this morning are caught by name, with their
+old verdict printed beside the new one so the fix is legible rather than
+merely claimed.**
+
+### WHAT WENT WRONG / WAS CHANGED ON THE WAY (Law 1)
+
+1. **S5 WAS ALTERED FROM THE AUDIT'S VERSION, AND THE CHANGE IS DISCLOSED.**
+   The audit broke `_utc_hhmm` by dropping the timezone. That works on this
+   machine (PKT, UTC+5) but is a **no-op on a machine already set to UTC** â€”
+   the drill would have reported S5 escaping, for a "sabotage" that changed
+   nothing. The permanent version shifts by a fixed hour instead, which is
+   wrong everywhere. **A drill that only works on some machines is not a
+   drill.** This is a change to a test I was about to be measured by, so it is
+   recorded in bold rather than made quietly.
+2. **The gate got slower and noisier on the network.** A smoke-test run now
+   makes roughly 75 Binance calls instead of ~10, because each of the six
+   sabotage runs re-fetches its own before/after snapshots rather than reusing
+   a cached one. Reusing the cache would have been cheaper and **dishonest** â€”
+   drift during a sabotage run could make a check fail for the wrong reason and
+   be scored as a catch. **The Brief's own cost is UNCHANGED at one request per
+   asset**; this expense lands only when a human runs the smoke test.
+3. **The weak old check was kept, and labelled weak.** "Does a sign appear next
+   to the ticker" survives in section 1 with a comment saying plainly that it
+   is weak on its own and that section 2 is what actually guards the sentence.
+   Deleting it would have hidden the history.
+
+### WHAT WAS DELIBERATELY NOT DONE
+
+- **`MAX_PLAUSIBLE_RATE` was NOT tightened.** Measured this morning at 13â€“16Ã—
+  looser than Binance's real cap, with a recommendation to move it to ~0.01.
+  **The Commander did not rule on it and a session does not decide it by
+  default.** Still on his desk.
+- **The settled rate was NOT added to the Brief** (R-004). Same reason.
+- **`cockpit/fear_greed.py` was NOT touched or audited.** It is built the same
+  way and is the most likely home of the next hole. **R-008, next session.**
+- **No law was written.** The sabotage rule now has a working implementation
+  and still is not law. His call.
+
+### THE HONEST LIMIT OF THIS FIX â€” filed as R-009
+
+**The gate now catches six sabotages. That is not the same as being unbreakable,
+and the difference is exactly the mistake the old gate made.** It proves the
+six named lies cannot pass. It does not prove a seventh cannot.
+
+**And the fix was written by the session that found the bug.** It graded its own
+remedy. **R-001 stays FAILED and is NOT cleared by this entry** â€” a session may
+never clear its own item, and that applies with full force when the item is the
+one it just fixed. **R-009 is filed so an independent eye reviews the repair,**
+and the honest question for that reviewer is not "do the six pass" but **"what
+is the seventh sabotage this session did not think of?"**
+
+**Next: R-008 â€” run this same exercise against `cockpit/fear_greed.py`. Then
+Step 3.2b, the open-interest recorder, whose 30-day window is still expiring.**

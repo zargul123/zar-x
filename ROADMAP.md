@@ -12,11 +12,14 @@ certify itself** — the first file an independent reviewer (Fable, or any secon
 AI) should open, kept short on purpose so it is actually read rather than
 skimmed. Every session files there before shipping anything it is unsure of,
 and **no session may clear its own item.**
-**NEXT BUILD SESSION: read SESSION_ORDERS.md — it carries the current step's
-exact orders. BUT READ THIS FIRST: the 2026-07-26 audit FAILED Gate 3.2 and
-STEP 3.2 IS REOPENED. The 48/48 tally is void; 4 of 6 deliberate sabotages
-passed that gate. The printed numbers are correct — the guard is not. Rebuild
-Gate 3.2 around what the pilot READS before Step 3.2b is touched.**
+**NEXT BUILD SESSION: (1) R-008 — sabotage-test `cockpit/fear_greed.py`, built
+the same way as funding and never checked for this class of hole; (2) then
+Step 3.2b, the open-interest recorder (orders + Gate 3.2b already written and
+measured in SESSION_ORDERS.md; its 30-day window is still expiring).**
+**CONTEXT: the 2026-07-26 audit failed Gate 3.2 — 4 of 6 deliberate sabotages
+walked through a gate reporting 48/48. GATE 3.2-R was rebuilt the same day and
+now catches all six, every run, on purpose. R-001 stays FAILED and R-009 is
+open: the session that found the fault also wrote the repair.**
 
 ## What exists and works (all gated live, all pushed)
 | Part | File | Status |
@@ -30,7 +33,7 @@ Gate 3.2 around what the pilot READS before Step 3.2b is touched.**
 | Grader v2 (merges all notebooks, candle-identity de-dup, always-UP parrot baseline) | journal/grader.py | ✅ |
 | Automation (Task Scheduler: brief 09:05 PKT; snapshots at every 4h close) | run_daily.bat / run_snapshot.bat | ✅ |
 | Context Deck — instrument 1 of 5: Fear & Greed (alternative.me, free, keyless; injectable URL, fails to one offline line) | cockpit/fear_greed.py | ✅ |
-| Context Deck — instrument 2 of 5: funding rates (Binance USDⓈ-M public, free, keyless; USDT perpetuals, partial failure names the missing asset). **PRINTS CORRECTLY — sign and magnitude re-verified against Binance raw 2026-07-26 — but GATE 3.2 IS VOID and the step is REOPENED: the gate could not catch a sign-flipped formatter.** | cockpit/funding.py | ⚠️ |
+| Context Deck — instrument 2 of 5: funding rates (Binance USDⓈ-M public, free, keyless; USDT perpetuals, partial failure names the missing asset). **GATE 3.2-R (rebuilt 2026-07-26): the self-test verifies the printed SENTENCE against Binance raw using its own arithmetic, and breaks itself six ways every run — all six caught. Awaiting an independent seventh sabotage (R-009).** | cockpit/funding.py | ✅ |
 | THE LAB, complete (Phase 2, Gates 2.1–2.5 all passed 2026-07-26): frozen checksummed vault · data validator at the only door · honest backtest engine (look-ahead impossible, costs always on, hold-out line train_end=2025-10-01) · walk-forward + Monte Carlo (seed 20260726) + regime breakdown · exit gate that caught a 1,687-parameter con artist · leak_check (Law 7's aid) | lab/ | ✅ |
 
 Run environment: `C:\Users\hp\miniconda3\envs\tfdml\python.exe` with `PYTHONUTF8=1`.

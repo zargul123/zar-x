@@ -118,6 +118,15 @@ STRING to an independently derived string, and **the sabotage test must become
 a permanent part of the gate, not a one-off audit exercise.** A check nobody
 has tried to break is a check nobody has tested.
 
+### >>> REMEDY SHIPPED 2026-07-26 — **R-001 STAYS FAILED. IT IS NOT CLEARED.**
+
+Both repairs were built the same day (`GATE 3.2-R PASSED`, all six sabotages
+caught including the four that escaped). **The status does not move**, because
+**the session that shipped the remedy is the session that found the fault, and
+a session may never clear its own item — least of all the one it just fixed.**
+**Filed as R-009 for an independent eye.** R-001 moves only when someone who
+did not write the repair says so.
+
 ## R-002 — Two planning generations written by the mind that then built them
 **STATUS: FAILED 2026-07-26 · P1 · flagged 2026-07-26 · reviewed by the
 2026-07-26 audit session**
@@ -345,6 +354,35 @@ that has an interest in them not being noticed:
 **A clean verdict looks like.** Someone runs the sabotage exercise against
 `fear_greed.py`, and against whatever replaces the Step 3.2 gate, and finds
 either nothing or something this session should have caught.
+
+## R-009 — The rebuilt Gate 3.2-R was written by the session that failed the old one
+**STATUS: OPEN · P1 · flagged 2026-07-26 by the session that built the repair**
+
+**What to review.** `cockpit/funding.py`'s rebuilt smoke test (Gate 3.2-R): the
+printed-sentence check, and the six-sabotage drill now baked into every run.
+
+**Why it needs an outside eye.** **The auditor who found the hole wrote the
+patch and then graded it.** That is the same structure as R-001 — the fault
+this very queue was raised to catch — one turn further down the road. **It
+looks right to its author, which is exactly what it would look like either
+way.** And the repair is defined by the six lies its author already knew about:
+**a gate built from a known list of attacks is strongest precisely where it has
+already been attacked.**
+
+**Evidence.** Gate declaration `c447852` (no `.py` in it, on purpose). Build
+commit and its `PROGRESS_LOG.md` entry *"THE INSPECTOR REBUILT"*. Diff hunks
+all at or after line 160, so the production path is untouched.
+
+**Reproduce.** `python cockpit\funding.py` — section 3 breaks the file six ways
+live and must catch all six. Then **write a seventh sabotage of your own** and
+see whether it survives.
+
+**A clean verdict looks like.** A reviewer who did not build it invents at
+least one NEW sabotage and finds it caught — or finds it escapes and says so.
+**"The six pass" is not a clean verdict; it is the claim under review.**
+
+**Failed looks like.** A seventh lie walks through, in which case the gate is
+still shaped around its author's imagination rather than around the truth.
 
 ---
 

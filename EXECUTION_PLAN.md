@@ -347,7 +347,35 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **PHASE 3 — STEP 3.2 IS REOPENED. THE AUDIT RAN 2026-07-26 AND
+→ We are at: **PHASE 3 — THE INSPECTOR IS FIXED. GATE 3.2-R PASSED 2026-07-26
+(21 checks in the program + 4 verified in the shell), and ALL SIX deliberate
+sabotages are now CAUGHT — including the four that walked through the old gate
+the same morning. The repair touched ONLY the `__main__` block of
+`cockpit/funding.py`: every diff hunk begins at line 160 or later, so the
+production path is byte-identical and what the Brief prints cannot have
+changed. Verified: Brief still 3/3, both Context Deck instruments, one header.**
+
+**BUT R-001 IS NOT CLEARED, AND STEP 3.2 IS NOT CERTIFIED.** The session that
+found the fault wrote the repair and graded it. **R-009 is filed** so someone
+who did not build it invents a SEVENTH sabotage — because a gate built from a
+known list of attacks is strongest exactly where it has already been attacked.
+
+**NEXT SESSION, IN ORDER: (1) R-008 — run the same sabotage exercise against
+`cockpit/fear_greed.py`, which is built the same way and has never been checked
+for this class of hole; (2) Step 3.2b, the open-interest recorder, whose orders
+and Gate 3.2b are already written and measured in SESSION_ORDERS.md and whose
+30-day window is still expiring.**
+
+**ON THE COMMANDER'S DESK, UNDECIDED, NOT TAKEN BY DEFAULT:** tighten
+`MAX_PLAUSIBLE_RATE` from 0.05 to ~0.01 (measured: the real cap is 0.003–0.00375)
+· print the last settled rate on the Brief as a checkable anchor (R-004) · three
+law candidates, the newest being *"a check is not proven until it has been
+deliberately broken."*
+
+---
+
+**THE MORNING'S POSITION, KEPT FOR THE RECORD:** **STEP 3.2 WAS REOPENED. THE
+AUDIT RAN 2026-07-26 AND
 DID NOT CLEAR: 3 of 5 bars passed, 1 partial, and BAR 5 (Exhibit A, the
 sabotage test) FAILED — 4 of 6 deliberate breakages walked through Gate 3.2
 while it reported 48/48. THE 48/48 TALLY IS VOID. Step 3.2b (the open-interest

@@ -158,9 +158,158 @@ def section_text(base_url=FAPI_BASE, contracts=None, timeout=TIMEOUT):
 
 
 if __name__ == '__main__':
-    ok = True
+    # =====================================================================
+    # GATE 3.2-R — rebuilt 2026-07-26, the day its predecessor was audited.
+    #
+    # The old gate reported 48/48 while FOUR of six deliberate sabotages
+    # walked through it. It checked the parse and never the printed sentence:
+    # a sign-flipped `_fmt_pct` printed the exact opposite of the truth and
+    # collected a tick mark. Two rules came out of that audit and both live
+    # below.
+    #
+    #   1. VERIFY WHAT THE PILOT READS, not what the parser returned. The
+    #      checks re-derive the expected string from Binance raw using THIS
+    #      BLOCK'S OWN arithmetic — never by calling the helper under test,
+    #      because a check that reuses the code it is checking proves nothing.
+    #
+    #   2. A CHECK NOBODY HAS TRIED TO BREAK IS A CHECK NOBODY HAS TESTED.
+    #      So this test breaks itself, all six ways, on EVERY run, and fails
+    #      if any breakage goes uncaught. Exhibit A is no longer an auditor's
+    #      one-off; it is part of the gate.
+    #
+    # Everything here lives inside `__main__` on purpose: the production path
+    # above is untouched, so what the Brief prints cannot have changed.
+    # =====================================================================
 
-    print("1) LIVE BLOCK — what the Brief will print")
+    # The test holds its OWN copy of the ground truth. If it read CONTRACTS
+    # it would follow the module into a miswiring and cheerfully confirm it
+    # (that is sabotage S6). An independent check needs an independent map.
+    GATE_CONTRACTS = {
+        'BTC-USD': 'BTCUSDT',
+        'ETH-USD': 'ETHUSDT',
+        'SOL-USD': 'SOLUSDT',
+    }
+
+    def _raw_snapshot():
+        """Raw values fetched by the TEST, straight from Binance, passing
+        through none of this file's helpers."""
+        snap = {}
+        for asset, contract in GATE_CONTRACTS.items():
+            p = requests.get(f"{FAPI_BASE}/fapi/v1/premiumIndex",
+                             params={'symbol': contract}, timeout=TIMEOUT).json()
+            snap[asset] = (str(p['lastFundingRate']), int(p['nextFundingTime']))
+        return snap
+
+    def _expected_pct(raw_str):
+        """The percentage the Brief OUGHT to show. `_fmt_pct` is deliberately
+        not called — it is the thing on trial."""
+        return "%+.4f%%" % (float(raw_str) * 100)
+
+    def _expected_hhmm(ms):
+        """Likewise: `_utc_hhmm` is deliberately not called."""
+        return datetime.fromtimestamp(ms / 1000, timezone.utc).strftime('%H:%M')
+
+    def _core_checks(verbose=True):
+        """The checks that guard the printed sentence — and, because they run
+        against whatever the module's helpers CURRENTLY are, the detector the
+        sabotage drill below uses on itself.
+
+        THE DRIFT RULE, fixed before this was written: funding is quoted
+        continuously, so a raw snapshot is taken before the line is built and
+        another after, and the printed string must match one or the other.
+        A moving rate lands on one of the two. A sign flip, a lost x100 or a
+        miswired ticker lands on NEITHER. The tolerance is for time passing,
+        never for being wrong.
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        ok = True
+        before = _raw_snapshot()
+        live = section_text()
+        if OFFLINE_WORDS in live:
+            say("   ✗ live block came back offline — the sentence cannot be verified")
+            return False
+        after = None
+
+        for asset in GATE_CONTRACTS:
+            short = asset.split('-')[0]
+            want = _expected_pct(before[asset][0])
+            hit = f"{short} {want}" in live
+            shown = want
+            if not hit:
+                if after is None:
+                    after = _raw_snapshot()
+                want2 = _expected_pct(after[asset][0])
+                hit = f"{short} {want2}" in live
+                shown = f"{want} (before) or {want2} (after)"
+            say(f"   {'✓' if hit else '✗'} {short}: Binance raw "
+                f"{before[asset][0]!r} → expected {shown} → the printed line "
+                f"{'carries it' if hit else 'DOES NOT CARRY IT'}")
+            ok = ok and hit
+
+        want_t = _expected_hhmm(min(v[1] for v in before.values()))
+        hit_t = f"next settlement {want_t} UTC" in live
+        shown_t = want_t
+        if not hit_t:
+            if after is None:
+                after = _raw_snapshot()
+            want_t2 = _expected_hhmm(min(v[1] for v in after.values()))
+            hit_t = f"next settlement {want_t2} UTC" in live
+            shown_t = f"{want_t} or {want_t2}"
+        say(f"   {'✓' if hit_t else '✗'} settlement time: expected "
+            f"{shown_t} UTC → the printed line "
+            f"{'carries it' if hit_t else 'DOES NOT CARRY IT'}")
+        return ok and hit_t
+
+    # The six from the audit of 2026-07-26, kept by name so the fix stays
+    # legible. S5 shifts by a fixed hour rather than dropping the timezone:
+    # dropping it is a no-op on a machine already set to UTC, and a drill that
+    # only works on some machines is not a drill.
+    _SABOTAGES = [
+        ('S1', '_fmt_pct — sign flipped', 'ESCAPED', '_fmt_pct',
+         lambda rate: f"{-rate * 100:+.4f}%"),
+        ('S2', '_fmt_pct — x100 dropped', 'ESCAPED', '_fmt_pct',
+         lambda rate: f"{rate:+.4f}%"),
+        ('S3', '_parse_rate — sign flipped', 'caught', '_parse_rate',
+         lambda raw: -float(str(raw).strip())),
+        ('S4', '_parse_rate — scaled x10', 'caught', '_parse_rate',
+         lambda raw: float(str(raw).strip()) * 10),
+        ('S5', '_utc_hhmm — shifted one hour', 'ESCAPED', '_utc_hhmm',
+         lambda ms: datetime.fromtimestamp(ms / 1000 + 3600,
+                                           timezone.utc).strftime('%H:%M')),
+        ('S6', 'CONTRACTS — tickers miswired', 'ESCAPED', 'CONTRACTS',
+         {'BTC-USD': 'SOLUSDT', 'ETH-USD': 'BTCUSDT', 'SOL-USD': 'ETHUSDT'}),
+    ]
+
+    def _sabotage_drill():
+        """EXHIBIT A, MADE PERMANENT. Break this file on purpose, one way at a
+        time, and require the checks above to FAIL each time. Any sabotage
+        that survives means the gate is decorative and the run must fail."""
+        ok = True
+        for tag, words, old, attr, repl in _SABOTAGES:
+            original = globals()[attr]
+            globals()[attr] = repl
+            try:
+                survived = _core_checks(verbose=False)
+            except Exception:
+                survived = False        # a crash is a catch: it did not pass
+            finally:
+                globals()[attr] = original
+            caught = not survived
+            print(f"   {'✓' if caught else '✗'} {tag}  {words:<32} "
+                  f"[old gate: {old:<7}] → "
+                  f"{'CAUGHT' if caught else 'ESCAPED AGAIN — GATE IS DECORATIVE'}")
+            ok = ok and caught
+        restored = _core_checks(verbose=False)
+        print(f"   {'✓' if restored else '✗'} every original restored — the "
+              f"clean checks pass again afterwards")
+        return ok and restored
+
+    ok = True
+    print("GATE 3.2-R — the funding instrument's self-test, rebuilt 2026-07-26.")
+    print("Its predecessor reported 48/48 while four deliberate lies walked")
+    print("through it. This one breaks itself before it passes.")
+
+    print("\n1) LIVE BLOCK — what the Brief will print")
     live = section_text()
     print()
     print(live)
@@ -171,20 +320,30 @@ if __name__ == '__main__':
     for short in ('BTC', 'ETH', 'SOL'):
         # _fmt_pct always emits an explicit + or -, so requiring the sign is
         # what separates a printed rate from a name in the "no data" list.
+        # NOTE: this check is WEAK on its own — a sign-flipped formatter still
+        # prints a sign. Section 2 is what actually guards the sentence.
         signed = f"{short} +" in live or f"{short} -" in live
         print(f"   {'✓' if signed else '✗'} {short} rate printed with a sign")
         ok = ok and signed
-    # Gate 3.2 (a) also requires the next settlement time, so assert it rather
-    # than trusting that it looks present in the block above.
     stamped = bool(re.search(r"next settlement \d{2}:\d{2} UTC", live))
     print(f"   {'✓' if stamped else '✗'} next settlement time printed as HH:MM UTC")
     ok = ok and stamped
 
-    print("\n2) EXACT IDENTITY CHECK (Gate 3.2 b1) — the settled rate this file"
-          "\n   parses must match the raw response digit for digit, sign"
-          "\n   included. Settled rates are fixed facts, so 'close' is not a"
-          "\n   pass. Both values use the same parse/format helpers as the"
-          "\n   printed estimate, so this guards the printed path too.")
+    print("\n2) THE PRINTED SENTENCE vs BINANCE RAW (Gate 3.2-R b, c, d) — the"
+          "\n   check whose absence voided the 48/48. Every expected string is"
+          "\n   derived by this block's own arithmetic from a raw fetch; no"
+          "\n   helper of the instrument is used to judge the instrument.")
+    ok = _core_checks(verbose=True) and ok
+
+    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.2-R e, f) — the file is"
+          "\n   broken on purpose six ways and each break MUST be caught."
+          "\n   Four of these six escaped the old gate on 2026-07-26.")
+    ok = _sabotage_drill() and ok
+
+    print("\n4) EXACT IDENTITY CHECK — the settled rate this file parses must"
+          "\n   match the raw response digit for digit, sign included. Settled"
+          "\n   rates are fixed historical facts, so 'close' is not a pass."
+          "\n   Kept from the old gate: it is sound, it was never the problem.")
     for asset, contract in CONTRACTS.items():
         try:
             parsed, when = read_settled(FAPI_BASE, contract)
@@ -201,7 +360,7 @@ if __name__ == '__main__':
             print(f"   ✗ {contract}: settled read failed: {type(e).__name__}: {e}")
             ok = False
 
-    print("\n3) PARTIAL-FAILURE DRILL (Gate 3.2 f) — one bogus symbol; the two"
+    print("\n5) PARTIAL-FAILURE DRILL (Gate 3.2 f) — one bogus symbol; the two"
           "\n   that answer must print and the one that does not must be NAMED")
     partial = section_text(contracts={'BTC-USD': 'BTCUSDT',
                                       'ETH-USD': 'ETHUSDT',
@@ -213,7 +372,7 @@ if __name__ == '__main__':
     print(f"   {'✓' if partial_ok else '✗'} two assets printed, the third named")
     ok = ok and partial_ok
 
-    print("\n4) OFFLINE DRILL — injected unreachable URL, internet untouched")
+    print("\n6) OFFLINE DRILL — injected unreachable URL, internet untouched")
     print(f"   pointing the instrument at {OFFLINE_DRILL_URL}")
     drill = section_text(base_url=OFFLINE_DRILL_URL)
     print()
@@ -225,8 +384,9 @@ if __name__ == '__main__':
     ok = ok and drill_ok
 
     if ok:
-        print("\nSMOKE TEST PASSED — live block, exact identity, partial "
-              "failure and offline drill all behaved.")
+        print("\nGATE 3.2-R PASSED — the printed sentence was verified against "
+              "Binance\nraw, and all six deliberate sabotages were caught. "
+              "This test has\ndemonstrated, this run, that it is able to say no.")
     else:
-        print("\nSMOKE TEST FAILED — see the ✗ lines above.")
+        print("\nGATE 3.2-R FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)
