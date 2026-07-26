@@ -2,8 +2,11 @@
 *The single document a new session (any model) reads to continue the work.
 FOR PHASE 2 AND BEYOND: follow EXECUTION_PLAN.md — exact steps, gates, and
 if/then orders for every phase. It outranks improvisation.*
-State as of 2026-07-19 night. Read with README.md (mission + THE PROMISE),
-SHIP_LAWS.md (how we build), EDGE_STACK_RESEARCH.md (why), PROGRESS_LOG.md (history).*
+State as of 2026-07-26 (PHASE 2 COMPLETE). Read with README.md (mission + THE
+PROMISE), SHIP_LAWS.md (now SEVEN laws — Law 7, the Leak Law, added 2026-07-26),
+EDGE_STACK_RESEARCH.md (why), PROGRESS_LOG.md (history).
+**NEXT BUILD SESSION: read SESSION_ORDERS.md — it carries the current step's
+exact orders (right now: Phase 3, Step 3.1, Fear & Greed).**
 
 ## What exists and works (all gated live, all pushed)
 | Part | File | Status |
@@ -16,16 +19,18 @@ SHIP_LAWS.md (how we build), EDGE_STACK_RESEARCH.md (why), PROGRESS_LOG.md (hist
 | Journal snapshots (the black box, split by writer: laptop → snapshots_local.csv, cloud → snapshots_cloud.csv, legacy snapshots.csv frozen) | journal/snapshot.py | ✅ |
 | Grader v2 (merges all notebooks, candle-identity de-dup, always-UP parrot baseline) | journal/grader.py | ✅ |
 | Automation (Task Scheduler: brief 09:05 PKT; snapshots at every 4h close) | run_daily.bat / run_snapshot.bat | ✅ |
+| THE LAB, complete (Phase 2, Gates 2.1–2.5 all passed 2026-07-26): frozen checksummed vault · data validator at the only door · honest backtest engine (look-ahead impossible, costs always on, hold-out line train_end=2025-10-01) · walk-forward + Monte Carlo (seed 20260726) + regime breakdown · exit gate that caught a 1,687-parameter con artist · leak_check (Law 7's aid) | lab/ | ✅ |
 
 Run environment: `C:\Users\hp\miniconda3\envs\tfdml\python.exe` with `PYTHONUTF8=1`.
 User is a non-programmer; explain in plain words; he runs commands from gray boxes only.
 
-## Build queue (in order — do not reorder without the Commander)
-1. **lab/** — the honest backtester, REDESIGNED for formula signals (museum's engine was
-   AI-prediction-coupled; port the discipline — hold-out cutoffs, chronological honesty,
-   per-trade CSV, fees+slippage — around a simple `signal(df) -> long/short/flat` interface).
-   Gate: a dummy always-flat rule backtests to zero trades; an MA-cross rule produces a
-   full honest stat card on a hold-out window.
+## Build queue (order now governed by EXECUTION_PLAN.md Phases 3–8; the list
+## below is kept for history — EXECUTION_PLAN outranks it where they differ,
+## e.g. the Context Deck (Phase 3) now comes BEFORE the trade logger (Phase 5))
+1. **lab/** — ✅ DONE 2026-07-26 as EXECUTION_PLAN Phase 2 (five steps, five
+   gates, all passed; see the Gate 2.1–2.5 entries in PROGRESS_LOG.md). The
+   exit exam proved the pipeline rejects an overfit con artist end to end, and
+   its honest limit — numbers cannot catch a leak — became Law 7.
 2. **journal/ part 2** — trade logger (user records real/paper trades) + **the grader**
    (scores past snapshots against what prices did next; also monthly review of user's
    logged trades). Gate: grader correctly scores ≥2 weeks of accumulated snapshots.
