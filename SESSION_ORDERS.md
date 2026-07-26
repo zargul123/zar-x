@@ -1,275 +1,289 @@
-# ZAR X — SESSION ORDERS: PHASE 3, STEP 3.2 — FUNDING RATES
+# ZAR X — SESSION ORDERS: NEXT SESSION
 
-*Written 2026-07-26 — **by Opus wearing Fable's hat.** Fable was unavailable,
-so the planning chair was filled by the same model that built Step 3.1. That
-is recorded here because it matters: the builder and the planner were the same
-mind, which is exactly the independence this ship normally relies on. The
-protection that survives is the one that always did the real work — **the gate
-below is declared BEFORE the build, and a FRESH session builds to it.** See
-"WHO CHECKS THE CHECKER" at the bottom; it is part of these orders, not a
-footnote.*
+*Written 2026-07-26 by Opus, again wearing Fable's hat, at the Commander's
+instruction. **The independence weakness is now two sessions deep and is stated
+at the top, not buried:** the same mind wrote the Step 3.2 orders, amended the
+Step 3.2 gate, built Step 3.2, graded it 48/48, and is now writing both the
+review of its own work and the next step's gate. A tally cannot fix that. Only
+PART 1 below can.*
 
-## READ FIRST, IN THIS ORDER, BEFORE TOUCHING ANYTHING
+*Step 3.2's orders are not reproduced here — they are in git at `c301f54` and
+`2a73645`. Seven laws get read; twelve get skimmed, and the same is true of
+orders.*
 
-1. `EXECUTION_PLAN.md` — the PHASE 3 block, the CURRENT POSITION MARKER, and
-   **the CORRECTION NOTE on Phase 3 #2** (the funding-recording premise was
-   measured and found false — read it before you believe anything about
-   funding history).
-2. The last two entries of `PROGRESS_LOG.md` — Step 3.1's gate, and the
-   planning entry that corrected the funding premise and measured the real
-   depth of every free source.
-3. `SHIP_LAWS.md` — all seven laws.
-4. `cockpit/fear_greed.py` — 156 lines, read all of them. **Step 3.2 is its
-   twin.** Copy its shape: injectable base URL, one doorway, never raises,
-   its own smoke test with a live half and an offline drill. Do not invent a
-   new pattern when a proven one is sitting next door.
-5. `cockpit/brief.py` — read the Context Deck wiring you are extending.
-6. `data/market_data.py` — the plain-`requests` house style for HTTP.
-7. `ROADMAP.md` — the MEASURED data-source facts table.
+---
 
-## SESSION RULES (the standing ones, restated so they cannot be missed)
+# THIS SESSION HAS TWO PARTS, IN THIS ORDER, AND PART 2 IS CONDITIONAL
+
+**PART 1 — Sit in Fable's chair. Audit Step 3.2 from raw evidence.**
+**PART 2 — ONLY IF PART 1 CLEARS: build Step 3.2b, the open-interest recorder.**
+
+If Part 1 finds a real problem, **Part 2 does not happen.** Write the finding
+up, tell the Commander, stop. A session that reviews its predecessor and then
+rushes into building has not reviewed anything — it has performed a review.
+
+## READ FIRST, IN THIS ORDER
+
+1. `SHIP_LAWS.md` — all seven laws.
+2. `EXECUTION_PLAN.md` — the PHASE 3 block and the CURRENT POSITION MARKER.
+3. The last THREE entries of `PROGRESS_LOG.md` — the false-premise correction,
+   the unpassable-gate correction, and the Step 3.2 build entry.
+4. `ROADMAP.md` — the MEASURED data-source facts table.
+5. `cockpit/funding.py` and `cockpit/brief.py` — the code under audit.
+
+## SESSION RULES (standing, restated so they cannot be missed)
 
 1. `git pull` FIRST. The cloud watchman commits every 4 hours.
 2. Run environment: `C:\Users\hp\miniconda3\envs\tfdml\python.exe` with
    `PYTHONUTF8=1`. The Commander is a non-programmer: plain words, gray-box
    commands, explain then commit (Law 5).
-3. Build ONLY Step 3.2. Do NOT start Step 3.3 (news headlines) and do NOT
-   build the open-interest recorder, however tempting — it has its own step
-   and its own gate. One part, one gate, one commit.
-4. INFORMATION for the Brief, never a signal (the tool-doorway law). Law 7
-   does not bite — nothing enters the Lab — but the signals doorway stands.
-5. Do NOT compute the delta-neutral carry. That is Phase 4's whole job and it
-   ships with mandatory risk caveats. A bare annualised percentage on the
-   Brief without those caveats is the kind of number that gets a pilot hurt.
+3. Use `git commit -F <file>` for multi-line messages. PowerShell here-strings
+   mangle quotes when passed to git; two commits were lost to this last time.
+4. One part, one gate, one commit. Do NOT start Step 3.3 (news headlines).
+5. INFORMATION, never a signal. The signals doorway stands.
+
+---
+
+# PART 1 — THE INDEPENDENT REVIEW OF STEP 3.2 (do this first, cold)
+
+This is the review that Fable used to perform, and it is the review that once
+caught a reviewer's own hardcoded "15/15" in Gate 2.5. **Recompute from raw
+evidence. Do not trust the printed tally in the log — that is precisely the
+thing being audited.**
+
+## 1.1 — SCOPE AND INTEGRITY
+
+- `git diff 2a73645..c301f54 --stat`: ONLY `cockpit/funding.py` (new),
+  `cockpit/brief.py`, `PROGRESS_LOG.md`, `EXECUTION_PLAN.md`, `ROADMAP.md`,
+  `SESSION_ORDERS.md` may have changed. **All of `lab/` byte-identical.**
+- `python lab\verify_vault.py` → VAULT INTACT, 6/6 checksums.
+- Read every line of `cockpit/funding.py`. It is ~200 lines. Read them.
+
+## 1.2 — RE-RUN EVERYTHING, FROM SCRATCH
+
+- `python cockpit\funding.py` → all three assets with signs, settlement time,
+  exact-identity check, partial-failure drill, offline drill, exit 0.
+- `python cockpit\brief.py` → ONE "CONTEXT DECK" header carrying BOTH
+  instruments, Fear & Greed above funding, 3/3 assets, every pre-existing
+  section intact.
+- Kill each instrument separately and both together. Brief stays 3/3 in all
+  three cases, no traceback.
+
+## 1.3 — RE-VERIFY THE SIGN AND MAGNITUDE YOURSELF
+
+Fetch Binance raw, by hand, in your own code. Confirm the printed percentage
+and **its sign** against `premiumIndex.lastFundingRate`. Confirm the settled
+rate matches `/fapi/v1/fundingRate` digit for digit. Confirm from Binance's own
+published documentation that **positive = longs pay shorts**, and that the
+Brief's wording says that and not its opposite.
+
+## 1.4 — **AUDIT THE AMENDMENT ITSELF. THIS IS THE POINT OF PART 1.**
+
+The previous session **rewrote Gate 3.2's most important check and then
+declared itself to have passed the rewritten version.** That is exactly the
+move a dishonest session would make, and it must not be taken on trust
+regardless of how good the reasoning looks. Test the claim that made the
+rewrite legitimate:
+
+1. **Was the original check really unpassable?** Call both endpoints. Is
+   `premiumIndex.lastFundingRate` genuinely a different quantity from the
+   newest settled `fundingRate`, or did the previous session misread it to
+   justify an easier gate? Check `nextFundingTime` against the newest
+   `fundingTime`.
+2. **Was the sign-agreement fallback really invalid?** Pull the last ~20
+   settled rates for ETH and SOL. Do the signs genuinely flip between
+   consecutive periods? The previous session claimed `+ − +` and `− + +`.
+3. **Is the replacement genuinely STRICTER, or is it theatre?** "Exact
+   identity" is only stricter if the settled reader and the printed estimate
+   truly share `_parse_rate` and `_fmt_pct`. **Read the code and confirm the
+   sharing is real.** If a bug were introduced into `_fmt_pct`, would the
+   exact-identity check actually catch it? Try it: break the helper on purpose
+   in a scratch copy and confirm the smoke test FAILS. A check that cannot
+   fail is not a check.
+4. **Did the amendment land before the code?** `git show cbfcff4 --stat` must
+   contain no `.py` files, and `git log` must show it strictly before
+   `c301f54`.
+
+**If any of these four does not hold, say so plainly and stop.** The finding
+outranks the tally, the commit, and this document.
+
+## 1.5 — HUNT FOR WHAT THE GATE DID NOT COVER
+
+The Step 3.2 gate checked what it was told to check. Ask what it was not told
+to check. Some candidates, not exhaustive — find your own:
+
+- What happens at the settlement boundary, when `nextFundingTime` passes
+  mid-run? Is the printed time ever stale or in the past?
+- `min(settlements)` is used when assets disagree on settlement time. Is that
+  right, or should disagreement be surfaced rather than silently minimised?
+- The `MAX_PLAUSIBLE_RATE = 0.05` sanity bound: is it above Binance's real
+  cap for these three contracts, or could an honest extreme reading be
+  refused as implausible? **Measure Binance's actual funding cap.**
+- Does a slow-but-alive Binance (partial timeout) degrade as honestly as a
+  dead one?
+
+## 1.6 — WRITE THE REVIEW UP
+
+A `PROGRESS_LOG.md` entry either way, **including if everything is clean.**
+Record what was recomputed, the numbers you got yourself, and the verdict.
+"Reviewed, found nothing" is a result worth recording; a review that only
+appears in the log when it finds something teaches the next session that
+silence means safety.
+
+---
+
+# PART 2 — STEP 3.2b: THE OPEN-INTEREST RECORDER
+
+*Only if Part 1 cleared. This is the one dataset on this ship that expires.*
+
+## WHY THIS EXISTS
+
+Every other free source we use serves deep history on demand. **Open interest
+does not: Binance serves a 30-day window and refuses anything older.** Phase 3
+instrument #5 (Whale Watch) names funding + open interest as its honest free
+footprint, and Phase 6 may want it. Whatever falls out of the window is gone
+permanently — it cannot be bought back later at any price.
+
+**But there is no emergency, only a deadline.** Because every read reaches back
+30 days, a recorder that runs even monthly loses nothing.
+
+## MEASURED FACTS — ALL PROBED 2026-07-26, NONE ASSUMED
+
+*The Step 3.2 lesson was that gates get written from assumption too. So every
+claim below was called before this gate was written. Verify them anyway.*
+
+    /fapi/v1/openInterest?symbol=BTCUSDT              HTTP 200
+      {"symbol","openInterest","time"}          ← live snapshot, one number
+
+    /futures/data/openInterestHist?symbol=BTCUSDT&period=4h&limit=500
+      HTTP 200, 180 rows, 2026-06-26 20:00 → 2026-07-26 16:00 (29.8 days)
+      {"symbol","sumOpenInterest","sumOpenInterestValue",
+       "CMCCirculatingSupply","timestamp"}
+
+    startTime 60 days back  → HTTP 400 {"code":-1130,
+                                        "msg":"parameter 'startTime' is invalid."}
+    startTime 20 days back  → HTTP 200, 120 rows (inside the window, fine)
+
+    Rows per period at limit=500:
+      period=5m  500 rows   1.7 days
+      period=1h  500 rows  20.8 days   ← does NOT cover the window
+      period=4h  180 rows  29.8 days   ← BEST: the whole window in ONE call
+      period=1d   30 rows  29.0 days
+
+**USE period=4h.** It is the only setting that captures the entire 30-day
+window in a single request per asset.
+
+### THREE TRAPS, MEASURED — THE GATE EXISTS FOR THESE
+
+1. **A BOGUS SYMBOL RETURNS `HTTP 200` AND AN EMPTY LIST `[]`, NOT AN ERROR.**
+   This is the opposite of the funding endpoint, which returns HTTP 400
+   `code -1121` for a bad symbol. **A recorder written the obvious way would
+   read `[]`, append nothing, print "0 new rows", exit 0, and report success
+   every month while the window silently rolled past.** By the time anyone
+   noticed, the data would be gone forever. **An empty result MUST be treated
+   as a LOUD FAILURE, never as "no new data".**
+2. **The field is named `sumOpenInterest` in the history endpoint but
+   `openInterest` in the live snapshot endpoint.** Two names, two endpoints,
+   same idea. Do not assume one from the other.
+3. **`CMCCirculatingSupply` is in the payload** and was in nobody's plan.
+   Record it in the log. Decide deliberately whether to store it; do not
+   store it by accident.
 
 ## WHAT TO BUILD
 
-**One new file: `cockpit/funding.py`. One minimal wiring change:
-`cockpit/brief.py`.** Those are the ONLY two code files this session may
-touch. All of `lab/` stays byte-for-byte untouched, vault read-only, and
-`data/ indicators/ regime/ risk/ signals/ journal/ config.py` untouched —
-including the symbol mapping, which lives inside `funding.py` (the compartment
-owns its own source mapping, Law 2).
+**One new file: `data/open_interest.py`. One new data directory:
+`data/oi_history/`.** Those are the only paths this session may create.
+**`cockpit/` is NOT touched** — 3.2b is a recorder, not a display. The Whale
+Watch instrument that reads this is Phase 3 #5 and has its own step.
+`lab/` stays byte-for-byte untouched and the vault stays read-only.
 
-### The instrument — `cockpit/funding.py`
+- **Append-only CSV per asset**, `data/oi_history/BTCUSDT_4h.csv` and the same
+  for ETH and SOL. Columns at minimum: `timestamp` (UTC ISO), `symbol`,
+  `sumOpenInterest`, `sumOpenInterestValue`.
+- **Backfill at birth:** the first run writes the full 30-day window.
+- **Idempotent:** running it twice must NOT duplicate rows. De-duplicate on
+  `(symbol, timestamp)`. This is the whole reason it can run on any schedule.
+- **Never rewrites history.** An existing row is never modified, only new
+  timestamps appended. If a re-read disagrees with a stored row, that is a
+  finding to report loudly, not a value to overwrite.
+- **Injectable base URL** (the `.invalid` trick) so the offline drill needs no
+  disconnection. **Fail-safe (Law 3): on failure it reports honestly and
+  writes NOTHING** — a truncated or partial CSV is worse than no write.
+- **Standalone smoke test in `__main__`**, as every part on this ship has.
 
-- **SOURCE: Binance USDⓈ-M futures public API. Free, NO key, no .env change,
-  no new dependency.** Verified reachable from the Commander's connection on
-  2026-07-26 (HTTP 200, both endpoints below).
-  - Current/predicted rate:
-    `GET https://fapi.binance.com/fapi/v1/premiumIndex?symbol=BTCUSDT`
-    → returns `lastFundingRate`, `nextFundingTime` (ms), `markPrice`.
-  - Last settled rates for context (optional, one call per asset):
-    `GET https://fapi.binance.com/fapi/v1/fundingRate?symbol=BTCUSDT&limit=3`
-    → the actually-settled 8-hourly rates.
-  - **VERIFY the live schema at build time and record the REAL shape in the
-    log**, exactly as Step 3.1 did. Values arrive as STRINGS.
-- **SYMBOLS:** our assets are `BTC-USD / ETH-USD / SOL-USD`; the perpetual
-  contracts are `BTCUSDT / ETHUSDT / SOLUSDT`. The mapping is a dict inside
-  this file. **Say plainly in the output or the docstring that these are the
-  USDT perpetual contracts** — they are not the same instrument as the spot
-  pair the rest of the Brief prices, and pretending otherwise is a small lie
-  that becomes a big one in Phase 6.
-- **RATE COUNT:** three assets = three requests minimum. Binance's public
-  weight limits are generous, but keep it to one request per asset per call
-  and no retry storms.
-- **OUTPUT:** one added block under the existing CONTEXT DECK, roughly:
+## GATE 3.2b — DECLARED HERE, BEFORE THE BUILD (Law 4)
 
-      Funding (8h) : BTC +0.0069%  ·  ETH +0.0041%  ·  SOL -0.0032%
-      (positive = longs pay shorts · next settlement 16:00 UTC — crowd
-       positioning, information, not a signal)
-
-  Numbers and honest mechanics only.
-- **THE SIGN IS THE WHOLE INSTRUMENT — GET IT RIGHT.** A positive funding rate
-  means holders of long positions pay holders of short positions; negative
-  means the reverse. **Getting this backwards would print the exact opposite
-  of the truth on the Brief every morning**, and no gate that only checks "a
-  number appeared" would catch it. Check (b) below exists for this reason
-  alone.
-- **ON THE WORDS "LONGS" AND "SHORTS" — settled here so the session does not
-  agonise.** Step 3.1's orders said no buy/sell words. That rule forbids
-  *telling the pilot what to do*. Stating that longs pay shorts is a fact
-  about how the funding mechanism works, exactly like saying RSI is 46, and
-  EXECUTION_PLAN Phase 3 #2 prescribes that wording itself. **Permitted:**
-  "positive = longs pay shorts", "the crowd is leaning long". **Forbidden:**
-  anything that recommends, suggests, or hints at an action — "so consider
-  fading it", "a good time to short", "bullish", "bearish".
-- **FAIL-SAFE (Law 3):** ANY failure — timeout, HTTP error, surprise schema,
-  no internet, a single asset missing — degrades honestly. A total failure
-  prints one line, "Funding instrument offline". **If some assets answer and
-  others do not, print the ones that answered and name the ones that did
-  not** — partial truth labelled as partial is honest; silently dropping an
-  asset is not. Timeout ~10s. No retry storms.
-- **Injectable base URL** (parameter or argument), so the offline drill points
-  at an unreachable address WITHOUT disconnecting the internet. Reuse Step
-  3.1's `.invalid` trick.
-- **STANDALONE SMOKE TEST (`__main__`):** (1) print the live block; (2) run
-  the offline drill against the injected bad URL and print the offline line;
-  exit 0 only if both behaved.
-
-### The wiring — `cockpit/brief.py`
-
-- The funding block joins the EXISTING CONTEXT DECK section — **one deck, two
-  instruments.** Do not print a second "CONTEXT DECK" header. Keep the touch
-  minimal; the Fear & Greed line must appear above it, unchanged.
-- The Brief's contract must not change: the `ok` count still counts ASSETS
-  only; a dead funding instrument must not change the count, the exit code, or
-  any existing line of output — including the Fear & Greed line, which must
-  still print normally when funding is dead, and vice versa. **The two
-  instruments must be independently killable.**
-
-### Deliberately NOT built (write this into the log)
-
-- **NO CSV recording of funding rates — and the reason is the opposite of what
-  the plan used to say.** Measured 2026-07-26: Binance serves settled funding
-  history back to contract inception (BTC 2019-09-10, ETH 2019-11-27, SOL
-  2020-09-13), paginated `startTime` + `limit=1000`. Nothing is lost by not
-  collecting it, so a recorder would be a second copy of a public archive.
-  **Phase 6 Slot 2 (funding-rate extreme fade) can be tested whenever we
-  choose.** The old "recording must start the day 3.2 ships" instruction was
-  written from assumption, was never true, and is corrected in
-  EXECUTION_PLAN.md and ROADMAP.md.
-- **NO open-interest recorder in this step**, even though OI is the one thing
-  that genuinely expires (30-day window, `code -1130` for anything older). It
-  gets its own step, its own gate, and a backfill at birth. Because every read
-  reaches back 30 days, a recorder that runs monthly loses nothing — there is
-  a deadline, not an emergency. Do not smuggle it in here.
-- **NO carry calculation.** Phase 4.
-
-## GATE 3.2 — DECLARED HERE, BEFORE THE BUILD (Law 4)
-
-(a) Standalone run prints a current funding rate for all THREE assets, each
-    with its sign, plus the next settlement time; exit 0.
-(b) ~~**THE SIGN AND MAGNITUDE CHECK — the one that actually matters.** Each
-    printed rate is cross-checked against Binance's own published figure for
-    that contract, from a surface independent of the one the instrument used
-    (the exchange's funding-rate page, or the `fundingRate` history endpoint
-    if the instrument used `premiumIndex`). Same number within rounding, and
-    **the same sign**. A session that cannot demonstrate the sign is correct
-    has not passed this gate.~~
-
-**(b) AMENDED 2026-07-26 BY MEASUREMENT, BEFORE ANY CODE EXISTED. The struck
-text above rests on a fact that is false, and is left legible because a plan
-that quietly edits its own errors teaches the next session nothing.**
-
-*What was measured, on all three assets, before the amendment was written:*
-
-| | BTC | ETH | SOL |
-|---|---|---|---|
-| `premiumIndex.lastFundingRate` | 0.00006211 | 0.00001104 | 0.00001776 |
-| newest settled `fundingRate` | 0.00005884 | 0.00002358 | 0.00006371 |
-| identical? | **no** | **no** | **no** |
-
-*The struck check assumes `lastFundingRate` IS the last settled rate. It is
-not. It is the running **estimate** for the NEXT settlement (16:00 UTC, while
-the newest settled payment was 08:00 UTC) — Binance's own documentation says
-the pre-settlement figure "represents an estimation." The two endpoints report
-**different quantities**, so "same number within rounding" cannot pass, and no
-correct implementation could ever make it pass.*
-
-*Worse, the weaker fallback of "at least the same sign" is ALSO invalid: the
-last three settled rates ran `+ − +` for ETH and `− + +` for SOL. The sign
-genuinely flips between 8-hour periods, so a sign-agreement check between the
-two surfaces would fail at random and invite a session to shrug off a real
-failure.*
-
-**The amended check — three parts, ALL required, and stricter than the struck
-one. It is written and committed BEFORE the instrument exists:**
-
-  **b1 — EXACT IDENTITY (catches a sign flip in our code).** The instrument
-       also reads the last SETTLED rate for each asset. A settled rate is a
-       fixed historical fact, so the instrument's parsed value must match a
-       freshly-fetched raw value **exactly — digit for digit, sign included**,
-       not merely "within rounding". The settled and printed-estimate values
-       MUST pass through the SAME parsing and formatting helpers, so this
-       exact check guards the printed path too. If they do not share that
-       code, this check proves nothing and the gate FAILS.
-  **b2 — THE PRINTED NUMBER (catches a formatting or unit error).** Every
-       rate printed on the Brief is re-derived BY HAND from a fresh raw
-       `premiumIndex` response — same sign, same magnitude, allowing only for
-       the drift of the minutes between calls. The re-derivation is recorded
-       in the log with both numbers visible.
-  **b3 — THE MEANING (the risk this whole check exists for).** "Positive =
-       longs pay shorts" is a fact about the WORLD, not about our code, and
-       **no endpoint can prove a naming convention**. It is verified against
-       Binance's own published documentation — a surface independent of the
-       API entirely — and the supporting sentence is QUOTED in the log.
-
-*A session that cannot demonstrate all three has not passed this gate.*
-(c) THE OFFLINE DRILL: with the injected unreachable URL, the instrument
-    prints its one offline line — no traceback, no crash — AND the Fear &
-    Greed line still prints normally in the same run, AND a full Brief still
-    completes with 3/3 assets reporting.
-(d) A full live Brief shows the funding block inside the existing CONTEXT
-    DECK, with the Fear & Greed line still above it, AND every section that
-    existed before unchanged, 3/3 assets reporting.
-(e) The Brief runs twice, back to back, completing both times. The funding
-    numbers MAY differ between runs — funding is quoted continuously; that is
-    live data being live, not nondeterminism. Note it, do not chase
-    byte-identity.
-(f) The partial-failure path is exercised, not just written: force ONE asset
-    to fail (an unmapped or bogus symbol via the injectable parameter) and
-    show the block prints the two that answered and NAMES the one that did
-    not, with the Brief still at 3/3.
+(a) **BACKFILL:** from empty, one run writes ≥ 175 rows per asset for all
+    three assets, spanning ≥ 29 days, `period=4h`. Report the real span.
+(b) **IDEMPOTENCE — the check that lets it run on any schedule.** Run it a
+    second time immediately. Row counts must be **identical**, no duplicates.
+    Prove it by counting distinct `(symbol, timestamp)` pairs against total
+    rows: the two numbers must be equal.
+(c) **THE EMPTY-RESULT TRAP.** Point it at a bogus symbol. It must **FAIL
+    LOUDLY** — non-zero exit or an explicit error line — and must **NOT**
+    write an empty file, append nothing silently, or report success. **A
+    session that cannot demonstrate this has not passed this gate**, because
+    this is the exact failure that would lose the data without anyone noticing.
+(d) **OFFLINE DRILL:** injected unreachable URL → honest offline line, no
+    traceback, **and the CSVs on disk are byte-identical afterwards**
+    (checksum before and after).
+(e) **HISTORY IS NEVER REWRITTEN:** hand-edit one stored value in a scratch
+    copy, re-run, and confirm the tool reports the disagreement rather than
+    silently overwriting it.
+(f) **THE BRIEF IS UNAFFECTED:** `python cockpit\brief.py` still prints 3/3
+    with both Context Deck instruments. 3.2b touches no cockpit file, so this
+    should be trivially true — verify it anyway.
+(g) **THE DATA IS PLAUSIBLE:** spot-check that BTC open interest is in a sane
+    range against Binance's own displayed figure. A recorder that faithfully
+    stores nonsense is not a working recorder.
 
 ## IF / THEN
 
 | IF | THEN |
 |---|---|
-| Binance answers HTTP 451 / "restricted location" | Do NOT quietly swap exchanges. STOP, write it into PROGRESS_LOG.md, tell the Commander. Bybit is verified reachable and is the standing candidate, but the plan names Binance and swapping the source is HIS call, not a session's. |
-| The response schema differs from the shape above | Adapt the parser; record the REAL schema in the log. |
-| The sign cannot be verified against an independent surface | The gate FAILS. Do not ship a funding line whose direction is unproven. |
-| Some assets answer and some do not | That is the (f) path, not a failure — print the truth, name the gaps. |
-| The wiring breaks anything on the existing Brief | Revert the wiring. A failing gate is never committed. |
-| The gate fails twice | STOP. Write it up, tell the Commander. |
-| Any planning document contradicts a measurement you just took | **The measurement wins, and you write the correction down.** This step exists because that rule was applied to the previous orders. |
+| Binance answers HTTP 451 / restricted location | STOP. Do NOT swap exchanges. Write it up, tell the Commander. **One source, chosen once, never switched mid-history.** |
+| The 30-day window has moved or the schema differs from the measured facts above | **The new measurement wins.** Record the real shape, adapt, write the correction down. |
+| A bogus symbol no longer returns `200 []` | Record it. Keep check (c) anyway — the recorder must refuse empty results regardless of how Binance signals them. |
+| The gate fails | Do not commit. Fix, or write it up and stop. **A failing gate is never "mostly passed".** |
+| Any planning document contradicts a measurement you just took | The measurement wins, and you write the correction down. **Twice now.** |
 
 ## IF EVERYTHING PASSES
 
-1. `PROGRESS_LOG.md` entry: what was built, the gate tally with the actual
-   live numbers seen, the real API schema received, how the SIGN was proven,
-   the no-recording-needed reasoning with its measured basis, and anything
-   that went wrong on the way (Law 1: rights AND wrongs).
-2. Marker in `EXECUTION_PLAN.md` → "Step 3.2 DONE <date>, GATE 3.2 PASSED.
-   Step 3.2b (open-interest recorder, 30-day window, backfill at birth) READY."
-3. `ROADMAP.md`: tick funding in the Context Deck row and the build queue.
-4. Commit with full notes, push.
+1. `PROGRESS_LOG.md`: the review verdict (Part 1) AND the build (Part 2) —
+   what was built, the gate tally with real numbers, the real schema received,
+   and every mistake as plainly as every success (Law 1).
+2. `EXECUTION_PLAN.md` marker → "Step 3.2b DONE <date>, GATE 3.2b PASSED."
+3. `ROADMAP.md`: tick the recorder; update the MEASURED facts table.
+4. Commit with full notes (`git commit -F`), push.
+5. **RAISE THE SCHEDULING DECISION WITH THE COMMANDER — do not silently skip
+   it.** A recorder that is never run collects nothing. Because each read
+   reaches back 30 days, running it monthly suffices; folding it into the
+   existing daily batch is simplest. **It must run on the Commander's laptop,
+   NOT the cloud watchman** — GitHub's runners are US-hosted and Binance
+   geo-blocks US addresses, so a cloud recorder might collect nothing,
+   silently, for weeks. Changing his Task Scheduler is his call: present the
+   one-line command and let him decide.
 
-## WHO CHECKS THE CHECKER (read this, it is an order)
+---
 
-Fable normally verified this ship's work independently, and that verification
-is what caught real problems — including a reviewer's own hardcoded "15/15" in
-Gate 2.5. With Fable away, the substitute is **separation in time, not in
-identity**:
+# STILL ON THE COMMANDER'S DESK (do not let these drop)
 
-1. These orders and this gate were written and committed **before** any Step
-   3.2 code existed. Law 4 holds regardless of who holds the pen.
-2. **A FRESH session builds** — one that has not read the reasoning behind
-   these orders and must work from what is written down. If something here is
-   unclear to a session with no memory of writing it, that is a defect in the
-   orders, and the session should say so rather than guess.
-3. **A THIRD fresh session reviews**, recomputing from raw evidence rather
-   than trusting the build session's printed tally — the Gate 2.5 method.
-4. **At Phase 6 this substitute expires.** A second, genuinely independent AI
-   reviewing the test setup before and the verdict after is a locked
-   requirement of EXECUTION_PLAN Phase 6 and is NOT waived by Fable's absence.
-   Information instruments can carry a lighter guard; the gauntlet cannot.
+1. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2.
+2. **The risk-doctrine decision**: the 25% position cap means real risk is
+   ~0.49% per trade, not the intended 1%. **Must be settled BEFORE Phase 6,
+   never after seeing results.**
+3. **The Law 8 candidate** — *"a claim about what a data source will or will
+   not give us is not a fact until it has been called; planning documents must
+   mark which claims are measured and which are assumed."* **It now has TWO
+   earned examples in two sessions**, the second being a false claim inside a
+   gate's own most important check. Adopt, reject, or reshape — his call, and
+   no session promotes its own idea to law.
+4. Vault CSVs carry no volume column (TwelveData serves none for these pairs).
 
-## THE EXAM THE REVIEWING SESSION WILL RUN (build to this)
+# AND THE ONE THAT DOES NOT EXPIRE
 
-1. `git diff` scope: ONLY `cockpit/funding.py`, `cockpit/brief.py`,
-   `PROGRESS_LOG.md`, `EXECUTION_PLAN.md`, `ROADMAP.md` (and this file if
-   marked done) changed. All of `lab/` byte-identical. Vault verifies INTACT.
-2. Fresh standalone run of the instrument — live block prints for all three
-   assets, offline drill behaves, exit 0.
-3. Fresh full Brief run — one CONTEXT DECK carrying BOTH instruments, 3/3
-   assets, all pre-existing sections intact.
-4. **The printed sign and magnitude independently re-verified against
-   Binance**, by the reviewer, from scratch.
-5. Each instrument killed separately: Fear & Greed dead → funding still
-   prints; funding dead → Fear & Greed still prints; both dead → Brief still
-   3/3.
-6. The log entry contains the gate tally, the real schema, the sign proof, and
-   the corrected recording reasoning.
-7. Marker and ROADMAP correct; commit message honest about anything that
-   failed en route; pushed to GitHub.
+**At Phase 6 the "separation in time" substitute EXPIRES.** A second,
+genuinely independent AI must review the gauntlet's test setup before and its
+verdict after. That is a locked requirement of EXECUTION_PLAN Phase 6 and is
+**NOT waived by Fable's absence.** Information instruments can carry a lighter
+guard. The gauntlet cannot.

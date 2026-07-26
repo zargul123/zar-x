@@ -348,8 +348,20 @@ answer, built into this plan:
 # CURRENT POSITION MARKER (update this line each session)
 
 → We are at: **PHASE 3 IN PROGRESS — Step 3.2 DONE 2026-07-26, GATE 3.2
-PASSED 48/48. Step 3.2b (open-interest recorder, 30-day window, backfill at
-birth) READY — it is the only dataset on this ship that expires.**
+PASSED 48/48. NEXT SESSION HAS TWO PARTS: (1) the independent audit of Step
+3.2, sitting in Fable's chair — mandatory, cold, recomputing from raw evidence;
+(2) Step 3.2b, the open-interest recorder, ONLY IF the audit clears. Orders and
+Gate 3.2b are written and committed in SESSION_ORDERS.md, with every claim
+about the OI endpoints MEASURED first.**
+
+**Gate 3.2b's endpoints were probed BEFORE the gate was written** — applying
+the same morning's lesson that gates get written from assumption too. The find
+that shaped the gate: **a bogus symbol on `/futures/data/openInterestHist`
+returns `HTTP 200` with an empty list `[]`, not an error** (the funding
+endpoint returns a clean HTTP 400 for the same mistake). A recorder written the
+obvious way would report success while collecting nothing, every month, until
+the 30-day window had silently rolled past — on the one dataset that cannot be
+recovered later at any price. Gate 3.2b check (c) exists solely for that.
 
 **Step 3.2 (Funding rates) DONE 2026-07-26, GATE 3.2 PASSED 48/48** (10 in the
 instrument's own smoke test, 38 in the gate runner). `cockpit/funding.py` (new)

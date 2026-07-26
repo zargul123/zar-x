@@ -65,7 +65,7 @@ what merely has to be READ. Every line below was measured, not assumed:
 |---|---|---|
 | alternative.me Fear & Greed | FULL history (`limit=0`, back to 2018) | **No** |
 | Binance funding rates `/fapi/v1/fundingRate` | **To contract inception** — BTC 2019-09-10, ETH 2019-11-27, SOL 2020-09-13; paginate `startTime` + `limit=1000` | **No** |
-| Binance open interest `/futures/data/openInterestHist` | **30 DAYS ONLY** — 180 rows at 4h; older `startTime` is refused outright (code -1130) | **YES — the only one** |
+| Binance open interest `/futures/data/openInterestHist` | **30 DAYS ONLY** — re-measured 2026-07-26: 180 rows at `period=4h` spanning 29.8 days, identical for all 3 assets; `startTime` 60 days back refused (code -1130). `period=1h` covers only 20.8 days at limit=500, so **4h is the only period that captures the whole window in one call** | **YES — the only one** |
 | TwelveData candles (our vault) | ~3y 1d / 4h from 2024-01-01 (glitch zone excluded) | Already frozen in lab/vault/ |
 
 **THE CORRECTION THAT MATTERS (2026-07-26):** earlier planning documents stated
@@ -83,6 +83,23 @@ is no emergency, only a deadline measured in weeks.
 
 Also measured the same day: **OKX does not resolve from the Commander's
 connection at all** (DNS failure); Binance and Bybit both answer normally.
+
+**THE SILENT-FAILURE TRAP (measured 2026-07-26, before Gate 3.2b was written):
+a bogus symbol on `/futures/data/openInterestHist` returns `HTTP 200` with an
+empty list `[]` — it does NOT error.** The funding endpoint returns a clean
+HTTP 400 (`code -1121`) for the same mistake, so the two behave oppositely. A
+recorder written the obvious way would read `[]`, append nothing, print "0 new
+rows", exit 0 and report success every month while the 30-day window silently
+rolled past — on the ONE dataset that cannot be bought back later at any price.
+**An empty result must be treated as a loud failure, never as "no new data".**
+Two smaller traps beside it: the field is `sumOpenInterest` in the history
+endpoint but `openInterest` in the live snapshot endpoint, and the payload
+carries an unplanned `CMCCirculatingSupply`.
+
+**Still UNMEASURED, and marked as such:** Binance's real funding-rate cap for
+our three contracts. `cockpit/funding.py` refuses rates beyond ±5% as
+implausible; that bound is a guess, and it is on the next session's review list
+rather than sitting in the code disguised as a fact.
 
 ## Standing answers to the Commander's questions (so they're never re-litigated)
 - **"How does it know what will happen?"** It doesn't. It's a weather station + cockpit:

@@ -2145,3 +2145,129 @@ What survives:
 
 **Next: Step 3.2b — the open-interest recorder. It is the only dataset on this
 ship that expires, and the deadline is measured in weeks.**
+
+---
+
+## 2026-07-26 — HANDOFF: ORDERS FOR THE NEXT SESSION, AND THE OPEN-INTEREST
+## ENDPOINTS **MEASURED BEFORE GATE 3.2b WAS WRITTEN**
+
+No code was written. The Commander asked for a handoff plan, and specifically
+asked that the next session **start by doing what Fable used to do — verify the
+previous session's work as a third party.** That is now Part 1 of the orders,
+and Part 2 (building Step 3.2b) is explicitly conditional on it.
+
+### THE LESSON FROM THIS MORNING, APPLIED IMMEDIATELY
+
+Step 3.2 discovered that **gates get written from assumption too** — its most
+important check was unpassable because nobody had called the endpoint before
+writing the check. So before a single word of Gate 3.2b was written, the
+open-interest endpoints were probed. **Every fact in the new orders was
+measured today, and the orders say so, and they still tell the next session to
+verify them anyway.**
+
+### WHAT WAS MEASURED (2026-07-26, from the Commander's connection)
+
+    GET /fapi/v1/openInterest?symbol=BTCUSDT                    HTTP 200
+      {"symbol","openInterest","time"}                  live snapshot
+
+    GET /futures/data/openInterestHist?symbol=BTCUSDT&period=4h&limit=500
+      HTTP 200, 180 rows, 2026-06-26 20:00 → 2026-07-26 16:00 (29.8 days)
+      {"symbol","sumOpenInterest","sumOpenInterestValue",
+       "CMCCirculatingSupply","timestamp"}
+
+    startTime 60 days back → HTTP 400 {"code":-1130,
+                                       "msg":"parameter 'startTime' is invalid."}
+    startTime 20 days back → HTTP 200, 120 rows
+
+    Rows per period at limit=500 (BTCUSDT):
+      5m   500 rows    1.7 days
+      1h   500 rows   20.8 days   ← does NOT cover the 30-day window
+      4h   180 rows   29.8 days   ← the whole window in ONE call
+      1d    30 rows   29.0 days
+
+**The 30-day wall is confirmed real**, identically for all three assets, and
+`period=4h` is the only setting that captures the whole window in one request
+per asset. The ROADMAP's measured-facts table stands.
+
+### THE FINDING THAT MATTERS — A SILENT-FAILURE TRAP
+
+**A bogus symbol returns `HTTP 200` with an empty list `[]`. It does not
+error.**
+
+    GET /futures/data/openInterestHist?symbol=NOTAREAL&period=4h  →  200  []
+
+This is the **opposite** of the funding endpoint, which returns a clean
+HTTP 400 `code -1121` for a bad symbol — and that difference is a trap laid
+exactly where it does the most damage.
+
+**A recorder written the obvious way would read `[]`, append nothing, print
+"0 new rows", exit 0, and report success — every month, while the 30-day
+window silently rolled past.** Open interest is the ONE dataset on this ship
+that cannot be recovered later at any price. The failure would be invisible
+until someone went looking for history that no longer existed.
+
+Gate 3.2b therefore has check (c): **an empty result must FAIL LOUDLY and must
+never be recorded as "no new data".** It is written into the orders as a check
+a session cannot pass by accident.
+
+Two smaller traps recorded with it:
+
+- The field is **`sumOpenInterest`** in the history endpoint but
+  **`openInterest`** in the live snapshot endpoint. Two names for one idea,
+  and assuming one from the other silently yields `None`.
+- **`CMCCirculatingSupply`** is in the payload and was in nobody's plan.
+  Recorded so the next session stores it deliberately or not at all, rather
+  than by accident.
+
+### WHAT THE NEXT SESSION'S ORDERS SAY (SESSION_ORDERS.md, rewritten)
+
+**PART 1 — sit in Fable's chair and audit Step 3.2 cold**, recomputing from
+raw evidence rather than trusting the 48/48 tally, which is the thing being
+audited. Section 1.4 is the heart of it: **the previous session rewrote the
+gate's most important check and then declared itself to have passed the
+rewritten version.** That is precisely the move a dishonest session would make.
+The orders tell the reviewer to test the four claims that made the rewrite
+legitimate — including **breaking `_fmt_pct` on purpose in a scratch copy to
+confirm the exact-identity check actually FAILS**, because a check that cannot
+fail is not a check. Section 1.5 asks what the gate did NOT cover, with
+candidates (settlement-boundary staleness, the `min(settlements)` choice, and
+whether `MAX_PLAUSIBLE_RATE = 0.05` might refuse an honest extreme — Binance's
+real funding cap has NOT been measured and is flagged as unmeasured).
+
+**PART 2 — build Step 3.2b, conditional on Part 1 clearing.** If the review
+finds a real problem, Part 2 does not happen. `data/open_interest.py` plus
+`data/oi_history/` CSVs; `cockpit/` untouched, because 3.2b is a recorder and
+the Whale Watch display is Phase 3 #5 with its own step. Gate 3.2b has seven
+checks: backfill, idempotence, the empty-result trap, the offline drill with
+before/after checksums, never-rewrite-history, the Brief unaffected, and a
+plausibility spot-check — because a recorder that faithfully stores nonsense
+is not a working recorder.
+
+**A scheduling decision is written in as a required final step**, not left to
+drift: a recorder that is never run collects nothing. It must run on the
+**laptop, not the cloud watchman** — GitHub's runners are US-hosted and Binance
+geo-blocks US addresses, so a cloud recorder might collect nothing, silently,
+for weeks. Changing the Commander's Task Scheduler is his call.
+
+### THE INDEPENDENCE PROBLEM IS NOW TWO SESSIONS DEEP
+
+Stated at the top of the new orders rather than buried. The same mind has now
+written the orders, amended a gate, built to it, graded itself, written the
+review of its own work, and written the next gate. **Part 1 is the only thing
+that can repair this, and it only works if the next session treats it as a real
+audit rather than a formality.** The orders say so in those words.
+
+The Phase 6 second-AI requirement remains **NOT waived**, and is restated as
+the closing line of the orders so it cannot be skimmed past.
+
+### ONE THING DELIBERATELY LEFT UNMEASURED, AND FLAGGED AS SUCH
+
+**Binance's real funding-rate cap for BTCUSDT/ETHUSDT/SOLUSDT was not
+measured.** `cockpit/funding.py` refuses any rate above ±5% as implausible.
+That bound is a guess. It is almost certainly well above the real cap, but
+"almost certainly" is the exact phrasing that produced two corrections today,
+so it is written into the next session's review list as an open question
+rather than quietly left in the code as a fact.
+
+**Next: a fresh session runs Part 1 (the audit), then Part 2 (Step 3.2b) only
+if Part 1 clears.**
