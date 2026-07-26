@@ -20,6 +20,10 @@ anything:
 4. `cockpit/funding.py` and `cockpit/brief.py` — the code under audit, ~200
    lines. Read every line of both.
 5. `ROADMAP.md` — the MEASURED data-source facts table.
+6. **`REVIEW_QUEUE.md` — the docket of everything this ship could not honestly
+   certify itself.** It is short on purpose. **R-001 through R-005 ARE your
+   PART 1 worklist**; the audit below is the long form of them. R-006 (the
+   Phase 6 second-AI review) cannot be cleared by you or any in-house session.
 
 Then: `git pull` FIRST. This session has TWO parts and **PART 2 IS
 CONDITIONAL.** If PART 1 finds a real problem, PART 2 does not happen — write
@@ -112,6 +116,22 @@ slow-but-alive Binance degrade as honestly as a dead one?
 sabotage results, and the verdict. "Reviewed, found nothing" is a result worth
 recording. A review that only appears in the log when it finds something
 teaches the next session that silence means safety.
+
+**1.7 UPDATE `REVIEW_QUEUE.md` — AND MIND WHAT YOU MAY NOT DO THERE.** Record
+your verdict against R-001 … R-005. **You may move an item to CLEARED only for
+work you did not build**, which for this session means R-001 through R-005 are
+fair game and **R-006 is not, ever.** Items you cannot settle stay OPEN with a
+note on what is still missing — leaving something open is a legitimate and
+recorded outcome, not a failure to finish. Never delete an item; never edit a
+cleared verdict.
+
+**AND THE STANDING DUTY, WHICH APPLIES TO PART 2 AS MUCH AS PART 1: if you
+catch yourself writing "probably", "almost certainly", or "this should be
+fine" about anything that ships — FILE IT in `REVIEW_QUEUE.md` before the
+commit that ships it**, using the form at the bottom of that file. If you
+change a rule you are about to be measured by, file it in bold. Filing costs
+one paragraph. Not filing costs whatever the mistake costs, discovered later
+by someone who trusted you.
 
 ---
 
@@ -236,10 +256,11 @@ stands. One source, chosen once, never switched mid-history.
 **IF EVERYTHING PASSES:** write both halves into `PROGRESS_LOG.md` — the audit
 verdict with the numbers you recomputed and the sabotage results, then the
 build with the gate tally, the real schema received, and every mistake as
-plainly as every success (Law 1). Update the marker to "Step 3.2b DONE <date>,
-GATE 3.2b PASSED — Step 3.3 (news headlines, CryptoPanic free tier) READY".
-Tick the recorder in `ROADMAP.md` and refresh the MEASURED facts table. Commit,
-push. **Then raise the scheduling decision with the Commander and do not
+plainly as every success (Law 1). **Update `REVIEW_QUEUE.md`: verdicts on
+R-001 … R-005, plus any new item this session could not certify itself.**
+Update the marker to "Step 3.2b DONE <date>, GATE 3.2b PASSED — Step 3.3 (news
+headlines, CryptoPanic free tier) READY". Tick the recorder in `ROADMAP.md` and
+refresh the MEASURED facts table. Commit, push. **Then raise the scheduling decision with the Commander and do not
 silently skip it — a recorder that is never run collects nothing. It must run
 on his LAPTOP, not the cloud watchman: GitHub's runners are US-hosted and
 Binance geo-blocks US addresses, so a cloud recorder might collect nothing,

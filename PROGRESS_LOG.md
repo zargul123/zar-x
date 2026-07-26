@@ -2271,3 +2271,99 @@ rather than quietly left in the code as a fact.
 
 **Next: a fresh session runs Part 1 (the audit), then Part 2 (Step 3.2b) only
 if Part 1 clears.**
+
+---
+
+## 2026-07-26 — **REVIEW_QUEUE.md CREATED — the ship's doubts get a docket**
+
+No code. The Commander asked two things: explain how a new session gets its
+rules, and make sure that anything a session flags as needing honest review is
+recorded **so that Fable, on returning, can find and review it easily.**
+
+### HOW A SESSION IS BOOTED (verified, not recalled)
+
+Outside the repo, on the Commander's machine only, `MEMORY.md` holds a single
+trigger: *"zar x" → read `ROADMAP.md`*. Everything else is in git, which is why
+the ship survives being handed to a different model:
+
+    ROADMAP.md         9 KB    the handoff: state, parts, queue, measured facts
+    SESSION_ORDERS.md 17 KB    the current step's orders and its gate
+    EXECUTION_PLAN.md 32 KB    phases 2-8, gates, IF/THEN, position marker
+    SHIP_LAWS.md       3 KB    the seven laws
+    PROGRESS_LOG.md  128 KB    the full history, append-only
+    README.md          2 KB    mission + THE PROMISE
+
+**The rules are not re-invented each session. They are stored and re-read.**
+
+### THE PROBLEM THIS FIXES
+
+Every self-doubt this ship has recorded was written down honestly — and then
+buried under the next entry. **The log is 128 KB.** Nobody reviews a 128 KB
+file; they skim it, which is the same as not reading it. An independent
+reviewer returning today would have to excavate four commit hashes, three
+marker paragraphs and several log entries just to find out what needed
+checking. **A finding nobody can find is a finding that does not exist.**
+
+### WHAT WAS BUILT
+
+`REVIEW_QUEUE.md` — short on purpose, and wired into the boot chain so no
+session can miss it (`ROADMAP.md` names it; `SESSION_ORDERS.md` lists it as
+read-first item 6 and points the next session's Part 1 straight at it).
+
+Six OPEN items, priority-ordered, each with: what to review, **why it needs an
+outside eye including the self-interest involved**, exact commits and files, a
+one-line reproduction, and — in Law 4's spirit — **what a clean verdict looks
+like, declared before the review runs**, plus what "failed" looks like and what
+reopens if it does.
+
+    R-001  P1  the Step 3.2 gate amended mid-flight by the session it judged
+    R-002  P1  two planning generations written by the mind that built them
+    R-003  P2  MAX_PLAUSIBLE_RATE = 0.05, an admitted guess in shipped code
+    R-004  P3  a session overruled its own recommendation, unwitnessed
+    R-005  P3  min(settlements) silently resolves a disagreement
+    R-006  P1  the Phase 6 second-AI review — CANNOT be cleared in-house
+
+One CLEARED entry, R-000, records Gate 2.5 and the birth of Law 7 — kept as the
+worked example of the queue functioning, because that review **caught a real
+defect (a reviewer's own hardcoded "15/15") that the builder could not see.**
+Clearing there was earned, not assumed.
+
+**Two rules the file enforces on itself:** only an independent reviewer may
+move an item to CLEARED — **a session may never clear its own item, however
+confident it is** — and nothing is ever deleted or quietly tidied, because a
+docket that edits itself teaches the next session nothing.
+
+**The filing duty, written into the orders:** if a session catches itself
+writing *"probably"*, *"almost certainly"*, or *"this should be fine"* about
+anything that ships, it files. If it grades its own work, it files. If it
+changes a rule it is about to be measured by, it files in bold. Filing costs
+one paragraph; not filing costs whatever the mistake costs, discovered later by
+someone who trusted the record.
+
+### WHAT WAS DELIBERATELY NOT DONE
+
+**`SHIP_LAWS.md` was not touched, and no eighth law was written.** The obvious
+companion rule — *"a session may not certify its own work; anything it cannot
+certify is filed before the commit that ships it, and only an independent
+reviewer may clear it"* — is recorded in `REVIEW_QUEUE.md` as **a candidate for
+the Commander, not as law.** The law book has seven laws and each was adopted
+by him after a failure that earned it, never by a session that liked its own
+idea. Seven laws get read; twelve get skimmed. **The file is record-keeping,
+which Law 1 already covers; the law form is his call.**
+
+The older candidate — *"a claim about what a data source will or will not give
+us is not a fact until it has been called"* — is carried forward beside it,
+now with two earned examples.
+
+### THE HONEST LIMIT OF THIS FILE
+
+`REVIEW_QUEUE.md` was written by the same session that is the subject of four
+of its six open items, and it chose its own wording for those items. **A docket
+written by the accused is better than no docket and worse than an independent
+one.** It is filed here as exactly that. The next session should ask what is
+MISSING from the queue, not only whether the listed items hold — the entries a
+self-auditing session failed to write are, by construction, the ones it could
+not see.
+
+**Next: unchanged — Part 1 (the audit, now with R-001…R-005 as its worklist),
+then Part 2 (Step 3.2b) only if Part 1 clears.**
