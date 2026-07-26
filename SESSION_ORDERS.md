@@ -140,13 +140,62 @@ owns its own source mapping, Law 2).
 
 (a) Standalone run prints a current funding rate for all THREE assets, each
     with its sign, plus the next settlement time; exit 0.
-(b) **THE SIGN AND MAGNITUDE CHECK — the one that actually matters.** Each
+(b) ~~**THE SIGN AND MAGNITUDE CHECK — the one that actually matters.** Each
     printed rate is cross-checked against Binance's own published figure for
     that contract, from a surface independent of the one the instrument used
     (the exchange's funding-rate page, or the `fundingRate` history endpoint
     if the instrument used `premiumIndex`). Same number within rounding, and
     **the same sign**. A session that cannot demonstrate the sign is correct
-    has not passed this gate.
+    has not passed this gate.~~
+
+**(b) AMENDED 2026-07-26 BY MEASUREMENT, BEFORE ANY CODE EXISTED. The struck
+text above rests on a fact that is false, and is left legible because a plan
+that quietly edits its own errors teaches the next session nothing.**
+
+*What was measured, on all three assets, before the amendment was written:*
+
+| | BTC | ETH | SOL |
+|---|---|---|---|
+| `premiumIndex.lastFundingRate` | 0.00006211 | 0.00001104 | 0.00001776 |
+| newest settled `fundingRate` | 0.00005884 | 0.00002358 | 0.00006371 |
+| identical? | **no** | **no** | **no** |
+
+*The struck check assumes `lastFundingRate` IS the last settled rate. It is
+not. It is the running **estimate** for the NEXT settlement (16:00 UTC, while
+the newest settled payment was 08:00 UTC) — Binance's own documentation says
+the pre-settlement figure "represents an estimation." The two endpoints report
+**different quantities**, so "same number within rounding" cannot pass, and no
+correct implementation could ever make it pass.*
+
+*Worse, the weaker fallback of "at least the same sign" is ALSO invalid: the
+last three settled rates ran `+ − +` for ETH and `− + +` for SOL. The sign
+genuinely flips between 8-hour periods, so a sign-agreement check between the
+two surfaces would fail at random and invite a session to shrug off a real
+failure.*
+
+**The amended check — three parts, ALL required, and stricter than the struck
+one. It is written and committed BEFORE the instrument exists:**
+
+  **b1 — EXACT IDENTITY (catches a sign flip in our code).** The instrument
+       also reads the last SETTLED rate for each asset. A settled rate is a
+       fixed historical fact, so the instrument's parsed value must match a
+       freshly-fetched raw value **exactly — digit for digit, sign included**,
+       not merely "within rounding". The settled and printed-estimate values
+       MUST pass through the SAME parsing and formatting helpers, so this
+       exact check guards the printed path too. If they do not share that
+       code, this check proves nothing and the gate FAILS.
+  **b2 — THE PRINTED NUMBER (catches a formatting or unit error).** Every
+       rate printed on the Brief is re-derived BY HAND from a fresh raw
+       `premiumIndex` response — same sign, same magnitude, allowing only for
+       the drift of the minutes between calls. The re-derivation is recorded
+       in the log with both numbers visible.
+  **b3 — THE MEANING (the risk this whole check exists for).** "Positive =
+       longs pay shorts" is a fact about the WORLD, not about our code, and
+       **no endpoint can prove a naming convention**. It is verified against
+       Binance's own published documentation — a surface independent of the
+       API entirely — and the supporting sentence is QUOTED in the log.
+
+*A session that cannot demonstrate all three has not passed this gate.*
 (c) THE OFFLINE DRILL: with the injected unreachable URL, the instrument
     prints its one offline line — no traceback, no crash — AND the Fear &
     Greed line still prints normally in the same run, AND a full Brief still

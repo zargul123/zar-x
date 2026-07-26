@@ -1819,3 +1819,139 @@ a candidate so the decision is his and the reasoning is not lost.
 4. Vault CSVs carry no volume column (TwelveData serves none for these pairs).
 
 **Next: a fresh session builds Step 3.2 to the committed gate.**
+
+---
+
+## 2026-07-26 — STEP 3.2 BUILD SESSION, PART 1 OF 2: **GATE 3.2 CHECK (b)
+## WAS UNPASSABLE AS WRITTEN — CORRECTED BEFORE ANY CODE EXISTED**
+
+**No code was written in this part.** This entry is committed on its own,
+BEFORE `cockpit/funding.py` exists, so that the corrected bar is on the record
+before anything can be built to fit it. Law 4 is the reason for the split
+commit: a gate amended by the same session that later reports passing it is
+worth nothing unless the amendment lands first, in public, with its evidence.
+
+### WHAT HAPPENED
+
+The fresh build session read the orders, then probed the two Binance endpoints
+to record the real schema as ordered. The probe showed that **check (b) rests
+on a false assumption and could never have passed** — not for a bad
+implementation, but for any implementation.
+
+The orders assume `premiumIndex.lastFundingRate` **is** the last settled
+funding rate, and therefore that it can be cross-checked against the
+`fundingRate` history endpoint expecting the *same number*. Measured:
+
+    ASSET   premiumIndex.lastFundingRate   newest settled fundingRate   equal?
+    BTC     0.00006211                     0.00005884                   NO
+    ETH     0.00001104                     0.00002358                   NO
+    SOL     0.00001776                     0.00006371                   NO
+
+    premiumIndex.nextFundingTime = 2026-07-26 16:00:00 UTC
+    newest settled fundingTime   = 2026-07-26 08:00:00 UTC
+
+They are **different quantities**. `lastFundingRate` is the running *estimate*
+for the NEXT settlement; the history endpoint reports payments that already
+happened. Binance's own documentation confirms it: the pre-settlement figure
+*"represents an estimation of the last 8 hours of the premium index."*
+
+**And the obvious weaker fallback is also invalid.** Before assuming "well, at
+least the signs should agree", that was measured too:
+
+    BTCUSDT: predicted +  | last 3 settled ['+', '+', '+']
+    ETHUSDT: predicted +  | last 3 settled ['+', '-', '+']
+    SOLUSDT: predicted +  | last 3 settled ['-', '+', '+']
+
+The settled sign flips between consecutive 8-hour periods. A sign-agreement
+check between the two surfaces would have failed **at random**, on correct
+code — the worst possible kind of check, because a session that saw it fail
+would be tempted to wave it through, and the ship would learn to distrust its
+own gates.
+
+### WHY THIS ONE MATTERS MORE THAN THE USUAL TYPO
+
+Check (b) is not a routine check. It is the ONLY check standing between this
+ship and printing *the exact opposite of the truth* on the Brief every single
+morning, and the orders say so in bold. **The single most important check in
+Gate 3.2 was unpassable, and every other check in the gate would have passed
+around it** — (a), (c), (d), (e) and (f) all verify that a number appeared and
+that failure degrades honestly. None of them looks at whether the number means
+what the line next to it claims.
+
+**This is the SAME failure shape the previous session documented**, one step
+later: a claim about a data source, written from assumption, never called. The
+previous session caught it about a *future* step's data. This one was about
+*this* step's data, sitting inside this step's own gate. The lesson generalises
+further than first recorded: **a gate is only as good as the measurements
+behind the claims it is built on, and gates get written from assumption too.**
+
+### THE CORRECTION — STRICTER, NOT LOOSER
+
+Recorded in full in SESSION_ORDERS.md with the original struck through and
+left legible. Check (b) becomes three checks, all required:
+
+- **b1 — EXACT IDENTITY.** The instrument also reads the last SETTLED rate.
+  Settled rates are fixed historical facts, so the parsed value must match a
+  fresh raw fetch **exactly, digit for digit, sign included** — an upgrade
+  from the struck check's "within rounding". Settled and estimate values must
+  pass through the SAME parse/format helpers, or the check proves nothing.
+- **b2 — THE PRINTED NUMBER.** Every printed rate re-derived BY HAND from a
+  fresh raw response; both numbers recorded in the log.
+- **b3 — THE MEANING.** "Positive = longs pay shorts" verified against
+  Binance's published documentation, an independent surface from the API,
+  because **no endpoint can prove a naming convention.** Verified already:
+  positive → *"traders long on a perpetual contract will pay a funding fee to
+  traders on the opposing side"*; negative → *"traders short on a perpetual
+  contract will pay a funding fee to long traders"*. Interval confirmed:
+  *"every 8 hours at 00:00 (UTC), 08:00 (UTC), and 16:00 (UTC)."*
+
+### THE REAL SCHEMA RECEIVED (recorded as ordered)
+
+    GET /fapi/v1/premiumIndex?symbol=BTCUSDT   HTTP 200
+    {"symbol","markPrice","indexPrice","estimatedSettlePrice",
+     "lastFundingRate","interestRate","nextFundingTime","time"}
+
+    GET /fapi/v1/fundingRate?symbol=BTCUSDT&limit=3   HTTP 200
+    [{"symbol","fundingTime","fundingRate","markPrice","rateType"}]
+
+    GET /fapi/v1/premiumIndex?symbol=NOTAREALSYMBOL   HTTP 400
+    {"code":-1121,"msg":"Invalid symbol."}
+
+All values arrive as STRINGS except `nextFundingTime`, `fundingTime` and
+`time`, which are integer milliseconds. **`rateType` ("Regular") is a field
+the orders did not know about** — recorded here, unused, so a future session
+does not mistake it for a surprise.
+
+The bogus-symbol result is noted because Gate 3.2 check (f) needs a per-asset
+failure: an unmapped symbol yields HTTP 400 for that asset alone, which is
+exactly the partial-failure path the check demands.
+
+### DECISIONS TAKEN WEARING FABLE'S HAT (the Commander delegated; recorded so
+### they can be overruled)
+
+1. **Source stays Binance. No third-party library, no GitHub funding package.**
+   The Commander twice offered an open-source fallback. It is declined because
+   Binance is not failing — every endpoint answered HTTP 200 from his
+   connection today. A wrapper would add a dependency that can break (the
+   pandas-ta lesson, already in the IF/THEN table) and would hide the very
+   schema the orders require us to record in Binance's own words.
+2. **The Brief prints the ESTIMATE only, one request per asset**, per the
+   orders' explicit call budget and output example. The session's own earlier
+   suggestion of also printing the last settled rate on the Brief was
+   **overruled by the session itself**: it would double the request count
+   against an explicit written cap, and the settled rate's real job is exact
+   verification, which belongs in the gate. Because both values run through
+   the same parse/format helpers, b1 still guards the printed path.
+3. **The independence problem is now WORSE than last session, and is not
+   glossed.** Last session the planner and builder were the same mind. This
+   session the same mind also amended the gate it will be judged by. The only
+   protections that survive are (i) this amendment is committed BEFORE any
+   code exists, with its measured evidence attached, and (ii) **a THIRD fresh
+   session must review by recomputing from raw evidence — it should treat the
+   amended (b) itself as a thing to be audited, not assumed.** The Phase 6
+   second-AI requirement remains explicitly NOT waived.
+
+### WHAT IS NOT YET DONE
+
+`cockpit/funding.py` does not exist. Gate 3.2 has not been run. The next entry
+reports the build and the full tally, pass or fail.
