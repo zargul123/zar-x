@@ -9,8 +9,13 @@ not build any of it.*
 Read these files in `C:\Users\hp\Downloads\zargul trader\zar-x` before doing
 anything:
 
+0. **`README.md` FIRST — it carries THE PROMISE**, which Law 6 points at by
+   name: three sealed gauntlet slots and then the signals chapter closes. It is
+   1.7 KB. **A session that has not read it does not know the rule the whole
+   ship is built around**, and this list omitted it once already.
 1. `SHIP_LAWS.md` — all seven laws. Law 4 (gates before tests) especially.
 2. `EXECUTION_PLAN.md` — the PHASE 3 block and the CURRENT POSITION MARKER.
+   **This is the map: what is built, what is next, what each phase's gate is.**
 3. The last THREE entries of `PROGRESS_LOG.md` — the audit that voided a 48/48,
    the Gate 3.2-R declaration (committed with **no `.py` file in it**), and the
    rebuild. **Read the rebuild as a CLAIM, not a result. It is what you are
@@ -18,9 +23,19 @@ anything:
 4. `cockpit/funding.py` — read every line, production path and `__main__` both.
 5. `cockpit/fear_greed.py` — ~155 lines. **This is the one nobody has ever
    attacked.** Read it looking for the same shape as funding's hole.
-6. `REVIEW_QUEUE.md` — **R-009 and R-008 are your PART 1 worklist.** R-001 may
+6. `ROADMAP.md` — what exists and works, and the **MEASURED data-source facts
+   table**. Part 2 depends on it. If anything you measure disagrees with it,
+   **your measurement wins and you write the correction down.**
+7. `REVIEW_QUEUE.md` — **R-009 and R-008 are your PART 1 worklist.** R-001 may
    also be settled by you (you did not build the repair). **R-006 may NEVER be
    cleared by you or any in-house session.**
+
+**A NOTE ON `PROGRESS_LOG.md`: it is 162 KB and reading all of it will eat the
+budget you need for the actual work.** The last three entries are the assignment
+and are enough. `EXECUTION_PLAN.md` and `ROADMAP.md` exist precisely so nobody
+has to read the whole log to know where the ship is — **if you find yourself
+needing older log entries to understand the current position, that is a defect
+in those two files and you should say so and fix it.**
 
 Then: `git pull` FIRST. This session has TWO parts and **PART 2 IS
 CONDITIONAL.** If PART 1 finds a real problem, fix that and stop — Step 3.2b
