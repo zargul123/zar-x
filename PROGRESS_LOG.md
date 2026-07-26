@@ -501,3 +501,100 @@ Commander's, and it is recorded here as an open blocker on Step 2.3.
 
 **Next:** the Commander's decision on the diseased 4h files, THEN Step 2.3
 (the honest backtest engine with the three-dummies gate).
+
+## 2026-07-26 — VAULT RE-BIRTH ATTEMPTED — REFUSED BY THE DOOR (blocker stands)
+
+**The Commander's written order:** delete lab/vault/ and rebuild it through the
+now-guarded builder; legal ONCE because the diseased original is committed and
+pushed (aa6de2d, e63a9ca) — git history keeps the evidence, so Law 5 is
+satisfied, not violated.
+
+**Executed in the ordered sequence:**
+1. `git pull` — fast-forwarded to 8a17fe3 (cloud snapshots).
+2. `verify_vault.py` BEFORE touching anything → INTACT for all six. We only
+   re-birth from a known state.
+3. Proof of reversibility taken first: the committed blob of BTC-USD_4h.csv in
+   aa6de2d hashes to 9d0cd7d5…, byte-identical to the file on disk. The old
+   vault is genuinely recoverable, not "probably" recoverable.
+4. lab/vault/ deleted (plus an off-repo scratch copy as belt-and-braces).
+5. `build_vault.py` run.
+
+**THE DOOR REFUSED AT FILE 1 OF 6.** BTC-USD 4h came back from TwelveData with
+the SAME 42 impossible candles. The builder printed the inspector's report,
+wrote nothing, and exited 1 — exactly the behaviour Step 2.2 was built to
+produce. Nothing was ever written to disk.
+
+**Then the vault was restored to its committed state** (`git checkout -- lab/vault`)
+and re-verified: INTACT for all six, and `git status lab/` shows zero changes.
+The failed re-birth left no scar. The repo is exactly as it was.
+
+**RECONNAISSANCE (read-only, run from the scratchpad — nothing added to lab/):**
+all three 4h series were downloaded fresh and compared, candle by candle,
+against the vault's copies. The result is the decisive fact:
+
+    BTC-USD 4h : 42 diseased fresh, 42 in vault — SAME candles: TRUE
+    ETH-USD 4h :  2 diseased fresh,  2 in vault — SAME candles: TRUE
+    SOL-USD 4h :  4 diseased fresh,  4 in vault — SAME candles: TRUE
+
+**THE GLITCH IS PERMANENT IN TWELVEDATA'S STORED HISTORY.** It is not a
+transient download error. Re-downloading will never fix it, today or in a year.
+That option is now closed by evidence, not by opinion.
+
+**Exactly which candles came back diseased (all 48):**
+BTC-USD 4h — the `low` is the true price divided by ~10,000:
+    2023-07-28 12:00 low 2.927   | 2023-07-31 08:00 low 2.9398
+    2023-08-01 12:00 low 2.8936  | 2023-08-01 20:00 low 2.9204
+    2023-08-02 16:00 low 2.9265  | 2023-08-03 00:00 low 2.9197
+    2023-08-03 04:00 low 2.905   | 2023-08-04 12:00 low 2.9218
+    2023-08-06 08:00 low 2.9096  | 2023-08-06 12:00 low 2.902
+    2023-08-07 04:00 low 2.9066  | 2023-08-07 16:00 low 2.9176
+    2023-08-08 00:00 low 2.92    | 2023-08-08 08:00 low 2.935
+    2023-08-08 12:00 low 2.957   | 2023-08-08 16:00 low 2.9636
+    2023-08-09 20:00 low 2.9568  | 2023-08-10 12:00 low 2.9458
+    2023-08-15 08:00 low 2.9376  | 2023-08-15 20:00 low 2.9204
+    2023-08-16 04:00 low 2.917   | 2023-08-16 16:00 low 2.9194
+    2023-08-16 20:00 low 2.8944  | 2023-08-17 08:00 low 2.8533
+    2023-08-17 12:00 low 2.8428  | 2023-08-18 12:00 low 2.6211
+    2023-08-18 16:00 low 2.6044  | 2023-08-18 20:00 low 2.6068
+    2023-08-19 04:00 low 2.5876  | 2023-08-20 12:00 low 2.5998
+    2023-08-20 20:00 low 2.6152  | 2023-08-21 00:00 low 2.614
+    2023-08-21 12:00 low 2.6062  | 2023-08-21 20:00 low 2.6124
+    2023-08-25 00:00 low 2.6092  | 2023-08-25 16:00 low 2.5972
+    2023-08-26 12:00 low 2.6076  | 2023-09-02 16:00 low 2.58
+    2023-09-03 16:00 low 2.5865  | 2023-09-05 16:00 low 2.5735
+    2023-09-07 04:00 low 2.581   | 2023-09-14 12:00 low 2.6455
+ETH-USD 4h:
+    2023-11-13 16:00 open 2105.23 high 2118.00 low 1.795    close 2100.00
+    2023-12-19 12:00 open 2236.13 high 2241.27 low 0.74859  close 2191.38
+SOL-USD 4h:
+    2023-11-27 00:00 open 57.57 high 58.09 low 0.2698     close 56.60
+    2023-12-12 16:00 open 68.45 high 68.78 low 0.00000224 close 67.62
+    2023-12-16 08:00 open 74.39 high 75.15 low 0.01652     close 75.15
+    2023-12-20 12:00 open 77.06 high 81.13 low 0.45911     close 80.52
+
+**Two facts that shape the decision (stated, not acted on):**
+1. 47 of the 48 have ONLY the `low` broken — open, high and close are sane.
+   The single exception is BTC 2023-08-01 12:00, whose CLOSE is also broken
+   ($2.8954 instead of ~$28,954).
+2. Every diseased candle sits between 2023-07-28 and 2023-12-20 — the first
+   five months of the three-year window. The last one in each asset:
+   BTC 2023-09-14, ETH 2023-12-19, SOL 2023-12-20. From 2023-12-21 onward all
+   three 4h series are free of impossible candles, and the 1d files covering
+   the diseased period are clean throughout.
+
+**RECORD CORRECTION (we correct forward, we do not rewrite the past):** the
+Step 2.2 entry above says TWO BTC candles have a broken close. The true count
+is ONE — 2023-08-01 12:00, close $2.8954. One broken close produces TWO
+candle-to-candle jumps (into it and out of it), which is what caused the
+miscount. The Step 2.2 entry stands as written; this line is the correction.
+
+**Nothing was repaired, no candle was hand-edited, no low was multiplied by
+10,000, no second data source was touched, and the validator's standards were
+not lowered.** All four were explicitly forbidden by the order, and all four
+remain undone.
+
+**Step 2.3 stays BLOCKED.** The re-download option is dead on evidence. The
+decision — and it belongs to the Commander, not to a session — is now between
+the honest remaining routes: run the Lab on 1d only; start the 4h window at
+2024-01-01 and record the shortened depth; or bring in a second data source
+with the Commander's explicit yes. No session may choose this alone.
