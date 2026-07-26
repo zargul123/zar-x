@@ -45,9 +45,15 @@ WHAT SEPARATES THEM, SAID ONCE AND PLAINLY
   the numbers show it. A leak is a strategy being fed answers. Answers work
   everywhere, hold-out included, so no amount of arithmetic can find it. Leaks
   are caught by ONE thing only in this Lab: a human reading the strategy's
-  code. The too-good alarm (PF > 2 or win rate > 70%) is meant to be the flare
-  that sends a human to go and read that code — and Step 6 of this gate
-  measures, rather than assumes, whether that flare actually goes up.
+  code. The too-good alarm (PF > 2 or win rate > 70%) was meant to be the
+  flare that sends a human to go and read that code — and Step 6 of this gate
+  MEASURED, rather than assumed, whether that flare actually goes up. IT DOES
+  NOT: this leak's hold-out card (PF 1.39, win 57.6%) sits under both limits.
+  That measurement is the founding evidence of LAW 7 (SHIP_LAWS.md, adopted
+  2026-07-26): mandatory recorded code-reading before certification, with
+  lab/leak_check.py — which DOES flag this leak, by finding the DataFrame it
+  carries — as the reading's aid, never its substitute. Step 6 verifies all
+  of that too.
 
 WHAT THIS FILE MAY AND MAY NOT TOUCH
   It consumes engine.py, walk_forward.py, monte_carlo.py, regime_report.py,
@@ -83,6 +89,7 @@ from dummies import MACross, PerfectForesight                   # noqa: E402
 from walk_forward import walk_forward                           # noqa: E402
 from monte_carlo import monte_carlo_result, SEED                # noqa: E402
 from regime_report import regime_report                         # noqa: E402
+from leak_check import leak_check                               # noqa: E402
 
 ASSET = 'BTC-USD'
 TIMEFRAME = '4h'
@@ -793,7 +800,7 @@ def step_5_battery(holdout_card, wf, mc):
 # STEP 6 — EXHIBIT 2: the leak, and the limit this Lab must admit
 # ==========================================================================
 
-def step_6_the_leak(data):
+def step_6_the_leak(data, con):
     banner('STEP 6 — EXHIBIT 2: THE CHEAT\'S RESULTS SOLD AS A TRACK RECORD')
     print('`PerfectForesight` from lab/dummies.py — the leak from Gate 2.3. '
           'Its author\nhanded it the whole file, so it reads tomorrow\'s candle '
@@ -833,10 +840,33 @@ def step_6_the_leak(data):
           'exhibit, not a failure of the bars')
 
     fired = too_good_alarm(holdout_card, 'the leak\'s HOLD-OUT card')
-    check('the too-good alarm fires on the leak\'s hold-out card', fired,
-          f'PF {holdout_card["profit_factor"]:.2f} (limit {TOO_GOOD_PF}), '
-          f'win rate {holdout_card["win_pct"]:.1f}% (limit '
-          f'{TOO_GOOD_WIN_PCT}%)')
+    check('MEASURED LIMIT: the too-good alarm stays SILENT on the leak',
+          not fired,
+          f'PF {holdout_card["profit_factor"]:.2f} < {TOO_GOOD_PF} and win '
+          f'rate {holdout_card["win_pct"]:.1f}% < {TOO_GOOD_WIN_PCT}% — the '
+          f'founding evidence of Law 7; if this ever starts firing, the '
+          f'ground has moved and Law 7 must be re-examined')
+
+    # ---- LAW 7's instrument, proven against the very leak that founded it --
+    print()
+    print('  LAW 7\'S INSTRUMENT — lab/leak_check.py, scanning the strategy '
+          'OBJECTS for')
+    print('  smuggled data (the scan the numbers cannot do):')
+    print()
+    rep_leak = leak_check(leaked)
+    print(rep_leak.text())
+    check('leak_check FLAGS the leak: it carries the whole file',
+          rep_leak.flagged
+          and any('full' in path for path, _ in rep_leak.findings),
+          '; '.join(f'{p} -> {d}' for p, d in rep_leak.findings))
+    rep_con = leak_check(con)
+    rep_ma = leak_check(MACross(20, 50))
+    check('leak_check clears the honest strategies (MA-cross, con artist)',
+          not rep_con.flagged and not rep_ma.flagged,
+          'the con artist smuggles nothing — its sin is memorising, which is '
+          'the numbers\' job to catch, and they did')
+    check('leak_check says in words that a clean scan is not innocence',
+          'NOT INNOCENCE' in rep_ma.text() and 'READ' in rep_ma.text())
 
     print()
     print('  ' + '=' * 74)
@@ -916,16 +946,21 @@ def step_6_the_leak(data):
         print('    neither the battery nor the alarm objected to this one at '
               'any point.')
         print()
-        print('  THIS GATE THEREFORE FAILS, DELIBERATELY, ON THAT ONE CHECK. '
-              'It is not a')
-        print('  bug in the instruments and it is not fixed by tuning the '
-              'alarm to fire —')
-        print('  lowering the alarm until this exhibit trips it would flag '
-              'every honest')
-        print('  strategy too, which is a detector that catches nothing. The '
-              'decision of')
-        print('  what to do about it belongs to the Commander, not to this '
-              'session.')
+        print('  THE COMMANDER\'S DECISION (2026-07-26, delegated in his '
+              'words and recorded')
+        print('  in PROGRESS_LOG.md): the limit is ACCEPTED and ARMOURED, '
+              'never papered')
+        print('  over. LAW 7 — THE LEAK LAW — now stands in SHIP_LAWS.md: no '
+              'strategy')
+        print('  enters certification until its code has been read for leaks '
+              'and the')
+        print('  reading recorded; lab/leak_check.py (which finds the data '
+              'this leak')
+        print('  smuggles) runs as the reading\'s aid, never its substitute; '
+              'and the alarm')
+        print('  was NOT lowered — tuning it until this exhibit trips would '
+              'flag every')
+        print('  honest strategy too, a detector that catches nothing.')
     print('  ' + '=' * 74)
     return res, holdout_card, fired
 
@@ -968,7 +1003,7 @@ def main():
     res, train_card, holdout_card = step_2_collapse(data, con)
     wf, mc, _ = step_3_detectors(res, holdout_card)
     step_5_battery(holdout_card, wf, mc)
-    step_6_the_leak(data)
+    step_6_the_leak(data, con)
 
     banner('GATE 2.5 — THE FULL TALLY')
     for name, ok in results.items():

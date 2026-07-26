@@ -1362,3 +1362,111 @@ The blocker stands and the decision remains the Commander's: (1) mandatory
 code-review-before-testing as law in SHIP_LAWS.md (recommended minimum),
 (2) additionally a structural leak check in the Lab, or (3) rework Exhibit 2.
 Phase 3 stays shut until the Commander decides.
+
+## 2026-07-26 — THE GATE 2.5 DECISION: LAW 7 ADOPTED, GATE PASSED 37/37 —
+## **PHASE 2 COMPLETE**
+
+The Commander delegated the blocker decision in his own words: *"you know the
+system spirit and what we want to achieve... do what is better for system."*
+Recorded here so the provenance of this decision is never in doubt: the
+Commander chose to delegate; the session chose the option; both facts are on
+the record.
+
+### THE DECISION: options 1 AND 2 — accept the limit and armour it
+
+Option 3 (rework Exhibit 2 until it flatters us) was REJECTED: reshaping an
+exam until the answer looks better is goalpost-moving, and Law 4 forbids it.
+The limit Exhibit 2 exposed is true; the system's spirit says a true limit
+gets written into law and defended, not painted over. So:
+
+**1. LAW 7 — THE LEAK LAW — added to SHIP_LAWS.md.** In short: the Lab's
+numbers catch overfitting and can NEVER catch a leak — measured, not assumed
+(the leak cleared all 4 locked bars with the alarm silent). Therefore no
+strategy enters Lab certification or a gauntlet slot until its code has been
+READ line by line for leaks and the reading RECORDED in this log; the leak
+check instrument runs as the reading's aid, never its substitute; and the
+too-good alarm stays a flare, not a fence — its silence proves nothing, and
+it is never to be lowered until some exhibit trips it (a detector tuned to
+catch one known cheat flags honest strategies too).
+
+**2. `lab/leak_check.py` — a new instrument, Law 7's aid.** It walks a
+strategy OBJECT — attributes, closures, function defaults, referenced module
+globals, nested containers — and reports every piece of candle-shaped data
+(DataFrame, Series, datetime index, large numeric array) the strategy carries
+AROUND the engine's feed. That is precisely how `PerfectForesight` cheats: the
+engine's feed is clean, but the author handed the object the whole file.
+
+Its own smoke test (Law 3), PASSED: three honest shapes clean (MACross,
+always_flat, peek_or_guess — whose cheat needs the feed and therefore
+carries nothing); four smugglers flagged (PerfectForesight via
+`strategy.full`; an array hidden in a default argument; a module-global
+DataFrame reached through the function's referenced names; a DataFrame buried
+two containers deep inside an attribute dict); reports deterministic — no
+memory addresses, types and shapes only, two scans print identical text.
+
+**Its stated limit, printed in every clean report:** a clean scan is NOT
+innocence. The scan only sees what the object carries at scan time; a
+strategy can still open a file when called, call an API, or hide data in a
+form the walk does not recognise. The scan narrows the hunt; the READING is
+the verdict. Any session treating a clean scan as a substitute for Law 7's
+reading is breaking the law the instrument was built to serve.
+
+### THE ONE AMENDMENT TO GATE 2.5, AND WHY IT IS NOT GOALPOST-MOVING
+
+The gate's single failing check — "the too-good alarm fires on the leak's
+hold-out card" — was an ASSERTION WRITTEN ON A WRONG ASSUMPTION, the same
+assumption Gate 2.3's log already recorded failing once before (that session
+demanded a >70% win rate from this same exhibit and measured 57.6%). Asked a
+second time, the number gave the same answer. The world was measured twice;
+the expectation was wrong twice.
+
+Per the Gate 2.3 precedent ("the check was corrected to what the exhibit
+actually proves"), the check now asserts the MEASURED truth and guards it:
+
+    MEASURED LIMIT: the too-good alarm stays SILENT on the leak
+    (PF 1.39 < 2 and win 57.6% < 70 — the founding evidence of Law 7; if
+     this ever starts firing, the ground has moved and Law 7 must be
+     re-examined)
+
+What was NOT changed, listed so nobody wonders: the locked battery bars (all
+four, untouched); the alarm thresholds (NOT lowered); every number of both
+exhibits (identical to the failing run — only the git commit stamp differs,
+which is the provenance stamp working); engine.py, validator.py, dummies.py,
+walk_forward.py, monte_carlo.py, regime_report.py, trade_stats.py, gate_2_3.py,
+gate_2_4.py (zero lines); the vault (read-only, verified INTACT in the
+independent review the same day). And Step 6 gained three checks that did not
+exist before: leak_check must FLAG the leak (naming `strategy.full`, the
+5,624-candle DataFrame it smuggles), must CLEAR the honest strategies
+(MA-cross and the con artist — whose sin is memorising, which is the numbers'
+job, and they did it), and must state in words that a clean scan is not
+innocence.
+
+### GATE 2.5 FINAL RESULT
+
+**PASSED, 37 of 37 checks. Run twice in separate processes: byte-identical
+output apart from the evidence filenames, exit 0 both times.** The full
+sequence the gate now proves, end to end: Gate 2.3 reproduced exactly (third
+gate running) -> the con artist built train-only with the capacity dial
+turned in the open -> train card spectacular, alarm FIRED -> hold-out
+collapsed -> walk-forward INCONSISTENT (1 of 6) -> Monte Carlo and regime
+report clean -> locked battery REFUSES certification (2 of 4 bars failed) ->
+the leak clears all 4 bars, alarm SILENT (the measured limit) -> leak_check
+flags the leak and clears the honest strategies -> Law 7 stated in the
+output in plain words.
+
+Evidence CSVs of both passing runs committed (Law 5); within-run checksums
+identical to the failing run's — the amendment changed no number.
+
+### PHASE 2 IS COMPLETE
+
+The Lab now stands on: a frozen, checksummed vault (2.1); a data inspector at
+the only door (2.2); an engine built so flattery is impossible (2.3); three
+lie detectors that each caught a planted disease (2.4); an exit exam that
+watched the whole pipeline reject a con artist, and an honest, law-backed
+answer for the one lie the numbers cannot see (2.5 + Law 7 + leak_check).
+
+Marker updated: **Phase 3, Step 3.1 (Fear & Greed index) READY TO START.**
+Phase 3 was NOT started in this session, per the standing order. Open items
+carried forward, still on the Commander's desk: TwelveData key rotation; the
+risk-doctrine item (25% cap -> actual risk ~0.486% not 1%) to be decided
+BEFORE Phase 6; vault CSVs carry no volume column.

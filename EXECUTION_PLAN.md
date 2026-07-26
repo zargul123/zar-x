@@ -336,27 +336,28 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **Phase 2, Step 2.5 — BUILT AND RUN, GATE 2.5 FAILED (33/34).
-BLOCKED ON A COMMANDER DECISION. PHASE 2 IS NOT COMPLETE. DO NOT START
-PHASE 3.**
-Step 2.5 (`lab/gate_2_5.py`) ran twice, byte-identical, exit 1 both times.
-It PASSED its main exam — the synthetic con artist (a 1,687-cell curve-fit
-memorised from train candles only) showed a spectacular TRAIN card (PF 4.26,
-win 77.2%, +361.67%), tripped the too-good alarm, collapsed on the hold-out
-(PF 0.69, -19.59%), was ruled INCONSISTENT by walk-forward (profitable in 1
-of 6 windows) and was **NOT CERTIFIED** by the locked battery (2 of 4 bars
-failed). The Lab catches overfitting.
-It FAILED on Exhibit 2: `PerfectForesight` (the leak) cleared **4 of 4**
-locked bars — PF 1.39, 203 trades, walk-forward CONSISTENT 6/6, Monte Carlo
-8.01% — and **the too-good alarm did not fire** (PF 1.39 < 2, win 57.6% <
-70%). A strategy that reads tomorrow's candle was CERTIFIED AS GOOD by every
-number the Lab can produce, with no alarm anywhere. On this evidence the only
-defence against a leak is a human reading the strategy's code.
-THE DECISION (Commander's, to be taken with Fable — see the full entry in
-PROGRESS_LOG.md): (1) accept the limit and write mandatory code-review-before-
-testing into SHIP_LAWS.md as a hard pre-Phase-6 gate; (2) accept it and add a
-structural leak check to the Lab; or (3) rework Exhibit 2. Nothing further is
-built until this is decided. The failing check was NOT tuned away.
+→ We are at: **PHASE 2 COMPLETE (2026-07-26) — Phase 3, Step 3.1
+(Fear & Greed) READY TO START.**
+Step 2.5 (`lab/gate_2_5.py`) PASSED 37/37, run twice byte-identical, after
+the Commander's decision resolved its one honest blocker. The full story is
+in PROGRESS_LOG.md (three entries: the finding, the independent review, the
+decision); the short version every future session must know:
+- **The Lab catches overfitting, proven end to end.** The synthetic con
+  artist (1,687-cell lookup memorised from train candles only, no RNG):
+  train card PF 4.26 / win 77.2% / +361.67% (too-good alarm FIRED), hold-out
+  PF 0.69 / -19.59%, walk-forward INCONSISTENT (1 of 6 windows), locked
+  battery verdict **NOT CERTIFIED** (2 of 4 bars failed).
+- **The Lab's numbers can NEVER catch a leak, and the alarm may stay silent
+  too — MEASURED, not assumed.** `PerfectForesight` (reads tomorrow's candle)
+  cleared all 4 locked bars (PF 1.39, 203 trades, walk-forward CONSISTENT
+  6/6, MC 8.01%) and the too-good alarm stayed SILENT (1.39 < 2, 57.6% < 70).
+- **LAW 7 — THE LEAK LAW — now stands in SHIP_LAWS.md:** mandatory recorded
+  code-reading before any certification; `lab/leak_check.py` (new instrument,
+  own smoke test; flags the leak's smuggled `strategy.full` DataFrame, clears
+  the honest strategies) runs as the reading's aid, never its substitute; the
+  alarm was NOT lowered. Gate 2.5's Step 6 now asserts the measured silence —
+  if that check ever fails, the ground moved and Law 7 must be re-examined.
+Phase 3 was NOT started (per the standing order not to, even on a quick pass).
 Step 2.1 (Frozen Vault) DONE 2026-07-26, GATE 2.1 PASSED.
 Step 2.2 (Data Validator) DONE 2026-07-26, GATE 2.2 PASSED first run.
 Step 2.3 (Backtest Engine) DONE 2026-07-26, GATE 2.3 PASSED.
