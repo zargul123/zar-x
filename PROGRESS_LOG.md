@@ -1955,3 +1955,193 @@ exactly the partial-failure path the check demands.
 
 `cockpit/funding.py` does not exist. Gate 3.2 has not been run. The next entry
 reports the build and the full tally, pass or fail.
+
+---
+
+## 2026-07-26 — PHASE 3, STEP 3.2: THE FUNDING-RATE INSTRUMENT —
+## **GATE 3.2 PASSED (48/48 checks)**
+
+The Context Deck now carries two instruments under one header. Built in the
+same session that amended the gate one commit earlier — that weakness is
+stated plainly at the bottom, not buried.
+
+### WHAT WAS BUILT
+
+`cockpit/funding.py` (new, ~200 lines) + **5 wiring lines** in
+`cockpit/brief.py` (one import, one print, three comment lines). Those were the
+only code files touched. `lab/` byte-identical, vault **INTACT (6/6
+checksums)**, `git status` showed exactly `M cockpit/brief.py` and
+`?? cockpit/funding.py` and nothing else.
+
+Source: **Binance USDⓈ-M futures public API, free, keyless, no new
+dependency.** The Brief prints the running estimate for the next settlement,
+one request per asset, exactly as the orders' call budget caps it:
+
+    Funding (8h) : BTC +0.0059%  ·  ETH +0.0018%  ·  SOL +0.0014%
+    (USDT perpetuals · positive = longs pay shorts · next settlement 16:00 UTC
+     — crowd positioning, information, not a signal)
+
+### THE GATE — 48/48
+
+**10 checks in the instrument's own smoke test:**
+
+    (a) BTC / ETH / SOL each printed with an explicit sign     3 PASS
+    (a) next settlement time printed as HH:MM UTC              1 PASS
+    (a) live block did not come back offline                   1 PASS
+    (b1) exact identity, settled rate vs raw response          3 PASS
+    (f) partial-failure drill, bogus symbol                    1 PASS
+    (c) offline drill, one line, no traceback                  1 PASS
+
+**38 checks in the gate runner** (scratchpad, NOT committed — the orders permit
+this session only two code files): 3 for (b2), 2 for (e), 22 for (d), 11 for
+the kill matrix.
+
+**b1 — EXACT IDENTITY.** Settled rates are fixed historical facts, so the bar
+was digit-for-digit, not "within rounding":
+
+    BTCUSDT: parsed 5.884e-05 == raw '0.00005884' → +0.0059%  (settled 08:00 UTC)
+    ETHUSDT: parsed 2.358e-05 == raw '0.00002358' → +0.0024%  (settled 08:00 UTC)
+    SOLUSDT: parsed 6.371e-05 == raw '0.00006371' → +0.0064%  (settled 08:00 UTC)
+
+This guards the printed path because the settled reader and the printed
+estimate share `_parse_rate` and `_fmt_pct` — a sign flip or unit error in
+either helper would fail this check. That sharing was a gate requirement, not
+a convenience.
+
+**b2 — HAND RE-DERIVATION.** Every printed number re-derived from a fresh raw
+fetch with no instrument code involved:
+
+    raw '0.00005972' → by hand +0.0060%  | instrument printed +0.0060%
+    raw '0.00001627' → by hand +0.0016%  | instrument printed +0.0016%
+    raw '0.00001410' → by hand +0.0014%  | instrument printed +0.0014%
+
+**b3 — THE MEANING, quoted from Binance's own documentation** (an independent
+surface from the API, because no endpoint can prove a naming convention):
+
+> positive: *"traders long on a perpetual contract will pay a funding fee to
+> traders on the opposing side"*
+> negative: *"traders short on a perpetual contract will pay a funding fee to
+> long traders"*
+> interval: *"every 8 hours at 00:00 (UTC), 08:00 (UTC), and 16:00 (UTC)."*
+
+The printed line says "positive = longs pay shorts". That matches. The chain is
+complete: the printed sign is Binance's raw sign (b1/b2 exact), and the claim
+beside it is Binance's own stated convention (b3).
+
+**(e) TWICE BACK TO BACK.** Both runs completed 3/3. The funding numbers were
+identical across these two runs, though they moved across the session
+(BTC drifted 0.00006249 → 0.00005972 → 0.00005884 over the hour). The gate
+declared in advance that either outcome is acceptable — funding is quoted
+continuously — so this is recorded, not chased.
+
+**(f) PARTIAL FAILURE, exercised not just written.** One bogus symbol injected:
+
+    Funding (8h) : BTC +0.0059%  ·  ETH +0.0018%   [no data: SOL]
+
+The two that answered printed; the one that did not was NAMED. Brief still 3/3.
+
+**THE KILL MATRIX — the two instruments are independently killable:**
+
+    funding dead, F&G alive   → F&G normal, "🔌 Funding instrument offline"   3/3
+    F&G dead, funding alive   → funding normal, "🔌 Fear & Greed ... offline" 3/3
+    BOTH dead                 → both offline lines, deck header intact        3/3
+
+No traceback in any of the three. Exactly ONE "CONTEXT DECK" header in every
+run. The Fear & Greed line always above the funding block. All pre-existing
+Brief sections verified present, and the output was scanned for advice words
+(`bullish`, `bearish`, `consider`, `you should`, `good time to`) — none found.
+
+### THE REAL API SCHEMA RECEIVED
+
+    GET /fapi/v1/premiumIndex?symbol=BTCUSDT   HTTP 200
+    {"symbol","markPrice","indexPrice","estimatedSettlePrice",
+     "lastFundingRate","interestRate","nextFundingTime","time"}
+
+    GET /fapi/v1/fundingRate?symbol=BTCUSDT&limit=1   HTTP 200
+    [{"symbol","fundingTime","fundingRate","markPrice","rateType"}]
+
+    GET /fapi/v1/premiumIndex?symbol=NOTAREALSYMBOL   HTTP 400
+    {"code":-1121,"msg":"Invalid symbol."}
+
+Rates arrive as STRINGS; times as integer milliseconds. `rateType` ("Regular")
+was not in the orders and is recorded, unused.
+
+### WHAT WENT WRONG ON THE WAY (Law 1 — wrongs as plainly as rights)
+
+1. **The gate's most important check was unpassable.** Documented in full in
+   the entry above and in commit `cbfcff4`. It was caught only because the
+   orders required probing the API to record the real schema before building —
+   a step that existed for a different reason and paid for itself.
+2. **A sloppy check was written and then rewritten before it ran.** The first
+   version of the smoke test's "is this asset printed" check was an unreadable
+   one-liner mixing a substring test with a `.split()` on the same string. It
+   would probably have worked; it was replaced because a check nobody can read
+   is a check nobody can trust, and this ship's whole defence is checks people
+   can read. Replaced with an explicit "does the sign appear next to the
+   ticker" test, which is also strictly correct where the old one was merely
+   likely-correct.
+3. **Gate check (a) was nearly overclaimed.** The next-settlement time printed
+   in every block but was never actually ASSERTED by the smoke test. It was
+   noticed while writing this entry. Rather than caveat it, the assertion was
+   added and the smoke test re-run (9/9 → 10/10). **The tally in this entry
+   reports only checks that a machine actually verified**, not things that
+   looked right in the output.
+4. **Two commit attempts failed** on PowerShell here-string quoting before
+   switching to `git commit -F` with a message file. Cost: two minutes. Noted
+   so the next session skips straight to `-F` for multi-line messages.
+
+### DELIBERATELY NOT BUILT (and why)
+
+- **No CSV recording of funding rates.** Measured: Binance serves settled
+  funding back to contract inception (BTC 2019-09-10, ETH 2019-11-27, SOL
+  2020-09-13), paginated. A recorder would be a second copy of a public
+  archive. **Phase 6 Slot 2 can be tested whenever we choose.**
+- **No open-interest recorder.** It is the ONE dataset that expires (30-day
+  window, `code -1130` beyond it) and it was deliberately left alone: it gets
+  Step 3.2b, its own gate, and a backfill at birth. Not smuggled in here.
+- **No carry calculation.** Phase 4, and it ships with mandatory risk caveats.
+- **No third-party funding library.** The Commander offered an open-source
+  fallback twice. Declined both times: Binance answered HTTP 200 throughout,
+  so there was nothing to fall back FROM, and a wrapper would add a breakable
+  dependency (the pandas-ta lesson) while hiding the schema the orders require
+  us to record in Binance's own words.
+- **The settled rate is NOT printed on the Brief.** The session initially
+  proposed printing it as a verifiable anchor, then **overruled itself**: the
+  orders cap this instrument at one request per asset, and a second per-asset
+  call would have doubled that against an explicit written limit for
+  information the pilot rarely acts on. The settled rate's real job — exact
+  verification — is done in the gate. **This is a judgement call and the
+  Commander can overrule it; it is recorded here so he can.**
+
+### THE INDEPENDENCE PROBLEM, STATED PLAINLY
+
+Last session the planner and the builder were the same mind. **This session
+that same mind also amended the gate it was about to be judged by**, at the
+Commander's explicit delegation ("wear Fable's cap"). That is weaker than last
+session, not stronger, and no amount of a 48/48 tally changes it.
+
+What survives:
+1. The amendment was committed **alone, first**, with its measured evidence
+   attached, before `cockpit/funding.py` existed (`cbfcff4`).
+2. The amendment made the gate **stricter** — exact identity replacing "within
+   rounding", plus a documentation check the original did not have.
+3. **A THIRD fresh session must still review by recomputing from raw evidence,
+   and must AUDIT the amended check (b) itself rather than assume it.** If that
+   session concludes the amendment was self-serving, the finding stands and
+   this step reopens.
+4. **The Phase 6 second-AI requirement is NOT waived.** Information instruments
+   can carry a lighter guard; the gauntlet cannot.
+
+### STILL ON THE COMMANDER'S DESK (carried forward, unchanged)
+
+1. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2.
+2. **The risk-doctrine decision**: the 25% position cap means actual risk is
+   ~0.49% per trade, not the intended 1%. Must be settled BEFORE Phase 6.
+3. **Law 8 candidate** — *"a claim about what a data source will or will not
+   give us is not a fact until it has been called."* **This step is now the
+   SECOND example in two sessions**, and this one was a claim inside a gate.
+   Still not adopted; still the Commander's call.
+4. Vault CSVs carry no volume column.
+
+**Next: Step 3.2b — the open-interest recorder. It is the only dataset on this
+ship that expires, and the deadline is measured in weeks.**

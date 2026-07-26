@@ -347,9 +347,54 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **PHASE 3 IN PROGRESS — Step 3.1 DONE 2026-07-26, GATE 3.1
-PASSED. Step 3.2 (Funding rates display, Binance public API) READY — orders
-written and committed, awaiting a fresh build session.**
+→ We are at: **PHASE 3 IN PROGRESS — Step 3.2 DONE 2026-07-26, GATE 3.2
+PASSED 48/48. Step 3.2b (open-interest recorder, 30-day window, backfill at
+birth) READY — it is the only dataset on this ship that expires.**
+
+**Step 3.2 (Funding rates) DONE 2026-07-26, GATE 3.2 PASSED 48/48** (10 in the
+instrument's own smoke test, 38 in the gate runner). `cockpit/funding.py` (new)
++ 5 wiring lines in `cockpit/brief.py` were the only code touched; `lab/`
+byte-identical, vault INTACT (6/6 checksums). The Context Deck now carries TWO
+instruments under ONE header, independently killable in every combination.
+Live that day: BTC +0.0059% · ETH +0.0018% · SOL +0.0014% per 8h, next
+settlement 16:00 UTC. Source: Binance USDⓈ-M public API, free, keyless, no new
+dependency — **an open-source funding library was offered twice and declined
+both times**, because Binance answered HTTP 200 throughout and a wrapper would
+add a breakable dependency (the pandas-ta lesson) while hiding the schema the
+orders require us to record.
+
+**THE THING THIS STEP WILL BE REMEMBERED FOR: Gate 3.2's check (b) — the one
+check standing between this ship and printing the opposite of the truth every
+morning — was UNPASSABLE AS WRITTEN, and was corrected before any code
+existed.** The orders assumed `premiumIndex.lastFundingRate` IS the last
+settled rate; measured, it is not — it is the running estimate for the NEXT
+settlement, a different quantity, so "same number within rounding" could never
+have passed for any correct implementation. The weaker fallback of "at least
+the signs agree" was measured too and is also invalid: settled signs ran
+`+ − +` for ETH and `− + +` for SOL, so that check would have failed at RANDOM
+on correct code. Check (b) was replaced with three stricter checks (b1 exact
+identity digit-for-digit, b2 hand re-derivation of every printed number, b3
+the meaning proven from Binance's published documentation, since no endpoint
+can prove a naming convention) — **written and committed alone, in commit
+cbfcff4, before `cockpit/funding.py` existed.**
+
+**The lesson generalises the previous session's, one step further: gates get
+written from assumption too.** Last time an untested claim about a FUTURE
+step's data rode through a passing gate. This time the untested claim was
+inside THIS step's own gate, in its single most important check, and every
+other check would have passed around it — (a) (c) (d) (e) (f) all verify that
+a number appeared and that failure degrades honestly, never that the number
+means what the line beside it claims.
+
+**Independence note, carried forward and now WEAKER, not stronger:** last
+session the planner and builder were the same mind. This session that same
+mind also amended the gate it would be judged by, at the Commander's explicit
+delegation. The surviving protections are that the amendment landed first with
+its evidence attached, and that **a THIRD fresh session must review by
+recomputing from raw evidence — and must audit the amended check (b) itself
+rather than assume it.** The Phase 6 second-AI requirement remains NOT waived.
+
+Previously:
 
 **CORRECTION, same day, before 3.2 was built:** this marker previously ended
 "funding recording to CSV starts the day 3.2 ships." **That was false** —

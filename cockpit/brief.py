@@ -21,6 +21,7 @@ from indicators.technical import add_indicators
 from regime.vane import RegimeVane
 from risk.calculator import RiskCalculator
 from cockpit.fear_greed import section_text as fear_greed_section
+from cockpit.funding import section_text as funding_section
 
 TIMEFRAME = '4h'
 CANDLES = 300
@@ -83,7 +84,11 @@ def run_brief() -> int:
     md, vane, risk = MarketData(), RegimeVane(), RiskCalculator()
     ok = sum(asset_brief(md, vane, risk, a) for a in ASSETS)
     print(f"\n{'─' * 62}")
-    print(fear_greed_section())   # never raises; offline it says so in one line
+    # One Context Deck, two instruments — the header belongs to the first.
+    # Neither raises, and neither can silence the other: an offline instrument
+    # says so in its own line and the rest of the deck prints unchanged.
+    print(fear_greed_section())
+    print(funding_section())
     print(f"\n{'=' * 62}")
     print(f"  {ok}/{len(ASSETS)} instruments reporting. "
           f"Facts, not advice — the pilot decides.")
