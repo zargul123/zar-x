@@ -39,6 +39,15 @@ RISK_CONFIG = {
     'default_tp_atr': 2.0,         # take-profit distance in ATRs
 }
 
+# --- Lab trading costs (the 1h-scar law: costs are NEVER optional) ---
+# In the museum, a "real" edge on 1h candles died the moment fees and slippage
+# were charged honestly. Every simulated trade in the Lab pays both, on BOTH
+# sides. These are defaults — adjustable — but never zero, and never skipped.
+LAB_COSTS = {
+    'fee_pct': 0.001,        # 0.1% exchange fee, charged per side
+    'slippage_pct': 0.0005,  # 0.05% slippage, charged per side (fill is worse)
+}
+
 # --- Regime vane (Layer 2: context instrument, NOT proven alpha) ---
 # Entropy thresholds are PER-TIMEFRAME (Zargul 2.0 lesson: a 1h-tuned dial
 # saturates on 4h and stamps everything Chaotic). 4h value = p70 of the

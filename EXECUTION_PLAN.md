@@ -336,11 +336,41 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **Phase 2, Step 2.3 (backtest engine) — READY TO START.
-Vault v2 healthy at birth: 4h from 2024-01-01 (~2.6y, source glitch zone
-excluded, see log), 1d full 3y.**
+→ We are at: **Phase 2, Step 2.4 (Lie Detectors) — READY TO START.**
 Step 2.1 (Frozen Vault) DONE 2026-07-26, GATE 2.1 PASSED.
 Step 2.2 (Data Validator) DONE 2026-07-26, GATE 2.2 PASSED first run.
+Step 2.3 (Backtest Engine) DONE 2026-07-26, GATE 2.3 PASSED.
+
+**What Step 2.4 must bolt onto:** `lab/engine.py`, contract
+`signal(df) -> long|short|flat`, entered via `load_vault(asset, timeframe)`
+(the ONLY door — it refuses any path outside lab/vault/ and any file the
+validator FAILs). `run_backtest(...)` returns a BacktestResult with
+`.card('holdout'|'train'|'full')`, `.window_trades(window)` and
+`.save_csv()`. The MA-cross dummy for Gate 2.4 is `lab/dummies.MACross(20,50)`;
+run it with `train_end='2025-10-01'` to reproduce the Step 2.3 card exactly.
+Per-trade CSVs already carry `regime_at_entry` (for regime_report.py) and
+`return_pct` — each trade's net result as a fraction of the equity it
+started with, so any subset of trades (a walk-forward window, a Monte Carlo
+reshuffle) can be compounded honestly on its own. Use `return_pct`, never
+raw dollars, when slicing trades into windows.
+
+**HOLD-OUT LINE, RECORDED: train_end = 2025-10-01** (~10 months / 1,789
+4h candles of untouched hold-out). Every Step 2.3 gate number is on that
+line; Step 2.4 must use the same one or say loudly that it changed.
+
+**OPEN ITEM FOR THE COMMANDER (found by Gate 2.3's hand-check, not yet
+acted on — it is doctrine, not a bug):** on BTC 4h the 1.5-ATR stop is
+~1.9% wide, so risking 1% of the account implies a position worth ~80% of
+it. `RISK_CONFIG['max_position_fraction']` caps that at 25%, and the cap —
+not the 1% rule — set the size on 116 of 119 trades. Actual risk taken:
+**~0.49% per trade, not 1%.** The engine is faithfully running the LIVE
+formula, so live behaves the same way. Nothing was changed. But it means
+every return AND every drawdown in the Lab is on roughly half the intended
+risk, and the Phase 6 gate "must beat buy-and-hold-with-1%-risk-sizing"
+needs to know which number it is comparing. Decide before Phase 6, not
+after seeing results.
+Vault v2 healthy at birth: 4h from 2024-01-01 (~2.6y, source glitch zone
+excluded, see log), 1d full 3y.
 Vault v2 born 2026-07-26 (commit below), all four gates passed: 6 files
 (4h 5,624 rows each from 2024-01-01; 1d 1,094 each from 2023-07-28),
 verify INTACT twice identically, validator reports ZERO FAIL verdicts,

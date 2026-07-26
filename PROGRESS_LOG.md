@@ -656,3 +656,159 @@ original is evidence and is not lost, merely retired.
 **Next:** Step 2.3 — the honest backtest engine, with the three-dummies gate
 (always-flat → 0 trades; MA-cross → full stat card; the planted look-ahead
 cheat → structurally impossible through the engine's own feed).
+
+## 2026-07-26 — STEP 2.3: THE HONEST BACKTEST ENGINE — GATE 2.3 PASSED
+
+The heart is in. `lab/engine.py` walks candles one at a time around one
+contract — `signal(df) -> 'long'|'short'|'flat'` — and is built so that
+flattering a strategy is not merely difficult but IMPOSSIBLE. Every wall
+below exists because of a specific known lie:
+
+- **Look-ahead.** At candle i the strategy is handed `df.iloc[:i+1].copy()`.
+  Candle i+1 is not a hidden row, not a NaN row — it is absent, and the
+  object has its own memory, so the rest of the file cannot be reached by
+  walking back through the buffer the slice was cut from.
+- **Same-candle magic.** Entries happen at the NEXT candle's OPEN.
+- **The optimistic exit.** Stop and target both touched inside one candle
+  -> the LOSS is counted. Always. A gap through the stop fills at the open,
+  not at the stop.
+- **Costs as a detail.** fee 0.1% + slippage 0.05%, BOTH sides, every trade,
+  from the new `LAB_COSTS` block in config.py (the one permitted touch
+  outside lab/). The 1h-scar law honoured.
+- **Testing where you tuned.** `train_end` splits the run; the card that
+  counts is hold-out only.
+- **Bad data.** `load_vault()` runs validator.py at load, and a FAIL verdict
+  refuses the backtest outright.
+- **Live data sneaking in.** `run_backtest` accepts ONLY a `VaultData`, whose
+  constructor refuses any path outside lab/vault/. engine.py does not import
+  data/market_data.py and never may.
+- **"Which version made this number?"** Every card and every CSV row carries
+  strategy name + fingerprint (a hash of the params AND the costs, risk and
+  ATR settings) + the git commit.
+
+Exits are ATR stop/target from risk/calculator.py — the LIVE Discipline
+Engine, not a Lab reinvention. Sizing is the live 1%-risk stop-distance
+formula. The strategy is asked for a signal only when flat; an open position
+is managed by the rules, exactly like live.
+
+**HOLD-OUT LINE, RECORDED: train_end = 2025-10-01** — 1,789 4h candles
+(~10 months) that no parameter ever saw.
+
+### GATE 2.3 — THE THREE DUMMIES (BTC-USD 4h, door verdict PASS)
+
+**DUMMY 1 — always-flat:** 0 trades, 0 P&L, 0% time in market, an empty CSV
+with no phantom rows — and the engine still walked all 5,624 candles.
+
+**DUMMY 2 — MA-cross 20/50, HOLD-OUT STAT CARD (2025-10-01 -> 2026-07-26,
+1,789 candles):**
+
+    trades        : 37   (19 long / 18 short)
+    wins / losses : 14 / 23      win rate 37.8%
+    profit factor : 0.63  (after costs)
+    avg win       : +0.60% of equity
+    avg loss      : -0.58% of equity   (win/loss ratio 1.03)
+    max drawdown  : 7.98%
+    NET RETURN    : -4.88%   <- after every fee and every slippage
+    gross return  : -2.20%   <- the same run with costs switched off
+    COST DRAG     : 2.68 percentage points ($265.60 over 37 trades, $7.18
+                    per round trip, on a $10,000 account)
+    time in market: 16.7%
+    exits         : stop 22, target 14, forced close at end of data 1
+    regime at entry: Ranging 20, Chaotic 13, Trending 4
+
+A losing strategy, printed exactly as it is. Costs turned a -2.20% fantasy
+into a -4.88% truth — that is the whole reason costs are never optional.
+Nothing here is claimed as an edge.
+
+**DUMMY 3 — THE CHEAT (peeks at tomorrow's close).**
+
+*(a) Fed the future, outside the engine:* correct on every one of the 1,789
+hold-out candles, no costs -> **+11,260,167% (112,602x the account)**, while
+buy-and-hold did -43.80% over the same window. That is what a leak is worth.
+
+*(b) Through the engine's proper feed:* the identical peek —
+`df['close'].iloc[len(df)]`, one row past the end — raised IndexError on
+**5,624 of 5,624 calls. 0 trades, 0 P&L.** An independent witness (`FeedSpy`
+in the gate script, which does not trust the engine's own audit and re-checks
+every single delivery against the vault file itself) measured: 0 candles from
+the future ever delivered, 0 deliveries of the wrong length, 0 out-of-order
+deliveries. The engine's own audit logged 0 look-ahead violations. The cheat
+did not fail to profit — it never received a number to cheat with.
+
+*(b2) The cheat that refuses to go flat* (falls back to "the last move
+continues" when the peek fails): 219 trades, win rate 42.0%, PF 0.83,
+**-11.60%**. That is what a look-ahead strategy IS once the look-ahead is
+taken away: an ordinary losing guess.
+
+**The leak's fingerprint is the SWING, not the size.** A third exhibit
+(beyond the plan, kept because it teaches): the same cheat run THROUGH the
+engine but holding its own copy of the whole file, so the future reached it
+AROUND the feed — same entry cadence, same ATR exits, same costs as (b2),
+only the peek differs:
+
+    win rate     42.0%   ->   57.6%
+    profit factor 0.83   ->    1.39
+    net return  -11.60%  ->  +21.61%
+
+One candle of future turned a loser into a winner. It is +21.6% rather than
+millions because the peek buys only the ENTRY direction: the engine holds a
+trade until an ATR stop or target hits — median 6 candles, mean 8.8, max 99 —
+so ~5/6 of the exposure is blind, and entry is at the next candle's OPEN
+while the peek is about that candle's CLOSE. **Recorded so nobody misreads
+it as the engine half-containing a leak: the engine controls what the FEED
+delivers, and nothing else. A strategy whose AUTHOR hands it the future will
+still cheat.** That is why strategy code gets read, and why Step 2.4 exists.
+
+### GATE RUN HONESTY (both things that went wrong)
+
+1. **The first run FAILED** — on an assertion written in this session, not on
+   the engine. I had demanded the leaked-future exhibit show a win rate above
+   70%; it showed 57.6%. My expectation was wrong, for the reason explained
+   above (one candle of foresight, six candles of holding). The check was
+   corrected to what the exhibit actually proves — that the leak turns a loser
+   into a winner — and the reasoning was written into the gate script so the
+   number can never again be mistaken for containment. No engine code changed.
+2. **The second run crashed** — the gate script printed a comparison against a
+   stat card that had not been computed yet. Fixed. No engine code changed.
+
+The engine was identical across all three runs, and so were its results: the
+per-trade CSVs of runs 1, 2 and 3 carry IDENTICAL SHA-256 checksums. The Lab
+is deterministic — a run that reproduces itself exactly is a run whose numbers
+mean something.
+
+**Evidence files (Law 5: nothing deleted, so all three runs remain on disk).
+THE FINAL PASSING RUN is:** `always-flat_...-3.csv`,
+`ma-cross-20-50_...-3.csv`, `cheat-leaked-future_...-3.csv`,
+`cheat-through-the-feed_...-2.csv`, `cheat-degraded-to-a-guess_...-2.csv`.
+The unsuffixed and other-suffixed files are earlier runs of the same day;
+their contents are identical wherever the same strategy ran.
+
+### AN INDEPENDENT HAND-CHECK (run before the commit, using no engine code)
+
+All 119 MA-cross trades recomputed from the vault CSV alone. All 15 checks
+clean: entry price is the entry candle's OPEN; slippage always worsens the
+fill in the correct direction; every entry was preceded by the matching cross
+on the PREVIOUS candle (119/119); stop and target sit exactly 1.5/2.0 ATR
+from the fill; the money arithmetic reproduces; net is ALWAYS below gross;
+every stop exit landed on a candle that genuinely touched the stop (66/66)
+and every target exit on one that genuinely touched the target (52/52); never
+two positions open at once; and the ATR at entry recomputes from candles
+BEFORE the entry candle only (119/119).
+
+### WHAT THE HAND-CHECK FOUND — AN OPEN ITEM, NOT A BUG
+
+**116 of 119 trades were sized by the 25% concentration cap, not by the 1%
+risk rule.** On BTC 4h a 1.5-ATR stop is ~1.9% wide, so risking 1% of the
+account implies a position worth ~80% of it;
+`RISK_CONFIG['max_position_fraction']` caps that at 25%, and the risk actually
+taken was a **median 0.486% per trade (mean 0.509%, range 0.14% - 1.00%)**.
+
+The engine is faithfully running the LIVE formula — so the live ship sizes the
+same way. Nothing was changed, because this is doctrine, and doctrine belongs
+to the Commander, not to a session. But it must be known: every Lab return and
+every Lab drawdown above is on roughly HALF the intended risk, and the Phase 6
+gate "must beat buy-and-hold-with-1%-risk-sizing" needs to state which risk it
+means. To be decided before Phase 6 — never after seeing results.
+
+**Next:** Step 2.4 — the Lie Detectors (walk_forward.py, monte_carlo.py,
+regime_report.py), all three run against this same MA-cross dummy.
