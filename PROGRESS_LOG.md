@@ -1306,3 +1306,59 @@ options, none of them taken here:
 Fable is to be asked. Nothing further is built until the Commander decides.
 
 **Next:** blocked on that decision. Phase 3 does not start.
+
+### INDEPENDENT REVIEW OF GATE 2.5 (Fable, same day) — THE FINDING STANDS
+
+Verified without trusting the session that built it, same discipline as the
+Gate 2.4 review:
+
+1. **The commit touched only what it was allowed to touch.** `git diff` of
+   commit 0d633c5 against its parent for engine.py, validator.py, dummies.py,
+   gate_2_3.py, gate_2_4.py, walk_forward.py, monte_carlo.py,
+   regime_report.py, trade_stats.py, lab/vault/, config.py, risk/, regime/
+   and data/: EMPTY. Zero lines. The commit contains exactly gate_2_5.py, the
+   evidence CSVs, the log entry and the marker.
+2. **The vault verifies INTACT**, all 6 files, checksums matching MANIFEST.
+3. **Every headline number recomputed from raw evidence, using NO lab code.**
+   An independent script (pandas/numpy only) reloaded the vault CSV and the
+   committed per-trade CSVs and recomputed all of it: the MA-cross hold-out
+   card (37 trades, 14/23, 37.8%, PF 0.63, -4.88%, dd 7.98% — Gate 2.3 intact
+   for the third gate running); the con artist's train card (378 trades,
+   77.2%, PF 4.26, +361.67%, dd 1.95%) and hold-out card (195 trades, 41.0%,
+   PF 0.69, -19.59%, dd 21.55%); the leak's hold-out card (203 trades, 57.6%,
+   PF 1.39, +21.61%); the walk-forward window tables for both exhibits
+   (con artist profitable in 1 of 6 with trade counts 40/29/35/25/34/32 and
+   SUM -21.40%; leak profitable in 6 of 6, biggest share 36.7%); the battery
+   verdicts (con artist NOT CERTIFIED on the PF and walk-forward bars; leak
+   passing every bar the review can recompute); and the alarm arithmetic
+   (con train 4.26 > 2 and 77.2 > 70 -> must fire, did; leak hold-out
+   1.39 < 2 and 57.6 < 70 -> cannot fire, did not). 17 of 17 checks match
+   the log. The silent alarm is arithmetic, not a bug.
+4. **The train-only claim exercised, not just read.** The review REBUILT the
+   con artist's lookup table from the vault's train slice alone, following
+   the documented recipe in its own code (no lab imports): the rebuild
+   produced exactly **1,687 memorised cells**, and **all 573 of the con
+   artist's committed trades (train + hold-out) trace back to a memorised
+   cell whose direction matches the trade**. The strategy is what the log
+   says it is: a train-only phone book.
+5. **A third fresh gate run, in a new process, after the commit:** exit 1,
+   66 OK lines, the SAME single failing check ("the too-good alarm fires on
+   the leak's hold-out card", PF 1.39 / win 57.6%). Diffed line by line
+   against the committed runs: every differing line is the git commit stamp
+   (ee09663 -> 0d633c5) — the provenance stamp doing its job, same
+   explanation as the Gate 2.4 checksum note. Every number identical. The
+   run wrote three more evidence CSVs, committed here — evidence is never
+   deleted.
+
+One honesty note from the review itself: the review script's final summary
+line printed a hardcoded "15/15" while actually running 17 checks — a typo in
+the reviewer's own scratch script, caught by counting the printed lines. The
+17 individual checks and their OK verdicts are what count.
+
+**Conclusion: Gate 2.5's record is accurate as written.** The Lab catches the
+overfit con artist decisively; the leak clears every numeric bar with no
+alarm; the failing check is real, reproducible, and correctly NOT tuned away.
+The blocker stands and the decision remains the Commander's: (1) mandatory
+code-review-before-testing as law in SHIP_LAWS.md (recommended minimum),
+(2) additionally a structural leak check in the Lab, or (3) rework Exhibit 2.
+Phase 3 stays shut until the Commander decides.
