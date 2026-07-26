@@ -343,6 +343,38 @@ CHECK_STATUS.bat updated to the new filenames. Gate: live local snapshot wrote
 **Next:** Commander rotates the key → Friday week-1 review (2026-07-26, on
 honest numbers) → Phase 2 the Lab, starting with the frozen vault backfill.
 
+## 2026-07-26 — WEEK-1 REVIEW (the 7-day observation verdict)
+
+**Machinery grade: A.** Seven days, two watchmen (laptop + cloud), 189 evidence
+rows, zero data losses. Every incident of the week (quoted-path scheduler bug,
+battery block, LF bat endings, two-writers conflicts, PyPI dropping pandas-ta)
+was found, fixed, and verified by fire. Catch-up-on-wake proven repeatedly.
+The ship runs itself.
+
+**Instruments verdict (80 graded claims, full week):** system 40.0% vs
+always-UP parrot 49.5% — the system did NOT beat the parrot in week 1.
+Market context: a round trip (BTC $64.5k → $66.3k → $64.4k). The EMA trend
+claims said UP near the top as lagging instruments must, and the falling
+half of the week graded them down (SOL worst at 29%, ETH best at 52%).
+MIXED honesty rose late-week (25 claims) as the instruments caught up.
+
+**The Commander's catch:** on Saturday ~10:00–14:00 UTC the system briefly
+BEAT the parrot (42.1% vs 41.1% — preserved in cloud_grader_report.txt
+history). The lead lasted hours and flipped back — recorded as the textbook
+demonstration of why a 1-point lead on a small sample is noise, not skill.
+
+**The learning (the founding lesson, now proven on our own fresh evidence):**
+trend DESCRIPTION is not trend PREDICTION. The weather station describes;
+it does not forecast. This is exactly why the Brief is a cockpit and not a
+signal source, and why signals must earn their place through the Lab and
+the sealed gauntlet. No instrument tuning done or permitted on this sample —
+"fixing" lagging EMAs to match one round-trip week is the overfitting trap.
+
+**Decisions:** observation period CLOSED. Snapshots + grading continue
+forever as background heartbeat. Next: TwelveData key rotation (still on
+the Commander's desk) → Phase 2 Step 2.1, the Frozen Vault, per
+EXECUTION_PLAN.md.
+
 ## 2026-07-21 — EXECUTION_PLAN.md: the step-by-step orders for Phases 2-8
 
 Commander's request: a plan so exact that any model (Opus, Sonnet) can follow

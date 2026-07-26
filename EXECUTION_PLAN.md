@@ -336,6 +336,8 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **Phase 2, Step 2.1 not yet started.** Before it: Commander
-rotates the TwelveData key. Friday 2026-07-26: week-1 review on honest
-grader-v2 numbers. Then Step 2.1, the Frozen Vault.
+→ We are at: **Phase 2, Step 2.1 (Frozen Vault) — READY TO START.**
+Week-1 review done 2026-07-26 (verdict in PROGRESS_LOG: machinery A;
+instruments 40.0% vs parrot 49.5% — description is not prediction;
+observation closed). Sole remaining pre-step: Commander rotates the
+TwelveData key (.env + GitHub secret). Next build session = Step 2.1.
