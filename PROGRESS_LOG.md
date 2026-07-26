@@ -1658,3 +1658,164 @@ build did meet on the way:
 
 **Step 3.2 was NOT started**, per the standing order, even though 3.1 finished
 early. One part, one gate, one commit.
+
+## 2026-07-26 — PLANNING SESSION FOR STEP 3.2 (Opus wearing Fable's hat) —
+## **A FALSE PREMISE FOUND AND KILLED BEFORE IT COST US ANYTHING**
+
+No code was built in this session. Orders for Step 3.2 were written, the
+ROADMAP was refreshed, and one belief this ship had been carrying since the
+execution plan was drafted was tested for the first time — and turned out to
+be wrong.
+
+### WHY THIS SESSION EXISTS
+
+Fable, who normally writes the orders and independently verifies the work,
+was unavailable. The Commander asked the Step 3.1 build session to fill the
+planning chair. **The builder and the planner are therefore the same mind,
+which is precisely the independence this ship normally relies on**, and that
+is recorded plainly rather than glossed over. What was done about it is in
+SESSION_ORDERS.md under "WHO CHECKS THE CHECKER": the gate is declared and
+committed BEFORE any code exists, a FRESH session builds to it, a THIRD fresh
+session reviews by recomputing from raw evidence, and **the Phase 6
+second-AI requirement is explicitly NOT waived.**
+
+### THE MISTAKE — MINE, MADE THE SAME MORNING, IN BOLD, THREE TIMES
+
+The Step 3.1 entry above, the EXECUTION_PLAN marker, and the Step 3.1 commit
+message all state — with emphasis — that Binance does not serve deep funding
+history, that funding recording to CSV must therefore begin the day Step 3.2
+ships, and that this was *"the single most time-sensitive obligation on the
+ship right now."*
+
+**Every word of that is false.**
+
+It came from EXECUTION_PLAN's Phase 6 Slot 2 line, which had carried the same
+claim since the plan was drafted. The Step 3.1 session read it, believed it,
+amplified it, and wrote it into three permanent records without once calling
+the endpoint. It cost nothing this time only because the next session happened
+to test it before building on it.
+
+**The structural lesson, which is worth more than the correction itself: a
+step's gate only tests the step's OWN data source.** Step 3.1's gate was
+thorough — 45 checks — and it verified alternative.me's schema against reality
+exactly as ordered. It had no reason to touch Binance, so a false claim about
+Binance rode through a passing gate untouched and picked up the authority of a
+"GATE PASSED" commit on the way. **Claims about a FUTURE step's data are the
+blind spot of a per-step gate**, and this ship now has one documented example.
+
+### WHAT WAS ACTUALLY MEASURED (2026-07-26, from the Commander's connection)
+
+Four endpoints probed directly, results recorded verbatim:
+
+    BINANCE /fapi/v1/premiumIndex   HTTP 200  lastFundingRate, nextFundingTime, markPrice
+    BINANCE /fapi/v1/fundingRate    HTTP 200  settled 8-hourly history, paginated
+    BYBIT   /v5/market/tickers      HTTP 200  reachable, funding present
+    OKX     /api/v5/public/funding-rate  DNS FAILURE — www.okx.com does not
+                                    resolve at all from this connection
+
+**Funding history depth — the claim that was wrong:**
+
+    limit=1000, no window          500 rows   2026-02-10 -> 2026-07-26
+    startTime=2020-01-01           1000 rows  2020-01-01 -> 2020-11-29
+    BTCUSDT earliest available     2019-09-10 08:00   (contract inception)
+    ETHUSDT earliest available     2019-11-27 08:00
+    SOLUSDT earliest available     2020-09-13 16:00
+
+Roughly **seven years of settled funding, free, keyless, paginated with
+`startTime` + `limit=1000`.** Nothing needs collecting. **Phase 6 Slot 2
+(funding-rate extreme fade) can be tested whenever we choose** — a real
+de-risking of Phase 6, arrived at by accident while checking a different
+thing.
+
+**Open interest depth — where the urgency actually lives:**
+
+    /futures/data/openInterestHist  period=4h limit=500
+      -> 180 rows only: 2026-06-26 16:00 -> 2026-07-26 12:00  (exactly 30 days)
+      -> startTime older than the window is REFUSED: code -1130,
+         "parameter 'startTime' is invalid"
+
+**Open interest is the one dataset that genuinely evaporates**, and Phase 3's
+instrument #5 (Whale Watch) names the funding+open-interest combination as its
+honest free footprint. The instinct behind the old instruction was sound; it
+was pointed at the wrong instrument.
+
+**And the detail that removes the panic:** because every read reaches back 30
+days, a recorder that runs even once a month loses nothing. This is a deadline
+measured in weeks, not an emergency — and it means the Commander's laptop is a
+sufficient recorder. The cloud watchman is not required, which conveniently
+sidesteps an unresolved risk: GitHub's runners are US-hosted and Binance
+geo-blocks US addresses, so a cloud-side funding/OI recorder might have
+collected nothing at all, silently, for weeks.
+
+### THE COMMANDER'S QUESTION: "WHAT SHOULD WE DO ABOUT THE FUNDING THING?"
+
+Answered as follows, and written into SESSION_ORDERS.md:
+
+1. **The source stays Binance.** It is reachable, it is free, it is what the
+   plan names, and it serves everything we need. No swap, no Bybit, no OKX
+   (which this connection cannot even resolve). Bybit is recorded as the
+   standing candidate ONLY if Binance ever refuses us, and switching is the
+   Commander's call, never a session's.
+2. **Step 3.2 builds the funding DISPLAY only. No recorder.** The reason is
+   now measured rather than assumed.
+3. **The open-interest recorder becomes its own step, 3.2b**, with a 30-day
+   backfill at birth and its own gate. It is NOT to be smuggled into 3.2.
+4. **One source, chosen once, never switched mid-history.** Funding rates
+   differ between exchanges; a dataset stitched from two of them is a dataset
+   that cannot be trusted. This matters more than which exchange wins.
+5. **The sign is the whole instrument.** Gate 3.2 check (b) exists solely to
+   prove that a positive rate is printed as longs paying shorts and not the
+   reverse. Getting it backwards would print the opposite of the truth every
+   morning, and no "a number appeared" check would ever catch it.
+
+### WHAT WAS CORRECTED, AND WHERE (nothing deleted, everything visible)
+
+- `EXECUTION_PLAN.md` Phase 6 Slot 2: the false clause **struck through, left
+  legible**, with the measured facts beside it. A plan that quietly edits its
+  own errors teaches the next session nothing.
+- `EXECUTION_PLAN.md` Phase 3 #2: note added redirecting the recording
+  obligation to open interest.
+- `EXECUTION_PLAN.md` marker: the false sentence from this morning quoted and
+  corrected in place.
+- `ROADMAP.md`: refreshed to Phase 3 state, Step 3.1 added to the parts table,
+  and a new **MEASURED data-source facts table** — every free source with the
+  depth it ACTUALLY serves and whether it must be recorded, so no future
+  session plans on a guess again.
+- The Step 3.1 log entry and its commit message are **left exactly as written,
+  wrong bits included.** They are history. This entry is the correction, and
+  the two are meant to be read together.
+
+### A CANDIDATE FOR LAW 8 — PROPOSED, **NOT ADOPTED**, THE COMMANDER DECIDES
+
+*"A claim about what a data source will or will not give us is not a fact
+until it has been called. Planning documents must mark which of their claims
+are measured and which are assumed, and no session may build on an assumed
+one without measuring it first."*
+
+That law would have caught this today. It is deliberately **not** written into
+SHIP_LAWS.md by this session: the law book has seven laws and each one was
+adopted by the Commander after a failure that earned it, not by a session that
+liked its own idea. Seven laws get read; twelve get skimmed. Recorded here as
+a candidate so the decision is his and the reasoning is not lost.
+
+### WHAT WAS DELIBERATELY NOT DONE
+
+- **No code was written.** Step 3.2 was not started; the orders exist so a
+  FRESH session builds to a gate it did not write.
+- **The open-interest recorder was not built**, despite being the genuinely
+  time-sensitive item. It is a step with a gate, not a footnote on another
+  step.
+- **SHIP_LAWS.md was not touched.** No session promotes its own idea to law.
+- **No file outside the four planning documents was changed.** No code, no
+  evidence, no vault.
+
+### STILL ON THE COMMANDER'S DESK (carried forward, unchanged)
+
+1. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2.
+2. **The risk-doctrine decision**: the 25% position cap means actual risk is
+   ~0.49% per trade, not the intended 1%. Must be settled BEFORE Phase 6,
+   never after seeing results.
+3. **Law 8 candidate** above — adopt, reject, or reshape.
+4. Vault CSVs carry no volume column (TwelveData serves none for these pairs).
+
+**Next: a fresh session builds Step 3.2 to the committed gate.**

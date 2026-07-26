@@ -156,6 +156,10 @@ each appearing as a new section on the Morning Brief.
 1. Fear & Greed index (alternative.me, free, no key).
 2. Funding rates display (Binance public API) — raw numbers + plain-words
    line ("longs are paying shorts 0.05%/8h — crowd is leaning long").
+   NOTE (2026-07-26): funding history needs NO recording — see the Slot 2
+   correction in Phase 6. The dataset that DOES expire is Binance OPEN
+   INTEREST (30-day window only), which instrument #5 below needs; it gets
+   its own step (3.2b) with a 30-day backfill at birth.
 3. News headlines (CryptoPanic free tier) — headlines ONLY, no sentiment
    score, no invented weights (the cut ghost stays cut).
 4. Event calendar (manual JSON file the Commander can edit + known recurring
@@ -204,8 +208,15 @@ snapshots+grades exist. The gauntlet uses the Lab; the Lab must be trusted.*
 
 THE THREE SEALED SLOTS (from README/THE PROMISE — no substitutions):
 - Slot 1: Turtle/Donchian breakout, daily(+weekly filter), regime-filtered.
-- Slot 2: Funding-rate extreme fade (needs funding history collected since
-  Phase 3/4 — start recording funding to CSV the day Phase 3.2 ships).
+- Slot 2: Funding-rate extreme fade. ~~(needs funding history collected since
+  Phase 3/4 — start recording funding to CSV the day Phase 3.2 ships)~~
+  **CORRECTED 2026-07-26 — the struck text was never true and was written from
+  assumption:** Binance serves settled funding history back to contract
+  inception, free and keyless (BTC 2019-09-10, ETH 2019-11-27, SOL 2020-09-13;
+  paginate `startTime` + `limit=1000`). **No collection is required and this
+  slot can be tested whenever we choose.** The struck words are left visible
+  rather than deleted so nobody re-derives the same wrong plan from a clean
+  page. Measured probe and full account in PROGRESS_LOG.md, 2026-07-26.
 - Slot 3: On-chain cycle thermometer (MVRV or similar free source; if no
   free source exists at build time, the slot may be re-specified ONCE by the
   Commander BEFORE testing begins, never after seeing any results).
@@ -337,8 +348,20 @@ answer, built into this plan:
 # CURRENT POSITION MARKER (update this line each session)
 
 → We are at: **PHASE 3 IN PROGRESS — Step 3.1 DONE 2026-07-26, GATE 3.1
-PASSED. Step 3.2 (Funding rates display, Binance public API) READY — funding
-recording to CSV starts the day 3.2 ships.**
+PASSED. Step 3.2 (Funding rates display, Binance public API) READY — orders
+written and committed, awaiting a fresh build session.**
+
+**CORRECTION, same day, before 3.2 was built:** this marker previously ended
+"funding recording to CSV starts the day 3.2 ships." **That was false** —
+inherited from the Slot 2 line above, repeated into the Step 3.1 log and
+commit message, and never tested by anyone until the 3.2 planning session
+probed the API. Binance serves ~7 years of settled funding on demand, so
+**funding needs no recording at all.** The instrument that genuinely expires
+is **open interest — a 30-day window, nothing older is served** — and it gets
+its own step, 3.2b. Because each read reaches back 30 days, a recorder running
+even monthly loses nothing: a deadline in weeks, not an emergency. Left here
+in full, mistake included, because a plan that quietly edits its own errors
+teaches the next session nothing.
 
 **Step 3.1 (Fear & Greed) DONE 2026-07-26, GATE 3.1 PASSED 45/45 on the first
 run.** `cockpit/fear_greed.py` (new) + 4 wiring lines in `cockpit/brief.py`
