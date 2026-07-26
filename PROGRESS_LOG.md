@@ -1012,3 +1012,17 @@ Phase 6.
 through the whole pipeline end to end and show the Lab exposes it (hold-out
 collapse, walk-forward inconsistency, Monte Carlo ruin). If the Lab certifies
 the bad strategy as good, Phase 2 is not done.
+
+### INDEPENDENT REVIEW OF GATE 2.4 (Fable, same day, before Step 2.5)
+
+Verified without trusting the session that built it: (1) the 2.4 commit
+touched ONLY the five new lab files, evidence CSVs, the log and the marker —
+zero lines changed in engine.py, validator.py, dummies.py, gate_2_3.py,
+config.py, risk/, regime/, data/, and the vault verifies INTACT; (2) the gate
+re-run fresh in a new process: 35/35, exit 0; (3) an independent script using
+NO lab code recomputed the whole walk-forward table from the raw per-trade CSV
+and the vault file alone — all six windows match the log to the cent, as do
+PF 0.63, net -4.88%, sum -4.94%, 14/23; (4) the reshuffle-invariance claim
+re-tested with different shuffles under a DIFFERENT seed: spread exactly 0.
+Step 2.4 stands. The review run wrote one more evidence CSV (-8), committed
+here — evidence is never deleted.
