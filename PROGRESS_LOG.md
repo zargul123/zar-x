@@ -1026,3 +1026,283 @@ PF 0.63, net -4.88%, sum -4.94%, 14/23; (4) the reshuffle-invariance claim
 re-tested with different shuffles under a DIFFERENT seed: spread exactly 0.
 Step 2.4 stands. The review run wrote one more evidence CSV (-8), committed
 here — evidence is never deleted.
+
+## 2026-07-26 — STEP 2.5: THE PHASE 2 EXIT GATE — GATE 2.5 **FAILED** (33/34)
+## The con artist was caught. The LEAK walked straight through. Phase 2 is NOT
+## declared complete. A decision is waiting for the Commander.
+
+`lab/gate_2_5.py` is built and run. It is the only new file; engine.py,
+validator.py, dummies.py, gate_2_3.py, gate_2_4.py, walk_forward.py,
+monte_carlo.py, regime_report.py and trade_stats.py were not touched by one
+line, and lab/vault/ was only read. The gate ran TWICE and produced
+byte-identical output both times apart from the evidence filenames, exit code
+1 both times, failing on the SAME single check.
+
+**Why this entry exists even though the gate failed.** The Commander's
+standing instruction, and Rule 6 of EXECUTION_PLAN.md: a blocker gets written
+into this log, not just spoken. A history that records only the runs that
+passed is a flattering history, and a flattering record is the exact disease
+this whole ship was built to refuse. What follows is the complete result —
+what was demonstrated, what failed, and what is now open.
+
+### THE DEFINITION OF "CERTIFIED AS GOOD", LOCKED BEFORE ANY RUN
+
+Written into the file as constants before a single number was measured — a
+copy of the Phase 6 gauntlet bars, so they cannot drift later:
+
+    hold-out profit factor after costs        >= 1.15
+    hold-out trades                           >= 30
+    walk-forward verdict                      == CONSISTENT
+      (>= 60% of windows profitable AND no window > 50% of the profit)
+    Monte Carlo 5th-percentile drawdown       <  30%
+
+CERTIFIED means all four. Phase 6 carries two FURTHER requirements this gate
+does not evaluate — "must beat buy-and-hold-with-1%-risk-sizing" and a second
+AI's review. Leaving them out makes the battery EASIER than the real gauntlet,
+which is the safe direction for an exam of this kind.
+
+### STEP 0 — NOTHING MOVED
+
+MACross(20,50), BTC-USD 4h, train_end 2025-10-01, re-run before anything else:
+**37 trades, 14/23, win rate 37.8%, PF 0.63, max drawdown 7.98%, net -4.88%.**
+Gate 2.3 reproduced exactly, for the second gate running. 0 look-ahead
+violations.
+
+### EXHIBIT 1 — THE CON ARTIST (SYNTHETIC, and labelled so everywhere)
+
+A strategy that breaks NO rule. It never sees a candle past train_end, never
+peeks at the future, obeys the signal contract exactly — and is still garbage,
+because it MEMORISED the training data. The table is keyed on candle FEATURES:
+hour-of-day (6 values on 4h) x day-of-week (7) x the up/down shape of the last
+6 candles (64) = **2,688 possible cells, 1,687 of them memorised as signals**.
+1,687 free parameters, every one fitted to the training data, not one of them
+justified by any idea about how a market works.
+
+**Train-only, enforced in code and printed.** The table is built from
+`df[df.index <= train_end]` and nothing else, and the forward walk that scores
+each training candle is bounded by the END of that slice — a trade unfinished
+at train_end is DROPPED, never followed one candle into the hold-out. Training
+slice 3,835 candles (3,815 scored, 20 dropped for having no ATR yet or no
+resolution before the training data ran out); hold-out 1,789 candles; not one
+candle shared.
+
+**The edge case, decided before coding.** It memorises RECURRING features,
+never TIMESTAMPS. A table keyed on "2024-03-15 08:00" would match nothing
+after train_end — zero hold-out trades and an exhibit proving nothing. Hours,
+weekdays and candle shapes come round again: **1,139 of the 1,789 hold-out
+candles (63.7%) matched a memorised cell**, so the collapse is visible in
+numbers rather than hidden behind an empty table. Had the hold-out still come
+in under 30 trades, that IS one of the locked bars and would have been
+reported as a failure, not tuned away.
+
+**No randomness at all.** No RNG, no seed, no sampling; ties broken by a fixed
+rule, never a coin. The table was built twice inside the gate and compared key
+by key — identical. The only randomness anywhere in this gate is the Monte
+Carlo's, seed **20260726**, printed in its own report.
+
+#### THE MEMORISATION DIAL, TURNED IN FRONT OF THE READER
+
+The con artist is allowed unlimited parameters ON TRAIN — that is its whole
+character. What it is never allowed is one candle past train_end. The stopping
+rule was written down first and is TRAIN-ONLY: *use the smallest pattern
+length whose TRAIN card trips BOTH halves of the standing too-good law.* The
+gate's code applies that rule itself, reading train PF and train win rate; the
+hold-out column is printed for the reader but never consulted by the code.
+
+     pattern   cells  memorised  samples  TRAIN PF  TRAIN win%  HOLDOUT PF  HOLDOUT net%
+           3     336        237     11.0      1.72        59.0        0.86         -9.09
+           4     672        499      6.0      1.87        61.4        0.76        -15.62
+           5    1344       1012      3.0      2.73        69.0        0.82        -12.88
+           6    2688       1687      2.0      4.26        77.2        0.69        -19.59
+
+Read that table slowly, because it is overfitting drawn as a picture: every
+turn of the dial makes TRAIN better and HOLD-OUT worse, in lockstep, all the
+way down. A median of TWO training candles behind one cell is not a discovery
+about markets. It is a phone book.
+
+#### (a) and (b) — THE TWO CARDS, SIDE BY SIDE
+
+                             TRAIN (memorised)    HOLD-OUT (never seen)
+    trades                                 378                      195
+    wins / losses                     292 / 86                 80 / 115
+    win rate %                            77.2                     41.0
+    PROFIT FACTOR                         4.26                     0.69
+    avg win %                            +0.69                    +0.61
+    avg loss %                           -0.55                    -0.61
+    max drawdown %                        1.95                    21.55
+    NET RETURN %                       +361.67                   -19.59
+    gross return %                      510.66                    -6.98
+    cost drag (pts)                     148.99                    12.61
+    time in market                       97.1%                    91.3%
+    window              2024-01-01 -> 2025-10-01   2025-10-01 -> 2026-07-26
+
+The train card is spectacular, and **the standing too-good law fired on it**,
+on both halves at once:
+
+    !! TOO-GOOD ALARM — the con artist's TRAIN card
+    !! profit factor 4.26 > 2.0 and win rate 77.2% > 70.0%.
+    !! STANDING LAW: results this good are a bug or a leak until proven
+    !! otherwise. Do not celebrate. Go and hunt the leak ... and READ THE
+    !! STRATEGY'S CODE. This alarm is not a verdict, it is an order to go look.
+
+Then ten months it had never seen: PF 4.26 -> 0.69, +361.67% -> -19.59%,
+drawdown 1.95% -> 21.55%. Nothing was broken and no rule was bent. The
+strategy wrote down what had already happened and bet it would happen again in
+the same hour of the same weekday after the same shape of candles. On the data
+it copied from, that is a perfect prophecy. On ten months it had never seen,
+it is a phone book. **This is the entire disease, and it is why a train card
+is never evidence of anything.**
+
+#### (c) WALK-FORWARD ON THE CON ARTIST'S HOLD-OUT
+
+    #  from         to           candles  trades  win%     PF     SUM%     NET%   maxDD%
+    1  2025-10-01   2025-11-19      298      40   42.5    0.67    -4.70    -4.66    6.49
+    2  2025-11-19   2026-01-08      298      29   44.8    0.77    -2.57    -2.60    4.85
+    3  2026-01-08   2026-02-27      298      35   37.1    0.54    -7.08    -6.92    6.93
+    4  2026-02-27   2026-04-17      298      25   60.0    1.51    +3.49    +3.49    1.99
+    5  2026-04-17   2026-06-06      298      34   38.2    0.72    -2.94    -2.95    5.35
+    6  2026-06-06   2026-07-26      299      32   28.1    0.38    -7.61    -7.37    8.98
+    TOTAL (arithmetic sum of every trade's percent result): -21.40%
+
+Profitable in **1 of 6** windows (17%, needs 60%) -> FAIL. The concentration
+test correctly refused to run on a negative total, in the same words as Gate
+2.4. **VERDICT: INCONSISTENT.** All 195 trades landed in exactly one window.
+
+#### (d) MONTE CARLO (seed 20260726) AND THE REGIME REPORT
+
+195 trades reshuffled 10,000 times: gentlest ride 19.59%, median 21.43%, 90th
+percentile 23.76%, **5th-percentile ride 24.54%**, worst shuffle of all
+30.21%. Spread between the best and worst FINAL return: 0.000000 percentage
+points, as it must be. Run twice on the same seed — identical numbers.
+
+    regime      trades  share   win%     PF    avg win  avg loss    SUM%     NET%  maxDD%
+    Trending        76   39.0%   42.1   0.75    +0.64     -0.63    -6.93    -6.86    9.99
+    Chaotic         68   34.9%   29.4   0.42    +0.60     -0.59   -16.53   -15.34   15.94
+    Ranging         51   26.2%   54.9   1.15    +0.57     -0.60    +2.06    +1.98    4.70
+    ALL            195  100.0%   41.0   0.69    +0.61     -0.61   -21.40   -19.59   21.55
+
+The buckets add back up to the engine's own card. Both instruments ran without
+error, as the gate required.
+
+#### (e) THE LOCKED BATTERY — THE LAB'S ANSWER
+
+    bar                                       measured           required   verdict
+    hold-out profit factor after costs            0.69            >= 1.15   FAIL
+    hold-out trade count                           195               >= 30   PASS
+    walk-forward verdict                  INCONSISTENT  must be CONSISTENT   FAIL
+    Monte Carlo 5th-percentile drawdown         24.54%              < 30%   PASS
+    bars passed: 2 of 4
+
+**VERDICT: NOT CERTIFIED — REJECTED BY THE LAB.** The exam Phase 2 exists to
+pass, passed. A strategy must clear EVERY bar; clearing some is not a partial
+pass, it is a fail — "promising" is the word that kills accounts.
+
+The two bars it DID clear are recorded so that clearing them is never mistaken
+for a compliment: a big trade count only means it traded a lot, and a
+survivable Monte Carlo only means it lost SMOOTHLY. Losing smoothly is still
+losing. The battery is an AND, not a score.
+
+### EXHIBIT 2 — THE LEAK. **THIS IS THE BLOCKER.**
+
+`PerfectForesight` from lab/dummies.py — the Gate 2.3 leak whose author handed
+it the whole file, so it reads tomorrow's candle around the side of the
+engine's feed. Run through the same pipeline, on the same hold-out line.
+
+Its hold-out does not collapse, which was expected — a cheat cheats on the
+hold-out too. **What was NOT expected is everything else.**
+
+    bar                                       measured           required   verdict
+    hold-out profit factor after costs            1.39            >= 1.15   PASS
+    hold-out trade count                           203               >= 30   PASS
+    walk-forward verdict                    CONSISTENT  must be CONSISTENT   PASS
+    Monte Carlo 5th-percentile drawdown          8.01%              < 30%   PASS
+    bars passed: 4 of 4      VERDICT: CERTIFIED AS GOOD.
+
+Its walk-forward is not merely acceptable, it is exemplary: profitable in
+**6 of 6** windows (+7.53, +4.09, +1.46, +1.12, +5.21, +0.66), biggest single
+window 36.7% of the profit, comfortably under the 50% limit. Every lie
+detector we built looked at a strategy that reads the future and reported a
+well-behaved, consistent, survivable edge.
+
+**AND THE TOO-GOOD ALARM STAYED SILENT.**
+
+    .. too-good alarm SILENT — the leak's HOLD-OUT card
+    .. profit factor 1.39 (limit 2.0) and win rate 57.6% (limit 70.0%).
+    .. Nothing here is spectacular enough to trip the standing law.
+
+This is the one failing check in the gate, and it is the finding of Step 2.5.
+We expected to write down the limit as: *"the numbers miss a leak, but the
+too-good alarm catches it."* **That is not what was measured.** A strategy
+that reads tomorrow's candle walked this entire pipeline, cleared every locked
+Phase 6 bar, and set off no alarm anywhere.
+
+**Why it looks so ordinary** (recorded in Gate 2.3, confirmed again here): the
+cheat sees exactly ONE candle ahead, but the engine holds a trade until an ATR
+stop or target is hit, many candles later. So the peek buys the entry
+direction and nothing else; most of the exposure is blind and rule-based exits
+decide the outcome. A modest leak produces modest numbers. **That is precisely
+what makes it dangerous** — the too-good alarm is tuned for spectacular
+cheating, and a leak does not have to be spectacular to be a lie. It only has
+to be good enough to win a Phase 6 slot, and this one is.
+
+For the record: this same expectation was already proven wrong once, in Gate
+2.3, whose entry states that session's first run failed because it demanded a
+>70% win rate from this exhibit and got 57.6%. It has now failed twice. The
+number is not going to change by asking it again.
+
+### THE LIMIT, STATED IN PLAIN WORDS AND NEVER TO BE OVERSTATED
+
+**The Lab's NUMBERS catch OVERFITTING.** Exhibit 1 proved it end to end, and
+it is a real and valuable power: a strategy that memorised the past falls
+apart on candles it has not seen, and the hold-out, the walk-forward and the
+Monte Carlo all said so, in that order.
+
+**The Lab's NUMBERS CANNOT CATCH A LEAK.** A strategy fed the answers answers
+correctly everywhere — on train, on the hold-out, in every window. There is no
+arithmetic that separates "knew the future" from "was right".
+
+**And on the evidence of Exhibit 2, the too-good alarm does not catch this one
+either.** So what stands between a leaking strategy and a Phase 6 certificate
+is ONE thing: **a human reading the strategy's code.** Not a formality, not a
+nice-to-have — the single point of failure, because neither the battery nor
+the alarm objected to this leak at any point. Nothing beyond that is claimed.
+
+### WHAT WAS DELIBERATELY *NOT* DONE
+
+- **The failing check was not "fixed".** Lowering the alarm until this exhibit
+  trips it would flag honest strategies too — a detector that fires on
+  everything catches nothing. Tuning a gate until it passes is the shortcut
+  the standing IF/THEN table forbids: gates outrank models.
+- **Phase 2 is NOT marked complete** and the marker does not say it is.
+- **Nothing was certified.** No strategy, real or synthetic, carries a pass.
+- **Phase 3 was not started.** The risk-doctrine open item (the 25% cap making
+  actual risk ~0.486% instead of 1%) stays parked for the Commander.
+- **No protected file was touched.** engine.py, validator.py, dummies.py,
+  gate_2_3.py, gate_2_4.py, walk_forward.py, monte_carlo.py, regime_report.py
+  and trade_stats.py — zero lines changed. Vault read-only.
+
+### REPRODUCIBILITY
+
+Gate run twice, back to back, in separate processes: output byte-identical
+except the evidence filenames (which never overwrite, Law 5), exit code 1 both
+times, the same single failing check. The per-trade CSVs of the two runs carry
+IDENTICAL SHA-256 checksums — con artist `a70a4560...`, leak `f361f91d...`.
+
+### THE DECISION THAT IS THE COMMANDER'S, NOT A SESSION'S
+
+By EXECUTION_PLAN's own wording, Step 2.5 asks whether the Lab catches a
+deliberately-bad strategy, and it does. What failed is the stricter condition
+the Commander set for this session: that the leak exhibit trip the alarm. The
+options, none of them taken here:
+
+1. **Accept the limit and make it law.** Write mandatory code-review-before-
+   testing into SHIP_LAWS.md as a hard gate before Phase 6, since on this
+   evidence it is the only defence against a leak. (Recommended minimum.)
+2. **Accept the limit and add a structural check** to the Lab — something that
+   inspects whether a strategy holds a reference to data outside the feed it
+   was handed, rather than trying to detect a leak from its results.
+3. **Treat Gate 2.5 as failed and rework Exhibit 2.**
+
+Fable is to be asked. Nothing further is built until the Commander decides.
+
+**Next:** blocked on that decision. Phase 3 does not start.
