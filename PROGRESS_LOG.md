@@ -2900,3 +2900,125 @@ is the seventh sabotage this session did not think of?"**
 
 **Next: R-008 â€” run this same exercise against `cockpit/fear_greed.py`. Then
 Step 3.2b, the open-interest recorder, whose 30-day window is still expiring.**
+
+---
+
+## 2026-07-26 â€” R-008: **THE FEAR & GREED KNIFE â€” 5 OF 6 SABOTAGES PASSED.**
+## **THE HOLE IS A CLASS. GATE 3.1-R DECLARED BEFORE ANY CODE EXISTS.**
+
+`cockpit/fear_greed.py` had never been attacked. It was built in `462e675` by a
+different session, so the session running this knife is a legitimate outside eye
+â€” **and it went looking specifically because the funding instrument, built the
+same way, failed the same test this morning.**
+
+### THE RESULT â€” worse than funding's
+
+    F1  _parse â€” value inverted (100 - value) ....... NOT CAUGHT
+    F2  _parse â€” label decoupled from value ......... NOT CAUGHT
+    F3  _age_words â€” every age called "yesterday" ... NOT CAUGHT
+    F4  _parse â€” date shifted three days forward .... NOT CAUGHT
+    F5  section_text â€” yesterday printed as today ... NOT CAUGHT
+    F6  offline path fabricates "50 â€” Neutral" ...... CAUGHT
+    control (untouched copy) ........................ PASSED, so the rig is valid
+
+**Funding leaked 4 of 6. Fear & Greed leaks 5 of 6.** The one that was caught
+was caught by the offline drill â€” the only check in the file that looks at the
+printed text at all.
+
+**F1 IS THE ONE THAT MATTERS.** With the value inverted, the smoke test printed:
+
+    âœ“ value 70 is within 0-100
+    âœ“ classification present: 'Fear'
+    Fear & Greed : 70 â€” Fear   (yesterday 74 Â· a week ago 71)
+
+**70 labelled "Fear" is a contradiction on the face of the line** â€” 70 is Greed
+territory â€” and every check passed. **Extreme Fear would print as Greed and the
+gate would applaud.** This is the same defect as funding's sign flip: the crowd's
+mood shown as its exact opposite.
+
+**F2 is the same wound from the other side:** the number and the words beside it
+were made to disagree, and "classification present" â€” which only asks whether
+the label is a non-empty string â€” waved it through.
+
+### WHY IT LEAKED: THE IDENTICAL CAUSE
+
+Every check in the file interrogates the **parse**: is the number in range, is
+the label non-empty, did eight rows arrive. **Not one check compares the printed
+sentence to the source.** The instrument is free to render correctly parsed data
+into any sentence at all.
+
+**This is now measured twice on two independently built instruments.** It is not
+a bug either author made; **it is the shape of test this ship has been writing.**
+
+### MISTAKE, RECORDED (Law 1)
+
+The F6 probe's first anchor was written with escaped unicode (`\U0001f50c` as
+literal text instead of the emoji) and matched nothing. **The runner reported it
+as SKIPPED rather than silently scoring it as a pass** â€” which is the only reason
+it was noticed. It was re-run with a correct anchor and F6 was CAUGHT. Also: on
+Windows `fng_F6.py` and `fng_f6.py` are the same file, so the re-run script
+overwrote itself. **Scratchpad only; the repo was never touched and `git status`
+confirmed it.**
+
+---
+
+## GATE 3.1-R â€” DECLARED HERE, BEFORE THE REPAIR EXISTS (Law 4)
+
+**This entry is committed ALONE with no `.py` file in it.** Third use of the
+pattern; it has survived an audit every time.
+
+### WHAT MAY BE CHANGED
+
+**ONLY the `__main__` block of `cockpit/fear_greed.py`.** `_get`, `_parse`,
+`_age_words`, `_context_words`, `section_text`, `HEADER`, `OFFLINE_WORDS` and
+every constant are **NOT modified.** What the pilot reads must come out
+unchanged, and check (a) proves it with diff hunk line numbers.
+
+### THE EDGE CASE, DEFINED BEFORE CODING
+
+Funding needed a before/after tolerance because rates drift continuously.
+**alternative.me serves ONE reading per day and it does not drift, so that
+tolerance is NOT copied in.** A tolerance that exists for no reason is a hole
+with a comment on it.
+
+**The one real boundary is the UTC day rolling over mid-run.** Handling, fixed
+now: the test takes ONE raw snapshot and compares strictly. **On a mismatch it
+re-fetches once and checks whether the newest date CHANGED.** If it did, that is
+a rollover, it is stated in the output and re-compared. If it did not, **it is a
+FAILURE and is reported as one.** The allowance is for the calendar, never for
+being wrong.
+
+### THE BAR
+
+(a) **NOTHING THE PILOT READS CHANGES.** All diff hunks at or after the
+    `if __name__ == '__main__':` line â€” **printed, not asserted.**
+    `python cockpit\brief.py` still 3/3, both instruments, ONE deck header.
+
+(b) **THE PRINTED SENTENCE IS VERIFIED AGAINST THE SOURCE**, using the test's
+    own arithmetic on a raw fetch. **No helper of the instrument is called to
+    judge the instrument.** Four things checked, each catching a named leak:
+      - the VALUE equals the newest raw `value`                      (kills F1)
+      - the LABEL equals that same row's raw `value_classification`  (kills F2)
+      - the DATE equals that row's raw timestamp rendered UTC        (kills F4)
+      - the headline row IS the newest row, not the second           (kills F5)
+
+(c) **THE CONTEXT POINTS ARE VERIFIED, AGES INCLUDED** â€” each comparison point's
+    value AND its age words re-derived independently from the raw timestamps
+    (kills F3). **An age word is a factual claim about the data and gets
+    checked like one.**
+
+(d) **THE SABOTAGE DRILL IS PERMANENT.** All six above are applied in memory on
+    every run, each required to be CAUGHT, originals restored and the
+    restoration verified. **If any escapes, the run FAILS and exits non-zero.**
+
+(e) Everything the old smoke test did, it still does â€” live section, the
+    0â€“100 range check, the offline drill degrading to exactly two lines with
+    the header intact, exit 0.
+
+(f) **NO new file, NO new dependency, NO extra call from the Brief's path.**
+
+**PASS = every check green including all six sabotages CAUGHT. Anything less is
+a FAIL and is not committed as a pass.** If a sabotage cannot be caught without
+changing production code, **STOP and report** â€” changing the instrument to make
+a test pass is how a ship gets a gate that fits the code instead of code that
+fits the gate.
