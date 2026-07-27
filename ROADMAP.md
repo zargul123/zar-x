@@ -50,10 +50,11 @@ User is a non-programmer; explain in plain words; he runs commands from gray box
    (scores past snapshots against what prices did next; also monthly review of user's
    logged trades). Gate: grader correctly scores ≥2 weeks of accumulated snapshots.
 3. **Context Deck** (cockpit) — 🔨 IN PROGRESS (EXECUTION_PLAN Phase 3, 2 of 5 done):
-   ✅ Fear & Greed (alternative.me, free) 2026-07-26 — **not yet audited for the
-   class of hole found in funding (R-008)** · ⚠️ funding rates display (Binance
-   USDⓈ-M public, free) 2026-07-26 — **REOPENED by the 2026-07-26 audit; prints
-   correctly, gate void** · ⏭️ **Gate 3.2 rebuilt FIRST, then Step 3.2b — the
+   ✅ Fear & Greed (alternative.me, free) — **audited 2026-07-26: leaked 5 of 6
+   sabotages, GATE 3.1-R rebuilt the same day, all six now caught every run** ·
+   ✅ funding rates display (Binance USDⓈ-M public, free) — **leaked 4 of 6,
+   GATE 3.2-R rebuilt, all six caught** · ⏭️ **a SEVENTH sabotage on each, by
+   someone who built neither (R-009, R-010), then Step 3.2b — the
    open-interest recorder (30-day window, backfill at birth), still the only
    dataset on this ship that expires and its deadline did not pause for the
    audit** · then news headlines (CryptoPanic free

@@ -329,7 +329,35 @@ so out loud, or the printed time is derived once rather than reconciled from
 three answers.
 
 ## R-008 — The 2026-07-26 audit's own blind spots (filed against itself)
-**STATUS: OPEN · P2 · flagged 2026-07-26 by the audit session, about itself**
+**STATUS: FAILED 2026-07-26 · P2 · flagged by the audit session about itself ·
+point 3 REVIEWED AND CONFIRMED the same day**
+
+### >>> VERDICT 2026-07-26 on point 3: **FAILED — the hole was real, and worse.**
+
+`cockpit/fear_greed.py` was put under the same knife (independent: it was built
+in `462e675` by a different session). **FIVE of six sabotages passed its smoke
+test.** Funding leaked 4 of 6; this leaked 5 of 6.
+
+    F1 value inverted · F2 label decoupled · F3 all ages "yesterday"
+    F4 date shifted 3 days · F5 yesterday printed as today ... ALL ESCAPED
+    F6 offline path fabricates a number ....................... caught
+    control (untouched) passed, so the rig was valid
+
+**F1 printed `70 — Fear`** — a contradiction on the face of the line, since 70
+is Greed territory — **and every check passed.** Same cause as funding: every
+check interrogated the parse, none compared the printed sentence to the source.
+
+**This confirms the defect is a CLASS, measured now on two independently built
+instruments.** It is not a mistake either author made; it is the shape of test
+this ship had been writing.
+
+**REMEDY SHIPPED the same day** (`GATE 3.1-R PASSED`, all six caught, production
+path untouched, every diff hunk ≥ line 113). **Points 1, 2 and 4 of R-008 remain
+unanswered and are carried into R-010.**
+
+**This item was filed by the session that then reviewed it. Marking it FAILED is
+not clearing it** — a session may never clear its own item, and nothing here is
+cleared.
 
 **What to review.** The audit that failed R-001 and R-002, on the same standard
 it applied to them.
@@ -383,6 +411,40 @@ least one NEW sabotage and finds it caught — or finds it escapes and says so.
 
 **Failed looks like.** A seventh lie walks through, in which case the gate is
 still shaped around its author's imagination rather than around the truth.
+
+## R-010 — Gate 3.1-R was also written by the session that found its fault
+**STATUS: OPEN · P1 · flagged 2026-07-26 by the session that built the repair**
+
+**What to review.** `cockpit/fear_greed.py`'s rebuilt smoke test: the
+printed-sentence check and the permanent six-sabotage drill.
+
+**Why it needs an outside eye.** **Identical structure to R-009, one instrument
+over.** The session that ran the knife wrote the patch and graded it. **Twelve
+sabotages now exist across the two instruments and all twelve were invented by
+the sessions that then defended against them.** A gate built from a known list
+of attacks is strongest exactly where it has already been attacked.
+
+**Evidence.** Gate declaration `b6bfdb7` (no `.py` in it, on purpose). The
+`PROGRESS_LOG.md` entries *"THE FEAR & GREED KNIFE"* and *"GATE 3.1-R PASSED"*.
+
+**Reproduce.** `python cockpit\fear_greed.py` — section 3 breaks the file six
+ways live and must catch all six. Then **write a seventh of your own.**
+
+**A clean verdict looks like.** A reviewer who did not build it invents at least
+one NEW sabotage and finds it caught — or finds it escapes and says so. **"The
+six pass" is not a clean verdict; it is the claim under review.**
+
+**Failed looks like.** A seventh lie walks through, in which case the gate is
+still shaped around its author's imagination.
+
+**Two specific doubts its author could not settle**, offered as starting points
+rather than as the assignment: **(1)** the value/label check is a substring
+match on the assembled line, so a sentence that contains the right pair AND
+extra rubbish would still pass; **(2)** nothing verifies the fixed words
+*"crowd-mood gauge from alternative.me — information, not a signal"*, so the
+INFORMATION-not-a-signal disclaimer could be edited or deleted and no check
+would notice. **The same gap exists in `cockpit/funding.py` for its
+"positive = longs pay shorts" line, and neither was closed today.**
 
 ---
 

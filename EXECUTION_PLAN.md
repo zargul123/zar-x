@@ -347,7 +347,35 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **PHASE 3 — THE INSPECTOR IS FIXED. GATE 3.2-R PASSED 2026-07-26
+→ We are at: **PHASE 3 — BOTH CONTEXT DECK INSTRUMENTS NOW BREAK THEMSELVES ON
+EVERY RUN. Twelve sabotages, twelve caught — and NINE of the twelve were walking
+through green gates this morning.** Gate 3.2-R (funding) PASSED, Gate 3.1-R
+(Fear & Greed) PASSED. R-008 confirmed the defect is a CLASS, measured on two
+independently built instruments: every check interrogated the parse, none
+compared the printed sentence to the source. Fear & Greed leaked **5 of 6** —
+`70 — Fear` printed as a contradiction on its own face while every check passed.
+**Both repairs touched ONLY the `__main__` block of their file** (funding: every
+diff hunk ≥ line 160; Fear & Greed: ≥ line 113), so both production paths are
+byte-identical and what the Brief prints cannot have changed. Verified: Brief
+3/3, both instruments, one deck header, vault INTACT 6/6.
+
+**NOTHING IS CERTIFIED. R-001, R-002, R-004 and R-008 are FAILED; R-009 and
+R-010 are OPEN.** Every one of the twelve sabotages was invented by the session
+that then defended against it. **NEXT SESSION, IN ORDER: (1) a SEVENTH sabotage
+against each instrument, by someone who built neither — that is R-009 and R-010,
+and it is what unblocks R-001; (2) Step 3.2b, the open-interest recorder, whose
+orders and Gate 3.2b are written and measured in SESSION_ORDERS.md and whose
+30-day window is still expiring.**
+
+**KNOWN GAP, NEITHER INSTRUMENT COVERS IT:** nothing checks the fixed
+disclaimer text — *"information, not a signal"*, *"positive = longs pay
+shorts"*. Both could be edited or deleted and no gate would notice. Filed in
+R-010.
+
+---
+
+**EARLIER TODAY, KEPT FOR THE RECORD:** **THE INSPECTOR WAS FIXED. GATE 3.2-R
+PASSED 2026-07-26
 (21 checks in the program + 4 verified in the shell), and ALL SIX deliberate
 sabotages are now CAUGHT — including the four that walked through the old gate
 the same morning. The repair touched ONLY the `__main__` block of

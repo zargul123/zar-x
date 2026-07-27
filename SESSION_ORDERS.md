@@ -1,10 +1,20 @@
-# ZAR X PHASE 3 — THE SEVENTH SABOTAGE, THEN THE FEAR & GREED KNIFE, THEN STEP 3.2b (a gate is strongest where it has already been attacked; find where it has not)
+# ZAR X PHASE 3 — TWO SEVENTH SABOTAGES, THEN STEP 3.2b (a gate is strongest where it has already been attacked; your whole job is to attack where it has not)
 
-*Written 2026-07-26 by the session that audited Gate 3.2, failed it, rebuilt it,
-and then filed R-009 against its own repair. **Stated before anything else: the
-same mind found the fault, wrote the fix, and graded the fix.** PART 1 exists
-because that is not certification, and you are the first pair of eyes that did
-not build any of it.*
+*Written 2026-07-26 by the session that audited BOTH Context Deck instruments,
+failed both, rebuilt both, and then filed R-009 and R-010 against its own two
+repairs. **Stated before anything else: one mind found both faults, wrote both
+fixes, and graded both fixes.** Twelve sabotages now live in the code and all
+twelve were invented by the sessions that then defended against them. **PART 1
+exists because that is not certification, and you are the first pair of eyes
+that built none of it.***
+
+**WHAT HAPPENED THE DAY BEFORE YOU, IN FOUR LINES.** Gate 3.2 reported 48/48
+while four deliberate lies walked through it. It was voided and rebuilt. Then
+`cockpit/fear_greed.py`, built by a different session and never attacked, was
+put under the same knife and leaked **five of six** — printing `70 — Fear`, a
+contradiction on its own face, while every check passed. **The defect is a
+CLASS, measured on two independently built instruments: every check
+interrogated the parse; none compared the printed sentence to the source.**
 
 Read these files in `C:\Users\hp\Downloads\zargul trader\zar-x` before doing
 anything:
@@ -26,9 +36,9 @@ anything:
 6. `ROADMAP.md` — what exists and works, and the **MEASURED data-source facts
    table**. Part 2 depends on it. If anything you measure disagrees with it,
    **your measurement wins and you write the correction down.**
-7. `REVIEW_QUEUE.md` — **R-009 and R-008 are your PART 1 worklist.** R-001 may
-   also be settled by you (you did not build the repair). **R-006 may NEVER be
-   cleared by you or any in-house session.**
+7. `REVIEW_QUEUE.md` — **R-009 and R-010 are your PART 1 worklist.** R-001 and
+   R-008 may also be settled by you, since you built none of it. **R-006 may
+   NEVER be cleared by you or any in-house session.**
 
 **A NOTE ON `PROGRESS_LOG.md`: it is 162 KB and reading all of it will eat the
 budget you need for the actual work.** The last three entries are the assignment
@@ -54,13 +64,12 @@ before you change, commit after.
 
 **LOCK THE DEFINITION OF "PART 1 CLEARS" BEFORE YOU RUN ANYTHING** — write
 these four bars into your working notes first so they cannot soften as you go:
-(1) a SEVENTH sabotage, invented by you, is thrown at Gate 3.2-R and its result
-recorded either way; (2) `cockpit/fear_greed.py` is put under the same knife and
-its verdict recorded either way; (3) any weakness found in Fear & Greed is
-REPAIRED under a gate declared before the code exists; (4) `lab/` byte-identical,
-vault INTACT 6/6, the Brief still 3/3. **Four of four or it has not cleared, and
-"three of four with a good explanation" is the phrasing this ship exists to
-refuse.**
+(1) a SEVENTH sabotage, invented by you, is thrown at Gate 3.2-R (funding) and
+its result recorded either way; (2) the same against Gate 3.1-R (Fear & Greed);
+(3) any leak found is REPAIRED under a gate declared before the code exists;
+(4) `lab/` byte-identical, vault INTACT 6/6, the Brief still 3/3. **Four of four
+or it has not cleared, and "three of four with a good explanation" is the
+phrasing this ship exists to refuse.**
 
 ## 1.1 — EXHIBIT A: THE SEVENTH SABOTAGE (R-009)
 
@@ -98,56 +107,53 @@ and you say what it was. **Failed looks like:** it escaped — in which case Gat
 3.2-R is still shaped around its author's imagination, you say so plainly, and
 the repair is extended to cover the class you found.
 
-## 1.2 — THE FEAR & GREED KNIFE (R-008)
+## 1.2 — EXHIBIT B: THE SEVENTH SABOTAGE ON FEAR & GREED (R-010)
 
-**`cockpit/fear_greed.py` has never been attacked, and it is built the same way
-as the instrument that failed this morning:** a `_get`, a `_parse`, a formatter,
-and a smoke test that checks the PARSE rather than the printed sentence. **This
-session did not look. That omission is filed as R-008 and it is now yours.**
+Identical exercise, one instrument over. `python cockpit\fear_greed.py` breaks
+itself six ways and catches all six. **Same author, same blind spot, same
+review.** Candidates — again, **find your own**:
 
-Run the same exercise. Scratch copy outside the repo, control first, then
-break it on purpose. Candidates — again, find your own:
+    - keep the right value and label but append rubbish to the line
+    - break `_parse`'s 0-100 range guard so an impossible reading prints
+    - make the source's `metadata.error` field be ignored
+    - reorder the readings so the "week ago" point is actually two days old
+    - make a partial response (fewer than 8 rows) print as if complete
 
-    - flip the value (print 100 - value, so Extreme Fear reads as Extreme Greed)
-    - mismatch the number and its label (26 printed beside "Greed")
-    - break `_age_words` so "a week ago" is attached to yesterday's reading
-    - break the date so a stale reading prints as today's
-    - break `_context_words` index selection so the comparison points are wrong
+**TWO DOUBTS ITS AUTHOR COULD NOT SETTLE, handed to you as starting points and
+NOT as the assignment:**
 
-**EDGE CASE, DEFINED BEFORE CODING:** alternative.me serves ONE reading per day.
-Unlike funding, **the value will NOT drift between two fetches within a run**,
-so the before/after tolerance funding needed is unnecessary here — **do not copy
-it in by reflex.** A tolerance that exists for no reason is a hole with a
-comment on it. If you find the value CAN change mid-run, that is a measurement
-that beats this paragraph and you write the correction down.
+1. **The value/label check is a SUBSTRING match** on the assembled line. A
+   sentence containing the right pair **plus extra rubbish** would still pass.
+2. **NOTHING VERIFIES THE FIXED DISCLAIMER TEXT.** *"crowd-mood gauge from
+   alternative.me — information, not a signal"* could be edited or deleted and
+   **no check on this ship would notice. The same gap exists in
+   `cockpit/funding.py` for "positive = longs pay shorts", and neither was
+   closed.** On a ship whose founding rule is INFORMATION NEVER A SIGNAL, an
+   unguarded disclaimer is not a cosmetic gap. **This is the most likely place
+   the seventh sabotage lands, on either instrument.**
 
-**IF THE SMOKE TEST CATCHES EVERYTHING YOU THROW: say so and clear R-008.**
+**IF BOTH GATES CATCH EVERYTHING YOU THROW: say so, and clear R-009 and R-010.**
 "Reviewed, found nothing" is a real result. **Do not manufacture a defect to
 justify the session.**
 
-## 1.3 — IF FEAR & GREED IS WEAK: STEP 3.1-R, UNDER A GATE DECLARED FIRST
+## 1.3 — IF EITHER GATE LEAKS: REPAIR UNDER A GATE DECLARED FIRST
 
-Only if 1.2 finds a real hole. **Copy the shape of Gate 3.2-R exactly — it is
-committed and it works:**
+Only if 1.1 or 1.2 finds a real hole. **The pattern is committed three times
+over and has survived audit each time — copy it exactly:**
 
-**DECLARE GATE 3.1-R IN `PROGRESS_LOG.md` AND COMMIT THAT ENTRY ALONE, WITH NO
+**DECLARE THE GATE IN `PROGRESS_LOG.md` AND COMMIT THAT ENTRY ALONE, WITH NO
 `.py` FILE IN THE COMMIT, BEFORE WRITING CODE.** Then `git show --stat` proves
-the bar preceded the work. This is the third time this pattern is used and it
-has survived an audit each time.
-
-**GATE 3.1-R — the bar, if you need it:**
+the bar preceded the work. Then:
 
 (a) **NOTHING THE PILOT READS CHANGES.** All edits confined to the `__main__`
     block — **prove it with the diff hunk line numbers, do not assert it.**
+    (`funding.py` `__main__` is line 160; `fear_greed.py` is line 113.)
     `python cockpit\brief.py` still 3/3, both instruments, ONE deck header.
-(b) **THE PRINTED SENTENCE IS VERIFIED**, using the test's own arithmetic
-    against a raw fetch. **The helper under test is never called to judge
-    itself.** The value, its label, and the age words are each checked.
-(c) **THE SABOTAGE DRILL IS PERMANENT** — every break you found in 1.2 is baked
-    into the smoke test, caught on every run, originals restored and the
-    restoration verified.
-(d) Everything the old smoke test did, it still does — live section, offline
-    drill degrading to two lines with the header intact, exit 0.
+(b) **THE PRINTED SENTENCE IS VERIFIED** using the test's own arithmetic against
+    a raw fetch. **The helper under test is never called to judge itself.**
+(c) **THE SABOTAGE DRILL IS PERMANENT** — your new break is added to the six,
+    caught on every run, originals restored and the restoration verified.
+(d) Everything the old smoke test did, it still does.
 (e) **NO new file, NO new dependency, NO extra call from the Brief's path.**
 
 **PASS = every check green including every sabotage CAUGHT. Anything less is a
@@ -160,9 +166,9 @@ actual output, and the verdict — **including if it is all clean.** A review th
 only appears in the log when it finds something teaches the next session that
 silence means safety.
 
-**`REVIEW_QUEUE.md`: you MAY clear R-008 and R-009 (you did not build them), and
-R-001 too if R-009 clears — the repair's independent review is exactly what
-R-001 has been waiting for.** Items you cannot settle stay OPEN with a note on
+**`REVIEW_QUEUE.md`: you MAY clear R-009 and R-010 (you built neither), and
+R-001 and R-008 too if those clear — the repairs' independent review is exactly
+what R-001 has been waiting for.** Items you cannot settle stay OPEN with a note on
 what is missing; **leaving something open is a legitimate recorded outcome.**
 **R-006 is not yours, ever. Never delete an item. Never edit a cleared verdict.**
 
@@ -295,7 +301,7 @@ mid-history.
 | IF | THEN |
 |---|---|
 | Your seventh sabotage ESCAPES Gate 3.2-R | Say so plainly, extend the drill to cover that class, and **R-001 and R-009 both stay open.** This is a success of the process, not a failure of the session. |
-| Fear & Greed catches everything you throw | **Clear R-008 and say "reviewed, found nothing".** Do not invent a defect to justify the session. |
+| BOTH gates catch everything you throw | **Clear R-009 and R-010 and say "reviewed, found nothing".** Do not invent a defect to justify the session. |
 | Binance answers HTTP 451 / restricted location | STOP. Do NOT swap exchanges. Write it up, tell the Commander — that swap is his call, never a session's. |
 | The schema or the 30-day window differs from the measured facts above | **The new measurement wins.** Record the real shape, adapt, write the correction down. |
 | A bogus symbol no longer returns `200 []` | Record it — and keep check (c) anyway. The recorder must refuse empty results however Binance signals them. |
