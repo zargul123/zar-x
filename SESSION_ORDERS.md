@@ -19,7 +19,12 @@ interrogated the parse; none compared the printed sentence to the source.**
 Read these files in `C:\Users\hp\Downloads\zargul trader\zar-x` before doing
 anything:
 
-0. **`README.md` FIRST — it carries THE PROMISE**, which Law 6 points at by
+0a. **`THE_PATTERN.md` — how a session runs, in plain words.** The three layers
+   (the gate · the sabotage drill · the independent attack), the two-job rhythm,
+   and the housekeeping that has already bitten this ship. **Not a law; if it and
+   `SHIP_LAWS.md` disagree, the laws win.** Read it first if you have never
+   worked on this ship.
+0. **`README.md` — it carries THE PROMISE**, which Law 6 points at by
    name: three sealed gauntlet slots and then the signals chapter closes. It is
    1.7 KB. **A session that has not read it does not know the rule the whole
    ship is built around**, and this list omitted it once already.

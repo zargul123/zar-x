@@ -7,6 +7,12 @@ DONE, Gates 3.1 passed 45/45 and 3.2 passed 48/48). Read with README.md
 (mission + THE PROMISE), SHIP_LAWS.md
 (now SEVEN laws — Law 7, the Leak Law, added 2026-07-26),
 EDGE_STACK_RESEARCH.md (why), PROGRESS_LOG.md (history).
+**THE_PATTERN.md is how a session runs** — the three layers (the gate declared
+first · the sabotage drill that lives in the code forever · the independent
+attack only a non-builder can perform), and the rhythm every session follows:
+**ATTACK what the last session built, THEN build the next thing.** It is the
+substitute for Fable and it says plainly where it is weaker.
+
 **REVIEW_QUEUE.md is the docket of everything this ship could NOT honestly
 certify itself** — the first file an independent reviewer (Fable, or any second
 AI) should open, kept short on purpose so it is actually read rather than
