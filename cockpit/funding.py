@@ -190,6 +190,10 @@ if __name__ == '__main__':
         'SOL-USD': 'SOLUSDT',
     }
 
+    # Imported here rather than at the top so every diff hunk stays inside
+    # `__main__` and the production path is provably untouched.
+    from itertools import zip_longest
+
     def _raw_snapshot():
         """Raw values fetched by the TEST, straight from Binance, passing
         through none of this file's helpers."""
@@ -208,6 +212,48 @@ if __name__ == '__main__':
     def _expected_hhmm(ms):
         """Likewise: `_utc_hhmm` is deliberately not called."""
         return datetime.fromtimestamp(ms / 1000, timezone.utc).strftime('%H:%M')
+
+    # =====================================================================
+    # GATE 3.2-R2, added 2026-07-27 after an independent session threw five
+    # NEW sabotages at Gate 3.2-R and FOUR walked through.
+    #
+    # The gate checked the DIGITS and never the WORDS. S7 flipped
+    # "positive = longs pay shorts" to its opposite — the reverse of how the
+    # market actually works — beside three perfectly correct numbers, and the
+    # gate printed PASSED. S8 appended a fabricated fourth asset that was
+    # never fetched from anywhere, and the gate printed PASSED.
+    #
+    # THE CAUSE: every check asked "is this expected string PRESENT?" None
+    # asked "is anything ELSE present?", and none checked the fixed words at
+    # all. So the gate now holds its OWN VERBATIM COPY of every fixed word and
+    # rebuilds the WHOLE printed block for an EXACT-EQUALITY comparison.
+    # Nothing can be appended to a string that must match exactly.
+    # =====================================================================
+
+    # The test's own copy of the wording. If it read these from the module it
+    # would follow the instrument into a corrupted sentence and confirm it —
+    # the same mistake `GATE_CONTRACTS` exists to prevent for the tickers.
+    GATE_LINE1_PREFIX = "  Funding (8h) : "
+    GATE_SEP = "  ·  "
+    GATE_WORDS_MECHANISM = "positive = longs pay shorts"
+    GATE_LINE2_HEAD = ("  (USDT perpetuals · positive = longs pay shorts · "
+                       "next settlement ")
+    GATE_LINE2_TAIL = " UTC"
+    GATE_LINE3_DISCLAIMER = "   — crowd positioning, information, not a signal)"
+
+    def _expected_block(snap):
+        """The ENTIRE block the Brief ought to print, assembled from raw by
+        this test's own arithmetic and its own wording. Compared for exact
+        equality, so an extra asset, a reversed sentence or a deleted
+        disclaimer all fail — none of which the old gate could see."""
+        parts = [f"{a.split('-')[0]} {_expected_pct(snap[a][0])}"
+                 for a in GATE_CONTRACTS]
+        stamp = _expected_hhmm(min(v[1] for v in snap.values()))
+        return "\n".join([
+            GATE_LINE1_PREFIX + GATE_SEP.join(parts),
+            GATE_LINE2_HEAD + stamp + GATE_LINE2_TAIL,
+            GATE_LINE3_DISCLAIMER,
+        ])
 
     def _core_checks(verbose=True):
         """The checks that guard the printed sentence — and, because they run
@@ -258,26 +304,131 @@ if __name__ == '__main__':
         say(f"   {'✓' if hit_t else '✗'} settlement time: expected "
             f"{shown_t} UTC → the printed line "
             f"{'carries it' if hit_t else 'DOES NOT CARRY IT'}")
-        return ok and hit_t
+        ok = ok and hit_t
 
-    # The six from the audit of 2026-07-26, kept by name so the fix stays
-    # legible. S5 shifts by a fixed hour rather than dropping the timezone:
-    # dropping it is a no-op on a machine already set to UTC, and a drill that
-    # only works on some machines is not a drill.
+        # --- GATE 3.2-R2 (c): THE FIXED WORDS, GUARDED BY NAME ------------
+        # Named separately from the block check below so a failure says WHICH
+        # sentence changed. These are the sentences that tell the pilot what
+        # the digits MEAN; a reversed meaning with correct numbers is the
+        # defect S7 exposed.
+        for words in (GATE_WORDS_MECHANISM,
+                      GATE_LINE3_DISCLAIMER.strip()):
+            hit_w = words in live
+            say(f"   {'✓' if hit_w else '✗'} fixed wording present verbatim: "
+                f"{words!r}")
+            ok = ok and hit_w
+
+        # --- GATE 3.2-R2 (b): THE WHOLE BLOCK, EXACT EQUALITY -------------
+        # The check that kills S8. "Contains" can never notice an ADDITION;
+        # equality can never miss one.
+        want_block = _expected_block(before)
+        block_ok = (live == want_block)
+        if not block_ok:
+            if after is None:
+                after = _raw_snapshot()
+            want_block = _expected_block(after)
+            block_ok = (live == want_block)
+        say(f"   {'✓' if block_ok else '✗'} the WHOLE printed block equals the "
+            f"block rebuilt from Binance raw — nothing added, nothing removed")
+        if not block_ok:
+            for i, (got, want) in enumerate(
+                    zip_longest(live.splitlines(), want_block.splitlines(),
+                                fillvalue=''), start=1):
+                if got != want:
+                    say(f"      line {i} printed : {got!r}")
+                    say(f"      line {i} expected: {want!r}")
+        return ok and block_ok
+
+    def _partial_checks(verbose=True):
+        """GATE 3.2-R2 (d): THE ROTATING PARTIAL-FAILURE DRILL.
+
+        The old drill always broke SOL, so it could only ever prove SOL. A
+        module that named the missing asset 'SOL' no matter which one failed
+        (sabotage S11) agreed with the drill and walked through. Each asset
+        now takes a turn as the bogus symbol and must be named BY ITS OWN
+        NAME, with the other two still printed."""
+        say = print if verbose else (lambda *a, **k: None)
+        ok = True
+        for broken in GATE_CONTRACTS:
+            short = broken.split('-')[0]
+            contracts = {a: ('NOTAREALSYMBOL' if a == broken else c)
+                         for a, c in GATE_CONTRACTS.items()}
+            out = section_text(contracts=contracts)
+            others = [x.split('-')[0] for x in GATE_CONTRACTS if x != broken]
+            hit = (f"[no data: {short}]" in out
+                   and all(f"{o} +" in out or f"{o} -" in out for o in others)
+                   and OFFLINE_WORDS not in out)
+            say(f"   {'✓' if hit else '✗'} {short} broken → named as "
+                f"'[no data: {short}]' and {' and '.join(others)} still "
+                f"printed")
+            ok = ok and hit
+        return ok
+
+    # S7-S11 corrupt the OUTPUT rather than editing the file, because that is
+    # what a drill running inside the file can do. The real proof that the
+    # repair works is the scratch rig, which edits the file for real — see the
+    # 2026-07-27 PROGRESS_LOG entry, Gate 3.2-R2 check (i).
+    _SECTION_TEXT_ORIGINAL = section_text
+
+    def _sab_reversed_meaning(*a, **k):
+        return _SECTION_TEXT_ORIGINAL(*a, **k).replace(
+            'positive = longs pay shorts', 'positive = shorts pay longs')
+
+    def _sab_phantom_asset(*a, **k):
+        lines = _SECTION_TEXT_ORIGINAL(*a, **k).splitlines()
+        lines[0] += "  ·  XRP +0.0100%"
+        return "\n".join(lines)
+
+    def _sab_disclaimer_deleted(*a, **k):
+        return _SECTION_TEXT_ORIGINAL(*a, **k).replace(
+            '   — crowd positioning, information, not a signal)',
+            '   — crowd positioning)')
+
+    def _sab_silent_drop(*a, **k):
+        return re.sub(r'\s*\[no data: [^\]]*\]', '',
+                      _SECTION_TEXT_ORIGINAL(*a, **k))
+
+    def _sab_always_sol(*a, **k):
+        return re.sub(r'\[no data: [^\]]*\]', '[no data: SOL]',
+                      _SECTION_TEXT_ORIGINAL(*a, **k))
+
+    # The six from the audit of 2026-07-26 and the five from the independent
+    # review of 2026-07-27, kept by name so the fix stays legible. S5 shifts by
+    # a fixed hour rather than dropping the timezone: dropping it is a no-op on
+    # a machine already set to UTC, and a drill that only works on some
+    # machines is not a drill.
+    #
+    # The last column is WHICH JUDGE decides. S10 and S11 corrupt only the
+    # partial-failure path, which the all-green core checks cannot see; judging
+    # them by the core checks would record two guaranteed escapes as if the
+    # gate were blind, and judging them by nothing at all is how S11 survived
+    # in the first place.
     _SABOTAGES = [
         ('S1', '_fmt_pct — sign flipped', 'ESCAPED', '_fmt_pct',
-         lambda rate: f"{-rate * 100:+.4f}%"),
+         lambda rate: f"{-rate * 100:+.4f}%", 'core'),
         ('S2', '_fmt_pct — x100 dropped', 'ESCAPED', '_fmt_pct',
-         lambda rate: f"{rate:+.4f}%"),
+         lambda rate: f"{rate:+.4f}%", 'core'),
         ('S3', '_parse_rate — sign flipped', 'caught', '_parse_rate',
-         lambda raw: -float(str(raw).strip())),
+         lambda raw: -float(str(raw).strip()), 'core'),
         ('S4', '_parse_rate — scaled x10', 'caught', '_parse_rate',
-         lambda raw: float(str(raw).strip()) * 10),
+         lambda raw: float(str(raw).strip()) * 10, 'core'),
         ('S5', '_utc_hhmm — shifted one hour', 'ESCAPED', '_utc_hhmm',
          lambda ms: datetime.fromtimestamp(ms / 1000 + 3600,
-                                           timezone.utc).strftime('%H:%M')),
+                                           timezone.utc).strftime('%H:%M'),
+         'core'),
         ('S6', 'CONTRACTS — tickers miswired', 'ESCAPED', 'CONTRACTS',
-         {'BTC-USD': 'SOLUSDT', 'ETH-USD': 'BTCUSDT', 'SOL-USD': 'ETHUSDT'}),
+         {'BTC-USD': 'SOLUSDT', 'ETH-USD': 'BTCUSDT', 'SOL-USD': 'ETHUSDT'},
+         'core'),
+        ('S7', 'the meaning REVERSED, digits intact', 'ESCAPED',
+         'section_text', _sab_reversed_meaning, 'core'),
+        ('S8', 'a phantom fourth asset appended', 'ESCAPED',
+         'section_text', _sab_phantom_asset, 'core'),
+        ('S9', 'the "not a signal" disclaimer deleted', 'ESCAPED',
+         'section_text', _sab_disclaimer_deleted, 'core'),
+        ('S10', 'a failed asset vanishes unnamed', 'caught',
+         'section_text', _sab_silent_drop, 'partial'),
+        ('S11', 'the missing asset always named SOL', 'ESCAPED',
+         'section_text', _sab_always_sol, 'partial'),
     ]
 
     def _sabotage_drill():
@@ -285,29 +436,32 @@ if __name__ == '__main__':
         time, and require the checks above to FAIL each time. Any sabotage
         that survives means the gate is decorative and the run must fail."""
         ok = True
-        for tag, words, old, attr, repl in _SABOTAGES:
+        for tag, words, old, attr, repl, judge in _SABOTAGES:
             original = globals()[attr]
             globals()[attr] = repl
             try:
-                survived = _core_checks(verbose=False)
+                survived = (_partial_checks(verbose=False) if judge == 'partial'
+                            else _core_checks(verbose=False))
             except Exception:
                 survived = False        # a crash is a catch: it did not pass
             finally:
                 globals()[attr] = original
             caught = not survived
-            print(f"   {'✓' if caught else '✗'} {tag}  {words:<32} "
+            print(f"   {'✓' if caught else '✗'} {tag:<4} {words:<38} "
                   f"[old gate: {old:<7}] → "
                   f"{'CAUGHT' if caught else 'ESCAPED AGAIN — GATE IS DECORATIVE'}")
             ok = ok and caught
-        restored = _core_checks(verbose=False)
+        restored = _core_checks(verbose=False) and _partial_checks(verbose=False)
         print(f"   {'✓' if restored else '✗'} every original restored — the "
               f"clean checks pass again afterwards")
         return ok and restored
 
     ok = True
-    print("GATE 3.2-R — the funding instrument's self-test, rebuilt 2026-07-26.")
-    print("Its predecessor reported 48/48 while four deliberate lies walked")
-    print("through it. This one breaks itself before it passes.")
+    print("GATE 3.2-R2 — the funding instrument's self-test, hardened 2026-07-27.")
+    print("Its first version reported 48/48 while four deliberate lies walked")
+    print("through it. Its second checked the digits and missed the WORDS: it")
+    print("printed 'positive = shorts pay longs' — the opposite of the truth —")
+    print("and passed. This one rebuilds the WHOLE block and compares it exactly.")
 
     print("\n1) LIVE BLOCK — what the Brief will print")
     live = section_text()
@@ -335,9 +489,10 @@ if __name__ == '__main__':
           "\n   helper of the instrument is used to judge the instrument.")
     ok = _core_checks(verbose=True) and ok
 
-    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.2-R e, f) — the file is"
-          "\n   broken on purpose six ways and each break MUST be caught."
-          "\n   Four of these six escaped the old gate on 2026-07-26.")
+    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.2-R e, f · 3.2-R2 f) — the"
+          "\n   file is broken on purpose ELEVEN ways and each break MUST be"
+          "\n   caught. Four of the first six escaped the gate of 2026-07-26;"
+          "\n   four of the last five escaped the gate of the day after.")
     ok = _sabotage_drill() and ok
 
     print("\n4) EXACT IDENTITY CHECK — the settled rate this file parses must"
@@ -360,16 +515,16 @@ if __name__ == '__main__':
             print(f"   ✗ {contract}: settled read failed: {type(e).__name__}: {e}")
             ok = False
 
-    print("\n5) PARTIAL-FAILURE DRILL (Gate 3.2 f) — one bogus symbol; the two"
-          "\n   that answer must print and the one that does not must be NAMED")
-    partial = section_text(contracts={'BTC-USD': 'BTCUSDT',
-                                      'ETH-USD': 'ETHUSDT',
-                                      'SOL-USD': 'NOTAREALSYMBOL'})
+    print("\n5) ROTATING PARTIAL-FAILURE DRILL (Gate 3.2 f · 3.2-R2 d) — EACH"
+          "\n   asset takes a turn as the bogus symbol. The old drill always"
+          "\n   broke SOL, so it could only ever prove SOL: a module naming"
+          "\n   every missing asset 'SOL' agreed with the drill and passed.")
     print()
-    print(partial)
-    partial_ok = ('no data: SOL' in partial and 'BTC ' in partial
-                  and 'ETH ' in partial and OFFLINE_WORDS not in partial)
-    print(f"   {'✓' if partial_ok else '✗'} two assets printed, the third named")
+    print(section_text(contracts={'BTC-USD': 'BTCUSDT',
+                                  'ETH-USD': 'ETHUSDT',
+                                  'SOL-USD': 'NOTAREALSYMBOL'}))
+    print()
+    partial_ok = _partial_checks(verbose=True)
     ok = ok and partial_ok
 
     print("\n6) OFFLINE DRILL — injected unreachable URL, internet untouched")
@@ -384,9 +539,11 @@ if __name__ == '__main__':
     ok = ok and drill_ok
 
     if ok:
-        print("\nGATE 3.2-R PASSED — the printed sentence was verified against "
-              "Binance\nraw, and all six deliberate sabotages were caught. "
-              "This test has\ndemonstrated, this run, that it is able to say no.")
+        print("\nGATE 3.2-R2 PASSED — the WHOLE printed block was rebuilt from "
+              "Binance\nraw and matched exactly, the fixed wording was checked "
+              "verbatim, every\nasset took a turn at failing, and all ELEVEN "
+              "deliberate sabotages were\ncaught. This test has demonstrated, "
+              "this run, that it is able to say no.")
     else:
-        print("\nGATE 3.2-R FAILED — see the ✗ lines above.")
+        print("\nGATE 3.2-R2 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)

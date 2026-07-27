@@ -137,10 +137,40 @@ if __name__ == '__main__':
     # untouched, so what the Brief prints cannot have changed.
     # =====================================================================
 
+    # =====================================================================
+    # GATE 3.1-R2, added 2026-07-27 after an independent session threw five
+    # NEW sabotages at Gate 3.1-R and THREE walked through.
+    #
+    # F7 turned the disclaimer into a recommendation — "buy when others are
+    # fearful" — on the instrument whose whole reason for existing is
+    # INFORMATION, NEVER A SIGNAL, and the gate passed. F8 appended
+    # ">> strong buy signal" to the reading line and the gate passed. F9
+    # credited the number to CNN Business, a source this ship has never
+    # called, and the gate passed.
+    #
+    # THE CAUSE, identical to funding's the same day: every check asked "is
+    # this expected string PRESENT?" — a substring test can never notice an
+    # ADDITION, and nothing checked the fixed words at all. So the gate now
+    # holds its OWN VERBATIM COPY of the wording and rebuilds the WHOLE block
+    # for an EXACT-EQUALITY comparison.
+    #
+    # AND ONE MORE, EARNED THE SAME DAY: this block used to read
+    # `HISTORY_LIMIT` from the module it is testing. Cutting that constant to
+    # 2 disarmed sabotage F3, which then escaped its own drill. The gate now
+    # holds its own copy and checks the module's against it — exactly what
+    # `GATE_CONTRACTS` does for funding's tickers.
+    # =====================================================================
+
+    GATE_LIMIT = 8          # the test's own copy; never read from the module
+    GATE_HEADER = "  CONTEXT DECK"
+    GATE_LINE2_PREFIX = "  Fear & Greed : "
+    GATE_LINE3_DISCLAIMER = ("  (crowd-mood gauge from alternative.me — "
+                             "information, not a signal)")
+
     def _raw_rows():
         """The source's own JSON, fetched by the TEST, passing through none
-        of this file's helpers."""
-        r = requests.get(FNG_URL, params={'limit': HISTORY_LIMIT},
+        of this file's helpers — and using the TEST'S OWN limit."""
+        r = requests.get(FNG_URL, params={'limit': GATE_LIMIT},
                          timeout=TIMEOUT)
         r.raise_for_status()
         return r.json()['data']
@@ -166,6 +196,19 @@ if __name__ == '__main__':
                 ctx.append(f"{words} {val}")
         return {'value': newest_val, 'label': newest_lab,
                 'date': str(newest_date), 'context': ctx}
+
+    def _expected_block(want):
+        """The ENTIRE block the Brief ought to print, assembled from raw by
+        this test's own arithmetic and its own wording. Compared for exact
+        equality, so appended rubbish, a corrupted disclaimer or a swapped
+        attribution all fail — none of which the old gate could see."""
+        ctx = f"   ({' · '.join(want['context'])})" if want['context'] else ""
+        return "\n".join([
+            GATE_HEADER,
+            f"{GATE_LINE2_PREFIX}{want['value']} — {want['label']}{ctx}"
+            f"   [reading of {want['date']} UTC]",
+            GATE_LINE3_DISCLAIMER,
+        ])
 
     def _core_checks(verbose=True):
         """The checks that guard the printed sentence — and the detector the
@@ -210,15 +253,50 @@ if __name__ == '__main__':
             say(f"   {'✓' if hit else '✗'} {words} → the printed line "
                 f"{'carries it' if hit else 'DOES NOT CARRY IT'}")
             ok = ok and hit
-        return ok
+
+        # --- GATE 3.1-R2 (e): THE TEST'S OWN LIMIT vs THE MODULE'S ---------
+        # Cutting HISTORY_LIMIT used to disarm the F3 detector silently.
+        limit_ok = (HISTORY_LIMIT == GATE_LIMIT)
+        say(f"   {'✓' if limit_ok else '✗'} the module's HISTORY_LIMIT "
+            f"({HISTORY_LIMIT}) equals the gate's own copy ({GATE_LIMIT})")
+        ok = ok and limit_ok
+
+        # --- GATE 3.1-R2 (c): THE FIXED WORDS, GUARDED BY NAME -------------
+        # Named separately from the block check so a failure says WHICH
+        # sentence changed. "information, not a signal" is the ship's founding
+        # rule printed on its own instrument; F7 rewrote it into advice and
+        # every check passed.
+        words_ok = GATE_LINE3_DISCLAIMER.strip() in live
+        say(f"   {'✓' if words_ok else '✗'} fixed wording present verbatim: "
+            f"{GATE_LINE3_DISCLAIMER.strip()!r}")
+        ok = ok and words_ok
+
+        # --- GATE 3.1-R2 (b): THE WHOLE BLOCK, EXACT EQUALITY --------------
+        # The check that kills F8. "Contains" can never notice an ADDITION.
+        want_block = _expected_block(want)
+        block_ok = (live == want_block)
+        say(f"   {'✓' if block_ok else '✗'} the WHOLE printed block equals the "
+            f"block rebuilt from the source — nothing added, nothing removed")
+        if not block_ok:
+            for i, (got, exp) in enumerate(
+                    zip_longest(live.splitlines(), want_block.splitlines(),
+                                fillvalue=''), start=1):
+                if got != exp:
+                    say(f"      line {i} printed : {got!r}")
+                    say(f"      line {i} expected: {exp!r}")
+        return ok and block_ok
 
     # Imported here rather than at the top so the diff stays inside __main__
     # and the production path is provably untouched.
     from datetime import timedelta
+    from itertools import zip_longest
 
-    # The sabotages that wrap `_parse` need a handle on the real one, captured
+    # The sabotages that wrap a real function need a handle on it, captured
     # before anything is swapped.
     _PARSE_ORIGINAL = _parse
+    _SECTION_TEXT_ORIGINAL = section_text
+    _CONTEXT_WORDS_ORIGINAL = _context_words
+    _GET_ORIGINAL = _get
 
     # The six from R-008, kept by name so the fix stays legible.
     _SABOTAGES = [
@@ -240,6 +318,35 @@ if __name__ == '__main__':
         ('F6', 'offline path fabricates a number', 'caught', 'section_text',
          lambda base_url=None, limit=None, timeout=None:
              f"{HEADER}\n  Fear & Greed : 50 — Neutral   [reading unavailable]"),
+        # F7-F11, from the independent review of 2026-07-27. Three of these
+        # five walked through Gate 3.1-R. They corrupt the OUTPUT rather than
+        # editing the file, because that is what a drill running inside the
+        # file can do; the proof the repair works is the scratch rig, which
+        # edits the file for real — Gate 3.1-R2 check (i).
+        ('F7', 'the disclaimer turned into ADVICE', 'ESCAPED', 'section_text',
+         lambda *a, **k: _SECTION_TEXT_ORIGINAL(*a, **k).replace(
+             'information, not a signal', 'buy when others are fearful')),
+        ('F8', 'rubbish appended to the reading line', 'ESCAPED',
+         'section_text',
+         lambda *a, **k: _SECTION_TEXT_ORIGINAL(*a, **k).replace(
+             ' UTC]', ' UTC]   >> strong buy signal')),
+        ('F9', 'credited to a source never called', 'ESCAPED', 'section_text',
+         lambda *a, **k: _SECTION_TEXT_ORIGINAL(*a, **k).replace(
+             'from alternative.me', 'from CNN Business')),
+        ('F10', 'the two context values swapped', 'caught', '_context_words',
+         lambda readings: _CONTEXT_WORDS_ORIGINAL(
+             [readings[0]]
+             + [dict(readings[7], date=readings[1]['date'])]
+             + readings[2:7]
+             + [dict(readings[1], date=readings[7]['date'])]
+             + readings[8:]) if len(readings) > 7
+             else _CONTEXT_WORDS_ORIGINAL(readings)),
+        # F11 forces the INSTRUMENT to fetch two days while the gate still
+        # fetches eight, so the week-ago context point silently disappears.
+        # Sabotaging the constant instead would move both and prove nothing —
+        # that is the trap the gate's own GATE_LIMIT now closes.
+        ('F11', 'a week of history silently lost', 'caught', '_get',
+         lambda base_url, limit, timeout: _GET_ORIGINAL(base_url, 2, timeout)),
     ]
 
     def _sabotage_drill():
@@ -264,7 +371,7 @@ if __name__ == '__main__':
             finally:
                 globals()[attr] = original
             caught = not survived
-            print(f"   {'✓' if caught else '✗'} {tag}  {words:<36} "
+            print(f"   {'✓' if caught else '✗'} {tag:<4} {words:<36} "
                   f"[old gate: {old:<7}] → "
                   f"{'CAUGHT' if caught else 'ESCAPED AGAIN — GATE IS DECORATIVE'}")
             ok = ok and caught
@@ -274,9 +381,11 @@ if __name__ == '__main__':
         return ok and restored
 
     ok = True
-    print("GATE 3.1-R — the Fear & Greed instrument's self-test, rebuilt")
-    print("2026-07-26 after five of six deliberate lies walked through its")
-    print("predecessor. This one breaks itself before it passes.")
+    print("GATE 3.1-R2 — the Fear & Greed instrument's self-test, hardened")
+    print("2026-07-27. Its first version let five of six deliberate lies")
+    print("through. Its second printed '>> strong buy signal' on the deck of")
+    print("an information-only ship and passed. This one rebuilds the WHOLE")
+    print("block and compares it exactly.")
 
     print("\n1) LIVE SECTION — what the Brief will print")
     try:
@@ -314,9 +423,10 @@ if __name__ == '__main__':
           "\n   number beside the wrong words is the defect F2 exposed.")
     ok = _core_checks(verbose=True) and ok
 
-    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.1-R d) — the file is broken"
-          "\n   on purpose six ways and each break MUST be caught. Five of"
-          "\n   these six escaped the old gate on 2026-07-26.")
+    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.1-R d · 3.1-R2 f) — the file"
+          "\n   is broken on purpose ELEVEN ways and each break MUST be"
+          "\n   caught. Five of the first six escaped the gate of 2026-07-26;"
+          "\n   three of the last five escaped the gate of the day after.")
     ok = _sabotage_drill() and ok
 
     print("\n4) OFFLINE DRILL — injected unreachable URL, internet untouched")
@@ -331,7 +441,12 @@ if __name__ == '__main__':
     ok = ok and drill_ok
 
     if ok:
-        print("\nSMOKE TEST PASSED — live reading and offline drill both behaved.")
+        print("\nGATE 3.1-R2 PASSED — the WHOLE printed block was rebuilt from "
+              "the\nsource and matched exactly, the disclaimer was checked "
+              "verbatim, the\ngate's own history limit was compared to the "
+              "module's, and all ELEVEN\ndeliberate sabotages were caught. "
+              "This test has demonstrated, this run,\nthat it is able to say "
+              "no.")
     else:
-        print("\nSMOKE TEST FAILED — see the ✗ lines above.")
+        print("\nGATE 3.1-R2 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)
