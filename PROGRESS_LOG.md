@@ -3879,3 +3879,68 @@ starting point was missing** — a session's error, not his. The working form:
 Verified before being handed over this time. **He does not need it — the monthly
 task runs it — but a command given to the Commander should work when he types
 it.**
+
+---
+
+## 2026-07-27 — **THE COMMANDER STOPPED A TENTH FILE, AND HE WAS RIGHT**
+
+**What happened.** He asked where a new session is told to start. This session
+began writing a new `START_HERE.md` to answer it. **He interrupted it before the
+file was created** and asked the better question: *"why are we not using the
+files we already have?"*
+
+**He was right and the file was never created.** The startup instructions
+already existed — in `SESSION_ORDERS.md`'s read list. **A tenth document
+explaining the nine would have been the exact clutter this ship is supposed to
+resist**, and it would have needed maintaining forever.
+
+**Recorded because it is a session being corrected by the Commander on a
+judgement call, and that is worth more in this log than another green tally.**
+
+### THE REAL DEFECT UNDERNEATH, WHICH HE ALSO NAMED
+
+**The instructions were scattered and REPEATED.** `THE_PATTERN.md` described the
+rhythm; `SESSION_ORDERS.md` repeated the run environment, the PowerShell
+encoding warning, the `git pull` rule and the whole closing ritual — **and the
+orders are rewritten from scratch every session.** So every permanent rule was
+being re-typed by every session, in a file designed to be thrown away.
+
+**That is how a rule quietly dies:** one session shortens it, the next drops it,
+and nobody notices because the file it lived in was disposable by design.
+
+### WHAT CHANGED — TWO FILES EDITED, ZERO CREATED
+
+**`THE_PATTERN.md` (10,015 → 16,785 chars) now carries everything permanent:**
+
+- **HOW A SESSION BEGINS.** The Commander says `ZAR X` and nothing else. He
+  names no file and repeats nothing. **If a session asks him what to do next, it
+  has not read its orders.** Includes the `cd` to the right folder — there is an
+  older `SAFE COPY OF LATEST ZARGUL 2` directory he often has open, and a
+  command run there fails; that already happened once, to him, from a command
+  this session handed over without the folder.
+- **THE NINE FILES.** What each is for, who may change it, and a lookup —
+  *"which file do I write THIS in?"* — so no session has to be told again.
+  **Explicitly: nothing else gets created, and a tenth file is almost always a
+  sign somebody did not read the nine.**
+- **THE LOOP CLOSES ITSELF.** Drawn as a loop: the Commander says `ZAR X` →
+  read the pattern and the orders → attack the last build → build the next →
+  closing ritual → **the next session starts at the top.** Every session ends by
+  writing the next session's job, **which is what makes this a loop rather than
+  a list.** Nobody has to restart it or explain it again.
+- Two housekeeping rules that had been living only in disposable files: the
+  **document-integrity scan** before the final commit, and **"SUCCESS from a
+  tool is not evidence that something works"** — earned by `schtasks` reporting
+  a successfully created task that could never run.
+
+**`SESSION_ORDERS.md` (25,269 → 23,579 chars) LOST the duplication.** The read
+list now names only the files specific to THIS job; the closing ritual is a
+pointer, not a copy. Verified afterwards: the PowerShell warning, the run
+environment and the closing ritual each now appear in **exactly one** file.
+
+### THE PRINCIPLE, SO THE NEXT SESSION DOES NOT UNDO IT
+
+**Permanent rules live in `THE_PATTERN.md`, which holds still. Disposable
+instructions live in `SESSION_ORDERS.md`, which is rewritten every session.**
+If you find yourself copying a rule from the pattern into the orders, **stop —
+you are moving a permanent rule into a file that gets deleted.** Point at it
+instead.

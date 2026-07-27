@@ -9,6 +9,78 @@ each was adopted by the Commander after a failure that earned it. This file only
 describes the practice that grew out of those laws. **If this file and
 `SHIP_LAWS.md` ever disagree, the laws win.**
 
+**THIS FILE EXISTS SO NOTHING HERE EVER HAS TO BE EXPLAINED AGAIN.** The
+Commander should never have to tell a session how the ship works, which file to
+read, or where to write something down. **If he finds himself explaining any of
+that, this file has failed and fixing it is that session's first job.**
+
+---
+
+# HOW A SESSION BEGINS
+
+**The Commander says: `ZAR X`.** That is the whole thing. He names no file,
+remembers no command, and repeats nothing from last time.
+
+**Everything after that is the session's job:**
+
+1. `cd "C:\Users\hp\Downloads\zargul trader\zar-x"` — **note the folder.** There
+   is an older directory called `SAFE COPY OF LATEST ZARGUL 2` and the Commander
+   often has it open. The live ship is `zar-x`. A command run in the wrong one
+   fails with *"can't open file"* — this has already happened.
+2. **`git pull` FIRST.** A laptop task and a cloud watchman both push here while
+   nobody is looking. Skipping the pull is how two sessions overwrite each other.
+3. **Read this file, then `SESSION_ORDERS.md`.** The orders open with a
+   plain-words brief and carry their own read list for anything else needed.
+4. **Prove the ship is alive before changing anything** — every gate green, the
+   Brief `3/3`, the vault `INTACT`. **If something is already broken when you
+   arrive, that is your session.** Say so and fix that instead.
+5. Then do what the orders say. **They outrank anything you think of**, because
+   they were written deliberately by someone who had just finished the work you
+   are about to check. Disagree out loud to the Commander — never quietly.
+
+**If a session asks the Commander what to do next, it has not read its orders.**
+
+---
+
+# THE NINE FILES — what each one is for, and where things get written
+
+**Nothing else gets created.** If you want to write something down, it belongs in
+one of these. **A tenth file is almost always a sign you did not read the nine.**
+
+## The four that hold still
+
+| File | What it is | Who may change it |
+|---|---|---|
+| `README.md` | **THE PROMISE** — three sealed signal slots, then the signals chapter closes. The rule the whole ship is built around. | Nobody |
+| `SHIP_LAWS.md` | **The seven laws.** Each adopted after a failure earned it. | **The Commander only.** A session may propose; it may never promote its own idea to law. |
+| `THE_PATTERN.md` | **This file. How a session runs.** | A session, **only** on a genuinely new lesson |
+| `EDGE_STACK_RESEARCH.md` | Why the ship is designed this way. History. | Nobody |
+
+## The five that every session updates
+
+| File | The one question it answers | What goes in it |
+|---|---|---|
+| `PROGRESS_LOG.md` | **"What happened?"** | Every action, the real numbers, the real output, and **every mistake as plainly as every success.** Append only — never edit an old entry. It is the ship's memory and outranks anyone's recollection. |
+| `REVIEW_QUEUE.md` | **"What can't we trust yet?"** | Every doubt, numbered `R-000`, `R-001`… Filed by the session that has the doubt — **including doubts about its own work.** Never deleted, never cleared by its own author. |
+| `EXECUTION_PLAN.md` | **"Where is the ship right now?"** | The CURRENT POSITION MARKER — the truth including what is broken or unproven — plus the phases and their gates. |
+| `ROADMAP.md` | **"What exists and works?"** | What shipped, and the **MEASURED data-source facts** table. |
+| `SESSION_ORDERS.md` | **"What does the next session do?"** | Rewritten in full each time, opening with a plain-words brief. |
+
+## Which file do I write THIS in?
+
+    something I did, or got wrong ............ PROGRESS_LOG.md
+    something I am not sure about ............ REVIEW_QUEUE.md  (as R-0NN)
+    where the ship now stands ................ EXECUTION_PLAN.md
+    a part that now works .................... ROADMAP.md
+    a job for whoever comes next ............. SESSION_ORDERS.md
+    a decision only the Commander can make ... SESSION_ORDERS.md, on his desk
+    a new rule for how sessions work ......... nowhere yet — propose it to him
+
+**The difference between the queue and the orders, because it is the one that
+matters:** `REVIEW_QUEUE.md` is the ship's **conscience** — a doubt goes in and
+does not come out until someone who did not create it says so. `SESSION_ORDERS.md`
+is the **instruction** — it is thrown away and rewritten every session.
+
 ---
 
 # WHY THIS EXISTS: FABLE IS GONE
@@ -132,18 +204,55 @@ memory of you.** If a stranger could not act on it, it is not finished.
 
 **6. Commit. Push.**
 
-**7. `SESSION_ORDERS.md` OPENS WITH THE STORY, IN PLAIN WORDS, AND THE COMMANDER
-GETS THE SAME.** Added 2026-07-27 **at the Commander's explicit instruction**,
-not because a session liked the idea. Before the bars and the commands, the
-orders carry a plain-English brief: where the ship is, what happened just
-before, what this session must do, and why. **Then report to him the same way** —
-what you tried, what broke, what held, what you got wrong, and what decision is
-his.
+**7. REPORT TO THE COMMANDER IN PLAIN WORDS.** What you tried, what broke, what
+held, **what you got wrong**, and what decision is his. Added 2026-07-27 **at his
+explicit instruction**, not because a session liked the idea.
 
 **The reason is not politeness. He is not a programmer, and he is the only
 person who can overrule a session.** An instruction he cannot read is an
 instruction he cannot refuse, and a ship where the Commander cannot follow the
-argument is a ship being steered by whoever writes the densest document.
+argument is a ship being steered by whoever writes the densest document. **The
+orders you write in step 5 open the same way, for the same reason.**
+
+---
+
+# THE LOOP CLOSES ITSELF — THIS IS THE WHOLE SYSTEM, AND IT REPEATS FOREVER
+
+    the Commander says "ZAR X"
+        │
+        ▼
+    read THE_PATTERN.md  ──▶  read SESSION_ORDERS.md  ──▶  check the ship is alive
+        │
+        ▼
+    PART 1 — ATTACK what the last session built
+        │           found something? ──▶ fix it under a gate declared first, STOP
+        ▼           found nothing?   ──▶ say so, clear the item, carry on
+    PART 2 — BUILD the next thing (gate first, sabotage drill from birth)
+        │
+        ▼
+    THE CLOSING RITUAL — log · queue · plan · roadmap · ORDERS · push · report
+        │
+        ▼
+    the next session says "ZAR X" and starts at the top ─────────────────┐
+        ▲                                                                │
+        └────────────────────────────────────────────────────────────────┘
+
+**EVERY SESSION ENDS BY WRITING THE NEXT SESSION'S JOB. That is what makes this
+a loop instead of a list.** Whatever you build becomes what the next session is
+ordered to attack, and whatever you fix becomes an item in `REVIEW_QUEUE.md`
+that only a later session may clear. **Then that session builds something, files
+its own doubts, writes the next orders — and the same thing happens to it.**
+
+**Nobody has to restart this, remind anyone of it, or explain it again.** It
+runs as long as each session performs the closing ritual honestly. **A session
+that skips the ritual does not just fail to record its work — it breaks the
+loop**, because the session after it arrives to no orders, no verdicts, and a
+position marker describing a ship that no longer exists.
+
+**THE THREE THINGS THAT KEEP THE LOOP HONEST RATHER THAN JUST TURNING:**
+a session may never clear its own work · a gate is declared before the thing it
+measures exists · every part keeps breaking itself on every run, forever.
+**Remove any one and the loop still spins, but it stops proving anything.**
 
 ## `THE_PATTERN.md` IS THE EXCEPTION — DO NOT REWRITE IT EVERY SESSION
 
@@ -196,6 +305,15 @@ legitimate outcome.
   **silently eats every em-dash, mid-dot, arrow and tick mark.** It corrupted
   four commits on 2026-07-26 before anyone noticed. Use Python
   (`open(p, encoding='utf-8')`) or the editor tools.
+- **SCAN THE DOCUMENTS BEFORE YOUR FINAL COMMIT.** Search the five updated files
+  for `â€`, `Â·`, `â†`, `Ã`, `âœ` — the fingerprints of the bug above. Ignore
+  hits inside backticks; those are deliberate quotations of the damage.
+  **Six corrupted arrows were still sitting in `PROGRESS_LOG.md` on 2026-07-27,
+  in entries a note the day before had declared clean.** Both times it was found
+  by a person looking, never by a check. **The scan costs one command.**
+- **"SUCCESS" FROM A TOOL IS NOT EVIDENCE THAT SOMETHING WORKS.** `schtasks`
+  reported a scheduled task created successfully and created a broken one that
+  could never run. **Run the thing and read its output.**
 - **Run env:** `C:\Users\hp\miniconda3\envs\tfdml\python.exe` with `PYTHONUTF8=1`.
 - **The Commander is a non-programmer.** Plain words, gray-box commands, explain
   before changing, commit after.

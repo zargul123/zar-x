@@ -162,46 +162,28 @@ pair of eyes.
 
 ## READ THESE FIRST
 
-Read these files in `C:\Users\hp\Downloads\zargul trader\zar-x`:
+**`THE_PATTERN.md` already told you how a session begins, what every file is
+for, the run environment, and the housekeeping that has bitten this ship. None
+of it is repeated here.** If you have not read it, stop and read it.
 
-0a. **`THE_PATTERN.md` — how a session runs, in plain words.** The three layers
-   (the gate declared first · the sabotage drill that lives in the code forever
-   · the independent attack), the two-job rhythm, and the housekeeping that has
-   already bitten this ship. **Not a law; if it and `SHIP_LAWS.md` disagree, the
-   laws win.** Read it first if you have never worked on this ship.
-0. **`README.md` — it carries THE PROMISE**, which Law 6 points at by name:
-   three sealed gauntlet slots and then the signals chapter closes. It is 1.7 KB.
-1. `SHIP_LAWS.md` — all seven laws. Law 4 (gates before tests) especially.
-2. `EXECUTION_PLAN.md` — the PHASE 3 block and the CURRENT POSITION MARKER.
-3. The last FOUR entries of `PROGRESS_LOG.md` — the review that failed both
+**These are the ones specific to THIS job:**
+
+1. **The last FOUR entries of `PROGRESS_LOG.md`** — the review that failed both
    gates, the repair, the Step 3.2b decisions, and the Step 3.2b build.
    **Read the last three as CLAIMS, not results. They are what you are
-   auditing.**
-4. `cockpit/funding.py` and `cockpit/fear_greed.py` — production paths and
+   auditing.** The file is ~225 KB; reading all of it will eat the budget you
+   need for the actual work. The last four entries are the assignment.
+2. **`cockpit/funding.py` and `cockpit/fear_greed.py`** — production paths and
    `__main__` blocks both.
-5. **`data/open_interest.py` — the newest part, ~640 lines, and the one nobody
-   has ever attacked.** Read it looking for the same shape as the others' holes.
-6. `ROADMAP.md` — what exists and works, and the **MEASURED data-source facts
-   table**. If anything you measure disagrees with it, **your measurement wins
-   and you write the correction down.**
-7. `REVIEW_QUEUE.md` — **R-011 and R-012 are your worklist.** R-001, R-008,
+3. **`data/open_interest.py`** — ~640 lines, the newest part, **and the one
+   nobody has ever attacked.** Read it looking for the same shape as the
+   others' holes.
+4. **`REVIEW_QUEUE.md`** — **R-011 and R-012 are your worklist.** R-001, R-008,
    R-009 and R-010 may also be settled by you, since you built none of it.
    **R-006 may NEVER be cleared by you or any in-house session.**
-
-**`PROGRESS_LOG.md` is ~215 KB and reading all of it will eat the budget you
-need for the actual work.** The last four entries are the assignment.
-
-Then: **`git pull` FIRST** — a scheduled task pushes snapshots from elsewhere.
-Use `git commit -F <file>` for multi-line messages. **NEVER use PowerShell
-`Get-Content` / `Add-Content` / `Set-Content` on this repo's UTF-8 files** —
-PowerShell 5.1 reads BOM-less UTF-8 as ANSI and silently eats every em-dash,
-mid-dot, arrow and tick mark. It corrupted four commits on 2026-07-26 and **six
-of the arrows were still there on 2026-07-27**, in a file that day's note
-declared clean. Use Python (`open(p, encoding='utf-8')`) or the editor tools.
-
-Run env: `C:\Users\hp\miniconda3\envs\tfdml\python.exe` with `PYTHONUTF8=1`.
-The Commander is a non-programmer — plain words, gray-box commands, explain
-before you change, commit after.
+5. **`ROADMAP.md`** — the MEASURED data-source facts table, if you touch a data
+   source. If anything you measure disagrees with it, **your measurement wins
+   and you write the correction down.**
 
 ---
 
@@ -405,21 +387,14 @@ certainly" or "this should be fine" about anything that ships — FILE IT in
 
 ---
 
-# THE CLOSING RITUAL — no session ends without this
+# BEFORE YOU FINISH
 
-Before the final commit, in this order: **1.** `PROGRESS_LOG.md` (what happened,
-mistakes as plainly as successes) · **2.** `REVIEW_QUEUE.md` (verdicts + new
-doubts) · **3.** `EXECUTION_PLAN.md` (where the ship is now, including what is
-unproven) · **4.** `ROADMAP.md` (what exists and works) · **5.**
-`SESSION_ORDERS.md` (the next session's job, written for someone with NO memory
-of you) · **6.** Commit. Push. **`THE_PATTERN.md` is the exception — do not
-rewrite it unless a session earned a genuinely new lesson.**
-
-**AND ONE CHECK THAT COSTS NOTHING AND HAS CAUGHT SOMETHING TWICE:** before your
-final commit, scan the five documents for `â€`, `Â·`, `â†`, `Ã`, `âœ`. Those are
-the fingerprints of the PowerShell encoding bug. **Six of them were still in
-`PROGRESS_LOG.md` on 2026-07-27, in entries a note the day before had declared
-clean.**
+**Do the closing ritual exactly as `THE_PATTERN.md` sets it out** — seven steps,
+ending with the next session's orders, the push, and your plain-words report to
+the Commander. **It is not repeated here.** The loop only survives if every
+session performs it honestly; a session that skips it leaves the next one with
+no orders, no verdicts, and a position marker describing a ship that no longer
+exists.
 
 ---
 
