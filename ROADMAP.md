@@ -18,9 +18,9 @@ certify itself** — the first file an independent reviewer (Fable, or any secon
 AI) should open, kept short on purpose so it is actually read rather than
 skimmed. Every session files there before shipping anything it is unsure of,
 and **no session may clear its own item.**
-**NEXT BUILD SESSION: (1) R-011 — a TWELFTH sabotage against each Context Deck
-instrument, by someone who built neither the gates nor their two repairs; (2) then
-Step 3.2b, the open-interest recorder (orders + Gate 3.2b already written and
+**NEXT BUILD SESSION IS ALL ATTACK, NO BUILD: (1) R-011 — a TWELFTH sabotage
+against each Context Deck instrument; (2) R-012 — a SEVENTH against the
+open-interest recorder (orders + Gate 3.2b already written and
 measured in SESSION_ORDERS.md; its 30-day window is still expiring).**
 **CONTEXT: the 2026-07-26 audit failed Gate 3.2 — 4 of 6 deliberate sabotages
 walked through a gate reporting 48/48. GATE 3.2-R was rebuilt the same day and
@@ -38,6 +38,7 @@ open: the session that found the fault also wrote the repair.**
 | Journal snapshots (the black box, split by writer: laptop → snapshots_local.csv, cloud → snapshots_cloud.csv, legacy snapshots.csv frozen) | journal/snapshot.py | ✅ |
 | Grader v2 (merges all notebooks, candle-identity de-dup, always-UP parrot baseline) | journal/grader.py | ✅ |
 | Automation (Task Scheduler: brief 09:05 PKT; snapshots at every 4h close) | run_daily.bat / run_snapshot.bat | ✅ |
+| **Open-interest recorder (Phase 3, Step 3.2b) — Binance 30-day window, `period=4h`, append-only CSV per asset, idempotent, never rewrites history. GATE 3.2b PASSED 2026-07-27: nine bars, six sabotages caught, and the drill judges THE CSV ON DISK against a raw fetch. 540 rows recorded. NOT SCHEDULED — Commander's decision, must run on his laptop (Binance geo-blocks US cloud runners). Awaiting an independent seventh sabotage (R-012).** | data/open_interest.py + data/oi_history/ | ✅ |
 | Context Deck — instrument 1 of 5: Fear & Greed (alternative.me, free, keyless; injectable URL, fails to one offline line). **GATE 3.1-R2 (hardened 2026-07-27): the self-test rebuilds the WHOLE printed block from the source and requires EXACT equality, holds its own verbatim copy of the "information, not a signal" disclaimer and its own history limit, and breaks itself ELEVEN ways every run — all eleven caught. Awaiting an independent twelfth (R-011).** | cockpit/fear_greed.py | ✅ |
 | Context Deck — instrument 2 of 5: funding rates (Binance USDⓈ-M public, free, keyless; USDT perpetuals, partial failure names the missing asset). **GATE 3.2-R2 (hardened 2026-07-27): the self-test rebuilds the WHOLE printed block from Binance raw using its own arithmetic and requires EXACT equality, holds its own verbatim copy of the "positive = longs pay shorts" wording, rotates the partial-failure drill through all three assets, and breaks itself ELEVEN ways every run — all eleven caught. Awaiting an independent twelfth sabotage (R-011).** | cockpit/funding.py | ✅ |
 | THE LAB, complete (Phase 2, Gates 2.1–2.5 all passed 2026-07-26): frozen checksummed vault · data validator at the only door · honest backtest engine (look-ahead impossible, costs always on, hold-out line train_end=2025-10-01) · walk-forward + Monte Carlo (seed 20260726) + regime breakdown · exit gate that caught a 1,687-parameter con artist · leak_check (Law 7's aid) | lab/ | ✅ |
@@ -64,7 +65,8 @@ User is a non-programmer; explain in plain words; he runs commands from gray box
    GATE 3.2-R rebuilt, then FAILED 2026-07-27 when 4 of 5 NEW sabotages walked
    through, including the meaning REVERSED with every digit correct; GATE
    3.2-R2 shipped the same day, all ELEVEN caught** · ⏭️ **a TWELFTH sabotage on
-   each, by someone who built neither (R-011), then Step 3.2b — the
+   each, by someone who built neither (R-011), and a seventh on the recorder
+   (R-012). **Step 3.2b SHIPPED 2026-07-27** — the open-interest recorder — the
    open-interest recorder (30-day window, backfill at birth), still the only
    dataset on this ship that expires and its deadline did not pause for the
    audit** · then news headlines (CryptoPanic free
@@ -81,7 +83,16 @@ User is a non-programmer; explain in plain words; he runs commands from gray box
 6. **Only with gauntlet survivors:** 8-week live proving, zero money, journal judging
    system AND pilot.
 
-## MEASURED data-source facts (probed 2026-07-26 — never plan on a guess again)
+## MEASURED data-source facts (probed 2026-07-26, ALL RE-PROBED 2026-07-27 and none had moved — never plan on a guess again)
+
+**ADDED 2026-07-27, and it corrected a planning document: a Binance 4h
+open-interest row is a POINT SAMPLE taken at the stamped instant, NOT a running
+aggregate over the following four hours.** 33 of 33 overlapping rows across
+BTC/ETH/SOL matched the 5m reading at the same instant exactly, while the 5m
+series kept moving afterwards and the 4h row did not. **So there is no
+"incomplete period" to hold back, and the newest row is stored.** The orders
+had warned of an incomplete-period trap; the premise was untested and the
+measurement won. **Fifth time.**
 
 Which sources serve deep history on demand decides what must be RECORDED and
 what merely has to be READ. Every line below was measured, not assumed:

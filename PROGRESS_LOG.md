@@ -3620,3 +3620,128 @@ mistake what the file means. **Deliberate. Recorded. Reversible later.**
 **GATE 3.2b IS UNCHANGED — all nine bars (a) to (i) as declared, and not one of
 them is softened here.** If the build cannot meet a bar, that is a FAILED bar
 reported honestly, never a number tuned until it passes.
+
+---
+
+## 2026-07-27 — STEP 3.2b: **GATE 3.2b PASSED — ALL NINE BARS, ALL SIX SABOTAGES CAUGHT**
+## **540 rows of the one dataset that expires are now recorded and pushed**
+
+Gate declared 2026-07-26 in `SESSION_ORDERS.md`; the two design decisions locked
+one commit earlier with **no `.py` file in it** (`979e8dd`). Build: `6bebcd8`.
+
+### WHAT WAS BUILT, AND THE PROOF THAT NOTHING ELSE MOVED
+
+**ONE new file — `data/open_interest.py` — and ONE new directory,
+`data/oi_history/`.** `git status` before the commit showed exactly two
+untracked paths and **not a single modified file.** No cockpit file touched, no
+existing line of the ship changed. The Brief still prints 3/3, both Context Deck
+gates still exit 0, vault INTACT 6/6.
+
+### THE GATE — NINE BARS, ALL GREEN
+
+    (a) BACKFILL      180 rows per asset, 29.8 days, all three
+                      2026-06-27T16:00Z → 2026-07-27T12:00Z
+    (b) IDEMPOTENCE   180 → 180 rows · 180 total vs 180 distinct
+                      (symbol, timestamp) pairs, printed side by side
+    (c) EMPTY TRAP    bogus symbol FAILS LOUDLY, writes no file, and NAMES
+                      the empty list in the message
+    (d) OFFLINE       one honest line per asset, no traceback, CSVs
+                      byte-identical: 0e21c3f5f88b810b before AND after
+    (e) NO REWRITE    a hand-tampered row is REPORTED and left exactly as it
+                      was — "stored 999999.99999999 → now 101118.45200000"
+    (f) BRIEF         3/3, unaffected
+    (g) PLAUSIBLE     newest stored 104,709.053 BTC vs the LIVE snapshot
+                      endpoint's 104,737.525 — 0.03% apart, and checked
+                      against a DIFFERENT endpoint with a DIFFERENT field name
+    (h) SABOTAGE      six breaks, six caught, built in from birth
+    (i) THE DETECTOR READS THE CSV BACK OFF DISK and compares it field by
+        field to a raw fetch the TEST makes itself
+
+    ✓ B1  timestamps converted as LOCAL time           → CAUGHT
+    ✓ B2  timestamps shifted by one hour               → CAUGHT
+    ✓ B3  de-dup key silently drops rows               → CAUGHT
+    ✓ B4  the VALUE column written into the OI column  → CAUGHT
+    ✓ B5  the naive recorder: empty = "no new data"    → CAUGHT
+    ✓ B6  the number rounded on the way to disk        → CAUGHT
+
+**THE REAL RUN, WHICH IS THE ACTUAL POINT:** 540 rows across BTC/ETH/SOL,
+committed to the repo. **A second run appended zero.** The 30-day window that
+had been expiring through two deferred sessions is now captured.
+
+### THE THREE DESIGN DECISIONS WORTH KEEPING
+
+**THE DETECTOR JUDGES THE FILE ON DISK, NOT THE PARSER.** This is check (i), and
+it exists because **both Context Deck instruments failed this year for exactly
+one reason: every check interrogated the parse and none compared the OUTPUT to
+the source.** The recorder's equivalent of "the printed sentence" is THE CSV
+ROW, so the drill writes a file, reads it back off disk, and compares every row
+to a raw fetch it made itself. **The lesson was applied before the mistake, for
+the first time on this ship.**
+
+**B5 IS JUDGED BY THE SAME CODE CHECK (c) USES, NOT A COPY OF IT.** A check and
+the drill that proves the check works must not be two pieces of code that merely
+agree — that is how a self-agreeing test is born, and this ship has produced two
+of them already.
+
+**AN EMPTY RESULT IS A LOUD FAILURE AND `run()` RETURNS FALSE IF *ANY* SYMBOL
+FAILS.** A partial success on a dataset that expires is not a success. A
+recorder that exits 0 while one asset silently collected nothing is the precise
+failure this part was written to prevent.
+
+### WHAT WENT WRONG ON THE WAY (Law 1)
+
+1. **SABOTAGE B5 WAS NOT TESTING WHAT IT CLAIMED, and the gate passed anyway
+   before it was fixed.** The first version replaced `fetch_history` with a
+   function returning `[]`. It was scored CAUGHT — but by an `IndexError` two
+   lines later when the span was computed, **not by the empty-result check it
+   was written to prove.** The gate printed a tick mark for a sabotage that
+   never reached the thing under test. **Rewritten as the naive recorder a
+   careless author would actually produce, and judged by check (c)'s own code.**
+   **Found by reading the drill, not by any check** — and it is exactly the
+   "a crash is scored as a catch" trap this session warned the NEXT session
+   about six hours earlier, then walked into itself.
+2. **THE OFFLINE LINE PRINTED A PARAGRAPH OF URLLIB3 INTERNALS.** Three of them,
+   filling the screen. Bar (d) says "honest offline line, no traceback" and this
+   technically passed — it was one line per asset and no traceback — **but an
+   offline line that fills the screen is a traceback wearing a plug emoji.**
+   Trimmed to 110 characters, **except for `RecorderError`, which this file
+   writes deliberately and which must be read in full.**
+3. **Two ugly constructions shipped in the first draft** — a nonsensical
+   `if not os.path.getsize(path) if os.path.exists(path) else True` and a
+   sabotage list with a `None` placeholder patched afterwards by index. Both
+   worked; both were rewritten before the commit because a test nobody can read
+   is a test nobody will maintain.
+
+### WHAT WAS DELIBERATELY NOT DONE
+
+- **`cockpit/` was not touched.** The Whale Watch instrument that will read
+  these files is Phase 3 #5, with its own step and its own gate. It was not
+  smuggled in.
+- **`CMCCirculatingSupply` is not stored** — decided and recorded before coding.
+- **Step 3.3 (news) not started.** `MAX_PLAUSIBLE_RATE` still not tightened.
+  The risk-doctrine item still parked. All the Commander's.
+- **THE RECORDER IS NOT SCHEDULED.** See below — it is a decision, not an
+  oversight.
+
+### **THE SCHEDULING DECISION — ON THE COMMANDER'S DESK, NOT TAKEN BY DEFAULT**
+
+**A recorder that is never run collects nothing.** It must run on **his LAPTOP,
+not the cloud watchman**: GitHub's runners are US-hosted and Binance geo-blocks
+US addresses, so a cloud recorder might collect nothing, silently, for weeks —
+on the one dataset that cannot be recovered.
+
+    C:\Users\hp\miniconda3\envs\tfdml\python.exe data\open_interest.py
+
+**Monthly is enough** and even that has slack: every read reaches back 30 days,
+so nothing is lost unless two months pass with no run. **Presented, not
+decided.**
+
+### THE STATE OF THE SHIP AFTER TODAY
+
+Three parts on this ship now break themselves on every run — **28 sabotages
+across `funding.py` (11), `fear_greed.py` (11) and `open_interest.py` (6), all
+28 caught.** Seven of them were walking through green gates this morning.
+
+**And nothing is certified.** R-011 stands against this morning's repair, R-012
+is filed against this afternoon's build, and **both were written by the session
+that built them.** The next session's first job is to attack both.

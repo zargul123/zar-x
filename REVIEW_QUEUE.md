@@ -587,6 +587,70 @@ review.**
 still shaped around its author's imagination, three generations deep, and the
 Commander should hear plainly that separation-in-time has stopped paying.
 
+## R-012 — The open-interest recorder was built, gated and graded by one session
+**STATUS: OPEN · P1 · flagged 2026-07-27 by the session that built it**
+
+**What to review.** `data/open_interest.py` and Gate 3.2b — the backfill, the
+idempotence proof, the empty-result trap, the never-rewrite rule, and the six
+sabotages it breaks itself with on every run.
+
+**Why it needs an outside eye.** **Same structure as R-009, R-010 and R-011: one
+mind wrote the part, wrote the test, and declared it passed.** The gate was
+declared before the code (Law 4 satisfied, `979e8dd` has no `.py` in it) and the
+six sabotages were still invented by the author. **And this part guards the ONE
+dataset on this ship that cannot be recovered if it is lost** — a defect here is
+not repairable later at any price.
+
+**A DEMONSTRATED REASON TO DISTRUST THE DRILL, from this build's own log:**
+**sabotage B5 was scored CAUGHT while never reaching the check it was written to
+prove** — it crashed two lines earlier and the tick mark appeared anyway. It was
+found by READING the drill, not by any check, and it was fixed. **The question a
+reviewer should ask is how many of the other five are passing for a reason
+nobody has looked at.**
+
+**FOUR SPECIFIC DOUBTS ITS AUTHOR COULD NOT SETTLE**, offered as starting points
+and NOT as the assignment:
+
+1. **THE POINT-SAMPLE MEASUREMENT IS LOAD-BEARING AND WAS TAKEN ONCE.** The
+   decision to store the newest row rests on a measurement made 2026-07-27:
+   33 of 33 overlapping 4h rows matched the 5m reading at the same instant, so
+   a 4h row is a point sample and cannot move. **If that is wrong — or becomes
+   wrong — stored rows would disagree on re-read.** The recorder reports such a
+   disagreement loudly and never overwrites, so the failure is loud rather than
+   silent, **but the decision itself has one day's evidence behind it.**
+2. **THE `(f)` BAR IS VERIFIED IN THE SHELL, NOT BY THE GATE.** The gate prints
+   an instruction to run `cockpit\brief.py` rather than running it, deliberately
+   — a recorder that imports the cockpit is no longer a sealed compartment.
+   **But that means bar (f) is the one bar the program does not check**, and a
+   tally counts only what a machine checked.
+3. **NOTHING PROVES THE RECORDER IS EVER RUN.** It is not scheduled; that is the
+   Commander's decision and is on his desk. **A recorder nobody runs collects
+   nothing, and there is no alarm anywhere on this ship for "the open-interest
+   file has not grown in two months."**
+4. **THE 10% PLAUSIBILITY BAR IN CHECK (g) IS A GUESS.** It compares a stored
+   point sample up to 4h old against a live snapshot; it measured 0.03% today.
+   **The bar was chosen by feel, exactly like `MAX_PLAUSIBLE_RATE = 0.05` was**
+   — and R-003 exists because that guess shipped and was only measured two steps
+   later. **This one is filed on the day it shipped instead.**
+
+**Evidence.** Decisions commit `979e8dd` (no `.py` in it, on purpose). Build
+`6bebcd8`. The 2026-07-27 `PROGRESS_LOG.md` entries.
+
+**Reproduce.** `python data\open_interest.py` — nine bars and six sabotages,
+all must be green. **Then write a SEVENTH sabotage of your own**, and check
+whether each of the six fails for the reason its label claims.
+
+**A clean verdict looks like.** A reviewer who did not build it invents at least
+one NEW sabotage and finds it caught — **and confirms the existing six each fail
+for the stated reason rather than incidentally.** "The six pass" is not a clean
+verdict; it is the claim under review.
+
+**Failed looks like.** A seventh walks through, or any of the six turns out to
+be passing by accident as B5 was. **If it fails, the recorder keeps running
+regardless** — collecting a flawed record of an expiring dataset beats
+collecting nothing while the gate is argued about. **Say that out loud rather
+than switching it off.**
+
 ---
 
 # HOW TO FILE AN ITEM (every session, every time)

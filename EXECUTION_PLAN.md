@@ -375,17 +375,35 @@ deck header, vault INTACT 6/6, `lab/` untouched.
 **THE KNOWN GAP RECORDED HERE YESTERDAY — the unguarded disclaimer text — IS
 NOW CLOSED on both instruments.**
 
-**R-011 IS FILED AGAINST THIS REPAIR. NOTHING IS CERTIFIED.** Third generation
-of the same structure: the session that found the fault wrote the fix and graded
-it. **R-001, R-002, R-004, R-008, R-009 and R-010 are all FAILED; R-006, R-007
-and R-011 are OPEN.**
+**R-011 IS FILED AGAINST THIS REPAIR.** Third generation of the same structure:
+the session that found the fault wrote the fix and graded it.
 
-**NEXT SESSION, IN ORDER: (1) a TWELFTH sabotage against each instrument, by
-someone who built neither — that is R-011; (2) Step 3.2b, the open-interest
-recorder, whose orders and Gate 3.2b are written and measured in
-`SESSION_ORDERS.md` and whose 30-day window is still expiring.** Step 3.2b did
-NOT happen on 2026-07-27 because Part 1 found a real problem, which is what the
-orders require.
+**AND THE SAME DAY, ON THE COMMANDER'S EXPLICIT DIRECTION, STEP 3.2b WAS BUILT:
+GATE 3.2b PASSED, all nine bars, all six sabotages caught, and 540 rows of the
+open-interest window are recorded and pushed.** One new file
+(`data/open_interest.py`) and one new directory (`data/oi_history/`); **no
+existing file was modified at all.** `THE_PATTERN.md` says Part 2 is conditional
+and a session that finds a real problem stops — **the Commander directed
+otherwise and that is recorded as his call, not a session's drift.** It was a
+safe call: the recorder touches no cockpit file and does not build on the repair
+under review.
+
+**THE 30-DAY WINDOW IS NO LONGER EXPIRING UNRECORDED.** BTC/ETH/SOL,
+2026-06-27T16:00Z → 2026-07-27T12:00Z, 180 rows each, idempotent on re-run.
+**But it is NOT SCHEDULED — that is on the Commander's desk and must run on his
+laptop, never the cloud watchman (US-hosted runners are geo-blocked by
+Binance).**
+
+**NOTHING IS CERTIFIED. R-001, R-002, R-004, R-008, R-009 and R-010 are FAILED;
+R-006, R-007, R-011 and R-012 are OPEN.** Both of today's deliverables were
+built and graded by the same session that wrote them.
+
+**NEXT SESSION, IN ORDER, AND IT IS ALL ATTACK: (1) a TWELFTH sabotage against
+each Context Deck instrument — R-011; (2) a SEVENTH against the open-interest
+recorder, plus a check that each of its six existing sabotages fails for the
+reason its label claims — R-012, and this matters because one of them was found
+being scored CAUGHT while never reaching the check it was meant to prove.**
+**No new part is built until both are attacked.**
 
 ---
 
