@@ -103,6 +103,46 @@ A half-built part is worse than no part.
 
 ---
 
+# THE CLOSING RITUAL — no session ends without this
+
+**A session that does the work and does not write it down has not finished. The
+next session inherits nothing but code it cannot trust.**
+
+Before the final commit, EVERY session updates these, in this order:
+
+**1. `PROGRESS_LOG.md` — WHAT HAPPENED.** Append a new entry. What was
+attempted, the actual numbers and output, the verdict, and **every mistake as
+plainly as every success.** Never edit an old entry; the log only ever grows.
+
+**2. `REVIEW_QUEUE.md` — WHAT COULD NOT BE CERTIFIED.** Verdicts on the items
+worked, plus any NEW doubt this session could not settle about its own work.
+**Never delete an item. Never edit a cleared verdict. Never clear your own.**
+
+**3. `EXECUTION_PLAN.md` — WHERE THE SHIP IS NOW.** The CURRENT POSITION MARKER,
+rewritten to the truth, including what is broken or unproven. **Keep the previous
+marker text below it for the record rather than erasing it.**
+
+**4. `ROADMAP.md` — WHAT EXISTS AND WORKS.** Tick what shipped, correct the
+MEASURED facts table if a measurement moved.
+
+**5. `SESSION_ORDERS.md` — THE NEXT SESSION'S JOB.** Rewritten in full: what to
+attack, what to build, the gate declared in advance, the edge cases named before
+coding, and what is on the Commander's desk. **Write it for someone with NO
+memory of you.** If a stranger could not act on it, it is not finished.
+
+**6. Commit. Push.**
+
+## `THE_PATTERN.md` IS THE EXCEPTION — DO NOT REWRITE IT EVERY SESSION
+
+The five files above change every session. **This one holds still on purpose.**
+Edit it **only when a session earns a genuinely new lesson** — a failure that
+teaches something the pattern does not already say.
+
+**A document that changes every session stops being the thing anyone trusts.**
+When you do change it, say in `PROGRESS_LOG.md` what failure earned the change.
+
+---
+
 # THE RULES THAT KEEP IT HONEST
 
 **A SESSION MAY NEVER CLEAR ITS OWN ITEM.** However confident it is. However
