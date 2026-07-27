@@ -347,10 +347,50 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **PHASE 3 — BOTH CONTEXT DECK INSTRUMENTS NOW BREAK THEMSELVES ON
-EVERY RUN. Twelve sabotages, twelve caught — and NINE of the twelve were walking
-through green gates this morning.** Gate 3.2-R (funding) PASSED, Gate 3.1-R
-(Fear & Greed) PASSED. R-008 confirmed the defect is a CLASS, measured on two
+→ We are at: **PHASE 3 — THE GATES NOW CHECK THE WORDS, NOT JUST THE DIGITS.**
+Gate 3.2-R2 (funding) PASSED and Gate 3.1-R2 (Fear & Greed) PASSED, 2026-07-27.
+**Twenty-two sabotages, twenty-two caught — and SEVEN of the twenty-two were
+walking through green gates that same morning.**
+
+**WHAT THE THIRD INDEPENDENT REVIEW FOUND.** A session that built neither
+instrument, neither gate, nor either repair threw ten new sabotages and **seven
+escaped.** The worst printed `positive = shorts pay longs` — **the exact
+opposite of how the market works** — beside three perfectly correct numbers,
+while the gate reported PASSED. Another printed `>> strong buy signal` on the
+Context Deck of a ship whose first rule is INFORMATION, NEVER A SIGNAL. **THE
+CLASS: every check asked whether an expected string was PRESENT; none asked
+whether anything ELSE was present, and none checked the fixed words at all.**
+The previous rebuild closed the hole for DIGITS and left it open for WORDS.
+
+**THE REPAIR, SHIPPED THE SAME DAY.** Both gates now rebuild the WHOLE printed
+block from the source and require EXACT equality, holding their own verbatim
+copy of every fixed sentence; the partial-failure drill rotates through all
+three assets; the Fear & Greed gate holds its own `HISTORY_LIMIT` (reading the
+module's had silently disarmed one of its own detectors). **All ten original
+attacks, re-run as real file edits, are now CAUGHT.** Production halves
+byte-identical by sha256 — funding lines 1-159, fear_greed lines 1-112, so what
+the Brief prints cannot have changed. Verified: Brief 3/3, both instruments, one
+deck header, vault INTACT 6/6, `lab/` untouched.
+
+**THE KNOWN GAP RECORDED HERE YESTERDAY — the unguarded disclaimer text — IS
+NOW CLOSED on both instruments.**
+
+**R-011 IS FILED AGAINST THIS REPAIR. NOTHING IS CERTIFIED.** Third generation
+of the same structure: the session that found the fault wrote the fix and graded
+it. **R-001, R-002, R-004, R-008, R-009 and R-010 are all FAILED; R-006, R-007
+and R-011 are OPEN.**
+
+**NEXT SESSION, IN ORDER: (1) a TWELFTH sabotage against each instrument, by
+someone who built neither — that is R-011; (2) Step 3.2b, the open-interest
+recorder, whose orders and Gate 3.2b are written and measured in
+`SESSION_ORDERS.md` and whose 30-day window is still expiring.** Step 3.2b did
+NOT happen on 2026-07-27 because Part 1 found a real problem, which is what the
+orders require.
+
+---
+
+**YESTERDAY'S POSITION, KEPT FOR THE RECORD:** Gate 3.2-R (funding) PASSED,
+Gate 3.1-R (Fear & Greed) PASSED. R-008 confirmed the defect is a CLASS, measured on two
 independently built instruments: every check interrogated the parse, none
 compared the printed sentence to the source. Fear & Greed leaked **5 of 6** —
 `70 — Fear` printed as a contradiction on its own face while every check passed.
@@ -370,7 +410,10 @@ orders and Gate 3.2b are written and measured in SESSION_ORDERS.md and whose
 **KNOWN GAP, NEITHER INSTRUMENT COVERS IT:** nothing checks the fixed
 disclaimer text — *"information, not a signal"*, *"positive = longs pay
 shorts"*. Both could be edited or deleted and no gate would notice. Filed in
-R-010.
+R-010. **— CLOSED 2026-07-27 by Gates 3.2-R2 / 3.1-R2, after it was
+demonstrated rather than merely suspected: the reversed sentence printed and
+the gate passed. Left here unedited because a gap that was known for a day and
+not closed is part of the record.**
 
 ---
 

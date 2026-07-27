@@ -18,8 +18,8 @@ certify itself** — the first file an independent reviewer (Fable, or any secon
 AI) should open, kept short on purpose so it is actually read rather than
 skimmed. Every session files there before shipping anything it is unsure of,
 and **no session may clear its own item.**
-**NEXT BUILD SESSION: (1) R-008 — sabotage-test `cockpit/fear_greed.py`, built
-the same way as funding and never checked for this class of hole; (2) then
+**NEXT BUILD SESSION: (1) R-011 — a TWELFTH sabotage against each Context Deck
+instrument, by someone who built neither the gates nor their two repairs; (2) then
 Step 3.2b, the open-interest recorder (orders + Gate 3.2b already written and
 measured in SESSION_ORDERS.md; its 30-day window is still expiring).**
 **CONTEXT: the 2026-07-26 audit failed Gate 3.2 — 4 of 6 deliberate sabotages
@@ -38,8 +38,8 @@ open: the session that found the fault also wrote the repair.**
 | Journal snapshots (the black box, split by writer: laptop → snapshots_local.csv, cloud → snapshots_cloud.csv, legacy snapshots.csv frozen) | journal/snapshot.py | ✅ |
 | Grader v2 (merges all notebooks, candle-identity de-dup, always-UP parrot baseline) | journal/grader.py | ✅ |
 | Automation (Task Scheduler: brief 09:05 PKT; snapshots at every 4h close) | run_daily.bat / run_snapshot.bat | ✅ |
-| Context Deck — instrument 1 of 5: Fear & Greed (alternative.me, free, keyless; injectable URL, fails to one offline line) | cockpit/fear_greed.py | ✅ |
-| Context Deck — instrument 2 of 5: funding rates (Binance USDⓈ-M public, free, keyless; USDT perpetuals, partial failure names the missing asset). **GATE 3.2-R (rebuilt 2026-07-26): the self-test verifies the printed SENTENCE against Binance raw using its own arithmetic, and breaks itself six ways every run — all six caught. Awaiting an independent seventh sabotage (R-009).** | cockpit/funding.py | ✅ |
+| Context Deck — instrument 1 of 5: Fear & Greed (alternative.me, free, keyless; injectable URL, fails to one offline line). **GATE 3.1-R2 (hardened 2026-07-27): the self-test rebuilds the WHOLE printed block from the source and requires EXACT equality, holds its own verbatim copy of the "information, not a signal" disclaimer and its own history limit, and breaks itself ELEVEN ways every run — all eleven caught. Awaiting an independent twelfth (R-011).** | cockpit/fear_greed.py | ✅ |
+| Context Deck — instrument 2 of 5: funding rates (Binance USDⓈ-M public, free, keyless; USDT perpetuals, partial failure names the missing asset). **GATE 3.2-R2 (hardened 2026-07-27): the self-test rebuilds the WHOLE printed block from Binance raw using its own arithmetic and requires EXACT equality, holds its own verbatim copy of the "positive = longs pay shorts" wording, rotates the partial-failure drill through all three assets, and breaks itself ELEVEN ways every run — all eleven caught. Awaiting an independent twelfth sabotage (R-011).** | cockpit/funding.py | ✅ |
 | THE LAB, complete (Phase 2, Gates 2.1–2.5 all passed 2026-07-26): frozen checksummed vault · data validator at the only door · honest backtest engine (look-ahead impossible, costs always on, hold-out line train_end=2025-10-01) · walk-forward + Monte Carlo (seed 20260726) + regime breakdown · exit gate that caught a 1,687-parameter con artist · leak_check (Law 7's aid) | lab/ | ✅ |
 
 Run environment: `C:\Users\hp\miniconda3\envs\tfdml\python.exe` with `PYTHONUTF8=1`.
@@ -57,10 +57,14 @@ User is a non-programmer; explain in plain words; he runs commands from gray box
    logged trades). Gate: grader correctly scores ≥2 weeks of accumulated snapshots.
 3. **Context Deck** (cockpit) — 🔨 IN PROGRESS (EXECUTION_PLAN Phase 3, 2 of 5 done):
    ✅ Fear & Greed (alternative.me, free) — **audited 2026-07-26: leaked 5 of 6
-   sabotages, GATE 3.1-R rebuilt the same day, all six now caught every run** ·
-   ✅ funding rates display (Binance USDⓈ-M public, free) — **leaked 4 of 6,
-   GATE 3.2-R rebuilt, all six caught** · ⏭️ **a SEVENTH sabotage on each, by
-   someone who built neither (R-009, R-010), then Step 3.2b — the
+   sabotages; GATE 3.1-R rebuilt, then FAILED 2026-07-27 when 3 of 5 NEW
+   sabotages walked through it, including ">> strong buy signal" printed on the
+   deck; GATE 3.1-R2 shipped the same day, all ELEVEN now caught every run** ·
+   ✅ funding rates display (Binance USDⓈ-M public, free) — **leaked 4 of 6;
+   GATE 3.2-R rebuilt, then FAILED 2026-07-27 when 4 of 5 NEW sabotages walked
+   through, including the meaning REVERSED with every digit correct; GATE
+   3.2-R2 shipped the same day, all ELEVEN caught** · ⏭️ **a TWELFTH sabotage on
+   each, by someone who built neither (R-011), then Step 3.2b — the
    open-interest recorder (30-day window, backfill at birth), still the only
    dataset on this ship that expires and its deadline did not pause for the
    audit** · then news headlines (CryptoPanic free

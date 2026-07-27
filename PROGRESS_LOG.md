@@ -2415,8 +2415,8 @@ brief.py" claim is literally true: one import, one print, three comment lines.
 
 ### BAR 2 — RE-RUN COLD: **CLEAR**
 
-`python cockpit\funding.py` â†’ exit 0, all ten of its own checks green.
-`python cockpit\brief.py` â†’ 3/3, exactly ONE "CONTEXT DECK" header, Fear &
+`python cockpit\funding.py` → exit 0, all ten of its own checks green.
+`python cockpit\brief.py` → 3/3, exactly ONE "CONTEXT DECK" header, Fear &
 Greed above funding, every pre-existing section intact.
 
 **The kill matrix, re-run by this session in its own harness (20/20):**
@@ -2427,7 +2427,7 @@ Greed above funding, every pre-existing section intact.
     CONTROL, both alive ....... full deck ............................. 3/3
 
 No traceback in any combination. **The numbers differed from the log and moved
-between my own runs (BTC 0.00005399 â†’ 0.00005500 within the hour). That was
+between my own runs (BTC 0.00005399 → 0.00005500 within the hour). That was
 declared in advance as live data being live**, and the sign, the shape and the
 3/3 never moved.
 
@@ -2558,7 +2558,7 @@ therefore safe for our three, with one narrow exception filed below as R-007.
 future when tested. No staleness path except R-007.
 
 **A slow-but-alive Binance degrades exactly like a dead one:**
-`section_text(timeout=0.001)` â†’ one honest offline line, no traceback.
+`section_text(timeout=0.001)` → one honest offline line, no traceback.
 
 ### VERDICTS FILED IN `REVIEW_QUEUE.md`
 
@@ -2624,7 +2624,7 @@ make, which is what "up to you" meant in the first place.**
 ### STILL ON THE COMMANDER'S DESK
 
 1. **TwelveData key rotation** — open since Phase 2.
-2. **The risk-doctrine decision** (25% cap â†’ ~0.49% real risk). Before Phase 6.
+2. **The risk-doctrine decision** (25% cap → ~0.49% real risk). Before Phase 6.
 3. **Law 8 candidate** — now with a THIRD earned example.
 4. Vault CSVs carry no volume column.
 5. **NEW — how Step 3.2 gets reopened**: the gate needs a check that compares
@@ -2814,7 +2814,7 @@ before a line was written:
 string must match one or the other, and is never allowed to match neither.**
 A moving rate lands on one of the two. A sign flip, a lost ×100, or a miswired
 ticker lands on neither. **The tolerance is for time passing, never for being
-wrong.** Observed in the run: BTC moved 0.00004738 â†’ 0.00004600 across the
+wrong.** Observed in the run: BTC moved 0.00004738 → 0.00004600 across the
 test, and the check stayed green without flapping. Two back-to-back runs both
 passed.
 
@@ -3345,3 +3345,178 @@ re-verified against Binance twice during this session and is correct today —
 `BTC +0.0072% · ETH +0.0068% · SOL +0.0097%`, matching raw digit for digit.
 **Removing a line proven true would be obedience to wording over meaning.** The
 Commander was told plainly and can reverse it in one word.
+
+---
+
+## 2026-07-27 — **GATE 3.2-R2 AND GATE 3.1-R2 PASSED. THE GATES NOW CHECK THE WORDS.**
+## **All 22 in-run sabotages caught, and all 10 real file edits that walked through this morning are now caught.**
+
+Declared one commit earlier with **no `.py` file in it** (`c69a71b`). Fourth use
+of that pattern; it has survived audit every time.
+
+### WHAT CHANGED — AND THE PROOF THAT NOTHING ELSE DID
+
+**Two files, and inside each ONLY the `__main__` block.** Not asserted —
+measured two ways:
+
+    every diff hunk, funding.py ..... first at line 192, all inside __main__
+                                      (__main__ begins at 160)
+    every diff hunk, fear_greed.py .. first at line 139, all inside __main__
+                                      (__main__ begins at 113)
+    sha256 of funding.py lines 1-159       59e3e6c3f5843335 before
+                                           59e3e6c3f5843335 after
+    sha256 of fear_greed.py lines 1-112    008253f20bb95d05 before
+                                           008253f20bb95d05 after
+
+**The production halves are byte-identical, so what the Brief prints cannot
+have changed.** `lab/` untouched, vault INTACT 6/6, Brief 3/3 with both
+instruments under one deck header. `git status` showed exactly the two files
+(plus `journal/snapshots_local.csv`, written by the scheduled task and committed
+separately to keep this diff clean).
+
+### THE REPAIR, IN PLAIN WORDS
+
+**The old gates asked "is this expected string PRESENT?".** That question can
+never notice an ADDITION, and it was never asked about the fixed wording at all.
+**The new gates rebuild the WHOLE printed block from the source and require it
+to match EXACTLY**, holding their own verbatim copy of every fixed sentence —
+so the test can never follow the instrument into a corrupted sentence and
+confirm it.
+
+    (b) whole-block exact equality, rebuilt from raw ..... kills S8, F8
+    (c) the fixed wording checked verbatim, BY NAME so a
+        failure says WHICH sentence changed ............. kills S7, S9, F7, F9
+    (d) the partial-failure drill ROTATES: each asset in
+        turn is the bogus one and must be named by its
+        own name ....................................... kills S11
+    (e) the Fear & Greed gate holds its OWN copy of
+        HISTORY_LIMIT and compares the module's to it ... closes the
+                                                          disarmed-detector
+                                                          finding
+    (f) eleven sabotages per instrument, every run
+
+### THE RESULT
+
+    GATE 3.2-R2 (funding)      11 of 11 sabotages CAUGHT, exit 0
+    GATE 3.1-R2 (Fear & Greed) 11 of 11 sabotages CAUGHT, exit 0
+
+    ✓ S7   the meaning REVERSED, digits intact     [old gate: ESCAPED] → CAUGHT
+    ✓ S8   a phantom fourth asset appended         [old gate: ESCAPED] → CAUGHT
+    ✓ S9   the "not a signal" disclaimer deleted   [old gate: ESCAPED] → CAUGHT
+    ✓ S10  a failed asset vanishes unnamed         [old gate: caught ] → CAUGHT
+    ✓ S11  the missing asset always named SOL      [old gate: ESCAPED] → CAUGHT
+    ✓ F7   the disclaimer turned into ADVICE       [old gate: ESCAPED] → CAUGHT
+    ✓ F8   rubbish appended to the reading line    [old gate: ESCAPED] → CAUGHT
+    ✓ F9   credited to a source never called       [old gate: ESCAPED] → CAUGHT
+    ✓ F10  the two context values swapped          [old gate: caught ] → CAUGHT
+    ✓ F11  a week of history silently lost         [old gate: caught ] → CAUGHT
+
+**AND THE EVIDENCE THAT ACTUALLY COUNTS — check (i).** The in-run drill
+simulates corrupted output. The scratch rig **edits the real files by real text
+replacement**, which is what an actual mistake would look like. **The same ten
+edits that produced seven escapes this morning were re-run against the repaired
+files: TEN OF TEN CAUGHT**, with both repaired controls still exiting 0.
+
+### A HARNESS CHECK THAT WAS RUN ON PURPOSE
+
+**A sabotage that crashes is recorded as "caught".** So a sabotage that never
+really ran would be scored as a pass — the exact near-miss recorded on
+2026-07-26, when an F6 anchor matched nothing. **Every one of the ten new
+sabotages was therefore probed separately and its output printed**, and every
+one produced a visibly wrong block rather than an exception:
+
+    S7  "positive = shorts pay longs" beside three correct numbers
+    S8  "... · SOL +0.0095%  ·  XRP +0.0100%"
+    S9  "— crowd positioning)" with the disclaimer gone
+    S10 BTC broken → BTC simply absent, nothing named
+    S11 BTC broken → "[no data: SOL]"
+    F7  "— buy when others are fearful"
+    F8  "[reading of 2026-07-27 UTC]   >> strong buy signal"
+    F9  "crowd-mood gauge from CNN Business"
+    F10 "(yesterday 29 · a week ago 26)" — the two values swapped
+    F11 "(yesterday 26)" — the week-ago point silently gone
+
+**A test harness needs the same suspicion as the code it tests.**
+
+### WHAT WENT WRONG ON THE WAY (Law 1)
+
+1. **The funding banner still announced "six ways" after the drill became
+   eleven, and the closing line still said "GATE 3.2-R PASSED".** Both were
+   caught by READING the output, not by any check. Cosmetic here — but a gate
+   that misdescribes its own scope is exactly the kind of thing that gets
+   quoted later as evidence of something it never tested. **Nothing on this
+   ship checks that a gate's own description matches what it does.**
+2. **The repair broke the attack rig, and this was predicted rather than
+   discovered.** The gate now holds its own verbatim copy of
+   `positive = longs pay shorts`, so the rig's search text matched twice
+   instead of once. The rig **refuses to run when its anchor is not unique**
+   rather than editing the first match, so the worst case was a refusal, not a
+   silent mis-edit. The anchor was re-pointed at the production line only. **A
+   rig that guesses which match to edit is a rig that can prove the wrong
+   thing.**
+3. **`journal/snapshots_local.csv` appeared in `git status` throughout**,
+   written by the scheduled task while this session worked. Left out of both
+   commits deliberately so the diffs stay legible.
+
+### WHAT WAS DELIBERATELY NOT DONE
+
+- **PART 2, Step 3.2b — the open-interest recorder — DID NOT HAPPEN.** Part 1
+  found a real problem, and the orders say fix that and stop. **The 30-day
+  Binance window keeps expiring and that is the correct price.**
+- **`MAX_PLAUSIBLE_RATE` still 0.05, still not tightened. The settled-rate
+  anchor still not added.** Both remain the Commander's.
+- **No production line of either instrument was touched.**
+- **No law was written.** The sabotage rule now has four working
+  implementations and is still not law — it is the Commander's to adopt.
+
+### WHAT THIS SESSION COULD NOT CERTIFY ABOUT ITSELF (filed, not buried)
+
+**R-011 is filed against this repair**, in three parts, because this session
+found the fault, wrote the fix and graded it — the same structure as R-009 and
+R-010 one turn further down the road.
+
+**The one worth the Commander's attention:** the gate now contains a copy of the
+exact words the Brief prints. **The next time someone legitimately improves that
+wording, the gate will fail — and the temptation will be to edit the gate to
+match.** That is precisely how a gate gets fitted to the code instead of the
+code to the gate. **Changing the gate's copy of the wording is a deliberate act
+and must be recorded as one.**
+
+### THE STATE OF THE SHIP AFTER TODAY
+
+**Both Context Deck instruments now verify the entire sentence the pilot reads,
+words included, and break themselves eleven ways on every run.** Twenty-two
+sabotages, twenty-two caught. **Seven of those twenty-two were walking through
+green gates this morning, and nine were walking through green gates yesterday.**
+
+**Three sessions in a row have now found real holes in the work of the session
+before.** The separation-in-time substitute for Fable is working — and every
+hole was found by a session that was ORDERED TO TRY TO BREAK THE CODE, never by
+one being careful. **That is the argument R-006 rests on, and it got stronger
+again today.**
+
+### ADDENDUM, SAME DAY — **THE 2026-07-26 CORRUPTION REPAIR MISSED SIX ARROWS**
+
+**Found while running a routine check for the known corruption markers across
+all six planning documents at the end of this session.** Five were clean.
+`PROGRESS_LOG.md` still carried **six instances of `â†’` — the cp1252 wreckage
+of `→`** — surviving in the entries of 2026-07-26 at four separate places,
+including inside the sentence *"BAR 2 — RE-RUN COLD: CLEAR"*.
+
+**The 2026-07-26 addendum states: "All five planning documents verified clean
+afterwards."** That claim was not true of this file. **The repair was run
+iteratively and stopped one pattern short**, and nothing checked it afterwards —
+the same shape as everything else this ship has caught: a green report over an
+incomplete set.
+
+**Repaired here** by the same exact reversal, asserted before it was applied
+(`'â†’'.encode('cp1252').decode('utf-8') == '→'`) and applied only to that one
+sequence, so no other text could be touched. Six replacements, 192,988 → 192,976
+characters. **Two apparent hits remain on purpose:** the literal `â€"` and `Â·`
+QUOTED inside the 2026-07-26 addendum as examples of the damage. They are
+correct text describing corruption, not corruption.
+
+**THE POINT, NOT THE TYPO: this ship still has no check on the integrity of its
+own documents.** It was found by looking, as it was last time. **A one-line scan
+for these markers costs nothing and would have caught both.** Recommended to the
+Commander, not adopted by a session on its own authority.

@@ -127,6 +127,17 @@ a session may never clear its own item — least of all the one it just fixed.**
 **Filed as R-009 for an independent eye.** R-001 moves only when someone who
 did not write the repair says so.
 
+### >>> 2026-07-27: **THE INDEPENDENT EYE CAME, AND R-001 STAYS FAILED.**
+
+The review R-001 was waiting for happened: a session that built none of it threw
+five new sabotages at Gate 3.2-R and **four walked through** (R-009). **The
+remedy R-001 was waiting on was itself defective.** A second remedy shipped the
+same day (Gate 3.2-R2, all ten original attacks now caught) — **and R-001 still
+does not move**, because that remedy was again written by the session that found
+the fault. **R-011 is now the item R-001 waits on.** Two generations of repair
+have each been failed by the next pair of eyes; **R-001 moves when a generation
+survives one.**
+
 ## R-002 — Two planning generations written by the mind that then built them
 **STATUS: FAILED 2026-07-26 · P1 · flagged 2026-07-26 · reviewed by the
 2026-07-26 audit session**
@@ -281,6 +292,13 @@ are not.** `min()` over three identical values is a no-op.
 
 # OPEN
 
+**2026-07-27 note on where things sit in this section.** R-009 and R-010 were
+reviewed and **FAILED** today. They are left physically here, under their
+original headings, so each verdict sits with the evidence that produced it
+rather than being shuffled into another section and losing its context. Their
+STATUS lines are the authority, not the heading they appear under. **R-011,
+filed against today's repair, is genuinely open.**
+
 ## R-006 — THE PHASE 6 SECOND-AI REVIEW **(cannot be cleared in-house)**
 **STATUS: OPEN · P1 · LOCKED BY `EXECUTION_PLAN.md` PHASE 6**
 
@@ -384,7 +402,44 @@ that has an interest in them not being noticed:
 either nothing or something this session should have caught.
 
 ## R-009 — The rebuilt Gate 3.2-R was written by the session that failed the old one
-**STATUS: OPEN · P1 · flagged 2026-07-26 by the session that built the repair**
+**STATUS: FAILED 2026-07-27 · P1 · flagged 2026-07-26 by the session that built
+the repair · reviewed by the 2026-07-27 session, which built none of it**
+
+### >>> VERDICT 2026-07-27: **FAILED. FOUR OF FIVE NEW SABOTAGES WALKED THROUGH.**
+
+A session that built neither the instrument, nor either gate, nor the repair
+invented five new sabotages and wrote a PREDICTION for each **before running
+anything**. Scratch copies outside the repo, controls passed first, `git status`
+clean throughout. **Five predictions, five correct.**
+
+    S7   "positive = longs pay shorts" -> "shorts pay longs",
+         every digit still correct ................................ ESCAPED
+    S8   a fabricated fourth asset "  ·  XRP +0.0100%" appended,
+         fetched from nowhere ..................................... ESCAPED
+    S9   "— crowd positioning, information, not a signal" deleted .. ESCAPED
+    S10  a failed asset vanishes without being named ............... caught
+    S11  the missing-asset name hardcoded to SOL, so any asset's
+         failure is reported as SOL's ............................. ESCAPED
+
+**Under S7 the instrument printed the exact opposite of how the market works,
+beside three perfectly correct numbers, and the gate printed "GATE 3.2-R PASSED
+— all six deliberate sabotages were caught" and exited 0.** The rebuild closed
+the hole for DIGITS and left it open for WORDS.
+
+**THE CLASS: every check asked whether an expected string was PRESENT. None
+asked whether anything ELSE was present, and none checked the fixed words at
+all.** S11 is the one nobody had suspected: the permanent drill always broke
+SOL, so a module naming every missing asset "SOL" agreed with its own test.
+
+**REMEDY SHIPPED the same day** — Gate 3.2-R2, declared in `c69a71b` with no
+`.py` in it, built in `975c125`. Whole-block exact equality, the fixed wording
+guarded verbatim, a rotating partial-failure drill, and eleven permanent
+sabotages. **All ten original attacks, re-run as real file edits, are now
+CAUGHT.** Production lines 1-159 byte-identical by sha256.
+
+**R-009 DOES NOT MOVE TO CLEARED. The session that found the fault wrote the
+repair and graded it — the same structure this item exists to catch, one turn
+further down the road. Filed as R-011.**
 
 **What to review.** `cockpit/funding.py`'s rebuilt smoke test (Gate 3.2-R): the
 printed-sentence check, and the six-sabotage drill now baked into every run.
@@ -413,7 +468,43 @@ least one NEW sabotage and finds it caught — or finds it escapes and says so.
 still shaped around its author's imagination rather than around the truth.
 
 ## R-010 — Gate 3.1-R was also written by the session that found its fault
-**STATUS: OPEN · P1 · flagged 2026-07-26 by the session that built the repair**
+**STATUS: FAILED 2026-07-27 · P1 · flagged 2026-07-26 by the session that built
+the repair · reviewed by the 2026-07-27 session, which built none of it**
+
+### >>> VERDICT 2026-07-27: **FAILED. THREE OF FIVE NEW SABOTAGES WALKED THROUGH.**
+
+Same reviewer, same rig, same discipline — predictions written before the run,
+control passed first.
+
+    F7   "information, not a signal" -> "buy when others are
+         fearful" ................................................. ESCAPED
+    F8   "   >> strong buy signal" appended to the reading line .... ESCAPED
+    F9   "from alternative.me" -> "from CNN Business", a source
+         this ship has never called ............................... ESCAPED
+    F10  the two context values swapped ........................... caught
+    F11  history cut to 2 days, the week-ago point disappears ...... caught
+
+**BOTH DOUBTS ITS AUTHOR RECORDED WERE CORRECT, and both were worse than
+stated.** Doubt (1), the substring match: F8 printed **`>> strong buy signal`
+on the Context Deck of a ship whose founding rule is INFORMATION, NEVER A
+SIGNAL**, and the gate applauded. Doubt (2), the unverified disclaimer: F7
+rewrote that very rule into advice and nothing noticed.
+
+**A FOURTH FINDING NOBODY HAD SUSPECTED, from a sabotage that was CAUGHT.**
+F11 failed the run — but look at WHICH line failed: **sabotage F3 escaped its
+own drill** (`✗ F3 … ESCAPED AGAIN — GATE IS DECORATIVE`). The drill read
+`HISTORY_LIMIT` from the module it was testing, **so breaking that constant
+disarmed the detector.** Funding had solved this exact problem with its private
+`GATE_CONTRACTS`; this file never did the same for its constant.
+
+**REMEDY SHIPPED the same day** — Gate 3.1-R2, same declaration commit
+`c69a71b` (no `.py`), built in `975c125`. Whole-block exact equality, the
+disclaimer guarded verbatim, the gate's own `GATE_LIMIT` compared against the
+module's, eleven permanent sabotages, all caught. Production lines 1-112
+byte-identical by sha256.
+
+**R-010 DOES NOT MOVE TO CLEARED, for the same reason as R-009. Filed as
+R-011.**
 
 **What to review.** `cockpit/fear_greed.py`'s rebuilt smoke test: the
 printed-sentence check and the permanent six-sabotage drill.
@@ -445,6 +536,56 @@ extra rubbish would still pass; **(2)** nothing verifies the fixed words
 INFORMATION-not-a-signal disclaimer could be edited or deleted and no check
 would notice. **The same gap exists in `cockpit/funding.py` for its
 "positive = longs pay shorts" line, and neither was closed today.**
+
+## R-011 — Gate 3.2-R2 and 3.1-R2 were written by the session that failed their predecessors
+**STATUS: OPEN · P1 · flagged 2026-07-27 by the session that built the repair**
+
+**What to review.** The whole-block equality check, the verbatim wording guard,
+the rotating partial drill, and the ten new permanent sabotages on both
+instruments.
+
+**Why it needs an outside eye.** **Third generation of the same structure.** The
+session that found the fault wrote the patch and graded it — exactly what R-001,
+R-009 and R-010 were each raised to catch. **Twenty-two sabotages now live in
+the two files and all twenty-two were invented by sessions that then defended
+against them.**
+
+**THREE SPECIFIC DOUBTS THIS SESSION COULD NOT SETTLE ABOUT ITS OWN WORK**,
+offered as starting points and NOT as the assignment:
+
+1. **THE GATE NOW CONTAINS A COPY OF THE EXACT WORDS THE BRIEF PRINTS.** The
+   next time anyone legitimately improves that wording, the gate will fail —
+   **and the obvious move will be to edit the gate to match.** That is how a
+   gate gets fitted to the code instead of the code to the gate, and it is the
+   very failure R-001 was convicted of. **Changing the gate's copy of the
+   wording must be a deliberate, recorded act — but nothing enforces that.**
+2. **THE PERMANENT SABOTAGES CORRUPT OUTPUT, NOT THE FILE.** S7-S11 and F7-F11
+   wrap `section_text` and rewrite what it returns. That proves the checks can
+   say no to a corrupted SENTENCE. **It does not prove they would say no to
+   every corrupted CODE PATH that could produce one.** The scratch rig, which
+   edits the files for real, showed ten of ten caught **on 2026-07-27 only** —
+   it is not part of the gate and does not run again.
+3. **NOTHING CHECKS THAT A GATE'S OWN DESCRIPTION MATCHES WHAT IT DOES.** This
+   session's first working version announced "six ways" while running eleven,
+   and printed "GATE 3.2-R PASSED" from Gate 3.2-R2. Caught by reading, not by
+   a check. **A gate that misdescribes its own scope gets quoted later as
+   evidence of something it never tested.**
+
+**Evidence.** Declaration `c69a71b` (no `.py` in it, on purpose). Build
+`975c125`. The 2026-07-27 `PROGRESS_LOG.md` entries.
+
+**Reproduce.** `python cockpit\funding.py` and `python cockpit\fear_greed.py` —
+each breaks itself eleven ways and must catch all eleven. **Then write a
+TWELFTH of your own.**
+
+**A clean verdict looks like.** A reviewer who did not build it invents at least
+one NEW sabotage per instrument and finds it caught — or finds it escapes and
+says so. **"The eleven pass" is not a clean verdict; it is the claim under
+review.**
+
+**Failed looks like.** A twelfth lie walks through — in which case the gate is
+still shaped around its author's imagination, three generations deep, and the
+Commander should hear plainly that separation-in-time has stopped paying.
 
 ---
 
