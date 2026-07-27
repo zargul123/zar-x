@@ -3520,3 +3520,103 @@ correct text describing corruption, not corruption.
 own documents.** It was found by looking, as it was last time. **A one-line scan
 for these markers costs nothing and would have caught both.** Recommended to the
 Commander, not adopted by a session on its own authority.
+
+---
+
+## 2026-07-27 — STEP 3.2b: **THE FACTS RE-MEASURED AND THE TWO DECISIONS MADE BEFORE ANY CODE EXISTS**
+## **AND THE ORDERS' EDGE CASE TURNS OUT TO REST ON A FALSE PREMISE**
+
+*Committed **ALONE, with no `.py` file in it** (Law 4). Gate 3.2b itself was
+declared 2026-07-26 and last committed in `e951812`, documents only — this entry
+does not change a single bar of it. It re-measures the facts the gate stands on
+and settles, in advance, the two design questions the orders said must not be
+improvised mid-build.*
+
+**THE COMMANDER'S DECISION, RECORDED FIRST.** `THE_PATTERN.md` says Part 2 is
+conditional and a session that finds a real problem fixes it and stops. Part 1
+found one and it was fixed. **The Commander directed that Step 3.2b be built in
+the same session anyway, with the next session verifying both.** Recorded as his
+call, not a session's drift. **The reason it is a safe call: the recorder is a
+NEW part in `data/`, it touches no cockpit file, and it does not build on top of
+the repair under review (R-011), which stays open regardless.**
+
+### THE MEASURED FACTS, RE-PROBED 2026-07-27 — ALL SIX CONFIRMED, NONE MOVED
+
+    /fapi/v1/openInterest?symbol=BTCUSDT   HTTP 200
+      {"symbol":"BTCUSDT","openInterest":"104718.877","time":1785157271376}
+
+    /futures/data/openInterestHist?symbol=X&period=4h&limit=500   HTTP 200
+      BTCUSDT  180 rows  2026-06-27 16:00 → 2026-07-27 12:00  (29.8 days)
+      ETHUSDT  180 rows  2026-06-27 16:00 → 2026-07-27 12:00  (29.8 days)
+      SOLUSDT  180 rows  2026-06-27 16:00 → 2026-07-27 12:00  (29.8 days)
+      keys: CMCCirculatingSupply · sumOpenInterest · sumOpenInterestValue
+            · symbol · timestamp
+
+    bogus symbol   HTTP 200 + []      ← THE TRAP IS STILL THERE, unchanged
+    startTime 60 days back            HTTP 400 {"code":-1130,...}
+    rows at limit=500   5m→500/1.7d · 1h→500/20.8d · 4h→180/29.8d · 1d→30/29.0d
+
+**`period=4h` remains the only setting that covers the whole window in one
+request per asset.** Nothing in the orders' fact table needs correcting.
+
+### DECISION 1 — **THE NEWEST ROW IS STORED. THE ORDERS' EDGE CASE DOES NOT EXIST.**
+
+The orders required a decision, before coding, on whether the newest row — for a
+period that may not have closed — is stored or held back, warning that
+idempotence would otherwise fail intermittently.
+
+**MEASURED, because "may not have closed" was an assumption nobody had tested:**
+
+    the three newest 4h rows, each compared to the 5m row stamped at the
+    SAME instant:
+      4h 2026-07-27 04:00 = 104206.93000000   5m same instant = 104206.93000000
+      4h 2026-07-27 08:00 = 104270.78300000   5m same instant = 104270.78300000
+      4h 2026-07-27 12:00 = 104709.05300000   5m same instant = 104709.05300000
+    and across all three assets: 33 of 33 overlapping rows IDENTICAL.
+    Meanwhile the 5m series keeps moving after the 4h stamp
+    (12:05 104928.838 · 12:10 105084.678 · 12:15 105014.337 ...)
+    while the 12:00 4h row does not.
+
+**THE 4h ROW IS A POINT SAMPLE TAKEN AT THE STAMPED INSTANT — not a running
+aggregate over the following four hours.** It is final the moment it appears,
+so **there is no such thing as an incomplete period here**, and holding the
+newest row back would discard the freshest reading for no reason.
+
+**DECISION: store every row Binance returns, including the newest.** At the time
+of writing, the newest row (12:00) belongs to a period that will not close until
+16:00 UTC — **so this decision is being exercised immediately, not theoretically.**
+
+**FIFTH TIME A MEASUREMENT HAS OVERRULED A PLANNING DOCUMENT ON THIS SHIP, and
+the measurement wins.** The orders were right to demand the decision in advance;
+the premise behind the warning was simply untested.
+
+**THE SAFETY NET THAT MAKES THIS SAFE EVEN IF THE MEASUREMENT IS WRONG:** the
+recorder never rewrites a stored row, and a re-read that disagrees with one is
+**reported loudly as a finding** (Gate 3.2b check (e)). If open interest rows
+ever do move, this recorder says so instead of silently corrupting the file.
+**Filed for an independent eye as part of R-012.**
+
+### DECISION 2 — **`CMCCirculatingSupply` IS NOT STORED**
+
+The payload carries it whether we want it or not, and the orders say it is
+stored deliberately or not at all, never by accident. **It is not stored**, for
+three stated reasons: it is a circulating-supply figure, not open interest, so
+it does not belong in a file named for open interest; **unlike open interest it
+is recoverable from many sources at any later date**, so nothing is lost
+permanently by omitting it; and a column nobody uses invites a future session to
+mistake what the file means. **Deliberate. Recorded. Reversible later.**
+
+### THE SHAPE, FIXED BEFORE CODING
+
+    data/oi_history/BTCUSDT_4h.csv   (and ETHUSDT, SOLUSDT)
+    columns: timestamp,symbol,sumOpenInterest,sumOpenInterestValue
+    timestamp: UTC ISO 8601, e.g. 2026-07-27T12:00:00Z
+    append-only · de-duplicated on (symbol, timestamp) · never rewritten
+    an empty result is a LOUD FAILURE, never "no new data"
+    on any failure: report honestly and write NOTHING (Law 3)
+    injectable base_url so the offline drill needs no disconnection
+    a sabotage drill built in FROM BIRTH, per Gate 3.2b check (h)
+
+**GATE 3.2b IS UNCHANGED — all nine bars (a) to (i) as declared, and not one of
+them is softened here.** If the build cannot meet a bar, that is a FAILED bar
+reported honestly, never a number tuned until it passes.
