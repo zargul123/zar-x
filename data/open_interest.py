@@ -263,6 +263,24 @@ if __name__ == '__main__':
     import shutil
     import tempfile
 
+    # --- `--record`: DO THE JOB, don't test it ---------------------------
+    # The monthly laptop task calls this. It is deliberately NOT the gate:
+    # the gate makes many extra requests, writes to scratch directories, and
+    # its exit code answers "is the test suite green?" — a different question
+    # from "was the data recorded?". A scheduled task must exit non-zero when
+    # THE JOB failed, or the alarm is decorative.
+    if '--record' in sys.argv:
+        print(f"Zar X open-interest recorder — "
+              f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC")
+        recorded, report = run()
+        for line in report:
+            print(line)
+        if recorded:
+            print("Recorded. The 30-day window is captured.")
+        else:
+            print("NOT RECORDED — see the lines above. Nothing was written.")
+        sys.exit(0 if recorded else 1)
+
     ok = True
     print("GATE 3.2b — the open-interest recorder's self-test.")
     print("It breaks itself on purpose and requires every break to be CAUGHT,")

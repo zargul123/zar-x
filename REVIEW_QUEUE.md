@@ -623,10 +623,18 @@ and NOT as the assignment:
    — a recorder that imports the cockpit is no longer a sealed compartment.
    **But that means bar (f) is the one bar the program does not check**, and a
    tally counts only what a machine checked.
-3. **NOTHING PROVES THE RECORDER IS EVER RUN.** It is not scheduled; that is the
-   Commander's decision and is on his desk. **A recorder nobody runs collects
-   nothing, and there is no alarm anywhere on this ship for "the open-interest
-   file has not grown in two months."**
+3. **~~NOTHING PROVES THE RECORDER IS EVER RUN.~~ SCHEDULED 2026-07-27** on the
+   Commander's instruction: task `ZarX Open Interest`, day 1 of every month,
+   09:00, laptop, with StartWhenAvailable so a laptop that was off catches up.
+   **TWO THINGS STILL UNPROVEN AND THEY BELONG TO THE NEXT REVIEWER:**
+   **(a)** the task's commit-and-push branch **has never run against real new
+   rows** — only the "nothing to commit" branch has, because no 4h period
+   closed during the session that built it. The command sequence was proved
+   correct in a throwaway repo. **Read `journal/daily_runs.log` after 1 August
+   and confirm it actually committed, rather than assuming.**
+   **(b) there is still no alarm anywhere on this ship for "the open-interest
+   file has not grown in two months."** The schedule makes that unlikely; it
+   does not make it detectable.
 4. **THE 10% PLAUSIBILITY BAR IN CHECK (g) IS A GUESS.** It compares a stored
    point sample up to 4h old against a live snapshot; it measured 0.03% today.
    **The bar was chosen by feel, exactly like `MAX_PLAUSIBLE_RATE = 0.05` was**

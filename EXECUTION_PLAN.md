@@ -390,9 +390,14 @@ under review.
 
 **THE 30-DAY WINDOW IS NO LONGER EXPIRING UNRECORDED.** BTC/ETH/SOL,
 2026-06-27T16:00Z → 2026-07-27T12:00Z, 180 rows each, idempotent on re-run.
-**But it is NOT SCHEDULED — that is on the Commander's desk and must run on his
-laptop, never the cloud watchman (US-hosted runners are geo-blocked by
-Binance).**
+**AND IT IS NOW SCHEDULED**, on the Commander's instruction: task
+`ZarX Open Interest`, day 1 of every month, 09:00, on his laptop — never the
+cloud watchman, whose US-hosted runners Binance geo-blocks. It catches up if the
+laptop was off, runs on battery, and preserves the rows to GitHub and OneDrive.
+**`schtasks` reported SUCCESS while creating a BROKEN task** (it split the path
+at the space in "zargul trader"); caught by running it and reading the log, not
+by trusting the report. **The commit-and-push branch has still never fired
+against real new rows — the first run after 1 August is its test.**
 
 **NOTHING IS CERTIFIED. R-001, R-002, R-004, R-008, R-009 and R-010 are FAILED;
 R-006, R-007, R-011 and R-012 are OPEN.** Both of today's deliverables were

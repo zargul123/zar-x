@@ -3745,3 +3745,86 @@ across `funding.py` (11), `fear_greed.py` (11) and `open_interest.py` (6), all
 **And nothing is certified.** R-011 stands against this morning's repair, R-012
 is filed against this afternoon's build, and **both were written by the session
 that built them.** The next session's first job is to attack both.
+
+---
+
+## 2026-07-27 — **THE RECORDER IS SCHEDULED. MONTHLY, ON THE COMMANDER'S LAPTOP.**
+
+**His decision, taken on the facts:** the cloud watchman cannot do this job —
+GitHub's runners are US-hosted and Binance geo-blocks US addresses, so a cloud
+recorder might collect nothing, silently, for weeks, on the one dataset that
+cannot be recovered.
+
+### WHAT WAS SET UP
+
+    Task name : ZarX Open Interest
+    Runs      : day 1 of every month, 09:00, on the laptop
+    Action    : run_oi_recorder.bat  (new file, matching the pattern the five
+                existing alarms already use)
+    Command   : data\open_interest.py --record
+
+**`--record` is a NEW MODE and is deliberately not the gate.** The gate makes
+many extra requests, writes to scratch directories, and its exit code answers
+*"is the test suite green?"* — **a different question from "was the data
+recorded?"**. A scheduled task must exit non-zero when THE JOB failed, or the
+alarm is decorative. Added inside `__main__`: the production half of
+`data/open_interest.py` is byte-identical by sha256 (`9189c08fe67563ae` before
+and after) and Gate 3.2b still exits 0.
+
+**THREE LAPTOP SETTINGS THAT MATTER MORE THAN THE SCHEDULE ITSELF:**
+
+    StartWhenAvailable          True    <- if the laptop was off on the 1st,
+                                           Windows runs it as soon as it is on
+    DisallowStartIfOnBatteries  False   <- Windows skips tasks on battery BY
+                                           DEFAULT; on a laptop that default
+                                           would have quietly disabled it
+    StopIfGoingOnBatteries      False
+
+**The task also preserves the rows off this laptop:** a scoped git add / commit
+/ push of `data/oi_history` only, plus a copy to `OneDrive\ZarX\oi_history`.
+**Data that exists on one disk is one disk failure away from not existing.**
+
+### WHAT WENT WRONG — AND IT WOULD HAVE FAILED SILENTLY EVERY MONTH (Law 1)
+
+**`schtasks /Create` reported "SUCCESS" and created a BROKEN TASK.** It stripped
+the quotes around the path and split it at the space in *"zargul trader"*:
+
+    Execute   : C:\Users\hp\Downloads\zargul
+    Arguments : trader\zar-x\run_oi_recorder.bat
+
+**Running it returned code 2147942402 — "the system cannot find the file
+specified".** Rebuilt with PowerShell's `New-ScheduledTaskAction`, which handles
+spaces properly, then re-run: **result code 0**, and the log confirms it
+actually recorded rather than merely exiting cleanly.
+
+**THE LESSON IS THE SAME ONE THIS SHIP KEEPS LEARNING: "SUCCESS: the scheduled
+task has successfully been created" IS NOT EVIDENCE THAT IT RUNS.** It was
+caught by running it and reading the log, not by trusting the tool's own report.
+**A month would have passed before anyone noticed, and the window would have
+rolled.**
+
+**A SECOND HAZARD, FOUND AND CLOSED BEFORE IT SHIPPED:** the first draft of the
+`.bat` ran a bare `git commit`, **which would have swept up whatever a session
+happened to leave staged.** Every git command is now restricted to
+`data/oi_history` with an explicit pathspec. **Proved in a throwaway repo rather
+than asserted:** with unrelated work deliberately left staged, the task
+committed only the CSV and left that work untouched and uncommitted.
+
+### WHAT IS NOT PROVEN
+
+**The commit-and-push branch has never run against REAL new rows** — only the
+"nothing to commit" branch has, because no new 4h period closed during this
+session. The command sequence was proved correct in a scratch repo. **Filed in
+R-012: the first real monthly run is the test, and the next session should read
+the log after 1 August rather than assume it worked.**
+
+**`CHECK_STATUS.bat` now lists the new alarm** beside the other six. Verified:
+all seven report OK.
+
+    ZarX Morning Brief       27-Jul 12:11  OK
+    ZarX Snapshot 0105       27-Jul 12:11  OK
+    ZarX Snapshot 0505       27-Jul 12:11  OK
+    ZarX Snapshot 1305       27-Jul 13:05  OK
+    ZarX Snapshot 1705       27-Jul 17:05  OK
+    ZarX Evening Snapshot    26-Jul 21:05  OK
+    ZarX Open Interest       27-Jul 18:23  OK

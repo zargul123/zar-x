@@ -299,14 +299,16 @@ clean.**
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **THE OPEN-INTEREST RECORDER IS NOT SCHEDULED, AND THIS IS THE LIVE ONE.**
-   A recorder that is never run collects nothing, on the only dataset that
-   cannot be recovered. **It must run on his LAPTOP, not the cloud watchman** —
-   GitHub's runners are US-hosted and Binance geo-blocks US addresses, so a
-   cloud recorder might collect nothing, silently, for weeks. The command:
-   `C:\Users\hp\miniconda3\envs\tfdml\python.exe data\open_interest.py`
-   **Monthly is enough** — every read reaches back 30 days, so nothing is lost
-   unless two months pass with no run. **Presented, not decided.**
+1. **THE OPEN-INTEREST RECORDER IS SCHEDULED — DONE 2026-07-27, HIS CALL.**
+   Task `ZarX Open Interest`, day 1 of every month, 09:00, on the laptop (never
+   the cloud watchman: US-hosted runners are geo-blocked by Binance). It catches
+   up if the laptop was off, runs on battery, pushes to GitHub and copies to
+   OneDrive, and appears in `CHECK_STATUS.bat` beside the other six alarms.
+   **WHAT IS STILL OWED TO HIM: the commit-and-push branch has never fired
+   against real new rows.** Read `journal/daily_runs.log` after 1 August and
+   tell him plainly whether it committed. **Do not assume it worked because the
+   task returns 0 — `schtasks` already reported SUCCESS once for a task that
+   could not run at all.**
 2. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2.
 3. **The risk-doctrine decision** — the 25% position cap means real risk is
    ~0.49% per trade, not the intended 1%. **Settled BEFORE Phase 6, never after
