@@ -3828,3 +3828,54 @@ all seven report OK.
     ZarX Snapshot 1705       27-Jul 17:05  OK
     ZarX Evening Snapshot    26-Jul 21:05  OK
     ZarX Open Interest       27-Jul 18:23  OK
+
+---
+
+## 2026-07-27 — **THE ORDERS NOW OPEN IN PLAIN WORDS, BY THE COMMANDER'S INSTRUCTION**
+
+**He asked for it directly**, having read this session's report to him and said:
+write the next session's brief like that, so the next session follows it.
+
+### WHAT CHANGED
+
+**`SESSION_ORDERS.md` now opens with `THE BRIEF, IN PLAIN WORDS — READ THIS
+BEFORE ANYTHING ELSE`**, ahead of every bar and command: where the ship is, what
+happened in the three sessions before, the three jobs in order, why job 3 is not
+routine, how to attack properly, what a session is allowed to conclude, and what
+belongs to the Commander. **The technical orders are unchanged and follow it
+intact** — nothing was softened or removed, and the plain section adds no new
+requirement that the bars do not already carry.
+
+**`THE_PATTERN.md` gained a step 7 to the closing ritual.** That file holds
+still on purpose and is edited only when a session earns a genuinely new lesson.
+**This edit is NOT a lesson a session earned — it is a standing instruction from
+the Commander, and it is recorded as such rather than dressed up as a
+discovery.** It lives there because **`SESSION_ORDERS.md` is rewritten from
+scratch every session and `THE_PATTERN.md` is not.** An instruction that only
+exists in a file which gets replaced would survive exactly one session.
+
+### WHY IT MATTERS MORE THAN A FORMATTING PREFERENCE
+
+**The Commander is not a programmer, and he is the only person who can overrule
+a session.** Every genuine correction this ship has made to its own course was
+possible because he could follow the argument well enough to say "no" or "do it
+anyway". **An instruction he cannot read is an instruction he cannot refuse.**
+
+A ship whose planning documents are legible only to their authors is a ship
+steered by whoever writes the densest document. That is the same failure shape
+as a gate legible only to its author — and this ship has now failed that way
+three times running.
+
+### A SMALL CORRECTION OWED TO HIM, RECORDED
+
+The by-hand command handed to him in this session's report **omitted the
+folder**, so running it from the directory he happened to be in failed with
+`can't open file ... No such file or directory`. **The path was right and the
+starting point was missing** — a session's error, not his. The working form:
+
+    cd "C:\Users\hp\Downloads\zargul trader\zar-x"
+    C:\Users\hp\miniconda3\envs\tfdml\python.exe data\open_interest.py --record
+
+Verified before being handed over this time. **He does not need it — the monthly
+task runs it — but a command given to the Commander should work when he types
+it.**

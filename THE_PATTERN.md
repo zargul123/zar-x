@@ -132,6 +132,19 @@ memory of you.** If a stranger could not act on it, it is not finished.
 
 **6. Commit. Push.**
 
+**7. `SESSION_ORDERS.md` OPENS WITH THE STORY, IN PLAIN WORDS, AND THE COMMANDER
+GETS THE SAME.** Added 2026-07-27 **at the Commander's explicit instruction**,
+not because a session liked the idea. Before the bars and the commands, the
+orders carry a plain-English brief: where the ship is, what happened just
+before, what this session must do, and why. **Then report to him the same way** —
+what you tried, what broke, what held, what you got wrong, and what decision is
+his.
+
+**The reason is not politeness. He is not a programmer, and he is the only
+person who can overrule a session.** An instruction he cannot read is an
+instruction he cannot refuse, and a ship where the Commander cannot follow the
+argument is a ship being steered by whoever writes the densest document.
+
 ## `THE_PATTERN.md` IS THE EXCEPTION — DO NOT REWRITE IT EVERY SESSION
 
 The five files above change every session. **This one holds still on purpose.**

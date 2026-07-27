@@ -8,6 +8,132 @@ everything.** Twenty-eight sabotages now live in three files and **all
 twenty-eight were invented by the sessions that then defended against them.**
 You are the first pair of eyes that built none of it.*
 
+---
+
+# THE BRIEF, IN PLAIN WORDS — READ THIS BEFORE ANYTHING ELSE
+
+*The rest of this file is the exact bars and commands. This part is the story,
+so you understand WHY before you read WHAT. The Commander is not a programmer
+and asked for it in this form. Write your own report to him the same way.*
+
+## Where the ship is
+
+Three parts of this ship now **break themselves on purpose every time they
+run**, and refuse to pass if any breakage goes unnoticed. Twenty-eight
+deliberate lies live in the code; all twenty-eight are caught.
+
+That sounds like strength. **Read it again: every one of those twenty-eight was
+invented by the same session that then defended against it.** A gate is
+strongest exactly where somebody has already attacked it. Nobody has attacked
+these anywhere else.
+
+## What happened just before you
+
+Three sessions in a row have each found real holes in the work of the session
+before.
+
+- One found a gate reporting **48 checks out of 48** while four deliberate lies
+  walked straight through it.
+- The next put the same knife into the other instrument: **five of six lies got
+  through.**
+- The third — the one that wrote these orders — threw ten new lies at both
+  repaired gates and **seven got through.** One printed
+  *"positive = shorts pay longs"*, **the exact opposite of how the market
+  works**, next to three perfectly correct numbers, and the gate said PASSED.
+  Another printed *">> strong buy signal"* on a ship whose first rule is
+  INFORMATION, NEVER A SIGNAL, and the gate applauded.
+
+**The cause every single time was the same.** Every check asked *"is the right
+text in there somewhere?"* — a question that can never notice something **added**,
+and never once looked at the fixed words. It was fixed the same day. **The fix
+has not been checked by anyone.**
+
+**Every one of those holes was found by a session that was ORDERED TO BREAK
+THINGS. Not one was found by a session being careful.** That is why your orders
+say what they say.
+
+## Your job, and you are not building anything
+
+**Three deliverables shipped in one day and not one has been looked at by
+anyone but the person who made it.** The build queue waits. Do these three, in
+this order.
+
+**1. Try to break the two Context Deck instruments.** They each catch eleven
+lies. Invent a **twelfth** for each. Report the result either way.
+
+**2. Try to break the open-interest recorder.** It is the newest part, nobody
+has ever attacked it, and it guards the only data on this ship that **cannot be
+bought back at any price** — Binance keeps 30 days and refuses anything older.
+Invent a **seventh** sabotage for it.
+
+**3. And do this one FIRST, before inventing anything.** Check that each of the
+recorder's six existing sabotages **actually fails for the reason its label
+claims.**
+
+## Why job 3 is not routine
+
+One of them didn't.
+
+Sabotage **B5** was recorded as **CAUGHT** — while never reaching the check it
+was written to prove. It crashed two lines earlier and collected a tick mark
+anyway. Its author found it by **reading** the drill, not by any test, and had
+warned the next session about that exact trap six hours before walking into it.
+
+**A test can lie about itself in precisely the way the code it guards can.** If
+one drill was passing for the wrong reason, look at the other five. **If you
+find another, that outranks everything else you could do this session.**
+
+## How to attack properly
+
+- **Write down what you are going to try, and what you predict will happen,
+  BEFORE you run it.** The last session predicted ten out of ten correctly, and
+  that is what proved the holes were structural rather than luck. It also makes
+  it impossible to reinterpret a result once you have seen it.
+- **Work on copies OUTSIDE the repo.** Never break the real files. Check
+  `git status` is clean when you are done.
+- **Run the untouched copy first.** If the healthy version does not pass, your
+  setup is broken and nothing you conclude means anything.
+- **Watch your own test.** A sabotage that CRASHES is scored as "caught" — so a
+  sabotage that never really ran looks like a success. **Print what your broken
+  version produces and confirm it is visibly wrong before you believe the
+  verdict.** This ship has fooled itself this way twice.
+
+## What you are allowed to conclude
+
+**"I attacked it and found nothing" is a real, honest, valuable result.** Say it
+plainly and clear the items.
+
+**Do NOT invent a fault to justify the session.** After three sessions that each
+found something big, the pull to also find something is real and it is a trap.
+This ship needs to see a clean review eventually.
+
+**You may clear R-011 and R-012** — you built neither. **You may never clear
+R-006**, the Phase 6 independent review; no in-house session can, ever.
+
+**And if you fix something, you may not clear your own fix.** File a new item
+against it and leave it open for whoever comes next. That rule is the only
+reason any of these holes were ever found.
+
+## Before you finish
+
+Write down what happened — **your mistakes as plainly as your successes.** That
+is Law 1 and it is the reason this ship can be trusted at all. Then update the
+five documents in order, commit, and push. The full list is at the bottom of
+this file.
+
+**Then write the Commander a report in plain words, like this section.** He is
+not a programmer. Tell him what you tried, what broke, what held, what you got
+wrong, and what decision is his.
+
+## What is his, not yours
+
+Do not decide these by default, and do not let them drop: the risk-doctrine
+decision, tightening `MAX_PLAUSIBLE_RATE`, the TwelveData key, and the five law
+candidates. They are listed at the bottom. **A session does not promote its own
+idea to law.**
+
+---
+
 ## WHAT YOU ARE NOT DOING
 
 **YOU ARE NOT BUILDING ANYTHING.** No Step 3.3, no Whale Watch instrument, no
