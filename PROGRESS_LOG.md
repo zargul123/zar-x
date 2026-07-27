@@ -3170,3 +3170,178 @@ em-dashes, mid-dots, arrows and tick marks.
 
 **Recorded because Law 1 says wrongs as plainly as rights, and because this one
 was invisible in the terminal output that reported success.**
+
+---
+
+## 2026-07-27 — PART 1: **THE SEVENTH SABOTAGE. SEVEN OF TEN WALKED THROUGH.**
+## **R-009 FAILED. R-010 FAILED. GATE 3.2-R2 AND GATE 3.1-R2 DECLARED BEFORE ANY CODE EXISTS.**
+
+*Written by a session that built neither instrument, neither gate, and neither
+repair. This entry is committed **ALONE, with no `.py` file in it** (Law 4), so
+`git show --stat` proves the bar existed before the work.*
+
+### WHAT WAS ASKED, AND THE BARS LOCKED BEFORE ANYTHING RAN
+
+`SESSION_ORDERS.md` 1.0 set four bars for "PART 1 clears": (1) a seventh
+sabotage against Gate 3.2-R, recorded either way; (2) the same against Gate
+3.1-R; (3) any leak repaired under a gate declared before the code exists;
+(4) `lab/` byte-identical, vault INTACT 6/6, Brief 3/3.
+
+**All ten attacks and a written PREDICTION for each were recorded before the
+first run**, in scratchpad notes, so no result could be reinterpreted after the
+fact. **Ten predictions, ten correct.** That is stated not as a boast but as
+evidence the holes are structural rather than lucky: they were derivable from
+reading the checks.
+
+### THE RIG
+
+Scratch copies of both files OUTSIDE the repo. **CONTROLS FIRST** — both
+untouched instruments exited 0, so the rig was valid and every later failure is
+attributable to the sabotage rather than the harness. One sabotage per run, each
+applied to a fresh copy of the original by exact text replacement, the
+replacement asserted to match exactly once or the run is refused. `git status`
+clean throughout and afterwards.
+
+### THE RESULT — **SEVEN OF TEN ESCAPED**
+
+    funding.py — GATE 3.2-R
+    S7   "positive = longs pay shorts" -> "shorts pay longs",
+         every digit still correct ................................. ESCAPED
+    S8   a fabricated fourth asset "  ·  XRP +0.0100%" appended
+         to the line, fetched from nowhere ......................... ESCAPED
+    S9   "— crowd positioning, information, not a signal" deleted .. ESCAPED
+    S10  a failed asset vanishes without being named ............... caught
+    S11  the missing-asset name hardcoded to SOL, so any asset's
+         failure is reported as SOL's .............................. ESCAPED
+
+    fear_greed.py — GATE 3.1-R
+    F7   "information, not a signal" -> "buy when others are
+         fearful" .................................................. ESCAPED
+    F8   "   >> strong buy signal" appended to the reading line .... ESCAPED
+    F9   "from alternative.me" -> "from CNN Business", a source
+         this ship has never called ................................ ESCAPED
+    F10  the two context values swapped (yesterday shows the
+         week-ago number) .......................................... caught
+    F11  history cut to 2 days, the week-ago point disappears ...... caught
+
+**S7 is the one that matters most.** The instrument printed
+`positive = shorts pay longs` — **the exact opposite of how the market works** —
+beside three perfectly correct numbers, and Gate 3.2-R printed
+*"GATE 3.2-R PASSED … all six deliberate sabotages were caught"* and exited 0.
+That is precisely the failure the rebuild was justified by, closed for DIGITS
+and left open for WORDS.
+
+**F8 is the one that offends the ship's founding rule.** The Context Deck
+printed `>> strong buy signal` and the gate applauded. INFORMATION, NEVER A
+SIGNAL is the first thing in `README.md`.
+
+### WHAT THE HOLE ACTUALLY IS — one sentence, three shapes
+
+**Every check on both instruments asks "is this expected string PRESENT?" None
+asks "is anything ELSE present?", and none checks the fixed words at all.**
+
+1. **UNGUARDED FIXED TEXT** (S7, S9, F7, F9). **This was already known** — the
+   previous session named it in R-010 and in the position marker's "KNOWN GAP"
+   note, and did not close it. **This session's contribution is that it is now
+   MEASURED rather than suspected**, and S7 shows it is not a cosmetic gap.
+2. **SUBSTRING CHECKS PERMIT ADDITIONS** (S8, F8). Filed as a doubt against
+   Fear & Greed only, never demonstrated, **and never applied to funding at
+   all.** A whole asset can be invented onto the Brief.
+3. **THE PARTIAL-FAILURE PATH CAN NAME THE WRONG ASSET** (S11). Not previously
+   suspected by anyone. The permanent drill uses SOL as its bogus symbol, so
+   the test agrees with the lie.
+
+### A FOURTH FINDING, FROM A SABOTAGE THAT WAS CAUGHT
+
+F11 was caught — but look at **which** line failed. With `HISTORY_LIMIT` cut to
+2, sabotage **F3 escaped its own drill** (`✗ F3 … ESCAPED AGAIN — GATE IS
+DECORATIVE`). **The drill reads the constant from the module it is testing, so
+breaking that constant disarms the detector.** Funding solved this exact problem
+by holding a private copy of the ticker map (`GATE_CONTRACTS`); Fear & Greed
+never did the same for its constant. **A test that trusts the thing it is
+testing is the shape of every failure recorded on this ship so far.**
+
+### VERDICT
+
+**R-009 — FAILED.** **R-010 — FAILED.** Both gates are still shaped around
+their author's imagination. R-001 stays FAILED with them; the independent review
+it was waiting for has now happened and did not clear it.
+
+Bars 1, 2 and 4 met (`git status` clean, vault INTACT 6/6, Brief 3/3, both
+instruments, one deck header). **Bar 3 — the repair — is what follows.**
+**PART 2, Step 3.2b, does NOT happen this session.** The 30-day open-interest
+window keeps expiring and that is the correct price to pay.
+
+---
+
+# GATE 3.2-R2 (funding) AND GATE 3.1-R2 (Fear & Greed) — DECLARED HERE, BEFORE THE REPAIR EXISTS (Law 4)
+
+Fourth use of this pattern. It has survived audit each time.
+
+**(a) NOTHING THE PILOT READS CHANGES.** Every edit confined to the `__main__`
+block of each file — **proven with diff hunk line numbers, never asserted.**
+`funding.py` `__main__` is line 160; `fear_greed.py` is line 113. **No
+production line, constant, docstring or helper is touched.** `python
+cockpit\brief.py` still 3/3, both instruments, ONE deck header.
+
+**(b) THE WHOLE PRINTED BLOCK IS REBUILT AND COMPARED FOR EXACT EQUALITY.** Not
+"contains". The gate assembles the complete expected block — every line, every
+separator, every fixed word — from a raw fetch using its own arithmetic and its
+own verbatim copy of the wording, and requires the instrument's output to EQUAL
+it. **This is what kills S8 and F8: nothing can be appended to a string that
+must match exactly.** The helper under test is never called to judge itself.
+
+**(c) THE FIXED WORDS ARE GUARDED BY NAME.** Separate, named checks that these
+exact sentences are present, so a failure says WHICH sentence changed:
+- funding: `positive = longs pay shorts` and
+  `— crowd positioning, information, not a signal`
+- Fear & Greed: `(crowd-mood gauge from alternative.me — information, not a signal)`
+**Kills S7, S9, F7, F9.**
+
+**(d) THE PARTIAL-FAILURE DRILL ROTATES.** Each of the three assets takes a turn
+as the bogus symbol, and each must be named **by its own name**, with the other
+two printed. **Kills S11.** A drill that only ever breaks SOL can only ever
+prove SOL.
+
+**(e) THE FEAR & GREED GATE HOLDS ITS OWN COPY OF `HISTORY_LIMIT`**, the way
+funding holds `GATE_CONTRACTS`, and checks the module's value against it.
+**Closes the disarmed-detector finding.**
+
+**(f) ELEVEN SABOTAGES ON EACH INSTRUMENT, ALL CAUGHT, ON EVERY RUN, FOREVER.**
+The existing six plus S7–S11 and F7–F11. Originals restored afterwards and the
+restoration verified. **Any sabotage that survives fails the run.**
+
+**(g) EVERYTHING THE OLD GATES DID, THEY STILL DO.** The exact-identity settled
+check, the offline drills, the live-block checks, the day-rollover allowance and
+funding's before/after drift rule all survive unchanged.
+
+**(h) NO new file. NO new dependency. NO extra call from the Brief's path. NO
+production code changed on either instrument.** If any sabotage cannot be caught
+without changing production code, **STOP and report** — changing the instrument
+to make a test pass is how a ship gets a gate that fits the code.
+
+**(i) THE REPAIR IS PROVEN BY THE ORIGINAL ATTACK, NOT BY ITS OWN DRILL.** The
+same scratch rig that broke these files by real text edit is re-run against the
+REPAIRED files, and all ten sabotages must now be CAUGHT. **The in-run drill
+simulates corrupted output; the rig actually edits the file. The rig is the
+evidence.**
+
+**PASS = every check green on BOTH instruments, all twenty-two sabotages caught,
+and all ten scratch-rig attacks caught. Anything less is a FAIL and is not
+committed as a pass and is not called "mostly passed".**
+
+### WHAT THIS SESSION MAY NOT DO WHEN IT IS FINISHED
+
+**It may not clear R-009 or R-010.** It found the fault and is about to write
+the repair, and **a session may never clear its own work.** R-009 and R-010 are
+marked FAILED — reviewed, found wanting — and **a new item is filed against this
+session's own repair** for whoever comes next. **R-006 is not touchable by any
+in-house session, ever.**
+
+### THE COMMANDER'S STANDING DECISION, RECORDED
+
+**The funding line stays on the Brief while the guard is built.** The sign was
+re-verified against Binance twice during this session and is correct today —
+`BTC +0.0072% · ETH +0.0068% · SOL +0.0097%`, matching raw digit for digit.
+**Removing a line proven true would be obedience to wording over meaning.** The
+Commander was told plainly and can reverse it in one word.
