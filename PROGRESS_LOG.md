@@ -4533,3 +4533,150 @@ exact structure R-001, R-009, R-010, R-011 and R-013 were each raised to catch,
 one turn further down the road. **A new item is filed against this repair and
 left OPEN for whoever comes next. R-013 is marked FAILED, which is not the same
 as cleared.**
+
+---
+
+## 2026-07-28 (evening) — **GATE 3.2-R4, GATE 3.1-R4 AND GATE 3.2b-R2 PASSED. THE GATES STOP TAKING THE MODULE'S WORD FOR ANYTHING.**
+## **36 in-run sabotages caught, and all four attacks that walked through this evening are caught as real file edits.**
+
+*The repair for the four leaks recorded in the entry above. The gate was declared
+in `7f8c13d`, which contains `PROGRESS_LOG.md` and nothing else —
+`git show --stat 7f8c13d` is the proof, and it precedes this commit.*
+
+### THE BARS, AND WHAT EACH ONE MEASURED
+
+**(a) NOTHING THE PILOT READS CHANGES — PROVED TWO WAYS, NOT ASSERTED.**
+
+    sha256 of the production half, before the work and after it:
+      cockpit/funding.py       lines 1-159   3f7eec06…e0bf  ->  3f7eec06…e0bf
+      cockpit/fear_greed.py    lines 1-112   c728f794…412c  ->  c728f794…412c
+      data/open_interest.py    lines 1-242   9189c08f…9c7e  ->  9189c08f…9c7e
+
+    every diff hunk, against the __main__ line of its file:
+      cockpit/funding.py       __main__ 160   12 hunks, earliest at old line 274
+      cockpit/fear_greed.py    __main__ 113   14 hunks, earliest at old line 198
+      data/open_interest.py    __main__ 243   19 hunks, earliest at old line 263
+
+**All three production halves are byte-identical and all 45 hunks are inside
+`__main__`.** The Brief was run afterwards: **3/3 instruments reporting.**
+
+**(b) THE GATE STOPS TAKING THE MODULE'S WORD FOR ANYTHING IT JUDGES BY.**
+
+- `funding.GATE_OFFLINE_WORDS` and `fear_greed.GATE_OFFLINE_WORDS` are now typed
+  out in the gate. `GATE_OFFLINE_BLOCK` is built from the gate's copy, and
+  `_offline_checks` compares the module's constant to it **by a named check that
+  prints both strings when they differ.**
+- The two remaining guards that asked the module what its own failure looks like
+  — `if OFFLINE_WORDS in live`, in `_core_checks` and in section 1 of each gate —
+  now use the gate's copy. **A guard that asks the module to describe its own
+  failure stops recognising a failure the moment the module renames it.**
+- `open_interest.GATE_SYMBOLS` is the gate's own asset list. **Every loop in that
+  gate now runs over it** — checks (a), (b), (g), the disk-vs-source detector —
+  and check (a) compares the module's `SYMBOLS` against it by name.
+
+**(c) THE RECORDER'S `--record` BRANCH IS ACTUALLY RUN — check (j), new.** Both
+outcomes, as a real subprocess against a **copy** of the file placed in a scratch
+directory. `HISTORY_DIR` is derived from the file's own location, so the copy can
+only ever write to scratch: **`data/oi_history/` cannot be touched by this check
+even if the check is wrong.**
+
+    ✓ the job succeeded → exit 0 · 'Recorded.' printed · rows written
+      {'BTCUSDT': 180, 'ETHUSDT': 180, 'SOLUSDT': 180}
+    ✓ the job failed → exit 1 (must be NON-ZERO, or the alarm is decorative) ·
+      'NOT RECORDED' printed · files written: none
+
+**(d) THE FOUR NEW SABOTAGES ARE PERMANENT.** Funding 13 → **14** (S14), Fear &
+Greed 12 → **13** (F13), the recorder 7 → **9** (B8, B9). **36 across the three
+files, caught on every run, forever.**
+
+    ✓ S1-S14   all fourteen caught, originals restored, clean checks pass after
+    ✓ F1-F13   all thirteen caught, originals restored, clean checks pass after
+    ✓ B1-B9    all nine caught; and the restoration check now also proves every
+               asset still reaches disk and the monthly alarm still fires
+
+**B8 could not be a swapped global** — it lives in the `--record` branch, which
+only ever executes in a subprocess, **and that is exactly why nothing caught
+it.** It is applied as a real text edit to a copy, judged by the same
+`_record_alarm_fires` that check (j) uses, so the drill proves the actual check
+rather than a weaker copy that merely agrees with it.
+
+**(e) THE FOUR ORIGINAL ATTACKS, RE-RUN AS REAL TEXT EDITS AGAINST THE REPAIRED
+FILES. THIS IS THE EVIDENCE; THE IN-RUN DRILL IS NOT.** Controls run first and
+passed (exit 0). **All four now FAIL, exit 1, and each is caught by TWO
+independent checks:**
+
+    S14  GATE 3.2-R4 FAILED — ✗ the module's OFFLINE_WORDS equals the gate's
+         own copy ('Funding instrument offline')
+                             — ✗ the offline block equals the gate's own
+         verbatim copy exactly
+    F13  GATE 3.1-R4 FAILED — the same two, naming Fear & Greed's constant
+    B9   GATE 3.2b-R2 FAILED — ✗ the module's SYMBOLS ('BTCUSDT', 'ETHUSDT')
+         equals the gate's own copy ('BTCUSDT', 'ETHUSDT', 'SOLUSDT')
+                              — ✗ SOLUSDT: could not read back: FileNotFoundError
+    B8   GATE 3.2b-R2 FAILED — ✗ the job failed → exit 0 (must be NON-ZERO, or
+         the alarm is decorative)
+                              — ✗ every original restored …
+
+**(f) EVERYTHING THE OLD GATES DID, THEY STILL DO.** Every pre-existing check is
+present and green, and all 32 pre-existing sabotages are still caught.
+
+**(g) NO new file, NO new dependency, NO extra call from the Brief's path.**
+`subprocess` is standard library, imported inside `__main__` beside `shutil` and
+`tempfile`, and the Brief never executes that block. **This was named in the
+declaration BEFORE the work, not excused after it — and it is filed in R-014 so
+somebody else judges it.**
+
+**(h) THE SHIP IS STILL ALIVE.** Brief **3/3**, vault **INTACT 6/6**, `lab/`
+byte-identical, `data/oi_history/` unchanged — `git status` lists exactly the
+three edited files and nothing else.
+
+### **THE ONE SENTENCE THAT IS THE WHOLE LESSON**
+
+**A GATE THAT ASKS THE THING IT IS JUDGING WHAT THE ANSWER SHOULD BE IS NOT A
+GATE.** Yesterday's repair added four verbatim copies and got the principle right
+four times. **It never went back and asked "where else does the gate still take
+the module's word for something?" — and in three places out of three, it still
+did.**
+
+**The ship had already learned this twice and patched it twice, locally.**
+`GATE_CONTRACTS` exists because of S6. `GATE_LIMIT` exists because cutting
+`HISTORY_LIMIT` silently disarmed F3. **Both were one-off fixes to one constant
+each, made at exactly the spot somebody had already attacked, and neither was
+ever turned into a sweep of the file.** That is the same failure mode as
+yesterday's — *a lesson gets applied where it was learned and nowhere else* —
+except this time the lesson had been learned twice and applied twice, and the
+third and fourth instances were sitting in the same files the whole time.
+
+### WHAT THIS SESSION GOT WRONG OR COULD NOT SETTLE
+
+**THE REPAIR IS GRADED BY THE SESSION THAT WROTE IT.** Fifth generation of the
+structure R-001, R-009, R-010, R-011 and R-013 were each raised to catch. **Filed
+as R-014 and left OPEN. R-013 is marked FAILED, which is not clearing it.**
+
+**THE FIRST RUN OF CHECK (j) CRASHED, AND IT WAS RIGHT TO.** `_record_run`
+refused to edit the file because its `FAPI_BASE` anchor matched twice — the
+second match being **the anchor string itself, which I had just written into the
+file.** The rule "if your anchor matches more than once, refuse rather than edit
+the first match" caught its own author within a minute of his writing it. The
+anchors are now whole lines. **Recorded because it is the kind of thing that
+quietly gets fixed and never mentioned.**
+
+**THE SWEEP FOR "WHAT ELSE DOES THE GATE READ FROM THE MODULE?" WAS DONE BY EYE.**
+Three files, read by the person who wanted the answer to be "nothing else". **A
+fourth constant of the same kind would look exactly like the three that were
+found, and nothing in any gate would notice.** Filed as R-014 doubt 1.
+
+**I DID NOT TOUCH R-013's OWN FOUR REMAINING DOUBTS.** The recorder's check (e) is
+still BTCUSDT-only. The 4h-boundary exposure is still unwatched. B1 is still a
+no-op on a UTC machine. **They stay open and I looked at none of them.**
+
+**THE TWO-ASSETS-FAIL PATH IN FUNDING IS STILL GUARDED BY NOTHING.** When two of
+three assets fail, `section_text` prints `[no data: ETH, SOL]` and no check
+anywhere in Gate 3.2-R4 ever builds or compares that block. **I noticed it, did
+not attack it, and did not fix it, because the declared gate did not name it.**
+It is written into the next session's orders as a named target.
+
+**AND THE HONEST LIMIT ON THE WHOLE SESSION: four attacks, one idea — again.**
+S14, F13 and B9 are one observation on three files; B8 is a coverage gap found
+while reading for the first. **What is proven is that these four lies are now
+caught. Nothing is proven about anything else.**

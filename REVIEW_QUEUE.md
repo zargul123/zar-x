@@ -779,7 +779,8 @@ collecting nothing while the gate is argued about. **Say that out loud rather
 than switching it off.**
 
 ## R-013 — Gate 3.2-R3, 3.1-R3 and 3.2b-R were written by the session that failed their predecessors
-**STATUS: OPEN · P1 · flagged 2026-07-28 by the session that built the repair**
+**STATUS: FAILED 2026-07-28 (evening) · P1 · flagged 2026-07-28 by the session
+that built the repair, reviewed the same day by a session that built none of it**
 
 **What to review.** The exact-equality checks now guarding funding's degraded
 block, both offline blocks, and the recorder's all-symbol detector — plus the
@@ -841,6 +842,106 @@ one NEW sabotage per part and finds it caught — or finds it escapes and says s
 
 **Failed looks like.** Any new lie walks through — in which case the gates are
 still shaped around their authors' imagination, four generations deep, and the
+Commander should hear plainly that separation-in-time has stopped paying.
+
+### >>> VERDICT 2026-07-28 (evening): **FAILED. FOUR OF FOUR NEW SABOTAGES WALKED THROUGH.**
+
+*By a session that built none of the three files. Predictions were written into
+working notes before anything was run; four of four were correct. Controls run
+first — all three gates green, Brief 3/3, vault INTACT 6/6 — so the rig was
+valid. All sabotage on copies outside the repo; `git status` clean throughout.*
+
+**THE HOLE IS ONE THING IN THREE PLACES: THE GATE READ ITS OWN GROUND TRUTH OUT
+OF THE MODULE IT WAS JUDGING.**
+
+    S14  funding.py OFFLINE_WORDS reworded to carry a fabricated rate.
+         GATE_OFFLINE_BLOCK interpolated that same constant, so the gate's
+         "own verbatim copy" moved with the lie. Equality held. PASSED.
+    F13  the same in fear_greed.py. The pilot's offline line read "last known
+         reading 72 - Extreme Greed" on a day the index read 29 - Fear.
+         F12 was scored CAUGHT in the same run. PASSED.
+    B9   SYMBOLS cut from three assets to two. Every loop in the gate said
+         `for symbol in SYMBOLS`, so SOLUSDT vanished from the recorder AND
+         from its own detector. PASSED, while printing "ALL THREE assets".
+    B8   the `--record` branch the monthly task runs is exercised by nothing.
+         Exit code changed to always 0: job failed, printed NOT RECORDED,
+         wrote nothing, reported success. PASSED.
+
+**Doubt 5 of R-013's own five said it plainly — "four attacks, one idea… what is
+NOT proven is that nothing else escapes." It was right.** Doubts 1-4 remain
+unexamined: check (e) is still BTCUSDT-only, the 4h-boundary exposure is still
+unwatched, and B1 is still a no-op on a UTC machine.
+
+**R-013 DOES NOT MOVE TO CLEARED. The session that found these four faults wrote
+the repair for them and may not grade it. Filed as R-014.**
+
+---
+
+## R-014 — Gate 3.2-R4, 3.1-R4 and 3.2b-R2 were written by the session that failed their predecessors
+**STATUS: OPEN · P1 · flagged 2026-07-28 (evening) by the session that built the repair**
+
+**What to review.** `GATE_OFFLINE_WORDS` in both instruments and `GATE_SYMBOLS`
+in the recorder, each with a named check comparing the module's constant to the
+gate's own; the recorder's new check (j), which runs `--record` for real as a
+subprocess in both outcomes; and the four new permanent sabotages S14, F13, B8
+and B9. **Thirty-six sabotages now live in three files and all thirty-six were
+invented by sessions that then defended against them.**
+
+**Why it needs an outside eye.** **FIFTH GENERATION OF THE SAME STRUCTURE.**
+R-001, R-009, R-010, R-011 and R-013 were each raised to catch exactly this, and
+each time the next pair of eyes found something. **Do not read five straight
+failures as proof the fix is now good; read them as proof that one mind grading
+its own gate has never once been enough on this ship.**
+
+**FIVE SPECIFIC DOUBTS THIS SESSION COULD NOT SETTLE ABOUT ITS OWN WORK**,
+offered as starting points and NOT as the assignment:
+
+1. **THE SWEEP WAS DONE BY HAND AND BY EYE.** The claim is "no gate now derives
+   an expectation from the module under test". **Nothing enforces that.** It was
+   established by reading three files and grepping, by the person who wanted it
+   to be true. A sixth constant of the same kind would look exactly like the
+   three that were found. **The check that would close this — a gate that fails
+   when its own expectations are traceable to the module — was not built.**
+2. **CHECK (j) RUNS THE FILE AS A SUBPROCESS AND EDITS A COPY OF ITS OWN SOURCE.**
+   That is new machinery in a gate, it roughly doubles the recorder gate's
+   requests and runtime, and **a test that rewrites source text has a whole class
+   of failure the others do not.** The anchors are whole lines and it refuses on
+   an ambiguous match — which it did, correctly, on its first run, because the
+   anchor text appears in the file that contains it. **Judge whether that whole
+   approach is sound or too clever.**
+3. **`subprocess` WAS ADDED TO THE RECORDER'S `__main__`.** The declared gate
+   named this in advance rather than waving it through later, and called it
+   standard library rather than a dependency. **That was the author's own
+   judgement on his own bar.** Somebody else should agree or disagree out loud.
+4. **B8 IS JUDGED ONLY ON THE FAILURE PATH.** `_record_alarm_fires` proves the
+   alarm sounds when the job fails. **Nothing proves the alarm STAYS SILENT for
+   the right reason on the success path** beyond exit 0 and a row count — and a
+   `--record` that always exits 1 would be caught by check (j)'s first half but
+   is not in the drill as its own sabotage.
+5. **AND THE STANDING ONE, NOW WORSE AGAIN: the gates hold ever more verbatim
+   copies of production text.** Three more constants joined today. R-011's and
+   R-013's first doubt — that a legitimate reword will fail a gate and the
+   obvious move is to edit the gate to match, which is what R-001 was convicted
+   of — **is now larger than when it was filed twice.**
+
+**Evidence.** Declaration `7f8c13d` (`PROGRESS_LOG.md` only, no `.py` — check it
+with `git show --stat 7f8c13d`). The build commit after it. The two 2026-07-28
+evening `PROGRESS_LOG.md` entries.
+
+**Reproduce.** `python cockpit\funding.py` (fourteen sabotages),
+`python cockpit\fear_greed.py` (thirteen), `python data\open_interest.py` (nine).
+
+**Then write a FIFTEENTH, a FOURTEENTH and a TENTH of your own.** The question
+that found today's four was *"what does the gate BELIEVE, and where did it get
+that belief?"* **Do not reuse it — it is now the direction this gate is strongest
+in. Bring a different question.**
+
+**A clean verdict looks like.** A reviewer who did not build it invents at least
+one NEW sabotage per part and finds it caught — or finds it escapes and says so.
+**"The thirty-six pass" is not a clean verdict; it is the claim under review.**
+
+**Failed looks like.** Any new lie walks through — in which case the gates are
+still shaped around their authors' imagination, five generations deep, and the
 Commander should hear plainly that separation-in-time has stopped paying.
 
 ---

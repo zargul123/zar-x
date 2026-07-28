@@ -347,7 +347,68 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **PHASE 3 — EVERY PATH THE PILOT CAN SEE IS NOW HELD TO EXACT
+→ We are at: **PHASE 3 — THE GATES NO LONGER TAKE THE MODULE'S WORD FOR WHAT
+THEY ARE CHECKING.** Gate 3.2-R4 (funding, FOURTEEN sabotages), Gate 3.1-R4
+(Fear & Greed, THIRTEEN) and Gate 3.2b-R2 (the open-interest recorder, NINE) all
+PASSED, 2026-07-28 evening. **Thirty-six sabotages, thirty-six caught — and FOUR
+of the thirty-six were walking through green gates earlier the same day.**
+
+**WHAT THE FIFTH INDEPENDENT REVIEW FOUND.** A session that built none of it
+invented four new attacks and **all four escaped, all four predicted correctly in
+writing beforehand.**
+
+**THE CLASS, in one sentence: A GATE THAT ASKS THE THING IT IS JUDGING WHAT THE
+ANSWER SHOULD BE IS NOT A GATE.** Three constants that decided what each gate
+expected were read straight out of the module under test, so corrupting one moved
+the lie and the bar together.
+
+    S14  funding's OFFLINE_WORDS reworded to carry a fabricated rate .. ESCAPED
+    F13  the same in Fear & Greed: "72 - Extreme Greed" on a 29 - Fear day
+                                                                       ESCAPED
+    B9   SYMBOLS cut to two assets; SOL vanished from the recorder AND
+         from its own detector .......................................  ESCAPED
+    B8   `--record`, the branch the monthly task runs, is exercised by
+         nothing; its exit code was made always-0 .....................  ESCAPED
+
+**B9 IS THE ONE THAT MATTERS MOST.** Every loop in Gate 3.2b said
+`for symbol in SYMBOLS`. Deleting one asset from the module deleted it from the
+gate too: SOLUSDT stopped being recorded entirely, permanently, **on the one
+dataset Binance will not sell back at any price**, and the gate printed PASSED
+while announcing in its own words that it checks "ALL THREE assets". That is
+B7's lesson one level up — B7 was *two of three assets guarded by a row count*;
+B9 is *all three guarded by a list the module hands over.*
+
+**THE REPAIR, SHIPPED THE SAME DAY**, declared in `7f8c13d` with no `.py` in it.
+Both instruments hold `GATE_OFFLINE_WORDS` and the recorder holds `GATE_SYMBOLS`,
+each compared to the module's constant by a **named** check; every loop in the
+recorder gate runs over the gate's own list; and new check (j) runs `--record`
+for real as a subprocess in **both** outcomes, against a copy in scratch so the
+real history cannot be touched. **All four original attacks, re-run as real file
+edits, now FAIL the gates with named diagnostics — each caught twice over.**
+Production halves byte-identical by sha256; all 45 diff hunks inside `__main__`.
+Verified after: Brief 3/3, vault INTACT 6/6, `lab/` and `data/oi_history/`
+untouched.
+
+**R-014 IS FILED AGAINST THIS REPAIR.** Fifth generation of the same structure:
+the session that found the fault wrote the fix and graded it. **R-013 is FAILED,
+not cleared. R-001 has now seen four generations of repair and still does not
+move** — it moves when a generation SURVIVES an independent attack, and none has.
+
+**WHAT IS STILL KNOWN-WEAK AND WAS NOT FIXED:** funding's **two-assets-fail**
+block (`[no data: ETH, SOL]`) is built by no check anywhere; the recorder's check
+(e) is still BTCUSDT-only; the 4h-boundary exposure is unwatched; B1 is a no-op
+on a UTC machine.
+
+**THE QUESTION THIS PHASE LEAVES FOR THE NEXT SESSION: the last two sessions
+asked "which paths has nobody attacked?" and "where does the gate take the
+module's word?" — both are now the directions these gates are STRONGEST in.
+Bring a third question.**
+
+---
+
+**PREVIOUS MARKER, kept for the record:**
+
+→ We were at: **PHASE 3 — EVERY PATH THE PILOT CAN SEE IS NOW HELD TO EXACT
 EQUALITY, NOT JUST THE HEALTHY ONE.** Gate 3.2-R3 (funding, THIRTEEN sabotages),
 Gate 3.1-R3 (Fear & Greed, TWELVE) and Gate 3.2b-R (the open-interest recorder,
 SEVEN) all PASSED, 2026-07-28. **Thirty-two sabotages, thirty-two caught — and

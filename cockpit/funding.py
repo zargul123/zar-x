@@ -271,7 +271,31 @@ if __name__ == '__main__':
     # The offline line, held verbatim by the test. `section_text` raises
     # ConnectionError("no asset answered") when every asset fails, so the
     # exception name in the honest line is deterministic.
-    GATE_OFFLINE_BLOCK = f"  🔌 {OFFLINE_WORDS} (ConnectionError)"
+    #
+    # =====================================================================
+    # GATE 3.2-R4, added 2026-07-28 (evening) after an independent session
+    # threw a FOURTEENTH sabotage at Gate 3.2-R3 and it walked through.
+    #
+    # **THIS LINE USED TO INTERPOLATE THE MODULE'S OWN `OFFLINE_WORDS`.** So it
+    # was never a verbatim copy at all — it was a MIRROR. S14 changed that one
+    # production constant to
+    #
+    #     "Funding instrument offline — last reading BTC +0.0100%, longs paying"
+    #
+    # and the gate's "own copy" changed itself to match, in lockstep. Equality
+    # held against the lie, S13 was scored CAUGHT in the same run, and section 6
+    # printed the fabricated rate on its own screen with a tick mark under it
+    # reading "NOTHING appended". BTC was +0.0027% at that moment, and ETH and
+    # SOL were both negative.
+    #
+    # `GATE_CONTRACTS` exists, twenty lines above, precisely because a test that
+    # reads its ground truth from the module will follow that module into a
+    # miswiring and cheerfully confirm it. **The identical mistake was sitting
+    # further down the same file the whole time.** The words are now typed out
+    # here, and the module's are compared AGAINST them by a named check.
+    # =====================================================================
+    GATE_OFFLINE_WORDS = "Funding instrument offline"
+    GATE_OFFLINE_BLOCK = f"  🔌 {GATE_OFFLINE_WORDS} (ConnectionError)"
 
     def _expected_block(snap):
         """The ENTIRE block the Brief ought to print, assembled from raw by
@@ -303,7 +327,10 @@ if __name__ == '__main__':
         ok = True
         before = _raw_snapshot()
         live = section_text()
-        if OFFLINE_WORDS in live:
+        # GATE 3.2-R4: the gate's own copy, never the module's. A guard that
+        # asks the module what its own failure looks like stops recognising a
+        # failure the moment the module renames it.
+        if GATE_OFFLINE_WORDS in live:
             say("   ✗ live block came back offline — the sentence cannot be verified")
             return False
         after = None
@@ -447,8 +474,24 @@ if __name__ == '__main__':
         line — '— last reading BTC +0.0100%, longs paying' — and satisfied both
         conditions. **An instrument that has just admitted it cannot see
         anything must print NOTHING ELSE**, and the only check that can enforce
-        'nothing else' is equality."""
+        'nothing else' is equality.
+
+        GATE 3.2-R4 (b): AND THE WORDING THE BAR IS BUILT FROM IS NOW CHECKED
+        AGAINST THE MODULE'S. Equality is only worth something if the thing
+        being compared TO cannot move with the thing being tested. It could,
+        and S14 moved it."""
         say = print if verbose else (lambda *a, **k: None)
+
+        # --- GATE 3.2-R4 (b): THE MODULE'S WORDING vs THE GATE'S OWN COPY ---
+        # Named separately so a failure says WHICH constant moved, rather than
+        # leaving the next session to diff two long strings by eye.
+        words_ok = (OFFLINE_WORDS == GATE_OFFLINE_WORDS)
+        say(f"   {'✓' if words_ok else '✗'} the module's OFFLINE_WORDS equals "
+            f"the gate's own copy ({GATE_OFFLINE_WORDS!r})")
+        if not words_ok:
+            say(f"      module : {OFFLINE_WORDS!r}")
+            say(f"      gate   : {GATE_OFFLINE_WORDS!r}")
+
         drill = section_text(base_url=OFFLINE_DRILL_URL)
         hit = (drill == GATE_OFFLINE_BLOCK)
         say(f"   {'✓' if hit else '✗'} the offline block equals the gate's own "
@@ -457,7 +500,7 @@ if __name__ == '__main__':
         if not hit:
             say(f"      printed : {drill!r}")
             say(f"      expected: {GATE_OFFLINE_BLOCK!r}")
-        return hit
+        return hit and words_ok
 
     # S7-S11 corrupt the OUTPUT rather than editing the file, because that is
     # what a drill running inside the file can do. The real proof that the
@@ -552,6 +595,16 @@ if __name__ == '__main__':
          'section_text', _sab_partial_meaning_reversed, 'partial'),
         ('S13', 'the offline line carries a made-up rate', 'ESCAPED',
          'section_text', _sab_offline_fabricates, 'offline'),
+        # S14, from the independent review of 2026-07-28 (evening). It walked
+        # through Gate 3.2-R3. **It changes no logic whatsoever** — it rewords
+        # one production constant, and the gate's "verbatim copy" of the offline
+        # line, which interpolated that same constant, followed it into the lie
+        # and confirmed it. It is S13's exact payload delivered through the door
+        # the check against S13 was holding open.
+        ('S14', 'the offline WORDS themselves reworded', 'ESCAPED',
+         'OFFLINE_WORDS',
+         "Funding instrument offline — last reading BTC +0.0100%, longs paying",
+         'offline'),
     ]
 
     def _sabotage_drill():
@@ -582,19 +635,20 @@ if __name__ == '__main__':
         return ok and restored
 
     ok = True
-    print("GATE 3.2-R3 — the funding instrument's self-test, hardened 2026-07-28.")
-    print("Version 1 reported 48/48 while four deliberate lies walked through.")
-    print("Version 2 checked the digits and missed the WORDS. Version 3 rebuilt")
-    print("the whole block exactly — ON THE HEALTHY PATH ONLY, and printed")
-    print("'positive = shorts pay longs' on its own screen the moment an asset")
-    print("failed. This one holds every path the pilot can see to that standard.")
+    print("GATE 3.2-R4 — the funding instrument's self-test, hardened")
+    print("2026-07-28 (evening). Version 1 reported 48/48 while four deliberate")
+    print("lies walked through. Version 2 checked the digits and missed the")
+    print("WORDS. Version 3 held every path to exact equality — but built the")
+    print("offline bar out of the MODULE'S OWN wording, so rewording that one")
+    print("constant moved the lie and the bar together and the gate confirmed")
+    print("it. Version 4 holds its own copy and checks the module's against it.")
 
     print("\n1) LIVE BLOCK — what the Brief will print")
     live = section_text()
     print()
     print(live)
     print()
-    if OFFLINE_WORDS in live:
+    if GATE_OFFLINE_WORDS in live:      # the gate's own copy — see 3.2-R4 (b)
         print("   ✗ the live block came back offline")
         ok = False
     for short in ('BTC', 'ETH', 'SOL'):
@@ -616,11 +670,13 @@ if __name__ == '__main__':
     ok = _core_checks(verbose=True) and ok
 
     print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.2-R e, f · 3.2-R2 f ·"
-          "\n   3.2-R3 c) — the file is broken on purpose THIRTEEN ways and"
-          "\n   each break MUST be caught. Four of the first six escaped the"
-          "\n   gate of 2026-07-26; four of the next five escaped the gate of"
-          "\n   the day after; and BOTH of the last two escaped the gate of"
-          "\n   2026-07-27 by living on a path it only counted.")
+          "\n   3.2-R3 c · 3.2-R4 d) — the file is broken on purpose FOURTEEN"
+          "\n   ways and each break MUST be caught. Four of the first six"
+          "\n   escaped the gate of 2026-07-26; four of the next five escaped"
+          "\n   the gate of the day after; BOTH of the next two escaped the gate"
+          "\n   of 2026-07-27 by living on a path it only counted; and the"
+          "\n   FOURTEENTH escaped the gate of 2026-07-28 by rewording a"
+          "\n   constant the gate was reading its own expectation out of.")
     ok = _sabotage_drill() and ok
 
     print("\n4) EXACT IDENTITY CHECK — the settled rate this file parses must"
@@ -666,12 +722,15 @@ if __name__ == '__main__':
     ok = ok and drill_ok
 
     if ok:
-        print("\nGATE 3.2-R3 PASSED — the WHOLE printed block was rebuilt from "
+        print("\nGATE 3.2-R4 PASSED — the WHOLE printed block was rebuilt from "
               "Binance\nraw and matched exactly on EVERY path the pilot can "
               "see — healthy,\ndegraded and offline — the fixed wording was "
-              "checked verbatim, every\nasset took a turn at failing, and all "
-              "THIRTEEN deliberate sabotages\nwere caught. This test has "
-              "demonstrated, this run, that it can say no.")
+              "checked verbatim, the\ngate's own offline wording was compared "
+              "to the module's, every asset\ntook a turn at failing, and all "
+              "FOURTEEN deliberate sabotages were\ncaught. Every expectation in "
+              "this gate is now typed out here rather\nthan read from the file "
+              "on trial. This test has demonstrated, this\nrun, that it can say "
+              "no.")
     else:
-        print("\nGATE 3.2-R3 FAILED — see the ✗ lines above.")
+        print("\nGATE 3.2-R4 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)

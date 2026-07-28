@@ -261,6 +261,7 @@ if __name__ == '__main__':
     # recorder's equivalent of "the printed sentence" is THE CSV ROW.**
     # =====================================================================
     import shutil
+    import subprocess
     import tempfile
 
     # --- `--record`: DO THE JOB, don't test it ---------------------------
@@ -281,8 +282,30 @@ if __name__ == '__main__':
             print("NOT RECORDED — see the lines above. Nothing was written.")
         sys.exit(0 if recorded else 1)
 
+    # =====================================================================
+    # GATE 3.2b-R2, added 2026-07-28 (evening) after an independent session
+    # threw an EIGHTH and a NINTH sabotage at Gate 3.2b-R and BOTH walked
+    # through.
+    #
+    # **THE GATE TOOK ITS LIST OF WHAT TO CHECK FROM THE MODULE IT WAS
+    # CHECKING.** Every loop below said `for symbol in SYMBOLS`. B9 cut SYMBOLS
+    # from three assets to two; SOLUSDT then appeared nowhere in the recorder,
+    # nowhere in the gate, and nowhere in the output — and the gate printed
+    # PASSED, exit 0, while announcing in its own words that it now checks
+    # "ALL THREE assets".
+    #
+    # One third of the only dataset on this ship that CANNOT BE BOUGHT BACK AT
+    # ANY PRICE would have stopped being collected, permanently, with every
+    # check green. That is B7's lesson — two of three assets guarded by a row
+    # count — one level up: all three guarded by a list the module hands over.
+    #
+    # The gate now holds its own list, checks the module's against it by name,
+    # and every loop below runs over the GATE'S copy.
+    # =====================================================================
+    GATE_SYMBOLS = ('BTCUSDT', 'ETHUSDT', 'SOLUSDT')
+
     ok = True
-    print("GATE 3.2b — the open-interest recorder's self-test.")
+    print("GATE 3.2b-R2 — the open-interest recorder's self-test.")
     print("It breaks itself on purpose and requires every break to be CAUGHT,")
     print("because on this ship a check nobody has attacked is a check nobody")
     print("has tested. The dataset it guards cannot be recovered if it is lost.")
@@ -302,6 +325,15 @@ if __name__ == '__main__':
     # ---- (a) BACKFILL ------------------------------------------------------
     print("\n(a) BACKFILL — from empty, one run must write >= 175 rows per")
     print("    asset for all three, spanning >= 29 days at period=4h.")
+    print("    Gate 3.2b-R2: the assets are named by THE GATE, not read from")
+    print("    the module. `run()` is called with no symbol list, exactly as")
+    print("    the monthly task calls it, and must produce a full window for")
+    print("    every asset THIS FILE says the ship collects. B9 deleted SOLUSDT")
+    print("    from the module's list and the whole gate simply looked away.")
+    symbols_ok = (tuple(SYMBOLS) == GATE_SYMBOLS)
+    print(f"   {'✓' if symbols_ok else '✗'} the module's SYMBOLS "
+          f"{tuple(SYMBOLS)} equals the gate's own copy {GATE_SYMBOLS}")
+    ok = ok and symbols_ok
     backfill_dir = _fresh_dir()
     good, lines = run(history_dir=backfill_dir)
     for ln in lines:
@@ -309,7 +341,7 @@ if __name__ == '__main__':
     if not good:
         print("   ✗ the backfill run itself reported a failure")
         ok = False
-    for symbol in SYMBOLS:
+    for symbol in GATE_SYMBOLS:
         try:
             rows = _rows(csv_path(symbol, backfill_dir))
             first = datetime.strptime(rows[0]['timestamp'], '%Y-%m-%dT%H:%M:%SZ')
@@ -328,9 +360,10 @@ if __name__ == '__main__':
     print("\n(b) IDEMPOTENCE — run again immediately. Row counts identical and")
     print("    zero duplicates: distinct (symbol, timestamp) pairs must EQUAL")
     print("    total rows, printed side by side.")
-    before_counts = {s: len(_rows(csv_path(s, backfill_dir))) for s in SYMBOLS}
+    before_counts = {s: len(_rows(csv_path(s, backfill_dir)))
+                     for s in GATE_SYMBOLS}
     run(history_dir=backfill_dir)
-    for symbol in SYMBOLS:
+    for symbol in GATE_SYMBOLS:
         rows = _rows(csv_path(symbol, backfill_dir))
         keys = {(r['symbol'], r['timestamp']) for r in rows}
         same = len(rows) == before_counts[symbol]
@@ -426,6 +459,95 @@ if __name__ == '__main__':
           f"rather than overwritten: {still_there}")
     ok = ok and edit_caught
 
+    # ---- (j) THE PATH THAT ACTUALLY RUNS UNATTENDED -----------------------
+    print("\n(j) THE `--record` BRANCH IS RUN FOR REAL — Gate 3.2b-R2 (c).")
+    print("    `--record` is what the monthly scheduled task calls, and until")
+    print("    today NOTHING anywhere ran it. Sabotage B8 changed its exit code")
+    print("    to always 0: the job failed, printed NOT RECORDED, wrote nothing")
+    print("    and reported SUCCESS to Task Scheduler — and this gate passed,")
+    print("    because it never went near the branch. The one path that runs")
+    print("    unattended, on the one dataset that expires, was the one path")
+    print("    with no coverage. Both outcomes are now driven for real.")
+
+    THIS_FILE = os.path.abspath(__file__)
+
+    def _record_run(work_dir, base_url=None):
+        """Run `--record` on a COPY of this file placed in `work_dir`.
+
+        The copy is what makes this safe: `HISTORY_DIR` is derived from the
+        file's OWN location, so a copy in a scratch directory can only ever
+        write to that scratch directory. **`data/oi_history/` cannot be touched
+        by this check even if it is wrong.**"""
+        dest = os.path.join(work_dir, 'oi_under_test.py')
+        with open(THIS_FILE, encoding='utf-8') as fh:
+            src = fh.read()
+        if base_url is not None:
+            # The newlines are load-bearing. Without them the anchor also
+            # matches THIS LINE, because the anchor is written in this file —
+            # which the first run of this check discovered by refusing to run.
+            # Anchored to a whole line, only the real constant matches.
+            anchor = "\nFAPI_BASE = 'https://fapi.binance.com'\n"
+            if src.count(anchor) != 1:
+                raise RecorderError("the FAPI_BASE anchor matched "
+                                    f"{src.count(anchor)} times — refusing to "
+                                    "edit rather than guess which")
+            src = src.replace(anchor, f"\nFAPI_BASE = '{base_url}'\n")
+        with open(dest, 'w', encoding='utf-8', newline='') as fh:
+            fh.write(src)
+        p = subprocess.run([sys.executable, dest, '--record'],
+                           capture_output=True, text=True, timeout=300)
+        return p.returncode, (p.stdout or '') + (p.stderr or '')
+
+    def _record_does_the_job(verbose=False):
+        """The success half: `--record` must exit 0 AND leave a real window on
+        disk for every asset. An exit code nobody earned is not a result."""
+        say = print if verbose else (lambda *a, **k: None)
+        d = _fresh_dir()
+        code, out = _record_run(d)
+        hist = os.path.join(d, 'oi_history')
+        counts = {}
+        for s in GATE_SYMBOLS:
+            path = csv_path(s, hist)
+            counts[s] = len(_rows(path)) if os.path.exists(path) else 0
+        full = all(n >= 175 for n in counts.values())
+        good = (code == 0) and ('Recorded.' in out) and full
+        say(f"   {'✓' if good else '✗'} the job succeeded → exit {code} "
+            f"(must be 0) · 'Recorded.' printed: {'Recorded.' in out} · "
+            f"rows written {counts}")
+        return good
+
+    def _record_alarm_fires(verbose=False, source_override=None):
+        """**THE BAR B8 BROKE.** When the job fails, `--record` must exit
+        NON-ZERO. Driven through the real mechanism — a copy pointed at the
+        unreachable address, which is exactly what the Commander's laptop looks
+        like with no internet on the 1st of the month.
+
+        The drill below judges B8 with THIS function, not with a second copy of
+        the same idea, so the drill proves the actual check."""
+        say = print if verbose else (lambda *a, **k: None)
+        d = _fresh_dir()
+        if source_override is not None:
+            dest = os.path.join(d, 'oi_under_test.py')
+            with open(dest, 'w', encoding='utf-8', newline='') as fh:
+                fh.write(source_override)
+            p = subprocess.run([sys.executable, dest, '--record'],
+                               capture_output=True, text=True, timeout=300)
+            code, out = p.returncode, (p.stdout or '') + (p.stderr or '')
+        else:
+            code, out = _record_run(d, base_url=OFFLINE_DRILL_URL)
+        hist = os.path.join(d, 'oi_history')
+        wrote = sorted(os.listdir(hist)) if os.path.isdir(hist) else []
+        said = 'NOT RECORDED' in out
+        good = (code != 0) and said and not wrote
+        say(f"   {'✓' if good else '✗'} the job failed → exit {code} (must be "
+            f"NON-ZERO, or the alarm is decorative) · 'NOT RECORDED' printed: "
+            f"{said} · files written: {wrote or 'none'}")
+        return good
+
+    job_ok = _record_does_the_job(verbose=True)
+    alarm_ok = _record_alarm_fires(verbose=True)
+    ok = ok and job_ok and alarm_ok
+
     # ---- (g) THE DATA IS PLAUSIBLE ----------------------------------------
     print("\n(g) THE DATA IS PLAUSIBLE — the stored figure for EVERY asset is")
     print("    checked against Binance's own LIVE snapshot endpoint, which is")
@@ -433,7 +555,7 @@ if __name__ == '__main__':
     print("    that faithfully stores nonsense is not a working recorder.")
     print("    Gate 3.2b-R: this compared BTCUSDT alone until 2026-07-28, and")
     print("    sabotage B7 filled ETH and SOL with Bitcoin's figures unseen.")
-    for symbol in SYMBOLS:
+    for symbol in GATE_SYMBOLS:
         try:
             live = requests.get(f"{FAPI_BASE}/fapi/v1/openInterest",
                                 params={'symbol': symbol},
@@ -455,7 +577,10 @@ if __name__ == '__main__':
 
     # ---- (h)+(i) THE SABOTAGE DRILL, AND IT JUDGES THE FILE ON DISK -------
     print("\n(h) THE SABOTAGE DRILL, BUILT IN FROM BIRTH — this file is broken")
-    print("    on purpose SEVEN ways and each break MUST be caught.")
+    print("    on purpose NINE ways and each break MUST be caught. Gate")
+    print("    3.2b-R2 added B8 and B9, which broke no logic whatsoever: one")
+    print("    deleted an asset from the module's list and one changed an exit")
+    print("    code, and both walked through a gate reporting seven of seven.")
     print("(i) AND THE DETECTOR READS THE CSV BACK OFF DISK and compares it,")
     print("    field by field, to a raw fetch the TEST makes itself — never to")
     print("    anything this file parsed. That is the lesson two Context Deck")
@@ -537,12 +662,42 @@ if __name__ == '__main__':
         printed "all six deliberate sabotages were caught" and exited 0.
 
         **On the one dataset Binance will not sell back at any price, two of
-        three assets were guarded by a row count.**"""
-        for symbol in SYMBOLS:
+        three assets were guarded by a row count.**
+
+        GATE 3.2b-R2, 2026-07-28 (evening): the loop runs over the GATE'S list,
+        not the module's. It used to say `for symbol in SYMBOLS` — so deleting
+        an asset from the module deleted it from its own detector too."""
+        for symbol in GATE_SYMBOLS:
             if not _symbol_matches_source(symbol, verbose):
                 if verbose:
                     print(f"      ^ {symbol} is where the disk stopped matching "
                           f"the source")
+                return False
+        return True
+
+    def _covers_every_asset(verbose=False):
+        """**THE JUDGE FOR B9.** Run the recorder the way the monthly task runs
+        it — with NO symbol list of its own — and require a full window on disk
+        for every asset THE GATE says this ship collects.
+
+        `_disk_matches_source` cannot see B9: it passes each symbol explicitly,
+        so it happily records SOLUSDT from a module that has stopped collecting
+        it. The only way to catch an asset going missing is to let the module
+        choose, and then check against a list it did not supply."""
+        say = print if verbose else (lambda *a, **k: None)
+        if tuple(SYMBOLS) != GATE_SYMBOLS:
+            say(f"      the module's SYMBOLS {tuple(SYMBOLS)} is not the "
+                f"gate's {GATE_SYMBOLS}")
+            return False
+        d = _fresh_dir()
+        good, _ = run(history_dir=d)
+        if not good:
+            return False
+        for s in GATE_SYMBOLS:
+            path = csv_path(s, d)
+            n = len(_rows(path)) if os.path.exists(path) else 0
+            if n < 175:
+                say(f"      {s}: {n} rows on disk — no full window")
                 return False
         return True
 
@@ -690,6 +845,13 @@ if __name__ == '__main__':
         # that looks past the first asset.
         ('B7', 'ETH and SOL written with BTC\'s figures', 'record',
          _sab_cross_symbol, 'disk'),
+        # B9, from the independent review of 2026-07-28 (evening). It walked
+        # through Gate 3.2b-R. **It breaks no logic at all** — it deletes one
+        # asset from the module's list, and every loop in the gate said
+        # `for symbol in SYMBOLS`, so the gate deleted it too and reported
+        # success. Thirty days of SOL, gone for good, all green.
+        ('B9', 'one asset silently dropped from SYMBOLS', 'SYMBOLS',
+         ('BTCUSDT', 'ETHUSDT'), 'covers'),
     ]
 
     drill_ok = True
@@ -697,8 +859,9 @@ if __name__ == '__main__':
         original = globals()[attr]
         globals()[attr] = repl
         try:
-            survived = (_trap_check(verbose=False) if judge == 'trap'
-                        else _disk_matches_source())
+            survived = {'trap': _trap_check,
+                        'covers': _covers_every_asset}.get(
+                judge, _disk_matches_source)(verbose=False)
         except Exception:
             survived = False        # a crash is a catch: it did not pass
         finally:
@@ -708,10 +871,49 @@ if __name__ == '__main__':
               f"{'CAUGHT' if caught else 'ESCAPED — THE GATE IS DECORATIVE'}")
         drill_ok = drill_ok and caught
 
-    restored = _disk_matches_source(verbose=True) and _trap_check(verbose=False)
+    # B8 cannot be expressed as a swapped global. It lives in the `--record`
+    # branch, which only ever executes in a subprocess — and that is precisely
+    # why nothing caught it. So it is applied as a REAL TEXT EDIT to a copy,
+    # which is the stronger form of the drill anyway and the form this ship has
+    # always used for its evidence. The copy is written to scratch, so the real
+    # history is untouchable here.
+    with open(THIS_FILE, encoding='utf-8') as _fh:
+        _pristine = _fh.read()
+    _FILE_SABOTAGES = [
+        # Both anchors are whole lines, newlines included, for the reason
+        # `_record_run` explains: the anchor text is written in this file, so
+        # an un-anchored substring matches itself and the edit is ambiguous.
+        ('B8', 'the monthly task always exits 0',
+         [("\nFAPI_BASE = 'https://fapi.binance.com'\n",
+           f"\nFAPI_BASE = '{OFFLINE_DRILL_URL}'\n"),
+          ('\n        sys.exit(0 if recorded else 1)\n',
+           '\n        sys.exit(0)\n')],
+         _record_alarm_fires),
+    ]
+    for tag, words, edits, judge in _FILE_SABOTAGES:
+        try:
+            broken = _pristine
+            for anchor, repl in edits:
+                if broken.count(anchor) != 1:
+                    raise RecorderError(f"{tag}: anchor {anchor!r} matched "
+                                        f"{broken.count(anchor)} times — "
+                                        f"refusing to guess which")
+                broken = broken.replace(anchor, repl)
+            survived = judge(verbose=False, source_override=broken)
+        except Exception:
+            survived = False        # a crash is a catch: it did not pass
+        caught = not survived
+        print(f"   {'✓' if caught else '✗'} {tag}  {words:<44} → "
+              f"{'CAUGHT' if caught else 'ESCAPED — THE GATE IS DECORATIVE'}")
+        drill_ok = drill_ok and caught
+
+    restored = (_disk_matches_source(verbose=True) and _trap_check(verbose=False)
+                and _covers_every_asset(verbose=True)
+                and _record_alarm_fires(verbose=False))
     print(f"   {'✓' if restored else '✗'} every original restored — a freshly "
-          f"written CSV matches the source row for row, and the empty-result "
-          f"trap still fails loudly")
+          f"written CSV matches the source row for row, every asset the gate "
+          f"names still reaches disk, the empty-result trap still fails loudly, "
+          f"and the monthly task's alarm still fires")
     ok = ok and drill_ok and restored
 
     # ---- (f) THE BRIEF IS UNAFFECTED --------------------------------------
@@ -724,14 +926,16 @@ if __name__ == '__main__':
     shutil.rmtree(SCRATCH, ignore_errors=True)
 
     if ok:
-        print("\nGATE 3.2b-R PASSED — the backfill is real, the same run twice")
+        print("\nGATE 3.2b-R2 PASSED — the backfill is real, the same run twice")
         print("changes nothing, an empty result fails loudly, the offline drill")
         print("leaves the files byte-identical, tampered history is reported")
-        print("rather than overwritten, and all SEVEN deliberate sabotages were")
-        print("caught by reading the CSV back off disk — FOR ALL THREE ASSETS,")
-        print("not just the first — and comparing it to Binance. This test has")
+        print("rather than overwritten, the `--record` branch the monthly task")
+        print("runs was driven for real and its alarm fires on failure, and all")
+        print("NINE deliberate sabotages were caught by reading the CSV back")
+        print("off disk — FOR EVERY ASSET THIS GATE NAMES, from its own list,")
+        print("not the module's — and comparing it to Binance. This test has")
         print("demonstrated, this run, that it can say no.")
     else:
-        print("\nGATE 3.2b-R FAILED — see the ✗ lines above. Nothing is")
+        print("\nGATE 3.2b-R2 FAILED — see the ✗ lines above. Nothing is")
         print("committed as a pass.")
     sys.exit(0 if ok else 1)

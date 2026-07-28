@@ -196,8 +196,31 @@ if __name__ == '__main__':
     # The offline block, held verbatim by the test. `_get` raises requests'
     # ConnectionError against the reserved .invalid domain, so the exception
     # name in the honest line is deterministic.
+    #
+    # =====================================================================
+    # GATE 3.1-R4, added 2026-07-28 (evening) after an independent session
+    # threw a THIRTEENTH sabotage at Gate 3.1-R3 and it walked through.
+    #
+    # **THIS LINE USED TO INTERPOLATE THE MODULE'S OWN `OFFLINE_WORDS`.** So it
+    # was never a verbatim copy at all — it was a MIRROR. F13 changed that one
+    # production constant to
+    #
+    #     "Fear & Greed instrument offline — last known reading 72 — Extreme Greed"
+    #
+    # and the gate's "own copy" changed itself to match, in lockstep. Equality
+    # held against the lie, the drill scored F12 CAUGHT in the same run, and
+    # section 4 printed the fabricated sentence on its own screen — directly
+    # under a paragraph explaining that this exact sentence is what F12 said on
+    # a day the index read 29 — Fear. Which it did again.
+    #
+    # `GATE_LIMIT` exists because reading `HISTORY_LIMIT` from the module
+    # silently disarmed F3. **The identical mistake was sitting one constant
+    # over the whole time.** The words are now typed out here, and the module's
+    # are compared AGAINST them by a named check that says which one moved.
+    # =====================================================================
+    GATE_OFFLINE_WORDS = "Fear & Greed instrument offline"
     GATE_OFFLINE_BLOCK = (f"{GATE_HEADER}\n"
-                          f"  🔌 {OFFLINE_WORDS} (ConnectionError)")
+                          f"  🔌 {GATE_OFFLINE_WORDS} (ConnectionError)")
 
     def _raw_rows():
         """The source's own JSON, fetched by the TEST, passing through none
@@ -258,7 +281,10 @@ if __name__ == '__main__':
         rows = _raw_rows()
         want = _expected_from(rows)
         live = section_text()
-        if OFFLINE_WORDS in live:
+        # GATE 3.1-R4: the gate's own copy, never the module's. A guard that
+        # asks the module what its own failure looks like stops recognising a
+        # failure the moment the module renames it.
+        if GATE_OFFLINE_WORDS in live:
             say("   ✗ live section came back offline — the sentence cannot be verified")
             return False
 
@@ -326,8 +352,24 @@ if __name__ == '__main__':
         anything must print NOTHING ELSE** — and "nothing else" is a claim only
         equality can enforce. This also becomes the judge for F6, which used to
         be scored by an inline special case in the drill: F6 drops the offline
-        words, F12 keeps them, and one bar now catches both."""
+        words, F12 keeps them, and one bar now catches both.
+
+        GATE 3.1-R4 (b): AND THE WORDING THE BAR IS BUILT FROM IS NOW CHECKED
+        AGAINST THE MODULE'S. Equality is only worth something if the thing
+        being compared TO cannot move with the thing being tested. It could,
+        and F13 moved it."""
         say = print if verbose else (lambda *a, **k: None)
+
+        # --- GATE 3.1-R4 (b): THE MODULE'S WORDING vs THE GATE'S OWN COPY ---
+        # Named separately so a failure says WHICH constant moved, rather than
+        # leaving the next session to diff two long strings by eye.
+        words_ok = (OFFLINE_WORDS == GATE_OFFLINE_WORDS)
+        say(f"   {'✓' if words_ok else '✗'} the module's OFFLINE_WORDS equals "
+            f"the gate's own copy ({GATE_OFFLINE_WORDS!r})")
+        if not words_ok:
+            say(f"      module : {OFFLINE_WORDS!r}")
+            say(f"      gate   : {GATE_OFFLINE_WORDS!r}")
+
         drill = section_text(base_url=OFFLINE_DRILL_URL)
         hit = (drill == GATE_OFFLINE_BLOCK)
         say(f"   {'✓' if hit else '✗'} the offline block equals the gate's own "
@@ -341,7 +383,7 @@ if __name__ == '__main__':
                 if got != exp:
                     say(f"      line {i} printed : {got!r}")
                     say(f"      line {i} expected: {exp!r}")
-        return hit
+        return hit and words_ok
 
     # Imported here rather than at the top so the diff stays inside __main__
     # and the production path is provably untouched.
@@ -421,6 +463,17 @@ if __name__ == '__main__':
                           + " — last known reading 72 — Extreme Greed"
                           if OFFLINE_WORDS in _SECTION_TEXT_ORIGINAL(*a, **k)
                           else _SECTION_TEXT_ORIGINAL(*a, **k)), 'offline'),
+        # F13, from the independent review of 2026-07-28 (evening). It walked
+        # through Gate 3.1-R3. **It changes no logic whatsoever** — it rewords
+        # one production constant, and the gate's "verbatim copy" of the offline
+        # line, which interpolated that same constant, followed it into the lie
+        # and confirmed it. It is F12's exact payload delivered through the door
+        # the check against F12 was holding open. The pilot reads "Extreme
+        # Greed" from an instrument that has just said it cannot see anything.
+        ('F13', 'the offline WORDS themselves reworded', 'ESCAPED',
+         'OFFLINE_WORDS',
+         "Fear & Greed instrument offline — last known reading 72 — Extreme Greed",
+         'offline'),
     ]
 
     def _sabotage_drill():
@@ -453,12 +506,14 @@ if __name__ == '__main__':
         return ok and restored
 
     ok = True
-    print("GATE 3.1-R3 — the Fear & Greed instrument's self-test, hardened")
-    print("2026-07-28. Version 1 let five of six deliberate lies through.")
-    print("Version 2 printed '>> strong buy signal' on the deck of an")
-    print("information-only ship and passed. Version 3 rebuilt the whole block")
-    print("exactly — ON THE LIVE PATH ONLY — and printed a fabricated 'Extreme")
-    print("Greed' on the offline line. This one holds BOTH paths to equality.")
+    print("GATE 3.1-R4 — the Fear & Greed instrument's self-test, hardened")
+    print("2026-07-28 (evening). Version 1 let five of six deliberate lies")
+    print("through. Version 2 printed '>> strong buy signal' on the deck of an")
+    print("information-only ship. Version 3 held both paths to exact equality —")
+    print("but built the offline bar out of the MODULE'S OWN wording, so")
+    print("rewording that one constant moved the lie and the bar together and")
+    print("the gate confirmed it. Version 4 holds its own copy and checks the")
+    print("module's against it.")
 
     print("\n1) LIVE SECTION — what the Brief will print")
     try:
@@ -484,7 +539,7 @@ if __name__ == '__main__':
     live = section_text()
     print()
     print(live)
-    if OFFLINE_WORDS in live:
+    if GATE_OFFLINE_WORDS in live:      # the gate's own copy — see 3.1-R4 (b)
         print("   ✗ the live section came back offline")
         ok = False
 
@@ -496,12 +551,14 @@ if __name__ == '__main__':
           "\n   number beside the wrong words is the defect F2 exposed.")
     ok = _core_checks(verbose=True) and ok
 
-    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.1-R d · 3.1-R2 f · 3.1-R3 b)"
-          "\n   — the file is broken on purpose TWELVE ways and each break MUST"
-          "\n   be caught. Five of the first six escaped the gate of"
+    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.1-R d · 3.1-R2 f · 3.1-R3 b ·"
+          "\n   3.1-R4 d) — the file is broken on purpose THIRTEEN ways and each"
+          "\n   break MUST be caught. Five of the first six escaped the gate of"
           "\n   2026-07-26; three of the next five escaped the gate of the day"
-          "\n   after; and the twelfth escaped the gate of 2026-07-27 by"
-          "\n   hiding on the one path it only counted.")
+          "\n   after; the twelfth escaped the gate of 2026-07-27 by hiding on"
+          "\n   the one path it only counted; and the THIRTEENTH escaped the"
+          "\n   gate of 2026-07-28 by rewording a constant the gate was reading"
+          "\n   its own expectation out of.")
     ok = _sabotage_drill() and ok
 
     print("\n4) OFFLINE DRILL (Gate 3.1-R3 a) — injected unreachable URL,"
@@ -516,12 +573,14 @@ if __name__ == '__main__':
     ok = ok and drill_ok
 
     if ok:
-        print("\nGATE 3.1-R3 PASSED — the WHOLE printed block was rebuilt from "
+        print("\nGATE 3.1-R4 PASSED — the WHOLE printed block was rebuilt from "
               "the\nsource and matched exactly on BOTH paths the pilot can see "
               "— live\nand offline — the disclaimer was checked verbatim, the "
-              "gate's own\nhistory limit was compared to the module's, and all "
-              "TWELVE deliberate\nsabotages were caught. This test has "
-              "demonstrated, this run, that it\nis able to say no.")
+              "gate's own\nhistory limit AND its own offline wording were both "
+              "compared to the\nmodule's, and all THIRTEEN deliberate sabotages "
+              "were caught. Every\nexpectation in this gate is now typed out "
+              "here rather than read from\nthe file on trial. This test has "
+              "demonstrated, this run, that it is\nable to say no.")
     else:
-        print("\nGATE 3.1-R3 FAILED — see the ✗ lines above.")
+        print("\nGATE 3.1-R4 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)
