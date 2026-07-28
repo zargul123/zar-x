@@ -4876,3 +4876,127 @@ block is still guarded by nothing; the recorder's check (e) is still BTCUSDT-onl
 B1 is still a no-op on a UTC machine. **The declared gate above does not name
 them, and widening a bar mid-flight is the R-001 failure running the other way.**
 They stay in the queue and in the next session's orders.
+
+---
+
+# 2026-07-28 (night) — **GATE 3.2-R5, 3.1-R5 AND 3.2b-R3 PASSED.** 15/15, 14/14 and 10/10. The gates now watch the channel the Brief actually reads from, and the month the recorder only ever sees once
+
+*Same session as the declaration above. The bars in that entry were committed
+alone in `a83bbf7` (`PROGRESS_LOG.md` only, no `.py` — `git show --stat a83bbf7`),
+before any of this code existed.*
+
+## THE RESULT AGAINST EACH DECLARED BAR
+
+**(a) NOTHING THE PILOT READS CHANGES — PROVEN TWO WAYS, NOT ASSERTED.**
+
+    cockpit/funding.py      lines 1-159  IDENTICAL
+      3f7eec06683db7b76a96058ea47cf034ca59cc3a0bb80b0b4adfe27ce120e0bf
+    cockpit/fear_greed.py   lines 1-112  IDENTICAL
+      c728f7949668f955a974417e17e8de81daf10a66926e227e9a01bd4362b0412c
+    data/open_interest.py   lines 1-242  IDENTICAL
+      9189c08fe67563ae67c86dd4735638b15a6eee3870f59c2e010e713162529c7e
+
+And every diff hunk is inside `__main__`. The lowest hunk in each file:
+`fear_greed.py` `@@ -387,0 +388` (`__main__` at 113), `funding.py`
+`@@ -504,0 +505` (at 160), `open_interest.py` `@@ -308 +308` (at 243).
+
+**(b) THE SILENCE CHECK.** `_silence_checks` in both instruments captures BOTH
+stdout and stderr around the `section_text` call and requires the buffer to be
+EMPTY. Only the call is wrapped, never the gate's own reporting.
+
+**(c) IT COVERS EVERY PATH THE PILOT CAN SEE.** Funding: healthy, degraded,
+offline. Fear & Greed: live, offline. **All green, and each named separately so
+a failure says WHICH path spoke.**
+
+**(d) THE MONTH-TWO CHECK.** `_month_two` seeds a partial window written by the
+TEST from its own raw fetch, lets the recorder append the rest, then reads every
+row back off disk and compares it field by field to a raw fetch the test makes
+itself — **for every asset `GATE_SYMBOLS` names.**
+
+    ✓ BTCUSDT: seeded 100, APPENDED 80, 180 on disk — every row matches
+    ✓ ETHUSDT: seeded 100, APPENDED 80, 180 on disk — every row matches
+    ✓ SOLUSDT: seeded 100, APPENDED 80, 180 on disk — every row matches
+
+**(e) IT PROVES IT ACTUALLY APPENDED.** `appended <= 0` is an explicit FAIL with
+its own message, and the count is printed. A seed covering the whole window would
+append nothing and pass having tested nothing — the B5 failure.
+
+**(f) THE 4h BOUNDARY IS HANDLED.** Raw truth is fetched before seeding and again
+after the run; a row is correct if it matches EITHER snapshot. **R-013's doubt 3
+named this exposure on 2026-07-28 and nobody had handled it. It is handled now,
+in this one check** — the others still are not.
+
+**(g) THE DRILL IS PERMANENT.** S15, F14 and B10 are in the files, broken on
+purpose and caught on every run. Originals restored, restoration verified —
+and the restoration check now includes the new bars.
+
+**(h) THE ORIGINAL ATTACKS, RE-RUN AS REAL TEXT EDITS AGAINST THE REPAIRED
+FILES. THIS IS THE EVIDENCE; THE IN-RUN DRILL IS NOT.** All three now FAIL,
+exit 1, **each naming the reason it claims** rather than dying incidentally:
+
+    S15 → ✗ healthy  path: the doorway wrote NOTHING to stdout or stderr…
+          it wrote: '  ⚠ funding extreme — close longs before the 16:00 settlement\n'
+        → ✗ degraded path: same, quoted verbatim
+    F14 → ✗ live path: it wrote: '  ⚠ extreme fear — historically a buying opportunity\n'
+    B10 → BTCUSDT row 2026-07-15T08:00:00Z: disk 6864809775.59010700
+                                          vs source 106380.92900000
+          ^ BTCUSDT is where the APPEND path stopped matching the source
+
+**(i) EVERYTHING THE OLD GATES DID, THEY STILL DO.** 14/14 → **15/15**,
+13/13 → **14/14**, 9/9 → **10/10**. No previous check was removed or weakened.
+
+**(j) NO new file, NO new dependency, NO extra call from the Brief's path.**
+`contextlib` and `io` are standard library, imported inside `__main__`.
+
+**(k) THE SHIP IS UNHARMED.** Brief **3/3**. Vault **INTACT 6/6**. `lab/`
+untouched. `data/oi_history/` fingerprinted before and after and **byte-identical**
+— `E3258E82E2C949B2` / `1549A8A122625CF7` / `E0F91A87704C80EA`, unchanged.
+
+## WHAT THIS SESSION GOT WRONG
+
+**THE FIRST DRAFT OF THE RECORDER GATE DIED WITH A NameError.** I placed the call
+to `_append_matches_source` beside the other numbered sections — fifteen lines
+before the function is defined. The gate crashed, printed no verdict, and exited
+1. **It is recorded here rather than quietly fixed**, and a comment in the file
+says why the section sits where it does. It also makes a small point in the
+ship's favour: the gate died loudly instead of skipping the check.
+
+**MY ANCHOR MATCHED TWICE AND THE RIG REFUSED TO RUN — TWICE.** The F14 anchor
+`now = readings[0]` appears in the production half AND in the gate. The rule
+R-014 wrote — *refuse rather than edit the first match* — stopped me, exactly as
+it stopped the session that wrote it. **Recorded because it is the kind of thing
+that gets quietly fixed and never mentioned.**
+
+**THE REPAIR IS GRADED BY THE SESSION THAT WROTE IT.** Sixth generation of the
+structure R-001, R-009, R-010, R-011, R-013 and R-014 were each raised to catch.
+**Filed as R-015 and left OPEN. R-014 is marked FAILED, which is not clearing it.**
+
+**I SETTLED NONE OF R-014's OWN FIVE DOUBTS.** They were starting points, not the
+assignment, and my question came from somewhere else. Doubt 1 in particular —
+*nothing enforces that no gate derives an expectation from the module under
+test* — **is still true, and my own new code inherits it**: `_raw_truth` and
+`_month_two` read `FAPI_BASE`, `HIST_PATH`, `PERIOD`, `LIMIT` and `TIMEOUT`
+straight out of the module they judge. **I noticed and did not fix it**, because
+those are the data source's coordinates rather than an expectation, and widening
+the declared gate mid-flight is the R-001 failure running the other way. **Filed
+in R-015. Somebody who did not make that call should judge it.**
+
+**AND THE THREE I NAMED IN ADVANCE AND STILL DID NOT FIX:** funding's
+two-assets-fail block is guarded by nothing; the recorder's check (e) is still
+BTCUSDT-only; B1 is still a no-op on a UTC machine. **Named in the declaration
+before the work so nobody could later read silence as coverage.**
+
+## THE ONE SENTENCE THAT IS THE WHOLE LESSON
+
+**A GATE CAN BE PERFECTLY HONEST ABOUT THE WRONG OBJECT.** Six generations
+hardened the *content* of the string these doorways RETURN — exact equality, on
+every path, against the gate's own verbatim copy. **Not one of them ever asked
+whether that string is the only thing the compartment puts on the pilot's screen.**
+It was not: `brief.py` runs the function before it prints the result, so a
+`print()` inside the function reaches the pilot through a channel with no check
+on it at all. The recorder's version of the same blindness: every row-level check
+built its file from EMPTY, so **the append path — the only path month two onward
+ever takes — had never once been read back.**
+
+**The previous five holes were all "the gate is looking at the right thing and
+believing the wrong source." This one is "the gate is looking somewhere else."**

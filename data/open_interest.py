@@ -305,7 +305,7 @@ if __name__ == '__main__':
     GATE_SYMBOLS = ('BTCUSDT', 'ETHUSDT', 'SOLUSDT')
 
     ok = True
-    print("GATE 3.2b-R2 — the open-interest recorder's self-test.")
+    print("GATE 3.2b-R3 — the open-interest recorder's self-test.")
     print("It breaks itself on purpose and requires every break to be CAUGHT,")
     print("because on this ship a check nobody has attacked is a check nobody")
     print("has tested. The dataset it guards cannot be recovered if it is lost.")
@@ -577,10 +577,13 @@ if __name__ == '__main__':
 
     # ---- (h)+(i) THE SABOTAGE DRILL, AND IT JUDGES THE FILE ON DISK -------
     print("\n(h) THE SABOTAGE DRILL, BUILT IN FROM BIRTH — this file is broken")
-    print("    on purpose NINE ways and each break MUST be caught. Gate")
+    print("    on purpose TEN ways and each break MUST be caught. Gate")
     print("    3.2b-R2 added B8 and B9, which broke no logic whatsoever: one")
     print("    deleted an asset from the module's list and one changed an exit")
     print("    code, and both walked through a gate reporting seven of seven.")
+    print("    Gate 3.2b-R3 added B10, which broke no logic the gate had ever")
+    print("    executed: B4 with one `if` in front of it, firing only on the")
+    print("    path every month after the first one takes.")
     print("(i) AND THE DETECTOR READS THE CSV BACK OFF DISK and compares it,")
     print("    field by field, to a raw fetch the TEST makes itself — never to")
     print("    anything this file parsed. That is the lesson two Context Deck")
@@ -698,6 +701,121 @@ if __name__ == '__main__':
             n = len(_rows(path)) if os.path.exists(path) else 0
             if n < 175:
                 say(f"      {s}: {n} rows on disk — no full window")
+                return False
+        return True
+
+    # =====================================================================
+    # GATE 3.2b-R3, added 2026-07-28 (night) after an independent session threw
+    # a TENTH sabotage at Gate 3.2b-R2 and it walked through.
+    #
+    # **EVERY ROW-LEVEL CHECK IN THIS GATE WRITES INTO AN EMPTY DIRECTORY.**
+    # `_symbol_matches_source`, `_covers_every_asset`, `_record_run` and the
+    # backfill all start from `_fresh_dir()`, so `exists` is False at write time
+    # and any defect confined to the append-to-an-existing-file branch never
+    # executes. And the only two checks that DO run against an existing file —
+    # (b) idempotence and (e) tamper — append ZERO new rows, so `if new_rows:`
+    # is False and the write block never runs at all.
+    #
+    # **THIS GATE HAD THEREFORE ONLY EVER TESTED MONTH ONE, AND MONTH ONE
+    # HAPPENS ONCE.** From month two onward the monthly task takes the append
+    # path every single time, and nothing had ever read a row back off it.
+    #
+    # B10 was sabotage B4 — the VALUE column written into the OI column — with
+    # one `if` in front of it, so it fired only when the CSV already existed.
+    # Eighty of a hundred and eighty rows landed 64,763x wrong, `record()`
+    # reported no disagreement, and this gate printed PASSED with all NINE
+    # sabotages CAUGHT — **including B4 itself, in that same run.**
+    # =====================================================================
+    SEED_ROWS = 100        # a STRICT subset, so there is genuinely something
+                           # left for the recorder to append
+
+    def _month_two(symbol, verbose=False):
+        """THE APPEND PATH: seed a partial window, let the recorder append the
+        rest, then read every row back off disk and compare it to a raw fetch
+        the test makes itself.
+
+        **The seed is written by THIS TEST from ITS OWN raw fetch and never
+        passes through the module's writer**, so a broken writer cannot make the
+        seed agree with itself.
+
+        **It must PROVE it appended something.** A seed that already covers the
+        window appends nothing and the check passes having tested nothing — that
+        is the B5 failure, where a tick mark appeared for a check that never
+        reached what it claimed to prove."""
+        say = print if verbose else (lambda *a, **k: None)
+        d = _fresh_dir()
+        before = _raw_truth(symbol)
+        ordered = sorted(before)
+        if len(ordered) <= SEED_ROWS:
+            say(f"      {symbol}: the source returned only {len(ordered)} rows "
+                f"— too few to seed a PARTIAL window, so this proves nothing")
+            return False
+
+        path = csv_path(symbol, d)
+        with open(path, 'w', newline='', encoding='utf-8') as fh:
+            w = csv.DictWriter(fh, fieldnames=COLUMNS)
+            w.writeheader()
+            for stamp in ordered[:SEED_ROWS]:
+                oi, val = before[stamp]
+                w.writerow({'timestamp': stamp, 'symbol': symbol,
+                            'sumOpenInterest': oi,
+                            'sumOpenInterestValue': val})
+
+        good, _ = run(symbols=(symbol,), history_dir=d)
+        if not good:
+            say(f"      {symbol}: the month-two run reported a failure")
+            return False
+
+        rows = _rows(path)
+        appended = len(rows) - SEED_ROWS
+        if appended <= 0:
+            say(f"      {symbol}: NOTHING WAS APPENDED — this check tested the "
+                f"append path not at all and must not pass")
+            return False
+
+        # THE 4h BOUNDARY (R-013 doubt 3, never handled until now): a period can
+        # close between the test's fetch and the module's, so a row is correct
+        # if it matches EITHER snapshot. This does not soften the bar — a
+        # transposed, rounded or cross-symbol figure matches NEITHER.
+        after = _raw_truth(symbol)
+        stamps = {r['timestamp'] for r in rows}
+        for r in rows:
+            pair = (r['sumOpenInterest'], r['sumOpenInterestValue'])
+            if pair not in (before.get(r['timestamp']),
+                            after.get(r['timestamp'])):
+                want = before.get(r['timestamp'])
+                say(f"      {symbol} row {r['timestamp']}: disk "
+                    f"{r['sumOpenInterest']} vs source "
+                    f"{want[0] if want else 'NOT IN SOURCE AT ALL'}")
+                return False
+            if r['symbol'] != symbol:
+                say(f"      {symbol} row {r['timestamp']} is stamped "
+                    f"{r['symbol']!r}")
+                return False
+        keys = {(r['symbol'], r['timestamp']) for r in rows}
+        if len(keys) != len(rows):
+            say(f"      {symbol}: {len(rows) - len(keys)} duplicate row(s) "
+                f"after the append")
+            return False
+        missing = [t for t in before if t not in stamps]
+        if missing:
+            say(f"      {symbol}: {len(missing)} source row(s) never reached "
+                f"disk, e.g. {sorted(missing)[:3]}")
+            return False
+        say(f"   ✓ {symbol}: seeded {SEED_ROWS}, APPENDED {appended}, "
+            f"{len(rows)} on disk — every row matches what Binance served and "
+            f"there are no duplicates")
+        return True
+
+    def _append_matches_source(verbose=False):
+        """**THE JUDGE FOR B10** — for every asset THE GATE names, never the
+        module's list. That is B9's lesson, one day old, and a repair that drops
+        it while quoting it has learned nothing."""
+        for symbol in GATE_SYMBOLS:
+            if not _month_two(symbol, verbose):
+                if verbose:
+                    print(f"      ^ {symbol} is where the APPEND path stopped "
+                          f"matching the source")
                 return False
         return True
 
@@ -821,6 +939,37 @@ if __name__ == '__main__':
             w.writerows(rows)
         return rep
 
+    def _sab_append_transposes(symbol, base_url=FAPI_BASE,
+                               history_dir=HISTORY_DIR, period=PERIOD,
+                               limit=LIMIT, timeout=TIMEOUT):
+        """**B10, from the independent review of 2026-07-28 (night). IT WALKED
+        THROUGH THIS GATE.**
+
+        Sabotage B4 — the VALUE column written into the OI column — with one
+        `if` in front of it, so it fires ONLY on rows appended to a file that
+        already existed. **B4 is in this drill and was scored CAUGHT in the very
+        run B10 passed**, because every row-level check here started from an
+        empty directory and the append branch never executed.
+
+        It corrupts only the NEWLY APPENDED rows, which is both the faithful
+        shape of the defect and the harder one to catch."""
+        path = csv_path(symbol, history_dir)
+        existed = os.path.exists(path)
+        already = {r['timestamp'] for r in _rows(path)} if existed else set()
+        rep = _RECORD_ORIGINAL(symbol, base_url, history_dir, period, limit,
+                               timeout)
+        if not existed:
+            return rep
+        rows = _rows(path)
+        for r in rows:
+            if r['timestamp'] not in already:
+                r['sumOpenInterest'] = r['sumOpenInterestValue']
+        with open(path, 'w', newline='', encoding='utf-8') as fh:
+            w = csv.DictWriter(fh, fieldnames=COLUMNS)
+            w.writeheader()
+            w.writerows(rows)
+        return rep
+
     # The last column is WHICH JUDGE decides. B5 corrupts only the bogus-symbol
     # path, which a healthy BTCUSDT write cannot see; judging it by the disk
     # comparison would record a guaranteed escape as if the gate were blind.
@@ -852,7 +1001,34 @@ if __name__ == '__main__':
         # success. Thirty days of SOL, gone for good, all green.
         ('B9', 'one asset silently dropped from SYMBOLS', 'SYMBOLS',
          ('BTCUSDT', 'ETHUSDT'), 'covers'),
+        # B10, from the independent review of 2026-07-28 (night). It walked
+        # through Gate 3.2b-R2. **It is B4 restricted to the append path** —
+        # the only path the monthly task takes from month two onward, and the
+        # one path no row-level check in this gate had ever built.
+        ('B10', 'the OI column transposed, but only on append', 'record',
+         _sab_append_transposes, 'append'),
     ]
+
+    # ---- (k) MONTH TWO: THE APPEND PATH -----------------------------------
+    # Placed here, after the helpers exist, rather than beside the other numbered
+    # sections: the first draft called it fifteen lines before it was defined and
+    # the gate died with a NameError. Recorded in PROGRESS_LOG.md rather than
+    # quietly fixed.
+    print("\n(k) MONTH TWO — THE APPEND PATH (Gate 3.2b-R3). Every other")
+    print("    row-level check in this gate writes into an EMPTY directory, so")
+    print("    `exists` is False and the append branch never runs; and the two")
+    print("    checks that do meet an existing file append ZERO rows, so the")
+    print("    write block never runs at all. This gate had only ever tested")
+    print("    MONTH ONE — and month one happens once. Sabotage B10 transposed")
+    print("    the OI column on append alone: 80 of 180 rows landed 64,763x")
+    print("    wrong and all NINE sabotages were scored CAUGHT. A partial window")
+    print("    is now seeded BY THIS TEST from its own raw fetch, the recorder")
+    print("    appends the rest, and every row is read back and compared.")
+    append_ok = _append_matches_source(verbose=True)
+    print(f"   {'✓' if append_ok else '✗'} the append path is a faithful record "
+          f"for every asset the gate names, and it proved it APPENDED rather "
+          f"than passing on an already-complete window")
+    ok = ok and append_ok
 
     drill_ok = True
     for tag, words, attr, repl, judge in _SABOTAGES:
@@ -860,7 +1036,8 @@ if __name__ == '__main__':
         globals()[attr] = repl
         try:
             survived = {'trap': _trap_check,
-                        'covers': _covers_every_asset}.get(
+                        'covers': _covers_every_asset,
+                        'append': _append_matches_source}.get(
                 judge, _disk_matches_source)(verbose=False)
         except Exception:
             survived = False        # a crash is a catch: it did not pass
@@ -909,11 +1086,13 @@ if __name__ == '__main__':
 
     restored = (_disk_matches_source(verbose=True) and _trap_check(verbose=False)
                 and _covers_every_asset(verbose=True)
-                and _record_alarm_fires(verbose=False))
+                and _record_alarm_fires(verbose=False)
+                and _append_matches_source(verbose=True))
     print(f"   {'✓' if restored else '✗'} every original restored — a freshly "
-          f"written CSV matches the source row for row, every asset the gate "
-          f"names still reaches disk, the empty-result trap still fails loudly, "
-          f"and the monthly task's alarm still fires")
+          f"written CSV matches the source row for row, the APPEND path does "
+          f"too, every asset the gate names still reaches disk, the "
+          f"empty-result trap still fails loudly, and the monthly task's alarm "
+          f"still fires")
     ok = ok and drill_ok and restored
 
     # ---- (f) THE BRIEF IS UNAFFECTED --------------------------------------
@@ -926,16 +1105,18 @@ if __name__ == '__main__':
     shutil.rmtree(SCRATCH, ignore_errors=True)
 
     if ok:
-        print("\nGATE 3.2b-R2 PASSED — the backfill is real, the same run twice")
+        print("\nGATE 3.2b-R3 PASSED — the backfill is real, the same run twice")
         print("changes nothing, an empty result fails loudly, the offline drill")
         print("leaves the files byte-identical, tampered history is reported")
         print("rather than overwritten, the `--record` branch the monthly task")
-        print("runs was driven for real and its alarm fires on failure, and all")
-        print("NINE deliberate sabotages were caught by reading the CSV back")
-        print("off disk — FOR EVERY ASSET THIS GATE NAMES, from its own list,")
-        print("not the module's — and comparing it to Binance. This test has")
-        print("demonstrated, this run, that it can say no.")
+        print("runs was driven for real and its alarm fires on failure, MONTH")
+        print("TWO — appending to a file that already holds rows, which is what")
+        print("every month after the first one does — was built and read back")
+        print("row by row, and all TEN deliberate sabotages were caught by")
+        print("reading the CSV back off disk, FOR EVERY ASSET THIS GATE NAMES,")
+        print("from its own list, not the module's. This test has demonstrated,")
+        print("this run, that it can say no.")
     else:
-        print("\nGATE 3.2b-R2 FAILED — see the ✗ lines above. Nothing is")
+        print("\nGATE 3.2b-R3 FAILED — see the ✗ lines above. Nothing is")
         print("committed as a pass.")
     sys.exit(0 if ok else 1)

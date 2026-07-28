@@ -385,6 +385,62 @@ if __name__ == '__main__':
                     say(f"      line {i} expected: {exp!r}")
         return hit and words_ok
 
+    # =====================================================================
+    # GATE 3.1-R5, added 2026-07-28 (night) after an independent session threw
+    # a FOURTEENTH sabotage at Gate 3.1-R4 and it walked through.
+    #
+    # **EVERY CHECK ABOVE INSPECTS THE STRING `section_text` RETURNS.**
+    # `cockpit/brief.py` line 90 is `print(fear_greed_section())`, and the
+    # function body runs BEFORE the print does. So anything this doorway writes
+    # to stdout ITSELF lands on the Brief, directly above its block, where the
+    # pilot reads it — and it appears in no returned string, so no equality
+    # check can see it.
+    #
+    # F14 added one `print()` inside `section_text` and changed the returned
+    # block by NOT ONE BYTE:
+    #
+    #     ⚠ extreme fear — historically a buying opportunity
+    #
+    # The gate reported all THIRTEEN sabotages CAUGHT and exited 0 — **in the
+    # same run in which F7, "the disclaimer turned into ADVICE", was scored
+    # CAUGHT.** The bar against advice was working perfectly on the one channel
+    # it was pointed at, while advice walked in through the other.
+    # =====================================================================
+    import contextlib
+    import io
+
+    def _capture(call):
+        """Run `call()` with BOTH streams captured. Returns what it wrote."""
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
+            call()
+        return buf.getvalue()
+
+    def _silence_checks(verbose=True):
+        """GATE 3.1-R5: THE DOORWAY WRITES NOTHING OF ITS OWN.
+
+        The Brief is assembled ONLY from what this compartment RETURNS. stderr
+        counts too — it lands on the same terminal the pilot is reading.
+
+        **BOTH paths the pilot can see are held to it**, live and offline: an
+        instrument that has just admitted it cannot see anything must print
+        nothing else through ANY channel. Only the `section_text` call is
+        wrapped, never this gate's own reporting."""
+        say = print if verbose else (lambda *a, **k: None)
+        ok = True
+        for name, call in (
+                ('live   ', lambda: section_text()),
+                ('offline', lambda: section_text(base_url=OFFLINE_DRILL_URL))):
+            written = _capture(call)
+            quiet = (written == '')
+            say(f"   {'✓' if quiet else '✗'} {name} path: the doorway wrote "
+                f"NOTHING to stdout or stderr of its own — the Brief prints "
+                f"only what it RETURNS")
+            if not quiet:
+                say(f"      it wrote: {written!r}")
+            ok = ok and quiet
+        return ok
+
     # Imported here rather than at the top so the diff stays inside __main__
     # and the production path is provably untouched.
     from datetime import timedelta
@@ -474,6 +530,18 @@ if __name__ == '__main__':
          'OFFLINE_WORDS',
          "Fear & Greed instrument offline — last known reading 72 — Extreme Greed",
          'offline'),
+        # F14, from the independent review of 2026-07-28 (night). It walked
+        # through Gate 3.1-R4. **It corrupts no string this gate had ever
+        # inspected** — the returned block stays byte-identical and the advice
+        # reaches the Brief through stdout, because `brief.py` runs this
+        # function before it prints what the function returns. It was scored
+        # green in the same run that scored F7 — "the disclaimer turned into
+        # ADVICE" — as CAUGHT.
+        ('F14', 'the doorway PRINTS advice of its own', 'ESCAPED',
+         'section_text',
+         lambda *a, **k: (
+             print("  ⚠ extreme fear — historically a buying opportunity")
+             or _SECTION_TEXT_ORIGINAL(*a, **k)), 'silence'),
     ]
 
     def _sabotage_drill():
@@ -489,8 +557,9 @@ if __name__ == '__main__':
                 # exactly the bar F12 then satisfied while lying. Both are now
                 # judged by the same exact-equality check, so the drill proves
                 # THE CHECK rather than a weaker copy of it.
-                survived = (_offline_checks(verbose=False) if judge == 'offline'
-                            else _core_checks(verbose=False))
+                survived = {'offline': _offline_checks,
+                            'silence': _silence_checks}.get(
+                    judge, _core_checks)(verbose=False)
             except Exception:
                 survived = False        # a crash is a catch: it did not pass
             finally:
@@ -500,20 +569,23 @@ if __name__ == '__main__':
                   f"[old gate: {old:<7}] → "
                   f"{'CAUGHT' if caught else 'ESCAPED AGAIN — GATE IS DECORATIVE'}")
             ok = ok and caught
-        restored = _core_checks(verbose=False) and _offline_checks(verbose=False)
+        restored = (_core_checks(verbose=False) and _offline_checks(verbose=False)
+                    and _silence_checks(verbose=False))
         print(f"   {'✓' if restored else '✗'} every original restored — the "
               f"clean checks pass again afterwards")
         return ok and restored
 
     ok = True
-    print("GATE 3.1-R4 — the Fear & Greed instrument's self-test, hardened")
-    print("2026-07-28 (evening). Version 1 let five of six deliberate lies")
+    print("GATE 3.1-R5 — the Fear & Greed instrument's self-test, hardened")
+    print("2026-07-28 (night). Version 1 let five of six deliberate lies")
     print("through. Version 2 printed '>> strong buy signal' on the deck of an")
     print("information-only ship. Version 3 held both paths to exact equality —")
     print("but built the offline bar out of the MODULE'S OWN wording, so")
     print("rewording that one constant moved the lie and the bar together and")
     print("the gate confirmed it. Version 4 holds its own copy and checks the")
-    print("module's against it.")
+    print("module's against it. Version 5: all four of those judged the string")
+    print("this doorway RETURNS, and the Brief prints TWO channels — advice")
+    print("written straight to stdout reached the pilot completely unwatched.")
 
     print("\n1) LIVE SECTION — what the Brief will print")
     try:
@@ -552,7 +624,7 @@ if __name__ == '__main__':
     ok = _core_checks(verbose=True) and ok
 
     print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.1-R d · 3.1-R2 f · 3.1-R3 b ·"
-          "\n   3.1-R4 d) — the file is broken on purpose THIRTEEN ways and each"
+          "\n   3.1-R4 d · 3.1-R5 c) — the file is broken FOURTEEN ways and each"
           "\n   break MUST be caught. Five of the first six escaped the gate of"
           "\n   2026-07-26; three of the next five escaped the gate of the day"
           "\n   after; the twelfth escaped the gate of 2026-07-27 by hiding on"
@@ -572,15 +644,27 @@ if __name__ == '__main__':
     drill_ok = _offline_checks(verbose=True)
     ok = ok and drill_ok
 
+    print("\n5) THE SILENT-DOORWAY CHECK (Gate 3.1-R5 a, b) — the Brief is"
+          "\n   assembled ONLY from what this compartment RETURNS. Sabotage F14"
+          "\n   printed 'historically a buying opportunity' straight to stdout,"
+          "\n   left the returned block byte-identical, and walked through every"
+          "\n   check in this file — in the same run that scored F7, 'the"
+          "\n   disclaimer turned into ADVICE', as CAUGHT. Held on BOTH paths,"
+          "\n   and stderr counts: it reaches the same terminal.")
+    silent_ok = _silence_checks(verbose=True)
+    ok = ok and silent_ok
+
     if ok:
-        print("\nGATE 3.1-R4 PASSED — the WHOLE printed block was rebuilt from "
+        print("\nGATE 3.1-R5 PASSED — the WHOLE printed block was rebuilt from "
               "the\nsource and matched exactly on BOTH paths the pilot can see "
               "— live\nand offline — the disclaimer was checked verbatim, the "
               "gate's own\nhistory limit AND its own offline wording were both "
-              "compared to the\nmodule's, and all THIRTEEN deliberate sabotages "
-              "were caught. Every\nexpectation in this gate is now typed out "
-              "here rather than read from\nthe file on trial. This test has "
-              "demonstrated, this run, that it is\nable to say no.")
+              "compared to the\nmodule's, THE DOORWAY WAS PROVED SILENT ON BOTH "
+              "PATHS so the Brief\ncarries only what it RETURNS, and all "
+              "FOURTEEN deliberate sabotages\nwere caught. Every expectation in "
+              "this gate is typed out here rather\nthan read from the file on "
+              "trial. This test has demonstrated, this\nrun, that it is able to "
+              "say no.")
     else:
-        print("\nGATE 3.1-R4 FAILED — see the ✗ lines above.")
+        print("\nGATE 3.1-R5 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)

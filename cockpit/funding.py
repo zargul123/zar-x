@@ -502,6 +502,74 @@ if __name__ == '__main__':
             say(f"      expected: {GATE_OFFLINE_BLOCK!r}")
         return hit and words_ok
 
+    # =====================================================================
+    # GATE 3.2-R5, added 2026-07-28 (night) after an independent session threw
+    # a FIFTEENTH sabotage at Gate 3.2-R4 and it walked through.
+    #
+    # **EVERY CHECK ABOVE — SIX GENERATIONS OF THEM — INSPECTS THE STRING
+    # `section_text` RETURNS.** `cockpit/brief.py` line 91 is
+    # `print(funding_section())`, and the function body runs BEFORE the print
+    # does. So anything this doorway writes to stdout ITSELF lands on the Brief,
+    # directly above its block, where the pilot reads it — and it appears in no
+    # returned string anywhere, so no equality check can ever see it.
+    #
+    # S15 added one `print()` inside `section_text` and changed the returned
+    # block by NOT ONE BYTE:
+    #
+    #     ⚠ funding extreme — close longs before the 16:00 settlement
+    #
+    # It printed THIRTY TIMES on this gate's own screen and the gate reported
+    # all fourteen sabotages CAUGHT and exited 0. **That is a trade instruction
+    # on the Context Deck of a ship whose founding rule is INFORMATION, NEVER A
+    # SIGNAL** — sabotage F8 delivered through a door nothing was watching.
+    #
+    # The exact-equality bars were never wrong. They were held against the wrong
+    # OBJECT: the Brief reads TWO channels and this gate only ever watched one.
+    # =====================================================================
+    import contextlib
+    import io
+
+    def _capture(call):
+        """Run `call()` with BOTH streams captured. Returns what it wrote."""
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
+            call()
+        return buf.getvalue()
+
+    def _silence_checks(verbose=True):
+        """GATE 3.2-R5: THE DOORWAY WRITES NOTHING OF ITS OWN.
+
+        The Brief is assembled ONLY from what this compartment RETURNS. A
+        compartment that prints is a compartment writing on the pilot's screen
+        through a channel no equality check can see. stderr counts too — it
+        lands on the same terminal.
+
+        **EVERY PATH THE PILOT CAN SEE IS HELD TO IT** — healthy, degraded and
+        offline. A guard on one path is a guard on one path, which is exactly
+        what S12 and F12 cost this ship; a repair that forgets that on the day
+        it is quoting it has learned nothing.
+
+        Only the `section_text` call is wrapped, never this gate's own
+        reporting — the check must not catch the checker."""
+        say = print if verbose else (lambda *a, **k: None)
+        broken = list(GATE_CONTRACTS)[0]
+        bogus = {a: ('NOTAREALSYMBOL' if a == broken else c)
+                 for a, c in GATE_CONTRACTS.items()}
+        ok = True
+        for name, call in (
+                ('healthy ', lambda: section_text()),
+                ('degraded', lambda: section_text(contracts=bogus)),
+                ('offline ', lambda: section_text(base_url=OFFLINE_DRILL_URL))):
+            written = _capture(call)
+            quiet = (written == '')
+            say(f"   {'✓' if quiet else '✗'} {name} path: the doorway wrote "
+                f"NOTHING to stdout or stderr of its own — the Brief prints "
+                f"only what it RETURNS")
+            if not quiet:
+                say(f"      it wrote: {written!r}")
+            ok = ok and quiet
+        return ok
+
     # S7-S11 corrupt the OUTPUT rather than editing the file, because that is
     # what a drill running inside the file can do. The real proof that the
     # repair works is the scratch rig, which edits the file for real — see the
@@ -550,6 +618,16 @@ if __name__ == '__main__':
         if OFFLINE_WORDS in out:
             out += " — last reading BTC +0.0100%, longs paying"
         return out
+
+    def _sab_prints_advice(*a, **k):
+        """S15, from the independent review of 2026-07-28 (night). It walked
+        through Gate 3.2-R4 and every gate before it. **It changes the returned
+        block by not one byte** — it writes a trade instruction straight onto
+        the pilot's screen through the one channel six generations of
+        exact-equality checking never looked at, because `brief.py` runs this
+        function before it prints what the function returns."""
+        print("  ⚠ funding extreme — close longs before the 16:00 settlement")
+        return _SECTION_TEXT_ORIGINAL(*a, **k)
 
     # The six from the audit of 2026-07-26 and the five from the independent
     # review of 2026-07-27, kept by name so the fix stays legible. S5 shifts by
@@ -605,6 +683,12 @@ if __name__ == '__main__':
          'OFFLINE_WORDS',
          "Funding instrument offline — last reading BTC +0.0100%, longs paying",
          'offline'),
+        # S15, from the independent review of 2026-07-28 (night). It walked
+        # through Gate 3.2-R4. **It corrupts no string this gate had ever
+        # inspected** — the returned block stays byte-identical and the advice
+        # reaches the Brief through stdout, which nothing was watching.
+        ('S15', 'the doorway PRINTS advice of its own', 'ESCAPED',
+         'section_text', _sab_prints_advice, 'silence'),
     ]
 
     def _sabotage_drill():
@@ -617,7 +701,8 @@ if __name__ == '__main__':
             globals()[attr] = repl
             try:
                 survived = {'partial': _partial_checks,
-                            'offline': _offline_checks}.get(
+                            'offline': _offline_checks,
+                            'silence': _silence_checks}.get(
                     judge, _core_checks)(verbose=False)
             except Exception:
                 survived = False        # a crash is a catch: it did not pass
@@ -629,19 +714,23 @@ if __name__ == '__main__':
                   f"{'CAUGHT' if caught else 'ESCAPED AGAIN — GATE IS DECORATIVE'}")
             ok = ok and caught
         restored = (_core_checks(verbose=False) and _partial_checks(verbose=False)
-                    and _offline_checks(verbose=False))
+                    and _offline_checks(verbose=False)
+                    and _silence_checks(verbose=False))
         print(f"   {'✓' if restored else '✗'} every original restored — the "
               f"clean checks pass again afterwards")
         return ok and restored
 
     ok = True
-    print("GATE 3.2-R4 — the funding instrument's self-test, hardened")
-    print("2026-07-28 (evening). Version 1 reported 48/48 while four deliberate")
+    print("GATE 3.2-R5 — the funding instrument's self-test, hardened")
+    print("2026-07-28 (night). Version 1 reported 48/48 while four deliberate")
     print("lies walked through. Version 2 checked the digits and missed the")
     print("WORDS. Version 3 held every path to exact equality — but built the")
     print("offline bar out of the MODULE'S OWN wording, so rewording that one")
     print("constant moved the lie and the bar together and the gate confirmed")
     print("it. Version 4 holds its own copy and checks the module's against it.")
+    print("Version 5: all four of those judged the string this doorway RETURNS,")
+    print("and the Brief prints TWO channels — anything the doorway writes to")
+    print("stdout itself reached the pilot with nothing watching it at all.")
 
     print("\n1) LIVE BLOCK — what the Brief will print")
     live = section_text()
@@ -670,7 +759,7 @@ if __name__ == '__main__':
     ok = _core_checks(verbose=True) and ok
 
     print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.2-R e, f · 3.2-R2 f ·"
-          "\n   3.2-R3 c · 3.2-R4 d) — the file is broken on purpose FOURTEEN"
+          "\n   3.2-R3 c · 3.2-R4 d · 3.2-R5 c) — the file is broken FIFTEEN"
           "\n   ways and each break MUST be caught. Four of the first six"
           "\n   escaped the gate of 2026-07-26; four of the next five escaped"
           "\n   the gate of the day after; BOTH of the next two escaped the gate"
@@ -721,16 +810,28 @@ if __name__ == '__main__':
     drill_ok = _offline_checks(verbose=True)
     ok = ok and drill_ok
 
+    print("\n7) THE SILENT-DOORWAY CHECK (Gate 3.2-R5 a, b) — the Brief is"
+          "\n   assembled ONLY from what this compartment RETURNS. Sabotage S15"
+          "\n   printed 'close longs before the 16:00 settlement' straight to"
+          "\n   stdout, left the returned block byte-identical, and walked"
+          "\n   through every check in this file: `brief.py` runs this function"
+          "\n   BEFORE it prints what the function returns, so the advice landed"
+          "\n   on the pilot's screen with nothing watching that channel. Held"
+          "\n   on EVERY path — healthy, degraded and offline — and stderr counts.")
+    silent_ok = _silence_checks(verbose=True)
+    ok = ok and silent_ok
+
     if ok:
-        print("\nGATE 3.2-R4 PASSED — the WHOLE printed block was rebuilt from "
+        print("\nGATE 3.2-R5 PASSED — the WHOLE printed block was rebuilt from "
               "Binance\nraw and matched exactly on EVERY path the pilot can "
               "see — healthy,\ndegraded and offline — the fixed wording was "
               "checked verbatim, the\ngate's own offline wording was compared "
-              "to the module's, every asset\ntook a turn at failing, and all "
-              "FOURTEEN deliberate sabotages were\ncaught. Every expectation in "
-              "this gate is now typed out here rather\nthan read from the file "
-              "on trial. This test has demonstrated, this\nrun, that it can say "
-              "no.")
+              "to the module's, every asset\ntook a turn at failing, THE DOORWAY "
+              "WAS PROVED SILENT ON EVERY PATH\nso the Brief carries only what "
+              "it RETURNS, and all FIFTEEN deliberate\nsabotages were caught. "
+              "Every expectation in this gate is typed out\nhere rather than "
+              "read from the file on trial. This test has\ndemonstrated, this "
+              "run, that it can say no.")
     else:
-        print("\nGATE 3.2-R4 FAILED — see the ✗ lines above.")
+        print("\nGATE 3.2-R5 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)

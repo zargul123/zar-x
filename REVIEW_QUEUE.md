@@ -151,6 +151,17 @@ because by now the streak is itself the finding** — every one of the three hol
 was found by a session ORDERED to break things, and not one by a session being
 careful.
 
+### >>> 2026-07-28 (night): **A FIFTH AND A SIXTH GENERATION WERE FAILED. R-001 STILL DOES NOT MOVE.**
+
+R-013 was failed on 2026-07-28 evening (four of four escaped) and **R-014 was
+failed the same night (three of three escaped)**. Both remedies were again
+written by the session that found the fault — now R-015.
+
+**Six generations of repair; six failed by the next pair of eyes. The condition
+has never once been met.** Written here plainly because the streak is the
+finding: **not one of the six holes was found by a session being careful, and
+every one was found by a session ORDERED to break things.**
+
 ## R-002 — Two planning generations written by the mind that then built them
 **STATUS: FAILED 2026-07-26 · P1 · flagged 2026-07-26 · reviewed by the
 2026-07-26 audit session**
@@ -317,6 +328,13 @@ filed against today's repair, is genuinely open.**
 **R-013, filed against today's repair, is the genuinely open one.** Of the items
 in this section, **only R-006, R-007 and R-013 are actually open** — and R-006 is
 not open to anybody in-house.
+
+**2026-07-28 (night) note, same convention again.** R-013 was failed that evening
+and **R-014 was failed the same night.** Both stay physically where they are,
+with their evidence. **Of every item in this file, only R-006, R-007 and R-015
+are actually open** — and R-006 is not open to anybody in-house. **R-007, the
+settlement-boundary race, was NOT touched tonight: my question came from
+elsewhere and I did not look at it.**
 
 ## R-006 — THE PHASE 6 SECOND-AI REVIEW **(cannot be cleared in-house)**
 **STATUS: OPEN · P1 · LOCKED BY `EXECUTION_PLAN.md` PHASE 6**
@@ -943,6 +961,124 @@ one NEW sabotage per part and finds it caught — or finds it escapes and says s
 
 **Failed looks like.** Any new lie walks through — in which case the gates are
 still shaped around their authors' imagination, five generations deep, and the
+Commander should hear plainly that separation-in-time has stopped paying.
+
+### >>> VERDICT 2026-07-28 (night): **FAILED. THREE OF THREE NEW SABOTAGES WALKED THROUGH.**
+
+*By a session that built none of the three files. Predictions written into
+working notes before anything was run; three of three were correct. Controls run
+first — 14/14, 13/13, 9/9, Brief 3/3, vault INTACT 6/6, `git status` clean — so
+the rig was valid. Real text edits to copies OUTSIDE the repo; every anchor a
+whole line, refusing to run on an ambiguous match (**which it did, twice**).
+`data/oi_history/` fingerprinted before and after and unchanged.*
+
+**THE HOLE IS ONE THING IN TWO SHAPES: THE GATE WAS PERFECTLY HONEST ABOUT THE
+WRONG OBJECT.**
+
+    S15  funding.section_text() PRINTS a trade instruction to stdout and
+         returns the honest block byte-for-byte unchanged. `brief.py` runs
+         the function BEFORE printing what it returns, so the advice lands
+         on the pilot's Brief through a channel no equality check watches.
+         It printed thirty times on the gate's own screen. PASSED, exit 0.
+    F14  the same in fear_greed.py — scored green in the same run that
+         scored F7, "the disclaimer turned into ADVICE", as CAUGHT. PASSED.
+    B10  record() transposes the OI column, but ONLY when the CSV already
+         exists. Every row-level check in Gate 3.2b-R2 writes into an EMPTY
+         directory, and the two checks that meet an existing file append
+         ZERO rows — so **the gate had only ever tested month one, and month
+         one happens once.** PASSED, all NINE sabotages scored CAUGHT.
+
+**B10 WAS NOT BELIEVED ON THE GREEN GATE ALONE.** Month two was built by hand —
+a CSV seeded with 100 rows written by the test from its own raw fetch, then
+`record()` called to append the rest. **80 of 180 rows landed on disk 64,763x
+wrong (the dollar value in the coin column); the untouched control produced 0 of
+180 wrong.** On the one dataset Binance will not sell back at any price. **B4 is
+that exact lie and is scored CAUGHT in the same run — B10 is B4 with one `if` in
+front of it.**
+
+**R-014's own doubt 5 said the gates hold ever more verbatim copies of what the
+doorway RETURNS. It was the right worry aimed one object short.** Doubts 1-4
+remain unexamined: the sweep is still by eye, check (e) is still BTCUSDT-only,
+B1 is still a no-op on a UTC machine.
+
+**REMEDY SHIPPED the same night** — Gate 3.2-R5, 3.1-R5 and 3.2b-R3, declared in
+`a83bbf7` with no `.py` in it. Both instruments prove the doorway writes NOTHING
+to stdout or stderr on EVERY path the pilot can see; the recorder builds month
+two for every asset the gate names and reads every row back against a raw fetch,
+**and must prove it appended rather than passing on a complete window.** All
+three original attacks, re-run as real file edits, now FAIL with named
+diagnostics. Production halves byte-identical by sha256; every diff hunk inside
+`__main__`. 15/15, 14/14, 10/10.
+
+**R-014 DOES NOT MOVE TO CLEARED. The session that found these three faults wrote
+the repair for them and may not grade it. Filed as R-015.**
+
+---
+
+## R-015 — Gate 3.2-R5, 3.1-R5 and 3.2b-R3 were written by the session that failed their predecessors
+**STATUS: OPEN · P1 · flagged 2026-07-28 (night) by the session that built the repair**
+
+**What to review.** `_silence_checks` in both instruments — the check that the
+doorway writes nothing to stdout or stderr on any path — and `_month_two` /
+`_append_matches_source` in the recorder, which seed a partial window and read
+every appended row back against a raw fetch. Plus the three new permanent
+sabotages S15, F14 and B10. **Thirty-nine sabotages now live in three files and
+all thirty-nine were invented by sessions that then defended against them.**
+
+**Why it needs an outside eye.** **SIXTH GENERATION OF THE SAME STRUCTURE.**
+R-001, R-009, R-010, R-011, R-013 and R-014 were each raised to catch exactly
+this, and **every single time the next pair of eyes found something.** Six for
+six. **Do not read that streak as proof the fix is finally good; read it as proof
+that one mind grading its own gate has never once been enough on this ship.**
+
+**FOUR SPECIFIC DOUBTS THIS SESSION COULD NOT SETTLE ABOUT ITS OWN WORK**,
+offered as starting points and NOT as the assignment:
+
+1. **MY OWN NEW CODE INHERITS R-014's DOUBT 1, AND I KNEW IT WHEN I SHIPPED IT.**
+   `_raw_truth` and `_month_two` read `FAPI_BASE`, `HIST_PATH`, `PERIOD`, `LIMIT`
+   and `TIMEOUT` straight out of the module they are judging. I argued to myself
+   that those are the data source's coordinates rather than an expectation, and
+   that widening the declared gate mid-flight is the R-001 failure running the
+   other way. **That argument is convenient for me and was not reviewed by
+   anybody. If `PERIOD` were changed to `1h`, the module and my "independent"
+   truth would both follow it.**
+2. **THE SILENCE CHECK PROVES THE DOORWAY IS SILENT; IT DOES NOT PROVE THE BRIEF
+   IS.** I verified by reading `brief.py` that it prints only the returned
+   strings. **Nothing checks that.** A future line added to `brief.py` itself —
+   which no gate on this ship guards at all — would put anything on the pilot's
+   screen with every gate green. **`cockpit/brief.py` HAS NO GATE. That is the
+   larger hole my finding sits inside, and I did not close it.**
+3. **MONTH TWO IS TESTED WITH ONE SEED SIZE, ONCE.** `SEED_ROWS = 100` out of
+   ~180. Month three, a seed that already covers the newest row, a seed with a
+   gap in the middle, and an append that crosses the 30-day window boundary are
+   all untested. **I proved the append path is READ; I did not enumerate it.**
+4. **THE 4h-BOUNDARY ALLOWANCE IS NEW AND ONLY IN MY CHECK.** `_month_two`
+   accepts a row matching either the before or after snapshot. **I believe that
+   cannot mask a real defect** — a transposed, rounded or cross-symbol figure
+   matches neither — **but "I believe" is exactly the phrasing this file exists
+   to catch, so it is filed.** The other checks in that gate still have the raw
+   exposure R-013 doubt 3 named.
+
+**Evidence.** Declaration `a83bbf7` (`PROGRESS_LOG.md` only, no `.py` — check it
+with `git show --stat a83bbf7`). The build commit after it. The two 2026-07-28
+night `PROGRESS_LOG.md` entries.
+
+**Reproduce.** `python cockpit\funding.py` (fifteen sabotages),
+`python cockpit\fear_greed.py` (fourteen), `python data\open_interest.py` (ten).
+
+**Then write a SIXTEENTH, a FIFTEENTH and an ELEVENTH of your own.** The question
+that found this generation's three was *"every check inspects a return value, or
+a file it just created from empty — what reaches the pilot's screen, or the
+permanent dataset, without passing through the thing the gate inspects?"*
+**Do not reuse it. It is now the direction these gates are strongest in, and the
+two questions before it are already spent. Bring a third.**
+
+**A clean verdict looks like.** A reviewer who did not build it invents at least
+one NEW sabotage per part and finds it caught — or finds it escapes and says so.
+**"The thirty-nine pass" is not a clean verdict; it is the claim under review.**
+
+**Failed looks like.** Any new lie walks through — in which case the gates are
+still shaped around their authors' imagination, six generations deep, and the
 Commander should hear plainly that separation-in-time has stopped paying.
 
 ---

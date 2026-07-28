@@ -347,7 +347,59 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **PHASE 3 — THE GATES NO LONGER TAKE THE MODULE'S WORD FOR WHAT
+→ We are at: **PHASE 3 — THE GATES NOW WATCH THE CHANNEL THE BRIEF ACTUALLY
+READS FROM, AND THE MONTH THE RECORDER ONLY EVER SEES ONCE.** Gate 3.2-R5
+(funding, FIFTEEN sabotages), Gate 3.1-R5 (Fear & Greed, FOURTEEN) and Gate
+3.2b-R3 (the open-interest recorder, TEN) all PASSED, 2026-07-28 night.
+**Thirty-nine sabotages, thirty-nine caught — and THREE of the thirty-nine were
+walking through green gates a few hours earlier.**
+
+**WHAT THE SIXTH INDEPENDENT REVIEW FOUND.** A session that built none of it
+invented three new attacks and **all three escaped, all three predicted correctly
+in writing beforehand.**
+
+**THE CLASS, in one sentence: A GATE CAN BE PERFECTLY HONEST ABOUT THE WRONG
+OBJECT.** The previous five holes were all *the gate is looking at the right
+thing and believing the wrong source*. This one is *the gate is looking somewhere
+else entirely.*
+
+    S15  funding's doorway PRINTS a trade instruction to stdout and returns
+         the honest block unchanged. brief.py runs the function BEFORE it
+         prints what the function returns, so it reached the pilot .... ESCAPED
+    F14  the same in Fear & Greed — green in the same run that scored F7,
+         "the disclaimer turned into ADVICE", as CAUGHT ............... ESCAPED
+    B10  record() transposes the OI column ONLY when the file already
+         exists. Every row-level check writes into an EMPTY directory,
+         so the gate had only ever tested MONTH ONE ................... ESCAPED
+
+**B10 IS THE ONE THAT MATTERS MOST.** Month one happens once; from month two
+onward the monthly task takes the append path every single time, and **no check
+had ever read a row back off it.** Built by hand: 80 of 180 rows landed 64,763x
+wrong — the dollar value in the coin column — with all NINE sabotages scored
+CAUGHT, **including B4, which is that exact lie.** B10 is B4 with one `if` in
+front of it, on the one dataset Binance will not sell back at any price.
+
+**THE REPAIR, SHIPPED THE SAME NIGHT**, declared in `a83bbf7` with no `.py` in
+it. Both instruments prove the doorway writes NOTHING to stdout or stderr on
+EVERY path the pilot can see; the recorder builds month two for every asset the
+gate names, reads every appended row back against its own raw fetch, **and must
+prove it appended rather than passing on an already-complete window.** All three
+original attacks, re-run as real file edits, now FAIL with named diagnostics.
+Production halves byte-identical by sha256; every diff hunk inside `__main__`.
+Brief 3/3, vault INTACT 6/6, `data/oi_history/` byte-identical.
+
+**THE LARGER HOLE THIS FINDING SITS INSIDE IS STILL OPEN: `cockpit/brief.py`
+HAS NO GATE AT ALL.** The instruments are now proved silent; nothing proves the
+Brief itself prints only what they return. Filed as R-015 doubt 2.
+
+**R-014 FAILED. R-015 is open against tonight's repair. R-001 has now outlived
+SIX generations of fix** and moves only when one SURVIVES an independent attack.
+
+---
+
+## PREVIOUS MARKER, kept for the record rather than erased
+
+→ We were at: **PHASE 3 — THE GATES NO LONGER TAKE THE MODULE'S WORD FOR WHAT
 THEY ARE CHECKING.** Gate 3.2-R4 (funding, FOURTEEN sabotages), Gate 3.1-R4
 (Fear & Greed, THIRTEEN) and Gate 3.2b-R2 (the open-interest recorder, NINE) all
 PASSED, 2026-07-28 evening. **Thirty-six sabotages, thirty-six caught — and FOUR
