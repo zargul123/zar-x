@@ -3944,3 +3944,249 @@ instructions live in `SESSION_ORDERS.md`, which is rewritten every session.**
 If you find yourself copying a rule from the pattern into the orders, **stop —
 you are moving a permanent rule into a file that gets deleted.** Point at it
 instead.
+
+---
+
+## 2026-07-28 — PART 1: **THE TWELFTH SABOTAGE, AND THE SEVENTH. FOUR OF FOUR WALKED THROUGH.**
+## **R-011 FAILED. R-012 FAILED. THE GATES GUARD THE HEALTHY PATH AND COUNT THE BROKEN ONE.**
+
+*Written by a session that built none of this: not the two instruments, not
+either rebuild, not the recorder, not one of the twenty-eight sabotages. It
+arrived to a ship where every gate was green, ran them all first to prove it,
+and then tried to break them. **The gate declaration for the repair is at the
+bottom of this entry and is committed ALONE, with no `.py` file in the commit,
+before any code is written.***
+
+### THE SHIP WAS ALIVE ON ARRIVAL — proved before anything was touched
+
+    Gate 3.2-R2  (funding)          PASSED    11/11 sabotages caught
+    Gate 3.1-R2  (fear & greed)     PASSED    11/11 sabotages caught
+    Gate 3.2b    (open interest)    PASSED     6/6  sabotages caught, 180 rows x 3
+    cockpit/brief.py                3/3 instruments reporting
+    lab/verify_vault.py             VAULT INTACT, 6/6 files match their checksums
+    git status                      only the scheduled snapshot task's own file
+
+### JOB 3 FIRST, AS ORDERED: **DO THE RECORDER'S SIX SABOTAGES FAIL FOR THE REASON THEIR LABELS CLAIM? YES. ALL SIX. THIS PART IS CLEAN.**
+
+The orders put this ahead of inventing anything, because sabotage **B5** had
+once been scored CAUGHT while crashing two lines before the check it was written
+to prove. **The question was whether any of the other five were passing by
+accident. None are.**
+
+Method: an instrumented copy outside the repo, identical to the original except
+that every early exit in the detector announces WHY it fired. The untouched
+control was run first and passed (exit 0). **The instrumented run also passed
+(exit 0), so the instrumentation changed no verdict — it only made the reasons
+visible.** Predictions for all six were written before the run; **six of six
+were correct.**
+
+    B1  timestamps as LOCAL time  -> TIMESTAMP-NOT-IN-SOURCE
+                                     disk 2026-06-28T17:00:00Z vs source 12:00:00Z
+    B2  timestamps +1 hour        -> TIMESTAMP-NOT-IN-SOURCE
+                                     disk 13:00:00Z vs source 12:00:00Z
+    B3  de-dup drops rows         -> ROW-COUNT-BAR, 31 rows < 175
+    B4  VALUE into the OI column  -> FIELD-MISMATCH
+                                     disk 6205076557.71 vs source 102877.834
+    B5  the naive recorder        -> TRAP, reached cleanly, NO CRASH:
+                                     run_reported_failure=False, empty_list_named=False
+    B6  rounded on the way to disk-> FIELD-MISMATCH
+                                     disk 102878 vs source 102877.834
+
+**B5 is genuinely repaired.** It reaches the trap and is judged by it. Its
+output was printed and read: the naive recorder prints
+`NOTAREALSYMBOL: 0 new row(s) appended, 0 stored, window — → —` **and reports
+success**, which is exactly the lie it was written to be.
+
+**ONE CAVEAT, RECORDED BECAUSE IT IS TRUE AND NOT BECAUSE IT IS A DEFECT.** B1
+replaces the timestamp helper with a naive local-time conversion. **On a machine
+whose clock is set to UTC that is a NO-OP** and B1 would prove nothing. This
+laptop is UTC+5, so it shifts five hours and the drill is real here. And the
+failure mode is safe: on a UTC machine B1 would be scored **ESCAPED** and fail
+the gate loudly, rather than passing quietly. Funding's S5 already avoids this
+trap by shifting a fixed hour instead, and its comment says why. **The recorder's
+B1 did not copy that lesson.** Filed, not fixed — it fails loud.
+
+### THEN THE ATTACKS. **FOUR INVENTED, FOUR ESCAPED, FOUR PREDICTED CORRECTLY.**
+
+Every one was a **REAL TEXT EDIT** to a scratch copy outside the repo — not a
+wrapper. Every anchor was required to match **exactly once** or the rig refused
+to run. **The untouched control was run first in every case and passed.** The
+output of every sabotage was PRINTED and read before any verdict was believed,
+because on this ship a sabotage that crashes is scored as caught and a sabotage
+that never ran looks like a success.
+
+    B7   ETH and SOL recorded with BITCOIN's open interest ......... ESCAPED
+    S12  the funding meaning REVERSES when an asset is missing ..... ESCAPED
+    S13  the funding OFFLINE line carries a fabricated rate ........ ESCAPED
+    F12  the Fear & Greed OFFLINE line carries a fabricated mood ... ESCAPED
+
+**Not one failing check appeared in any of the four runs. All four gates printed
+PASSED and exited 0.**
+
+### **THE ONE CAUSE, AND IT IS THE SAME SENTENCE THREE TIMES OVER**
+
+**EVERY GATE ON THIS SHIP REBUILDS THE WHOLE OUTPUT AND DEMANDS EXACT EQUALITY —
+ON THE HEALTHY PATH ONLY. EVERY DEGRADED OR SECONDARY PATH IS STILL GUARDED THE
+OLD WAY: BY ASKING WHETHER AN EXPECTED SUBSTRING IS PRESENT, AND BY COUNTING.**
+
+That is the precise question the R2 rebuild of 2026-07-27 was written to
+abolish. **It was abolished on one path per instrument and left standing on
+every other.** The lesson was applied where the lesson was learned.
+
+    funding, partial path   `_partial_checks` asks: is '[no data: SOL]' there,
+                            does each surviving asset carry a sign, is the
+                            offline phrase absent. It never looks at the digits,
+                            the settlement time, the mechanism sentence or the
+                            disclaimer.
+    funding, offline path   asks: are the offline words present AND is it one
+                            line. Appending to that one line satisfies both.
+    fear & greed, offline   asks: are the offline words present AND are there
+                            two lines AND is the header first. Same hole.
+    the recorder            `_disk_matches_source()` — the ONLY check anywhere
+                            in Gate 3.2b that compares what was WRITTEN to what
+                            Binance SERVED — is hardcoded to BTCUSDT. So are
+                            checks (e) and (g). **For ETHUSDT and SOLUSDT the
+                            entire gate only ever COUNTS: 180 rows, 30 days, no
+                            duplicates.**
+
+### B7 — THE SEVENTH SABOTAGE, AND THE WORST OF THE FOUR
+
+**The defect is a memo cache keyed on the TIMESTAMP and not on the
+(SYMBOL, TIMESTAMP) pair.** The first asset fetched populates it; every later
+asset reads its own timestamps back out and writes the first asset's figures
+under its own name. **That is not a strawman — it is what "let us not re-derive
+rows we have already seen" looks like when written carelessly.**
+
+What the sabotaged recorder wrote to disk, beside what Binance actually serves
+for the same instant — **printed, not assumed:**
+
+    BTC   105984.62500000        BTC    105984.62500000     correct
+    ETH   105984.62500000        ETH   2316121.51100000     22x wrong
+    SOL   105984.62500000        SOL   8532810.05000000     80x wrong
+
+**Thirty days of two assets filled with Bitcoin's open interest, and Gate 3.2b
+printed "all six deliberate sabotages were caught" and exited 0.** Every check
+stayed green: (a) counts rows, (b) compares counts and discards the return value
+of its own second run, (c)(d) never touch the figures, (e)(g)(h)(i) never look
+at anything but BTC.
+
+**THIS IS THE DATASET THAT CANNOT BE BOUGHT BACK AT ANY PRICE.** Binance serves
+a 30-day window and refuses anything older. A wrong number here is not repairable
+later — it is simply wrong forever, on two of the three assets, and nothing on
+this ship would have said so.
+
+### S12 — THE FUNDING GATE PRINTS THE LIE ON SCREEN AND TICKS IT GREEN
+
+The mechanism sentence reverses itself **only when an asset is missing.** The
+healthy block is byte-identical, so `_core_checks` — the whole-block equality
+check, the strong one — never sees it. This is **sabotage S7, the lie the entire
+R2 rebuild exists to kill, moved one path over.**
+
+Gate 3.2-R2's own section 5, running against the sabotaged file:
+
+      Funding (8h) : BTC +0.0016%  ·  ETH -0.0057%   [no data: SOL]
+      (USDT perpetuals · positive = shorts pay longs · next settlement 16:00 UTC
+       — crowd positioning, information, not a signal)
+
+       ✓ BTC broken → named as '[no data: BTC]' and ETH and SOL still printed
+       ✓ ETH broken → named as '[no data: ETH]' and BTC and SOL still printed
+       ✓ SOL broken → named as '[no data: SOL]' and BTC and ETH still printed
+
+**The gate printed the exact opposite of how the market works on its own screen
+and put three tick marks underneath it.**
+
+### S13 AND F12 — THE OFFLINE LINE IS A PLACE TO HIDE A NUMBER
+
+**F12 is sabotage F6 done properly.** F6 — "offline path fabricates a number" —
+is in the drill and is caught, but **only because it DROPS the offline words.**
+Keep the honest words and append the fabrication and it walks:
+
+      🔌 Fear & Greed instrument offline (ConnectionError) — last known reading 72 — Extreme Greed
+       ✓ degraded to one offline line, no traceback, nothing else printed
+
+**The true reading that day was 29 — Fear. The line the pilot would read says
+Extreme Greed, on an instrument that has just admitted it cannot see anything,
+and the check underneath it says "nothing else printed".**
+
+S13 is the identical hole in funding, and it was **MEASURED, not assumed from
+the similarity** — a separate scratch copy, its own control, its own run:
+
+      🔌 Funding instrument offline (ConnectionError) — last reading BTC +0.0100%, longs paying
+       ✓ degraded to one offline line, no traceback, nothing else printed
+
+### WHAT THIS SESSION GOT WRONG, AND WHAT IT IS NOT CLAIMING
+
+**It found the hole it went looking for.** The shape was formed while READING
+the three files, and pre-registered in writing before any sabotage ran — the
+honest sequence — **but a reviewer who arrives with a hypothesis is a reviewer
+who may stop once it is confirmed.** Four sabotages of one family is not a survey
+of what else escapes. **What is proven is that four specific lies pass; what is
+NOT proven is that nothing else does.**
+
+**Four attacks, one idea.** All four are the same observation applied to four
+paths. A genuinely different reviewer would have brought a second idea.
+
+**It re-measured nothing about the data itself.** The point-sample decision
+(R-012 doubt 1), the 10% plausibility bar (doubt 4) and `MAX_PLAUSIBLE_RATE`
+were not touched. They remain open.
+
+**And the standing one: this reviewer is the same model as every builder,
+separated only by having no memory of the work.** Failing three gates does not
+make that substitute stronger than R-002 says it is.
+
+---
+
+# **THE GATE FOR THE REPAIR — DECLARED NOW, COMMITTED ALONE, NO `.py` IN THIS COMMIT**
+
+*Law 4. `git show --stat` on this commit must contain no `.py` file, and must
+precede the build commit. Seven uses of this pattern, and it has survived audit
+every time. **The bars below are fixed at this moment and may not soften as the
+work proceeds.***
+
+**GATE 3.2-R3 (funding) · GATE 3.1-R3 (fear & greed) · GATE 3.2b-R (recorder)**
+
+**(a) NOTHING THE PILOT READS CHANGES.** Every edit confined to the `__main__`
+block. **Proved two ways, not asserted:** every diff hunk at or after the
+`__main__` line — `funding.py` 160, `fear_greed.py` 113, `open_interest.py` 243
+— **AND** a sha256 of the production half of each file taken before and after
+and printed side by side.
+
+**(b) EVERY DEGRADED PATH GETS THE STANDARD THE HEALTHY PATH ALREADY HAS.** The
+partial-failure block and both offline blocks are compared for **EXACT EQUALITY**
+against a block the gate rebuilds from its OWN verbatim copy of the wording and
+its OWN arithmetic. **No substring test may remain as the only guard on any path
+that reaches the pilot's eye.** A "contains" check can never notice an addition;
+that sentence is now three failures old.
+
+**(c) THE RECORDER'S DETECTOR COVERS EVERY ASSET IT RECORDS.**
+`_disk_matches_source` runs for **all three symbols**, not BTCUSDT alone, and
+check (g)'s plausibility comparison does too. **A dataset that cannot be
+recovered may not have two of its three assets guarded only by a row count.**
+
+**(d) THE FOUR NEW SABOTAGES BECOME PERMANENT.** S12 and S13 join funding
+(eleven → thirteen), F12 joins Fear & Greed (eleven → twelve), B7 joins the
+recorder (six → seven). Caught on **every run, forever**, originals restored and
+the restoration verified.
+
+**(e) THE ORIGINAL ATTACKS ARE RE-RUN AGAINST THE REPAIRED FILES AS REAL TEXT
+EDITS — NOT WRAPPERS — AND MUST NOW BE CAUGHT. That is the evidence. The in-run
+drill is not.** Controls run first; if a control fails the rig is broken and
+nothing concluded means anything.
+
+**(f) EVERYTHING THE OLD GATES DID, THEY STILL DO.** All eleven funding
+sabotages, all eleven Fear & Greed sabotages and all six recorder sabotages
+still caught, and every existing check still present and green.
+
+**(g) NO new file, NO new dependency, NO extra call from the Brief's path.**
+
+**(h) THE SHIP IS STILL ALIVE AFTERWARDS.** Brief 3/3, vault INTACT 6/6, `lab/`
+byte-identical, and the recorded CSVs in `data/oi_history/` unchanged.
+
+**PASS = every check green including every sabotage CAUGHT. Anything less is a
+FAIL, is not committed as a pass, and is not called "mostly passed".**
+
+**AND THE RULE THIS SESSION IS BOUND BY: IT MAY NOT CLEAR ITS OWN REPAIR.** The
+session that found these four holes is about to write the fix for them — which
+is the exact structure R-001, R-009, R-010 and R-011 were each raised to catch,
+one turn further down the road. **A new item is filed against this repair and
+left OPEN for whoever comes next.**
