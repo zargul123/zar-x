@@ -4330,3 +4330,206 @@ filed rather than repaired under a gate that did not name it.
 **AND THE HONEST LIMIT ON THE WHOLE SESSION: four attacks, one idea.** All four
 were the same observation applied to four paths. **What is proven is that these
 four lies are now caught. What is NOT proven is that nothing else escapes.**
+
+---
+
+## 2026-07-28 (evening) — PART 1: **THE FOURTEENTH SABOTAGE, THE THIRTEENTH, THE EIGHTH AND THE NINTH. FOUR OF FOUR WALKED THROUGH.**
+## **R-013 FAILED. THE GATE'S "OWN VERBATIM COPY" IS NOT ITS OWN.**
+
+*Written by a session that built none of the three files it attacked. **Five
+sessions in a row have now each found real holes in the work of the session
+before.** The predictions below were written into working notes BEFORE anything
+was run, and are reproduced unedited; four of four were correct.*
+
+### THE IDEA, AND IT IS NOT YESTERDAY'S IDEA
+
+Yesterday's session found "the lesson was applied on the healthy path and
+nowhere else". I deliberately did not go looking for a fifth path. **I went
+looking at what the gates BELIEVE, and where that belief comes from.**
+
+Both instrument gates state the rule themselves, in their own comments:
+
+> `funding.py:234` — *"The test's own copy of the wording. If it read these from
+> the module it would follow the instrument into a corrupted sentence and
+> confirm it."*
+
+> `fear_greed.py:157` — *"this block used to read `HISTORY_LIMIT` from the module
+> it is testing. Cutting that constant to 2 disarmed sabotage F3… The gate now
+> holds its own copy and checks the module's against it."*
+
+**That rule has a hole in the very files that state it.** Three constants that
+decide what the gate believes are still read straight out of the module under
+test, and nothing anywhere compares them to anything:
+
+    funding.py:274      GATE_OFFLINE_BLOCK = f"  🔌 {OFFLINE_WORDS} (ConnectionError)"
+    fear_greed.py:199   GATE_OFFLINE_BLOCK = f"{GATE_HEADER}\n  🔌 {OFFLINE_WORDS} (…)"
+    open_interest.py    the whole gate loops `SYMBOLS`, the module's own list
+
+`OFFLINE_WORDS` appears on no other path, so **no other check ever looks at it.**
+Corrupt the constant and the gate's "own verbatim copy" corrupts itself to match,
+in lockstep, and equality holds against a lie.
+
+**This is not a new species of lie. It is S13 and F12 — the exact two lies Gate
+3.2-R3 and Gate 3.1-R3 were built yesterday to kill — walking back in through a
+door the new checks hold open themselves.**
+
+### THE FOUR ATTACKS, AND THE PREDICTION MADE BEFORE EACH ONE RAN
+
+**Controls first.** All three gates were run untouched: 3.1-R3, 3.2-R3 and
+3.2b-R all exit 0. Brief **3/3**, vault **INTACT 6/6**. The rig is valid, so the
+results below mean something. All sabotage was done on copies **outside the
+repo**; `git status` was clean before and after.
+
+**S14 — funding.py, one production line, `OFFLINE_WORDS` (line 46).**
+Changed to *"Funding instrument offline — last reading BTC +0.0100%, longs
+paying"*. A well-meant "make the offline line more useful" edit.
+**PREDICTED: ESCAPES. RESULT: ESCAPED, exit 0, GATE 3.2-R3 PASSED.**
+The gate printed the fabricated line on its own screen and ticked it:
+
+      🔌 Funding instrument offline — last reading BTC +0.0100%, longs paying (ConnectionError)
+       ✓ the offline block equals the gate's own verbatim copy exactly — one
+         honest line, no traceback, and NOTHING appended
+
+BTC's real rate at that moment was **+0.0027%**, and ETH and SOL were both
+**negative**. S13 is still scored CAUGHT in the same run, because S13 appends on
+top of the corrupted words and therefore differs from them.
+
+**F13 — fear_greed.py, one production line, `OFFLINE_WORDS` (line 29).**
+Changed to *"Fear & Greed instrument offline — last known reading 72 — Extreme
+Greed"*. **This is F12's payload verbatim, moved into the constant.**
+**PREDICTED: ESCAPES. RESULT: ESCAPED, exit 0, GATE 3.1-R3 PASSED.**
+
+      🔌 Fear & Greed instrument offline — last known reading 72 — Extreme Greed (ConnectionError)
+       ✓ the offline block equals the gate's own verbatim copy exactly — the
+         header, one honest line, no traceback, and NOTHING appended
+
+**The index actually read 29 — Fear that day.** The gate's section 4 header
+prints a paragraph explaining that F12 said "72 — Extreme Greed" on a day the
+index read "29 — Fear" — and then prints that exact sentence underneath it and
+passes. **F12 is scored CAUGHT in the same run.**
+
+**B8 — open_interest.py: the gate never runs the only path that runs
+unattended.** `--record` (lines 266-282) is what the monthly scheduled task
+calls. Nothing anywhere executes it. The file's own comment says *"A scheduled
+task must exit non-zero when THE JOB failed, or the alarm is decorative"* — and
+nothing checks that it does. Changed `sys.exit(0 if recorded else 1)` to
+`sys.exit(0)`, then made the job genuinely fail the way it really would (no
+internet on the 1st):
+
+      CONTROL (untouched):   NOT RECORDED — nothing was written.   exit 1  ✓
+      SABOTAGED:             NOT RECORDED — nothing was written.   exit 0  ✗
+
+**PREDICTED: ESCAPES. RESULT: ESCAPED, exit 0, GATE 3.2b-R PASSED**, all seven
+sabotages CAUGHT — because the gate never runs `--record` at all. The monthly
+task would report success forever while recording nothing.
+
+**B9 — open_interest.py: `SYMBOLS` cut from three assets to two.**
+The gate takes its list of *what to check* from the module it is checking.
+**PREDICTED: ESCAPES. RESULT: ESCAPED, exit 0, GATE 3.2b-R PASSED.**
+SOLUSDT is simply absent from every line of the output, and the gate prints, in
+its own words, *"it now does that for ALL THREE assets"* while checking two:
+
+       ✓ BTCUSDT: 180 rows spanning 29.8 days
+       ✓ ETHUSDT: 180 rows spanning 29.8 days
+       ✓ B7  ETH and SOL written with BTC's figures       → CAUGHT
+      GATE 3.2b-R PASSED
+
+**One third of the only dataset on this ship that cannot be bought back at any
+price stops being collected, permanently, and every check goes green.** This is
+B7's lesson — *two of three assets were guarded by a row count* — one level up:
+**now all three are guarded by a list the module hands the gate.**
+
+### WHAT THIS MEANS, IN ONE SENTENCE
+
+**A GATE THAT ASKS THE THING IT IS JUDGING WHAT THE ANSWER SHOULD BE IS NOT A
+GATE.** Yesterday's repair added four more verbatim copies and got the principle
+right four times; it did not go back and ask *where else does the gate still
+take the module's word for something?* — and in three places out of three, it
+still did.
+
+**The ship already knew this.** `GATE_CONTRACTS` exists because of S6.
+`GATE_LIMIT` exists because cutting `HISTORY_LIMIT` silently disarmed F3. **Both
+were built as one-off patches to one constant each, at the exact spot somebody
+had already attacked, and neither was ever turned into a sweep of the file.**
+
+### WHAT I COULD NOT SETTLE, AND WHAT I GOT WRONG
+
+- **Four attacks, one idea — again.** S14, F13 and B9 are the same observation on
+  three files. B8 is a different thing (coverage of an untested path) that I
+  found while reading for the first. **What is proven is that these four lies
+  get through. Nothing is proven about anything else.**
+- I did **not** attack the five doubts R-013 filed against itself. Check (e) is
+  still BTCUSDT-only, the 4h-boundary exposure is still unwatched, and B1 is
+  still a no-op on a UTC machine. **All three remain open and unexamined by me.**
+- The **two-assets-fail** path in funding (`[no data: X, Y]`) is still guarded by
+  nothing at all. I noticed it, did not attack it, and am recording it rather
+  than leaving it in my head.
+
+---
+
+# **THE GATE FOR THE REPAIR — DECLARED NOW, COMMITTED ALONE, NO `.py` IN THIS COMMIT**
+
+*Law 4. `git show --stat` on this commit must contain no `.py` file, and must
+precede the build commit. **Eight uses of this pattern, and it has survived audit
+every time.** The bars below are fixed at this moment and may not soften as the
+work proceeds.*
+
+**GATE 3.2-R4 (funding) · GATE 3.1-R4 (fear & greed) · GATE 3.2b-R2 (recorder)**
+
+**(a) NOTHING THE PILOT READS CHANGES.** Every edit confined to the `__main__`
+block. **Proved two ways, not asserted:** every diff hunk at or after the
+`__main__` line — `funding.py` 160, `fear_greed.py` 113, `open_interest.py` 243
+— **AND** a sha256 of the production half of each file taken before and after
+and printed side by side. Taken before the work began:
+
+    cockpit/funding.py       lines 1-159   3f7eec06…e0bf
+    cockpit/fear_greed.py    lines 1-112   c728f794…412c
+    data/open_interest.py    lines 1-242   9189c08f…9c7e
+
+**(b) THE GATE STOPS TAKING THE MODULE'S WORD FOR ANYTHING IT JUDGES BY.** Every
+constant that decides **what the pilot reads** or **what the gate checks** is
+held as the gate's OWN copy, and the module's is compared against it **by a
+named check that says which constant moved.** Specifically: `OFFLINE_WORDS` in
+both instruments, and `SYMBOLS` in the recorder. **A gate may not derive its
+expected output from a constant it is supposed to be testing.**
+
+**(c) THE RECORDER'S `--record` BRANCH IS ACTUALLY RUN.** Both outcomes, as a
+real subprocess: the success path must exit **0** and write real rows, and the
+failure path must exit **1** and write nothing. **The path that runs unattended
+once a month, on the dataset that expires, may not be the one path with no
+coverage.** It runs against a COPY in a scratch directory — `data/oi_history/`
+is never touched by the gate.
+
+**(d) THE FOUR NEW SABOTAGES BECOME PERMANENT.** S14 joins funding (thirteen →
+fourteen), F13 joins Fear & Greed (twelve → thirteen), B8 and B9 join the
+recorder (seven → nine). Caught on **every run, forever**, originals restored and
+the restoration verified.
+
+**(e) THE FOUR ORIGINAL ATTACKS ARE RE-RUN AGAINST THE REPAIRED FILES AS REAL
+TEXT EDITS — NOT WRAPPERS — AND MUST NOW BE CAUGHT. That is the evidence. The
+in-run drill is not.** Controls run first; if a control fails the rig is broken
+and nothing concluded means anything.
+
+**(f) EVERYTHING THE OLD GATES DID, THEY STILL DO.** All thirteen funding
+sabotages, all twelve Fear & Greed sabotages and all seven recorder sabotages
+still caught, and every existing check still present and green.
+
+**(g) NO new file, NO new dependency, NO extra call from the Brief's path.**
+**Named in advance so it cannot be waved through later:** check (c) needs
+`subprocess`. It is the standard library, it is imported inside `__main__` beside
+`shutil` and `tempfile` which are already there, and the Brief never executes
+that block. **If that is judged to be a new dependency, this bar FAILS and the
+check must be built another way.**
+
+**(h) THE SHIP IS STILL ALIVE AFTERWARDS.** Brief 3/3, vault INTACT 6/6, `lab/`
+byte-identical, and the recorded CSVs in `data/oi_history/` unchanged.
+
+**PASS = every check green including every sabotage CAUGHT. Anything less is a
+FAIL, is not committed as a pass, and is not called "mostly passed".**
+
+**AND THE RULE THIS SESSION IS BOUND BY: IT MAY NOT CLEAR ITS OWN REPAIR.** The
+session that found these four holes is about to write the fix for them — the
+exact structure R-001, R-009, R-010, R-011 and R-013 were each raised to catch,
+one turn further down the road. **A new item is filed against this repair and
+left OPEN for whoever comes next. R-013 is marked FAILED, which is not the same
+as cleared.**
