@@ -427,35 +427,42 @@ if __name__ == '__main__':
     ok = ok and edit_caught
 
     # ---- (g) THE DATA IS PLAUSIBLE ----------------------------------------
-    print("\n(g) THE DATA IS PLAUSIBLE — the stored BTC figure is checked")
-    print("    against Binance's own LIVE snapshot endpoint, which is a")
-    print("    different endpoint with a different field name. A recorder that")
-    print("    faithfully stores nonsense is not a working recorder.")
-    try:
-        live = requests.get(f"{FAPI_BASE}/fapi/v1/openInterest",
-                            params={'symbol': 'BTCUSDT'},
-                            timeout=TIMEOUT).json()
-        live_oi = float(live['openInterest'])
-        stored_oi = float(_rows(csv_path('BTCUSDT', backfill_dir))[-1]
-                          ['sumOpenInterest'])
-        drift = abs(stored_oi - live_oi) / live_oi * 100
-        near = drift < 10
-        print(f"   {'✓' if near else '✗'} newest stored {stored_oi:,.3f} BTC vs "
-              f"live snapshot {live_oi:,.3f} BTC → {drift:.2f}% apart "
-              f"(the stored row is a point sample up to 4h old, so a few "
-              f"percent is expected; 10% is the bar)")
-        ok = ok and near
-    except Exception as e:
-        print(f"   ✗ plausibility check failed: {type(e).__name__}: {e}")
-        ok = False
+    print("\n(g) THE DATA IS PLAUSIBLE — the stored figure for EVERY asset is")
+    print("    checked against Binance's own LIVE snapshot endpoint, which is")
+    print("    a different endpoint with a different field name. A recorder")
+    print("    that faithfully stores nonsense is not a working recorder.")
+    print("    Gate 3.2b-R: this compared BTCUSDT alone until 2026-07-28, and")
+    print("    sabotage B7 filled ETH and SOL with Bitcoin's figures unseen.")
+    for symbol in SYMBOLS:
+        try:
+            live = requests.get(f"{FAPI_BASE}/fapi/v1/openInterest",
+                                params={'symbol': symbol},
+                                timeout=TIMEOUT).json()
+            live_oi = float(live['openInterest'])
+            stored_oi = float(_rows(csv_path(symbol, backfill_dir))[-1]
+                              ['sumOpenInterest'])
+            drift = abs(stored_oi - live_oi) / live_oi * 100
+            near = drift < 10
+            print(f"   {'✓' if near else '✗'} {symbol}: newest stored "
+                  f"{stored_oi:,.3f} vs live snapshot {live_oi:,.3f} → "
+                  f"{drift:.2f}% apart (the stored row is a point sample up to "
+                  f"4h old, so a few percent is expected; 10% is the bar)")
+            ok = ok and near
+        except Exception as e:
+            print(f"   ✗ {symbol}: plausibility check failed: "
+                  f"{type(e).__name__}: {e}")
+            ok = False
 
     # ---- (h)+(i) THE SABOTAGE DRILL, AND IT JUDGES THE FILE ON DISK -------
     print("\n(h) THE SABOTAGE DRILL, BUILT IN FROM BIRTH — this file is broken")
-    print("    on purpose SIX ways and each break MUST be caught.")
+    print("    on purpose SEVEN ways and each break MUST be caught.")
     print("(i) AND THE DETECTOR READS THE CSV BACK OFF DISK and compares it,")
     print("    field by field, to a raw fetch the TEST makes itself — never to")
     print("    anything this file parsed. That is the lesson two Context Deck")
     print("    gates cost: check what is WRITTEN, not what the parser returned.")
+    print("    Gate 3.2b-R: it now does that for ALL THREE assets. It read")
+    print("    BTCUSDT alone until 2026-07-28, so B7 — which leaves BTC")
+    print("    perfect — walked straight through a gate that printed PASSED.")
 
     def _raw_truth(symbol='BTCUSDT'):
         """Fetched by the TEST, straight from Binance, passing through none of
@@ -473,43 +480,70 @@ if __name__ == '__main__':
                             str(raw['sumOpenInterestValue']))
         return truth
 
-    def _disk_matches_source(verbose=False):
-        """THE DETECTOR. Writes a fresh file, reads it back off disk, and
-        compares every row to raw. Returns True if the file on disk is a
-        faithful record of what Binance served."""
+    def _symbol_matches_source(symbol, verbose=False):
+        """Writes a fresh file for ONE symbol, reads it back off disk, and
+        compares every row to raw. True if the file on disk is a faithful
+        record of what Binance served for that symbol."""
         d = _fresh_dir()
-        good, _ = run(symbols=('BTCUSDT',), history_dir=d)
+        good, _ = run(symbols=(symbol,), history_dir=d)
         if not good:
             return False
-        path = csv_path('BTCUSDT', d)
+        path = csv_path(symbol, d)
         if not os.path.exists(path):
             return False
         rows = _rows(path)
-        truth = _raw_truth()
+        truth = _raw_truth(symbol)
         if len(rows) < 175:
             return False
         for r in rows:
             want = truth.get(r['timestamp'])
             if want is None:
                 if verbose:
-                    print(f"      row {r['timestamp']} is on disk but not in "
-                          f"the source")
+                    print(f"      {symbol} row {r['timestamp']} is on disk but "
+                          f"not in the source")
                 return False
             if (r['sumOpenInterest'], r['sumOpenInterestValue']) != want:
                 if verbose:
-                    print(f"      row {r['timestamp']}: disk "
+                    print(f"      {symbol} row {r['timestamp']}: disk "
                           f"{r['sumOpenInterest']} vs source {want[0]}")
                 return False
-            if r['symbol'] != 'BTCUSDT':
+            if r['symbol'] != symbol:
                 return False
         # every source row inside the written window must be present
         stamps = {r['timestamp'] for r in rows}
         missing = [t for t in truth if t not in stamps]
         if missing:
             if verbose:
-                print(f"      {len(missing)} source row(s) never reached disk, "
-                      f"e.g. {sorted(missing)[:3]}")
+                print(f"      {symbol}: {len(missing)} source row(s) never "
+                      f"reached disk, e.g. {sorted(missing)[:3]}")
             return False
+        return True
+
+    def _disk_matches_source(verbose=False):
+        """THE DETECTOR — **FOR EVERY ASSET THIS RECORDER COLLECTS, not just
+        the first one.**
+
+        GATE 3.2b-R, 2026-07-28. This function used to be hardcoded to
+        BTCUSDT, and it is the ONLY check anywhere in this gate that compares
+        what was WRITTEN to what Binance SERVED. So did check (e), and so did
+        check (g). **For ETHUSDT and SOLUSDT the entire gate only ever COUNTED:
+        180 rows, 30 days, no duplicates.**
+
+        An independent session exploited that with sabotage B7 — a memo cache
+        keyed on the timestamp rather than on the (symbol, timestamp) pair, so
+        the first asset fetched fills it and every later asset writes the FIRST
+        asset's figures under its own name. BTCUSDT stayed perfect. ETH was
+        recorded 22x wrong and SOL 80x wrong, for thirty days, and this gate
+        printed "all six deliberate sabotages were caught" and exited 0.
+
+        **On the one dataset Binance will not sell back at any price, two of
+        three assets were guarded by a row count.**"""
+        for symbol in SYMBOLS:
+            if not _symbol_matches_source(symbol, verbose):
+                if verbose:
+                    print(f"      ^ {symbol} is where the disk stopped matching "
+                          f"the source")
+                return False
         return True
 
     _UTC_ISO_ORIGINAL = _utc_iso
@@ -595,6 +629,43 @@ if __name__ == '__main__':
         return _RECORD_ORIGINAL(symbol, base_url, history_dir, period, limit,
                                 timeout)
 
+    _B7_MEMO = {}
+
+    def _sab_cross_symbol(symbol, base_url=FAPI_BASE, history_dir=HISTORY_DIR,
+                          period=PERIOD, limit=LIMIT, timeout=TIMEOUT):
+        """**B7, from the independent review of 2026-07-28. IT WALKED THROUGH
+        THIS GATE.**
+
+        A memo cache keyed on the TIMESTAMP and not on the (SYMBOL, TIMESTAMP)
+        pair. The first asset fetched fills it; every later asset reads its own
+        timestamps back out and writes the first asset's figures under its own
+        name. **That is not a strawman — it is what "let us not re-derive rows
+        we have already seen" looks like when written carelessly.**
+
+        The first symbol stays PERFECT, which is the whole point: a detector
+        that only ever looked at BTCUSDT could not see this, and for thirty days
+        ETH would have carried Bitcoin's open interest 22x wrong and SOL 80x
+        wrong on a dataset that cannot be bought back at any price."""
+        rep = _RECORD_ORIGINAL(symbol, base_url, history_dir, period, limit,
+                               timeout)
+        path = csv_path(symbol, history_dir)
+        rows = _rows(path)
+        if symbol == SYMBOLS[0]:
+            _B7_MEMO.clear()
+            for r in rows:
+                _B7_MEMO[r['timestamp']] = (r['sumOpenInterest'],
+                                            r['sumOpenInterestValue'])
+            return rep
+        for r in rows:
+            hit = _B7_MEMO.get(r['timestamp'])
+            if hit:
+                r['sumOpenInterest'], r['sumOpenInterestValue'] = hit
+        with open(path, 'w', newline='', encoding='utf-8') as fh:
+            w = csv.DictWriter(fh, fieldnames=COLUMNS)
+            w.writeheader()
+            w.writerows(rows)
+        return rep
+
     # The last column is WHICH JUDGE decides. B5 corrupts only the bogus-symbol
     # path, which a healthy BTCUSDT write cannot see; judging it by the disk
     # comparison would record a guaranteed escape as if the gate were blind.
@@ -614,6 +685,11 @@ if __name__ == '__main__':
          _sab_naive_recorder, 'trap'),
         ('B6', 'the number rounded on the way to disk', 'record',
          _sab_rounded, 'disk'),
+        # B7 is the reason `_disk_matches_source` now covers every symbol. It
+        # leaves BTCUSDT perfect on purpose, so it is caught ONLY by a detector
+        # that looks past the first asset.
+        ('B7', 'ETH and SOL written with BTC\'s figures', 'record',
+         _sab_cross_symbol, 'disk'),
     ]
 
     drill_ok = True
@@ -648,13 +724,14 @@ if __name__ == '__main__':
     shutil.rmtree(SCRATCH, ignore_errors=True)
 
     if ok:
-        print("\nGATE 3.2b PASSED — the backfill is real, the same run twice")
+        print("\nGATE 3.2b-R PASSED — the backfill is real, the same run twice")
         print("changes nothing, an empty result fails loudly, the offline drill")
         print("leaves the files byte-identical, tampered history is reported")
-        print("rather than overwritten, and all six deliberate sabotages were")
-        print("caught by reading the CSV back off disk and comparing it to")
-        print("Binance. This test has demonstrated, this run, that it can say no.")
+        print("rather than overwritten, and all SEVEN deliberate sabotages were")
+        print("caught by reading the CSV back off disk — FOR ALL THREE ASSETS,")
+        print("not just the first — and comparing it to Binance. This test has")
+        print("demonstrated, this run, that it can say no.")
     else:
-        print("\nGATE 3.2b FAILED — see the ✗ lines above. Nothing is committed")
-        print("as a pass.")
+        print("\nGATE 3.2b-R FAILED — see the ✗ lines above. Nothing is")
+        print("committed as a pass.")
     sys.exit(0 if ok else 1)

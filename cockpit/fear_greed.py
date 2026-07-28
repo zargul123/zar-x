@@ -161,11 +161,43 @@ if __name__ == '__main__':
     # `GATE_CONTRACTS` does for funding's tickers.
     # =====================================================================
 
+    # =====================================================================
+    # GATE 3.1-R3, added 2026-07-28 after an independent session threw a
+    # TWELFTH sabotage at Gate 3.1-R2 and it walked through.
+    #
+    # R2 rebuilt the WHOLE block and demanded exact equality — ON THE HEALTHY
+    # PATH ONLY. The OFFLINE path was still guarded the old way: are the
+    # offline words present, are there two lines, is the header first. **All
+    # three questions can be satisfied while a fabricated number rides along
+    # on the end of the line.**
+    #
+    # F12 IS SABOTAGE F6 DONE PROPERLY. F6 — "offline path fabricates a
+    # number" — is in the drill and is caught, but only because it DROPS the
+    # offline words. F12 keeps them and appends the fabrication:
+    #
+    #     🔌 Fear & Greed instrument offline (ConnectionError) — last known
+    #     reading 72 — Extreme Greed
+    #
+    # The true reading that day was 29 — Fear. The line the pilot would read
+    # said Extreme Greed, on an instrument that had just admitted it could not
+    # see anything, and the check underneath it said "nothing else printed".
+    #
+    # SO: THE OFFLINE PATH NOW GETS THE STANDARD THE HEALTHY PATH ALREADY HAS.
+    # It is compared for EXACT EQUALITY against the gate's own verbatim copy,
+    # because the only check that can enforce "nothing else" is equality.
+    # =====================================================================
+
     GATE_LIMIT = 8          # the test's own copy; never read from the module
     GATE_HEADER = "  CONTEXT DECK"
     GATE_LINE2_PREFIX = "  Fear & Greed : "
     GATE_LINE3_DISCLAIMER = ("  (crowd-mood gauge from alternative.me — "
                              "information, not a signal)")
+
+    # The offline block, held verbatim by the test. `_get` raises requests'
+    # ConnectionError against the reserved .invalid domain, so the exception
+    # name in the honest line is deterministic.
+    GATE_OFFLINE_BLOCK = (f"{GATE_HEADER}\n"
+                          f"  🔌 {OFFLINE_WORDS} (ConnectionError)")
 
     def _raw_rows():
         """The source's own JSON, fetched by the TEST, passing through none
@@ -286,6 +318,31 @@ if __name__ == '__main__':
                     say(f"      line {i} expected: {exp!r}")
         return ok and block_ok
 
+    def _offline_checks(verbose=True):
+        """GATE 3.1-R3 (a): THE OFFLINE BLOCK, EXACT EQUALITY.
+
+        The old bar asked three questions a fabricated number could answer
+        correctly. **An instrument that has just admitted it cannot see
+        anything must print NOTHING ELSE** — and "nothing else" is a claim only
+        equality can enforce. This also becomes the judge for F6, which used to
+        be scored by an inline special case in the drill: F6 drops the offline
+        words, F12 keeps them, and one bar now catches both."""
+        say = print if verbose else (lambda *a, **k: None)
+        drill = section_text(base_url=OFFLINE_DRILL_URL)
+        hit = (drill == GATE_OFFLINE_BLOCK)
+        say(f"   {'✓' if hit else '✗'} the offline block equals the gate's own "
+            f"verbatim copy exactly — the header, one honest line, no "
+            f"traceback, and NOTHING appended")
+        if not hit:
+            for i, (got, exp) in enumerate(
+                    zip_longest(drill.splitlines(),
+                                GATE_OFFLINE_BLOCK.splitlines(),
+                                fillvalue=''), start=1):
+                if got != exp:
+                    say(f"      line {i} printed : {got!r}")
+                    say(f"      line {i} expected: {exp!r}")
+        return hit
+
     # Imported here rather than at the top so the diff stays inside __main__
     # and the production path is provably untouched.
     from datetime import timedelta
@@ -298,26 +355,30 @@ if __name__ == '__main__':
     _CONTEXT_WORDS_ORIGINAL = _context_words
     _GET_ORIGINAL = _get
 
-    # The six from R-008, kept by name so the fix stays legible.
+    # The six from R-008, kept by name so the fix stays legible. The last
+    # column is WHICH JUDGE decides: F6 and F12 corrupt only the offline path,
+    # which the live core checks cannot see, so judging them by the core checks
+    # would record two guaranteed escapes as if the gate were blind.
     _SABOTAGES = [
         ('F1', '_parse — value inverted', 'ESCAPED', '_parse',
          lambda payload: [dict(r, value=100 - r['value'])
-                          for r in _PARSE_ORIGINAL(payload)]),
+                          for r in _PARSE_ORIGINAL(payload)], 'core'),
         ('F2', '_parse — label decoupled', 'ESCAPED', '_parse',
          lambda payload: [dict(r, label='Extreme Greed')
-                          for r in _PARSE_ORIGINAL(payload)]),
+                          for r in _PARSE_ORIGINAL(payload)], 'core'),
         ('F3', '_age_words — all ages "yesterday"', 'ESCAPED', '_age_words',
-         lambda days: "yesterday"),
+         lambda days: "yesterday", 'core'),
         ('F4', '_parse — date shifted 3 days', 'ESCAPED', '_parse',
          lambda payload: [dict(r, date=r['date'] + timedelta(days=3))
-                          for r in _PARSE_ORIGINAL(payload)]),
+                          for r in _PARSE_ORIGINAL(payload)], 'core'),
         ('F5', 'section_text — yesterday as today', 'ESCAPED', '_parse',
-         lambda payload: _PARSE_ORIGINAL(payload)[1:]),
+         lambda payload: _PARSE_ORIGINAL(payload)[1:], 'core'),
         # F6 swaps the doorway itself: the only way to make the offline path
         # lie is to replace the thing that writes it.
         ('F6', 'offline path fabricates a number', 'caught', 'section_text',
          lambda base_url=None, limit=None, timeout=None:
-             f"{HEADER}\n  Fear & Greed : 50 — Neutral   [reading unavailable]"),
+             f"{HEADER}\n  Fear & Greed : 50 — Neutral   [reading unavailable]",
+         'offline'),
         # F7-F11, from the independent review of 2026-07-27. Three of these
         # five walked through Gate 3.1-R. They corrupt the OUTPUT rather than
         # editing the file, because that is what a drill running inside the
@@ -325,14 +386,15 @@ if __name__ == '__main__':
         # edits the file for real — Gate 3.1-R2 check (i).
         ('F7', 'the disclaimer turned into ADVICE', 'ESCAPED', 'section_text',
          lambda *a, **k: _SECTION_TEXT_ORIGINAL(*a, **k).replace(
-             'information, not a signal', 'buy when others are fearful')),
+             'information, not a signal', 'buy when others are fearful'),
+         'core'),
         ('F8', 'rubbish appended to the reading line', 'ESCAPED',
          'section_text',
          lambda *a, **k: _SECTION_TEXT_ORIGINAL(*a, **k).replace(
-             ' UTC]', ' UTC]   >> strong buy signal')),
+             ' UTC]', ' UTC]   >> strong buy signal'), 'core'),
         ('F9', 'credited to a source never called', 'ESCAPED', 'section_text',
          lambda *a, **k: _SECTION_TEXT_ORIGINAL(*a, **k).replace(
-             'from alternative.me', 'from CNN Business')),
+             'from alternative.me', 'from CNN Business'), 'core'),
         ('F10', 'the two context values swapped', 'caught', '_context_words',
          lambda readings: _CONTEXT_WORDS_ORIGINAL(
              [readings[0]]
@@ -340,52 +402,63 @@ if __name__ == '__main__':
              + readings[2:7]
              + [dict(readings[1], date=readings[7]['date'])]
              + readings[8:]) if len(readings) > 7
-             else _CONTEXT_WORDS_ORIGINAL(readings)),
+             else _CONTEXT_WORDS_ORIGINAL(readings), 'core'),
         # F11 forces the INSTRUMENT to fetch two days while the gate still
         # fetches eight, so the week-ago context point silently disappears.
         # Sabotaging the constant instead would move both and prove nothing —
         # that is the trap the gate's own GATE_LIMIT now closes.
         ('F11', 'a week of history silently lost', 'caught', '_get',
-         lambda base_url, limit, timeout: _GET_ORIGINAL(base_url, 2, timeout)),
+         lambda base_url, limit, timeout: _GET_ORIGINAL(base_url, 2, timeout),
+         'core'),
+        # F12, from the independent review of 2026-07-28. It walked through
+        # Gate 3.1-R2. **It is F6 done properly:** F6 is caught only because it
+        # DROPS the offline words, so the bar never had to prove it could
+        # notice an ADDITION. Keep the honest words, append the fabrication,
+        # and the pilot reads Extreme Greed on a day the index says Fear.
+        ('F12', 'offline line keeps the words AND fabricates', 'ESCAPED',
+         'section_text',
+         lambda *a, **k: (_SECTION_TEXT_ORIGINAL(*a, **k)
+                          + " — last known reading 72 — Extreme Greed"
+                          if OFFLINE_WORDS in _SECTION_TEXT_ORIGINAL(*a, **k)
+                          else _SECTION_TEXT_ORIGINAL(*a, **k)), 'offline'),
     ]
 
     def _sabotage_drill():
         """EXHIBIT A, MADE PERMANENT. Break this file on purpose, one way at a
         time, and require the checks above to FAIL each time."""
         ok = True
-        for tag, words, old, attr, repl in _SABOTAGES:
+        for tag, words, old, attr, repl, judge in _SABOTAGES:
             original = globals()[attr]
             globals()[attr] = repl
             try:
-                if tag == 'F6':
-                    # judged by the ORIGINAL offline bar: the honest words, two
-                    # lines, header first
-                    drill = section_text(base_url=OFFLINE_DRILL_URL)
-                    lines = drill.splitlines()
-                    survived = (OFFLINE_WORDS in drill and len(lines) == 2
-                                and lines[0] == HEADER)
-                else:
-                    survived = _core_checks(verbose=False)
+                # F6 used to be judged by an inline copy of the old offline bar
+                # — "the words are present, two lines, header first" — which is
+                # exactly the bar F12 then satisfied while lying. Both are now
+                # judged by the same exact-equality check, so the drill proves
+                # THE CHECK rather than a weaker copy of it.
+                survived = (_offline_checks(verbose=False) if judge == 'offline'
+                            else _core_checks(verbose=False))
             except Exception:
                 survived = False        # a crash is a catch: it did not pass
             finally:
                 globals()[attr] = original
             caught = not survived
-            print(f"   {'✓' if caught else '✗'} {tag:<4} {words:<36} "
+            print(f"   {'✓' if caught else '✗'} {tag:<4} {words:<42} "
                   f"[old gate: {old:<7}] → "
                   f"{'CAUGHT' if caught else 'ESCAPED AGAIN — GATE IS DECORATIVE'}")
             ok = ok and caught
-        restored = _core_checks(verbose=False)
+        restored = _core_checks(verbose=False) and _offline_checks(verbose=False)
         print(f"   {'✓' if restored else '✗'} every original restored — the "
               f"clean checks pass again afterwards")
         return ok and restored
 
     ok = True
-    print("GATE 3.1-R2 — the Fear & Greed instrument's self-test, hardened")
-    print("2026-07-27. Its first version let five of six deliberate lies")
-    print("through. Its second printed '>> strong buy signal' on the deck of")
-    print("an information-only ship and passed. This one rebuilds the WHOLE")
-    print("block and compares it exactly.")
+    print("GATE 3.1-R3 — the Fear & Greed instrument's self-test, hardened")
+    print("2026-07-28. Version 1 let five of six deliberate lies through.")
+    print("Version 2 printed '>> strong buy signal' on the deck of an")
+    print("information-only ship and passed. Version 3 rebuilt the whole block")
+    print("exactly — ON THE LIVE PATH ONLY — and printed a fabricated 'Extreme")
+    print("Greed' on the offline line. This one holds BOTH paths to equality.")
 
     print("\n1) LIVE SECTION — what the Brief will print")
     try:
@@ -423,30 +496,32 @@ if __name__ == '__main__':
           "\n   number beside the wrong words is the defect F2 exposed.")
     ok = _core_checks(verbose=True) and ok
 
-    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.1-R d · 3.1-R2 f) — the file"
-          "\n   is broken on purpose ELEVEN ways and each break MUST be"
-          "\n   caught. Five of the first six escaped the gate of 2026-07-26;"
-          "\n   three of the last five escaped the gate of the day after.")
+    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.1-R d · 3.1-R2 f · 3.1-R3 b)"
+          "\n   — the file is broken on purpose TWELVE ways and each break MUST"
+          "\n   be caught. Five of the first six escaped the gate of"
+          "\n   2026-07-26; three of the next five escaped the gate of the day"
+          "\n   after; and the twelfth escaped the gate of 2026-07-27 by"
+          "\n   hiding on the one path it only counted.")
     ok = _sabotage_drill() and ok
 
-    print("\n4) OFFLINE DRILL — injected unreachable URL, internet untouched")
+    print("\n4) OFFLINE DRILL (Gate 3.1-R3 a) — injected unreachable URL,"
+          "\n   internet untouched. Judged by EXACT EQUALITY against the gate's"
+          "\n   own verbatim copy: sabotage F12 appended '— last known reading"
+          "\n   72 — Extreme Greed' to this line, on a day the index read 29 —"
+          "\n   Fear, and the old bar called it 'nothing else printed'.")
     print(f"   pointing the instrument at {OFFLINE_DRILL_URL}")
-    drill = section_text(base_url=OFFLINE_DRILL_URL)
     print()
-    print(drill)
-    lines = drill.splitlines()
-    drill_ok = OFFLINE_WORDS in drill and len(lines) == 2 and lines[0] == HEADER
-    print(f"   {'✓' if drill_ok else '✗'} degraded to one offline line, "
-          f"no traceback, nothing else printed")
+    print(section_text(base_url=OFFLINE_DRILL_URL))
+    drill_ok = _offline_checks(verbose=True)
     ok = ok and drill_ok
 
     if ok:
-        print("\nGATE 3.1-R2 PASSED — the WHOLE printed block was rebuilt from "
-              "the\nsource and matched exactly, the disclaimer was checked "
-              "verbatim, the\ngate's own history limit was compared to the "
-              "module's, and all ELEVEN\ndeliberate sabotages were caught. "
-              "This test has demonstrated, this run,\nthat it is able to say "
-              "no.")
+        print("\nGATE 3.1-R3 PASSED — the WHOLE printed block was rebuilt from "
+              "the\nsource and matched exactly on BOTH paths the pilot can see "
+              "— live\nand offline — the disclaimer was checked verbatim, the "
+              "gate's own\nhistory limit was compared to the module's, and all "
+              "TWELVE deliberate\nsabotages were caught. This test has "
+              "demonstrated, this run, that it\nis able to say no.")
     else:
-        print("\nGATE 3.1-R2 FAILED — see the ✗ lines above.")
+        print("\nGATE 3.1-R3 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)

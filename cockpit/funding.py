@@ -241,6 +241,38 @@ if __name__ == '__main__':
     GATE_LINE2_TAIL = " UTC"
     GATE_LINE3_DISCLAIMER = "   — crowd positioning, information, not a signal)"
 
+    # =====================================================================
+    # GATE 3.2-R3, added 2026-07-28 after an independent session threw two
+    # NEW sabotages at Gate 3.2-R2 and BOTH walked through.
+    #
+    # R2 rebuilt the WHOLE block and demanded exact equality — ON THE HEALTHY
+    # PATH ONLY. Every DEGRADED path was still guarded the old way: by asking
+    # whether an expected substring was PRESENT, and by counting lines. That is
+    # the exact question R2 was written to abolish, abolished on one path and
+    # left standing on the others.
+    #
+    # S12 reversed "positive = longs pay shorts" to its opposite BUT ONLY WHEN
+    # AN ASSET WAS MISSING, so the healthy block stayed byte-identical and
+    # `_core_checks` never saw it. That is sabotage S7 — the lie the entire R2
+    # rebuild exists to kill — moved one path over. The gate printed the
+    # reversed sentence on its own screen in section 5 and put three tick marks
+    # underneath it.
+    #
+    # S13 appended a fabricated rate to the OFFLINE line. The old bar asked
+    # only "are the offline words present AND is it one line", and an appended
+    # phrase satisfies both.
+    #
+    # SO: THE DEGRADED PATHS NOW GET THE STANDARD THE HEALTHY PATH ALREADY HAS.
+    # Both are rebuilt from the gate's own verbatim wording and its own
+    # arithmetic and compared for EXACT EQUALITY. No substring test remains as
+    # the only guard on any path that reaches the pilot's eye.
+    # =====================================================================
+
+    # The offline line, held verbatim by the test. `section_text` raises
+    # ConnectionError("no asset answered") when every asset fails, so the
+    # exception name in the honest line is deterministic.
+    GATE_OFFLINE_BLOCK = f"  🔌 {OFFLINE_WORDS} (ConnectionError)"
+
     def _expected_block(snap):
         """The ENTIRE block the Brief ought to print, assembled from raw by
         this test's own arithmetic and its own wording. Compared for exact
@@ -339,30 +371,93 @@ if __name__ == '__main__':
                     say(f"      line {i} expected: {want!r}")
         return ok and block_ok
 
+    def _expected_partial_block(snap, broken):
+        """The ENTIRE degraded block the Brief ought to print when one asset
+        fails, assembled from raw by this test's own arithmetic and its own
+        wording. `section_text` only collects settlement times from assets that
+        ANSWERED, so the expected stamp is the minimum over the survivors."""
+        others = [a for a in GATE_CONTRACTS if a != broken]
+        parts = [f"{a.split('-')[0]} {_expected_pct(snap[a][0])}"
+                 for a in others]
+        stamp = _expected_hhmm(min(snap[a][1] for a in others))
+        return "\n".join([
+            (GATE_LINE1_PREFIX + GATE_SEP.join(parts)
+             + f"   [no data: {broken.split('-')[0]}]"),
+            GATE_LINE2_HEAD + stamp + GATE_LINE2_TAIL,
+            GATE_LINE3_DISCLAIMER,
+        ])
+
     def _partial_checks(verbose=True):
-        """GATE 3.2-R2 (d): THE ROTATING PARTIAL-FAILURE DRILL.
+        """GATE 3.2-R2 (d) · 3.2-R3 (a): THE ROTATING PARTIAL-FAILURE DRILL,
+        NOW JUDGED BY EXACT EQUALITY.
 
         The old drill always broke SOL, so it could only ever prove SOL. A
         module that named the missing asset 'SOL' no matter which one failed
         (sabotage S11) agreed with the drill and walked through. Each asset
-        now takes a turn as the bogus symbol and must be named BY ITS OWN
-        NAME, with the other two still printed."""
+        now takes a turn as the bogus symbol and must be named BY ITS OWN NAME,
+        with the other two still printed.
+
+        **AND, 2026-07-28: the check is no longer a substring test.** It asked
+        three questions — is '[no data: X]' there, does each survivor carry a
+        sign, is the offline phrase absent — and never looked at the digits, the
+        settlement time, the mechanism sentence or the disclaimer. So S12
+        reversed the meaning of the instrument on this path alone and the drill
+        applauded. The WHOLE degraded block is now rebuilt and compared exactly:
+        a reversed sentence, a deleted disclaimer, a wrong rate and an appended
+        phantom all fail, because nothing can be added to a string that must
+        match exactly.
+
+        The before/after drift allowance is the same one `_core_checks` uses and
+        for the same reason — funding is quoted continuously — and it is taken
+        PER ASSET, because three degraded blocks are built one after another and
+        a snapshot taken before the first is already stale by the third."""
         say = print if verbose else (lambda *a, **k: None)
         ok = True
         for broken in GATE_CONTRACTS:
             short = broken.split('-')[0]
             contracts = {a: ('NOTAREALSYMBOL' if a == broken else c)
                          for a, c in GATE_CONTRACTS.items()}
+            before = _raw_snapshot()
             out = section_text(contracts=contracts)
+            want = _expected_partial_block(before, broken)
+            hit = (out == want)
+            if not hit:
+                want = _expected_partial_block(_raw_snapshot(), broken)
+                hit = (out == want)
             others = [x.split('-')[0] for x in GATE_CONTRACTS if x != broken]
-            hit = (f"[no data: {short}]" in out
-                   and all(f"{o} +" in out or f"{o} -" in out for o in others)
-                   and OFFLINE_WORDS not in out)
-            say(f"   {'✓' if hit else '✗'} {short} broken → named as "
-                f"'[no data: {short}]' and {' and '.join(others)} still "
-                f"printed")
+            say(f"   {'✓' if hit else '✗'} {short} broken → the WHOLE degraded "
+                f"block equals the block rebuilt from Binance raw: "
+                f"'[no data: {short}]' named, {' and '.join(others)} still "
+                f"printed, mechanism sentence and disclaimer intact")
+            if not hit:
+                for i, (got, exp) in enumerate(
+                        zip_longest(out.splitlines(), want.splitlines(),
+                                    fillvalue=''), start=1):
+                    if got != exp:
+                        say(f"      line {i} printed : {got!r}")
+                        say(f"      line {i} expected: {exp!r}")
             ok = ok and hit
         return ok
+
+    def _offline_checks(verbose=True):
+        """GATE 3.2-R3 (b): THE OFFLINE BLOCK, EXACT EQUALITY.
+
+        The old bar asked whether the offline words were present and whether
+        there was one line. Sabotage S13 appended a fabricated rate to that one
+        line — '— last reading BTC +0.0100%, longs paying' — and satisfied both
+        conditions. **An instrument that has just admitted it cannot see
+        anything must print NOTHING ELSE**, and the only check that can enforce
+        'nothing else' is equality."""
+        say = print if verbose else (lambda *a, **k: None)
+        drill = section_text(base_url=OFFLINE_DRILL_URL)
+        hit = (drill == GATE_OFFLINE_BLOCK)
+        say(f"   {'✓' if hit else '✗'} the offline block equals the gate's own "
+            f"verbatim copy exactly — one honest line, no traceback, and "
+            f"NOTHING appended")
+        if not hit:
+            say(f"      printed : {drill!r}")
+            say(f"      expected: {GATE_OFFLINE_BLOCK!r}")
+        return hit
 
     # S7-S11 corrupt the OUTPUT rather than editing the file, because that is
     # what a drill running inside the file can do. The real proof that the
@@ -391,6 +486,27 @@ if __name__ == '__main__':
     def _sab_always_sol(*a, **k):
         return re.sub(r'\[no data: [^\]]*\]', '[no data: SOL]',
                       _SECTION_TEXT_ORIGINAL(*a, **k))
+
+    def _sab_partial_meaning_reversed(*a, **k):
+        """S12, from the independent review of 2026-07-28. The mechanism
+        sentence reverses itself ONLY when an asset is missing, so the healthy
+        block stays byte-identical and the whole-block equality check on the
+        happy path never sees it. This is S7 moved onto the degraded path —
+        which is precisely the path the pilot is reading on a bad morning."""
+        out = _SECTION_TEXT_ORIGINAL(*a, **k)
+        if '[no data:' in out:
+            out = out.replace('positive = longs pay shorts',
+                              'positive = shorts pay longs')
+        return out
+
+    def _sab_offline_fabricates(*a, **k):
+        """S13, from the same review. The offline line keeps the honest offline
+        words AND appends a rate that was fetched from nowhere. The old bar —
+        'the words are present and it is one line' — was satisfied by both."""
+        out = _SECTION_TEXT_ORIGINAL(*a, **k)
+        if OFFLINE_WORDS in out:
+            out += " — last reading BTC +0.0100%, longs paying"
+        return out
 
     # The six from the audit of 2026-07-26 and the five from the independent
     # review of 2026-07-27, kept by name so the fix stays legible. S5 shifts by
@@ -429,6 +545,13 @@ if __name__ == '__main__':
          'section_text', _sab_silent_drop, 'partial'),
         ('S11', 'the missing asset always named SOL', 'ESCAPED',
          'section_text', _sab_always_sol, 'partial'),
+        # S12 and S13, from the independent review of 2026-07-28. BOTH walked
+        # through Gate 3.2-R2. Both live on a DEGRADED path, which is why the
+        # whole-block equality check added the day before could not see them.
+        ('S12', 'the meaning reverses when an asset fails', 'ESCAPED',
+         'section_text', _sab_partial_meaning_reversed, 'partial'),
+        ('S13', 'the offline line carries a made-up rate', 'ESCAPED',
+         'section_text', _sab_offline_fabricates, 'offline'),
     ]
 
     def _sabotage_drill():
@@ -440,28 +563,31 @@ if __name__ == '__main__':
             original = globals()[attr]
             globals()[attr] = repl
             try:
-                survived = (_partial_checks(verbose=False) if judge == 'partial'
-                            else _core_checks(verbose=False))
+                survived = {'partial': _partial_checks,
+                            'offline': _offline_checks}.get(
+                    judge, _core_checks)(verbose=False)
             except Exception:
                 survived = False        # a crash is a catch: it did not pass
             finally:
                 globals()[attr] = original
             caught = not survived
-            print(f"   {'✓' if caught else '✗'} {tag:<4} {words:<38} "
+            print(f"   {'✓' if caught else '✗'} {tag:<4} {words:<40} "
                   f"[old gate: {old:<7}] → "
                   f"{'CAUGHT' if caught else 'ESCAPED AGAIN — GATE IS DECORATIVE'}")
             ok = ok and caught
-        restored = _core_checks(verbose=False) and _partial_checks(verbose=False)
+        restored = (_core_checks(verbose=False) and _partial_checks(verbose=False)
+                    and _offline_checks(verbose=False))
         print(f"   {'✓' if restored else '✗'} every original restored — the "
               f"clean checks pass again afterwards")
         return ok and restored
 
     ok = True
-    print("GATE 3.2-R2 — the funding instrument's self-test, hardened 2026-07-27.")
-    print("Its first version reported 48/48 while four deliberate lies walked")
-    print("through it. Its second checked the digits and missed the WORDS: it")
-    print("printed 'positive = shorts pay longs' — the opposite of the truth —")
-    print("and passed. This one rebuilds the WHOLE block and compares it exactly.")
+    print("GATE 3.2-R3 — the funding instrument's self-test, hardened 2026-07-28.")
+    print("Version 1 reported 48/48 while four deliberate lies walked through.")
+    print("Version 2 checked the digits and missed the WORDS. Version 3 rebuilt")
+    print("the whole block exactly — ON THE HEALTHY PATH ONLY, and printed")
+    print("'positive = shorts pay longs' on its own screen the moment an asset")
+    print("failed. This one holds every path the pilot can see to that standard.")
 
     print("\n1) LIVE BLOCK — what the Brief will print")
     live = section_text()
@@ -489,10 +615,12 @@ if __name__ == '__main__':
           "\n   helper of the instrument is used to judge the instrument.")
     ok = _core_checks(verbose=True) and ok
 
-    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.2-R e, f · 3.2-R2 f) — the"
-          "\n   file is broken on purpose ELEVEN ways and each break MUST be"
-          "\n   caught. Four of the first six escaped the gate of 2026-07-26;"
-          "\n   four of the last five escaped the gate of the day after.")
+    print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.2-R e, f · 3.2-R2 f ·"
+          "\n   3.2-R3 c) — the file is broken on purpose THIRTEEN ways and"
+          "\n   each break MUST be caught. Four of the first six escaped the"
+          "\n   gate of 2026-07-26; four of the next five escaped the gate of"
+          "\n   the day after; and BOTH of the last two escaped the gate of"
+          "\n   2026-07-27 by living on a path it only counted.")
     ok = _sabotage_drill() and ok
 
     print("\n4) EXACT IDENTITY CHECK — the settled rate this file parses must"
@@ -527,23 +655,23 @@ if __name__ == '__main__':
     partial_ok = _partial_checks(verbose=True)
     ok = ok and partial_ok
 
-    print("\n6) OFFLINE DRILL — injected unreachable URL, internet untouched")
+    print("\n6) OFFLINE DRILL (Gate 3.2-R3 b) — injected unreachable URL,"
+          "\n   internet untouched. Judged by EXACT EQUALITY against the gate's"
+          "\n   own verbatim copy: sabotage S13 appended a fabricated rate to"
+          "\n   this line and the old 'words present, one line' bar passed it.")
     print(f"   pointing the instrument at {OFFLINE_DRILL_URL}")
-    drill = section_text(base_url=OFFLINE_DRILL_URL)
     print()
-    print(drill)
-    lines = drill.splitlines()
-    drill_ok = OFFLINE_WORDS in drill and len(lines) == 1
-    print(f"   {'✓' if drill_ok else '✗'} degraded to one offline line, "
-          f"no traceback, nothing else printed")
+    print(section_text(base_url=OFFLINE_DRILL_URL))
+    drill_ok = _offline_checks(verbose=True)
     ok = ok and drill_ok
 
     if ok:
-        print("\nGATE 3.2-R2 PASSED — the WHOLE printed block was rebuilt from "
-              "Binance\nraw and matched exactly, the fixed wording was checked "
-              "verbatim, every\nasset took a turn at failing, and all ELEVEN "
-              "deliberate sabotages were\ncaught. This test has demonstrated, "
-              "this run, that it is able to say no.")
+        print("\nGATE 3.2-R3 PASSED — the WHOLE printed block was rebuilt from "
+              "Binance\nraw and matched exactly on EVERY path the pilot can "
+              "see — healthy,\ndegraded and offline — the fixed wording was "
+              "checked verbatim, every\nasset took a turn at failing, and all "
+              "THIRTEEN deliberate sabotages\nwere caught. This test has "
+              "demonstrated, this run, that it can say no.")
     else:
-        print("\nGATE 3.2-R2 FAILED — see the ✗ lines above.")
+        print("\nGATE 3.2-R3 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)

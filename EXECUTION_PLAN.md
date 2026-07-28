@@ -347,7 +347,63 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **PHASE 3 — THE GATES NOW CHECK THE WORDS, NOT JUST THE DIGITS.**
+→ We are at: **PHASE 3 — EVERY PATH THE PILOT CAN SEE IS NOW HELD TO EXACT
+EQUALITY, NOT JUST THE HEALTHY ONE.** Gate 3.2-R3 (funding, THIRTEEN sabotages),
+Gate 3.1-R3 (Fear & Greed, TWELVE) and Gate 3.2b-R (the open-interest recorder,
+SEVEN) all PASSED, 2026-07-28. **Thirty-two sabotages, thirty-two caught — and
+FOUR of the thirty-two were walking through green gates that same morning.**
+
+**WHAT THE FOURTH INDEPENDENT REVIEW FOUND.** A session that built none of it
+did the ordered audit first — **it confirmed all six of the recorder's existing
+sabotages fail for the reason their labels claim, so there is no second B5, and
+that half of R-012 is genuinely clean.** Then it invented four new attacks and
+**all four escaped, all four predicted correctly in writing beforehand.**
+
+**THE CLASS, and it is one sentence: the gates rebuilt the whole output and
+demanded exact equality ON THE HEALTHY PATH ONLY. Every degraded, offline or
+secondary path was still guarded by asking whether an expected substring was
+PRESENT, and by counting.** That is the exact question the 2026-07-27 rebuild
+was written to abolish — **applied where the lesson was learned and nowhere
+else.**
+
+    S12  the funding meaning REVERSES when an asset is missing ... ESCAPED
+    S13  the funding OFFLINE line carries a fabricated rate ...... ESCAPED
+    F12  the Fear & Greed OFFLINE line fabricates a mood ......... ESCAPED
+    B7   ETH and SOL recorded with BITCOIN's open interest ....... ESCAPED
+
+**B7 IS THE ONE THAT MATTERS MOST.** `_disk_matches_source()` — the only check
+in Gate 3.2b that compared what was WRITTEN to what Binance SERVED — was
+hardcoded to BTCUSDT, as were checks (e) and (g). **For two of three assets the
+gate only ever COUNTED rows.** A memo cache keyed on the timestamp instead of on
+(symbol, timestamp) left BTC perfect while ETH went 22x wrong and SOL 80x wrong
+for thirty days, **on the one dataset Binance will not sell back at any price**,
+and the gate printed PASSED and exited 0.
+
+**THE REPAIR, SHIPPED THE SAME DAY**, declared in `a8eddab` with no `.py` in it.
+Funding's degraded block and both instruments' offline blocks are rebuilt from
+the gates' own verbatim wording and compared for EXACT equality; F6 lost its
+private weaker judge and now shares the real one; the recorder's detector and
+plausibility check run for **all three symbols** and name which failed. **All
+four original attacks, re-run as real file edits, now FAIL the gates with named
+diagnostics — B7 twice over, by two checks not designed together.** Production
+halves byte-identical by sha256 (funding 1-159, fear_greed 1-112,
+open_interest 1-242); all 63 diff hunks inside `__main__`. Verified after:
+Brief 3/3, vault INTACT 6/6, `lab/` and `data/oi_history/` untouched.
+
+**R-013 IS FILED AGAINST THIS REPAIR.** Fourth generation of the same structure:
+the session that found the fault wrote the fix and graded it. **R-011 and R-012
+are FAILED, not cleared. R-001 has now seen three generations of repair and
+still does not move** — it moves when a generation SURVIVES an independent
+attack, and none has.
+
+**THE QUESTION THIS PHASE LEAVES FOR THE NEXT SESSION, in one line: every gate
+here should now be read with "WHICH PATHS HAS NOBODY ATTACKED?"**
+
+---
+
+**PREVIOUS MARKER, kept for the record:**
+
+→ We were at: **PHASE 3 — THE GATES NOW CHECK THE WORDS, NOT JUST THE DIGITS.**
 Gate 3.2-R2 (funding) PASSED and Gate 3.1-R2 (Fear & Greed) PASSED, 2026-07-27.
 **Twenty-two sabotages, twenty-two caught — and SEVEN of the twenty-two were
 walking through green gates that same morning.**

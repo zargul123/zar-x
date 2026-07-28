@@ -4190,3 +4190,143 @@ session that found these four holes is about to write the fix for them — which
 is the exact structure R-001, R-009, R-010 and R-011 were each raised to catch,
 one turn further down the road. **A new item is filed against this repair and
 left OPEN for whoever comes next.**
+
+---
+
+## 2026-07-28 — **GATE 3.2-R3, GATE 3.1-R3 AND GATE 3.2b-R PASSED. EVERY PATH THE PILOT CAN SEE IS NOW HELD TO EQUALITY.**
+## **32 in-run sabotages caught, and all four attacks that walked through this morning are caught as real file edits.**
+
+*The repair for the four leaks recorded in the entry above. The gate was
+declared in `a8eddab`, which contains `PROGRESS_LOG.md` and nothing else —
+`git show --stat a8eddab` is the proof, and it precedes this commit.*
+
+### THE BARS, AND WHAT EACH ONE MEASURED
+
+**(a) NOTHING THE PILOT READS CHANGES — PROVED TWO WAYS, NOT ASSERTED.**
+
+    sha256 of the production half, before the work and after it:
+      cockpit/funding.py       lines 1-159   3f7eec06...e0bf  ->  3f7eec06...e0bf
+      cockpit/fear_greed.py    lines 1-112   c728f794...412c  ->  c728f794...412c
+      data/open_interest.py    lines 1-242   9189c08f...9c7e  ->  9189c08f...9c7e
+
+    every diff hunk, against the __main__ line of its file:
+      cockpit/funding.py       __main__ 160   20 hunks, earliest at old line 243
+      cockpit/fear_greed.py    __main__ 113   26 hunks, earliest at old line 163
+      data/open_interest.py    __main__ 243   17 hunks, earliest at old line 430
+
+**All three production halves are byte-identical and all 63 hunks are inside
+`__main__`.** What the Brief prints cannot have changed, and the Brief was run
+afterwards to confirm it: **3/3 instruments reporting.**
+
+**(b) EVERY DEGRADED PATH NOW GETS THE STANDARD THE HEALTHY PATH ALREADY HAD.**
+
+- `funding._partial_checks` no longer asks three substring questions. It
+  rebuilds the **WHOLE degraded block** — the surviving rates, the settlement
+  time taken over the survivors only, the mechanism sentence and the disclaimer
+  — from the gate's own verbatim wording and its own arithmetic, and demands
+  **exact equality**. The before/after drift allowance is taken **per asset**,
+  because three degraded blocks are built one after another and a snapshot taken
+  before the first is already stale by the third.
+- `funding._offline_checks` and `fear_greed._offline_checks` are new and compare
+  the offline block to a verbatim copy held by the gate. **"Nothing else
+  printed" is a claim only equality can enforce.**
+- **F6 no longer has its own private judge.** It used to be scored by an inline
+  copy of the old offline bar inside the drill — which is the exact bar F12 then
+  satisfied while lying. Both are now judged by `_offline_checks`, so the drill
+  proves THE CHECK rather than a weaker copy of it. **That was a second, smaller
+  instance of the same disease and it was found while fixing the first.**
+
+**(c) THE RECORDER'S DETECTOR COVERS EVERY ASSET IT RECORDS.**
+`_disk_matches_source` was hardcoded to BTCUSDT and is the only check in the
+gate that compares written data to served data. It now loops `SYMBOLS` and names
+which asset failed. Check (g)'s plausibility comparison runs for all three too.
+
+**(d) THE FOUR NEW SABOTAGES ARE PERMANENT.** Funding 11 → **13** (S12, S13),
+Fear & Greed 11 → **12** (F12), the recorder 6 → **7** (B7). **32 across the
+three files, caught on every run, forever.**
+
+    ✓ S1-S13   all thirteen caught, originals restored, clean checks pass after
+    ✓ F1-F12   all twelve caught, originals restored, clean checks pass after
+    ✓ B1-B7    all seven caught, and the empty-result trap still fails loudly
+
+**(e) THE FOUR ORIGINAL ATTACKS, RE-RUN AS REAL TEXT EDITS AGAINST THE REPAIRED
+FILES. THIS IS THE EVIDENCE; THE IN-RUN DRILL IS NOT.** Controls run first and
+passed (exit 0), so the rig was valid. **All four now FAIL the gate, exit 1, and
+say exactly what is wrong:**
+
+    S12  GATE 3.2-R3 FAILED, 5 failing checks
+         line 2 printed : '  (USDT perpetuals · positive = shorts pay longs · …'
+         line 2 expected: '  (USDT perpetuals · positive = longs pay shorts · …'
+         — and it fails on ALL THREE assets' turns, not just one
+    S13  GATE 3.2-R3 FAILED, 3 failing checks
+         printed : '  🔌 Funding instrument offline (ConnectionError) — last
+                    reading BTC +0.0100%, longs paying'
+         expected: '  🔌 Funding instrument offline (ConnectionError)'
+    F12  GATE 3.1-R3 FAILED, 3 failing checks
+         line 2 printed : '  🔌 Fear & Greed instrument offline
+                          (ConnectionError) — last known reading 72 — Extreme Greed'
+         line 2 expected: '  🔌 Fear & Greed instrument offline (ConnectionError)'
+    B7   GATE 3.2b-R FAILED, 4 failing checks — caught TWICE OVER, by two
+         independent checks that were not designed together:
+         ✗ ETHUSDT row 2026-06-28T12:00:00Z: disk 102877.834 vs source 2301940.141
+           ^ ETHUSDT is where the disk stopped matching the source
+         ✗ ETHUSDT: newest stored 105,984.625 vs live 2,327,644.087 → 95.45% apart
+         ✗ SOLUSDT: newest stored 105,984.625 vs live 8,582,727.150 → 98.77% apart
+
+**(f) EVERYTHING THE OLD GATES DID, THEY STILL DO.** Every pre-existing check is
+present and green, and all 22 pre-existing sabotages are still caught.
+
+**(g) NO new file, NO new dependency, NO extra call from the Brief's path.** All
+three changes are inside `__main__`, which the Brief never executes.
+
+**(h) THE SHIP IS STILL ALIVE.** Brief **3/3**, vault **INTACT 6/6**, `lab/`
+byte-identical, and `data/oi_history/` unchanged — `git status` lists only the
+three edited files and the scheduled snapshot task's own CSV.
+
+### **THE ONE SENTENCE THAT IS THE WHOLE LESSON**
+
+**A LESSON GETS APPLIED WHERE IT WAS LEARNED AND NOWHERE ELSE.** On 2026-07-27
+this ship learned that a "contains" check can never notice an addition, and
+rebuilt both instruments around exact equality. **It applied that to the path it
+was standing on and left every other path guarded by the old question.** The
+gates were not weak — they were **locally** strong, at exactly the spot somebody
+had already attacked.
+
+**Which is the sentence `THE_PATTERN.md` already contains:** *a gate is
+strongest exactly where it has already been attacked.* It was written about
+sabotages. **It is equally true about PATHS.** Every gate on this ship should now
+be read with the question *"which paths has nobody attacked?"* — and today the
+answer was: the degraded one, the offline one, and two assets out of three.
+
+### WHAT THIS SESSION GOT WRONG OR COULD NOT SETTLE
+
+**THE REPAIR IS GRADED BY THE SESSION THAT WROTE IT.** Fourth generation of
+exactly the structure R-001, R-009, R-010 and R-011 were each raised to catch.
+**Filed as R-013 and left OPEN. R-011 and R-012 are marked FAILED, not cleared —
+marking an item FAILED is not clearing it.**
+
+**THE GATES NOW HOLD FOUR MORE VERBATIM COPIES OF PRODUCTION WORDING** — two
+degraded blocks and two offline blocks. **This makes R-011's first doubt WORSE,
+not better:** the next person who legitimately improves any of that wording will
+watch a gate fail and the obvious move will be to edit the gate to match, which
+is what R-001 was convicted of. **Nothing enforces that such an edit is
+deliberate and recorded. Said out loud rather than left implied.**
+
+**THE RECORDER'S CHECK (e) IS STILL BTCUSDT-ONLY.** The tamper/never-rewrite
+check was not extended, because the declared gate did not name it and widening a
+bar mid-flight is the R-001 failure in the other direction. **It is the same
+shape of gap B7 exploited, one check over, and it is filed.**
+
+**THE DETECTOR NOW MAKES THREE TIMES THE REQUESTS, SO IT HAS THREE TIMES THE
+EXPOSURE to a 4h boundary rolling over between the module's fetch and the test's
+fetch.** That would fail the gate spuriously. The window is small and the
+failure is loud rather than silent, **but the exposure was tripled today and
+that is worth saying.** Filed.
+
+**B1's timezone no-op was found and NOT fixed** — see the entry above. It fails
+loud on a UTC machine rather than passing quietly, so it was left alone and
+filed rather than repaired under a gate that did not name it.
+
+**AND THE HONEST LIMIT ON THE WHOLE SESSION: four attacks, one idea.** All four
+were the same observation applied to four paths. **What is proven is that these
+four lies are now caught. What is NOT proven is that nothing else escapes.**

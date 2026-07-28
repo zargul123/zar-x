@@ -1,12 +1,12 @@
-# ZAR X PHASE 3 — **THIS SESSION IS ALL ATTACK AND NO BUILD.** Two instruments and a recorder, all three built and graded by the sessions that wrote them
+# ZAR X PHASE 3 — **ATTACK THE FOURTH REPAIR, THEN BUILD STEP 3.3.** Four generations of gate have now each been failed by the next pair of eyes
 
-*Written 2026-07-27 by the session that failed both Context Deck gates, repaired
-them, then built the open-interest recorder — and filed R-011 and R-012 against
-its own two deliverables. **Stated before anything else: one mind found the
-faults, wrote both fixes, built the new part, wrote its gate, and graded
-everything.** Twenty-eight sabotages now live in three files and **all
-twenty-eight were invented by the sessions that then defended against them.**
-You are the first pair of eyes that built none of it.*
+*Written 2026-07-28 by the session that audited the recorder's six sabotages
+(clean), then invented four new ones and watched all four walk through three
+green gates, then repaired all three and graded its own repair. **Stated before
+anything else: one mind found the four holes, wrote every fix, and declared them
+all passed.** Thirty-two sabotages now live in three files and **all thirty-two
+were invented by the sessions that then defended against them.** You are the
+first pair of eyes that built none of it.*
 
 ---
 
@@ -18,147 +18,104 @@ and asked for it in this form. Write your own report to him the same way.*
 
 ## Where the ship is
 
-Three parts of this ship now **break themselves on purpose every time they
-run**, and refuse to pass if any breakage goes unnoticed. Twenty-eight
-deliberate lies live in the code; all twenty-eight are caught.
+Three parts break themselves on purpose every time they run and refuse to pass
+if any breakage goes unnoticed. **Thirty-two deliberate lies live in the code;
+all thirty-two are caught.**
 
-That sounds like strength. **Read it again: every one of those twenty-eight was
-invented by the same session that then defended against it.** A gate is
-strongest exactly where somebody has already attacked it. Nobody has attacked
-these anywhere else.
+That sounds like strength. **Read it again: every one of the thirty-two was
+invented by the same session that then defended against it.** Nobody outside has
+ever attacked them.
 
 ## What happened just before you
 
-Three sessions in a row have each found real holes in the work of the session
-before.
+**Four sessions in a row have each found real holes in the work of the session
+before.** 48/48 with four lies walking through. Then five more. Then seven more.
+**Then, yesterday, four more — and yesterday's were a different shape.**
 
-- One found a gate reporting **48 checks out of 48** while four deliberate lies
-  walked straight through it.
-- The next put the same knife into the other instrument: **five of six lies got
-  through.**
-- The third — the one that wrote these orders — threw ten new lies at both
-  repaired gates and **seven got through.** One printed
-  *"positive = shorts pay longs"*, **the exact opposite of how the market
-  works**, next to three perfectly correct numbers, and the gate said PASSED.
-  Another printed *">> strong buy signal"* on a ship whose first rule is
-  INFORMATION, NEVER A SIGNAL, and the gate applauded.
+The session before you found that **all three gates rebuilt their whole output
+and demanded a perfect match — but only when everything was working.** The
+moment an asset failed, or the internet dropped, or you looked at any asset
+other than Bitcoin, the checks fell back to the old, weak question: *"is the
+expected text in there somewhere?"*
 
-**The cause every single time was the same.** Every check asked *"is the right
-text in there somewhere?"* — a question that can never notice something **added**,
-and never once looked at the fixed words. It was fixed the same day. **The fix
-has not been checked by anyone.**
+So:
 
-**Every one of those holes was found by a session that was ORDERED TO BREAK
-THINGS. Not one was found by a session being careful.** That is why your orders
-say what they say.
+- The funding instrument **reversed the sentence explaining what the numbers
+  mean** — "shorts pay longs" instead of "longs pay shorts", the opposite of how
+  the market works — **but only when one asset was missing.** The gate printed
+  the reversed sentence on its own screen and put three tick marks under it.
+- Both instruments' **offline lines** happily carried a made-up number on the
+  end. Fear & Greed printed *"last known reading 72 — Extreme Greed"* on a day
+  the real index said **29 — Fear**, and the check underneath it said
+  *"nothing else printed"*.
+- **The worst one: the open-interest recorder.** The only check that compared
+  what was SAVED against what Binance actually SENT was looking at Bitcoin and
+  nothing else. Ethereum and Solana were checked by counting rows. A single
+  plausible bug filled thirty days of ETH and SOL with **Bitcoin's** numbers —
+  22 times and 80 times wrong — and the gate said PASSED. **That is the one
+  dataset this ship cannot buy back at any price.**
 
-## Your job, and you are not building anything
+**The lesson, in one line, and it is why your orders say what they say: A LESSON
+GETS APPLIED WHERE IT WAS LEARNED AND NOWHERE ELSE.** The day before, this ship
+learned that "is the text in there?" is a worthless question. It fixed that on
+the one path it was standing on and left every other path exactly as it was.
 
-**Three deliverables shipped in one day and not one has been looked at by
-anyone but the person who made it.** The build queue waits. Do these three, in
-this order.
+## Your job, in order
 
-**1. Try to break the two Context Deck instruments.** They each catch eleven
-lies. Invent a **twelfth** for each. Report the result either way.
+**1. ATTACK YESTERDAY'S REPAIR (R-013).** It closed four holes and was written
+and graded by one mind. **Ask the question that found them: WHICH PATHS HAS
+NOBODY ATTACKED?** A fourteenth funding sabotage, a thirteenth Fear & Greed, an
+eighth recorder. Report either way.
 
-**2. Try to break the open-interest recorder.** It is the newest part, nobody
-has ever attacked it, and it guards the only data on this ship that **cannot be
-bought back at any price** — Binance keeps 30 days and refuses anything older.
-Invent a **seventh** sabotage for it.
+**2. THEN, ONLY IF PART 1 IS CLEAN, BUILD STEP 3.3** — the third Context Deck
+instrument. **If Part 1 finds anything real, fix that and stop.** Four sessions
+running have found something; do not assume you will be the fifth, and do not
+assume you will not be.
 
-**3. And do this one FIRST, before inventing anything.** Check that each of the
-recorder's six existing sabotages **actually fails for the reason its label
-claims.**
-
-## Why job 3 is not routine
-
-One of them didn't.
-
-Sabotage **B5** was recorded as **CAUGHT** — while never reaching the check it
-was written to prove. It crashed two lines earlier and collected a tick mark
-anyway. Its author found it by **reading** the drill, not by any test, and had
-warned the next session about that exact trap six hours before walking into it.
-
-**A test can lie about itself in precisely the way the code it guards can.** If
-one drill was passing for the wrong reason, look at the other five. **If you
-find another, that outranks everything else you could do this session.**
+**3. AND ONE ERRAND THAT IS DUE, WHOEVER YOU ARE.** After 1 August, open
+`journal/daily_runs.log` and tell the Commander **plainly** whether the monthly
+recorder task actually committed and pushed real new rows. **That branch has
+never fired.** Do not assume it worked because the task returned 0 — `schtasks`
+already reported SUCCESS once for a task that could not run at all.
 
 ## How to attack properly
 
-- **Write down what you are going to try, and what you predict will happen,
-  BEFORE you run it.** The last session predicted ten out of ten correctly, and
-  that is what proved the holes were structural rather than luck. It also makes
-  it impossible to reinterpret a result once you have seen it.
+- **Write what you will try and what you PREDICT, BEFORE you run it.** The last
+  session predicted ten of ten correctly, and that is what proved the holes were
+  structural rather than luck. It also makes it impossible to reinterpret a
+  result after seeing it.
 - **Work on copies OUTSIDE the repo.** Never break the real files. Check
   `git status` is clean when you are done.
-- **Run the untouched copy first.** If the healthy version does not pass, your
-  setup is broken and nothing you conclude means anything.
-- **Watch your own test.** A sabotage that CRASHES is scored as "caught" — so a
-  sabotage that never really ran looks like a success. **Print what your broken
-  version produces and confirm it is visibly wrong before you believe the
-  verdict.** This ship has fooled itself this way twice.
+- **Run the untouched control first.** If the healthy copy does not pass, your
+  rig is broken and nothing you conclude means anything.
+- **Watch your own test. A sabotage that CRASHES is scored as "caught"**, so one
+  that never really ran looks like a success. **PRINT what your broken version
+  produces and confirm it is visibly wrong before you believe any verdict.**
+  This ship has fooled itself this way twice.
+- **If your text anchor matches more than once, REFUSE TO RUN** rather than
+  editing the first match. All three gates hold their own copies of production
+  wording, so obvious anchors appear twice.
 
 ## What you are allowed to conclude
 
 **"I attacked it and found nothing" is a real, honest, valuable result.** Say it
-plainly and clear the items.
+plainly and clear the item.
 
-**Do NOT invent a fault to justify the session.** After three sessions that each
-found something big, the pull to also find something is real and it is a trap.
-This ship needs to see a clean review eventually.
+**DO NOT INVENT A FAULT TO JUSTIFY THE SESSION.** After four sessions that each
+found something, the pull to also find something is real and it is a trap.
+**This ship still has not seen a clean review and it needs one eventually.**
 
-**You may clear R-011 and R-012** — you built neither. **You may never clear
-R-006**, the Phase 6 independent review; no in-house session can, ever.
-
-**And if you fix something, you may not clear your own fix.** File a new item
-against it and leave it open for whoever comes next. That rule is the only
-reason any of these holes were ever found.
-
-## Before you finish
-
-Write down what happened — **your mistakes as plainly as your successes.** That
-is Law 1 and it is the reason this ship can be trusted at all. Then update the
-five documents in order, commit, and push. The full list is at the bottom of
-this file.
-
-**Then write the Commander a report in plain words, like this section.** He is
-not a programmer. Tell him what you tried, what broke, what held, what you got
-wrong, and what decision is his.
+**You may clear R-013** — you built none of it. **You may never clear R-006.**
+**And if you fix something, you may not clear your own fix.**
 
 ## What is his, not yours
 
-Do not decide these by default, and do not let them drop: the risk-doctrine
-decision, tightening `MAX_PLAUSIBLE_RATE`, the TwelveData key, and the five law
-candidates. They are listed at the bottom. **A session does not promote its own
-idea to law.**
+Do not decide these by default and do not let them drop: the risk-doctrine
+decision, tightening `MAX_PLAUSIBLE_RATE`, the TwelveData key, the
+document-integrity check, and the **six** law candidates. They are listed at the
+bottom. **A session does not promote its own idea to law.**
 
 ---
-
-## WHAT YOU ARE NOT DOING
-
-**YOU ARE NOT BUILDING ANYTHING.** No Step 3.3, no Whale Watch instrument, no
-new source. **Two deliverables shipped in one day and neither has been looked at
-by anyone but its author.** The build queue waits.
-
-## WHAT HAPPENED THE DAY BEFORE YOU, IN SIX LINES
-
-On 2026-07-26 Gate 3.2 reported 48/48 while four deliberate lies walked through
-it; it was voided and rebuilt, and the same knife found five more in
-`cockpit/fear_greed.py`. Both were rebuilt and both passed. **On 2026-07-27 a
-third session failed BOTH rebuilds — seven of ten new sabotages escaped.** One
-printed `positive = shorts pay longs`, **the exact opposite of how the market
-works**, beside three perfectly correct numbers, and the gate said PASSED.
-Another printed `>> strong buy signal` on the deck of a ship whose first rule is
-INFORMATION, NEVER A SIGNAL. **Cause both times: every check asked whether an
-expected string was PRESENT; none asked whether anything ELSE was present, and
-none checked the fixed words at all.** Both were repaired the same day. **Then,
-on the Commander's explicit direction, the same session also built Step 3.2b.**
-
-**THE PATTERN THAT SHOULD SHAPE YOUR WHOLE SESSION: three sessions in a row have
-each found real holes in the work of the session before, and every one of those
-holes was found by a session ORDERED TO TRY TO BREAK THE CODE — never by one
-being careful.** Two generations of repair have each been failed by the next
-pair of eyes.
 
 ## READ THESE FIRST
 
@@ -166,24 +123,21 @@ pair of eyes.
 for, the run environment, and the housekeeping that has bitten this ship. None
 of it is repeated here.** If you have not read it, stop and read it.
 
-**These are the ones specific to THIS job:**
+**Specific to THIS job:**
 
-1. **The last FOUR entries of `PROGRESS_LOG.md`** — the review that failed both
-   gates, the repair, the Step 3.2b decisions, and the Step 3.2b build.
-   **Read the last three as CLAIMS, not results. They are what you are
-   auditing.** The file is ~225 KB; reading all of it will eat the budget you
-   need for the actual work. The last four entries are the assignment.
-2. **`cockpit/funding.py` and `cockpit/fear_greed.py`** — production paths and
-   `__main__` blocks both.
-3. **`data/open_interest.py`** — ~640 lines, the newest part, **and the one
-   nobody has ever attacked.** Read it looking for the same shape as the
-   others' holes.
-4. **`REVIEW_QUEUE.md`** — **R-011 and R-012 are your worklist.** R-001, R-008,
-   R-009 and R-010 may also be settled by you, since you built none of it.
+1. **The last TWO entries of `PROGRESS_LOG.md`** — the four-sabotage review and
+   the repair. **Read them as CLAIMS, not results. They are what you are
+   auditing.** The file is ~239 KB; reading all of it will eat the budget you
+   need for the actual work.
+2. **`cockpit/funding.py`, `cockpit/fear_greed.py`, `data/open_interest.py`** —
+   the `__main__` blocks are where every change landed. The production halves
+   are provably byte-identical to yesterday's.
+3. **`REVIEW_QUEUE.md` — R-013 is your worklist**, and its five recorded doubts
+   are starting points, **not the assignment**. R-007 may also be settled by you.
    **R-006 may NEVER be cleared by you or any in-house session.**
-5. **`ROADMAP.md`** — the MEASURED data-source facts table, if you touch a data
-   source. If anything you measure disagrees with it, **your measurement wins
-   and you write the correction down.**
+4. **`ROADMAP.md`** — the MEASURED data-source facts table. If anything you
+   measure disagrees with it, **your measurement wins and you write the
+   correction down.**
 
 ---
 
@@ -191,146 +145,94 @@ of it is repeated here.** If you have not read it, stop and read it.
 
 Write these into your working notes first so they cannot soften as you go:
 
-1. A **TWELFTH** sabotage, invented by you, thrown at Gate 3.2-R2 (funding),
+1. A **FOURTEENTH** sabotage, invented by you, thrown at Gate 3.2-R3 (funding),
    result recorded either way.
-2. The same against Gate 3.1-R2 (Fear & Greed).
-3. A **SEVENTH** sabotage against Gate 3.2b (the open-interest recorder) —
-   **and a check that each of its six existing sabotages fails for the reason
-   its label claims.**
+2. A **THIRTEENTH** against Gate 3.1-R3 (Fear & Greed).
+3. An **EIGHTH** against Gate 3.2b-R (the open-interest recorder).
 4. Any leak found is REPAIRED under a gate declared before the code exists.
-5. `lab/` byte-identical, vault INTACT 6/6, the Brief still 3/3, and the
-   recorded CSVs unchanged unless the recorder legitimately appended.
+5. `lab/` byte-identical, vault INTACT 6/6, the Brief still 3/3, and
+   `data/oi_history/` unchanged unless the recorder legitimately appended.
 
 **Five of five or it has not cleared, and "four of five with a good
 explanation" is the phrasing this ship exists to refuse.**
 
-**AND THE PRACTICE THAT PAID OFF TWICE: write your PREDICTION for each sabotage
-BEFORE you run it.** The 2026-07-27 session predicted ten of ten correctly,
-which is what showed the holes were structural rather than lucky — and it makes
-it impossible to reinterpret a result after seeing it.
+---
+
+# PART 1 — THE FOURTH REPAIR (R-013)
+
+`python cockpit\funding.py` (thirteen sabotages), `python cockpit\fear_greed.py`
+(twelve), `python data\open_interest.py` (seven). **That is the claim under
+review, not the verdict.**
+
+**Where the gates are now STRONGEST — so do NOT spend your time here:**
+
+- the whole printed block, the degraded block and the offline block are each
+  rebuilt from the gate's own verbatim wording and compared for **exact
+  equality**, so nothing can be appended, deleted or reversed on any of them
+- the recorder's disk-vs-source detector and its plausibility check run for
+  **all three assets** and name which one failed
+- funding rotates its partial drill through all three assets, with a per-asset
+  drift allowance
+- Fear & Greed holds its own `GATE_LIMIT` and compares the module's against it
+
+## THE FIVE DOUBTS ITS AUTHOR COULD NOT SETTLE — starting points, NOT the assignment
+
+1. **THE GATES NOW HOLD FOUR MORE VERBATIM COPIES OF PRODUCTION WORDING.** The
+   next person who legitimately improves any of that wording watches a gate
+   fail, and **the obvious move is to edit the gate to match — which is what
+   R-001 was convicted of.** Nothing enforces that such an edit is deliberate
+   and recorded. **The problem was made worse on purpose. Judge that trade.**
+2. **THE RECORDER'S CHECK (e) — the tamper / never-rewrite check — IS STILL
+   BTCUSDT-ONLY.** It is the same shape of gap B7 exploited, one check over. It
+   was left alone because the declared gate did not name it.
+3. **THE RECORDER'S DETECTOR NOW MAKES THREE TIMES THE REQUESTS** and so has
+   three times the exposure to a 4h boundary rolling over between the module's
+   fetch and the test's fetch, which would fail the gate spuriously. Nobody has
+   watched it across a boundary.
+4. **THE RECORDER'S B1 IS A NO-OP ON A MACHINE SET TO UTC.** Funding's S5 avoids
+   this trap and says why in a comment; the recorder never copied it. It fails
+   LOUD rather than quietly, so it was filed rather than fixed.
+5. **FOUR ATTACKS, ONE IDEA.** Every one was the same observation on a different
+   path. **What is proven is that those four lies are caught. Nothing is proven
+   about anything else.**
+
+## IDEAS TO GET YOU STARTED — find your own, these are not the assignment
+
+    - the recorder's check (e) and the tamper path generally: what can hide there?
+    - the `--record` path the SCHEDULED TASK actually runs is NOT the gate.
+      Nothing in the drill exercises it. What could be wrong in the branch that
+      runs unattended once a month?
+    - the exception NAME in both offline blocks is now hardcoded into the gates
+      as 'ConnectionError'. What if a real outage raises something else — does
+      the instrument still print honestly, and does the gate then fail for the
+      wrong reason?
+    - `_expected_partial_block` takes the settlement time over the SURVIVORS
+      only. Is that right when two assets fail rather than one?
+    - what if the recorder is run twice concurrently — the monthly task firing
+      while somebody runs the gate?
+    - MAX_PLAUSIBLE_RATE is still 0.05, still 13-16x looser than Binance's cap
 
 ---
 
-# PART 1 — THE TWO CONTEXT DECK INSTRUMENTS (R-011)
+# PART 2 — STEP 3.3, **ONLY IF PART 1 IS CLEAN**
 
-`python cockpit\funding.py` and `python cockpit\fear_greed.py` each break
-themselves **eleven** ways every run and catch all eleven. **That is the claim
-under review, not the verdict.**
+The third Context Deck instrument. **Declare its gate first, commit it alone
+with no `.py` in the commit, name the awkward edge cases before writing code,
+and give it a sabotage drill FROM BIRTH** — including one that lives on a
+degraded path, because that is the lesson of 2026-07-28 and a part built without
+it is a part built before yesterday.
 
-**What the gates now do** — read this as the list of places they are ALREADY
-strongest, and therefore where NOT to spend your time:
-
-- rebuild the **WHOLE printed block** from the source, using their own
-  arithmetic, and require **exact equality** — so nothing can be appended
-- hold their **own verbatim copy** of every fixed sentence, checked by name
-- funding **rotates** its partial-failure drill through all three assets
-- Fear & Greed holds its **own `GATE_LIMIT`** and compares the module's
-  `HISTORY_LIMIT` against it
-- funding keeps its before/after drift allowance; Fear & Greed keeps its
-  once-only day-rollover re-fetch
-
-## THE THREE DOUBTS ITS AUTHOR COULD NOT SETTLE — starting points, NOT the assignment
-
-1. **THE GATES NOW CONTAIN A COPY OF THE EXACT WORDS THE BRIEF PRINTS.** The
-   next time anyone legitimately improves that wording, the gate FAILS — and the
-   obvious move is to edit the gate to match. **That is how a gate gets fitted to
-   the code instead of the code to the gate, which is what R-001 was convicted
-   of.** Nothing enforces that such an edit is deliberate and recorded. **Is that
-   a defect or an accepted cost? Say which, out loud.**
-2. **THE PERMANENT SABOTAGES CORRUPT OUTPUT, NOT THE FILE.** S7-S11 and F7-F11
-   wrap `section_text` and rewrite what it returns. That proves the checks can
-   say no to a corrupted SENTENCE. **It does not prove they would say no to every
-   corrupted CODE PATH that could produce one.** The scratch rig that edited the
-   real files ran once and is not part of the gate.
-3. **NOTHING CHECKS THAT A GATE'S OWN DESCRIPTION MATCHES WHAT IT DOES.**
-
-## IDEAS TO GET YOU STARTED — do not stop at these
-
-    - the drift allowance: the funding block passes if it matches the BEFORE or
-      the AFTER snapshot. Can a lie be made to live in that gap?
-    - the offline paths: make one print something plausible instead of the
-      offline line, without touching the happy path
-    - MAX_PLAUSIBLE_RATE is still 0.05, still 13-16x looser than Binance's real
-      cap. Does anything notice if it is removed entirely?
-    - Fear & Greed's `_parse` range guard and its `metadata.error` handling are
-      not reachable from a live fetch. Are they ever actually exercised?
-    - what if the source serves a GAP, or duplicates a day?
-
----
-
-# PART 2 — THE OPEN-INTEREST RECORDER (R-012) — **the one nobody has ever attacked**
-
-`python data\open_interest.py` runs nine bars and breaks itself six ways.
-**It guards the ONE dataset on this ship that cannot be recovered if it is
-lost** — Binance serves a 30-day window and refuses anything older, so a defect
-here is not repairable later at any price. **Attack it hardest.**
-
-## **START HERE: ONE OF ITS SIX SABOTAGES WAS SCORED "CAUGHT" WITHOUT EVER REACHING THE CHECK IT WAS MEANT TO PROVE**
-
-The author's own log records it: sabotage **B5**'s first version returned an
-empty list and was scored CAUGHT — **by an `IndexError` two lines later**, not by
-the empty-result check. **The gate printed a tick mark for a sabotage that never
-touched the thing under test.** It was found by READING the drill, not by any
-check, and it was rewritten.
-
-**YOUR FIRST JOB IS THEREFORE NOT A NEW SABOTAGE. It is to confirm that each of
-the six existing ones fails for the reason its label claims** — print the CSV
-each produces and look at it. **If one of them passes by accident, that is a
-real finding and it outranks anything else you could do this session.**
-
-## THEN THE SEVENTH, AND THE FOUR DOUBTS ITS AUTHOR COULD NOT SETTLE
-
-1. **THE POINT-SAMPLE MEASUREMENT IS LOAD-BEARING AND WAS TAKEN ONCE.** The
-   decision to store the newest row rests on one day's evidence: 33 of 33
-   overlapping 4h rows matched the 5m reading at the same instant. **Re-measure
-   it.** If a 4h row can move, stored rows will disagree on re-read — the
-   recorder reports that loudly and never overwrites, so the failure is loud,
-   **but the decision has one day behind it.**
-2. **BAR (f) IS THE ONE BAR THE PROGRAM DOES NOT CHECK.** The gate prints an
-   instruction to run `cockpit\brief.py` rather than running it — deliberately,
-   because a recorder that imports the cockpit is no longer a sealed
-   compartment. **But a tally counts only what a machine checked.**
-3. **NOTHING PROVES THE RECORDER IS EVER RUN.** There is no alarm anywhere for
-   "the open-interest file has not grown in two months."
-4. **THE 10% PLAUSIBILITY BAR IN CHECK (g) IS A GUESS**, chosen by feel exactly
-   as `MAX_PLAUSIBLE_RATE = 0.05` was. It measured 0.03% today.
-
-## IDEAS FOR THE SEVENTH — find your own
-
-    - append a row for a timestamp Binance never served
-    - write a row for the WRONG symbol into the right file
-    - make the disagreement report fire but the run still exit 0
-    - make the offline path write a partial file before failing
-    - reverse the row order on disk, or drop the header
-    - make the de-dup key case-sensitive, or whitespace-sensitive
-
-## **AND THE STANDING INSTRUCTION IF YOU FAIL IT**
-
-**If Gate 3.2b leaks, the recorder KEEPS RUNNING while it is repaired.**
-Collecting a flawed record of an expiring dataset beats collecting nothing while
-the gate is argued about. **Say that out loud rather than switching it off.**
+**If the session is running short, do PART 1 properly and leave PART 2
+entirely.** A half-built part is worse than no part.
 
 ---
 
 # THE RIG (defined before you run, because a broken rig proves nothing)
 
-**Do the sabotage in a scratch copy OUTSIDE the repo.** Confirm `git status` is
-clean afterwards. **Run the untouched control too** — if the control does not
-pass, your rig is broken and nothing you conclude means anything.
-
-**CHECK YOUR OWN HARNESS: a sabotage that CRASHES is scored as "caught".** So a
-sabotage that never really ran is recorded as a pass. **Print the output your
-sabotage produces and confirm it is visibly wrong before you trust the verdict.**
-**This ship has now done this to itself twice** — once with an anchor that
-matched nothing, once with B5.
-
-**If your text-replacement anchor matches more than once, REFUSE TO RUN rather
-than editing the first match.** All three gates now hold their own copies of
-production text, so several obvious anchors appear twice.
-
-**FOR THE RECORDER SPECIFICALLY: point it at a scratch `history_dir`.** Every
-function takes one. **Do not let a drill write to `data/oi_history/`** — and
-check the real CSVs are unchanged when you are done.
+**Sabotage in a scratch copy OUTSIDE the repo.** Confirm `git status` is clean
+afterwards. **Run the untouched control too.** **Point recorder drills at a
+scratch `history_dir`** — every function takes one — and **never let a drill
+write to `data/oi_history/`.**
 
 ---
 
@@ -338,15 +240,14 @@ check the real CSVs are unchanged when you are done.
 
 **DECLARE THE GATE IN `PROGRESS_LOG.md` AND COMMIT THAT ENTRY ALONE, WITH NO
 `.py` FILE IN THE COMMIT, BEFORE WRITING CODE.** Then `git show --stat` proves
-the bar preceded the work. **Six uses of this pattern, and it has survived audit
-every time.** Then:
+the bar preceded the work. **Seven uses of this pattern, and it has survived
+audit every time.** Then:
 
-(a) **NOTHING THE PILOT READS CHANGES.** All edits confined to the `__main__`
-    block — **prove it two ways, do not assert it:** every diff hunk at or after
-    the `__main__` line (`funding.py` 160, `fear_greed.py` 113,
-    `open_interest.py` — check it, do not assume), AND a sha256 of the
-    production half before and after, printed side by side.
-(b) **THE OUTPUT IS VERIFIED** against a raw fetch, using the test's own
+(a) **NOTHING THE PILOT READS CHANGES.** All edits inside `__main__` — **prove
+    it two ways, do not assert it:** every diff hunk at or after the `__main__`
+    line (`funding.py` 160, `fear_greed.py` 113, `open_interest.py` 243), AND a
+    sha256 of the production half before and after, printed side by side.
+(b) **THE OUTPUT IS VERIFIED** against a raw fetch using the test's own
     arithmetic. **The helper under test is never called to judge itself.**
 (c) **THE SABOTAGE DRILL IS PERMANENT** — your new break joins the others,
     caught every run, originals restored and the restoration verified.
@@ -357,7 +258,7 @@ every time.** Then:
 (f) **NO new file, NO new dependency, NO extra call from the Brief's path.**
 
 **PASS = every check green including every sabotage CAUGHT. Anything less is a
-FAIL and is not committed as a pass and is not called "mostly passed".**
+FAIL, is not committed as a pass, and is not called "mostly passed".**
 
 ---
 
@@ -368,18 +269,12 @@ actual output, and the verdict — **including if it is all clean.** A review th
 only appears in the log when it finds something teaches the next session that
 silence means safety.
 
-**`REVIEW_QUEUE.md`: you MAY clear R-011 and R-012 (you built neither), and
-R-001, R-008, R-009 and R-010 too if those clear.** R-001 has now waited through
-two failed generations of repair and **moves only when a generation survives an
-independent attack.** Items you cannot settle stay OPEN with a note on what is
-missing; **leaving something open is a legitimate recorded outcome.**
-**R-006 is not yours, ever. Never delete an item. Never edit a cleared verdict.**
-
-**IF EVERY GATE CATCHES EVERYTHING YOU THROW: say so, and clear R-011 and
-R-012.** "Reviewed, found nothing" is a real result. **DO NOT MANUFACTURE A
-DEFECT TO JUSTIFY THE SESSION.** After three sessions that each found something
-big, the pressure to also find something is real. **A clean review is a
-legitimate outcome and this ship needs to see one eventually.**
+**`REVIEW_QUEUE.md`: you MAY clear R-013 (you built none of it), and R-007 too
+if it settles.** R-001 has now waited through **three** failed generations of
+repair and **moves only when a generation survives an independent attack.**
+Items you cannot settle stay OPEN with a note on what is missing; **leaving
+something open is a legitimate recorded outcome.** **R-006 is not yours, ever.
+Never delete an item. Never edit a cleared verdict.**
 
 **AND THE STANDING DUTY: if you catch yourself writing "probably", "almost
 certainly" or "this should be fine" about anything that ships — FILE IT in
@@ -391,56 +286,51 @@ certainly" or "this should be fine" about anything that ships — FILE IT in
 
 **Do the closing ritual exactly as `THE_PATTERN.md` sets it out** — seven steps,
 ending with the next session's orders, the push, and your plain-words report to
-the Commander. **It is not repeated here.** The loop only survives if every
-session performs it honestly; a session that skips it leaves the next one with
-no orders, no verdicts, and a position marker describing a ship that no longer
-exists.
+the Commander. **It is not repeated here.**
 
 ---
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **THE OPEN-INTEREST RECORDER IS SCHEDULED — DONE 2026-07-27, HIS CALL.**
-   Task `ZarX Open Interest`, day 1 of every month, 09:00, on the laptop (never
-   the cloud watchman: US-hosted runners are geo-blocked by Binance). It catches
-   up if the laptop was off, runs on battery, pushes to GitHub and copies to
-   OneDrive, and appears in `CHECK_STATUS.bat` beside the other six alarms.
-   **WHAT IS STILL OWED TO HIM: the commit-and-push branch has never fired
-   against real new rows.** Read `journal/daily_runs.log` after 1 August and
-   tell him plainly whether it committed. **Do not assume it worked because the
-   task returns 0 — `schtasks` already reported SUCCESS once for a task that
-   could not run at all.**
+1. **THE RECORDER'S COMMIT-AND-PUSH BRANCH HAS STILL NEVER FIRED AGAINST REAL
+   NEW ROWS.** Task `ZarX Open Interest`, day 1 of every month, 09:00, laptop
+   only (US-hosted cloud runners are geo-blocked by Binance). **Read
+   `journal/daily_runs.log` after 1 August and tell him plainly whether it
+   committed. Do not assume it worked because the task returns 0.**
 2. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2.
 3. **The risk-doctrine decision** — the 25% position cap means real risk is
    ~0.49% per trade, not the intended 1%. **Settled BEFORE Phase 6, never after
    seeing results.**
-4. **`MAX_PLAUSIBLE_RATE`** — measured at 13-16× looser than Binance's published
+4. **`MAX_PLAUSIBLE_RATE`** — measured at 13-16x looser than Binance's published
    cap. **Recommendation: tighten to ~0.01. STILL NOT DONE.**
 5. **The settled-rate anchor (R-004)** — returned to him on correct facts.
-6. **THE FUNDING LINE STAYED ON THE BRIEF, 2026-07-27, and he was told.** The
-   sign has been proven repeatedly against Binance raw. **A session decided not
-   to remove a line it had just verified as true. He can reverse it in one
-   word.**
+6. **THE FUNDING LINE STAYED ON THE BRIEF** and he was told. He can reverse it
+   in one word.
 7. **A DOCUMENT-INTEGRITY CHECK.** Nothing on this ship checks that its own
    documents are not corrupted. Found by a human looking, twice. **A one-line
    scan would close it. Recommended, not adopted.**
-8. **FIVE law candidates, none adopted, all his call:**
+8. **SIX law candidates, none adopted, all his call:**
    - *"A session may not certify its own work; anything it cannot certify is
      filed in `REVIEW_QUEUE.md` before the commit that ships it, and only an
      independent reviewer may clear it."*
    - *"A claim about what a data source will or will not give us is not a fact
      until it has been called; planning documents must mark which claims are
-     measured and which are assumed."* **Now FIVE earned examples** — the newest
-     being the "incomplete period" trap that turned out not to exist.
+     measured and which are assumed."* **Now SIX earned examples** — the newest
+     being the live open-interest snapshot endpoint, never once called for ETH
+     or SOL until 2026-07-28.
    - *"A check is not proven until it has been deliberately broken."*
-     **Five working implementations and still not law.**
+     **Eight working implementations and still not law.**
    - *"A gate must verify what the pilot READS — the whole line, words included
-     — not what the parser returned."* **Two instruments failed the same way
-     twice each.**
-   - **NEWEST, earned 2026-07-27:** *"A sabotage that is scored CAUGHT must be
-     shown to fail for the reason it claims."* **B5 was scored caught while
-     crashing two lines before the check it was written to prove. A drill can
-     lie in exactly the way the code it guards can.**
+     — not what the parser returned."* **Two instruments failed this way twice
+     each.**
+   - *"A sabotage that is scored CAUGHT must be shown to fail for the reason it
+     claims."* Earned by B5. **Now with a worked example on the other side: the
+     2026-07-28 audit checked all six and found all six honest.**
+   - **NEWEST, earned 2026-07-28:** *"A gate must hold EVERY path the pilot can
+     see to the same standard — the degraded path, the offline path and every
+     asset — not only the path that was under attack when the lesson was
+     learned."* **Four lies walked through three green gates by standing on a
+     path nobody had attacked.**
 9. Vault CSVs carry no volume column (TwelveData serves none for these pairs).
 
 **AND THE ONE THAT DOES NOT EXPIRE: at Phase 6 the "separation in time"
@@ -448,7 +338,7 @@ substitute for Fable EXPIRES.** A second, genuinely independent AI reviews the
 gauntlet's test setup before and its verdict after. That is locked in
 `EXECUTION_PLAN.md` Phase 6 and is **NOT waived by Fable's absence.**
 Information instruments can carry a lighter guard. The gauntlet cannot.
-**Three sessions in a row have now failed their predecessor's work. The
+**Four sessions in a row have now failed their predecessor's work. The
 substitute is working — and every hole was found by a session ORDERED to break
 things rather than one being careful. Whatever reviews Phase 6 must be ordered
 to break it too.**
