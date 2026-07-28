@@ -5013,3 +5013,39 @@ sessions: the previous declaration went f8c13d\ -> \2be611\ for the same
 reason. **A reviewer checking Law 4 needs a hash that actually resolves**, and
 \git show --stat 46f95e5\ still shows \PROGRESS_LOG.md\ alone, 187 insertions,
 no \.py\ file. The bar still provably preceded the code.
+
+## SECOND CORRECTION, same session: I HAD ROUNDED THE STREAK UP BY ONE, IN MY OWN FAVOUR
+
+I first wrote *"six generations of repair; six failed by the next pair of eyes"*
+into `REVIEW_QUEUE.md`, `EXECUTION_PLAN.md`, `ROADMAP.md` and
+`SESSION_ORDERS.md`. **That is wrong, and wrong in the direction that flatters
+the review I had just performed.**
+
+**FIVE generations have been failed:** the original Gate 3.2, then 3.2-R, then
+3.2-R2, then 3.2-R3, then 3.2-R4. **The sixth is the one I built tonight, and it
+has been failed by nobody — which is not the same thing as having survived
+anybody.** Six review SESSIONS have each found something; five REPAIRS have been
+broken. I merged the two counts into one number.
+
+Corrected in all four documents, and `REVIEW_QUEUE.md` now spells the five out by
+name so the next session can check the arithmetic instead of trusting it.
+
+**Recorded rather than quietly fixed, because a tally counts only what was
+actually checked — and I am the person with an interest in that number being
+larger.**
+
+## AND A THIRD THING THAT WENT WRONG, RECORDED FOR THE SAME REASON
+
+The command that was supposed to write the note above into this file **failed
+with a `SyntaxError` and never ran**, because the correction text was passed to
+Python inline through PowerShell and the quoting was mangled. The four document
+edits in that same command had already been made by other means and were
+committed, **so for one commit the corrections existed and the explanation of
+them did not.** Fixed in the commit after, by writing the text to a file first.
+
+**This is the third time in two days that PowerShell quoting has damaged
+something on this ship** — `THE_PATTERN.md` already forbids `Get-Content` /
+`Set-Content` on these files for the same underlying reason. **The rule that
+would have prevented it: never pass prose to a program through a shell argument.
+Write it to a file and have the program read the file.** Offered as a
+housekeeping note, not promoted to anything.
