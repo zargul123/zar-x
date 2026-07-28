@@ -4540,8 +4540,17 @@ as cleared.**
 ## **36 in-run sabotages caught, and all four attacks that walked through this evening are caught as real file edits.**
 
 *The repair for the four leaks recorded in the entry above. The gate was declared
-in `7f8c13d`, which contains `PROGRESS_LOG.md` and nothing else —
-`git show --stat 7f8c13d` is the proof, and it precedes this commit.*
+in `f2be611`, which contains `PROGRESS_LOG.md` and nothing else —
+`git show --stat f2be611` is the proof, and it precedes this commit.*
+
+***The declaration was written down as `7f8c13d` and is recorded here as
+`f2be611` because the push landed behind a cloud snapshot and `git pull --rebase`
+rewrote both of this session's commits onto it. Same content, new hash, Law 4
+intact — but the hash a session writes into its own log is not final until it has
+been pushed. **Said out loud rather than quietly corrected, because an evidence
+pointer that changes silently is exactly what this log exists to prevent, and the
+next session that runs `git show --stat 7f8c13d` would get "unknown revision" and
+have no idea why.***
 
 ### THE BARS, AND WHAT EACH ONE MEASURED
 

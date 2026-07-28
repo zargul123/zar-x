@@ -924,8 +924,9 @@ offered as starting points and NOT as the assignment:
    obvious move is to edit the gate to match, which is what R-001 was convicted
    of — **is now larger than when it was filed twice.**
 
-**Evidence.** Declaration `7f8c13d` (`PROGRESS_LOG.md` only, no `.py` — check it
-with `git show --stat 7f8c13d`). The build commit after it. The two 2026-07-28
+**Evidence.** Declaration `f2be611` (`PROGRESS_LOG.md` only, no `.py` — check it
+with `git show --stat f2be611`; it was `7f8c13d` before a rebase onto a cloud
+snapshot, which the log records). The build commit after it. The two 2026-07-28
 evening `PROGRESS_LOG.md` entries.
 
 **Reproduce.** `python cockpit\funding.py` (fourteen sabotages),

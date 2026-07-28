@@ -378,7 +378,7 @@ while announcing in its own words that it checks "ALL THREE assets". That is
 B7's lesson one level up — B7 was *two of three assets guarded by a row count*;
 B9 is *all three guarded by a list the module hands over.*
 
-**THE REPAIR, SHIPPED THE SAME DAY**, declared in `7f8c13d` with no `.py` in it.
+**THE REPAIR, SHIPPED THE SAME DAY**, declared in `f2be611` with no `.py` in it.
 Both instruments hold `GATE_OFFLINE_WORDS` and the recorder holds `GATE_SYMBOLS`,
 each compared to the module's constant by a **named** check; every loop in the
 recorder gate runs over the gate's own list; and new check (j) runs `--record`
