@@ -26,6 +26,19 @@ may never clear its own item, however confident it is.**
 Phase 6 · `P2` should be reviewed before the surrounding area is built on ·
 `P3` worth an outside look, not blocking.
 
+**CATEGORY B — added 2026-07-28 (night) by the Commander's decision.** A finding
+the Commander has ruled SMALL after reading THE FINDING REPORT in
+`THE_PATTERN.md` — real, recorded, and **deliberately not repaired yet** so that
+building can continue. It is marked `CATEGORY B` in its STATUS line.
+
+**THIS IS NOT A BIN.** A Category B item is unfixed work with a date on it:
+**the entire Category B pile is cleared before the ship is used for real
+decisions**, at the same moment `cockpit/brief.py` finally gets its own gate.
+**One small finding is nothing. Twenty of them under a system about to be trusted
+with money is not.** A session that lets the pile grow without saying so out loud
+in its report to the Commander has broken the only condition on which the
+category was granted.
+
 **FIRST USE, 2026-07-26.** The 2026-07-26 audit session worked R-001 … R-005 as
 its worklist. **The queue functioned: three items reviewed found wanting, two
 cleared on measurements nobody had taken.** R-001 was convicted by the

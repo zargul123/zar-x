@@ -5091,3 +5091,76 @@ Today all thirty-nine are caught on every run.
 is what six sessions of attacking added."** The gates were never dishonest — every
 check they ran, they ran correctly. They were simply narrower than their own
 summary lines claimed.
+
+## `THE_PATTERN.md` WAS CHANGED, 2026-07-28 (night) — AND HERE IS THE FAILURE THAT EARNED IT
+
+**`THE_PATTERN.md` is the file that is supposed to hold still.** It says a session
+may edit it *"only when a session earns a genuinely new lesson"*, and that when it
+does, **the log must say what failure earned the change.** This is that record.
+
+### THE FAILURE
+
+**Six independent reviews in a row each found something, every one of them stopped
+to repair it, and Step 3.3 was deferred four sessions running.** The Context Deck
+is two instruments of five. Meanwhile the severity of what was being found fell
+the whole way down:
+
+    round 1  a flipped sign — the screen would show the EXACT OPPOSITE of
+             the truth, and look completely normal doing it
+    round 3  the mechanism sentence reversed beside three correct numbers
+    round 5  two of three assets silently ruined on data that cannot be re-bought
+    round 6  a `print()` statement NOBODY HAS WRITTEN
+
+**The rule in force was: "If Part 1 finds a real problem, fix that and stop."**
+That rule cannot terminate. **A test can always be improved — there is always one
+more lie it does not catch** — so "found something" is guaranteed forever, and
+building is therefore deferred forever. **The rule was not wrong when it was
+written; it simply has no floor.**
+
+### WHAT WAS ADDED, AND WHOSE IDEA IT WAS
+
+**THE FINDING REPORT — a four-step form, filled in for every finding BEFORE any
+repair**, grading it SERIOUS, BORDERLINE or SMALL.
+
+**THE DESIGN IS THE COMMANDER'S, NOT A SESSION'S, AND THE DIFFERENCE MATTERS.**
+A session proposed a blanket rule permitting sessions to skip small findings on
+their own judgement. **He rejected it** — correctly, because it hands a permanent
+decision to the party with an interest in it — and specified instead that the
+session ANSWERS and he RULES, case by case, in his own words. **He also improved
+question 2.1 himself**, by observing that a made-up scenario nobody would ever
+produce is not the same thing as an ordinary slip.
+
+**The session that proposed the original rule was the one being blocked by the old
+one. That conflict of interest was stated to him in bold before he decided.**
+
+### EVERY QUESTION IS EARNED, NOT INVENTED
+
+    0.2  print the broken output ....... B5, scored CAUGHT while crashing two
+                                         lines before the check it claimed
+    0.3  not your own work ............. six generations of self-grading
+    1    the veto ...................... R-007: a real race, harmless in effect
+    2.1  accident or on purpose ........ B10, one slip from B4
+    2.2  would he SEE it .............. the round-1 sign flip
+    2.3  can it be undone ............. Binance's 30-day window
+    3.1  still reports "all fine" ..... the naive recorder: success every
+                                         month while collecting nothing
+    3.3  touches advice ............... F8 printing ">> strong buy signal"
+    3.4  one thing or everything ...... B7, first asset perfect, other two ruined
+
+### THE CONDITION THE CATEGORY WAS GRANTED ON
+
+**CATEGORY B IS NOT A BIN.** Every SMALL finding is filed in `REVIEW_QUEUE.md`
+marked `CATEGORY B`, and **the whole pile is cleared before the ship is used for
+real decisions** — the same moment `cockpit/brief.py` gets its own gate. **A
+session that lets the pile grow without saying so out loud in its report has
+broken the condition the category exists under.**
+
+### AND THE HONEST RISK, RECORDED ON THE DAY IT WAS ADOPTED
+
+**This change makes it easier to stop testing and start building. That is its
+purpose, and it is also exactly how a ship talks itself into shipping something
+weak.** The protections against that are three, and they are thin: the Commander
+rules rather than the session; a session may never grade its own repair; and the
+pile has a hard deadline. **If a future session finds itself grading everything
+SMALL, that is the failure this note predicted — and the fix is to say so to the
+Commander, not to quietly keep building.**

@@ -100,6 +100,33 @@ never been checked. Read the file and count the rows yourself.
   editing the first match. **This stopped last night's session twice**, once
   because `now = readings[0]` appears in both halves of `fear_greed.py`.
 
+## **NEW, 2026-07-28 (night) — THE COMMANDER CHANGED HOW FINDINGS ARE HANDLED. READ THIS.**
+
+**`THE_PATTERN.md` now carries THE FINDING REPORT — a four-step form you fill in
+for EVERY finding, BEFORE you repair anything.** It grades a finding SERIOUS,
+BORDERLINE or SMALL, in plain words a non-programmer can check.
+
+**This changes what you do next, so do not skim it:**
+
+    SERIOUS ....... fix it, and stop. Build nothing.
+    BORDERLINE .... do NOT fix it. Report and stop. The Commander rules.
+    SMALL ......... do NOT fix it. File it in REVIEW_QUEUE.md as CATEGORY B
+                    and carry on to PART 2 and BUILD.
+
+**THE FORM COMES BEFORE THE REPAIR.** Its whole job is to decide whether the
+repair is worth doing now. **If you repair first and grade afterwards you have
+already spent the thing you were deciding about**, and you are asking him to
+approve work that is done.
+
+**You recommend. He rules.** And you may never grade your own repair.
+
+**Why he made this change, so you understand it rather than merely obey it:** six
+sessions in a row each found something, every one stopped to repair it, and
+**Step 3.3 was deferred four times running** — while the severity of what was
+being found fell from *"prints the opposite of the truth"* to *"would not catch a
+line of code nobody has written."* **A review that never ends stops protecting
+the project and becomes the project.**
+
 ## What you are allowed to conclude
 
 **"I attacked it and found nothing" is a real, honest, valuable result.** Say it

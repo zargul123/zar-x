@@ -141,9 +141,30 @@ the only useful attack is one its author never imagined.
     PART 1 — ATTACK what the last session built.   (Layer 3)
     PART 2 — BUILD the next thing.                 (Layers 1 and 2)
 
-**PART 2 IS CONDITIONAL. If Part 1 finds a real problem, fix that and stop.**
+**PART 2 IS CONDITIONAL ON HOW BAD THE PROBLEM IS — AND THE COMMANDER DECIDES
+THAT, NOT THE SESSION.** If Part 1 finds something, **fill in THE FINDING REPORT
+below BEFORE repairing anything**, then:
+
+    SERIOUS ....... fix it, and stop. Build nothing.
+    BORDERLINE .... do NOT fix it. Report and stop. The Commander rules.
+    SMALL ......... do NOT fix it. File it in REVIEW_QUEUE.md as CATEGORY B
+                    and carry on to PART 2.
+
+**THE REPORT COMES BEFORE THE REPAIR, ALWAYS.** Its entire purpose is to decide
+whether the repair is worth doing now. A session that repairs first and grades
+afterwards has spent the time it was supposed to be deciding about, and is asking
+the Commander to approve something already done.
+
+**A session may recommend. It may never rule** — and it may never grade its own
+repair. **Adopted 2026-07-28 (night) by the Commander**, after six consecutive
+reviews each found something and Step 3.3 was deferred four times running while
+the severity of what was being found fell from *"prints the opposite of the
+truth"* to *"would not catch a line nobody has written."*
+
 A session that reviews its predecessor and then hurries into building has not
-reviewed anything; it has performed a review.
+reviewed anything; it has performed a review. **But a session that repairs every
+imaginable weakness in a test before it is allowed to build has stopped
+protecting the project and become the project.**
 
 **If the session is running short, do PART 1 properly and leave PART 2 entirely.**
 A half-built part is worse than no part.
@@ -172,6 +193,96 @@ A half-built part is worse than no part.
 6. Record everything in `PROGRESS_LOG.md` — mistakes as plainly as successes.
 7. File what you could not certify in `REVIEW_QUEUE.md`. Commit. Push.
 8. Write the next session's orders in `SESSION_ORDERS.md`.
+
+---
+
+# THE FINDING REPORT — filled in for EVERY finding, BEFORE any repair
+
+**Why it exists.** The Commander is not a programmer. Without a fixed form he
+cannot tell a bug that would quietly cost him money from one that could only
+happen if somebody set out to cause it — so every finding looked equally urgent,
+building stopped every time, and the Context Deck sat at two instruments of five.
+
+**He judges the ANSWERS, not the code.** Every question is answerable in one
+plain sentence. **A vague or dodged answer is itself the warning sign**, and
+spotting a dodged question needs no technical knowledge at all.
+
+**Every question below was earned by something that actually happened on this
+ship.** None was invented for tidiness.
+
+## STEP 0 — IS THE FINDING EVEN TRUSTWORTHY?
+
+*Any wrong answer here and the finding is NOT PROVEN. Do not classify it. Redo
+the test.*
+
+    0.1  Did the healthy, untouched system pass FIRST?                bad: no
+    0.2  Did you PRINT the broken version's output and show it is
+         visibly wrong?                                               bad: no
+    0.3  Are you judging your OWN work?                              bad: yes
+
+**Earned by:** sabotage B5, scored CAUGHT while crashing two lines before the
+check it claimed to prove — found by reading, not by any check. And by six
+straight generations where the builder graded himself and the next pair of eyes
+found something every time.
+
+## STEP 1 — THE VETO QUESTION. ASK IT FIRST.
+
+    If this went wrong, would it change something the Commander would ACT on,
+    or damage a record we keep?
+
+    NO  -> it CANNOT be serious. File as CATEGORY B. Stop here.
+    YES -> continue.
+
+**Earned by R-007:** a genuine race that can print a settlement time a few
+seconds stale. A real defect. **It changes nothing for anybody**, and rating it
+P3 was correct.
+
+## STEP 2 — THE THREE BIG ONES. ANY BAD ANSWER = SERIOUS.
+
+    2.1  Could this happen BY ACCIDENT, or only if someone did it
+         on purpose?                                        bad: by accident
+    2.2  Would the Commander SEE it with his own eyes?              bad: no
+    2.3  Could it be UNDONE later?                                  bad: no
+
+**Earned by:** B10 — one tiny slip away from B4, which was already on the list
+(2.1). The very first sabotage ever found, a flipped sign printing the exact
+opposite of the truth on a screen that looked perfectly normal (2.2). And
+Binance's 30-day window, which cannot be bought back at any price (2.3).
+
+## STEP 3 — WHAT MAKES IT WORSE. ANY YES = BORDERLINE, THE COMMANDER RULES.
+
+    3.1  Would the system still report "all fine" while this happened?
+    3.2  Does it touch the saved records that cannot be re-bought?
+    3.3  Does it touch anything that TELLS HIM TO ACT — advice, or the
+         signals chapter?
+    3.4  Does it affect one thing once, or everything, forever?
+
+**Earned by:** the naive recorder that would have **reported success every month
+while collecting nothing** (3.1); sabotage F8, which printed *">> strong buy
+signal"* on the deck of an information-only ship while the gate applauded (3.3);
+and B7, which left the first asset perfect and quietly ruined the other two
+(3.4).
+
+## STEP 4 — SAY IT IN PLAIN WORDS
+
+    4.1  In ONE sentence: what would actually happen to the Commander if this
+         went wrong?
+    4.2  My recommendation: SERIOUS / BORDERLINE / SMALL — and why, in one line.
+
+## THE SCORING
+
+    Step 0 wrong ................ not proven. Test again.
+    Step 1 = NO ................. SMALL
+    Any Step 2 bad .............. SERIOUS
+    Step 2 clean + any Step 3 ... BORDERLINE — the Commander rules
+    Step 2 clean + no Step 3 .... SMALL
+
+**CATEGORY B IS A PILE, AND PILES GROW.** Every SMALL finding is filed in
+`REVIEW_QUEUE.md` marked **CATEGORY B**. One is nothing; twenty sitting under a
+system about to be trusted with real money is not nothing. **THE WHOLE CATEGORY B
+PILE IS CLEARED BEFORE THE SHIP IS USED FOR REAL** — the same moment
+`cockpit/brief.py` finally gets its own gate. **A session may not quietly let the
+pile become a place findings go to die.**
 
 ---
 
@@ -206,7 +317,9 @@ memory of you.** If a stranger could not act on it, it is not finished.
 
 **7. REPORT TO THE COMMANDER IN PLAIN WORDS.** What you tried, what broke, what
 held, **what you got wrong**, and what decision is his. Added 2026-07-27 **at his
-explicit instruction**, not because a session liked the idea.
+explicit instruction**, not because a session liked the idea. **And for EVERY
+finding, hand him THE FINDING REPORT above — all four steps, answered in plain
+sentences. He rules SERIOUS or SMALL; you only recommend.**
 
 **The reason is not politeness. He is not a programmer, and he is the only
 person who can overrule a session.** An instruction he cannot read is an
