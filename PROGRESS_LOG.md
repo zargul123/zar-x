@@ -4689,3 +4689,190 @@ It is written into the next session's orders as a named target.
 S14, F13 and B9 are one observation on three files; B8 is a coverage gap found
 while reading for the first. **What is proven is that these four lies are now
 caught. Nothing is proven about anything else.**
+
+---
+
+# 2026-07-28 (night) — THE SIXTH GENERATION IS FAILED. THREE NEW SABOTAGES, THREE PREDICTIONS, THREE ESCAPES. **GATE 3.2-R5, 3.1-R5 AND 3.2b-R3 DECLARED BEFORE ANY CODE EXISTS.**
+
+*By a session that built none of the three files. Predictions written into
+working notes before anything was run; three of three were correct. Controls run
+first — GATE 3.2-R4 14/14, GATE 3.1-R4 13/13, GATE 3.2b-R2 9/9, vault INTACT 6/6,
+`git status` clean — so the rig was valid. All sabotage applied as REAL TEXT
+EDITS to copies OUTSIDE the repo. `data/oi_history/` fingerprinted before and
+after and unchanged.*
+
+**THIS ENTRY IS COMMITTED ALONE, WITH NO `.py` FILE IN THE COMMIT (Law 4).**
+`git show --stat` proves the bar preceded the work.
+
+## THE QUESTION I BROUGHT, AND WHY IT IS NOT EITHER OF THE LAST TWO
+
+R-014 says plainly: *"The question that found today's four was 'what does the
+gate BELIEVE, and where did it get that belief?' Do not reuse it — it is now the
+direction this gate is strongest in."* The session before that asked *"which
+PATHS has nobody attacked?"* Mine is neither:
+
+> **EVERY CHECK ON THIS SHIP INSPECTS A RETURN VALUE, OR A FILE IT JUST CREATED
+> FROM EMPTY. WHAT REACHES THE PILOT'S SCREEN — OR THE SHIP'S PERMANENT DATASET —
+> WITHOUT PASSING THROUGH THE THING THE GATE INSPECTS?**
+
+Last night's question was *is the gate's ruler honest?* **Mine is: is the gate
+holding the ruler against the right object at all?**
+
+## WHAT ESCAPED
+
+    S15  funding.section_text() PRINTS a trade instruction to stdout and
+         returns the honest block byte-for-byte unchanged .............. ESCAPED
+    F14  fear_greed.section_text() does the same ........................ ESCAPED
+    B10  record() transposes the OI column, but ONLY when the CSV
+         already exists — i.e. only on the append path ................. ESCAPED
+
+**All three gates printed PASSED and exited 0.**
+
+### S15 AND F14 — THE GATE WATCHES ONE CHANNEL, AND THE BRIEF READS TWO
+
+`cockpit/brief.py` line 90 is `print(fear_greed_section())` and line 91 is
+`print(funding_section())`. **The function body runs before the print does.**
+Anything a doorway writes to stdout itself lands on the Brief, directly above its
+block, where the pilot reads it — and it never appears in the returned string
+that every single check inspects.
+
+Under S15 the funding instrument printed
+
+      ⚠ funding extreme — close longs before the 16:00 settlement
+
+**thirty times on Gate 3.2-R4's own screen**, and the gate reported all FOURTEEN
+sabotages CAUGHT and exited 0. Under F14 the Fear & Greed instrument printed
+`⚠ extreme fear — historically a buying opportunity` — **in the same run in
+which sabotage F7, "the disclaimer turned into ADVICE", was scored CAUGHT.**
+
+**This is a trade instruction on the Context Deck of a ship whose founding rule
+is INFORMATION, NEVER A SIGNAL.** It is sabotage F8 — the one that printed
+`>> strong buy signal` — delivered through a door no gate on this ship is
+watching. Six generations of gate have hardened the *content* of the returned
+string to exact equality on every path, and **not one of them ever asked whether
+the string is the only thing the compartment contributes to the Brief.**
+
+### B10 — THE GATE ONLY EVER TESTS MONTH ONE
+
+`record()` appends. Every row-level check in Gate 3.2b-R2 writes into a
+`_fresh_dir()` — an EMPTY directory — so `exists` is False at write time and any
+defect confined to the append-to-an-existing-file branch never executes:
+
+    (a) backfill                  -> backfill_dir, fresh
+    (h)/(i) _symbol_matches_source -> _fresh_dir(), fresh
+    _covers_every_asset            -> _fresh_dir(), fresh
+    (j) _record_run                -> fresh scratch copy, fresh
+    (g) plausibility               -> reads backfill_dir, written fresh
+
+And the only two checks that DO run against an existing file append **zero** new
+rows, so `if new_rows:` is False and the write block never runs at all:
+
+    (b) idempotence -> second run, nothing new
+    (e) tamper      -> re-run over a full window, nothing new
+
+**THE GATE NEVER ONCE CONSTRUCTS THE SITUATION THE MONTHLY TASK WILL BE IN FROM
+MONTH TWO ONWARD: an existing file PLUS genuinely new rows. Month one is the
+only month this gate has ever tested — and month one happens once.**
+
+**I did not accept the green gate as proof.** The scenario was built by hand: a
+CSV seeded with 100 rows written by the TEST from its own raw fetch, then
+`record()` called to append the rest. Printed, not assumed:
+
+    CONTROL   (untouched recorder)  seeded 100, appended 80, 0 of 180 rows wrong
+    B10       (sabotaged recorder)  seeded 100, appended 80, 80 of 180 rows wrong
+
+    timestamp                            ON DISK        BINANCE SERVED
+    2026-07-15T04:00:00Z     6887595656.12241300       106350.89300000
+    2026-07-15T08:00:00Z     6864809775.59010700       106380.92900000
+    2026-07-15T12:00:00Z     6870905767.83900000       106184.23500000
+
+**64,763x wrong — the dollar value stored in the coin column — on the one dataset
+Binance will not sell back at any price, with GATE 3.2b-R2 printing PASSED and
+all NINE sabotages CAUGHT.** B4 is *"the VALUE column written into the OI
+column"*; it is in the drill and scored CAUGHT in that very run. **B10 is B4
+moved onto the path the gate has never built.**
+
+## THE BARS — DECLARED NOW, BEFORE THE CODE EXISTS
+
+**PASS = every check green including every sabotage CAUGHT. Anything less is a
+FAIL, is not committed as a pass, and is not called "mostly passed".**
+
+**(a) NOTHING THE PILOT READS CHANGES.** Every edit inside `__main__`. **Proven
+two ways, not asserted:** every diff hunk at or after the `__main__` line
+(`funding.py` 160, `fear_greed.py` 113, `open_interest.py` 243), AND a sha256 of
+the production half printed before and after, side by side.
+
+**(b) THE SILENCE CHECK.** A named check in both instruments captures whatever
+`section_text` writes to **stdout AND stderr** during the call and requires it to
+be EMPTY — the Brief is assembled only from what the doorway RETURNS.
+
+**(c) THE SILENCE CHECK COVERS EVERY PATH THE PILOT CAN SEE.** Healthy, degraded
+and offline for funding; healthy and offline for Fear & Greed. **A guard on one
+path is a guard on one path — that is exactly what S12 and F12 cost, and a repair
+that forgets it on the day it is quoting it has learned nothing.**
+
+**(d) THE MONTH-TWO CHECK.** For **every asset `GATE_SYMBOLS` names**, seed a
+PARTIAL window on disk, run the recorder, read the file back and compare EVERY
+row, field by field, to a raw fetch the test makes itself. **The seed is written
+by the TEST from its own raw fetch and never passes through the module's writer**,
+so a broken writer cannot make the seed agree with itself.
+
+**(e) THE MONTH-TWO CHECK MUST PROVE IT ACTUALLY APPENDED.** The number of rows
+appended is required to be > 0 and is PRINTED. **A check that seeds a full window
+appends nothing and passes vacuously — that is the B5 failure, where a tick mark
+appeared for a check that crashed two lines before reaching what it claimed to
+prove.**
+
+**(f) THE 4h BOUNDARY IS HANDLED, NOT IGNORED.** Raw truth is fetched before
+seeding and again after the run; a stored row is correct if it matches EITHER
+snapshot. This is the drift discipline `_core_checks` already uses in
+`funding.py`. **It does not weaken the bar: a transposed, rounded or
+cross-symbol figure matches neither snapshot.** (R-013's doubt 3 named this
+exposure and nobody had handled it.)
+
+**(g) THE SABOTAGE DRILL IS PERMANENT.** S15, F14 and B10 join the others, broken
+on purpose and caught on EVERY run, originals restored and the restoration
+verified.
+
+**(h) MY ORIGINAL ATTACKS ARE RE-RUN AGAINST THE REPAIRED FILES** — real text
+edits to copies outside the repo, not wrappers — and must now be CAUGHT.
+**That is the evidence; the in-run drill is not.**
+
+**(i) EVERYTHING THE OLD GATES DID, THEY STILL DO.** 14/14, 13/13 and 9/9 stay
+green and become 15/15, 14/14 and 10/10.
+
+**(j) NO new file, NO new dependency, NO extra call from the Brief's path.**
+`io` and `contextlib` are standard library and are imported **inside `__main__`**,
+exactly as `subprocess` was on 2026-07-28 evening. **I am naming that in advance
+rather than waving it through afterwards, and somebody else should say out loud
+whether they agree** — it is the same judgement call R-014's doubt 3 filed
+against its author.
+
+**(k) `data/oi_history/` IS NEVER WRITTEN BY ANY OF THIS.** Fingerprinted before
+and after. Scratch directories only. The vault stays INTACT 6/6, `lab/`
+byte-identical, the Brief still 3/3.
+
+## THE EDGE CASES, NAMED BEFORE THE CODE IS WRITTEN
+
+1. **The silence check must not catch the GATE's own printing** — only the
+   `section_text` call itself is wrapped, never the surrounding report.
+2. **stderr counts.** A compartment writing to stderr still puts words on the
+   pilot's terminal. Both streams are captured; both must be empty.
+3. **The offline path must be silent too.** An instrument that has just admitted
+   it cannot see anything must print nothing else — through ANY channel.
+4. **The month-two seed must be a strict subset** with genuinely newer rows left
+   to append, or the check proves nothing. Enforced by requiring appended > 0.
+5. **A duplicate check still applies at month two** — distinct (symbol, timestamp)
+   pairs must equal total rows after the append.
+6. **Every loop runs over `GATE_SYMBOLS`**, never the module's `SYMBOLS`. The
+   lesson of B9, one day old, must not be dropped by the repair that follows it.
+7. **Runtime grows.** Month two adds three fetches and three runs to a gate that
+   is already the slowest on the ship. Accepted deliberately, recorded here.
+
+## WHAT I ALREADY KNOW I AM NOT FIXING
+
+**Named so nobody later reads silence as coverage:** funding's two-assets-fail
+block is still guarded by nothing; the recorder's check (e) is still BTCUSDT-only;
+B1 is still a no-op on a UTC machine. **The declared gate above does not name
+them, and widening a bar mid-flight is the R-001 failure running the other way.**
+They stay in the queue and in the next session's orders.
