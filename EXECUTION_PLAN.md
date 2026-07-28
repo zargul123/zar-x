@@ -180,41 +180,23 @@ internet (or a bad key) degrades to "offline" without breaking the Brief.
 - IF a free API dies or paywalls → mark instrument offline, log it, move on.
   NEVER substitute a paid API without the Commander's yes.
 
-## STEP 3.6 — **`cockpit/brief.py` GETS ITS OWN GATE. DECIDED BY THE COMMANDER, 2026-07-28 (night).**
+## STANDING REQUIREMENT — **`cockpit/brief.py` MUST HAVE ITS OWN GATE BEFORE THE SHIP IS USED FOR REAL**
 
-**THE COMMANDER'S INSTRUCTION, in his own framing:** *when we are finalising
-things, we make an inspector for `brief.py` too.* **This is a decision, not a
-recommendation, and it is recorded here so no session has to re-argue it.**
+**Commander's decision, 2026-07-28 (night): NOT NOW. Before going live.**
 
-**WHY IT EXISTS.** Every instrument the Brief prints is now guarded to the byte —
-39 deliberate lies live across three files and all 39 are caught on every run.
-**The file that assembles them is checked by nothing whatsoever.** It was
-"verified by reading", which is precisely what this ship has been wrong about
-five times. The 2026-07-28 night review proved a compartment could reach the
-pilot through a channel no gate watched; **`brief.py` is itself an entirely
-unwatched channel, about forty lines long, and nobody has ever attacked it.**
+Every instrument the Brief prints is guarded to the byte. **The file that
+assembles them onto the screen is checked by nothing.** That is a real gap and it
+is recorded here so it cannot be forgotten.
 
-**WHEN.** At the END of Phase 3, once all five Context Deck instruments exist —
-not before. Gating it now would freeze an assembler that is still growing by one
-instrument per step, and every new instrument would fail a gate written against
-the old layout. **This is the one place where waiting is the right call, and the
-reason is written down so waiting cannot later be mistaken for forgetting.**
+**It is deliberately NOT built yet**, and the reason is written down so waiting is
+never mistaken for forgetting: **`brief.py` changes shape every time an instrument
+is added.** A gate written today would be rewritten after Steps 3.3, 3.4 and 3.5,
+and every rewrite is a chance to quietly weaken it — which is the one mistake this
+ship has already been convicted of (R-001).
 
-**WHAT IT MUST DO, at minimum — declared now, before the code exists (Law 4):**
-- **The Brief prints ONLY what the compartments return.** Rebuild the whole
-  expected screen from each doorway's return value and compare for EXACT
-  EQUALITY. Nothing added, nothing removed, nothing reordered.
-- **No line of advice can reach the screen.** A named check for the words this
-  ship refuses — buy, sell, should, opportunity, signal — anywhere on the Brief.
-- **One dead instrument never silences another.** Break each compartment in turn
-  and require every other line to survive, and the failed one to be NAMED.
-- **The `ok/total` count is real.** It must be shown to fall when an asset fails,
-  not merely printed.
-- **A sabotage drill FROM BIRTH**, including one lie that reaches the screen
-  without passing through any doorway's return value — the 2026-07-28 lesson.
-
-**IT IS NOT A SIGNALS GATE.** The Brief reports facts. Nothing here weakens the
-signals doorway or THE PROMISE.
+**THE DEADLINE: it must exist before the Brief is relied on for real decisions,
+and in any case before Phase 6 seals the signal slots.** No session may mark this
+done by reading the file and declaring it fine.
 
 # PHASE 4 — CARRY MONITOR (Layer 7, structural income instrument)
 

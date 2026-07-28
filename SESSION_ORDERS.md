@@ -322,13 +322,10 @@ the Commander. **It is not repeated here.**
    cloud runners are geo-blocked by Binance). **Read `journal/daily_runs.log`
    after 1 August and tell him plainly whether it committed. Do not assume it
    worked because the task returns 0.**
-2. **~~`cockpit/brief.py` HAS NO GATE.~~ DECIDED BY THE COMMANDER 2026-07-28
-   (night): IT GETS ONE.** His instruction: *when we are finalising things, we
-   make an inspector for `brief.py` too.* **Written into `EXECUTION_PLAN.md` as
-   STEP 3.6, with its bars declared in advance and the reason it waits until all
-   five instruments exist.** No session needs to re-argue this and no session may
-   quietly drop it. **It is still the biggest unwatched thing on the ship until
-   it is built.**
+2. **`cockpit/brief.py` HAS NO GATE — and the Commander has ruled: NOT NOW,
+   BEFORE GOING LIVE.** Recorded in `EXECUTION_PLAN.md` as a standing
+   requirement. **Do not build it, and do not re-argue it.** The reason it waits
+   is that the Brief changes shape with every instrument added.
 3. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2.
 4. **The risk-doctrine decision** — the 25% position cap means real risk is ~0.49%
    per trade, not the intended 1%. **Settled BEFORE Phase 6, never after seeing
