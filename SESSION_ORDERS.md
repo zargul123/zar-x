@@ -82,9 +82,10 @@ never been checked. Read the file and count the rows yourself.
   looking at the right object at all?"* **All three are now the directions these
   gates are strongest in, and reusing any of them is the approach most likely to
   find nothing.**
-- **Write what you will try and what you PREDICT, BEFORE you run it.** The last
-  three sessions predicted seventeen of seventeen correctly, and that is what
-  proved the holes were structural rather than luck.
+- **Write what you will try and what you PREDICT, BEFORE you run it.** Each of
+  the last three sessions predicted EVERY ONE of its attacks correctly before
+  running anything, and that is what proved the holes were structural rather than
+  luck. It also makes it impossible to reinterpret a result after seeing it.
 - **Work on copies OUTSIDE the repo.** Never break the real files. Check
   `git status` is clean when you are done.
 - **Run the untouched control first.** If the healthy copy does not pass, your rig
@@ -291,8 +292,9 @@ appears in the log when it finds something teaches the next session that silence
 means safety.
 
 **`REVIEW_QUEUE.md`: you MAY clear R-015 (you built none of it), and R-007 too if
-it settles.** R-001 has now waited through **six** failed generations of repair
-and **moves only when a generation survives an independent attack.** Items you
+it settles.** R-001 has now waited through **five FAILED generations of repair,
+with the sixth untested**, and **moves only when a generation survives an
+independent attack. Untested is not survived.** Items you
 cannot settle stay OPEN with a note on what is missing; **leaving something open
 is a legitimate recorded outcome.** **R-006 is not yours, ever. Never delete an
 item. Never edit a cleared verdict.**

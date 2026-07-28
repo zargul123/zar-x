@@ -151,16 +151,22 @@ because by now the streak is itself the finding** — every one of the three hol
 was found by a session ORDERED to break things, and not one by a session being
 careful.
 
-### >>> 2026-07-28 (night): **A FIFTH AND A SIXTH GENERATION WERE FAILED. R-001 STILL DOES NOT MOVE.**
+### >>> 2026-07-28 (night): **A FOURTH AND A FIFTH GENERATION WERE FAILED. R-001 STILL DOES NOT MOVE.**
 
 R-013 was failed on 2026-07-28 evening (four of four escaped) and **R-014 was
 failed the same night (three of three escaped)**. Both remedies were again
 written by the session that found the fault — now R-015.
 
-**Six generations of repair; six failed by the next pair of eyes. The condition
-has never once been met.** Written here plainly because the streak is the
-finding: **not one of the six holes was found by a session being careful, and
-every one was found by a session ORDERED to break things.**
+**FIVE generations of repair have now been failed by the next pair of eyes, and
+the sixth — tonight's — is untested.** The condition has never once been met.
+
+**Counted carefully rather than roundly, because rounding it up would be the same
+sin this file exists to catch.** The generations FAILED are: the original Gate
+3.2, then 3.2-R, then 3.2-R2, then 3.2-R3, then 3.2-R4. **Tonight's 3.2-R5 has
+been failed by nobody, which is not remotely the same thing as having survived
+somebody.** Written plainly because the streak is itself the finding: **not one of
+those five holes was found by a session being careful, and every single one was
+found by a session ORDERED to break things.**
 
 ## R-002 — Two planning generations written by the mind that then built them
 **STATUS: FAILED 2026-07-26 · P1 · flagged 2026-07-26 · reviewed by the

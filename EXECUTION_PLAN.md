@@ -393,7 +393,9 @@ HAS NO GATE AT ALL.** The instruments are now proved silent; nothing proves the
 Brief itself prints only what they return. Filed as R-015 doubt 2.
 
 **R-014 FAILED. R-015 is open against tonight's repair. R-001 has now outlived
-SIX generations of fix** and moves only when one SURVIVES an independent attack.
+FIVE FAILED generations of fix, and the sixth is untested** — it moves only when
+a generation SURVIVES an independent attack, and none ever has. **Untested is not
+the same as survived, and this ship counts it that way on purpose.**
 
 ---
 

@@ -28,8 +28,9 @@ simply `print()`s advice reached the Brief completely unwatched — `brief.py` r
 the function before it prints what the function returns — and the recorder's
 APPEND path, which every month after the first one takes, had never had a single
 row read back off it. **Three of three attacks escaped. R-014 FAILED; R-015 is
-open against its repair; R-001 has now outlived SIX generations of fix and moves
-only when one SURVIVES an independent attack.**
+open against its repair; R-001 has now outlived FIVE FAILED generations of fix
+and the sixth is untested — it moves only when one SURVIVES an independent
+attack, and none ever has.**
 **AND THE LARGER HOLE THE NEWEST FINDING SITS INSIDE, STILL OPEN:
 `cockpit/brief.py` — the pilot's actual daily tool — HAS NO GATE AT ALL.**
 
