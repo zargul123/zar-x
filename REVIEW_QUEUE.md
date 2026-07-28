@@ -1002,7 +1002,7 @@ remain unexamined: the sweep is still by eye, check (e) is still BTCUSDT-only,
 B1 is still a no-op on a UTC machine.
 
 **REMEDY SHIPPED the same night** — Gate 3.2-R5, 3.1-R5 and 3.2b-R3, declared in
-`a83bbf7` with no `.py` in it. Both instruments prove the doorway writes NOTHING
+`46f95e5` with no `.py` in it. Both instruments prove the doorway writes NOTHING
 to stdout or stderr on EVERY path the pilot can see; the recorder builds month
 two for every asset the gate names and reads every row back against a raw fetch,
 **and must prove it appended rather than passing on a complete window.** All
@@ -1059,8 +1059,8 @@ offered as starting points and NOT as the assignment:
    to catch, so it is filed.** The other checks in that gate still have the raw
    exposure R-013 doubt 3 named.
 
-**Evidence.** Declaration `a83bbf7` (`PROGRESS_LOG.md` only, no `.py` — check it
-with `git show --stat a83bbf7`). The build commit after it. The two 2026-07-28
+**Evidence.** Declaration `46f95e5` (`PROGRESS_LOG.md` only, no `.py` — check it
+with `git show --stat 46f95e5`). The build commit after it. The two 2026-07-28
 night `PROGRESS_LOG.md` entries.
 
 **Reproduce.** `python cockpit\funding.py` (fifteen sabotages),

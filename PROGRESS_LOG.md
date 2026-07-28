@@ -4882,7 +4882,7 @@ They stay in the queue and in the next session's orders.
 # 2026-07-28 (night) — **GATE 3.2-R5, 3.1-R5 AND 3.2b-R3 PASSED.** 15/15, 14/14 and 10/10. The gates now watch the channel the Brief actually reads from, and the month the recorder only ever sees once
 
 *Same session as the declaration above. The bars in that entry were committed
-alone in `a83bbf7` (`PROGRESS_LOG.md` only, no `.py` — `git show --stat a83bbf7`),
+alone in `46f95e5` (`PROGRESS_LOG.md` only, no `.py` — `git show --stat 46f95e5`),
 before any of this code existed.*
 
 ## THE RESULT AGAINST EACH DECLARED BAR
@@ -5000,3 +5000,16 @@ ever takes — had never once been read back.**
 
 **The previous five holes were all "the gate is looking at the right thing and
 believing the wrong source." This one is "the gate is looking somewhere else."**
+
+## CORRECTION, same session: THE DECLARATION COMMIT HASH MOVED
+
+The declaration was committed as \83bbf7\. Pushing required a rebase onto a
+cloud snapshot that landed while this session was working, and the rebase
+rewrote it to **&f95e5\**. Every reference in \EXECUTION_PLAN.md\,
+\REVIEW_QUEUE.md\ and this file has been corrected to &f95e5\.
+
+**Recorded rather than silently fixed** — and it is the second time in two
+sessions: the previous declaration went f8c13d\ -> \2be611\ for the same
+reason. **A reviewer checking Law 4 needs a hash that actually resolves**, and
+\git show --stat 46f95e5\ still shows \PROGRESS_LOG.md\ alone, 187 insertions,
+no \.py\ file. The bar still provably preceded the code.

@@ -379,7 +379,7 @@ wrong — the dollar value in the coin column — with all NINE sabotages scored
 CAUGHT, **including B4, which is that exact lie.** B10 is B4 with one `if` in
 front of it, on the one dataset Binance will not sell back at any price.
 
-**THE REPAIR, SHIPPED THE SAME NIGHT**, declared in `a83bbf7` with no `.py` in
+**THE REPAIR, SHIPPED THE SAME NIGHT**, declared in `46f95e5` with no `.py` in
 it. Both instruments prove the doorway writes NOTHING to stdout or stderr on
 EVERY path the pilot can see; the recorder builds month two for every asset the
 gate names, reads every appended row back against its own raw fetch, **and must
