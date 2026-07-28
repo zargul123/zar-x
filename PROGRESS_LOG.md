@@ -5049,3 +5049,45 @@ something on this ship** — `THE_PATTERN.md` already forbids `Get-Content` /
 would have prevented it: never pass prose to a program through a shell argument.
 Write it to a file and have the program read the file.** Offered as a
 housekeeping note, not promoted to anything.
+
+## THE COMMANDER'S DECISION, 2026-07-28 (night): **`cockpit/brief.py` GETS ITS OWN INSPECTOR**
+
+Told to him plainly at the end of this session that the Brief — the file that
+assembles everything he reads each morning — **is guarded by nothing**, while
+every instrument it prints is guarded to the byte. **He decided on the spot that
+it gets an inspector when the Context Deck is being finalised.**
+
+**Recorded in `EXECUTION_PLAN.md` as STEP 3.6**, with its bars declared in
+advance (Law 4, before any code exists): the Brief must print ONLY what the
+compartments return, compared by exact equality; a named check that no word of
+advice can appear; one dead instrument must never silence another; the `ok/total`
+count must be shown to FALL rather than merely printed; and a sabotage drill from
+birth including one lie that reaches the screen without passing through any
+doorway's return value.
+
+**It waits until all five instruments exist, and the reason is written down so
+waiting can never later be mistaken for forgetting:** gating the assembler now
+would freeze a layout that still changes with every instrument added.
+
+**The desk item in `SESSION_ORDERS.md` is struck through and marked DECIDED**, so
+no future session re-argues a question the Commander has already answered.
+
+### AND THE MEASUREMENT HE ASKED FOR, TAKEN FROM THE CODE RATHER THAN FROM MEMORY
+
+Counted by a script reading the sabotage tables in the files themselves:
+
+    cockpit/funding.py        15 lies   12 once escaped a green gate    3 never did
+    cockpit/fear_greed.py     14 lies   11 once escaped a green gate    3 never did
+    data/open_interest.py     10 lies    4 once escaped a green gate    6 never did
+    ------------------------------------------------------------------------------
+    TOTAL                     39 lies   27 once passed a gate reporting SUCCESS
+
+**Twenty-seven of the thirty-nine deliberate lies now living in this code were,
+at some point, walking through a gate that was printing PASSED and exiting 0.**
+Today all thirty-nine are caught on every run.
+
+**The honest reading of that number is not "the gates are good now."** It is
+**"twelve is how many a gate catches when nobody has attacked it, and twenty-seven
+is what six sessions of attacking added."** The gates were never dishonest — every
+check they ran, they ran correctly. They were simply narrower than their own
+summary lines claimed.
