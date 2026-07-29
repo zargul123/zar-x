@@ -6357,3 +6357,198 @@ after the rebase: it still carries `PROGRESS_LOG.md` alone, 225 insertions, no
 `.py`.** The references were corrected rather than left pointing at a hash that
 no longer exists. This happened to the previous session too — **twice now, and
 it is a consequence of a scheduled cloud task pushing while a session works.**
+
+
+---
+
+# 2026-07-29 (night) — **THE COMMANDER RE-ORDERED THE WORK. R-016 IS PART 1.**
+# **GATE 3.1-R6 AND GATE 3.2-R6 DECLARED BEFORE THEIR CODE EXISTS — CLOSE THE BRIEF'S TWO DOORS.**
+
+**His words, at the start of this session:** *"Change the order of work. Part 1
+is closing the two doors (R-016) — that is my order and it has waited two
+sessions. Attacking R-020 becomes Part 2, and if you run short, leave it, file
+it, and say so plainly. Do not defer my order a third time."*
+
+**That reverses THE RHYTHM for this session only, and he is the only authority
+who can.** ATTACK-then-BUILD becomes BUILD-then-ATTACK, because the thing being
+built has now been deferred twice by sessions that each had a good reason.
+**Recorded in bold because a session that changes a rule it is measured by must
+say so** — and this one was changed by the Commander, not by the session.
+
+---
+
+## WHAT WAS FOUND ON ARRIVAL, BEFORE ANYTHING WAS CHANGED
+
+    vault ............. INTACT 6/6
+    Brief ............. 3/3 instruments reporting, Context Deck prints
+    fear_greed gate ... GATE 3.1-R5 PASSED, all 14 sabotages caught
+    funding gate ...... **FAILED** — four runs out of four
+
+**The funding gate was already red when this session arrived.** It is a
+LIVE-RATE RACE, not a code defect, and it is filed as **R-021, CATEGORY B**.
+Measured at 15:38 UTC, twenty-two minutes before the 16:00 settlement:
+
+    20:38:25  BTCUSDT=0.00002671  ETHUSDT=0.00002899  SOLUSDT=0.00000244
+    20:38:30  BTCUSDT=0.00002671  ETHUSDT=0.00002899  SOLUSDT=0.00000023
+    20:38:36  BTCUSDT=0.00002901  ETHUSDT=0.00002899  SOLUSDT=0.00000023
+
+`_core_checks` and `_partial_checks` bracket the module's fetch with a `before`
+snapshot and an `after` snapshot and accept either. **When the rate moves TWICE
+inside that bracket, the module's value matches NEITHER bookend.** A DIFFERENT
+set of checks failed on each of the four runs, and that variance is itself the
+proof it is a race rather than a defect. The restore check re-runs core, partial,
+offline and silence — about ten more bracketed fetches — so it failed on all four.
+
+**It is graded SMALL at Step 1, the veto question, and the grading is written
+out in full further down.** In one line: the gate lives entirely inside
+`__main__`, `brief.py` never calls it, no record moves, and the Brief printed
+correct rates 3/3 at the same moment the gate was red. **It fails LOUD, which is
+the opposite of every SERIOUS finding this ship has recorded.**
+
+---
+
+## THE TWO DOORS, PROVED OPEN BEFORE ANY REPAIR WAS WRITTEN
+
+**Predicted in writing first, then measured.** All four predictions held.
+
+### DOOR 1 — SPEAKING PAST THE EAR
+
+`_capture` listens with `contextlib.redirect_stdout` / `redirect_stderr`, which
+rebind the **names** `sys.stdout` and `sys.stderr`. Two routes walk straight
+past it. Run against the gate's own `_capture`, copied verbatim, with a control
+first:
+
+    control  print()           -> _capture returned 'ADVICE VIA print()\n'
+    P1  os.write(1, ...)       -> _capture returned ''   *** ESCAPED ***
+    P2  logging -> real stderr -> _capture returned ''   *** ESCAPED ***
+
+**Both escaped lines were printed on the terminal, at the top of the run**, in
+the exact place they would land on the Commander's Brief:
+
+    >> close longs before the 16:00 settlement
+    >> funding flipped negative - go long
+
+P2 is the more dangerous of the two because it needs no exotic call at all: a
+`logging.StreamHandler` built at import time holds a reference to the real
+`sys.stderr` object, and every later `redirect_stderr` is invisible to it.
+
+### DOOR 2 — SPEAKING BEFORE THE EAR WAS LISTENING
+
+**Nothing anywhere watches what a module writes at IMPORT time**, and
+`brief.py` lines 23 and 24 import both Context Deck instruments. One line was
+injected into a scratch copy of `cockpit/funding.py` — binary mode, anchor
+proved unique first, **76 bytes and exactly one CRLF added, zero line endings
+converted:**
+
+    print(">> funding is negative on all three - the crowd is short, go long")
+
+The Morning Brief, in the scratch rig:
+
+    >> funding is negative on all three - the crowd is short, go long
+    ==============================================================
+      ZAR X — MORNING BRIEF   2026-07-29 20:44   [4h]
+    ==============================================================
+
+**The trade instruction lands ABOVE THE HEADER** — the first thing on the page.
+And the gate, in the same rig, in the same run:
+
+    ✓ healthy  path: the doorway wrote NOTHING to stdout or stderr of its own
+    ✓ degraded path: the doorway wrote NOTHING to stdout or stderr of its own
+    ✓ offline  path: the doorway wrote NOTHING to stdout or stderr of its own
+
+**Three green ticks certifying silence, printed underneath the advice itself.**
+
+P4, checked because the repair depends on it: both modules import in a
+subprocess in about 0.4s, return code 0, **write nothing, make no network call,
+and do NOT run `__main__`** — so the import check cannot recurse into itself.
+
+---
+
+# GATE 3.1-R6 (fear_greed) AND GATE 3.2-R6 (funding) — THE BAR, DECLARED NOW
+
+**This entry is committed ALONE, with no `.py` file in the commit.** `git show
+--stat` on it proves the bar existed before the code that has to clear it.
+
+**(a) THE EAR IS PROVED TO HEAR BEFORE ITS SILENCE IS BELIEVED.** A named check
+feeds `_capture` a known string down **all three routes** — `print`, `os.write`
+to the raw descriptor, and a `logging` handler bound to the real stderr — and
+**all three must come back.** A deaf ear reports silence, and three ticks
+reading "wrote NOTHING" is exactly what a deaf ear looks like. **This check is
+the control for every other check in this section and it runs first.**
+
+**(b) `_capture` LISTENS AT THE FILE DESCRIPTOR, NOT AT THE NAME.** Descriptors
+1 and 2 are redirected for the duration of the doorway call, both Python buffers
+flushed on each side, and **anything arriving by any of the three routes is
+returned.** The comparison is against empty **bytes**, so no encoding or
+line-ending translation can manufacture a pass.
+
+**(c) THE PROCESS STREAMS ARE PROVED UNTAMPERED.** A named check requires
+`sys.stdout is sys.__stdout__` and `sys.stderr is sys.__stderr__` after the
+doorway has run. **If either `sys.__stdout__` or `sys.__stderr__` is `None` the
+check FAILS LOUDLY rather than passing** — a comparison that quietly succeeds
+because both sides are `None` is the shape this ship has been bitten by before.
+
+**(d) SOMETHING WATCHES WHAT THE MODULE WRITES AT IMPORT TIME.** A named check
+imports the module in a **fresh subprocess** and requires return code 0 and
+**both streams empty**. It runs against the real module as the control, and
+against a scratch copy carrying one injected module-level line as the break.
+
+**(e) THREE NEW SABOTAGES, PERMANENT, CAUGHT ON EVERY RUN, FOREVER:**
+
+    S16 / F15  the doorway writes advice straight to the FILE DESCRIPTOR
+    S17 / F16  the doorway writes advice through a logging handler bound to
+               the real stderr at import time
+    S18 / F17  the module writes advice AT IMPORT TIME
+
+S18 cannot be simulated by swapping a global — the import has already happened —
+so it is driven by a **real text edit of a scratch copy outside the repo**, in
+binary mode, with the anchor proved unique first. **If the anchor matches more
+than once the check REFUSES TO RUN rather than editing the first match.**
+
+**(f) EVERY NEW SABOTAGE'S JUDGE RETURNS `False` RATHER THAN RAISING.** Proved
+by a named check, printed. **A sabotage that CRASHES is scored "caught", so one
+that never really ran looks like a success** — that is the B5 failure and it is
+guarded here by name, not by hope.
+
+**(g) NOTHING THE PILOT READS CHANGES — PROVED TWO WAYS, NOT ASSERTED.** Every
+diff hunk at or after the `__main__` line (`funding.py` 160, `fear_greed.py`
+113), **and** a sha256 of each production half printed before and after, side by
+side.
+
+**(h) EVERYTHING THE OLD GATES DID, THEY STILL DO.** All 15 funding sabotages
+and all 14 fear_greed sabotages still caught, every existing check still green.
+
+**(i) NO new file in the repo, NO new dependency, NO extra call from the
+Brief's path.** The import check spawns a subprocess with
+`PYTHONDONTWRITEBYTECODE=1` so the drill cannot dirty the working tree, and
+`git status` must be clean afterwards.
+
+**PASS = every check green including every sabotage CAUGHT. Anything less is a
+FAIL, is not committed as a pass, and is not called "mostly passed."**
+
+## THE EDGE CASES, NAMED BEFORE THE CODE RATHER THAN DISCOVERED IN IT
+
+    E1   only the `section_text` call is wrapped — the ear must never
+         swallow the gate's own reporting
+    E2   flush both streams BEFORE the redirect and AFTER the call, or output
+         lands in the wrong place entirely
+    E3   restore the descriptors in `finally` even when `call()` raises, and
+         close every dup — fifteen sabotages across three paths would
+         otherwise exhaust the process's descriptors
+    E4   compare against empty BYTES, so CRLF translation cannot fake a pass
+    E5   decode utf-8 with errors='replace' — the doorway writes an emoji
+    E6   the subprocess runs with cwd at the repo root and `sys.executable`
+    E7   PYTHONDONTWRITEBYTECODE=1 — the drill must not dirty the repo
+    E8   the import must make no network call; it is timed
+    E9   `-c "import cockpit.funding"` sets `__name__` to the module name, so
+         the gate does NOT recurse. **Fork-bomb risk, so it is proved rather
+         than assumed:** fast, silent, return code 0
+    E10  `sys.__stdout__` can be `None`; that must FAIL, never pass
+    E11  the scratch copy is edited in BINARY mode, one line, anchor unique
+         or refuse to run
+    E12  scratch layout is `<tmp>/cockpit/<module>.py` with cwd at `<tmp>`;
+         both modules import only the standard library and `requests`
+    E13  only the import door needs a subprocess — two spawns per module
+    E14  `_silence_checks` is a JUDGE inside the sabotage drill. **If the
+         descriptor redirect ever leaked, the whole run's output would
+         vanish**, so the restoration is bulletproofed and then demonstrated
