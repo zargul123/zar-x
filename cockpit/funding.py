@@ -526,15 +526,128 @@ if __name__ == '__main__':
     # The exact-equality bars were never wrong. They were held against the wrong
     # OBJECT: the Brief reads TWO channels and this gate only ever watched one.
     # =====================================================================
-    import contextlib
-    import io
+    # =====================================================================
+    # GATE 3.2-R6, added 2026-07-29 (night). **R-016, and the Commander's own
+    # order** — he ruled "close the two doors", two sessions deferred it, and
+    # he ruled a second time that it does not get deferred a third.
+    #
+    # The R5 ear listened with `contextlib.redirect_stdout` / `redirect_stderr`.
+    # Those rebind the **NAMES** `sys.stdout` and `sys.stderr`. They do not own
+    # the file descriptors underneath, and they cannot reach backwards to an
+    # object somebody already took a reference to. So there were two doors:
+    #
+    #   DOOR 1, measured before this was written, against the R5 ear itself:
+    #       control  print()           -> heard 'ADVICE VIA print()\n'
+    #       os.write(1, ...)           -> heard ''   *** ESCAPED ***
+    #       logging -> real stderr     -> heard ''   *** ESCAPED ***
+    #   Both escaped lines printed trade instructions on the terminal.
+    #
+    #   DOOR 2: NOTHING ANYWHERE WATCHED WHAT THIS MODULE WRITES AT **IMPORT**
+    #   TIME, and `brief.py` line 24 imports it. One injected module-level
+    #   line put ">> ... the crowd is short, go long" ABOVE the Morning Brief's
+    #   header — the first thing on the page — while this section printed
+    #   three green ticks reading "the doorway wrote NOTHING".
+    #
+    # The logging route is the dangerous one because it needs nothing exotic:
+    # a `StreamHandler` built at import time holds the real `sys.stderr` OBJECT,
+    # and every later `redirect_stderr` is invisible to it.
+    #
+    # THE EAR NOW LISTENS AT THE FILE DESCRIPTOR, where all three routes must
+    # pass — and, because a deaf ear also reports silence, **it is made to
+    # prove it can hear before its silence is believed.**
+    # =====================================================================
+    import logging
+    import os
+    import shutil
+    import subprocess
+    import tempfile
+    import time
 
     def _capture(call):
-        """Run `call()` with BOTH streams captured. Returns what it wrote."""
-        buf = io.StringIO()
-        with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
-            call()
-        return buf.getvalue()
+        """Run `call()` with BOTH streams captured AT THE FILE DESCRIPTOR.
+
+        Descriptors 1 and 2 are the narrow point every route has to pass
+        through: `print`, a raw `os.write`, and a handler holding a reference
+        to the original stream object all end up here. Redirecting the NAMES
+        catches only the first of the three.
+
+        Returns raw BYTES. The caller compares against `b''`, so no decoding
+        and no line-ending translation can manufacture a pass.
+
+        E2: both buffers are flushed BEFORE the swap, or the gate's own
+        earlier output would be swallowed into the capture, and again AFTER
+        the call, or the doorway's buffered writes would arrive on the pilot's
+        screen once the descriptors were back.
+
+        E3/E14: **this function is a JUDGE inside the sabotage drill and runs
+        forty-five times a session. If it ever leaked a descriptor the whole
+        run's output would vanish**, so the restore is in `finally`, it runs
+        even when `call()` raises, and every dup is closed.
+        """
+        sys.stdout.flush()
+        sys.stderr.flush()
+        heard = tempfile.TemporaryFile()
+        saved_out, saved_err = os.dup(1), os.dup(2)
+        try:
+            os.dup2(heard.fileno(), 1)
+            os.dup2(heard.fileno(), 2)
+            try:
+                call()
+            finally:
+                for stream in (sys.stdout, sys.stderr):
+                    try:
+                        stream.flush()
+                    except Exception:
+                        pass
+        finally:
+            os.dup2(saved_out, 1)
+            os.dup2(saved_err, 2)
+            os.close(saved_out)
+            os.close(saved_err)
+        heard.seek(0)
+        written = heard.read()
+        heard.close()
+        return written
+
+    # Bound to `sys.stderr` HERE, at gate-definition time, exactly as a handler
+    # created during a module import would be. This is the object
+    # `redirect_stderr` can never take away, and it is why door 1 was open.
+    _EAR_LOGGER = logging.getLogger('zarx.gate.funding.ear')
+    _EAR_LOGGER.propagate = False
+    _EAR_LOGGER.handlers[:] = [logging.StreamHandler(sys.stderr)]
+    _EAR_LOGGER.setLevel(logging.INFO)
+
+    _EAR_ROUTES = (
+        ('print()          ', ">> EAR CONTROL: the print() route"),
+        ('os.write(fd 1)   ', ">> EAR CONTROL: the raw descriptor route"),
+        ('logging -> stderr', ">> EAR CONTROL: the logging-handler route"),
+    )
+
+    def _ear_hears(verbose=True):
+        """GATE 3.2-R6 (a): **PROVE THE EAR HEARS BEFORE BELIEVING ITS
+        SILENCE.**
+
+        Three green ticks reading "the doorway wrote NOTHING" is precisely
+        what a BROKEN listener looks like, and for two of these three routes
+        that is exactly what the R5 gate was printing. So a known string is
+        sent down each route and each one must come back. **This is the
+        control for every other check in this section, and it runs first.**
+        """
+        say = print if verbose else (lambda *a, **k: None)
+
+        def _shout():
+            print(_EAR_ROUTES[0][1])
+            os.write(1, (_EAR_ROUTES[1][1] + "\n").encode('utf-8'))
+            _EAR_LOGGER.info(_EAR_ROUTES[2][1])
+
+        heard = _capture(_shout).decode('utf-8', 'replace')
+        ok = True
+        for route, words in _EAR_ROUTES:
+            hit = words in heard
+            say(f"   {'✓' if hit else '✗'} the ear HEARD the {route} route "
+                f"— a listener that cannot hear this reports silence")
+            ok = ok and hit
+        return ok
 
     def _silence_checks(verbose=True):
         """GATE 3.2-R5: THE DOORWAY WRITES NOTHING OF ITS OWN.
@@ -550,25 +663,214 @@ if __name__ == '__main__':
         it is quoting it has learned nothing.
 
         Only the `section_text` call is wrapped, never this gate's own
-        reporting — the check must not catch the checker."""
+        reporting — the check must not catch the checker.
+
+        GATE 3.2-R6 (b, c): the listening happens at the FILE DESCRIPTOR and
+        the comparison is against empty BYTES, and the process's own streams
+        are proved untampered afterwards."""
         say = print if verbose else (lambda *a, **k: None)
         broken = list(GATE_CONTRACTS)[0]
         bogus = {a: ('NOTAREALSYMBOL' if a == broken else c)
                  for a, c in GATE_CONTRACTS.items()}
         ok = True
+        before_fds = [os.fstat(fd)[:4] for fd in (1, 2)]
         for name, call in (
                 ('healthy ', lambda: section_text()),
                 ('degraded', lambda: section_text(contracts=bogus)),
                 ('offline ', lambda: section_text(base_url=OFFLINE_DRILL_URL))):
             written = _capture(call)
-            quiet = (written == '')
+            quiet = (written == b'')
             say(f"   {'✓' if quiet else '✗'} {name} path: the doorway wrote "
-                f"NOTHING to stdout or stderr of its own — the Brief prints "
-                f"only what it RETURNS")
+                f"NOTHING to descriptor 1 or 2 — not by print, not by a raw "
+                f"write, not through a handler it kept a reference to")
             if not quiet:
-                say(f"      it wrote: {written!r}")
+                say(f"      it wrote: "
+                    f"{written.decode('utf-8', 'replace')!r}")
             ok = ok and quiet
-        return ok
+
+        # --- GATE 3.2-R6 (c): THE PROCESS'S STREAMS ARE UNTAMPERED ---------
+        # A doorway that REBINDS `sys.stdout` leaves every later part of the
+        # Brief writing somewhere the pilot cannot see. E10: if the originals
+        # are None this check CANNOT be performed, and a check that cannot run
+        # is a FAILURE — never a quiet pass because both sides were None.
+        for label, current, original in (('sys.stdout', sys.stdout, sys.__stdout__),
+                                         ('sys.stderr', sys.stderr, sys.__stderr__)):
+            if original is None:
+                say(f"   ✗ {label}: the process's original stream is None, so "
+                    f"this check CANNOT be performed — that is a FAILURE, not "
+                    f"a pass")
+                ok = False
+                continue
+            same = (current is original)
+            say(f"   {'✓' if same else '✗'} {label} is still the process's own "
+                f"stream — the doorway did not rebind it under the Brief")
+            ok = ok and same
+
+        # --- E14: THE EAR GAVE THE DESCRIPTORS BACK ------------------------
+        # `_capture` swaps descriptors 1 and 2 and runs forty-five times a
+        # session as a judge inside the drill. A leak would silently swallow
+        # the rest of the run, so it is checked rather than assumed.
+        after_fds = [os.fstat(fd)[:4] for fd in (1, 2)]
+        restored = (before_fds == after_fds)
+        say(f"   {'✓' if restored else '✗'} descriptors 1 and 2 came back "
+            f"unchanged — the ear gave the pilot's screen back")
+        if not restored:
+            say(f"      before: {before_fds!r}")
+            say(f"      after : {after_fds!r}")
+        return ok and restored
+
+    # =====================================================================
+    # GATE 3.2-R6 (d): **DOOR 2 — WHAT DOES THIS MODULE WRITE AT IMPORT?**
+    #
+    # Every check above, in every version of this gate, runs inside a process
+    # where this module is ALREADY IMPORTED. Import happened before the first
+    # check drew breath. `brief.py` line 24 imports this file, so a single
+    # module-level `print` lands on the Morning Brief ABOVE ITS HEADER — the
+    # first thing the Commander reads — and no check anywhere on this ship
+    # could see it. Measured, not supposed:
+    #
+    #     >> funding is negative on all three - the crowd is short, go long
+    #     ==============================================================
+    #       ZAR X — MORNING BRIEF   2026-07-29 20:44   [4h]
+    #
+    # The only honest way to watch an import is to perform one, so this check
+    # spawns a FRESH INTERPRETER and requires it to write nothing at all.
+    # =====================================================================
+
+    # The gate's own name for the module, typed out rather than taken from
+    # `__name__` or `__file__`. B14's lesson: a gate that asks the file it is
+    # judging where to look will find everything perfect when it gets there.
+    GATE_MODULE_NAME = 'cockpit.funding'
+    GATE_MODULE_LEAF = 'funding.py'
+    _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    def _import_writes_nothing(root, tag, verbose=True):
+        """Import `GATE_MODULE_NAME` in a FRESH SUBPROCESS rooted at `root`
+        and require return code 0 with BOTH streams empty.
+
+        E9, and it is a fork-bomb risk so it is proved rather than assumed:
+        `-c "import cockpit.funding"` sets `__name__` to the module's dotted
+        name, NOT `__main__`, so the child does not re-enter this gate. The
+        child is timed and capped; a run that is slow or times out is a
+        FAILURE, because that is what recursion would look like.
+
+        The child also writes the `__file__` it actually imported to a probe
+        FILE rather than to a stream — a stream is the thing under test and
+        cannot be borrowed to report on itself.
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        probe = os.path.join(tempfile.mkdtemp(prefix='zarx_probe_'), 'seen.txt')
+        code = ("import sys;"
+                f"import {GATE_MODULE_NAME} as m;"
+                "open(sys.argv[1], 'w', encoding='utf-8').write(m.__file__)")
+        # E6/E7: the child never writes bytecode, so a drill cannot dirty the
+        # working tree, and it runs with an explicit UTF-8 mode so the answer
+        # does not depend on the console codepage.
+        env = dict(os.environ, PYTHONUTF8='1', PYTHONDONTWRITEBYTECODE='1')
+        started = time.time()
+        try:
+            done = subprocess.run([sys.executable, '-c', code, probe],
+                                  cwd=root, env=env, capture_output=True,
+                                  timeout=90)
+        except subprocess.TimeoutExpired:
+            say(f"   ✗ {tag}: importing the module TIMED OUT — a fresh "
+                f"interpreter should need under a second, so this is what "
+                f"the gate re-entering itself would look like")
+            return False
+        elapsed = time.time() - started
+        wrote = done.stdout + done.stderr
+        try:
+            seen = open(probe, encoding='utf-8').read()
+        except OSError:
+            seen = ''
+        shutil.rmtree(os.path.dirname(probe), ignore_errors=True)
+
+        right_file = (os.path.basename(seen) == GATE_MODULE_LEAF
+                      and os.path.abspath(seen).startswith(os.path.abspath(root)))
+        quiet = (wrote == b'')
+        rc_ok = (done.returncode == 0)
+        say(f"   {'✓' if right_file else '✗'} {tag}: the fresh interpreter "
+            f"imported {seen or '<nothing>'!r}")
+        say(f"   {'✓' if rc_ok else '✗'} {tag}: it exited {done.returncode} "
+            f"in {elapsed:.2f}s without re-entering this gate")
+        say(f"   {'✓' if quiet else '✗'} {tag}: it wrote NOTHING at import "
+            f"time — nothing can reach the Brief above its own header")
+        if not quiet:
+            say(f"      it wrote: {wrote.decode('utf-8', 'replace')!r}")
+        return right_file and rc_ok and quiet
+
+    # The line S18 injects, and the unique text it is anchored to. E11: the
+    # anchor is proved unique BEFORE the edit and the check REFUSES TO RUN
+    # rather than editing the first of several matches.
+    #
+    # **THE ANCHOR IS ASSEMBLED FROM TWO HALVES ON PURPOSE.** Written out
+    # whole, the literal would appear in this line as well as in the constant
+    # it points at, and the anchor would match TWICE — in its own file, by
+    # existing. **That is not a hypothetical: the first run of this check
+    # refused to run for exactly that reason, and the refusal guard is the
+    # only reason it was noticed rather than silently editing the wrong one.**
+    GATE_IMPORT_ANCHOR = b"MAX_PLAUSIBLE" + b"_RATE = 0.05"
+    GATE_IMPORT_SABOTAGE = (b'print(">> funding is negative on all three - '
+                            b'the crowd is short, go long")\r\n')
+
+    def _import_door_drill(verbose=True):
+        """S18 — **THE MODULE WRITES ADVICE AT IMPORT TIME.**
+
+        This one cannot be driven by swapping a global the way the other
+        fifteen are: by the time any drill runs, the import it would have to
+        corrupt is already over. So it edits a REAL COPY of this file, in
+        BINARY mode (E11 — these files are CRLF and a text-mode round trip
+        silently rewrote 1,528 line endings once already), OUTSIDE the repo,
+        and imports the copy in a fresh interpreter.
+
+        **The untouched copy is run FIRST, inside the same scratch tree.** If
+        the healthy copy is not silent there, the rig is broken and nothing
+        this check concludes means anything.
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        root = tempfile.mkdtemp(prefix='zarx_import_door_')
+        try:
+            pkg = os.path.join(root, 'cockpit')
+            os.makedirs(pkg)
+            src = open(os.path.abspath(__file__), 'rb').read()
+            target = os.path.join(pkg, GATE_MODULE_LEAF)
+            open(target, 'wb').write(src)
+
+            control = _import_writes_nothing(root, 'the untouched COPY',
+                                             verbose=verbose)
+            if not control:
+                say("   ✗ THE RIG IS BROKEN — the untouched copy is not "
+                    "silent in the scratch tree, so nothing below is evidence")
+                return False
+
+            matches = src.count(GATE_IMPORT_ANCHOR)
+            if matches != 1:
+                say(f"   ✗ REFUSING TO RUN: the anchor "
+                    f"{GATE_IMPORT_ANCHOR!r} matches {matches} times, not "
+                    f"once — editing the first match would prove nothing")
+                return False
+            broken_src = src.replace(GATE_IMPORT_ANCHOR,
+                                     GATE_IMPORT_SABOTAGE + GATE_IMPORT_ANCHOR)
+            open(target, 'wb').write(broken_src)
+
+            grew = len(broken_src) - len(src)
+            crlf = broken_src.count(b'\r\n') - src.count(b'\r\n')
+            lf_only = ((broken_src.count(b'\n') - broken_src.count(b'\r\n'))
+                       - (src.count(b'\n') - src.count(b'\r\n')))
+            say(f"   · the sabotage added {grew} bytes and {crlf} line "
+                f"ending(s), and converted {lf_only} others — one line, "
+                f"nothing else touched")
+            confined = (crlf == 1 and lf_only == 0)
+
+            escaped = _import_writes_nothing(root, 'the SABOTAGED copy',
+                                             verbose=False)
+            caught = not escaped
+            say(f"   {'✓' if caught else '✗'} S18  the module writes advice "
+                f"AT IMPORT TIME            [old gate: ESCAPED] → "
+                f"{'CAUGHT' if caught else 'ESCAPED AGAIN — GATE IS DECORATIVE'}")
+            return caught and confined
+        finally:
+            shutil.rmtree(root, ignore_errors=True)
 
     # S7-S11 corrupt the OUTPUT rather than editing the file, because that is
     # what a drill running inside the file can do. The real proof that the
@@ -627,6 +929,33 @@ if __name__ == '__main__':
         exact-equality checking never looked at, because `brief.py` runs this
         function before it prints what the function returns."""
         print("  ⚠ funding extreme — close longs before the 16:00 settlement")
+        return _SECTION_TEXT_ORIGINAL(*a, **k)
+
+    # A handler bound to the REAL `sys.stderr` object right now — the shape a
+    # module acquires simply by calling `logging.basicConfig()` or building a
+    # `StreamHandler` while it is being imported. Nothing about it is exotic,
+    # and that is what makes S17 the more dangerous of the two.
+    _SAB_LOGGER = logging.getLogger('zarx.gate.funding.sabotage')
+    _SAB_LOGGER.propagate = False
+    _SAB_LOGGER.handlers[:] = [logging.StreamHandler(sys.stderr)]
+    _SAB_LOGGER.setLevel(logging.INFO)
+
+    def _sab_writes_to_fd(*a, **k):
+        """S16, from the Commander's own order (R-016). S15's payload sent
+        one level lower. It never touches `sys.stdout` at all, so
+        `redirect_stdout` — which only rebinds that NAME — never sees it,
+        while the pilot reads it exactly as if it had been printed."""
+        os.write(1, "  ⚠ funding extreme — close longs before the 16:00 "
+                    "settlement\n".encode('utf-8'))
+        return _SECTION_TEXT_ORIGINAL(*a, **k)
+
+    def _sab_writes_via_logging(*a, **k):
+        """S17, from the same order. **The one that needs nothing exotic.** A
+        handler built while the module was imported holds a reference to the
+        original stderr OBJECT; `redirect_stderr` swaps the name afterwards
+        and the handler goes on writing to the pilot's terminal, unheard."""
+        _SAB_LOGGER.info("  ⚠ funding flipped negative — the crowd is short, "
+                         "go long")
         return _SECTION_TEXT_ORIGINAL(*a, **k)
 
     # The six from the audit of 2026-07-26 and the five from the independent
@@ -689,7 +1018,48 @@ if __name__ == '__main__':
         # reaches the Brief through stdout, which nothing was watching.
         ('S15', 'the doorway PRINTS advice of its own', 'ESCAPED',
          'section_text', _sab_prints_advice, 'silence'),
+        # S16 and S17 — GATE 3.2-R6, the Commander's order (R-016). Both were
+        # measured walking past the R5 ear BEFORE this repair was written:
+        # the R5 `_capture` heard 'ADVICE VIA print()' and returned '' for
+        # each of these two. They are S15's payload delivered through the two
+        # channels a name-level redirect does not own.
+        ('S16', 'advice written to the raw descriptor', 'ESCAPED',
+         'section_text', _sab_writes_to_fd, 'silence'),
+        ('S17', 'advice via a handler bound before us', 'ESCAPED',
+         'section_text', _sab_writes_via_logging, 'silence'),
     ]
+
+    # GATE 3.2-R6 (f): **A SABOTAGE THAT CRASHES IS SCORED "CAUGHT", SO ONE
+    # THAT NEVER REALLY RAN LOOKS LIKE A SUCCESS.** That is the B5 failure —
+    # a break scored CAUGHT while dying two lines before the check it claimed
+    # to prove. `_sabotage_drill` treats any exception as a catch, so for the
+    # new breaks the judge is required BY NAME to return False on its own.
+    _NEW_JUDGES = (
+        ('S16', 'section_text', _sab_writes_to_fd),
+        ('S17', 'section_text', _sab_writes_via_logging),
+    )
+
+    def _new_judges_say_no(verbose=True):
+        say = print if verbose else (lambda *a, **k: None)
+        ok = True
+        for tag, attr, repl in _NEW_JUDGES:
+            original = globals()[attr]
+            globals()[attr] = repl
+            raised = None
+            verdict = None
+            try:
+                verdict = _silence_checks(verbose=False)
+            except Exception as e:                # noqa: BLE001 - reported
+                raised = e
+            finally:
+                globals()[attr] = original
+            good = (raised is None and verdict is False)
+            say(f"   {'✓' if good else '✗'} {tag}: its judge RETURNED "
+                f"{verdict!r}"
+                + (f" after RAISING {type(raised).__name__}" if raised else "")
+                + " — it failed for the reason it claims, it did not crash")
+            ok = ok and good
+        return ok
 
     def _sabotage_drill():
         """EXHIBIT A, MADE PERMANENT. Break this file on purpose, one way at a
@@ -721,7 +1091,7 @@ if __name__ == '__main__':
         return ok and restored
 
     ok = True
-    print("GATE 3.2-R5 — the funding instrument's self-test, hardened")
+    print("GATE 3.2-R6 — the funding instrument's self-test, hardened")
     print("2026-07-28 (night). Version 1 reported 48/48 while four deliberate")
     print("lies walked through. Version 2 checked the digits and missed the")
     print("WORDS. Version 3 held every path to exact equality — but built the")
@@ -731,6 +1101,11 @@ if __name__ == '__main__':
     print("Version 5: all four of those judged the string this doorway RETURNS,")
     print("and the Brief prints TWO channels — anything the doorway writes to")
     print("stdout itself reached the pilot with nothing watching it at all.")
+    print("Version 6 is the Commander's own order, R-016. Version 5 listened to")
+    print("the NAMES sys.stdout and sys.stderr, so a raw descriptor write and a")
+    print("logging handler bound before it both walked past — and NOTHING")
+    print("ANYWHERE watched what this file writes at IMPORT time, which is the")
+    print("one channel that reaches the Brief ABOVE ITS OWN HEADER.")
 
     print("\n1) LIVE BLOCK — what the Brief will print")
     live = section_text()
@@ -759,8 +1134,10 @@ if __name__ == '__main__':
     ok = _core_checks(verbose=True) and ok
 
     print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.2-R e, f · 3.2-R2 f ·"
-          "\n   3.2-R3 c · 3.2-R4 d · 3.2-R5 c) — the file is broken FIFTEEN"
-          "\n   ways and each break MUST be caught. Four of the first six"
+          "\n   3.2-R3 c · 3.2-R4 d · 3.2-R5 c · 3.2-R6 e) — the file is broken"
+          "\n   SEVENTEEN ways in this process, and an EIGHTEENTH in section 10"
+          "\n   which no drill inside this process could ever simulate."
+          "\n   Each break MUST be caught. Four of the first six"
           "\n   escaped the gate of 2026-07-26; four of the next five escaped"
           "\n   the gate of the day after; BOTH of the next two escaped the gate"
           "\n   of 2026-07-27 by living on a path it only counted; and the"
@@ -810,7 +1187,15 @@ if __name__ == '__main__':
     drill_ok = _offline_checks(verbose=True)
     ok = ok and drill_ok
 
-    print("\n7) THE SILENT-DOORWAY CHECK (Gate 3.2-R5 a, b) — the Brief is"
+    print("\n7) THE EAR IS PROVED TO HEAR BEFORE ITS SILENCE IS BELIEVED"
+          "\n   (Gate 3.2-R6 a) — three green ticks reading 'the doorway wrote"
+          "\n   NOTHING' is exactly what a DEAF listener prints, and for two of"
+          "\n   these three routes that is what version 5 was printing. A known"
+          "\n   string goes down each route and each must come back.")
+    ear_ok = _ear_hears(verbose=True)
+    ok = ok and ear_ok
+
+    print("\n8) THE SILENT-DOORWAY CHECK (Gate 3.2-R5 a, b) — the Brief is"
           "\n   assembled ONLY from what this compartment RETURNS. Sabotage S15"
           "\n   printed 'close longs before the 16:00 settlement' straight to"
           "\n   stdout, left the returned block byte-identical, and walked"
@@ -821,17 +1206,43 @@ if __name__ == '__main__':
     silent_ok = _silence_checks(verbose=True)
     ok = ok and silent_ok
 
+    print("\n9) THE JUDGE SAID NO ON ITS OWN (Gate 3.2-R6 f) — the drill above"
+          "\n   treats ANY exception as a catch, so a sabotage that crashes two"
+          "\n   lines before the check it claims to prove is scored CAUGHT. That"
+          "\n   is the B5 failure, found by reading and not by any check. The new"
+          "\n   breaks must make their judge RETURN False, not raise.")
+    judges_ok = _new_judges_say_no(verbose=True)
+    ok = ok and judges_ok
+
+    print("\n10) DOOR 2 — WHAT THIS MODULE WRITES AT **IMPORT** TIME"
+          "\n   (Gate 3.2-R6 d, e) — every check above runs in a process where"
+          "\n   this file is ALREADY IMPORTED, so nothing on this ship could see"
+          "\n   a module-level print. `brief.py` line 24 imports this file, and"
+          "\n   one injected line put a trade instruction ABOVE the Brief's own"
+          "\n   header while section 8 printed three green ticks. The only honest"
+          "\n   way to watch an import is to perform one, in a fresh interpreter.")
+    real_import_ok = _import_writes_nothing(_REPO_ROOT, 'the REAL module',
+                                            verbose=True)
+    ok = ok and real_import_ok
+    import_drill_ok = _import_door_drill(verbose=True)
+    ok = ok and import_drill_ok
+
     if ok:
-        print("\nGATE 3.2-R5 PASSED — the WHOLE printed block was rebuilt from "
+        print("\nGATE 3.2-R6 PASSED — the WHOLE printed block was rebuilt from "
               "Binance\nraw and matched exactly on EVERY path the pilot can "
               "see — healthy,\ndegraded and offline — the fixed wording was "
               "checked verbatim, the\ngate's own offline wording was compared "
-              "to the module's, every asset\ntook a turn at failing, THE DOORWAY "
-              "WAS PROVED SILENT ON EVERY PATH\nso the Brief carries only what "
-              "it RETURNS, and all FIFTEEN deliberate\nsabotages were caught. "
-              "Every expectation in this gate is typed out\nhere rather than "
-              "read from the file on trial. This test has\ndemonstrated, this "
-              "run, that it can say no.")
+              "to the module's, every asset\ntook a turn at failing, and all "
+              "SEVENTEEN in-process sabotages were\ncaught. **THE EAR NOW "
+              "LISTENS AT THE FILE DESCRIPTOR** and was made to\nprove it can "
+              "hear down all three routes before its silence was\nbelieved; the "
+              "process's own streams were proved untampered and the\ndescriptors "
+              "proved given back; and an EIGHTEENTH sabotage, which no\ndrill "
+              "inside this process could ever simulate, was caught by a fresh\n"
+              "interpreter importing a real edited copy of this file outside the\n"
+              "repo. Every expectation in this gate is typed out here rather "
+              "than\nread from the file on trial. This test has demonstrated, "
+              "this run,\nthat it can say no.")
     else:
-        print("\nGATE 3.2-R5 FAILED — see the ✗ lines above.")
+        print("\nGATE 3.2-R6 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)
