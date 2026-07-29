@@ -181,6 +181,19 @@ somebody.** Written plainly because the streak is itself the finding: **not one 
 those five holes was found by a session being careful, and every single one was
 found by a session ORDERED to break things.**
 
+### >>> 2026-07-29: **A SIXTH GENERATION WAS FAILED. R-001 STILL DOES NOT MOVE.**
+
+R-015 was failed on 2026-07-29 — **three of three new sabotages walked
+through** 3.2-R5, 3.1-R5 and 3.2b-R3. The count of generations FAILED is now
+**six**: Gate 3.2, 3.2-R, 3.2-R2, 3.2-R3, 3.2-R4, and 3.2-R5. The seventh,
+3.2b-R4, was written today by the session that found the fault it repairs and
+**has been failed by nobody, which is again not the same thing as having
+survived somebody.** Filed as R-017.
+
+**R-001's condition — that a generation survive an independent attack — has now
+never been met in seven attempts.** And the pattern held again: today's three
+were found by a session ORDERED to break things, not by one being careful.
+
 ## R-002 — Two planning generations written by the mind that then built them
 **STATUS: FAILED 2026-07-26 · P1 · flagged 2026-07-26 · reviewed by the
 2026-07-26 audit session**
@@ -1099,6 +1112,122 @@ one NEW sabotage per part and finds it caught — or finds it escapes and says s
 **Failed looks like.** Any new lie walks through — in which case the gates are
 still shaped around their authors' imagination, six generations deep, and the
 Commander should hear plainly that separation-in-time has stopped paying.
+
+### >>> VERDICT 2026-07-29: **FAILED. THREE OF THREE NEW SABOTAGES WALKED THROUGH.**
+
+Reviewed by a session that built none of it. **All three attacks were written
+down, with their predictions, before anything was run; all three predictions
+were correct**, which is what makes these structural rather than lucky.
+
+The question that found them — **new, and none of the three spent ones** —
+was: ***the gate has an ear now. What is the ear itself deaf to?*** Every
+previous question interrogated the gate's coverage or its object. This one
+interrogates the **detector**, because a detector is code, and a blind spot in
+the detector leaves the check present, green, correctly aimed, and deaf.
+
+- **S16 — spoke PAST the ear.** `_capture` listens with
+  `contextlib.redirect_stdout` / `redirect_stderr`, which rebind the **names**
+  `sys.stdout` and `sys.stderr`. A `logging` handler bound to the real stderr at
+  import time, or `os.write(1, …)` straight to the file descriptor, walks past
+  both. **35 advice lines on the gate's own screen, three green ticks underneath
+  reading "the doorway wrote NOTHING to stdout or stderr of its own", fifteen of
+  fifteen CAUGHT, PASSED, exit 0.** Shown landing on the real `brief.py` output —
+  and `run_daily.bat` writes it to `journal/daily_runs.log` with `2>&1` and
+  copies it to the Commander's phone.
+- **F15 — spoke BEFORE the ear was listening.** `_silence_checks` wraps
+  `section_text()` calls; **nothing anywhere watches what a module writes at
+  IMPORT time**, and `brief.py` line 23 imports this one. The advice is the
+  **first line the gate prints**, and the gate then passes itself.
+- **B11 — spoke where there is no ear at all.** Every detector reads the CSV
+  back off disk. **Nothing asserted the recorder's own REPORT is true** — and
+  that line is this part's only human-readable output, written to
+  `journal/daily_runs.log`, and the standing order on the desk is to judge the
+  recorder BY IT. `'appended': len(fresh)` for `len(new_rows)`: disk
+  byte-perfect, ten of ten CAUGHT, PASSED — while the report claimed 180
+  appended rows on a run that appended none. The healthy control printed 0.
+
+**R-015 DOES NOT MOVE TO CLEARED.** Two of the three findings were left
+unrepaired on purpose (see R-016) and the third was repaired by the session
+that found it (see R-017).
+
+---
+
+## R-016 — ADVICE CAN STILL REACH THE BRIEF THROUGH TWO UNWATCHED DOORS **(the Commander rules; deliberately NOT repaired)**
+**STATUS: OPEN · graded BORDERLINE by the session that found it · 2026-07-29**
+
+**What to review.** Whether S16 and F15 are worth closing now, or worth leaving.
+**They were NOT repaired, on purpose**, because THE FINDING REPORT graded them
+BORDERLINE and the Commander's rule of 2026-07-28 says a BORDERLINE finding is
+reported and stopped at, not fixed. **The full four-step form is in the
+`PROGRESS_LOG.md` entry of 2026-07-29.**
+
+**The honest summary of that grading.** Step 2 came out clean: advice does not
+appear by accident, the Commander *would* recognise a trade instruction on an
+information-only Brief, and the line can be deleted. Step 3.3 is a plain yes —
+it touches the signals chapter. Under the scoring that is BORDERLINE.
+
+**Why it needs an outside eye rather than my judgement.** **I am the session
+that both found these and declined to fix them**, and "BORDERLINE" is the grade
+that let me stop attacking and finish. That is a conflict of interest and it is
+stated here rather than left for someone to notice. A reviewer should ask
+whether 2.2 was answered too generously: I argued the Commander would spot
+advice on his own Brief because he quotes the rule constantly. **That is a claim
+about a person, made by a machine, and it is doing a lot of work in the grade.**
+
+**What closing it would look like.** The silence check compares
+`sys.stdout`/`sys.stderr` against `sys.__stdout__`/`sys.__stderr__` and captures
+at the file-descriptor level rather than the name level, and something watches
+what the modules write at import time. **Neither is written.**
+
+**A clean verdict looks like.** Either the Commander rules SMALL and it goes to
+CATEGORY B, or he rules it worth closing and a session closes it under a gate
+declared first. **A session may not rule this for him.**
+
+**Failed looks like.** A future session quietly treats "BORDERLINE, not
+repaired" as "settled", and the two doors stay open because nobody ever ruled.
+
+---
+
+## R-017 — Gate 3.2b-R4 was written by the session that found the fault it repairs
+**STATUS: OPEN · P1 · filed by that session, against its own work, 2026-07-29**
+
+**What to review.** `_report_is_true` and `GATE_REPORT_RE` in
+`data/open_interest.py`, plus the new permanent sabotage B11. **SEVENTH
+GENERATION OF THE SAME STRUCTURE**, and the six before it were each failed by
+the next pair of eyes.
+
+**THREE DOUBTS I COULD NOT SETTLE ABOUT MY OWN REPAIR:**
+
+1. **MY CHECK PARSES THE REPORT WITH A REGULAR EXPRESSION I WROTE BY LOOKING AT
+   THE MODULE'S OUTPUT.** I typed the pattern into the gate rather than reading
+   it from the module, which is R-014's lesson applied — **but I derived it by
+   reading the line I was about to judge.** If the wording is ever legitimately
+   improved, my parse fails and the gate fails loudly, which I claim is the safe
+   direction. **Nobody has checked that claim.**
+2. **I GUARD `appended` AND `total`. I DO NOT GUARD THE WINDOW.** The report
+   also prints `window X → Y`, and **nothing compares those two timestamps to
+   anything.** A recorder that printed a stale or fabricated window would pass my
+   new check completely. I closed the count and left the dates, and I noticed
+   only while writing this.
+3. **I RUN THE RECORDER TWICE AND CALL THE SECOND RUN "MONTH TWO".** It is not.
+   It is the same window seconds later. **The real month two appends ~30 rows
+   after five days**, and I never built that shape for this check — `_month_two`
+   does it for the disk comparison, but my report check does not.
+
+**Evidence.** Declaration `1c540d3` — `PROGRESS_LOG.md` only, **no `.py` in the
+commit**, verify with `git show --stat 1c540d3`. The build commit after it.
+Production half of `data/open_interest.py` sha256
+`9189c08fe67563ae67c86dd4735638b15a6eee3870f59c2e010e713162529c7e`, **identical
+before and after the repair**, and every diff hunk at or after line 263 with
+`__main__` at 243.
+
+**Reproduce.** `python data\open_interest.py` — eleven sabotages, section (l).
+
+**A clean verdict looks like.** A reviewer who did not build it invents a
+TWELFTH sabotage and finds it caught, or finds it escapes and says so.
+
+**Failed looks like.** Any new lie walks through — most likely through doubt 2,
+the window timestamps, which I have named because I could not close it.
 
 ---
 

@@ -5483,3 +5483,131 @@ AGAINST THE DISK ITSELF.**
 
 **PASS = every check green including every sabotage CAUGHT. Anything less is a
 FAIL, is not committed as a pass, and is not called "mostly passed".**
+
+---
+
+# 2026-07-29 (continued) — THE REPAIR: GATE 3.2b-R4 BUILT AND PASSED. THE OTHER TWO FINDINGS DELIBERATELY LEFT ALONE.
+
+*The bar for this work was committed as `1c540d3`, `PROGRESS_LOG.md` only, with
+no `.py` file in it. `git show --stat 1c540d3` proves the bar preceded the code.
+Tenth use of the pattern and it has survived audit every time.*
+
+## WHAT WAS REPAIRED, AND WHAT WAS NOT — AND WHY THAT SPLIT
+
+**B11 graded SERIOUS** (three of three Step 2 answers bad) → repaired, and
+nothing else built. **S16 and F15 graded BORDERLINE** (Step 2 clean, Step 3.3
+yes) → **NOT repaired.** The Commander's rule of 2026-07-28 says a BORDERLINE
+finding is reported and stopped at, and that the session recommends while he
+rules. Both are filed as R-016 with the conflict of interest stated: **the
+session that graded them BORDERLINE is the session that was thereby excused
+from fixing them.**
+
+## THE REPAIR
+
+`_report_is_true` and `GATE_REPORT_RE`, both inside `__main__`, plus the new
+permanent sabotage B11 and a new numbered section (l).
+
+**The check counts the rows itself** — `_count()` over `csv.DictReader`, before
+and after each run — and compares those numbers to the counts parsed out of the
+recorder's own printed line. The module's arithmetic is never consulted.
+
+**It runs the recorder TWICE, and the second run is the entire point.** B11's
+claim and the truth are identical on the first run (180 fetched, 180 appended)
+and differ by 180 on the second (180 claimed, 0 real). **A check that ran the
+recorder once would have been written, passed, and proved nothing** — which is
+precisely the B5 failure this ship already paid for once.
+
+**The 4h boundary was handled by construction, not patched afterwards.** A
+period can close between the two runs, so the second may legitimately append a
+row. The bar is therefore NOT "the second run reports zero" but "the reported
+count equals what actually landed on disk, whatever that is". That invariant is
+correct regardless of the calendar, and it was chosen because it was named as an
+edge case BEFORE the code was written, not discovered by a flaky run later.
+
+**A report line that does not parse is a FAILURE, never a skip**, and the assets
+are named by `GATE_SYMBOLS` — B9's lesson, one day old, deliberately not dropped
+while quoting it.
+
+## THE BARS, ANSWERED ONE BY ONE
+
+    (l1) appended == rows the gate counted, every asset, gate's own list   ✓
+    (l2) the same on the SECOND run, where the honest answer is zero       ✓
+    (l3) total == rows the gate counted on disk                            ✓
+    (l4) B11 permanent in the drill, caught every run                      ✓
+    (l5) everything R3 did, it still does — all ten still caught           ✓
+    (l6) confinement proved TWO ways, not asserted                         ✓
+    (l7) no new file, no new dependency, nothing added to the Brief's path ✓
+    (l8) the original attack re-run as a REAL TEXT EDIT and now CAUGHT     ✓
+
+**(l6), the evidence rather than the claim.** Production half sha256
+`9189c08fe67563ae67c86dd4735638b15a6eee3870f59c2e010e713162529c7e` **before**
+the repair and `9189c08fe67563ae67c86dd4735638b15a6eee3870f59c2e010e713162529c7e`
+**after** — 11190 chars, 242 lines, unchanged to the character. And every diff
+hunk begins at line 263 or later, with `__main__` at line 243.
+
+**(l8), the evidence that actually counts.** B11 applied as a real text edit to
+a copy of the REPAIRED file — one anchor, matched exactly once, or the script
+refuses to run. Result: **exit 1**, and the reason named:
+
+    run 2 BTCUSDT: the report claims 180 row(s) appended
+                   — the gate counted 0 arriving on disk
+    ✗ the printed report is true for every asset the gate names, on the
+      first run AND on the second
+
+**It fails for the reason it claims, on the run it was predicted to fail on, and
+not incidentally.** The in-run drill is not the evidence; this is.
+
+## THE GATE, RUN CLEAN
+
+    GATE 3.2b-R4 PASSED — exit 0
+    failure marks in the whole run : 0
+    sabotages CAUGHT               : 11 of 11 (B1-B11)
+    run 1: appended {BTC:180, ETH:180, SOL:180}, stored {180,180,180}
+    run 2: appended {BTC:0,   ETH:0,   SOL:0},   stored {180,180,180}
+
+And the rest of the ship, checked after: **VAULT INTACT 6/6** · `lab/`
+byte-identical (`git status lab/` empty) · **Brief 3/3** · `data/oi_history/`
+sha256 unchanged from arrival, all three files.
+
+## WHAT I GOT WRONG, RECORDED AS PLAINLY AS THE REST
+
+1. **I renamed the gate's PASSED text to R4 and left its own title and FAILED
+   text saying R3.** Found only because the attack run in (l8) printed
+   `GATE 3.2b-R3 FAILED` — the failure banner of a gate that no longer existed.
+   Fixed, and the gate re-run clean afterwards. **A version number the file
+   disagrees with itself about is exactly the kind of thing this ship has been
+   wrong about before**, and it was caught by reading output, not by any check.
+2. **My first attempt to prove S16 reached the Brief suppressed stderr** — the
+   very stream the logging variant writes to — and I briefly had evidence that
+   showed nothing. Re-run with both streams merged, and separately with stderr
+   suppressed for F15 to prove that one lands on pure stdout. **A test pointed
+   at the wrong stream is the same mistake as a gate pointed at the wrong
+   object, made by the person auditing it.**
+3. **I filed doubt 2 of R-017 against my own repair only while writing R-017.**
+   `_report_is_true` guards `appended` and `total` and **does not guard the
+   `window X → Y` timestamps the same line prints.** I closed the counts and
+   left the dates. It is filed rather than quietly fixed, because fixing it now
+   would be widening a gate mid-flight — the R-001 failure running the other way.
+
+## THE 1 AUGUST ERRAND — NOT DUE YET, AND ITS STATE MEASURED RATHER THAN ASSUMED
+
+Today is 2026-07-29. **The errand is not due and has not been performed.**
+What was measured today, so the next session does not have to re-derive it:
+
+    schtasks: \ZarX Open Interest — Status Ready, Next Run 01-Aug-2026 09:00
+    journal/daily_runs.log holds SIX recorder lines in its whole history,
+    all from ONE run, by hand, on 2026-07-27:
+        BTCUSDT: 0 new row(s) appended, 180 stored, …
+        ETHUSDT: 0 new row(s) appended, 180 stored, …
+        SOLUSDT: 0 new row(s) appended, 180 stored, …
+        Recorded. The 30-day window is captured.
+
+**Two things follow from that, and both matter on 1 August:**
+
+- **The only recorder evidence that has ever existed says ZERO.** The
+  commit-and-push branch has still never fired against real new rows.
+- **The honest figure on 1 August is roughly THIRTY, not 180** — about five days
+  at six 4h rows a day since 2026-07-27T12:00Z. **Write that number down before
+  reading the log.** With B11 shipped, that line would have read 180 and looked
+  entirely healthy, and there was no expectation recorded anywhere to check it
+  against. That absence is a large part of why B11 graded SERIOUS.

@@ -365,7 +365,61 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-→ We are at: **PHASE 3 — THE GATES NOW WATCH THE CHANNEL THE BRIEF ACTUALLY
+→ We are at: **PHASE 3 — THE RECORDER'S REPORT IS NOW GUARDED. THE BRIEF'S TWO
+UNWATCHED DOORS ARE STILL OPEN, ON PURPOSE, AND THE COMMANDER MUST RULE ON
+THEM.** Gate 3.2b-R4 (the open-interest recorder, **ELEVEN** sabotages) PASSED
+2026-07-29, exit 0, zero failure marks. Gate 3.2-R5 (funding, fifteen) and Gate
+3.1-R5 (Fear & Greed, fourteen) still PASS — **and are both known to be
+defeatable. They were not repaired.**
+
+**WHAT THE SEVENTH INDEPENDENT REVIEW FOUND.** A session that built none of it
+invented three new attacks and **all three escaped, all three predicted
+correctly in writing beforehand.** The new question — the three previous ones
+being spent — was ***the gate has an ear now; what is the ear itself deaf to?***
+
+    S16  a logging handler bound to the real stderr at IMPORT time, or
+         os.write(1, ...), walks straight past redirect_stdout, which only
+         rebinds a NAME. 35 advice lines on the gate's own screen, three
+         ticks underneath saying it wrote nothing ..................... ESCAPED
+    F15  nothing anywhere watches what a module writes at IMPORT time,
+         and brief.py imports both instruments. The advice is the FIRST
+         line the gate prints, and the gate then passes itself ........ ESCAPED
+    B11  'appended': len(fresh) for len(new_rows). The disk stays
+         byte-perfect, so every detector is happy — only the printed
+         REPORT lies, and that line is the one the Commander reads .... ESCAPED
+
+**THE CLASS, in one sentence: THE GATE'S DETECTOR IS ITSELF CODE, AND IT HAS
+BLIND SPOTS.** The check is present, green, correctly aimed — and deaf.
+
+**B11 IS THE ONE THAT MATTERS MOST, AND IT WAS THE ONLY ONE REPAIRED.** Graded
+**SERIOUS** on all three Step 2 questions: it happens by an ordinary typo, the
+Commander cannot see it (180 looks exactly like a healthy month), and the weeks
+of open interest lost while he believes it is being collected cannot be bought
+back at any price. **The standing order on his desk is to judge the recorder by
+that very line on 1 August.** Repaired under Gate 3.2b-R4, declared in `1c540d3`
+with no `.py` in it; the attack re-run as a real text edit now fails with the
+named diagnostic *"the report claims 180 row(s) appended — the gate counted 0
+arriving on disk"*. Production half byte-identical by sha256, every diff hunk
+inside `__main__`.
+
+**S16 AND F15 WERE GRADED BORDERLINE AND DELIBERATELY NOT REPAIRED.** Under the
+Commander's rule of 2026-07-28 a BORDERLINE finding is reported and stopped at;
+the session recommends and he rules. **Filed as R-016, with the conflict of
+interest stated: the session that graded them BORDERLINE is the session that was
+thereby excused from fixing them.** Until he rules, **it remains true that a
+single line of code in either instrument can put a trade instruction on the
+Morning Brief with every gate green.**
+
+**STEP 3.3 WAS NOT BUILT — deferred a fifth time**, because a SERIOUS finding
+means fix it and stop. The Context Deck still stands at two instruments.
+
+**R-001's condition has now never been met in SEVEN attempts.** Six generations
+of gate have each been failed by the next pair of eyes; the seventh, 3.2b-R4,
+was written today by the session that found the fault and is filed as R-017.
+
+## The previous marker, kept for the record rather than erased
+
+→ We were at: **PHASE 3 — THE GATES NOW WATCH THE CHANNEL THE BRIEF ACTUALLY
 READS FROM, AND THE MONTH THE RECORDER ONLY EVER SEES ONCE.** Gate 3.2-R5
 (funding, FIFTEEN sabotages), Gate 3.1-R5 (Fear & Greed, FOURTEEN) and Gate
 3.2b-R3 (the open-interest recorder, TEN) all PASSED, 2026-07-28 night.

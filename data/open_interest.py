@@ -260,6 +260,7 @@ if __name__ == '__main__':
     # interrogated the parse and none compared the OUTPUT to the source. **The
     # recorder's equivalent of "the printed sentence" is THE CSV ROW.**
     # =====================================================================
+    import re
     import shutil
     import subprocess
     import tempfile
@@ -305,7 +306,7 @@ if __name__ == '__main__':
     GATE_SYMBOLS = ('BTCUSDT', 'ETHUSDT', 'SOLUSDT')
 
     ok = True
-    print("GATE 3.2b-R3 — the open-interest recorder's self-test.")
+    print("GATE 3.2b-R4 — the open-interest recorder's self-test.")
     print("It breaks itself on purpose and requires every break to be CAUGHT,")
     print("because on this ship a check nobody has attacked is a check nobody")
     print("has tested. The dataset it guards cannot be recovered if it is lost.")
@@ -577,13 +578,15 @@ if __name__ == '__main__':
 
     # ---- (h)+(i) THE SABOTAGE DRILL, AND IT JUDGES THE FILE ON DISK -------
     print("\n(h) THE SABOTAGE DRILL, BUILT IN FROM BIRTH — this file is broken")
-    print("    on purpose TEN ways and each break MUST be caught. Gate")
+    print("    on purpose ELEVEN ways and each break MUST be caught. Gate")
     print("    3.2b-R2 added B8 and B9, which broke no logic whatsoever: one")
     print("    deleted an asset from the module's list and one changed an exit")
     print("    code, and both walked through a gate reporting seven of seven.")
     print("    Gate 3.2b-R3 added B10, which broke no logic the gate had ever")
     print("    executed: B4 with one `if` in front of it, firing only on the")
-    print("    path every month after the first one takes.")
+    print("    path every month after the first one takes. Gate 3.2b-R4 added")
+    print("    B11, which broke no logic at all and wrote nothing wrong to")
+    print("    disk — it changed only the line the Commander reads.")
     print("(i) AND THE DETECTOR READS THE CSV BACK OFF DISK and compares it,")
     print("    field by field, to a raw fetch the TEST makes itself — never to")
     print("    anything this file parsed. That is the lesson two Context Deck")
@@ -819,6 +822,107 @@ if __name__ == '__main__':
                 return False
         return True
 
+    # =====================================================================
+    # GATE 3.2b-R4, added 2026-07-29 after an independent session threw an
+    # ELEVENTH sabotage at Gate 3.2b-R3 and it walked through.
+    #
+    # **EVERY DETECTOR IN THIS GATE READS THE CSV BACK OFF DISK.** That was
+    # the right lesson and it was learned properly. **But not one check
+    # anywhere asserted that the recorder's own REPORT is true.**
+    # `_trap_check` looks for the words 'EMPTY LIST' and check (e) looks for
+    # 'DISAGREE' — and that is the entire extent to which any printed line
+    # was ever inspected.
+    #
+    # **THE REPORT IS THE ONLY OUTPUT OF THIS PART A HUMAN EVER SEES.** It is
+    # written to `journal/daily_runs.log` by `run_daily.bat`, and the standing
+    # order on the Commander's desk is to read that log and decide FROM IT
+    # whether the recorder worked. A gate that guards the disk perfectly and
+    # never looks at the report has guarded everything except the one thing
+    # he actually reads.
+    #
+    # B11 wrote `'appended': len(new_rows)` as `'appended': len(fresh)` — two
+    # adjacent keys in one dict literal, both already in scope. The disk
+    # stayed byte-perfect, so every check here was happy: TEN OF TEN
+    # SABOTAGES CAUGHT, PASSED, exit 0. Run twice against a scratch copy, the
+    # healthy recorder reports '0 new row(s) appended' and the broken one
+    # reports '180', with nothing on disk having changed either time.
+    # =====================================================================
+
+    # The gate's OWN copy of the report's shape, typed out here and never read
+    # from the module — the same rule `GATE_SYMBOLS` exists for. Anchored to
+    # the start of the line and to the symbol, so a `!!  … DISAGREE` line and a
+    # `🔌 … NOT RECORDED` line cannot be mistaken for a report line.
+    GATE_REPORT_RE = re.compile(
+        r"^  (?P<symbol>[A-Z]+): (?P<appended>\d+) new row\(s\) appended, "
+        r"(?P<total>\d+) stored, window ")
+
+    def _report_is_true(verbose=False):
+        """**THE JUDGE FOR B11.** The printed report must match the disk — and
+        the disk is counted BY THE GATE, before and after the run, never taken
+        from the module.
+
+        Run TWICE. Month one, where the honest answer is a full window, and
+        month two, where the honest answer is zero. **The second run is the one
+        that lies loudest**, and it is the path the monthly task takes from now
+        on: B11's claim and the truth are identical on the first run and differ
+        by 180 on the second.
+
+        THE 4h BOUNDARY, handled by construction rather than patched later: a
+        period can close between the two runs, so the second run may
+        legitimately append a row. **The bar is therefore NOT "the second run
+        must report zero"** — it is "the reported count equals what actually
+        landed on disk, whatever that is". That is the correct invariant
+        anyway, and it cannot be broken by the calendar.
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        d = _fresh_dir()
+
+        def _count(symbol):
+            p = csv_path(symbol, d)
+            return len(_rows(p)) if os.path.exists(p) else 0
+
+        for run_no in (1, 2):
+            before = {s: _count(s) for s in GATE_SYMBOLS}
+            good, lines = run(history_dir=d)
+            after = {s: _count(s) for s in GATE_SYMBOLS}
+            if not good:
+                say(f"      run {run_no} reported a failure")
+                return False
+
+            seen = {}
+            for ln in lines:
+                m = GATE_REPORT_RE.match(ln)
+                if m:
+                    seen[m.group('symbol')] = (int(m.group('appended')),
+                                               int(m.group('total')))
+            # **A line that does not parse is a FAILURE, never a skip.** A
+            # check that quietly finds nothing to check and passes is the B5
+            # lesson, and the assets are named by THE GATE — B9's lesson.
+            if set(seen) != set(GATE_SYMBOLS):
+                say(f"      run {run_no}: the report named {sorted(seen)}, "
+                    f"the gate expects {sorted(GATE_SYMBOLS)}")
+                return False
+
+            for s in GATE_SYMBOLS:
+                claimed_appended, claimed_total = seen[s]
+                really_appended = after[s] - before[s]
+                if claimed_appended != really_appended:
+                    say(f"      run {run_no} {s}: the report claims "
+                        f"{claimed_appended} row(s) appended — the gate "
+                        f"counted {really_appended} arriving on disk")
+                    return False
+                if claimed_total != after[s]:
+                    say(f"      run {run_no} {s}: the report claims "
+                        f"{claimed_total} stored — the gate counted "
+                        f"{after[s]} on disk")
+                    return False
+
+            say(f"   ✓ run {run_no}: every asset's printed report matches the "
+                f"rows the gate counted itself — appended "
+                f"{ {s: after[s] - before[s] for s in GATE_SYMBOLS} }, stored "
+                f"{ {s: after[s] for s in GATE_SYMBOLS} }")
+        return True
+
     _UTC_ISO_ORIGINAL = _utc_iso
     _RECORD_ORIGINAL = record
 
@@ -970,6 +1074,31 @@ if __name__ == '__main__':
             w.writerows(rows)
         return rep
 
+    def _sab_report_lies(symbol, base_url=FAPI_BASE, history_dir=HISTORY_DIR,
+                         period=PERIOD, limit=LIMIT, timeout=TIMEOUT):
+        """**B11, from the independent review of 2026-07-29. IT WALKED THROUGH
+        THIS GATE.**
+
+        `'appended': len(new_rows)` written as `'appended': len(fresh)` — two
+        adjacent keys in one dict literal, in a function whose keys are
+        `fetched`, `stored_before`, `appended`, `total`, with both values
+        already in scope. **This is the most ordinary slip available in this
+        file**, not a strawman.
+
+        **It writes nothing wrong to disk.** That is the whole point: every
+        row-level detector in this gate reads the CSV back and finds it
+        perfect, because it IS perfect. Only the printed line lies — and the
+        printed line is the only part of this recorder a human ever reads, and
+        the only evidence the Commander has been told to judge it by.
+
+        The lie is invisible on the first run, where the count it fakes and
+        the truth happen to be equal. It shows on the second, which is every
+        month from now on."""
+        rep = _RECORD_ORIGINAL(symbol, base_url, history_dir, period, limit,
+                               timeout)
+        rep['appended'] = rep['fetched']
+        return rep
+
     # The last column is WHICH JUDGE decides. B5 corrupts only the bogus-symbol
     # path, which a healthy BTCUSDT write cannot see; judging it by the disk
     # comparison would record a guaranteed escape as if the gate were blind.
@@ -1007,6 +1136,13 @@ if __name__ == '__main__':
         # one path no row-level check in this gate had ever built.
         ('B10', 'the OI column transposed, but only on append', 'record',
          _sab_append_transposes, 'append'),
+        # B11, from the independent review of 2026-07-29. It walked through
+        # Gate 3.2b-R3. **It corrupts nothing this gate had ever inspected** —
+        # the disk stays byte-perfect and only the REPORT lies, which is the
+        # one output of this part a human reads and the one no check here had
+        # ever looked at.
+        ('B11', 'the report claims rows it never appended', 'record',
+         _sab_report_lies, 'report'),
     ]
 
     # ---- (k) MONTH TWO: THE APPEND PATH -----------------------------------
@@ -1030,6 +1166,28 @@ if __name__ == '__main__':
           f"than passing on an already-complete window")
     ok = ok and append_ok
 
+    # ---- (l) THE REPORT IS TRUE -------------------------------------------
+    print("\n(l) THE REPORT MUST MATCH THE DISK (Gate 3.2b-R4). Every other")
+    print("    check in this gate reads the CSV back off disk — and NOTHING")
+    print("    anywhere asserted that the line this recorder PRINTS is true.")
+    print("    That line is the only output of this part a human ever sees:")
+    print("    `run_daily.bat` writes it into journal/daily_runs.log, and the")
+    print("    Commander's standing order is to read that log and decide from")
+    print("    it whether the recorder worked. Sabotage B11 wrote `len(fresh)`")
+    print("    where `len(new_rows)` belongs — one word, two adjacent keys in")
+    print("    the same dict — and the disk stayed byte-perfect, so all TEN")
+    print("    sabotages were scored CAUGHT and the gate exited 0 while the")
+    print("    report claimed 180 appended rows on a run that appended none.")
+    print("    The gate now counts the rows ITSELF, before and after, and runs")
+    print("    the recorder TWICE: the lie is invisible on the first run and")
+    print("    plain on the second, which is what every month looks like now.")
+    report_ok = _report_is_true(verbose=True)
+    print(f"   {'✓' if report_ok else '✗'} the printed report is true for every "
+          f"asset the gate names, on the first run AND on the second — "
+          f"measured against rows the gate counted, never against the "
+          f"module's own arithmetic")
+    ok = ok and report_ok
+
     drill_ok = True
     for tag, words, attr, repl, judge in _SABOTAGES:
         original = globals()[attr]
@@ -1037,7 +1195,8 @@ if __name__ == '__main__':
         try:
             survived = {'trap': _trap_check,
                         'covers': _covers_every_asset,
-                        'append': _append_matches_source}.get(
+                        'append': _append_matches_source,
+                        'report': _report_is_true}.get(
                 judge, _disk_matches_source)(verbose=False)
         except Exception:
             survived = False        # a crash is a catch: it did not pass
@@ -1087,12 +1246,13 @@ if __name__ == '__main__':
     restored = (_disk_matches_source(verbose=True) and _trap_check(verbose=False)
                 and _covers_every_asset(verbose=True)
                 and _record_alarm_fires(verbose=False)
-                and _append_matches_source(verbose=True))
+                and _append_matches_source(verbose=True)
+                and _report_is_true(verbose=True))
     print(f"   {'✓' if restored else '✗'} every original restored — a freshly "
           f"written CSV matches the source row for row, the APPEND path does "
           f"too, every asset the gate names still reaches disk, the "
-          f"empty-result trap still fails loudly, and the monthly task's alarm "
-          f"still fires")
+          f"empty-result trap still fails loudly, the monthly task's alarm "
+          f"still fires, and the printed report still matches the disk")
     ok = ok and drill_ok and restored
 
     # ---- (f) THE BRIEF IS UNAFFECTED --------------------------------------
@@ -1105,18 +1265,21 @@ if __name__ == '__main__':
     shutil.rmtree(SCRATCH, ignore_errors=True)
 
     if ok:
-        print("\nGATE 3.2b-R3 PASSED — the backfill is real, the same run twice")
+        print("\nGATE 3.2b-R4 PASSED — the backfill is real, the same run twice")
         print("changes nothing, an empty result fails loudly, the offline drill")
         print("leaves the files byte-identical, tampered history is reported")
         print("rather than overwritten, the `--record` branch the monthly task")
         print("runs was driven for real and its alarm fires on failure, MONTH")
         print("TWO — appending to a file that already holds rows, which is what")
         print("every month after the first one does — was built and read back")
-        print("row by row, and all TEN deliberate sabotages were caught by")
+        print("row by row, THE PRINTED REPORT WAS MEASURED AGAINST ROWS THE")
+        print("GATE COUNTED ITSELF on two consecutive runs — because that line")
+        print("is the only output of this part a human ever reads — and all")
+        print("ELEVEN deliberate sabotages were caught by")
         print("reading the CSV back off disk, FOR EVERY ASSET THIS GATE NAMES,")
         print("from its own list, not the module's. This test has demonstrated,")
         print("this run, that it can say no.")
     else:
-        print("\nGATE 3.2b-R3 FAILED — see the ✗ lines above. Nothing is")
+        print("\nGATE 3.2b-R4 FAILED — see the ✗ lines above. Nothing is")
         print("committed as a pass.")
     sys.exit(0 if ok else 1)
