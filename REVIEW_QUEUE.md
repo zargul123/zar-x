@@ -1214,8 +1214,11 @@ the next pair of eyes.
    after five days**, and I never built that shape for this check — `_month_two`
    does it for the disk comparison, but my report check does not.
 
-**Evidence.** Declaration `1c540d3` — `PROGRESS_LOG.md` only, **no `.py` in the
-commit**, verify with `git show --stat 1c540d3`. The build commit after it.
+**Evidence.** Declaration `29ac18b` — `PROGRESS_LOG.md` only, **no `.py` in the
+commit**, verify with `git show --stat 29ac18b`. The build commit after it.
+*(Written as `1c540d3` before the push; a `git pull --rebase` over the cloud
+watchman's snapshot commit rewrote the hash. The rebased commit was re-checked
+and still carries `PROGRESS_LOG.md` alone, 319 insertions, no `.py`.)*
 Production half of `data/open_interest.py` sha256
 `9189c08fe67563ae67c86dd4735638b15a6eee3870f59c2e010e713162529c7e`, **identical
 before and after the repair**, and every diff hunk at or after line 263 with

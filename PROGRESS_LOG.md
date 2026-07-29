@@ -5611,3 +5611,26 @@ What was measured today, so the next session does not have to re-derive it:
   reading the log.** With B11 shipped, that line would have read 180 and looked
   entirely healthy, and there was no expectation recorded anywhere to check it
   against. That absence is a large part of why B11 graded SERIOUS.
+
+
+## CORRECTION, appended rather than edited (the log only ever grows)
+
+**The two entries above name the gate-declaration commit as 1c540d3. That
+hash no longer exists.** The cloud watchman pushed a snapshot commit while this
+session was working, so the push needed git pull --rebase, and rebasing
+rewrote all three of this session's commit hashes.
+
+**The declaration is now 29ac18b.** It was re-checked after the rebase and
+still carries PROGRESS_LOG.md alone — 319 insertions, no .py file — so the
+proof that the bar preceded the code is intact:
+
+    git show --stat 29ac18b
+
+**Recorded here rather than corrected in place**, because the entries above are
+already written and this file is append-only. REVIEW_QUEUE.md and
+EXECUTION_PLAN.md are living documents and were corrected directly.
+
+**The lesson, small but real: a commit hash written into a document before the
+push is a guess.** THE_PATTERN.md already warns that a scheduled task pushes
+here while nobody is looking; it did, on this session, between the declaration
+and the push. **Cite the hash after pushing, or expect to correct it.**

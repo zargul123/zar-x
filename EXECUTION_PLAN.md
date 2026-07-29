@@ -396,7 +396,7 @@ BLIND SPOTS.** The check is present, green, correctly aimed — and deaf.
 Commander cannot see it (180 looks exactly like a healthy month), and the weeks
 of open interest lost while he believes it is being collected cannot be bought
 back at any price. **The standing order on his desk is to judge the recorder by
-that very line on 1 August.** Repaired under Gate 3.2b-R4, declared in `1c540d3`
+that very line on 1 August.** Repaired under Gate 3.2b-R4, declared in `29ac18b`
 with no `.py` in it; the attack re-run as a real text edit now fails with the
 named diagnostic *"the report claims 180 row(s) appended — the gate counted 0
 arriving on disk"*. Production half byte-identical by sha256, every diff hunk
