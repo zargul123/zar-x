@@ -6223,9 +6223,9 @@ passed".**
 
 # 2026-07-29 (evening) — GATE 3.2b-R6: THE GATE NOW HOLDS ITS OWN ADDRESS, NOT JUST ITS OWN EXPECTATIONS
 
-*The repair for B14, built under the gate declared in `8b9ca5b` — that commit
+*The repair for B14, built under the gate declared in `e4fdb7c` — that commit
 carries `PROGRESS_LOG.md` alone, 225 insertions, **no `.py`**. `git show --stat
-8b9ca5b` proves the bar preceded the work. Fourteenth use of this pattern.*
+e4fdb7c` proves the bar preceded the work. Fourteenth use of this pattern.*
 
 ## WHAT WAS BUILT
 
@@ -6349,3 +6349,11 @@ slip commit `3413b25` was created to undo on 2026-07-28.** Removed in the
 commit after, not by amending, so the history shows it happened. **Twice is a
 pattern rather than an accident, so `.commitmsg` is now in `.gitignore`** and
 the next session cannot repeat it by remembering to be careful.
+
+**AND THE HASH CORRECTION, for the second session running.** The declaration
+commit was written into these documents as `8b9ca5b`. A `git pull --rebase`
+over the cloud watchman's snapshot commit rewrote it to `e4fdb7c`. **Re-checked
+after the rebase: it still carries `PROGRESS_LOG.md` alone, 225 insertions, no
+`.py`.** The references were corrected rather than left pointing at a hash that
+no longer exists. This happened to the previous session too — **twice now, and
+it is a consequence of a scheduled cloud task pushing while a session works.**

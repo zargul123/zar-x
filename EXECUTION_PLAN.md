@@ -406,7 +406,7 @@ QUALIFICATION, RECORDED AGAINST THE FINDING'S OWN INTEREST: B14 DESTROYS
 NOTHING.** B13 deleted 34 irreplaceable rows; B14 deletes none — the two files
 together still hold every row. **It is SERIOUS because it is invisible and
 happens by accident, not because anything is lost.** **Repaired under Gate
-3.2b-R6, declared in `8b9ca5b` with no `.py` in it.** The attack, re-run as a
+3.2b-R6, declared in `e4fdb7c` with no `.py` in it.** The attack, re-run as a
 real text edit, now fails with exit 1 and a named first line
 (*"the module's csv_path ['BTCUSDT.csv', …] equals the gate's own
 ['BTCUSDT_4h.csv', …]"*), then **REFUSES TO RUN** rather than dying in a

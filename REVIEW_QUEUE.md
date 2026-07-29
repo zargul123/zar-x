@@ -1441,7 +1441,7 @@ irreplaceable rows; B14 deletes none — the two files together still hold every
 row and concatenating them repairs it. **It is SERIOUS because it is invisible
 and happens by accident, not because anything is lost.**
 
-**REMEDY SHIPPED the same session** — Gate 3.2b-R6, declared in `8b9ca5b` with
+**REMEDY SHIPPED the same session** — Gate 3.2b-R6, declared in `e4fdb7c` with
 no `.py` in it. The gate holds its own `GATE_CSV_SUFFIX`; fifteen calls across
 fourteen check sites moved to `_gate_csv_path`; the six inside `_sab_*`
 deliberately did not; a named check prints both filename lists; and a failed
@@ -1546,8 +1546,8 @@ the next pair of eyes.**
    took no measurement, so that doubt is exactly where I found it** and the
    4h-boundary exposure R-013 named is still unwatched.
 
-**Evidence.** Declaration `8b9ca5b` — `PROGRESS_LOG.md` alone, 225 insertions,
-**no `.py`**, verify with `git show --stat 8b9ca5b`. The build commit after it.
+**Evidence.** Declaration `e4fdb7c` — `PROGRESS_LOG.md` alone, 225 insertions,
+**no `.py`**, verify with `git show --stat e4fdb7c`. The build commit after it.
 Production half sha256
 `e242f5af04853e19fca7a0f873dfef1450b63ee415fb9808e53a8f01cc3b585d`, identical
 before and after; zero diff hunks touch lines 1-242, `__main__` at 243.
