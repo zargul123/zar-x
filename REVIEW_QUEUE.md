@@ -1652,7 +1652,7 @@ done was try to break them.**
 
 ---
 
-## R-021 — **THE FUNDING GATE IS RED ABOUT THREE RUNS IN FOUR, AND WAS BEFORE THIS SESSION ARRIVED**
+## R-021 — **THE FUNDING GATE GOES RED NEAR A FUNDING SETTLEMENT (00:00, 08:00, 16:00 UTC), AND DID SO BEFORE THIS SESSION ARRIVED**
 **STATUS: OPEN · CATEGORY B · graded SMALL at the Step 1 veto, 2026-07-29 (night) ·
 found by the session that built none of it · NOT REPAIRED, deliberately**
 

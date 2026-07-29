@@ -469,10 +469,14 @@ the Commander. **It is not repeated here.**
 1. **R-016 IS DONE — TAKEN OFF HIS DESK.** He gave the order three times and it
    is carried out. **It is not CLEARED; that is R-022, and it is a session's
    job, not his.**
-2. **THE FUNDING GATE IS RED THREE RUNS IN FOUR (R-021).** He should know his
-   ship has a test that cries wolf, that it was already doing so before last
-   night, and that it was deliberately NOT repaired because the rules say a
-   SMALL finding gets filed, not fixed. **He can overrule that in one word.**
+2. **THE FUNDING GATE GOES RED NEAR A FUNDING SETTLEMENT (R-021).** He should
+   know his ship has a test that cries wolf in the ~45 minutes around 00:00,
+   08:00 and 16:00 UTC, that it did so before last night too — **proved by
+   running the untouched previous version side by side** — and that it was
+   deliberately NOT repaired because the rules say a SMALL finding gets filed,
+   not fixed. **He can overrule that in one word.** **He is the reason this is
+   stated correctly: he asked why it had passed in earlier sessions, and the
+   session had claimed it without measuring.**
 3. **THE RECORDER'S COMMIT-AND-PUSH BRANCH HAS STILL NEVER FIRED AGAINST REAL
    NEW ROWS.** The errand above. **Due 1 August.**
 4. **`cockpit/brief.py` HAS NO GATE — and he has ruled: NOT NOW, BEFORE GOING
