@@ -1152,8 +1152,29 @@ that found it (see R-017).
 
 ---
 
-## R-016 — ADVICE CAN STILL REACH THE BRIEF THROUGH TWO UNWATCHED DOORS **(the Commander rules; deliberately NOT repaired)**
-**STATUS: OPEN · graded BORDERLINE by the session that found it · 2026-07-29**
+## R-016 — ADVICE CAN STILL REACH THE BRIEF THROUGH TWO UNWATCHED DOORS **(the Commander HAS RULED: CLOSE THEM. NOT YET DONE.)**
+**STATUS: OPEN · P1 · graded BORDERLINE by the session that found it, 2026-07-29 ·
+THE COMMANDER RULED 2026-07-29 (evening): CLOSE THEM NOW · THE WORK IS NOT DONE**
+
+### >>> THE COMMANDER'S RULING, 2026-07-29 (evening): **CLOSE THE TWO DOORS.**
+
+Put to him in plain words at the start of that session, before any code was
+read, as his own deferral required. He had ruled *"attack first, then decide"*;
+the attack had happened and had found the newest gate leaking too, so the
+condition he set was met. **He ruled: close them.**
+
+**THE RULING IS RECORDED AND THE WORK IS NOT DONE, AND THAT IS A SESSION'S
+DECISION HE SHOULD SEE.** The same session then found B14, which graded
+SERIOUS, and his own standing rule of 2026-07-28 says SERIOUS means *fix it,
+and stop — build nothing.* **Closing these two doors is a build.** It was
+therefore written into `SESSION_ORDERS.md` as the next session's Part 2,
+marked as HIS instruction rather than a session's idea. **He can overrule that
+in one word.** Until the doors are closed this stays true: **one line of code
+in either Context Deck instrument can put a trade instruction on his Morning
+Brief with every gate green.**
+
+**This item does NOT move to CLEARED.** He has ruled on WHAT TO DO; nobody has
+yet done it, and the session that closes the doors may not clear its own work.
 
 **What to review.** Whether S16 and F15 are worth closing now, or worth leaving.
 **They were NOT repaired, on purpose**, because THE FINDING REPORT graded them
@@ -1360,11 +1381,100 @@ FOURTEENTH sabotage and finds it caught, or finds it escapes and says so.
 the single manufactured archive shape, which I have named because I could not
 close it.
 
+### >>> VERDICT 2026-07-29 (evening): **FAILED. A FOURTEENTH SABOTAGE WALKED THROUGH.**
+
+*By a session that built none of `data/open_interest.py` and none of its gate.
+The attack and its prediction were written down before anything was run and the
+prediction was correct. Controls passed first — vault INTACT 6/6, 15/15, 14/14,
+13/13, Brief 3/3 — and the untouched control was ALSO run inside the scratch
+copy and passed there, exit 0, so the rig was valid. Real one-line text edit in
+binary mode, on a whole-repo copy OUTSIDE the repo. `git status` clean
+throughout; `data/oi_history/` sha256-fingerprinted before and after and
+**unchanged**.*
+
+**THE HOLE IS ONE THING: THE GATE FOUND THE RECORDER'S WORK BY ASKING THE
+RECORDER WHERE IT PUT IT.**
+
+    B14  `csv_path` returns `f"{symbol}.csv"` instead of
+         `f"{symbol}_{PERIOD}.csv"`. An ordinary filename tidy-up. It
+         breaks no logic, writes no wrong number, drops no row from the
+         file it writes, and its printed report is TRUE about that file.
+         GATE 3.2b-R5 PASSED, exit 0, 13/13 CAUGHT. ............. ESCAPED
+
+**None of this item's five recorded doubts is what found it.** R-014's lesson —
+*a gate may not derive anything it measures BY from the file it is judging* —
+had been applied five times, and **every application was to a VALUE THE GATE
+COMPARES**: `GATE_SYMBOLS`, `GATE_OFFLINE_WORDS`, `GATE_LIMIT`,
+`GATE_PERIOD_HOURS`, `GATE_REPORT_RE`. Nobody applied it to `csv_path()`,
+because `csv_path()` is not a value being compared. **It is the ADDRESS the
+gate walks to before it compares anything.**
+
+**THE MOST DAMNING LINE IN THE RUN IS CHECK (m) — BUILT THE DAY BEFORE FOR THE
+SOLE PURPOSE OF PROVING THE ARCHIVE SURVIVES:** *"✓ BTCUSDT: 12 archive row(s)
+the source NO LONGER SERVES survived byte for byte."* It seeded the archive
+rows into the new filename, watched the recorder append to the new filename,
+read them back from the new filename and certified them. **The
+archive-protection check followed the recorder away from the archive.**
+
+**AND THE SEAM WAS VISIBLE IN THE PREVIOUS SESSION'S OWN LOG**, which recorded
+considering a misdirected `HISTORY_DIR` and finding the FOLDER pinned by
+`_record_does_the_job`. **That pin is real and it held. Nobody went the one
+level down to the file inside the folder.**
+
+**THE DAMAGE, PRINTED — not inferred from a green gate.** Both runs driven
+through `--record`, which is what the monthly task calls, against directories
+seeded with a byte-for-byte copy of the REAL archive:
+
+                       healthy                  B14
+    report line    12 appended, 192 stored  180 appended, 180 stored
+    exit code      0                        0
+    on disk        BTCUSDT_4h.csv 192 rows  BTCUSDT.csv    180 rows
+                                            BTCUSDT_4h.csv 180 rows FROZEN
+                   (and the same for ETHUSDT and SOLUSDT)
+
+**Graded on THE FINDING REPORT BEFORE any repair** — full four steps in the
+`PROGRESS_LOG.md` entry of 2026-07-29 evening, with 2.2 answered under the
+Commander's own new wording. **Two bad answers in Step 2 (by accident;
+invisible on its face) → SERIOUS.** **And the qualification recorded against
+the finding's own interest: B14 DESTROYS NOTHING.** B13 deleted 34
+irreplaceable rows; B14 deletes none — the two files together still hold every
+row and concatenating them repairs it. **It is SERIOUS because it is invisible
+and happens by accident, not because anything is lost.**
+
+**REMEDY SHIPPED the same session** — Gate 3.2b-R6, declared in `8b9ca5b` with
+no `.py` in it. The gate holds its own `GATE_CSV_SUFFIX`; fifteen calls across
+fourteen check sites moved to `_gate_csv_path`; the six inside `_sab_*`
+deliberately did not; a named check prints both filename lists; and a failed
+name check now REFUSES TO RUN rather than dying in a traceback further down.
+The original attack, re-run as a real text edit, now fails with exit 1 **and is
+shown to fail for the reason it claims, in the first failing line.** Production
+half byte-identical by sha256; zero diff hunks touch it. **14/14.**
+
+**R-018 DOES NOT MOVE TO CLEARED. The session that found this fault wrote the
+repair for it and may not grade it. Filed as R-020.**
+
 ---
 
 ## R-019 — THE FINDING REPORT'S STEP 2.2 WAS ANSWERED BY MACHINES ABOUT A PERSON
-**STATUS: OPEN · P1 · the Commander ruled on it 2026-07-29; the wording of the
-amendment is his to accept or refuse**
+**STATUS: CLEARED 2026-07-29 (evening) · P1 · cleared by THE COMMANDER HIMSELF,
+who is the only person who could — it was his rule, his ruling and his words**
+
+### >>> SETTLED 2026-07-29 (evening): **HE REFUSED THE SESSION'S WORDING AND WROTE HIS OWN.**
+
+Shown the amendment a previous session had drafted, he declined it and supplied
+his own text. **It is now in `THE_PATTERN.md` verbatim, under a heading that
+says the words are his and not a session's**, with the failure that earned it
+recorded beside it. His wording is stricter than the draft in one specific way
+nobody had proposed: **his knowledge of this ship's own rules counts as a
+prediction about him, not as something the output shows.**
+
+**It bit immediately.** B14, found the same evening, is SERIOUS on question 2.2
+alone: its report reads `180 new row(s) appended, 180 stored` over a 30-day
+window, which is internally consistent, and spotting it requires knowing in
+advance that the honest figure was 192.
+
+**Cleared rather than left open because the only authority who could settle it
+has settled it.** No session cleared its own item here.
 
 **What to review.** Step 2.2 of THE FINDING REPORT — *"Would the Commander SEE
 it with his own eyes?"* — and every grade that has ever leaned on it.
@@ -1394,6 +1504,61 @@ and that is recorded too.
 
 **Failed looks like.** The ruling stays buried in one log entry, and the next
 session grades a finding on what it imagines he would notice.
+
+---
+
+## R-020 — Gate 3.2b-R6 was written by the session that found the fault it repairs
+**STATUS: OPEN · P1 · filed by that session, against its own work, 2026-07-29 (evening)**
+
+**What to review.** `GATE_CSV_SUFFIX`, `_gate_csv_path`, the named check (c),
+the REFUSES-TO-RUN branch, and the new permanent sabotage B14. **NINTH
+GENERATION OF THE SAME STRUCTURE, and the eight before it were each failed by
+the next pair of eyes.**
+
+**FIVE DOUBTS I COULD NOT SETTLE ABOUT MY OWN REPAIR:**
+
+1. **I FIXED THE ADDRESS OF ONE FILE AND I DID NOT SWEEP FOR OTHERS.** My whole
+   finding was that this ship had applied R-014's lesson to five VALUES and
+   never once to an ADDRESS. **I then fixed exactly the one address I had
+   attacked.** `cockpit/funding.py` and `cockpit/fear_greed.py` were not
+   examined for the same class at all, and neither was `journal/`. **A sixth
+   address of the same kind would look exactly like the one I found.** This is
+   R-014's doubt 1 repeated by someone who was quoting the lesson at the time,
+   which is the third session running to do that.
+2. **THE GATE'S ADDRESS IS A HARDCODED `'_4h.csv'` AND NOTHING TIES IT TO
+   REALITY.** If the ship ever legitimately changes `PERIOD`, this gate fails
+   loudly and **the obvious move will be to edit the gate's copy to match** —
+   which is R-001's conviction and R-011's first doubt, now one string worse.
+   I declared the loud failure as the safe direction in advance. **Nobody who
+   did not make that trade has judged it.**
+3. **THE REFUSES-TO-RUN BRANCH MEANS A FAILING NAME CHECK SKIPS THIRTEEN OF
+   FOURTEEN SECTIONS.** I believe that is right, because every one of them
+   would be measuring a file the recorder never wrote — **and "I believe" is
+   exactly the phrasing this file exists to catch, so it is filed.** The cost
+   is real: a future defect that trips check (c) will hide whatever else is
+   wrong in the same run.
+4. **B14 IS JUDGED IN THE DRILL BY EXACTLY ONE JUDGE**, `_disk_matches_source`.
+   Check (c) catches it too and catches it first, so there are two independent
+   catches — **but that is the same shape as R-018's doubt 5, which I am
+   inheriting rather than closing.**
+5. **I DID NOT MEASURE THE RUNTIME, AGAIN.** R-018's doubt 4 said the gate had
+   got much slower and nobody had measured it. **I added no fetches, but I also
+   took no measurement, so that doubt is exactly where I found it** and the
+   4h-boundary exposure R-013 named is still unwatched.
+
+**Evidence.** Declaration `8b9ca5b` — `PROGRESS_LOG.md` alone, 225 insertions,
+**no `.py`**, verify with `git show --stat 8b9ca5b`. The build commit after it.
+Production half sha256
+`e242f5af04853e19fca7a0f873dfef1450b63ee415fb9808e53a8f01cc3b585d`, identical
+before and after; zero diff hunks touch lines 1-242, `__main__` at 243.
+
+**Reproduce.** `python data\open_interest.py` — fourteen sabotages, check (c).
+
+**A clean verdict looks like.** A reviewer who did not build it invents a
+FIFTEENTH sabotage and finds it caught, or finds it escapes and says so.
+
+**Failed looks like.** Any new lie walks through — most likely through doubt 1,
+the sweep I did not do, which I have named because I could not close it.
 
 ---
 

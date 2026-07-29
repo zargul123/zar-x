@@ -244,6 +244,35 @@ P3 was correct.
     2.2  Would the Commander SEE it with his own eyes?              bad: no
     2.3  Could it be UNDONE later?                                  bad: no
 
+## **HOW 2.2 IS ANSWERED — THE COMMANDER'S OWN WORDS, ADOPTED 2026-07-29 (evening)**
+
+**This is his wording, not a session's.** A session proposed a form of it, he
+refused those words and wrote these. Reproduced verbatim:
+
+> 2.2  Would the Commander SEE it with his own eyes?          bad: no
+>
+> Answer ONLY from what the output itself shows. A session may NOT answer
+> YES by predicting what the Commander would notice, remember or care
+> about — and his knowledge of this ship's own rules counts as a
+> prediction about him, not as something the output shows.
+>
+> The answer is YES only when the output is wrong ON ITS FACE — it
+> contradicts itself, or it is visibly broken — such that a stranger who
+> knew nothing about this ship would see that something was wrong.
+>
+> If spotting it needs the correct number, date or wording known in
+> advance, or needs the reader to remember a rule, the answer is NO.
+
+**THE FAILURE THAT EARNED IT.** R-016 was graded BORDERLINE partly on the claim
+*"the Commander would recognise advice on his own Brief, because he quotes that
+rule constantly."* **That is a claim about a person, made by a machine, and it
+was carrying most of the grade — written by the session the grade excused from
+doing the repair.** Asked directly, he ruled: do not assume either way.
+
+**It makes findings harder to grade away, and it has already moved two.** B12
+went from BORDERLINE to SERIOUS under it, and B14 — the fourteenth sabotage,
+2026-07-29 evening — is SERIOUS on this question alone.
+
 **Earned by:** B10 — one tiny slip away from B4, which was already on the list
 (2.1). The very first sabotage ever found, a flipped sign printing the exact
 opposite of the truth on a screen that looked perfectly normal (2.2). And

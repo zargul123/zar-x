@@ -6217,3 +6217,127 @@ passed".**
   sabotages still caught, every lettered section still green.
 
   **(g) NO new file, NO new dependency, NO extra call from the Brief's path.**
+
+
+---
+
+# 2026-07-29 (evening) — GATE 3.2b-R6: THE GATE NOW HOLDS ITS OWN ADDRESS, NOT JUST ITS OWN EXPECTATIONS
+
+*The repair for B14, built under the gate declared in `8b9ca5b` — that commit
+carries `PROGRESS_LOG.md` alone, 225 insertions, **no `.py`**. `git show --stat
+8b9ca5b` proves the bar preceded the work. Fourteenth use of this pattern.*
+
+## WHAT WAS BUILT
+
+**The gate holds its own copy of WHERE THE ARCHIVE LIVES**, typed out as
+`GATE_CSV_SUFFIX = '_4h.csv'` and deliberately **not** built from the module's
+`PERIOD` — building it from `PERIOD` would put the gate's address back on the
+same string as the module's and reintroduce the defect exactly.
+
+**Fifteen calls across fourteen check sites moved from the module's `csv_path()`
+to the gate's own `_gate_csv_path()`.** The **six** calls inside the `_sab_*`
+functions deliberately did **not** move, for the reason named in the declaration
+before any code was written: a sabotage stands in for module code while it is
+installed, so it must address the file the way the module does. Moving them
+would have scored every one of them CAUGHT for the wrong reason — the B5 failure
+bought a second time.
+
+**A named check (c)** now compares the module's `csv_path` against the gate's
+own for every asset the gate names and **prints both lists**, so a moved archive
+is diagnosed by name rather than merely being fatal somewhere further down.
+
+**B14 is a permanent sabotage**, broken and caught on every run forever.
+
+## THE BARS, EACH ANSWERED
+
+**(a) NOTHING THE PILOT READS CHANGES — proved two ways, not asserted.** The
+production half (lines 1-242) hashes to
+`e242f5af04853e19fca7a0f873dfef1450b63ee415fb9808e53a8f01cc3b585d`, **identical
+to the value written into the declaration before the work began.** `__main__` is
+at line 243 and **zero diff hunks touch the production half** — counted by
+machine, not by eye.
+
+**(b) THE GATE FINDS THE FILE AT ITS OWN ADDRESS — proved by count.** Zero bare
+`csv_path(` calls remain in check code; the only six left are inside `_sab_*`,
+where they belong.
+
+**(c) THE NAMED CHECK PRINTS BOTH SIDES:**
+
+    ✓ the module's csv_path ['BTCUSDT_4h.csv', 'ETHUSDT_4h.csv', 'SOLUSDT_4h.csv']
+      equals the gate's own ['BTCUSDT_4h.csv', 'ETHUSDT_4h.csv', 'SOLUSDT_4h.csv']
+
+**(d) B14 IS PERMANENT AND CAUGHT.** `GATE 3.2b-R6 PASSED`, exit 0, **fourteen
+of fourteen.**
+
+**(e) THE ORIGINAL ATTACK RE-RUN AS A REAL TEXT EDIT AGAINST THE REPAIRED FILE —
+THIS IS THE EVIDENCE, NOT THE IN-RUN DRILL.** Fresh whole-repo copy outside the
+repo, the same one-line binary edit, exit **1**:
+
+    ✓ the module's SYMBOLS (…) equals the gate's own copy (…)
+    ✗ the module's csv_path ['BTCUSDT.csv', 'ETHUSDT.csv', 'SOLUSDT.csv']
+      equals the gate's own ['BTCUSDT_4h.csv', …]
+
+    GATE 3.2b-R6 REFUSES TO RUN — the recorder is not writing where this
+    gate looks. … THE ARCHIVE HAS MOVED, and on a dataset that cannot be
+    re-bought that is the whole finding.
+
+**It fails for the reason it claims, named in the first failing line, not
+incidentally.**
+
+**AND THE B5 LESSON APPLIED TO MY OWN REPAIR, because a sabotage that CRASHES is
+scored CAUGHT and one that never really ran looks like a success.** The B14 drill
+entry was driven in isolation against the real module: the judge **returned
+`False` cleanly** with the diagnostic *"THE GATE'S OWN ADDRESS BTCUSDT_4h.csv
+DOES NOT EXIST after the run. The recorder wrote ['BTCUSDT.csv'] instead — the
+archive has MOVED"*, **raised no exception**, and the same judge returned `True`
+once the original was restored. **The tick mark is the check saying no, not a
+crash wearing a tick.**
+
+**(f) EVERYTHING THE OLD GATE DID, IT STILL DOES.** All thirteen previous
+sabotages still caught, every lettered section still green.
+
+**(g) NO new file, NO new dependency, NO extra call from the Brief's path** —
+`git status` shows one modified `.py`, and the diff adds no import.
+
+## TWO THINGS I CHANGED THAT THE DECLARATION DID NOT NAME — SAID IN BOLD, NOT IN PASSING
+
+**1. THE GATE NOW REFUSES TO RUN WHEN CHECK (c) FAILS, RATHER THAN CONTINUING.**
+The first version of this repair passed its own gate and then, under the re-run
+attack, **died in a `FileNotFoundError` traceback at section (b)** — after
+printing the correct diagnostic, but before reaching its own FAILED banner,
+before running twelve of its fourteen sections, and before deleting its scratch
+tree. **A gate that ends in a stack trace has not told the Commander anything he
+can read.** So a failed name check now stops the run, prints plain words, cleans
+up, and exits 1. **This strengthens the bar rather than softening it, and on a
+healthy file it changes nothing** — but it was not in the declaration and it is
+recorded here rather than slipped in.
+
+**2. THE GATE WAS MISDESCRIBING ITS OWN SCOPE AND I CORRECTED IT.** Section (h)
+announced *"this file is broken on purpose ELEVEN ways"* **while running
+thirteen.** That is R-011's third doubt — *"nothing checks that a gate's own
+description matches what it does… a gate that misdescribes its own scope gets
+quoted later as evidence of something it never tested"* — sitting stale in the
+file, and **it was found by reading, not by any check, which is exactly what that
+doubt predicted.** Corrected to FOURTEEN. **Nothing still checks this
+automatically; the doubt stands.**
+
+## WHAT I GOT WRONG IN THIS SESSION
+
+**My first attempt at the sabotage edit rewrote every line ending in the file.**
+I read the source in text mode and wrote it back with `newline=''`, which turned
+1,528 CRLF lines into LF and made the diff show the whole file as changed. **I
+caught it in the diff, threw the result away and redid the edit in binary mode**
+before drawing any conclusion from it. **A one-line sabotage that silently
+rewrites the whole file is not a one-line sabotage**, and any escape it produced
+would have been worthless evidence.
+
+## WHAT IS NOT DONE, AND WHY — THE COMMANDER'S R-016 ORDER IS OUTSTANDING
+
+**He ruled today: close the two doors into the Brief. It is not done.** B14
+graded **SERIOUS**, and his own standing rule of 2026-07-28 says SERIOUS means
+*fix it, and stop — build nothing.* Closing R-016 is a build. **I followed the
+rule and left the order for the next session, whose Part 2 it now is, marked as
+HIS instruction and not a session's idea.** **He can overrule this in one word,
+and he should know that a session made the call to defer his order** rather than
+being told to. **Step 3.3 is therefore deferred a SEVENTH time, and R-016 has now
+been outstanding through two sessions since he first deferred it.**

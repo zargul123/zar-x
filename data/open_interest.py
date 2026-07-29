@@ -305,8 +305,58 @@ if __name__ == '__main__':
     # =====================================================================
     GATE_SYMBOLS = ('BTCUSDT', 'ETHUSDT', 'SOLUSDT')
 
+    # =====================================================================
+    # GATE 3.2b-R6, added 2026-07-29 (evening) after an independent session
+    # threw a FOURTEENTH sabotage at Gate 3.2b-R5 and it walked through.
+    #
+    # **THE GATE FOUND THE RECORDER'S WORK BY ASKING THE RECORDER WHERE IT PUT
+    # IT.** All twenty-three places in this file that locate a CSV went through
+    # the module's own `csv_path()`, and not one line anywhere on this ship
+    # named `<SYMBOL>_4h.csv`.
+    #
+    # R-014's lesson — a gate may not derive anything it measures BY from the
+    # file it is judging — had been applied five times: `GATE_SYMBOLS`,
+    # `GATE_OFFLINE_WORDS`, `GATE_LIMIT`, `GATE_PERIOD_HOURS`,
+    # `GATE_REPORT_RE`. **Every one of those is a VALUE THE GATE COMPARES.**
+    # `csv_path()` is not a value. **It is the ADDRESS the gate walks to before
+    # it compares anything** — and a gate that follows the module to the wrong
+    # place finds everything perfect when it gets there.
+    #
+    # B14 changed `f"{symbol}_{PERIOD}.csv"` to `f"{symbol}.csv"`. One line, an
+    # ordinary filename tidy-up. Against a byte-for-byte copy of the REAL
+    # archive it started a second file per asset and left `<SYMBOL>_4h.csv`
+    # frozen forever, printing `180 new row(s) appended, 180 stored` where the
+    # honest run prints 192 — and THIS GATE PRINTED PASSED, exit 0, with all
+    # THIRTEEN sabotages scored CAUGHT. **Check (m), built the day before for
+    # the sole purpose of proving the archive survives, seeded the archive rows
+    # into the new filename, watched the recorder append to the new filename,
+    # read them back from the new filename and certified them.**
+    #
+    # `_record_does_the_job` pins the FOLDER `oi_history`, and that pin was
+    # attacked on 2026-07-29 and HELD. **The file inside the folder was not
+    # pinned, and nobody had gone the one level down.**
+    # =====================================================================
+    # The gate's OWN copy of the name the archive lives under. **Typed out
+    # here on purpose and deliberately NOT built from the module's `PERIOD`** —
+    # building it from `PERIOD` would reintroduce the exact defect, because the
+    # gate's address would move with the module's. A legitimate future change of
+    # `PERIOD` will therefore fail this gate LOUDLY. That is the safe direction
+    # and it was declared in advance in PROGRESS_LOG.md rather than discovered.
+    GATE_CSV_SUFFIX = '_4h.csv'
+
+    def _gate_csv_path(symbol, history_dir):
+        """Where **THE GATE** says this asset's history belongs — never where
+        the module says it put it.
+
+        Every CHECK below locates files through this. The `_sab_*` functions
+        deliberately still use the module's `csv_path()`: a sabotage stands in
+        for module code while it is installed, so it must address the file the
+        way the module does, or it would be scored CAUGHT for the wrong reason
+        and prove nothing."""
+        return os.path.join(history_dir, f"{symbol}{GATE_CSV_SUFFIX}")
+
     ok = True
-    print("GATE 3.2b-R5 — the open-interest recorder's self-test.")
+    print("GATE 3.2b-R6 — the open-interest recorder's self-test.")
     print("It breaks itself on purpose and requires every break to be CAUGHT,")
     print("because on this ship a check nobody has attacked is a check nobody")
     print("has tested. The dataset it guards cannot be recovered if it is lost.")
@@ -335,6 +385,36 @@ if __name__ == '__main__':
     print(f"   {'✓' if symbols_ok else '✗'} the module's SYMBOLS "
           f"{tuple(SYMBOLS)} equals the gate's own copy {GATE_SYMBOLS}")
     ok = ok and symbols_ok
+    # GATE 3.2b-R6: the same idea one level down. Above, the gate holds its own
+    # copy of WHICH ASSETS. Here it holds its own copy of WHERE THEY LIVE — and
+    # this line exists so that a moved archive is DIAGNOSED by name rather than
+    # merely being fatal somewhere further down. B14 walked through the whole of
+    # Gate 3.2b-R5 because every check asked the module for the address and then
+    # went and looked there.
+    _probe = os.path.join('DIR')
+    name_ok = all(csv_path(s, _probe) == _gate_csv_path(s, _probe)
+                  for s in GATE_SYMBOLS)
+    print(f"   {'✓' if name_ok else '✗'} the module's csv_path "
+          f"{[os.path.basename(csv_path(s, _probe)) for s in GATE_SYMBOLS]} "
+          f"equals the gate's own "
+          f"{[os.path.basename(_gate_csv_path(s, _probe)) for s in GATE_SYMBOLS]}")
+    ok = ok and name_ok
+    if not name_ok:
+        # **REFUSE TO RUN RATHER THAN PRODUCE MEANINGLESS RESULTS.** If the
+        # module is not writing where this gate looks, every check below is
+        # reading a file that has nothing to do with what the recorder just
+        # did, and the first one to touch it dies in a traceback halfway down
+        # the output. A gate that ends in a stack trace has not told the
+        # Commander anything he can read. Same spirit as the anchor-ambiguity
+        # refusal in `_record_run`: stop, and name the reason.
+        print("\nGATE 3.2b-R6 REFUSES TO RUN — the recorder is not writing")
+        print("where this gate looks. The archive lives at the name printed")
+        print("on the right above; the module is using the one on the left.")
+        print("Nothing below this point could be measured against anything, so")
+        print("nothing below this point was run. THE ARCHIVE HAS MOVED, and on")
+        print("a dataset that cannot be re-bought that is the whole finding.")
+        shutil.rmtree(SCRATCH, ignore_errors=True)
+        sys.exit(1)
     backfill_dir = _fresh_dir()
     good, lines = run(history_dir=backfill_dir)
     for ln in lines:
@@ -344,7 +424,7 @@ if __name__ == '__main__':
         ok = False
     for symbol in GATE_SYMBOLS:
         try:
-            rows = _rows(csv_path(symbol, backfill_dir))
+            rows = _rows(_gate_csv_path(symbol, backfill_dir))
             first = datetime.strptime(rows[0]['timestamp'], '%Y-%m-%dT%H:%M:%SZ')
             last = datetime.strptime(rows[-1]['timestamp'], '%Y-%m-%dT%H:%M:%SZ')
             days = (last - first).total_seconds() / 86400
@@ -361,11 +441,11 @@ if __name__ == '__main__':
     print("\n(b) IDEMPOTENCE — run again immediately. Row counts identical and")
     print("    zero duplicates: distinct (symbol, timestamp) pairs must EQUAL")
     print("    total rows, printed side by side.")
-    before_counts = {s: len(_rows(csv_path(s, backfill_dir)))
+    before_counts = {s: len(_rows(_gate_csv_path(s, backfill_dir)))
                      for s in GATE_SYMBOLS}
     run(history_dir=backfill_dir)
     for symbol in GATE_SYMBOLS:
-        rows = _rows(csv_path(symbol, backfill_dir))
+        rows = _rows(_gate_csv_path(symbol, backfill_dir))
         keys = {(r['symbol'], r['timestamp']) for r in rows}
         same = len(rows) == before_counts[symbol]
         nodupe = len(keys) == len(rows)
@@ -434,12 +514,12 @@ if __name__ == '__main__':
     print("    scratch copy, re-run, and confirm the tool REPORTS the")
     print("    disagreement instead of silently overwriting it.")
     edit_dir = _fresh_dir()
-    shutil.copy(csv_path('BTCUSDT', backfill_dir), csv_path('BTCUSDT', edit_dir))
-    rows = _rows(csv_path('BTCUSDT', edit_dir))
+    shutil.copy(_gate_csv_path('BTCUSDT', backfill_dir), _gate_csv_path('BTCUSDT', edit_dir))
+    rows = _rows(_gate_csv_path('BTCUSDT', edit_dir))
     victim = rows[len(rows) // 2]
     original_value = victim['sumOpenInterest']
     victim['sumOpenInterest'] = '999999.99999999'
-    with open(csv_path('BTCUSDT', edit_dir), 'w', newline='',
+    with open(_gate_csv_path('BTCUSDT', edit_dir), 'w', newline='',
               encoding='utf-8') as fh:
         w = csv.DictWriter(fh, fieldnames=COLUMNS)
         w.writeheader()
@@ -449,7 +529,7 @@ if __name__ == '__main__':
     edit_ok, edit_lines = run(symbols=('BTCUSDT',), history_dir=edit_dir)
     for ln in edit_lines:
         print(ln)
-    after_rows = _rows(csv_path('BTCUSDT', edit_dir))
+    after_rows = _rows(_gate_csv_path('BTCUSDT', edit_dir))
     still_there = any(r['timestamp'] == victim['timestamp']
                       and r['sumOpenInterest'] == '999999.99999999'
                       for r in after_rows)
@@ -508,7 +588,7 @@ if __name__ == '__main__':
         hist = os.path.join(d, 'oi_history')
         counts = {}
         for s in GATE_SYMBOLS:
-            path = csv_path(s, hist)
+            path = _gate_csv_path(s, hist)
             counts[s] = len(_rows(path)) if os.path.exists(path) else 0
         full = all(n >= 175 for n in counts.values())
         good = (code == 0) and ('Recorded.' in out) and full
@@ -562,7 +642,7 @@ if __name__ == '__main__':
                                 params={'symbol': symbol},
                                 timeout=TIMEOUT).json()
             live_oi = float(live['openInterest'])
-            stored_oi = float(_rows(csv_path(symbol, backfill_dir))[-1]
+            stored_oi = float(_rows(_gate_csv_path(symbol, backfill_dir))[-1]
                               ['sumOpenInterest'])
             drift = abs(stored_oi - live_oi) / live_oi * 100
             near = drift < 10
@@ -578,7 +658,7 @@ if __name__ == '__main__':
 
     # ---- (h)+(i) THE SABOTAGE DRILL, AND IT JUDGES THE FILE ON DISK -------
     print("\n(h) THE SABOTAGE DRILL, BUILT IN FROM BIRTH — this file is broken")
-    print("    on purpose ELEVEN ways and each break MUST be caught. Gate")
+    print("    on purpose FOURTEEN ways and each break MUST be caught. Gate")
     print("    3.2b-R2 added B8 and B9, which broke no logic whatsoever: one")
     print("    deleted an asset from the module's list and one changed an exit")
     print("    code, and both walked through a gate reporting seven of seven.")
@@ -586,7 +666,13 @@ if __name__ == '__main__':
     print("    executed: B4 with one `if` in front of it, firing only on the")
     print("    path every month after the first one takes. Gate 3.2b-R4 added")
     print("    B11, which broke no logic at all and wrote nothing wrong to")
-    print("    disk — it changed only the line the Commander reads.")
+    print("    disk — it changed only the line the Commander reads. Gate")
+    print("    3.2b-R6 added B14, which broke no logic and wrote nothing wrong")
+    print("    ANYWHERE: it moved the archive to another filename, and every")
+    print("    check here followed it there, because every check asked the")
+    print("    module for the address. THIRTEEN of thirteen scored CAUGHT.")
+    print("    **The count above was stale at ELEVEN while fourteen ran** —")
+    print("    R-011's third doubt, found by reading and corrected here.")
     print("(i) AND THE DETECTOR READS THE CSV BACK OFF DISK and compares it,")
     print("    field by field, to a raw fetch the TEST makes itself — never to")
     print("    anything this file parsed. That is the lesson two Context Deck")
@@ -619,8 +705,16 @@ if __name__ == '__main__':
         good, _ = run(symbols=(symbol,), history_dir=d)
         if not good:
             return False
-        path = csv_path(symbol, d)
+        path = _gate_csv_path(symbol, d)
         if not os.path.exists(path):
+            # GATE 3.2b-R6: named, not silent. B14 moved the archive to another
+            # filename and every check in this gate followed it there, so the
+            # one thing this must never say is nothing.
+            if verbose:
+                print(f"      {symbol}: THE GATE'S OWN ADDRESS "
+                      f"{os.path.basename(path)} DOES NOT EXIST after the run. "
+                      f"The recorder wrote {sorted(os.listdir(d)) or 'nothing'} "
+                      f"instead — the archive has MOVED.")
             return False
         rows = _rows(path)
         truth = _raw_truth(symbol)
@@ -700,7 +794,7 @@ if __name__ == '__main__':
         if not good:
             return False
         for s in GATE_SYMBOLS:
-            path = csv_path(s, d)
+            path = _gate_csv_path(s, d)
             n = len(_rows(path)) if os.path.exists(path) else 0
             if n < 175:
                 say(f"      {s}: {n} rows on disk — no full window")
@@ -754,7 +848,7 @@ if __name__ == '__main__':
                 f"— too few to seed a PARTIAL window, so this proves nothing")
             return False
 
-        path = csv_path(symbol, d)
+        path = _gate_csv_path(symbol, d)
         with open(path, 'w', newline='', encoding='utf-8') as fh:
             w = csv.DictWriter(fh, fieldnames=COLUMNS)
             w.writeheader()
@@ -897,7 +991,7 @@ if __name__ == '__main__':
         d = _fresh_dir()
 
         def _count(symbol):
-            p = csv_path(symbol, d)
+            p = _gate_csv_path(symbol, d)
             return len(_rows(p)) if os.path.exists(p) else 0
 
         for run_no in (1, 2):
@@ -1017,7 +1111,7 @@ if __name__ == '__main__':
                 f"source window — this check would be proving nothing")
             return False
 
-        path = csv_path(symbol, d)
+        path = _gate_csv_path(symbol, d)
         with open(path, 'w', newline='', encoding='utf-8') as fh:
             w = csv.DictWriter(fh, fieldnames=COLUMNS)
             w.writeheader()
@@ -1358,6 +1452,19 @@ if __name__ == '__main__':
          _sab_window_lies, 'report'),
         ('B13', 'the archive pruned to the source window', 'record',
          _sab_archive_synced, 'archive'),
+        # B14, from the independent review of 2026-07-29 (evening). It walked
+        # through Gate 3.2b-R5 with all THIRTEEN above it scored CAUGHT.
+        # **It breaks no logic, writes no wrong number and loses no row from
+        # the file it writes** — its report is entirely true about the file it
+        # describes. It simply moves the archive to another name, and every
+        # check in this gate found it there because every check asked the
+        # module for the address. The signature keeps `csv_path`'s default
+        # argument: a replacement that raised TypeError would be scored CAUGHT
+        # without ever reaching the check it claims to prove, which is the B5
+        # failure this ship has already paid for once.
+        ('B14', 'the archive quietly moves to another file', 'csv_path',
+         lambda symbol, history_dir=HISTORY_DIR: os.path.join(
+             history_dir, f"{symbol}.csv"), 'disk'),
     ]
 
     # ---- (k) MONTH TWO: THE APPEND PATH -----------------------------------
@@ -1505,7 +1612,7 @@ if __name__ == '__main__':
     shutil.rmtree(SCRATCH, ignore_errors=True)
 
     if ok:
-        print("\nGATE 3.2b-R5 PASSED — the backfill is real, the same run twice")
+        print("\nGATE 3.2b-R6 PASSED — the backfill is real, the same run twice")
         print("changes nothing, an empty result fails loudly, the offline drill")
         print("leaves the files byte-identical, tampered history is reported")
         print("rather than overwritten, the `--record` branch the monthly task")
@@ -1518,11 +1625,14 @@ if __name__ == '__main__':
         print("OF THE PRINTED WINDOW were measured against the gate's own")
         print("fetch, ROWS THE SOURCE NO LONGER SERVES were seeded on disk and")
         print("required to survive the run — the shape the real world has and")
-        print("this gate could not build until today — and all THIRTEEN")
-        print("deliberate sabotages were caught, FOR EVERY ASSET THIS GATE")
-        print("NAMES, from its own list, not the module's. This test has")
+        print("this gate could not build until today — EVERY CHECK FOUND THE")
+        print("FILE AT THE GATE'S OWN ADDRESS rather than at the one the")
+        print("module names, so a recorder that quietly moves the archive")
+        print("somewhere else is caught instead of followed — and all")
+        print("FOURTEEN deliberate sabotages were caught, FOR EVERY ASSET THIS")
+        print("GATE NAMES, from its own list, not the module's. This test has")
         print("demonstrated, this run, that it can say no.")
     else:
-        print("\nGATE 3.2b-R5 FAILED — see the ✗ lines above. Nothing is")
+        print("\nGATE 3.2b-R6 FAILED — see the ✗ lines above. Nothing is")
         print("committed as a pass.")
     sys.exit(0 if ok else 1)

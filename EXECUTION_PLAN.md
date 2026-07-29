@@ -365,6 +365,92 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+→ We are at: **PHASE 3 — THE GATE NOW HOLDS ITS OWN ADDRESS, NOT JUST ITS OWN
+EXPECTATIONS. THE COMMANDER HAS RULED THAT THE BRIEF'S TWO DOORS ARE TO BE
+CLOSED, AND THEY ARE STILL OPEN — A SESSION DEFERRED HIS ORDER AND SAID SO.**
+Gate 3.2b-R6 (the open-interest recorder, **FOURTEEN** sabotages) PASSED
+2026-07-29 evening, exit 0, zero failure marks. Gate 3.2-R5 (funding, fifteen)
+and Gate 3.1-R5 (Fear & Greed, fourteen) still PASS — **and are both still known
+to be defeatable. They have still not been repaired.**
+
+**WHAT THE NINTH INDEPENDENT REVIEW FOUND.** A session that built none of it
+invented one new attack and **it escaped, predicted correctly in writing
+beforehand.** The new question — the five previous ones being spent — was
+***every check finds the recorder's work by asking the recorder where it put it;
+what if it puts it somewhere else?***
+
+    B14  `csv_path` returns `f"{symbol}.csv"` instead of
+         `f"{symbol}_{PERIOD}.csv"`. An ordinary filename tidy-up. It
+         breaks no logic, writes no wrong number, loses no row from the
+         file it writes, and its report is TRUE about that file.
+         GATE 3.2b-R5 PASSED, exit 0, 13/13 CAUGHT ................... ESCAPED
+
+**THE CLASS, in one sentence: R-014's lesson had been applied to five VALUES THE
+GATE COMPARES and never once to the ADDRESS THE GATE WALKS TO.**
+`GATE_SYMBOLS`, `GATE_OFFLINE_WORDS`, `GATE_LIMIT`, `GATE_PERIOD_HOURS`,
+`GATE_REPORT_RE` — every one a value. All twenty-three places that located a CSV
+asked the module's `csv_path()`, and **no line anywhere on this ship named
+`<SYMBOL>_4h.csv`.** `_record_does_the_job` pins the FOLDER, that pin was
+attacked the day before and HELD — **nobody went the one level down.**
+
+**THE MOST DAMNING LINE WAS CHECK (m), BUILT THE DAY BEFORE TO PROVE THE ARCHIVE
+SURVIVES.** It seeded archive rows into the new filename, watched the recorder
+append to the new filename, read them back from the new filename, and certified
+them. Against a copy of the REAL archive, B14 left `<SYMBOL>_4h.csv` frozen at
+180 rows and started a second file, printing `180 new row(s) appended, 180
+stored` where the honest run prints 192.
+
+Graded **SERIOUS** on **two of three** Step 2 questions — by accident, and
+invisible on its face under the Commander's own new 2.2. **AND THE
+QUALIFICATION, RECORDED AGAINST THE FINDING'S OWN INTEREST: B14 DESTROYS
+NOTHING.** B13 deleted 34 irreplaceable rows; B14 deletes none — the two files
+together still hold every row. **It is SERIOUS because it is invisible and
+happens by accident, not because anything is lost.** **Repaired under Gate
+3.2b-R6, declared in `8b9ca5b` with no `.py` in it.** The attack, re-run as a
+real text edit, now fails with exit 1 and a named first line
+(*"the module's csv_path ['BTCUSDT.csv', …] equals the gate's own
+['BTCUSDT_4h.csv', …]"*), then **REFUSES TO RUN** rather than dying in a
+traceback. Production half byte-identical by sha256; **zero** diff hunks touch
+lines 1-242, `__main__` at 243.
+
+**STEP 3.3 WAS NOT BUILT — DEFERRED A SEVENTH TIME**, because a SERIOUS finding
+means fix it and stop. **The Context Deck has sat at two instruments of five for
+seven consecutive sessions**, and the reason each time was a real defect found in
+the session before.
+
+**THE COMMANDER'S TWO RULINGS OF 2026-07-29 (evening), both put to him in plain
+words before any code was read, and both recorded:**
+- **R-016: CLOSE THE TWO DOORS.** The condition he set — *attack first, then
+  decide* — had been met. **HE RULED. THE WORK IS NOT DONE.** B14 graded SERIOUS
+  the same session, his own rule says SERIOUS means build nothing, and closing
+  the doors is a build. **It is the next session's Part 2, marked as HIS
+  instruction. A session made that call about his order and it is recorded here
+  so he can overrule it in one word.**
+- **R-019: HE REFUSED THE SESSION'S WORDING FOR STEP 2.2 AND WROTE HIS OWN.**
+  **`THE_PATTERN.md` IS NOW EDITED**, verbatim, under a heading saying the words
+  are his. His version is stricter than the draft in a way nobody proposed: **his
+  knowledge of this ship's own rules counts as a prediction about him.** R-019 is
+  CLEARED — by him, the only authority who could.
+
+**WHAT IS BROKEN OR UNPROVEN RIGHT NOW, stated because this marker must carry
+the truth and not the good news:**
+- **Gate 3.2b-R6 has been failed by nobody, which is not the same as having
+  survived somebody.** Filed as R-020 with five doubts its own author could not
+  settle. **Nine generations; the condition on R-001 has never once been met.**
+- **I FIXED ONE ADDRESS AND SWEPT FOR NO OTHERS.** The two Context Deck
+  instruments were not examined for the same class at all. **That is R-020's
+  first and strongest doubt.**
+- **THE BRIEF'S TWO DOORS ARE OPEN AND THE COMMANDER HAS ORDERED THEM SHUT.**
+  Until they are, one line in either instrument can put a trade instruction on
+  his Morning Brief with every gate green.
+- **`cockpit/brief.py` STILL HAS NO GATE.** His standing ruling: NOT NOW, BEFORE
+  GOING LIVE.
+- **The recorder's commit-and-push branch has still never fired against real new
+  rows.** It cannot until 1 August.
+- **The Category B pile must be cleared before the ship is used for real.**
+
+**THE PREVIOUS MARKER, kept for the record rather than erased:**
+
 → We are at: **PHASE 3 — THE GATE CAN NOW BUILD THE SHAPE THE REAL WORLD HAS.
 THE BRIEF'S TWO UNWATCHED DOORS ARE STILL OPEN AND THE COMMANDER HAS DEFERRED
 HIS RULING UNTIL AFTER THIS REVIEW — WHICH IS NOW DONE, SO THE RULING IS DUE.**

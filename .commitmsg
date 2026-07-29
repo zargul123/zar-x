@@ -1,0 +1,26 @@
+GATE 3.2b-R6: the gate now holds its own ADDRESS, not just its own expectations
+
+B14 escaped Gate 3.2b-R5 with exit 0 and 13/13 scored CAUGHT. One line:
+csv_path returning f"{symbol}.csv" instead of f"{symbol}_{PERIOD}.csv".
+It breaks no logic, writes no wrong number, loses no row from the file it
+writes, and its report is TRUE. All 23 places that located a CSV asked the
+module's own csv_path, and no line anywhere on this ship named
+<SYMBOL>_4h.csv. R-014's lesson had been applied to five VALUES the gate
+compares and never once to the ADDRESS the gate walks to.
+
+Check (m), built the day before to prove the archive survives, seeded into
+the new filename and certified it. Against a copy of the real archive the
+recorder left <SYMBOL>_4h.csv frozen and started a second file, reporting
+180 appended / 180 stored where the honest run prints 192.
+
+Graded SERIOUS before any repair, with the qualification recorded that B14
+destroys nothing. Repaired under the gate declared in 8b9ca5b (no .py).
+
+The Commander's two rulings, both put to him before any code was read:
+R-016 - close the Brief's two doors. Recorded; deferred to the next session
+because B14 graded SERIOUS and his own rule says build nothing. Said out
+loud rather than hidden.
+R-019 - he refused the session's wording for THE FINDING REPORT step 2.2
+and wrote his own. THE_PATTERN.md now carries his words verbatim.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
