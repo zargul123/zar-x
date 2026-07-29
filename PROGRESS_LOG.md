@@ -5634,3 +5634,264 @@ EXECUTION_PLAN.md are living documents and were corrected directly.
 push is a guess.** THE_PATTERN.md already warns that a scheduled task pushes
 here while nobody is looking; it did, on this session, between the declaration
 and the push. **Cite the hash after pushing, or expect to correct it.**
+
+
+---
+
+# 2026-07-29 (afternoon) — THE EIGHTH INDEPENDENT REVIEW: TWO NEW SABOTAGES, BOTH ESCAPED, AND ONE OF THEM DESTROYS THE ARCHIVE
+
+*By a session that built none of `data/open_interest.py` and none of its gate.
+Predictions were written into working notes **before anything was run**; both
+were correct. The control was run first and passed. All sabotage was applied as
+real text edits to a whole-repo copy **outside** the repo; every anchor was a
+whole line and the rig refuses to run on an ambiguous match. `git status` clean
+throughout, `data/oi_history/` fingerprinted by sha256 before and after and
+**unchanged**, `lab/` unchanged.*
+
+## THE CONTROL, run first, so the rig means something
+
+    funding.py        GATE 3.2-R5  PASSED  15/15  exit 0
+    fear_greed.py     GATE 3.1-R5  PASSED  14/14  exit 0
+    open_interest.py  GATE 3.2b-R4 PASSED  11/11  exit 0
+    brief.py          3/3 instruments reporting
+    verify_vault.py   VAULT INTACT 6/6
+    git status        clean
+
+The same gate was then run inside the scratch copy and also passed 11/11, exit
+0, so a failure in the copy means the sabotage and not the rig.
+
+## THE QUESTION I BROUGHT — it is not one of the four spent ones
+
+The four the orders declared spent: *"which paths has nobody attacked?"* ·
+*"where does the gate take the module's word?"* · *"is the gate looking at the
+right object at all?"* · *"what is the gate's own detector deaf to?"*
+
+**MINE: "THE GATE BUILDS THE WORLD IT TESTS IN. What shape does the REAL world
+have that the gate's world can never have?"**
+
+Every check in Gate 3.2b-R4 hands the recorder either an **empty** directory
+(month one) or a directory **seeded by the gate from its own raw fetch**
+(`_month_two`, `SEED_ROWS = 100`). In both, the rows already on disk are a
+**subset** of the rows Binance is currently serving — `stored ⊆ fresh`.
+
+**In real life that is false, and it is false from the very next run.** The
+archive holds `2026-06-27T16:00Z → 2026-07-27T12:00Z`. Binance serves a rolling
+thirty days, so its window **already begins 2026-06-29**, two days after our
+oldest stored row. Those oldest rows exist in our file **and nowhere else on
+earth**.
+
+**`stored ⊄ fresh` is the only shape in which the archive can be DESTROYED, and
+it is the one shape this gate cannot construct.**
+
+## B12 — THE WINDOW LIES. **ESCAPED.**
+
+The report line prints `window X → Y`. `GATE_REPORT_RE` stops matching at the
+word `window `, and **nothing anywhere compares those two timestamps to
+anything at all.** The gate's author filed this as his own doubt 2 and could not
+close it. It was never proved. **It is now proved.**
+
+The slip: the window derived from **the clock** instead of from the data
+actually fetched — what *"show the window we asked for"* looks like written
+carelessly, one line below the dict key B11 already broke. **The counts stay
+perfectly honest, so check (l) — the entire point of Gate 3.2b-R4 — has nothing
+to complain about.**
+
+    healthy   window 2026-06-27T16:00:00Z → 2026-07-27T12:00:00Z
+    sabotaged window 2026-06-29T11:57:34Z → 2026-07-29T11:57:34Z
+
+    ELEVEN of ELEVEN sabotages CAUGHT · GATE 3.2b-R4 PASSED · exit 0
+
+Those are wall-clock seconds, not 4h boundaries. **Why it matters: it prints a
+flawless thirty-day window every month whatever the source actually served.** If
+Binance ever returns a short or stale set, the one line a human reads still says
+the full window was captured.
+
+## B13 — THE ARCHIVE IS "KEPT IN STEP WITH THE SOURCE". **ESCAPED, AND IT DESTROYS DATA.**
+
+From my question above. A *"keep the file in step with the window the source
+serves"* tidy-up — a rolling-window change, the most ordinary well-intentioned
+edit available on a file like this — which drops stored rows that are no longer
+in `fresh`, and reports `total` from **the rows actually on disk**. That is to
+say: **its report is TRUE.**
+
+**In every scenario this gate builds, `stored ⊆ fresh`, so the branch never
+fires and not one check ever gets the chance to object.**
+
+    ELEVEN of ELEVEN sabotages CAUGHT · GATE 3.2b-R4 PASSED · exit 0
+
+**A green gate is not the evidence.** The damage was built by hand, against a
+scratch directory seeded with a byte-for-byte copy of the REAL archive, run
+exactly as the monthly task will run it. Not a simulation of the future — the
+shape the file has **today**:
+
+                       healthy control          B13
+    BTCUSDT   before   180 rows                 180 rows
+              after    191 rows                 180 rows
+              window   2026-06-27 → 07-29       2026-06-29 → 07-29
+              DESTROYED    0 rows                 11 rows
+    ETHUSDT   DESTROYED    0 rows                 12 rows
+    SOLUSDT   DESTROYED    0 rows                 11 rows
+
+**Thirty-four rows of the one dataset Binance will not sell back at any price,
+gone — and this is the line the Commander reads:**
+
+    BTCUSDT: 11 new row(s) appended, 180 stored, window 2026-06-29T12:00:00Z → 2026-07-29T08:00:00Z
+
+**The healthy run prints `11 new row(s) appended, 191 stored`.** The only
+difference visible to any human being is `180` where `191` was right — **and
+nobody on this ship knows which number is right.**
+
+**THE BITTEREST PART: check (l) would have caught this.** `claimed_appended`
+is 11 and the rows that really arrived is 0. **The check is correct, present,
+and green. The gate simply never builds the world in which it fires** — and in
+production nothing counts the disk before and after at all.
+
+## THE LESSON, IN ONE LINE
+
+**A GATE CAN ONLY EVER JUDGE THE WORLD IT IS ABLE TO BUILD.** Every check here
+was aimed correctly and every check was honest. The hole is not in any check —
+**it is in the set of situations the gate is capable of creating.** Seven
+generations have hardened *what the gate looks at*; none has asked *what the
+gate is able to put in front of itself.*
+
+## THE FINDING REPORT — both findings, filled in BEFORE any repair
+
+**B12 — the window lies**
+
+    0.1 healthy passed first? .................. YES (11/11, exit 0, same copy)
+    0.2 printed, visibly wrong? ................ YES (wall-clock seconds shown)
+    0.3 judging my own work? ................... NO
+    1   would he act on it / is a record hurt? . YES — it is part of the one
+        line his standing order says to judge this recorder by
+    2.1 by accident or on purpose? ............. BY ACCIDENT — bad
+    2.2 would he see it with his own eyes? ..... HE HAS RULED: DO NOT ASSUME.
+        Cannot be answered in the ship's favour — bad
+    2.3 could it be undone? .................... yes, no data is lost
+    3.1 would it still report "all fine"? ...... yes
+    3.4 one thing once, or everything forever? . every month, forever
+    4.1 what would happen to him: he would read a window that says the archive
+        covers a period it does not cover, and believe the collection is whole.
+    4.2 RECOMMENDATION: **SERIOUS** — the lesser of the two.
+
+**B13 — the archive synced to the source**
+
+    0.1 healthy passed first? .................. YES — and the healthy recorder
+        destroyed ZERO rows in the very same demonstration
+    0.2 printed, visibly wrong? ................ YES — 34 rows, listed by
+        timestamp, side by side with the control
+    0.3 judging my own work? ................... NO
+    1   would he act on it / is a record hurt? . YES — it destroys the record
+    2.1 by accident or on purpose? ............. BY ACCIDENT — bad
+    2.2 would he see it with his own eyes? ..... NO — bad. The log line reads
+        entirely normal; the only tell is 180 where 191 was right
+    2.3 could it be undone? .................... NO — bad. Binance will not
+        sell those rows back at any price
+    3.1 would it still report "all fine"? ...... yes — 11/11, exit 0
+    3.2 does it touch the records that cannot be re-bought? ... YES
+    3.4 one thing once, or everything forever? . every asset, every month,
+        forever, and each month's loss is permanent
+    4.1 what would happen to him: an ordinary tidy-up edit would silently
+        delete the oldest slice of the open-interest archive every month, for
+        good, while the gate printed 11/11 green and the log looked normal.
+    4.2 RECOMMENDATION: **SERIOUS** — three of three bad in Step 2, which is
+        the worst grade this form can produce.
+
+**Under the Commander's rule of 2026-07-28: SERIOUS means fix it and stop.
+STEP 3.3 IS THEREFORE DEFERRED A SIXTH TIME, and that is said plainly rather
+than buried.**
+
+## THE COMMANDER'S RULING TODAY, AND IT CHANGES THE FORM ITSELF
+
+R-016 was put to him in plain words at the start of this session, as ordered.
+**He ruled: ATTACK FIRST, THEN DECIDE** — the two doors stay open meanwhile and
+he rules once he has seen whether the newest gate also leaks. It does.
+
+**And he ruled on the thing underneath it. Asked whether the claim "the
+Commander would recognise advice on his own Brief" was fair, he answered: DO NOT
+ASSUME EITHER WAY — a claim about a person may not carry a technical grade.**
+
+**THIS IS A CHANGE TO THE FINDING REPORT AND IT IS SAID IN BOLD BECAUSE IT IS A
+RULE I AM ABOUT TO BE MEASURED BY.** Step 2.2 — *"Would the Commander SEE it
+with his own eyes?"* — may no longer be answered generously on a session's guess
+about what he would notice. **Both findings above are graded under his new
+ruling, and B12's grade depends on it.**
+
+The proposed wording of the amendment is carried to `SESSION_ORDERS.md` for him
+to accept or refuse. **A session may not promote its own idea, and this one is
+his idea, but the wording is mine and he has not seen it yet.**
+
+## THE 1 AUGUST ERRAND — **THE ORDERS WERE WRONG AND THE ERRAND IS NOT DUE**
+
+The orders say, in bold, *"THE 1 AUGUST ERRAND — NOW DUE. DO NOT SKIP IT."*
+
+**Today is 2026-07-29. The first of August has not happened.** The measurement
+was taken before reading anything, with the expectation written down first:
+
+    PREDICTED: one recorder run only, by hand, 2026-07-27, zero rows appended;
+               oi_history unchanged; the scheduled task cannot have fired.
+    MEASURED:  exactly that. journal/daily_runs.log lines 317-322 —
+               "open-interest recorder 27-Jul-2026 18:23:46.64", then
+               "0 new row(s) appended, 180 stored" for all three assets.
+               data/oi_history/ last touched in commit 6bebcd8. 180 rows each.
+
+**THE MEASUREMENT WINS AND THE CORRECTION IS WRITTEN DOWN, as this ship
+requires. The commit-and-push branch has still never fired against real new
+rows, and cannot until 1 August.** The errand is carried forward intact.
+
+**AND A MEASURED FACT THE NEXT SESSION SHOULD HAVE, taken during the B13
+demonstration:** the healthy recorder, run against the real archive today,
+appends **11 rows for BTCUSDT, 12 for ETHUSDT, 11 for SOLUSDT**. The orders
+predicted "roughly thirty rows per asset" for 1 August; the honest arithmetic
+from today's measurement is **about thirty by then**, and the *stored* figure
+should read roughly **210**, not 180. **Write that expectation down before
+reading the log on 1 August.**
+
+---
+
+# GATE 3.2b-R5 — DECLARED NOW, BEFORE THE CODE THAT MUST PASS IT EXISTS
+
+**This entry is committed ALONE, with no `.py` file in the commit.** Verify with
+`git show --stat` on the commit that carries it. Eleven previous uses of this
+pattern have survived audit; this is the twelfth.
+
+**PASS = every check green including every sabotage CAUGHT. Anything less is a
+FAIL, is not committed as a pass, and is not called "mostly passed".**
+
+**(a) NOTHING THE PILOT READS CHANGES.** Every edit inside `__main__`. Proved
+two ways, not asserted: every diff hunk at or after line 243, **and** the
+sha256 of the production half printed before and after. It is
+`9189c08fe67563ae67c86dd4735638b15a6eee3870f59c2e010e713162529c7e` now and must
+be identical after.
+
+**(b) THE WINDOW IS MEASURED, NOT PRINTED UNREAD.** Check (l) must compare
+**both** timestamps in the report line against a raw fetch **the gate makes
+itself**, never against anything the module computed. A report line whose window
+does not parse is a FAILURE, never a skip.
+
+**(c) THE GATE MUST BUILD THE SHAPE IT HAS NEVER BUILT.** A new check that
+seeds a stored file containing rows **the source no longer serves** —
+`stored ⊄ fresh`, the real shape of every month from now on — runs the recorder
+against it, and requires **every one of those rows to still be on disk
+afterwards, byte for byte**. It must prove the seeded rows were genuinely
+outside the fetch window, so the check cannot quietly become a no-op the day
+the window moves.
+
+**(d) B12 AND B13 JOIN THE PERMANENT DRILL** as sabotages twelve and thirteen,
+broken and caught on every run, forever, originals restored and the restoration
+verified.
+
+**(e) THE ORIGINAL ATTACKS ARE RE-RUN AS REAL TEXT EDITS** against the repaired
+file — not wrappers — and must now be CAUGHT, **and shown to fail for the reason
+they claim rather than incidentally.** That is the evidence; the in-run drill is
+not.
+
+**(f) EVERYTHING THE OLD GATE DID, IT STILL DOES.** All eleven existing
+sabotages still caught, every existing check still present.
+
+**(g) NO new file, NO new dependency, NO extra call from the Brief's path.**
+
+**WHAT FAILED LOOKS LIKE, written now so it cannot soften later:** any of the
+eleven old sabotages stops being caught; or B12 or B13 is scored CAUGHT while
+crashing before the check that claims to catch it; or check (c)'s seeded rows
+turn out to have been inside the fetch window after all, which would make the
+whole check theatre.
