@@ -5,3 +5,9 @@ cache/
 venv/
 .venv/
 journal/daily_runs.log
+
+# Scratch file used for multi-line commit messages (git commit -F).
+# `git add -A` swept it into a commit on 2026-07-28 and AGAIN on
+# 2026-07-29. Twice is a pattern, so it is ignored rather than
+# remembered.
+.commitmsg

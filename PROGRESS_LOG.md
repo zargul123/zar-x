@@ -6341,3 +6341,11 @@ HIS instruction and not a session's idea.** **He can overrule this in one word,
 and he should know that a session made the call to defer his order** rather than
 being told to. **Step 3.3 is therefore deferred a SEVENTH time, and R-016 has now
 been outstanding through two sessions since he first deferred it.**
+
+
+**A MISTAKE, RECORDED RATHER THAN QUIETLY AMENDED.** `git add -A` swept the
+scratch file `.commitmsg` into the build commit `e519fd5` — **the identical
+slip commit `3413b25` was created to undo on 2026-07-28.** Removed in the
+commit after, not by amending, so the history shows it happened. **Twice is a
+pattern rather than an accident, so `.commitmsg` is now in `.gitignore`** and
+the next session cannot repeat it by remembering to be careful.
