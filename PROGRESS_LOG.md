@@ -5164,3 +5164,322 @@ rules rather than the session; a session may never grade its own repair; and the
 pile has a hard deadline. **If a future session finds itself grading everything
 SMALL, that is the failure this note predicted — and the fix is to say so to the
 Commander, not to quietly keep building.**
+
+---
+
+# 2026-07-29 — THE SEVENTH INDEPENDENT REVIEW. THREE MORE SABOTAGES, ALL THREE WALKED THROUGH. ONE OF THEM AIMS AT THE COMMANDER'S OWN EVIDENCE.
+
+*Written by a session that built none of the three files it attacked. The
+predictions below were written down BEFORE anything was run and are reproduced
+unedited; all three were correct.*
+
+## THE SHIP WAS ALIVE ON ARRIVAL — checked before anything was touched
+
+    lab/verify_vault.py       VAULT INTACT, 6/6 files match their checksums
+    cockpit/funding.py        GATE 3.2-R5  PASSED, fifteen sabotages caught
+    cockpit/fear_greed.py     GATE 3.1-R5  PASSED, fourteen sabotages caught
+    data/open_interest.py     GATE 3.2b-R3 PASSED, ten sabotages caught
+    cockpit/brief.py          3/3 instruments reporting
+    git status                only journal/snapshots_local.csv — six legitimate
+                              rows appended by the local snapshot task
+
+`data/oi_history/` sha256 recorded before any work and re-checked after, to the
+character:
+
+    BTCUSDT_4h.csv  E3258E82E2C949B2…   ETHUSDT_4h.csv  1549A8A122625CF7…
+    SOLUSDT_4h.csv  E0F91A87704C80EA…
+
+## THE NEW QUESTION — the previous three are spent and were not reused
+
+The orders named three directions as spent: *which paths has nobody attacked* ·
+*where does the gate take the module's word* · *is the gate looking at the right
+object at all*. This session brought a fourth:
+
+> **THE GATE HAS AN EAR NOW. WHAT IS THE EAR ITSELF DEAF TO?**
+
+Last night's repair gave all three gates a *detector*: `_capture`, which listens
+for anything the doorway writes, and `_rows`, which reads the CSV back off disk.
+Every earlier question interrogated the gate's COVERAGE or its OBJECT. **This one
+interrogates the measuring instrument.** A detector is code, code has blind
+spots, and a blind spot in the detector is worse than a blind spot in a check —
+because the check is still there, still green, still pointed at the right thing,
+and deaf.
+
+Three shapes of deafness, one per file: speak **past** the ear · speak **before**
+the ear is listening · speak **where there is no ear at all**.
+
+## THE RIG
+
+The whole repo was copied to a scratch directory outside it and every edit made
+there. **Because the copy is whole, the REAL `cockpit/brief.py` could be run
+against a sabotaged compartment** — the difference between claiming a line
+reaches the pilot and showing it. Every anchor had to match exactly once or the
+script refused to edit. The untouched copy was run first: all three gates PASSED
+in the rig, exit 0, no failure marks. `git status` clean afterwards.
+
+---
+
+## S16 — THE DOORWAY SPEAKS PAST THE GATE'S EAR. **IT ESCAPED.**
+
+**Predicted before running: ESCAPES.** Correct.
+
+`_silence_checks` listens with `contextlib.redirect_stdout` /
+`redirect_stderr`. Those rebind the **names** `sys.stdout` and `sys.stderr`.
+They do not touch file descriptor 1, and they do not touch any reference to the
+original stream taken before the redirect began.
+
+Payload: the module calls `logging.basicConfig(format='%(message)s')` at import
+time — which binds a handler to the REAL stderr, once, before any check exists —
+and `section_text` then calls `logging.warning("⚠ funding extreme — close longs
+before the 16:00 settlement")`. The returned block changed by not one byte.
+
+    advice lines printed on the gate's own screen : 35
+    failure marks in the whole run                : 0
+    sabotages scored CAUGHT                       : 15 of 15
+    verdict                                       : GATE 3.2-R5 PASSED, exit 0
+
+And underneath, verbatim, in the same run:
+
+    ✓ healthy  path: the doorway wrote NOTHING to stdout or stderr of its own
+    ✓ degraded path: the doorway wrote NOTHING to stdout or stderr of its own
+    ✓ offline  path: the doorway wrote NOTHING to stdout or stderr of its own
+
+**Three green ticks saying the doorway wrote nothing, while the doorway wrote
+the same trade instruction thirty-five times on that very screen.**
+
+Confirming variant **S16B**, the same door opened the blunt way — `os.write(1,
+…)`, straight to the file descriptor, on stdout, *the exact channel the check
+names*: 35 advice lines, 0 failure marks, PASSED, exit 0.
+
+**It reaches the pilot.** The real `brief.py`, unmodified, run against the
+sabotaged compartment:
+
+      ⚠ funding extreme — close longs before the 16:00 settlement
+    ==============================================================
+      ZAR X — MORNING BRIEF   2026-07-29 15:22   [4h]
+
+And `run_daily.bat` line 8 redirects with `2>&1`, so it is written permanently
+into `journal/daily_runs.log` **and copied to OneDrive for the Commander to read
+on his phone.**
+
+## F15 — THE MODULE SPEAKS BEFORE THE EAR IS LISTENING. **IT ESCAPED.**
+
+**Predicted before running: ESCAPES.** Correct.
+
+`_silence_checks` wraps `section_text()` calls. **Nothing anywhere listens to
+what the module writes at IMPORT time** — and `brief.py` line 23 imports this
+module. One module-level `print` of advice; `section_text` byte-for-byte
+innocent; every equality check still passing.
+
+    verdict: GATE 3.1-R5 PASSED, exit 0, 0 failure marks
+
+The gate's own output begins:
+
+      ⚠ extreme fear — historically a buying opportunity
+    GATE 3.1-R5 — the Fear & Greed instrument's self-test, hardened
+
+**The advice is the first line the gate prints, and the gate then passes
+itself.** On the Brief — stderr suppressed, so this is pure stdout — it lands
+above the header, the first thing the Commander reads.
+
+## B11 — THE ONE LINE THE COMMANDER ACTUALLY READS IS GUARDED BY NOTHING. **IT ESCAPED.**
+
+**Predicted before running: ESCAPES.** Correct.
+
+Every detector in Gate 3.2b-R3 reads the CSV back off disk. That was the right
+lesson and it was learned properly. **But not one check anywhere asserts that
+the recorder's own REPORT is true.** `_trap_check` looks for the words `EMPTY
+LIST` and check (e) looks for `DISAGREE`; that is the entire extent to which any
+printed line is ever inspected.
+
+**And the report is the only output of this part a human ever sees.** It goes to
+`journal/daily_runs.log` — and the standing order on the Commander's desk is to
+read that log on 1 August and decide from it whether the recorder worked.
+
+Payload: `'appended': len(new_rows)` becomes `'appended': len(fresh)`. Two
+adjacent keys in one dict literal, in a function whose keys are `fetched`,
+`stored_before`, `appended`, `total`.
+
+    verdict: GATE 3.2b-R3 PASSED, exit 0, ten of ten sabotages CAUGHT
+
+The disk stays byte-perfect, which is why every check it owns is happy. The
+`--record` branch — the real one, the one the monthly task calls — run twice
+against a scratch copy, beside the healthy control:
+
+    SABOTAGED, run 2:  BTCUSDT: 180 new row(s) appended, 180 stored
+    HEALTHY,   run 2:  BTCUSDT:   0 new row(s) appended, 180 stored
+    rows actually on disk, both cases: 180. Nothing was appended either time.
+
+**The healthy recorder says 0. The broken one says 180. The gate cannot tell
+them apart, and 180 is what the Commander would read.**
+
+---
+
+# THE FINDING REPORT — all three, filled in BEFORE any repair was written
+
+## FINDING 1 and 2 — S16 and F15 (advice reaching the Brief unwatched)
+
+*Graded together: one defect in two files, the same repair in both.*
+
+    STEP 0 — IS IT TRUSTWORTHY?
+    0.1  healthy system passed first?      YES — all three gates green in the
+                                           rig before anything was touched
+    0.2  printed the broken output?        YES — 35 advice lines on funding's
+                                           own screen, and the line shown
+                                           landing on the real Brief
+    0.3  judging my own work?              NO — I built none of it
+
+    STEP 1 — THE VETO
+    Would it change something he would ACT on, or damage a record we keep?
+    YES. It is a trade instruction on an information-only Brief, and
+    run_daily.bat writes it permanently into journal/daily_runs.log and copies
+    it to his phone. Continue.
+
+    STEP 2 — THE THREE BIG ONES
+    2.1  by accident or on purpose?        ON PURPOSE. The *channel* opens by
+                                           accident easily — a stray logging
+                                           line is ordinary. But a stray
+                                           logging line is untidy, not
+                                           actionable, and Step 1 sends that
+                                           version to SMALL on its own. The
+                                           harmful version — advice — requires
+                                           somebody to write advice.   GOOD
+    2.2  would he SEE it?                  YES. A wrong NUMBER looks normal;
+                                           that is what earned this question.
+                                           A line telling him to close longs
+                                           on a ship whose founding rule he
+                                           quotes constantly is the one thing
+                                           this Commander would spot.   GOOD
+    2.3  could it be undone?               YES — delete the line.        GOOD
+
+    STEP 3 — WHAT MAKES IT WORSE
+    3.1  still reports "all fine"?         YES — PASSED, exit 0, 35 times over
+    3.2  touches records that cannot be
+         re-bought?                        no
+    3.3  touches what TELLS HIM TO ACT?    YES — this is the signals chapter
+    3.4  one thing once, or everything?    every run, both instruments
+
+    STEP 4 — PLAIN WORDS
+    4.1  What would actually happen to him: on some morning his Brief carries a
+         line telling him to trade, printed by his own ship, looking exactly
+         like the rest of it — and every self-test still says PASSED.
+    4.2  MY RECOMMENDATION: **BORDERLINE.** Step 2 is clean, Step 3.3 is a
+         plain yes. Real, structural, and the third night running that advice
+         has reached the pilot through a channel nobody was watching — but the
+         line that would do it does not exist in the code today, and by the
+         Commander's own rule that is his call to make, not mine. **NOT
+         REPAIRED BY THIS SESSION.** Filed as R-016.
+
+## FINDING 3 — B11 (the recorder's report is guarded by nothing)
+
+    STEP 0 — IS IT TRUSTWORTHY?
+    0.1  healthy system passed first?      YES — and the healthy control was
+                                           run through the SAME two-run rig
+                                           and printed 0, correctly
+    0.2  printed the broken output?        YES — 180 against the control's 0,
+                                           side by side, disk identical
+    0.3  judging my own work?              NO — I built none of it
+
+    STEP 1 — THE VETO
+    Would it change something he would ACT on, or damage a record we keep?
+    **YES, and more directly than anything found on this ship so far.** The
+    standing order on his desk is to read journal/daily_runs.log on 1 August
+    and judge from it whether the recorder worked. That line IS the decision.
+    Continue.
+
+    STEP 2 — THE THREE BIG ONES
+    2.1  by accident or on purpose?        **BY ACCIDENT.** `len(fresh)` where
+                                           `len(new_rows)` belongs — adjacent
+                                           keys, same dict literal, both
+                                           already in scope. This is the most
+                                           ordinary slip available in the
+                                           file.                          BAD
+    2.2  would he SEE it?                  **NO.** "180 new row(s) appended"
+                                           is exactly what a healthy month
+                                           looks like. He has no independent
+                                           expectation of the number — on
+                                           1 August the honest figure is
+                                           roughly thirty, and nothing tells
+                                           him that.                      BAD
+    2.3  could it be undone?               **NO.** The wrong line, yes. The
+                                           weeks of open interest lost while
+                                           he believed it was being collected
+                                           cannot be bought back from Binance
+                                           at any price.                  BAD
+
+    STEP 3 — WHAT MAKES IT WORSE (all four, for the record)
+    3.1  still reports "all fine"?         YES — this is the naive recorder's
+                                           exact failure, one level up
+    3.2  touches records that cannot be
+         re-bought?                        YES — the only such dataset here
+    3.3  touches what TELLS HIM TO ACT?    YES — it is the evidence he was
+                                           ordered to act on
+    3.4  one thing once, or everything?    every month, forever
+
+    STEP 4 — PLAIN WORDS
+    4.1  What would actually happen to him: he reads "180 new rows appended"
+         in his log every month, believes his one irreplaceable dataset is
+         being collected, and finds out it was not only when he goes to use
+         it — by which time the missing weeks are gone for good.
+    4.2  MY RECOMMENDATION: **SERIOUS** — three of three Step 2 answers bad.
+         By THE_PATTERN.md that means fix it and stop, build nothing. That is
+         what this session did.
+
+**AND THE HONEST QUALIFICATION, STATED PLAINLY: none of these three lines
+exists in the shipped code today.** All three findings are holes in the GATES,
+not defects in the instruments. What B11 shows is that the recorder's report —
+the one piece of evidence the Commander has been told to trust — has never been
+checked by anything, and is one ordinary typo away from lying to him in the
+direction he cannot detect and cannot undo.
+
+---
+
+# GATE 3.2b-R4 — DECLARED HERE, BEFORE THE CODE EXISTS
+
+**This entry is committed ALONE, with no `.py` file in the commit** (Law 4), so
+`git show --stat` proves the bar preceded the work. Tenth use of the pattern.
+
+**THE BAR: THE RECORDER'S REPORT MUST BE TRUE, AND THE GATE MUST MEASURE IT
+AGAINST THE DISK ITSELF.**
+
+    (l1) For every asset THE GATE names — never the module's list (B9's
+         lesson) — the `appended` count in the printed report must EQUAL the
+         number of rows the GATE counts arriving on disk, measured by the gate
+         before and after the run.
+    (l2) The same on the SECOND run, where the honest answer is zero. This is
+         the path that lies loudest and the one the monthly task takes from
+         month two onward.
+    (l3) The `total` figure in the report must EQUAL the rows the gate counts
+         on disk. A claimed total is not a measured total.
+    (l4) A NEW SABOTAGE B11 joins the drill permanently, judged by the check
+         above, and must be caught on every run forever.
+    (l5) Everything Gate 3.2b-R3 did, it still does — all ten existing
+         sabotages still caught.
+    (l6) All edits inside `__main__`. Proved TWO ways, not asserted: every
+         diff hunk at or after the `__main__` line, AND a sha256 of the
+         production half before and after, printed side by side.
+    (l7) No new file, no new dependency, no extra call from the Brief's path.
+    (l8) My original attack is re-run against the repaired file as a REAL TEXT
+         EDIT — not a wrapper — and must now be CAUGHT, and must be shown to
+         fail for the reason it claims rather than incidentally.
+
+**THE AWKWARD EDGE CASES, NAMED BEFORE THE CODE IS WRITTEN:**
+
+1. **The 4h boundary.** A period can close between run one and run two, so run
+   two may legitimately append a row. **The bar is therefore NOT "run two must
+   report zero"** — it is "the reported count equals what actually landed on
+   disk, whatever that is." That is the correct invariant anyway and it is
+   boundary-proof by construction, which is why it is written this way rather
+   than patched later.
+2. **A failed asset prints a different line** (`🔌 … NOT RECORDED`) carrying no
+   counts. It must not be parsed as a count of zero.
+3. **Disagreement lines** (`!! … DISAGREE`) also name a symbol. They must not
+   be mistaken for report lines.
+4. **One asset's name must not match another asset's line.** The parse is
+   anchored, and a report line that fails to parse is a FAILURE, never a skip —
+   a check that quietly finds nothing to check is the B5 lesson.
+5. **The gate must count the rows itself**, before and after, and never take
+   the module's word for either number. That is the whole finding.
+
+**PASS = every check green including every sabotage CAUGHT. Anything less is a
+FAIL, is not committed as a pass, and is not called "mostly passed".**
