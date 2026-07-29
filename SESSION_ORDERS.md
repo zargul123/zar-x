@@ -79,18 +79,28 @@ runs first and everything else in the section depends on it.
 
 ## **WHAT YOU WILL WALK INTO — DO NOT MISTAKE IT FOR YOUR OWN BREAKAGE**
 
-**`python cockpit\funding.py` IS RED ABOUT THREE RUNS IN FOUR. IT IS NOT YOU AND
-IT IS NOT LAST NIGHT'S WORK.** It was already red on arrival last night, four
-runs out of four, before anything was changed. **R-021, CATEGORY B, graded SMALL
-at the Step 1 veto.**
+**`python cockpit\funding.py` GOES RED NEAR A FUNDING SETTLEMENT AND IS GREEN
+THE REST OF THE TIME. R-021, CATEGORY B, graded SMALL at the Step 1 veto.**
 
-    runtime ......... ~130 seconds per full run  (measured; this also answers
-                      R-020's own fifth doubt, which had gone two sessions
-                      unmeasured)
-    green ........... roughly 2 runs in 9
-    failing checks .. 3, 5, 4, 0 across the timed set — **the failing checks
-                      VARY between runs, and that variance IS the proof it is
-                      a race and not a defect**
+**BINANCE SETTLES AT 00:00, 08:00 AND 16:00 UTC. Check the clock before you
+believe a red funding gate.** The controlled comparison — the untouched `3.2-R5`
+bytes from commit `74ec950` run in a scratch tree beside the new gate:
+
+    ~15:30-15:45 UTC   OLD 3.2-R5 (untouched, on arrival)   FAIL x4
+    16:02-16:15 UTC    NEW 3.2-R6                           FAIL, FAIL, FAIL, PASS
+    16:52-16:56 UTC    OLD 3.2-R5                           **PASS x2**
+    16:57-17:03 UTC    NEW 3.2-R6                           **PASS x3**
+
+**Both versions fail inside the window and both pass outside it**, so it is not
+the R-016 repair and it is not new. Runtime is ~130 seconds per run — which also
+answers R-020's own fifth doubt, unmeasured for two sessions.
+
+**>>> AND THE WARNING THAT MATTERS MOST: OUTSIDE A SETTLEMENT WINDOW, A RED
+FUNDING GATE IS A REAL FAILURE. TREAT IT AS ONE.** The first draft of these
+orders said the gate is "red three runs in four" full stop — **written from one
+45-minute window and corrected the same night after the Commander asked why it
+had passed in previous sessions.** A session that shrugs at a red gate because
+"R-021 says it does that" is doing the exact thing this ship exists to prevent.
 
 **The cause:** `_core_checks` and `_partial_checks` bracket the module's fetch
 with a `before` snapshot and an `after` snapshot and accept either. Binance's
@@ -98,8 +108,8 @@ with a `before` snapshot and an `after` snapshot and accept either. Binance's
 seconds — so **when it moves twice inside the bracket, the module's HONEST value
 matches neither bookend.**
 
-**RUN IT UNTIL IT IS GREEN AND SAY HOW MANY RUNS IT TOOK. Never call a red gate
-"the known flakiness" and move on** — the moment anyone does that, this SMALL
+**IF IT IS RED, CHECK THE UTC CLOCK FIRST, THEN RUN IT AGAIN AND SAY HOW MANY
+RUNS IT TOOK. Never call a red gate "the known flakiness" and move on** — the moment anyone does that, this SMALL
 finding has become the thing that breaks the ship's honesty.
 
 **IF YOU REPAIR IT: TIGHTEN THE BRACKET, NEVER THE BAR.** The obvious move is to

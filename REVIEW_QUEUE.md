@@ -1660,15 +1660,35 @@ found by the session that built none of it · NOT REPAIRED, deliberately**
 four runs out of four.** It is not caused by this session's work, and the Brief
 was printing correct rates 3/3 at the same moment.
 
-**MEASURED across nine runs on 2026-07-29 (night):**
+### **CORRECTED THE SAME NIGHT, AFTER THE COMMANDER ASKED WHY IT PASSED BEFORE**
 
-    runtime ......... ~130 seconds per full run
-    green ........... roughly 2 runs in 9
-    failing checks .. 3, 5, 4, 0 across the timed set — **the checks that
-                      fail VARY between runs, which is the proof it is a
-                      race rather than a defect**
-    the raw rate was measured moving twice in eleven seconds, 22 minutes
-    before the 16:00 UTC settlement
+**HE WAS RIGHT AND THE FIRST VERSION OF THIS ITEM WAS WRONG.** It reported
+"red about three runs in four" as a property of the gate. **It is a property of
+the forty-five minutes around a funding settlement.** The controlled comparison
+— the untouched `3.2-R5` bytes from commit `74ec950`, run in a scratch tree
+beside the new gate:
+
+    ~15:30-15:45 UTC   OLD 3.2-R5 (untouched, on arrival)   FAIL x4
+    16:02-16:15 UTC    NEW 3.2-R6                           FAIL, FAIL, FAIL, PASS
+    16:52-16:56 UTC    OLD 3.2-R5                           **PASS x2**
+    16:57-17:03 UTC    NEW 3.2-R6                           **PASS x3**
+
+**Binance settles at 00:00, 08:00 and 16:00 UTC. Both versions fail inside the
+window and both pass outside it** — so it is not caused by the R-016 repair,
+and it is not a gate that has newly broken.
+
+    runtime ................. ~130 seconds per full run
+    near a settlement ....... fails most runs; every failure recorded this
+                              session fell between 15:30 and 16:15 UTC
+    away from a settlement .. PASSES; 5 consecutive green runs across both
+                              versions between 16:52 and 17:03 UTC
+    the failing checks VARY between runs, which is the proof it is a race
+
+**>>> THE PART THAT MATTERS TO WHOEVER READS THIS NEXT: OUTSIDE A SETTLEMENT
+WINDOW, A RED FUNDING GATE IS A REAL FAILURE AND MUST BE TREATED AS ONE.** The
+first version of this item would have taught the opposite, and a session that
+shrugs at a red gate because "R-021 says it does that" is the exact harm this
+queue exists to prevent.
 
 **THE CAUSE, read from the code:** `_core_checks` and `_partial_checks` bracket
 the module's fetch with a `before` snapshot and an `after` snapshot and accept

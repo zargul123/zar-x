@@ -6737,3 +6737,62 @@ arrival and this session did not make it its job** — it graded it, filed it, a
 carried out the Commander's order instead. **That was a judgement call about his
 own rule, made by a session, and it is recorded here rather than hidden.** He
 can overrule it in one word.
+
+
+---
+
+## **A CORRECTION, THE SAME NIGHT, BECAUSE THE COMMANDER ASKED THE RIGHT QUESTION**
+
+**He asked: "what about R-021, because in the previous session it was working
+fine."** He was right and the session had not tested it. **THE MEASUREMENT WINS,
+AND THIS IS THE MEASUREMENT.**
+
+The controlled comparison, both versions, same machine, same day. The OLD gate
+is `cockpit/funding.py` at commit `74ec950` — the exact bytes the previous
+session left, sha256 `433595fd1db81a6f…`, still declaring `GATE 3.2-R5` —
+extracted with `git show` and run in a scratch tree outside the repo:
+
+    ~15:30-15:45 UTC   OLD 3.2-R5 (untouched, on arrival)   FAIL x4
+    16:02-16:15 UTC    NEW 3.2-R6                           FAIL, FAIL, FAIL, PASS
+    16:52-16:56 UTC    OLD 3.2-R5                           **PASS x2**
+    16:57-17:03 UTC    NEW 3.2-R6                           **PASS x3**
+
+**BINANCE SETTLES FUNDING AT 00:00, 08:00 AND 16:00 UTC. This session arrived
+22 minutes before the 16:00 settlement.** Both versions fail inside that window
+and both versions pass outside it.
+
+### WHAT WAS WRONG IN THE ENTRY ABOVE, STATED PLAINLY
+
+1. **"RED ABOUT THREE RUNS IN FOUR" IS NOT A PROPERTY OF THE GATE. It is a
+   property of the forty-five minutes around a settlement.** Every failing run
+   this session recorded happened between 15:30 and 16:15 UTC. **The figure was
+   measured in one window and written down as if it were the weather.**
+2. **The entry above says the gate "was already red on arrival" and implies the
+   next session will meet a red gate. Only the first half is true.** It was
+   red on arrival — that part is now PROVED, because the untouched 3.2-R5
+   bytes fail in that window too — but a session arriving at any other hour
+   will meet a green one.
+3. **Nothing here excuses the original claim.** The session had the old version
+   one `git show` away and did not run it. **It reasoned from the code to a
+   conclusion instead of measuring, and the conclusion it reached happened to
+   flatter it** — "already broken when I arrived, not my doing". It was not its
+   doing, and it still should have proved that rather than asserted it.
+
+### AND ONE MEASUREMENT THAT OVERSTATED THE PROBLEM
+
+A race meter run at 16:51 UTC — no gate code at all, pure Binance — showed the
+middle reading matching NEITHER bookend in **5 of 12** trials. **That number is
+too pessimistic and the session should have caught why: it compared RAW strings,
+while the gate compares the value ROUNDED TO FOUR DECIMAL PLACES.** Most raw
+movements vanish in the rounding. **A measurement of the wrong quantity is not
+evidence, however carefully it was taken.**
+
+### WHAT THIS CHANGES
+
+**R-021 stands as a real defect** — the bracket genuinely cannot hold a rate
+that moves twice, and near a settlement it genuinely does. **Its severity is
+unchanged: SMALL, CATEGORY B.** What changes is the advice to the next session,
+which was wrong in a way that could have done harm: **told that the gate is red
+three runs in four, a session meeting a red gate would have shrugged.** It is
+now told the opposite — **outside a settlement window a red funding gate is a
+REAL FAILURE and must be treated as one.**

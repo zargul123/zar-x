@@ -396,15 +396,18 @@ interpreter imports each module and requires silence.
    in advance. **R-020 is untouched, uncleared, and it is the next session's
    Part 1.** Its five recorded doubts have never been tested.
 
-2. **THE FUNDING GATE IS RED ABOUT THREE RUNS IN FOUR — R-021, CATEGORY B.**
-   **It was already red on arrival, four runs of four, before anything was
-   changed.** A live-rate race in `_core_checks`/`_partial_checks`: the bookend
-   snapshots cannot bracket a rate that moves twice. **Measured: ~130 seconds
-   per run, green roughly 2 runs in 9, and the failing checks VARY between
-   runs** — which is the proof it is a race. It fails LOUD and the Brief is
-   correct throughout, so it was graded SMALL at the Step 1 veto and filed
-   rather than repaired. **The next session will meet a red gate exactly as
-   this one did, and the repair must tighten the BRACKET, never the BAR.**
+2. **THE FUNDING GATE GOES RED NEAR A FUNDING SETTLEMENT — R-021, CATEGORY B.**
+   A live-rate race in `_core_checks`/`_partial_checks`: the bookend snapshots
+   cannot bracket a rate that moves twice, and near a settlement it does.
+   **PROVED by controlled comparison, not asserted:** the untouched `3.2-R5`
+   bytes from commit `74ec950` FAIL x4 in the window and PASS x2 outside it,
+   while `3.2-R6` FAILS 3 of 4 inside and PASSES x3 outside. **Binance settles
+   at 00:00, 08:00 and 16:00 UTC.** ~130 seconds per run. It fails LOUD and the
+   Brief is correct throughout, so it was graded SMALL at the Step 1 veto and
+   filed rather than repaired. **The repair must tighten the BRACKET, never the
+   BAR. AND: OUTSIDE A SETTLEMENT WINDOW A RED FUNDING GATE IS A REAL FAILURE.**
+   The first version of this marker called it "red three runs in four" flat —
+   measured in one 45-minute window and corrected the same night.
 
 3. **THE R-016 REPAIR HAS NOT BEEN INDEPENDENTLY ATTACKED — R-022.** Its author
    filed **seven doubts against his own work**, the sharpest being that
