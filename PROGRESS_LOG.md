@@ -5895,3 +5895,100 @@ eleven old sabotages stops being caught; or B12 or B13 is scored CAUGHT while
 crashing before the check that claims to catch it; or check (c)'s seeded rows
 turn out to have been inside the fetch window after all, which would make the
 whole check theatre.
+
+
+---
+
+# 2026-07-29 (afternoon) — GATE 3.2b-R5 PASSED: THE GATE CAN NOW BUILD THE SHAPE THE REAL WORLD HAS
+
+*The repair for the two findings above, built by the session that found them —
+which is exactly why it may not grade itself, and does not. Filed as R-018.*
+
+**The bar was declared first and committed alone in `dac6db4`**, 261 insertions,
+`PROGRESS_LOG.md` and nothing else. Verify with `git show --stat dac6db4`.
+**Twelfth use of this pattern; it has survived audit every time.**
+
+## WHAT WAS BUILT
+
+**(b) THE WINDOW IS MEASURED.** `GATE_REPORT_RE` no longer gives up at the word
+`window `. Both timestamps are captured and both are compared against
+`_window_bounds()`, a fetch **the gate makes itself**. The bounds are taken on
+BOTH sides of the run, so a 4h period closing mid-run is legitimate and accepted
+— **and a fabricated, stale or clock-derived window matches neither.**
+
+**(c) CHECK (m) — THE SHAPE THIS GATE COULD NEVER BUILD.** `_archive_survives`
+seeds twelve rows per asset **dated before the oldest row the source still
+serves**, stepped back in the gate's own 4h strides, then runs the recorder and
+requires **every one of them to still be on disk, byte for byte**. It also
+requires ≥175 fresh rows to have landed, so a recorder that writes nothing
+cannot pass by touching nothing.
+
+**AND IT PROVES ITS OWN SEED IS OUTSIDE THE WINDOW BEFORE IT PROVES ANYTHING
+ELSE.** Without that, the check quietly becomes a no-op the day the window
+moves — a tick mark for something never tested, which is the B5 failure this
+ship has already paid for once.
+
+**(d) B12 AND B13 ARE PERMANENT**, broken and caught on every run forever.
+`GATE_PERIOD_HOURS = 4` is the gate's own copy of the stride, never read from
+the module — R-014's lesson.
+
+## THE RESULT
+
+    GATE 3.2b-R5 PASSED — exit 0 — THIRTEEN of THIRTEEN sabotages CAUGHT
+
+    ✓ BTCUSDT: 12 archive row(s) the source NO LONGER SERVES survived byte
+      for byte, and 180 fresh rows still landed — 192 rows on disk
+    ✓ ETHUSDT: (the same)        ✓ SOLUSDT: (the same)
+
+**BAR (a), PROVED TWO WAYS RATHER THAN ASSERTED.** The production half's sha256
+is `9189c08fe67563ae67c86dd4735638b15a6eee3870f59c2e010e713162529c7e` **before
+and after, identical**, and every diff hunk begins at line 309 or later with
+`__main__` at 243. The file grew from 1285 lines to 1528; **not one of those
+lines is in the half the pilot's Brief can reach.**
+
+**BAR (e) — THE ORIGINAL ATTACKS RE-RUN AS REAL TEXT EDITS, which is the
+evidence; the in-run drill is not.** Both now FAIL the gate with named
+diagnostics, **and both fail for the reason they claim rather than
+incidentally:**
+
+    B12  exit 1, GATE 3.2b-R5 FAILED
+         "run 1 BTCUSDT: the report claims the window STARTS at
+          2026-06-29T12:13:13Z — the gate's own fetch says
+          ['2026-06-29T16:00:00Z']"
+
+    B13  exit 1, GATE 3.2b-R5 FAILED
+         "BTCUSDT: ARCHIVE ROW 2026-06-27T16:00:00Z WAS DESTROYED — the
+          source no longer serves it and it is no longer on disk, so it
+          is gone for good"
+
+**BARS (f) AND (g).** All eleven older sabotages still caught; every existing
+check still present. No new file, no new dependency, nothing added to the
+Brief's path. `funding.py` 15/15, `fear_greed.py` 14/14, Brief 3/3, vault
+INTACT 6/6, `data/oi_history/` sha256-identical to what it was this morning,
+`lab/` unchanged.
+
+## WHAT I GOT WRONG, AND WHAT I FOUND STRONGER THAN EXPECTED
+
+**I spent a good part of this session on an attack that does not exist.** My
+first candidate was misdirecting `HISTORY_DIR` — a recorder writing a perfect,
+truthful file into a folder nobody reads, reporting success every month. **On
+reading the code, `_record_does_the_job` already pins the folder name `oi_history`
+by joining it to the work directory itself, so the lie is caught.** Recorded
+because a review that only reports its hits teaches the next session that the
+ship is weaker than it is. **That check is doing real work and nobody had said
+so.**
+
+**I also considered and discarded three attacks that turned out to be already
+named in the queue** — the `PERIOD`/`LIMIT` constants (R-015 doubt 1), check
+(e) still being BTCUSDT-only, and B1's no-op on a UTC machine. **All three are
+still open and still unfixed.** They are not mine to claim.
+
+**THE GATE IS NOW SUBSTANTIALLY SLOWER AND MAKES MANY MORE REQUESTS.**
+`_report_is_true` adds twelve raw fetches per call and is called four times;
+`_archive_survives_all` adds six per call and is called three times. **I did not
+measure the runtime before and after, and I should have.** Filed in R-018.
+
+**And the honest one: the evening snapshot task fired at 17:05 local while this
+session was working**, appending three rows to `journal/snapshots_local.csv`.
+That is the ship working normally, not this session's doing, and it is committed
+alongside rather than left dirty for the next session to puzzle over.

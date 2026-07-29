@@ -365,6 +365,80 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+→ We are at: **PHASE 3 — THE GATE CAN NOW BUILD THE SHAPE THE REAL WORLD HAS.
+THE BRIEF'S TWO UNWATCHED DOORS ARE STILL OPEN AND THE COMMANDER HAS DEFERRED
+HIS RULING UNTIL AFTER THIS REVIEW — WHICH IS NOW DONE, SO THE RULING IS DUE.**
+Gate 3.2b-R5 (the open-interest recorder, **THIRTEEN** sabotages) PASSED
+2026-07-29 afternoon, exit 0, zero failure marks. Gate 3.2-R5 (funding, fifteen)
+and Gate 3.1-R5 (Fear & Greed, fourteen) still PASS — **and are both still known
+to be defeatable. They have still not been repaired.**
+
+**WHAT THE EIGHTH INDEPENDENT REVIEW FOUND.** A session that built none of it
+invented two new attacks and **both escaped, both predicted correctly in writing
+beforehand.** The new question — the four previous ones being spent — was
+***the gate builds the world it tests in; what shape does the REAL world have
+that the gate's world can never have?***
+
+    B12  the report's `window X → Y` derived from THE CLOCK. The parser
+         stopped matching at the word `window ` and nothing compared
+         those timestamps to anything. Counts stayed honest, so the
+         brand-new check (l) had nothing to say ...................... ESCAPED
+    B13  the archive "kept in step with the window the source serves" —
+         an ordinary rolling-window tidy-up WHOSE PRINTED REPORT IS
+         TRUE. In every scenario the gate could build, stored ⊆ fresh,
+         so the branch never fired and eleven checks stayed green .... ESCAPED
+
+**THE CLASS, in one sentence: A GATE CAN ONLY EVER JUDGE THE WORLD IT IS ABLE TO
+BUILD.** Seven generations hardened *what the gate looks at*; none had asked
+*what the gate is able to put in front of itself.*
+
+**B13 IS THE WORST FINDING THIS SHIP HAS RECORDED AGAINST THE RECORDER.** Every
+gate scenario seeds an empty directory or one filled from the gate's own fetch,
+so the stored rows are always a SUBSET of what Binance still serves. **In real
+life that is false from the very next run:** the archive starts 2026-06-27,
+Binance serves a rolling thirty days, and its window already begins 2026-06-29.
+Run against a copy of the REAL archive, B13 **destroyed 34 rows** — 11 BTC,
+12 ETH, 11 SOL — that exist nowhere else on earth, while printing
+`11 new row(s) appended, 180 stored` where the honest run prints 191.
+
+Graded **SERIOUS** on **three of three** Step 2 questions — by accident,
+invisible to him, **and not undoable at any price.** B12 graded SERIOUS, the
+lesser. **Repaired under Gate 3.2b-R5, declared in `dac6db4` with no `.py` in
+it.** Both attacks, re-run as real text edits, now fail with named diagnostics
+(*"the report claims the window STARTS at … the gate's own fetch says …"* and
+*"ARCHIVE ROW … WAS DESTROYED"*). Production half byte-identical by sha256;
+every diff hunk at or after line 309 with `__main__` at 243.
+
+**STEP 3.3 WAS NOT BUILT — DEFERRED A SIXTH TIME**, because a SERIOUS finding
+means fix it and stop. Said plainly rather than buried: **the Context Deck has
+sat at two instruments of five for six consecutive sessions**, and the reason
+each time was a real defect found in the session before.
+
+**THE COMMANDER'S TWO RULINGS OF 2026-07-29, both recorded:**
+- **R-016: ATTACK FIRST, THEN DECIDE.** He deferred deciding whether to close
+  the Brief's two doors until this review reported. **It has now reported, and
+  it found the newest gate leaking too. The ruling is due.**
+- **STEP 2.2 OF THE FINDING REPORT: DO NOT ASSUME EITHER WAY.** A claim about a
+  person may not carry a technical grade. **This changes the grading form
+  itself.** Both of this session's findings were graded under it. **`THE_PATTERN.md`
+  has NOT been edited** — the wording is on his desk in `SESSION_ORDERS.md`,
+  filed as R-019.
+
+**WHAT IS BROKEN OR UNPROVEN RIGHT NOW, stated because this marker must carry
+the truth and not the good news:**
+- **Gate 3.2b-R5 has been failed by nobody, which is not the same as having
+  survived somebody.** Filed as R-018 with five doubts its own author could not
+  settle. **Eight generations; the condition on R-001 has never once been met.**
+- **`cockpit/funding.py` and `cockpit/fear_greed.py` were not attacked at all
+  this session.** R-016's two doors are open and untested.
+- **`cockpit/brief.py` STILL HAS NO GATE.** His standing ruling: NOT NOW, BEFORE
+  GOING LIVE.
+- **The recorder's commit-and-push branch has still never fired against real new
+  rows.** It cannot until 1 August.
+- **The Category B pile must be cleared before the ship is used for real.**
+
+**THE PREVIOUS MARKER, kept for the record rather than erased:**
+
 → We are at: **PHASE 3 — THE RECORDER'S REPORT IS NOW GUARDED. THE BRIEF'S TWO
 UNWATCHED DOORS ARE STILL OPEN, ON PURPOSE, AND THE COMMANDER MUST RULE ON
 THEM.** Gate 3.2b-R4 (the open-interest recorder, **ELEVEN** sabotages) PASSED

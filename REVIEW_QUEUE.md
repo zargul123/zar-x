@@ -1232,6 +1232,169 @@ TWELFTH sabotage and finds it caught, or finds it escapes and says so.
 **Failed looks like.** Any new lie walks through — most likely through doubt 2,
 the window timestamps, which I have named because I could not close it.
 
+### >>> VERDICT 2026-07-29 (afternoon): **FAILED. TWO OF TWO NEW SABOTAGES WALKED THROUGH, AND ONE OF THEM DESTROYS THE ARCHIVE.**
+
+*By a session that built none of `data/open_interest.py` and none of its gate.
+Both attacks and both predictions were written down before anything was run;
+**both predictions were correct.** Control passed first — 15/15, 14/14, 11/11,
+Brief 3/3, vault INTACT 6/6 — and the same gate passed inside the scratch copy,
+so the rig was valid. Real text edits to a whole-repo copy OUTSIDE the repo,
+every anchor a whole line, refusing to run on an ambiguous match. `git status`
+clean throughout; `data/oi_history/` sha256-fingerprinted before and after and
+**unchanged**.*
+
+**THE HOLE IS ONE THING: A GATE CAN ONLY EVER JUDGE THE WORLD IT IS ABLE TO
+BUILD.**
+
+    B12  the report window derived from THE CLOCK instead of the data
+         fetched. GATE_REPORT_RE stopped matching at the word `window `
+         and nothing compared those two timestamps to anything at all.
+         The counts stayed honest, so check (l) had nothing to say.
+         11/11 CAUGHT, GATE 3.2b-R4 PASSED, exit 0. ................ ESCAPED
+    B13  the archive "kept in step with the window the source serves" —
+         a rolling-window tidy-up whose printed report is TRUE.
+         11/11 CAUGHT, PASSED, exit 0. ............................. ESCAPED
+
+**DOUBT 2 OF THIS ITEM'S OWN THREE WAS RIGHT, AND ITS AUTHOR SAID SO IN
+ADVANCE:** *"I guard `appended` and `total`. I do not guard the window… I
+noticed only while writing this."* **B12 is that doubt, proved rather than
+assumed.** Doubt 1 was also tested — the regex WAS rewritten, and the gate
+failed loudly, which is the safe direction its author claimed. **That claim
+holds.**
+
+**B13 IS THE ONE THAT MATTERS AND IT WAS NOT BELIEVED ON A GREEN GATE ALONE.**
+Run against a scratch directory seeded with a byte-for-byte copy of the REAL
+archive — not a simulation of the future, the shape the file has today, because
+Binance's rolling window already begins two days after our oldest stored row:
+
+                       healthy control          B13
+    BTCUSDT  before    180 rows                 180 rows
+             after     191 rows                 180 rows
+             DESTROYED   0 rows                  11 rows
+    ETHUSDT  DESTROYED   0 rows                  12 rows
+    SOLUSDT  DESTROYED   0 rows                  11 rows
+
+**Thirty-four rows of the one dataset Binance will not sell back at any price,
+gone — and the line the Commander is under standing order to judge this recorder
+by read `11 new row(s) appended, 180 stored`, where the honest run prints 191.**
+The only tell visible to any human is `180` where `191` was right, **and nobody
+on this ship knows which number is right.**
+
+**THE BITTEREST PART: check (l) WOULD have caught it.** `claimed_appended` is 11
+and the rows that really arrived is 0. **The check is correct, present and
+green. The gate simply never builds the world in which it fires**, and in
+production nothing counts the disk before and after at all.
+
+**Graded on THE FINDING REPORT BEFORE any repair** (full four steps in the
+`PROGRESS_LOG.md` entry of 2026-07-29 afternoon). **B13: three of three bad in
+Step 2 — by accident, invisible to him, and NOT UNDOABLE. SERIOUS, the worst
+grade this form can produce.** B12: SERIOUS, the lesser. **Under the Commander's
+rule, SERIOUS means fix it and stop, so STEP 3.3 IS DEFERRED A SIXTH TIME.**
+
+**REMEDY SHIPPED the same session** — Gate 3.2b-R5, declared in `dac6db4` with
+no `.py` in it. The window is measured against the gate's own fetch on both
+sides of the run; new check (m) seeds rows the source no longer serves and
+requires every one to survive byte for byte, **after first proving they really
+are outside the window so the check cannot become a no-op.** Both original
+attacks, re-run as real text edits, now FAIL with named diagnostics. Production
+half byte-identical by sha256; every diff hunk at or after line 309, `__main__`
+at 243. **13/13.**
+
+**R-017 DOES NOT MOVE TO CLEARED. The session that found these two faults wrote
+the repair for them and may not grade it. Filed as R-018.**
+
+---
+
+## R-018 — Gate 3.2b-R5 was written by the session that found the faults it repairs
+**STATUS: OPEN · P1 · filed by that session, against its own work, 2026-07-29 (afternoon)**
+
+**What to review.** `_window_bounds` and the window half of `_report_is_true`;
+the new check (m) `_archive_survives` / `_archive_survives_all`; and the two new
+permanent sabotages B12 and B13. **EIGHTH GENERATION OF THE SAME STRUCTURE, and
+the seven before it were each failed by the next pair of eyes.**
+
+**FIVE DOUBTS I COULD NOT SETTLE ABOUT MY OWN REPAIR:**
+
+1. **MY SEEDED ARCHIVE ROWS ARE MANUFACTURED, NOT REAL.** `_archive_survives`
+   invents twelve rows per asset with made-up values (`1001.00000000`) sitting
+   immediately before the fetch window. **What is proven is that rows outside
+   the window survive. What is NOT proven is anything about a real archive** —
+   real values, a gap in the middle, rows far older than one stride, or an
+   archive whose oldest row is months rather than days outside the window.
+   **I built one shape, once, exactly as R-015's doubt 3 said of `_month_two`,
+   and I have repeated that mistake in a new check while quoting the lesson.**
+2. **`_raw_truth` STILL READS `FAPI_BASE`, `HIST_PATH`, `PERIOD`, `LIMIT` AND
+   `TIMEOUT` OUT OF THE MODULE IT JUDGES**, and my new check leans on it
+   entirely. I gave the gate its own `GATE_PERIOD_HOURS` for the stride
+   arithmetic and then took the fetch coordinates from the module anyway.
+   **This is R-015's doubt 1, inherited knowingly and not closed.**
+3. **THE WINDOW BAR ACCEPTS EITHER OF TWO SNAPSHOTS THE GATE TOOK SECONDS
+   APART.** I believe a fabricated, stale or clock-derived window matches
+   neither — **and "I believe" is exactly the phrasing this file exists to
+   catch, so it is filed.** A source that were systematically stale in the same
+   way to both the gate and the module would agree with itself.
+4. **I DID NOT MEASURE THE RUNTIME BEFORE AND AFTER, AND I SHOULD HAVE.**
+   `_report_is_true` now makes twelve extra raw fetches per call and is called
+   four times; `_archive_survives_all` makes six per call and is called three
+   times. **That is a large increase in requests and in exposure to a 4h
+   boundary rolling over mid-check**, which R-013's doubt 3 already named as
+   unwatched and which is now several times larger.
+5. **B13 IS JUDGED BY EXACTLY ONE CHECK.** If `_archive_survives_all` were ever
+   disarmed, nothing else in this gate would notice B13 at all — the disk
+   comparisons, the append check and the report check were ALL green under it.
+   **That is the whole finding restated as a dependency.**
+
+**Evidence.** Declaration `dac6db4` — `PROGRESS_LOG.md` only, **no `.py` in the
+commit**, verify with `git show --stat dac6db4`. The build commit after it.
+Production half sha256
+`9189c08fe67563ae67c86dd4735638b15a6eee3870f59c2e010e713162529c7e`, identical
+before and after; every diff hunk at or after line 309 with `__main__` at 243.
+
+**Reproduce.** `python data\open_interest.py` — thirteen sabotages, sections
+(l) and (m).
+
+**A clean verdict looks like.** A reviewer who did not build it invents a
+FOURTEENTH sabotage and finds it caught, or finds it escapes and says so.
+
+**Failed looks like.** Any new lie walks through — most likely through doubt 1,
+the single manufactured archive shape, which I have named because I could not
+close it.
+
+---
+
+## R-019 — THE FINDING REPORT'S STEP 2.2 WAS ANSWERED BY MACHINES ABOUT A PERSON
+**STATUS: OPEN · P1 · the Commander ruled on it 2026-07-29; the wording of the
+amendment is his to accept or refuse**
+
+**What to review.** Step 2.2 of THE FINDING REPORT — *"Would the Commander SEE
+it with his own eyes?"* — and every grade that has ever leaned on it.
+
+**Why it exists.** R-016 was graded BORDERLINE partly on the claim *"the
+Commander would recognise advice on his own Brief, because he quotes that rule
+constantly."* **That is a claim about a person, made by a machine, and it was
+carrying most of the grade** — and the session making it was the session the
+grade excused from doing the repair.
+
+**Asked directly on 2026-07-29, the Commander ruled: DO NOT ASSUME EITHER WAY.**
+A claim about a person may not carry a technical grade.
+
+**What is already done.** Both of this session's findings were graded under his
+ruling. B12's grade depends on it: with 2.2 unanswerable in the ship's favour,
+B12 is SERIOUS rather than BORDERLINE.
+
+**What is NOT done, and is his call.** **`THE_PATTERN.md` has not been edited.**
+The proposed wording is in `SESSION_ORDERS.md` on his desk. **A session may not
+promote its own idea, and a session may not quietly rewrite the rule it is about
+to be measured by** — this one is his idea, but the wording is mine and he has
+not seen it.
+
+**A clean verdict looks like.** He accepts or rewrites the amendment and it goes
+into `THE_PATTERN.md` with the failure that earned it recorded, or he refuses it
+and that is recorded too.
+
+**Failed looks like.** The ruling stays buried in one log entry, and the next
+session grades a finding on what it imagines he would notice.
+
 ---
 
 # HOW TO FILE AN ITEM (every session, every time)

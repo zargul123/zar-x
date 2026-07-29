@@ -306,7 +306,7 @@ if __name__ == '__main__':
     GATE_SYMBOLS = ('BTCUSDT', 'ETHUSDT', 'SOLUSDT')
 
     ok = True
-    print("GATE 3.2b-R4 — the open-interest recorder's self-test.")
+    print("GATE 3.2b-R5 — the open-interest recorder's self-test.")
     print("It breaks itself on purpose and requires every break to be CAUGHT,")
     print("because on this ship a check nobody has attacked is a check nobody")
     print("has tested. The dataset it guards cannot be recovered if it is lost.")
@@ -852,9 +852,28 @@ if __name__ == '__main__':
     # from the module — the same rule `GATE_SYMBOLS` exists for. Anchored to
     # the start of the line and to the symbol, so a `!!  … DISAGREE` line and a
     # `🔌 … NOT RECORDED` line cannot be mistaken for a report line.
+    # GATE 3.2b-R5, 2026-07-29 (afternoon): THE WINDOW IS NO LONGER WHERE THIS
+    # PATTERN GIVES UP. B12 printed a window derived from the CLOCK and walked
+    # straight through, because this match ended at the word `window ` and
+    # nothing anywhere compared those two timestamps to anything at all. The
+    # gate's author filed it as his own doubt and could not close it. Both
+    # timestamps are captured now, and both are measured against a fetch the
+    # gate makes itself.
     GATE_REPORT_RE = re.compile(
         r"^  (?P<symbol>[A-Z]+): (?P<appended>\d+) new row\(s\) appended, "
-        r"(?P<total>\d+) stored, window ")
+        r"(?P<total>\d+) stored, window (?P<start>\S+) → (?P<end>\S+)$")
+
+    # The gate's OWN copy of the sampling period, never read from the module it
+    # is judging. That is R-014's lesson and a repair that drops it while
+    # quoting it has learned nothing.
+    GATE_PERIOD_HOURS = 4
+
+    def _window_bounds(symbol):
+        """The oldest and newest timestamps Binance is serving RIGHT NOW, taken
+        from a fetch THE GATE makes, passing through none of this module's
+        helpers and none of its arithmetic."""
+        truth = _raw_truth(symbol)
+        return min(truth), max(truth)
 
     def _report_is_true(verbose=False):
         """**THE JUDGE FOR B11.** The printed report must match the disk — and
@@ -883,7 +902,13 @@ if __name__ == '__main__':
 
         for run_no in (1, 2):
             before = {s: _count(s) for s in GATE_SYMBOLS}
+            # Bracketed either side of the run: a 4h period can close while the
+            # module is fetching, so BOTH snapshots are legitimate answers and
+            # the bar accepts either. A fabricated, stale or clock-derived
+            # window matches NEITHER, which is the whole point.
+            win_before = {s: _window_bounds(s) for s in GATE_SYMBOLS}
             good, lines = run(history_dir=d)
+            win_after = {s: _window_bounds(s) for s in GATE_SYMBOLS}
             after = {s: _count(s) for s in GATE_SYMBOLS}
             if not good:
                 say(f"      run {run_no} reported a failure")
@@ -894,7 +919,9 @@ if __name__ == '__main__':
                 m = GATE_REPORT_RE.match(ln)
                 if m:
                     seen[m.group('symbol')] = (int(m.group('appended')),
-                                               int(m.group('total')))
+                                               int(m.group('total')),
+                                               m.group('start'),
+                                               m.group('end'))
             # **A line that does not parse is a FAILURE, never a skip.** A
             # check that quietly finds nothing to check and passes is the B5
             # lesson, and the assets are named by THE GATE — B9's lesson.
@@ -904,8 +931,24 @@ if __name__ == '__main__':
                 return False
 
             for s in GATE_SYMBOLS:
-                claimed_appended, claimed_total = seen[s]
+                (claimed_appended, claimed_total,
+                 claimed_start, claimed_end) = seen[s]
                 really_appended = after[s] - before[s]
+                # **THE WINDOW, GATE 3.2b-R5.** The two timestamps the report
+                # prints must be the two ends of what the source actually
+                # served. Nothing here is taken from the module.
+                ok_start = {win_before[s][0], win_after[s][0]}
+                ok_end = {win_before[s][1], win_after[s][1]}
+                if claimed_start not in ok_start:
+                    say(f"      run {run_no} {s}: the report claims the window "
+                        f"STARTS at {claimed_start} — the gate's own fetch says "
+                        f"{sorted(ok_start)}")
+                    return False
+                if claimed_end not in ok_end:
+                    say(f"      run {run_no} {s}: the report claims the window "
+                        f"ENDS at {claimed_end} — the gate's own fetch says "
+                        f"{sorted(ok_end)}")
+                    return False
                 if claimed_appended != really_appended:
                     say(f"      run {run_no} {s}: the report claims "
                         f"{claimed_appended} row(s) appended — the gate "
@@ -920,7 +963,108 @@ if __name__ == '__main__':
             say(f"   ✓ run {run_no}: every asset's printed report matches the "
                 f"rows the gate counted itself — appended "
                 f"{ {s: after[s] - before[s] for s in GATE_SYMBOLS} }, stored "
-                f"{ {s: after[s] for s in GATE_SYMBOLS} }")
+                f"{ {s: after[s] for s in GATE_SYMBOLS} }, AND both ends of "
+                f"every printed window match the gate's own fetch")
+        return True
+
+    # ---- THE SHAPE THIS GATE COULD NEVER BUILD -----------------------------
+    ARCHIVE_SEED_ROWS = 12      # ~2 days at 4h — the slice of the real archive
+                                # that already sits outside Binance's window
+
+    def _archive_survives(symbol, verbose=False):
+        """**THE JUDGE FOR B13, and GATE 3.2b-R5's reason for existing.**
+
+        Every other check in this file hands the recorder an EMPTY directory,
+        or a directory seeded from the gate's OWN raw fetch. In both, the rows
+        already on disk are a SUBSET of the rows Binance is currently serving.
+
+        **In real life that is false, and it is false from the very next run.**
+        The archive begins 2026-06-27 and the source serves a rolling thirty
+        days, so its oldest rows exist in our file **and nowhere else on
+        earth**. `stored ⊄ fresh` is the ONLY shape in which the archive can be
+        DESTROYED, and it was the one shape this gate could not construct —
+        which is why B13 deleted thirty-four irreplaceable rows while eleven
+        checks stayed green and the printed report stayed TRUE.
+
+        So the gate builds it: rows the source no longer serves are seeded onto
+        disk, the recorder runs, and **every one of them must still be there,
+        byte for byte, afterwards.**"""
+        say = print if verbose else (lambda *a, **k: None)
+        d = _fresh_dir()
+        truth = _raw_truth(symbol)
+        oldest = min(truth)
+        # Stepped back in the gate's own 4h strides from the oldest row the
+        # source still serves. `timedelta` is deliberately not imported into
+        # this module, so the arithmetic is done in seconds.
+        base = datetime.strptime(oldest, '%Y-%m-%dT%H:%M:%SZ').replace(
+            tzinfo=timezone.utc).timestamp()
+        seeded = []
+        for i in range(ARCHIVE_SEED_ROWS, 0, -1):
+            stamp = datetime.fromtimestamp(
+                base - i * GATE_PERIOD_HOURS * 3600,
+                timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+            seeded.append({'timestamp': stamp, 'symbol': symbol,
+                           'sumOpenInterest': f"{1000 + i}.00000000",
+                           'sumOpenInterestValue': f"{2000 + i}.00000000"})
+
+        # **PROVE THE SEED IS REALLY OUTSIDE THE WINDOW.** Without this the
+        # check quietly becomes a no-op the day the window moves — a tick mark
+        # for something never tested, which is the B5 failure this ship has
+        # already paid for once.
+        inside = [r['timestamp'] for r in seeded if r['timestamp'] in truth]
+        if inside:
+            say(f"      {symbol}: {len(inside)} seeded row(s) ARE in the "
+                f"source window — this check would be proving nothing")
+            return False
+
+        path = csv_path(symbol, d)
+        with open(path, 'w', newline='', encoding='utf-8') as fh:
+            w = csv.DictWriter(fh, fieldnames=COLUMNS)
+            w.writeheader()
+            for row in seeded:
+                w.writerow(row)
+
+        good, _ = run(symbols=(symbol,), history_dir=d)
+        if not good:
+            say(f"      {symbol}: the archive run reported a failure")
+            return False
+
+        on_disk = {r['timestamp']: r for r in _rows(path)}
+        for row in seeded:
+            got = on_disk.get(row['timestamp'])
+            if got is None:
+                say(f"      {symbol}: ARCHIVE ROW {row['timestamp']} WAS "
+                    f"DESTROYED — the source no longer serves it and it is no "
+                    f"longer on disk, so it is gone for good")
+                return False
+            if ((got['sumOpenInterest'], got['sumOpenInterestValue'],
+                 got['symbol'])
+                    != (row['sumOpenInterest'], row['sumOpenInterestValue'],
+                        row['symbol'])):
+                say(f"      {symbol}: ARCHIVE ROW {row['timestamp']} WAS "
+                    f"REWRITTEN — {got['sumOpenInterest']} where "
+                    f"{row['sumOpenInterest']} was recorded")
+                return False
+        # And the run must genuinely have done its job, or a recorder that
+        # writes nothing at all would pass this check by touching nothing.
+        landed = [t for t in truth if t in on_disk]
+        if len(landed) < 175:
+            say(f"      {symbol}: only {len(landed)} source row(s) reached "
+                f"disk — the archive survived a run that did not happen")
+            return False
+        say(f"   ✓ {symbol}: {len(seeded)} archive row(s) the source NO LONGER "
+            f"SERVES survived byte for byte, and {len(landed)} fresh rows "
+            f"still landed — {len(on_disk)} rows on disk")
+        return True
+
+    def _archive_survives_all(verbose=False):
+        """For every asset THE GATE names, from its own list — B9's lesson."""
+        for symbol in GATE_SYMBOLS:
+            if not _archive_survives(symbol, verbose):
+                if verbose:
+                    print(f"      {symbol} failed the archive-preservation "
+                          f"check")
+                return False
         return True
 
     _UTC_ISO_ORIGINAL = _utc_iso
@@ -1099,6 +1243,68 @@ if __name__ == '__main__':
         rep['appended'] = rep['fetched']
         return rep
 
+    def _sab_window_lies(symbol, base_url=FAPI_BASE, history_dir=HISTORY_DIR,
+                         period=PERIOD, limit=LIMIT, timeout=TIMEOUT):
+        """**B12, from the independent review of 2026-07-29 (afternoon). IT
+        WALKED THROUGH THIS GATE.**
+
+        The report prints `window X → Y`, and `GATE_REPORT_RE` stopped matching
+        at the word `window `. **Nothing anywhere compared those two timestamps
+        to anything at all** — the gate's own author filed that as his doubt 2
+        and could not close it.
+
+        The slip is a window derived from THE CLOCK rather than from the data
+        actually fetched: what *"show the window we asked for"* looks like
+        written carelessly, one line below the dict key B11 already broke.
+        **The counts stay perfectly honest, so check (l) had nothing to say.**
+
+        Why it matters: it prints a flawless thirty-day window every month
+        whatever the source really served. If Binance ever returns a short or
+        stale set, the one line a human reads still says the window was
+        captured whole."""
+        rep = _RECORD_ORIGINAL(symbol, base_url, history_dir, period, limit,
+                               timeout)
+        now_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
+        rep['span'] = (_UTC_ISO_ORIGINAL(now_ms - 30 * 86400 * 1000),
+                       _UTC_ISO_ORIGINAL(now_ms))
+        return rep
+
+    def _sab_archive_synced(symbol, base_url=FAPI_BASE,
+                            history_dir=HISTORY_DIR, period=PERIOD,
+                            limit=LIMIT, timeout=TIMEOUT):
+        """**B13, from the independent review of 2026-07-29 (afternoon). IT
+        WALKED THROUGH THIS GATE, AND IT DESTROYS THE ARCHIVE.**
+
+        A *"keep the file in step with the window the source serves"* tidy-up —
+        a rolling-window change, the most ordinary well-intentioned edit
+        available on a file like this. It drops stored rows that are no longer
+        in `fresh`, and it reports `total` from the rows actually on disk, so
+        **its report is TRUE.** Nothing about it looks like a lie.
+
+        **In every scenario this gate could build, the stored rows were a
+        SUBSET of what Binance still serves, so this branch never fired and
+        eleven checks stayed green.** Run against a copy of the REAL archive it
+        deleted thirty-four rows — 11 BTC, 12 ETH, 11 SOL — that Binance will
+        not sell back at any price, and printed
+        `11 new row(s) appended, 180 stored` where the honest run prints 191.
+
+        It is caught now only because the gate finally builds the shape the
+        real world has: rows on disk that the source no longer serves."""
+        rep = _RECORD_ORIGINAL(symbol, base_url, history_dir, period, limit,
+                               timeout)
+        oldest = rep['span'][0]          # the oldest row the source served
+        path = csv_path(symbol, history_dir)
+        if os.path.exists(path):
+            kept = [r for r in read_stored(symbol, history_dir)
+                    if r['timestamp'] >= oldest]
+            with open(path, 'w', newline='', encoding='utf-8') as fh:
+                w = csv.DictWriter(fh, fieldnames=COLUMNS)
+                w.writeheader()
+                for row in kept:
+                    w.writerow(row)
+            rep['total'] = len(kept)     # honest about the final state
+        return rep
+
     # The last column is WHICH JUDGE decides. B5 corrupts only the bogus-symbol
     # path, which a healthy BTCUSDT write cannot see; judging it by the disk
     # comparison would record a guaranteed escape as if the gate were blind.
@@ -1143,6 +1349,15 @@ if __name__ == '__main__':
         # ever looked at.
         ('B11', 'the report claims rows it never appended', 'record',
          _sab_report_lies, 'report'),
+        # B12 and B13, from the independent review of 2026-07-29 (afternoon).
+        # Both walked through Gate 3.2b-R4 with all ELEVEN scored CAUGHT.
+        # B12 lies in the half of the report line the parser had stopped
+        # reading at. B13 lies nowhere at all — its report is TRUE — and
+        # destroys the archive in the one shape this gate could not build.
+        ('B12', 'the report window comes from the clock', 'record',
+         _sab_window_lies, 'report'),
+        ('B13', 'the archive pruned to the source window', 'record',
+         _sab_archive_synced, 'archive'),
     ]
 
     # ---- (k) MONTH TWO: THE APPEND PATH -----------------------------------
@@ -1188,6 +1403,27 @@ if __name__ == '__main__':
           f"module's own arithmetic")
     ok = ok and report_ok
 
+    # ---- (m) THE ARCHIVE SURVIVES -----------------------------------------
+    print("\n(m) THE SHAPE THIS GATE COULD NEVER BUILD (Gate 3.2b-R5). Every")
+    print("    other check here hands the recorder an EMPTY directory, or one")
+    print("    seeded from the gate's OWN raw fetch — so the rows already on")
+    print("    disk are always a SUBSET of what Binance is serving now. IN")
+    print("    REAL LIFE THAT IS FALSE FROM THE VERY NEXT RUN: the archive")
+    print("    begins 2026-06-27, the source serves a rolling thirty days, and")
+    print("    its oldest rows exist in our file AND NOWHERE ELSE ON EARTH.")
+    print("    Sabotage B13 — an ordinary 'keep the file in step with the")
+    print("    source' tidy-up, whose printed report is TRUE — deleted 34 such")
+    print("    rows from a copy of the real archive while ELEVEN sabotages")
+    print("    were scored CAUGHT and this gate exited 0. Rows the source no")
+    print("    longer serves are now seeded on purpose, and every one of them")
+    print("    must still be on disk, byte for byte, when the run is over.")
+    archive_ok = _archive_survives_all(verbose=True)
+    print(f"   {'✓' if archive_ok else '✗'} the archive survives the run for "
+          f"every asset the gate names — rows the source has already dropped "
+          f"were proved outside the window first, so this check cannot quietly "
+          f"become a no-op")
+    ok = ok and archive_ok
+
     drill_ok = True
     for tag, words, attr, repl, judge in _SABOTAGES:
         original = globals()[attr]
@@ -1196,7 +1432,8 @@ if __name__ == '__main__':
             survived = {'trap': _trap_check,
                         'covers': _covers_every_asset,
                         'append': _append_matches_source,
-                        'report': _report_is_true}.get(
+                        'report': _report_is_true,
+                        'archive': _archive_survives_all}.get(
                 judge, _disk_matches_source)(verbose=False)
         except Exception:
             survived = False        # a crash is a catch: it did not pass
@@ -1247,12 +1484,15 @@ if __name__ == '__main__':
                 and _covers_every_asset(verbose=True)
                 and _record_alarm_fires(verbose=False)
                 and _append_matches_source(verbose=True)
-                and _report_is_true(verbose=True))
+                and _report_is_true(verbose=True)
+                and _archive_survives_all(verbose=True))
     print(f"   {'✓' if restored else '✗'} every original restored — a freshly "
           f"written CSV matches the source row for row, the APPEND path does "
           f"too, every asset the gate names still reaches disk, the "
           f"empty-result trap still fails loudly, the monthly task's alarm "
-          f"still fires, and the printed report still matches the disk")
+          f"still fires, the printed report still matches the disk INCLUDING "
+          f"both ends of its window, and rows the source no longer serves "
+          f"still survive the run")
     ok = ok and drill_ok and restored
 
     # ---- (f) THE BRIEF IS UNAFFECTED --------------------------------------
@@ -1265,7 +1505,7 @@ if __name__ == '__main__':
     shutil.rmtree(SCRATCH, ignore_errors=True)
 
     if ok:
-        print("\nGATE 3.2b-R4 PASSED — the backfill is real, the same run twice")
+        print("\nGATE 3.2b-R5 PASSED — the backfill is real, the same run twice")
         print("changes nothing, an empty result fails loudly, the offline drill")
         print("leaves the files byte-identical, tampered history is reported")
         print("rather than overwritten, the `--record` branch the monthly task")
@@ -1274,12 +1514,15 @@ if __name__ == '__main__':
         print("every month after the first one does — was built and read back")
         print("row by row, THE PRINTED REPORT WAS MEASURED AGAINST ROWS THE")
         print("GATE COUNTED ITSELF on two consecutive runs — because that line")
-        print("is the only output of this part a human ever reads — and all")
-        print("ELEVEN deliberate sabotages were caught by")
-        print("reading the CSV back off disk, FOR EVERY ASSET THIS GATE NAMES,")
-        print("from its own list, not the module's. This test has demonstrated,")
-        print("this run, that it can say no.")
+        print("is the only output of this part a human ever reads — BOTH ENDS")
+        print("OF THE PRINTED WINDOW were measured against the gate's own")
+        print("fetch, ROWS THE SOURCE NO LONGER SERVES were seeded on disk and")
+        print("required to survive the run — the shape the real world has and")
+        print("this gate could not build until today — and all THIRTEEN")
+        print("deliberate sabotages were caught, FOR EVERY ASSET THIS GATE")
+        print("NAMES, from its own list, not the module's. This test has")
+        print("demonstrated, this run, that it can say no.")
     else:
-        print("\nGATE 3.2b-R4 FAILED — see the ✗ lines above. Nothing is")
+        print("\nGATE 3.2b-R5 FAILED — see the ✗ lines above. Nothing is")
         print("committed as a pass.")
     sys.exit(0 if ok else 1)
