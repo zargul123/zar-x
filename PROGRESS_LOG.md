@@ -5992,3 +5992,228 @@ measure the runtime before and after, and I should have.** Filed in R-018.
 session was working**, appending three rows to `journal/snapshots_local.csv`.
 That is the ship working normally, not this session's doing, and it is committed
 alongside rather than left dirty for the next session to puzzle over.
+
+
+---
+
+# 2026-07-29 (evening) — THE NINTH INDEPENDENT REVIEW: THE GATE FOLLOWS THE RECORDER TO THE WRONG FILE AND CERTIFIES IT
+
+*By a session that built none of `data/open_interest.py` and none of its gate.
+The attack and its prediction were written into working notes **before anything
+was run**; the prediction was correct. Controls passed first — vault INTACT 6/6,
+Gate 3.2-R5 15/15, Gate 3.1-R5 14/14, Gate 3.2b-R5 13/13, Brief 3/3 — and the
+untouched control was ALSO run inside the scratch copy and passed there, exit 0,
+so the rig was valid. Real text edit to a whole-repo copy OUTSIDE the repo, in
+binary mode so the file's CRLF endings survived and the diff is genuinely one
+line. `git status` clean throughout; `data/oi_history/` sha256-fingerprinted
+before and after and **unchanged**.*
+
+## BOTH RULINGS ON THE COMMANDER'S DESK WERE PUT TO HIM FIRST, BEFORE ANY CODE WAS READ
+
+**R-016 — HIS RULING: CLOSE THE TWO DOORS.** Asked in plain words whether the
+two unwatched ways advice can reach his Morning Brief were worth closing now, he
+ruled **close them now**, having deferred it once with "attack first, then
+decide". **The condition he set had been met.** Recorded in `REVIEW_QUEUE.md`.
+**It is NOT done in this session** — see the section at the end, and the reason
+is his own SERIOUS rule, not a session's preference.
+
+**R-019 — HIS RULING: THE AMENDMENT GOES IN, IN HIS OWN WORDS.** He was shown
+the wording a previous session proposed for Step 2.2 of THE FINDING REPORT and
+declined it, writing his own instead. **`THE_PATTERN.md` is edited with the text
+he supplied, verbatim, and not one word of a session's drafting.** The failure
+that earned it: R-016 was graded BORDERLINE partly on the claim *"the Commander
+would recognise advice on his own Brief"* — a claim about a person, made by a
+machine, carrying most of a technical grade, written by the session the grade
+excused from doing the repair.
+
+## THE QUESTION — the sixth, and the five before it are spent
+
+Five questions have now found nine holes, and each is the direction these gates
+are strongest in: *which paths has nobody attacked* · *where does the gate take
+the module's word* · *is the gate looking at the right object* · *what is the
+gate's own detector deaf to* · *what shape does the real world have that the
+gate's world cannot*.
+
+**MINE: "EVERY CHECK IN THIS GATE FINDS THE RECORDER'S WORK BY ASKING THE
+RECORDER WHERE IT PUT IT. WHAT IF IT PUTS IT SOMEWHERE ELSE?"**
+
+**Why this is not question two wearing a hat.** R-014's lesson — *a gate may not
+derive anything it measures BY from the file it is judging* — has been applied
+five separate times on this ship, and **every single application was to a VALUE
+THE GATE COMPARES**: `GATE_SYMBOLS`, `GATE_OFFLINE_WORDS`, `GATE_LIMIT`,
+`GATE_PERIOD_HOURS`, `GATE_REPORT_RE`. Nobody applied it to `csv_path()`,
+because `csv_path()` is not a value being compared. **It is the ADDRESS the gate
+walks to before it compares anything.** A gate that follows the module to the
+wrong place finds everything perfect when it gets there.
+
+**And the seam was visible in the previous session's own log.** It wrote:
+*"My first candidate was misdirecting `HISTORY_DIR` … on reading the code,
+`_record_does_the_job` already pins the folder name `oi_history`, so the lie is
+caught."* **That is true, and the folder is genuinely pinned.** The file inside
+the folder is not, and nobody went the one level down. Measured before the
+attack: `data/open_interest.py` contains **twenty-three** places that locate a
+CSV, **all twenty-three go through the module's `csv_path()`, and not one line
+anywhere in the file — or anywhere on this ship — names `<SYMBOL>_4h.csv`.**
+
+## B14 — THE FOURTEENTH SABOTAGE. IT ESCAPED.
+
+    def csv_path(symbol, history_dir=HISTORY_DIR):
+    -   return os.path.join(history_dir, f"{symbol}_{PERIOD}.csv")
+    +   return os.path.join(history_dir, f"{symbol}.csv")
+
+**One line. An ordinary filename tidy-up.** It breaks no logic, writes no wrong
+number, drops no row from the file it writes, and **its printed report is
+entirely TRUE about the file it is describing.**
+
+    GATE 3.2b-R5 — exit 0 — PASSED — all THIRTEEN sabotages scored CAUGHT
+
+**THE MOST DAMNING LINE IN THE WHOLE RUN, and it is check (m) — the check built
+YESTERDAY for the sole purpose of proving the archive survives:**
+
+    ✓ BTCUSDT: 12 archive row(s) the source NO LONGER SERVES survived byte
+      for byte, and 180 fresh rows still landed — 192 rows on disk
+
+It seeded the archive rows into the new filename, watched the recorder append to
+the new filename, read them back from the new filename, and certified them.
+**The archive-protection check followed the recorder away from the archive and
+certified a different file.**
+
+## THE DAMAGE, PRINTED — because a green gate is not the evidence
+
+Both runs driven through `python open_interest.py --record`, which is exactly
+what the monthly scheduled task calls, against directories seeded with a
+**byte-for-byte copy of the REAL archive** (180 rows per asset, oldest
+2026-06-27T16:00:00Z).
+
+                        HEALTHY                     B14
+    report line     12 new row(s) appended,     180 new row(s) appended,
+                    192 stored                  180 stored
+    exit code       0                           0
+    files on disk   BTCUSDT_4h.csv  192 rows    BTCUSDT.csv     180 rows
+                                                BTCUSDT_4h.csv  180 rows  ← frozen
+                    ETHUSDT_4h.csv  192 rows    ETHUSDT.csv     180 rows
+                                                ETHUSDT_4h.csv  180 rows  ← frozen
+                    SOLUSDT_4h.csv  192 rows    SOLUSDT.csv     180 rows
+                                                SOLUSDT_4h.csv  180 rows  ← frozen
+
+**The archive every document on this ship names by that filename stops growing,
+permanently, and the line the Commander is under standing order to judge this
+recorder by reads `180 new row(s) appended, 180 stored` — 180 rows over a 30-day
+window at 4h, a figure that agrees with itself perfectly.**
+
+## THE FINDING REPORT — filled in BEFORE any repair, as the pattern requires
+
+**STEP 0 — IS THE FINDING TRUSTWORTHY?**
+
+    0.1  Did the healthy, untouched system pass FIRST?   YES — all four gates
+         green, and the untouched control also run INSIDE the scratch copy,
+         exit 0, before the edit was made.
+    0.2  Did you PRINT the broken version's output and show it is wrong?
+         YES — the side-by-side above, against a copy of the real archive.
+    0.3  Are you judging your OWN work?                  NO — I built none of
+         `data/open_interest.py` and none of its gate.
+
+**STEP 1 — THE VETO QUESTION.** *Would it change something the Commander would
+ACT on, or damage a record we keep?* **YES.** It damages the record — the
+archive stops growing and splits in two — and it corrupts the one line he is
+under standing order to judge the recorder by.
+
+**STEP 2 — THE THREE BIG ONES. ANY BAD ANSWER = SERIOUS.**
+
+    2.1  By accident, or only on purpose?      BY ACCIDENT — renaming a data
+         file is among the most ordinary edits available.          **BAD**
+    2.2  Would the Commander SEE it with his own eyes?  **NO** — answered
+         under HIS OWN RULING of today and only from what the output shows.
+         `180 new row(s) appended, 180 stored, window 2026-06-29 →
+         2026-07-29` is 180 rows over 30 days at 4h: the line agrees with
+         itself, and a stranger who knew nothing about this ship would see
+         nothing wrong on its face. Spotting it requires knowing in advance
+         that the honest figure was 192.                           **BAD**
+    2.3  Could it be UNDONE later?             **YES.** And this is the one
+         that matters in his favour — see 4.1.                     good
+
+**STEP 3 — WHAT MAKES IT WORSE.**
+
+    3.1  Would the system still report "all fine"?  YES — gate PASSED exit 0,
+         13/13 caught, `--record` exits 0 and prints "Recorded."
+    3.2  Does it touch records that cannot be re-bought?  YES — the
+         open-interest archive, though it SPLITS them rather than deleting.
+    3.3  Does it touch anything that TELLS HIM TO ACT?   NO — this recorder
+         displays nothing and feeds no line of the Brief.
+    3.4  One thing once, or everything forever?   EVERYTHING, FOREVER — all
+         three assets, every month from the moment it lands, diverging further
+         each month.
+
+**STEP 4 — IN PLAIN WORDS.**
+
+    4.1  What would actually happen to him? On the 1st of some month the
+         recorder would quietly start a brand-new file, print a healthy-looking
+         line, exit 0, and leave the archive that every document on this ship
+         names frozen forever — with its own gate printing PASSED and thirteen
+         of thirteen sabotages caught.
+    4.2  MY RECOMMENDATION: **SERIOUS** — two bad answers in Step 2, and the
+         form says any one of them is enough.
+         **AND THE HONEST QUALIFICATION, STATED PLAINLY BECAUSE IT CUTS
+         AGAINST MY OWN FINDING: B14 DESTROYS NOTHING.** B13 deleted 34
+         irreplaceable rows; B14 deletes none. The two files together still
+         hold every row, and anyone who noticed could repair it by
+         concatenating them. **It is SERIOUS because it is invisible and
+         happens by accident — not because anything is lost.** The Commander
+         may reasonably rule it lower than B13 and he should know that before
+         he does.
+
+## THE GATE FOR THE REPAIR — GATE 3.2b-R6, DECLARED HERE BEFORE THE CODE EXISTS
+
+**This entry is committed ALONE, with no `.py` file in the commit.** `git show
+--stat` on it proves the bar preceded the work. Thirteen uses of this pattern
+and it has survived audit every time.
+
+**THE AWKWARD EDGE CASES, NAMED BEFORE WRITING CODE, NOT AFTER DISCOVERING THEM:**
+
+1. **The six `csv_path()` calls inside the `_sab_*` functions MUST NOT MOVE.** A
+   sabotage stands in for module code while it is installed, so it has to
+   address the file the way the module does. Moving them would make the
+   sabotages address a file the recorder never writes and score every one of
+   them CAUGHT for the wrong reason — the B5 failure, bought a second time.
+2. **The gate's own copy of the name must be TYPED OUT, not built from
+   `PERIOD`.** That is the whole point. A legitimate future change of `PERIOD`
+   will therefore fail this gate loudly, which is the declared safe direction
+   and is recorded here in advance rather than discovered as a surprise.
+3. **Check (e) writes the tampered file itself**, so it must write to the gate's
+   address and the healthy module must read the same one.
+4. `_record_does_the_job` already pins the FOLDER and that pin stays; only the
+   file inside it moves to the gate's address.
+5. B14's permanent replacement must keep `csv_path`'s exact signature, default
+   argument included, or it will fail on a TypeError and be scored CAUGHT
+   without ever reaching the check it claims to prove.
+
+**THE BARS. PASS = every one green, including all FOURTEEN sabotages caught.
+Anything less is a FAIL, is not committed as a pass, and is not called "mostly
+passed".**
+
+  **(a) NOTHING THE PILOT READS CHANGES.** Every edit inside `__main__`. Proved
+  **two ways, not asserted:** every diff hunk at or after line 243, and a sha256
+  of the production half (lines 1-242) printed before and after and identical.
+  It is `e242f5af04853e19fca7a0f873dfef1450b63ee415fb9808e53a8f01cc3b585d` now.
+
+  **(b) THE GATE FINDS THE FILE AT ITS OWN ADDRESS.** Every place a CHECK
+  locates a CSV uses the gate's own `_gate_csv_path`, typed out in the gate.
+  **Proved by count, not by eye:** zero remaining `csv_path(` calls in the gate
+  half outside the `_sab_*` functions.
+
+  **(c) A NAMED CHECK compares the module's `csv_path` against the gate's own**
+  for every asset the gate names, and PRINTS BOTH — the same shape as the
+  existing `SYMBOLS` line, so a mismatch is diagnosed rather than merely fatal.
+
+  **(d) B14 IS A PERMANENT SABOTAGE**, broken and caught on every run forever,
+  originals restored and the restoration verified.
+
+  **(e) THE ORIGINAL ATTACK IS RE-RUN AS A REAL TEXT EDIT against the repaired
+  file** — not a wrapper — and must now FAIL, **and must be shown to fail for
+  the reason it claims and not incidentally**, by naming the address in its
+  diagnostic. **That is the evidence; the in-run drill is not.**
+
+  **(f) EVERYTHING THE OLD GATE DID, IT STILL DOES** — all thirteen existing
+  sabotages still caught, every lettered section still green.
+
+  **(g) NO new file, NO new dependency, NO extra call from the Brief's path.**
