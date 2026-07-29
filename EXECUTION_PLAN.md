@@ -365,6 +365,64 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+→ We are at: **PHASE 3 — THE BRIEF'S TWO DOORS ARE CLOSED. THE COMMANDER'S
+ORDER, DEFERRED BY TWO SESSIONS, WAS CARRIED OUT ON 2026-07-29 (night).**
+
+**HE REVERSED THE RHYTHM TO GET IT DONE, IN WRITING, AND ONLY HE COULD.**
+ATTACK-then-BUILD became BUILD-then-ATTACK for that session alone: *"Part 1 is
+closing the two doors — that is my order and it has waited two sessions… Do not
+defer my order a third time."* **`THE_PATTERN.md` was NOT edited; the rhythm
+stands for everyone else.**
+
+    cockpit/fear_greed.py   GATE 3.1-R6 PASSED  exit 0  17 sabotages caught
+    cockpit/funding.py      GATE 3.2-R6 PASSED  exit 0  18 sabotages caught
+                                                55 checks green, 0 red
+    data/open_interest.py   GATE 3.2b-R6 PASSED (2026-07-29 evening, 14)
+    vault INTACT 6/6 · Brief 3/3 · lab/ and data/oi_history/ untouched
+
+**WHAT WAS CLOSED.** The ear listened to the NAMES `sys.stdout`/`sys.stderr`, so
+a raw `os.write` to the descriptor and a `logging` handler bound at import time
+both walked past it — **measured, with both escaped lines printing trade
+instructions on the terminal.** And **nothing anywhere watched what these modules
+write at IMPORT time**, where one line put ">> … go long" ABOVE the Morning
+Brief's own header. `_capture` now listens at the FILE DESCRIPTOR, the ear is
+**made to prove it can hear before its silence is believed**, and a fresh
+interpreter imports each module and requires silence.
+
+## **THE TRUTH INCLUDING WHAT IS BROKEN OR UNPROVEN**
+
+1. **NOTHING OF THE NINTH REPAIR (R-020) WAS ATTACKED. NOT PARTIALLY — NOT AT
+   ALL.** The session ran short and the Commander had authorised exactly that
+   in advance. **R-020 is untouched, uncleared, and it is the next session's
+   Part 1.** Its five recorded doubts have never been tested.
+
+2. **THE FUNDING GATE IS RED ABOUT THREE RUNS IN FOUR — R-021, CATEGORY B.**
+   **It was already red on arrival, four runs of four, before anything was
+   changed.** A live-rate race in `_core_checks`/`_partial_checks`: the bookend
+   snapshots cannot bracket a rate that moves twice. **Measured: ~130 seconds
+   per run, green roughly 2 runs in 9, and the failing checks VARY between
+   runs** — which is the proof it is a race. It fails LOUD and the Brief is
+   correct throughout, so it was graded SMALL at the Step 1 veto and filed
+   rather than repaired. **The next session will meet a red gate exactly as
+   this one did, and the repair must tighten the BRACKET, never the BAR.**
+
+3. **THE R-016 REPAIR HAS NOT BEEN INDEPENDENTLY ATTACKED — R-022.** Its author
+   filed **seven doubts against his own work**, the sharpest being that
+   `brief.py`'s own import surface is still unwatched: **a `pandas_ta`
+   `UserWarning` is already printing on the real Brief's first line.**
+
+4. **`cockpit/brief.py` STILL HAS NO GATE.** The Commander has ruled: **NOT
+   NOW, BEFORE GOING LIVE.** Standing requirement, not to be re-argued.
+
+5. **AND THE ONE THAT DOES NOT EXPIRE:** at Phase 6 the "separation in time"
+   substitute for Fable EXPIRES. A second, genuinely independent AI reviews the
+   gauntlet's test setup before it runs and its verdict after. **R-006, and no
+   in-house session may ever clear it.**
+
+---
+
+## THE PREVIOUS MARKER, KEPT FOR THE RECORD RATHER THAN ERASED
+
 → We are at: **PHASE 3 — THE GATE NOW HOLDS ITS OWN ADDRESS, NOT JUST ITS OWN
 EXPECTATIONS. THE COMMANDER HAS RULED THAT THE BRIEF'S TWO DOORS ARE TO BE
 CLOSED, AND THEY ARE STILL OPEN — A SESSION DEFERRED HIS ORDER AND SAID SO.**

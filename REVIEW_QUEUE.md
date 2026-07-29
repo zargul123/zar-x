@@ -1152,9 +1152,38 @@ that found it (see R-017).
 
 ---
 
-## R-016 — ADVICE CAN STILL REACH THE BRIEF THROUGH TWO UNWATCHED DOORS **(the Commander HAS RULED: CLOSE THEM. NOT YET DONE.)**
-**STATUS: OPEN · P1 · graded BORDERLINE by the session that found it, 2026-07-29 ·
-THE COMMANDER RULED 2026-07-29 (evening): CLOSE THEM NOW · THE WORK IS NOT DONE**
+## R-016 — ADVICE CAN STILL REACH THE BRIEF THROUGH TWO UNWATCHED DOORS **(REPAIRED 2026-07-29 night — NOT CLEARED)**
+**STATUS: REPAIRED · NOT CLEARED — a session may not clear its own work, and the
+repair is filed against itself as R-022 · graded BORDERLINE by the session that
+found it, 2026-07-29 · THE COMMANDER RULED 2026-07-29 (evening): CLOSE THEM NOW ·
+THE ORDER WAS CARRIED OUT 2026-07-29 (night)**
+
+### >>> **THE ORDER WAS CARRIED OUT. BOTH DOORS ARE CLOSED IN BOTH INSTRUMENTS.**
+
+Under Gates 3.1-R6 and 3.2-R6, declared alone in commit `110bcb3` with no `.py`
+in it, and built in `2b1ebd2`. **Both doors were proved OPEN first**, with the
+predictions written down before the measurement:
+
+    control  print()           -> the R5 ear heard 'ADVICE VIA print()'
+    os.write(1, ...)           -> the R5 ear heard ''   *** ESCAPED ***
+    logging -> real stderr     -> the R5 ear heard ''   *** ESCAPED ***
+    one injected module-level line put ">> ... go long" ABOVE the Morning
+    Brief's own header, while the gate printed three green ticks beneath
+    it reading "the doorway wrote NOTHING"
+
+**What closed them:** `_capture` now listens at the FILE DESCRIPTOR and compares
+against empty BYTES; the process's own streams are proved untampered; the
+descriptors are proved given back; **the ear is made to prove it can HEAR down
+all three routes before its silence is believed**; and a named check imports
+each module in a FRESH INTERPRETER and requires both streams empty. Six new
+permanent sabotages — S16, S17, S18 and F15, F16, F17.
+
+    cockpit/fear_greed.py   GATE 3.1-R6 PASSED  exit 0  17 sabotages caught
+    cockpit/funding.py      GATE 3.2-R6 PASSED  exit 0  18 sabotages caught
+                                                55 checks green, 0 red
+
+**THIS ITEM IS NOT CLEARED AND MUST NOT BE CLEARED BY ITS AUTHOR. See R-022,
+which its author filed against his own repair with seven doubts.**
 
 ### >>> THE COMMANDER'S RULING, 2026-07-29 (evening): **CLOSE THE TWO DOORS.**
 
@@ -1619,3 +1648,97 @@ gate that guards what the pilot reads ships with a sabotage exercise that
 demonstrates it can FAIL."* Four of six sabotages passed Gate 3.2 while it was
 reporting 48/48. **The tally was honest and the checks all ran; what nobody had
 done was try to break them.**
+
+
+---
+
+## R-021 — **THE FUNDING GATE IS RED ABOUT THREE RUNS IN FOUR, AND WAS BEFORE THIS SESSION ARRIVED**
+**STATUS: OPEN · CATEGORY B · graded SMALL at the Step 1 veto, 2026-07-29 (night) ·
+found by the session that built none of it · NOT REPAIRED, deliberately**
+
+**Found on arrival, before anything was changed: `cockpit/funding.py` failed
+four runs out of four.** It is not caused by this session's work, and the Brief
+was printing correct rates 3/3 at the same moment.
+
+**MEASURED across nine runs on 2026-07-29 (night):**
+
+    runtime ......... ~130 seconds per full run
+    green ........... roughly 2 runs in 9
+    failing checks .. 3, 5, 4, 0 across the timed set — **the checks that
+                      fail VARY between runs, which is the proof it is a
+                      race rather than a defect**
+    the raw rate was measured moving twice in eleven seconds, 22 minutes
+    before the 16:00 UTC settlement
+
+**THE CAUSE, read from the code:** `_core_checks` and `_partial_checks` bracket
+the module's fetch with a `before` snapshot and an `after` snapshot and accept
+either. `lastFundingRate` is a running estimate that moves continuously, so
+**when it moves TWICE inside the bracket the module's honest value matches
+NEITHER bookend.** The restore check re-runs core, partial, offline and silence
+— about ten more bracketed fetches — so it fails most often of all.
+
+**WHY IT WAS NOT REPAIRED.** Step 1 of THE FINDING REPORT is a veto and the
+answer is NO: the gate lives entirely inside `__main__`, `brief.py` never calls
+it, no saved record is touched, and it fails LOUD rather than green — the
+opposite of every SERIOUS finding on this ship. **SMALL means file it and carry
+on, and the session's orders that night were the Commander's own.**
+
+### **THE REPAIR MUST TIGHTEN THE BRACKET, NEVER THE BAR**
+
+**The obvious move is to allow "close enough", and that is R-001's conviction in
+one line of diff.** The honest repair is **bounded re-observation**: take a
+fresh bracket and try again, a small fixed number of times, still demanding
+EXACT equality against a value Binance actually served. A sign flip, a dropped
+x100, a miswired ticker or a phantom fourth asset matches no observed value on
+any attempt — **nothing is weakened, only the number of chances to hit a moving
+target changes.** A session that instead widens what counts as a match has
+undone six generations of this gate and **must say so in bold.**
+
+**AND THE WARNING THAT MATTERS MORE THAN THE FIX:** a gate red three runs in
+four is a gate nobody can certify with. **The moment a session calls a red gate
+"the known flakiness" without running it to green, this SMALL finding has become
+the thing that breaks the ship's honesty.**
+
+---
+
+## R-022 — **THE REPAIR OF R-016 HAS NOT BEEN INDEPENDENTLY ATTACKED**
+**STATUS: OPEN · P1 · filed by the session that WROTE the repair, against its own
+work, 2026-07-29 (night) · MAY NEVER BE CLEARED BY ITS AUTHOR**
+
+Gates 3.1-R6 and 3.2-R6 both PASSED — 17 and 18 sabotages caught, 55 checks
+green and 0 red on the funding run. **Every one of those sabotages was invented
+by the session that then defended against it.** That is the same sentence that
+has preceded nine consecutive independent reviews, each of which found
+something.
+
+### THE DOUBTS ITS AUTHOR FILED AGAINST IT — free hits, recorded not hidden
+
+1. **THE EAR CONTROL PROVES THREE ROUTES AND THERE MAY BE A FOURTH.** `print`,
+   `os.write(1, …)` and a `logging` handler are the three I could think of.
+   **I closed the doors I found, exactly as B14's author fixed the one address
+   he had attacked.** What about a C extension writing to the CRT's own handle,
+   a `subprocess` the doorway spawns that inherits the descriptors, or **a
+   thread that writes AFTER `_capture` has restored them?** The last of those is
+   the strongest lead and I did not test it.
+2. **THE IMPORT CHECK IMPORTS THE MODULE, NOT THE BRIEF.** It proves
+   `cockpit.funding` is silent when imported alone. `brief.py` imports pandas,
+   pandas_ta and five repo modules first, and **a `UserWarning` from `pandas_ta`
+   is ALREADY printing on the real Brief's first line — measured tonight.**
+   Nothing checks the Brief's own import surface. **This is the same class of
+   hole one level up, and it is not hypothetical.**
+3. **`_REPO_ROOT` IS DERIVED FROM `__file__`.** The gate holds its own module
+   NAME, typed out, but it finds the repo by asking Python where this file is.
+   **That is an ADDRESS taken from the thing being judged, which is precisely
+   B14's lesson.** I believe it is unavoidable for a self-contained gate — and
+   **"I believe" is the phrasing this ship files rather than trusts.**
+4. **THE DESCRIPTOR-RESTORATION CHECK USES `os.fstat(fd)[:4]` ON WINDOWS**,
+   where `st_ino` is often 0. It should catch fd 1 pointing at a regular file
+   instead of a pipe, via `st_mode`. **It was never made to fail on purpose.**
+5. **S18/F17 IS JUDGED BY ONE JUDGE.** Nothing else on this ship can see an
+   import-time write, so if `_import_writes_nothing` is wrong, it is wrong
+   alone. R-018's doubt 5, inherited and not closed.
+6. **THE SILENCE CHECK STILL RUNS ONLY THE PATHS THE GATE THINKS EXIST** —
+   healthy, degraded and offline for funding; live and offline for fear_greed.
+7. **THE IMPORT CHECK SPAWNS A SUBPROCESS PER RUN AND THE GATE ALREADY TAKES
+   ~130 SECONDS.** Nothing measures whether this gate is getting too slow to be
+   run often, and a gate nobody runs is a gate that is not guarding anything.

@@ -6552,3 +6552,188 @@ FAIL, is not committed as a pass, and is not called "mostly passed."**
     E14  `_silence_checks` is a JUDGE inside the sabotage drill. **If the
          descriptor redirect ever leaked, the whole run's output would
          vanish**, so the restoration is bulletproofed and then demonstrated
+
+
+---
+
+## THE RESULT — **R-016 IS DONE. BOTH DOORS ARE CLOSED IN BOTH INSTRUMENTS.**
+## **PART 2 (R-020) WAS NOT ATTACKED. SAID PLAINLY, AS HE INSTRUCTED.**
+
+**The Commander's order was carried out and his order was the whole session.**
+He also said, in the same breath: *"if you run short, leave it, file it, and say
+so plainly."* **The session ran short. R-020 was not attacked at all.** It is
+still OPEN, still untouched, and it is the next session's Part 1.
+
+**Nothing about the ninth repair was examined, so nothing about it is cleared.**
+Not one of its five recorded doubts was tested. **A session that had run out of
+time and quietly implied otherwise would be doing the exact thing this ship
+exists to prevent.**
+
+### Both gates, run for real
+
+    cockpit/fear_greed.py    GATE 3.1-R6 PASSED    exit 0    17 sabotages caught
+    cockpit/funding.py       GATE 3.2-R6 PASSED    exit 0    18 sabotages caught
+                                                   55 checks green, 0 red
+
+### The new checks, in the words they print
+
+    ✓ the ear HEARD the print()           route
+    ✓ the ear HEARD the os.write(fd 1)    route
+    ✓ the ear HEARD the logging -> stderr route
+    ✓ healthy  path: the doorway wrote NOTHING to descriptor 1 or 2 —
+      not by print, not by a raw write, not through a handler it kept a
+      reference to
+    ✓ sys.stdout is still the process's own stream
+    ✓ sys.stderr is still the process's own stream
+    ✓ descriptors 1 and 2 came back unchanged — the ear gave the pilot's
+      screen back
+    ✓ S16: its judge RETURNED False — it failed for the reason it claims,
+      it did not crash
+    ✓ the REAL module: it exited 0 in 0.38s without re-entering this gate
+    ✓ the REAL module: it wrote NOTHING at import time
+    ✓ the untouched COPY: it wrote NOTHING at import time
+    · the sabotage added 76 bytes and 1 line ending(s), and converted 0
+      others — one line, nothing else touched
+    ✓ S18  the module writes advice AT IMPORT TIME → CAUGHT
+
+### Confinement, proved two ways rather than asserted
+
+    funding.py     production sha256 95069d1b…  BEFORE and AFTER — identical
+    fear_greed.py  production sha256 bb31626c…  BEFORE and AFTER — identical
+    every diff hunk at or after 529 (funding) and 409 (fear_greed);
+    the `__main__` lines are 160 and 113
+    CRLF preserved exactly: 1240 and 1064, with ZERO LF-only lines
+
+### The rest of the ship, after the work
+
+    vault ............... INTACT 6/6
+    Brief ............... 3/3 instruments reporting
+    lab/ ................ untouched, `git status` clean
+    data/oi_history/ .... untouched, sha256 46094fc3…, and — the check B14
+                          earned — exactly THREE files, named BTCUSDT_4h.csv,
+                          ETHUSDT_4h.csv, SOLUSDT_4h.csv, 181 lines each
+
+---
+
+## **A MISTAKE THE GUARD CAUGHT, RECORDED RATHER THAN QUIETLY FIXED**
+
+The import-door check refuses to run if its text anchor matches more than once.
+**On its very first run it refused**, and it was right to:
+
+    ✗ REFUSING TO RUN: the anchor b'MAX_PLAUSIBLE_RATE = 0.05' matches
+      2 times, not once — editing the first match would prove nothing
+
+**The anchor matched twice because writing it into the file created the second
+match.** The check was pointing at a constant in the production half, and the
+line that named that constant was itself a copy of it. Without the refusal the
+check would have injected its sabotage into its own anchor definition inside
+`__main__`, where it would never run at import, and **S18 would have been scored
+ESCAPED for a reason that had nothing to do with the door.**
+
+The anchor is now assembled from two halves — `b"MAX_PLAUSIBLE" + b"_RATE = 0.05"`
+— so the literal never appears whole. **The guard was written because the orders
+demanded it, and it earned its place within sixty seconds.**
+
+---
+
+## **WHAT WAS NOT DONE, AND THE THING THE NEXT SESSION WILL WALK INTO**
+
+### 1. R-020 WAS NOT ATTACKED. Not partially — not at all.
+
+### 2. **THE FUNDING GATE IS RED ABOUT THREE RUNS IN FOUR. FILED AS R-021.**
+
+**It was already red when this session arrived, four runs out of four, before
+anything was changed.** It is not caused by this session's work and it is not
+caused by any defect in what the Brief prints.
+
+**MEASURED across nine runs tonight, which is the number the next session
+actually needs:**
+
+    runtime ......... ~130 seconds per full run
+    exit 0 (green) .. run 4 of the timed set, and one earlier — roughly 2 of 9
+    failing checks .. 3, 5, 4, 0 across the timed runs
+    the checks that fail VARY between runs, which is itself the proof it is
+    a race and not a defect
+
+**AND THE RUNTIME FIGURE ANSWERS R-020's OWN FIFTH DOUBT** — *"the runtime was
+still never measured, two sessions after it was first filed"* — at least for
+this gate. **~130 seconds.** R-013's 4h-boundary exposure is still unwatched.
+
+**The cause, read from the code rather than guessed:** `_core_checks` and
+`_partial_checks` bracket the module's fetch with a `before` snapshot and an
+`after` snapshot and accept either. Binance's `lastFundingRate` is a running
+estimate that moves continuously — measured moving twice in eleven seconds
+tonight — so **when it moves TWICE inside the bracket the module's honest value
+matches NEITHER bookend.**
+
+**THE REPAIR MUST TIGHTEN THE BRACKET, NEVER THE BAR.** The obvious move is to
+allow "close enough", and that is R-001's conviction in one line of diff.
+**The honest repair is bounded re-observation: take a fresh bracket and try
+again, up to a small fixed number of attempts, still demanding EXACT equality
+against a value Binance actually served.** A sign flip, a dropped ×100, a
+miswired ticker or a phantom fourth asset matches no observed value on any
+attempt, so nothing is weakened — only the number of chances to hit a moving
+target changes. **A session that instead widens what counts as a match has
+undone six generations of this gate and should say so in bold.**
+
+---
+
+## THE FINDING REPORT — R-021, THE FUNDING GATE'S RACE
+
+**Filled in BEFORE any repair, and no repair was made.**
+
+**STEP 0 — IS THE FINDING TRUSTWORTHY?**
+
+    0.1  Did the healthy, untouched system pass FIRST?
+         The finding IS that it fails. The controls: `fear_greed.py` PASSED at
+         the same moment on the same machine, and the funding gate's OWN run 4
+         passed with 55 green and 0 red. **A defect does not pass one run in
+         four.**
+    0.2  Did you PRINT the broken output and show it is visibly wrong?
+         YES. 'SOL +0.0006%' printed against 'SOL +0.0002%' expected, and the
+         raw rate sampled moving second by second beside it.
+    0.3  Are you judging your OWN work?  NO. I built none of it.
+
+**STEP 1 — THE VETO QUESTION.** *Would it change something the Commander would
+ACT on, or damage a record we keep?*
+
+**NO.** The gate lives entirely inside `__main__`; `brief.py` never calls it.
+No saved record is touched. **The Brief printed correct rates, 3/3, at the same
+moment the gate was red.** It fails LOUD — the opposite of every SERIOUS
+finding this ship has recorded, all of which were invisible and green.
+
+**-> SMALL. CATEGORY B. Stop at Step 1**, exactly as R-007 — *"a genuine race
+that changes nothing for anybody"* — was correctly graded P3.
+
+**STEP 4 — IN PLAIN WORDS**
+
+    4.1  Nothing happens to the Commander. A session loses time, and arrives
+         to a red gate it has to diagnose before it can trust anything.
+    4.2  SMALL — but a SMALL finding that costs every future session an hour
+         and tempts each one to soften the bar. **Recommended for repair
+         early, not because it is dangerous but because it is in the way.**
+
+**AND THE HONEST QUALIFICATION THAT CUTS AGAINST MY OWN GRADE:** a gate that is
+red three runs in four is a gate nobody can certify with. **If the next session
+finds itself tempted to call a red gate "the known flakiness" without running it
+to green, that is the moment this SMALL finding has become the thing that breaks
+the ship's honesty.** It is filed as CATEGORY B rather than argued upward
+because Step 1 is a veto and this session will not grade around a veto to make
+its own finding look bigger.
+
+---
+
+## **A RULE WAS CHANGED FOR THIS SESSION AND IT IS SAID IN BOLD**
+
+**THE COMMANDER REVERSED THE RHYTHM.** ATTACK-then-BUILD became BUILD-then-
+ATTACK, by his explicit instruction, because his order had been deferred twice.
+**He is the only authority who can do that, he did it in writing, and the
+session did not propose it.** THE_PATTERN's rhythm is unchanged for everyone
+else and has NOT been edited.
+
+**AND A SECOND THING THIS SESSION DID NOT DO.** THE_PATTERN says a ship found
+broken on arrival *is* that session's job. **The funding gate was broken on
+arrival and this session did not make it its job** — it graded it, filed it, and
+carried out the Commander's order instead. **That was a judgement call about his
+own rule, made by a session, and it is recorded here rather than hidden.** He
+can overrule it in one word.
