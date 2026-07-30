@@ -7929,3 +7929,206 @@ THAT THE PUSH-BACK EXCUSES FROM BUILDING IT.** That is the same conflict of
 interest R-019 was earned by, pointing the other way, and I am recording it here
 BEFORE the repair rather than explaining it afterwards. **He can overrule it in
 one word.** It is written out for him in `SESSION_ORDERS.md`, on his desk.
+
+---
+
+# 2026-07-30 (evening) — TWELFTH GENERATION — **GATE 3.2b-R9 PASSED. BOTH FINDINGS REPAIRED. R-007 REPRODUCED AND ANSWERED. PART 2 (DOOR 3) NOT BUILT, AND WHY IS ON HIS DESK.**
+
+*Results of the bars declared alone in the commit above, with no code in it.*
+
+## THE HEADLINE NUMBERS
+
+    python data\open_interest.py    GATE 3.2b-R9 PASSED   exit 0   74 s
+                                    0 red ticks · 14/14 CAUGHT · 18 control lines
+    production half sha256          5347bfec… BEFORE and AFTER — identical
+    every diff hunk                 line 359 or later (the __main__ line is 243)
+    cockpit/brief.py                3/3 instruments reporting
+    data/oi_history/                3 files, 181 lines, e3258e82 / 1549a8a1 / e0f91a87
+    git status                      only data/open_interest.py modified
+
+## THE NINE BARS, SCORED
+
+1. **Reachability rule** — built. Every `_SABOTAGES` target must appear as a
+   WHOLE WORD in the production half, split at the `__main__` line, which the
+   rule requires to appear exactly once or it raises rather than guesses. GREEN.
+2. **Proved able to fire, both ways** — six new permanent controls. GREEN:
+
+       ✓ POSITIVE: '_rows' — the GATE'S OWN reader — reported ABSENT, even
+         though a naive substring search finds it 6 times in the production
+         half inside 'new_rows'
+       ✓ POSITIVE: a name that exists nowhere at all is reported ABSENT
+       ✓ NEGATIVE: '_utc_iso' / 'record' / 'csv_path' / 'SYMBOLS' each reported
+         PRESENT — a rule that called everything unreachable would flag all
+         twelve sabotages and mean nothing
+
+3. **staticmethod / classmethod / property** — `_holds` now unwraps them.
+   Three new positive controls, GREEN, bringing the detector's proved shapes
+   from five to eight.
+4. **Both old negative controls still silent** — GREEN. The correct call-time
+   pattern and a plain alias are still not reported. **This is the bar the
+   eleventh generation's first draft failed, and it is the one I most expected
+   to fail.**
+5. **The docstring names its measured misses** — done, in the file, in plain
+   words: closures, decorator wrappers, module-level containers and instance
+   attributes are NOT seen.
+6. **Everything the old gate did** — exit 0, zero red, fourteen of fourteen.
+7. **Nothing the pilot reads changed** — proved two ways, printed above.
+8. **Both original attacks re-run against the repaired file** — GREEN, below.
+9. **`py_compile` before the gate; no new file, no new dependency** — `re` is
+   imported inside `__main__` beside the existing `import functools`, so the
+   recorder's import surface is untouched. GREEN.
+
+## BAR 8 — MY OWN ATTACKS, RE-RUN AGAINST THE REPAIR
+
+**ATTACK 1 IS NOW CAUGHT, AND IT FAILS FOR THE REASON IT CLAIMS.** The same BX
+sabotage, re-applied as the same real text edit on top of the repaired file:
+
+    ✗ BX   rebinds '_rows'  → THE RECORDER NEVER MENTIONS '_rows'. It is named
+                              ONLY inside this gate, so this sabotage reaches
+                              NOTHING THE PILOT RUNS AND TESTS NOTHING
+    GATE 3.2b-R9 FAILED — see the ✗ lines above.        exit 1
+
+**Before the repair the identical edit produced `✓ BX … → CAUGHT`, `✓ BX rebinds
+'_rows' → the swap reaches the module`, zero red ticks and exit 0, while the
+recorder wrote 180 perfect rows:**
+
+    BX DAMAGE >> the recorder wrote 180 rows to BTCUSDT_4h.csv, spanning
+                 2026-06-30T16:00:00Z .. 2026-07-30T12:00:00Z - UNTOUCHED.
+
+**ATTACK 2 IS NOW PARTLY CAUGHT, AND I AM SAYING WHICH PART.** The same probe,
+re-run against the repaired file:
+
+    ATTACK PROBE SEEN    _AttackHolder.static_method     (was MISSED)
+    ATTACK PROBE SEEN    _AttackHolder.class_method      (was MISSED)
+    ATTACK PROBE MISSED  _AttackHolder.prop              (still MISSED)
+    ATTACK PROBE MISSED  _closure_fn / _wrapped_fn / _container / _holder_inst
+
+**THE PROPERTY IS THE HONEST BIT AND I WILL NOT LET IT LOOK LIKE A WIN.** My new
+control plants `property(lambda self, x=sentinel: x)` — a getter with a frozen
+DEFAULT — and the detector now finds it. My probe plants a getter that CLOSES
+OVER the value, and the detector still does not. **So I fixed a shape, not a
+form**, and a closure behind a property is still invisible. That is the same
+disease this whole session is about, one level smaller, and it is filed as R-027
+doubt 5 rather than written up as coverage.
+
+## WHAT I GOT WRONG — every one, as plainly as the successes
+
+1. **THE 3.10 F-STRING TRAP THE ORDERS WARNED ME ABOUT IN BOLD, AND I WALKED
+   STRAIGHT INTO IT.** `f'…{raw.count(b"\n")…}'` — SyntaxError, cost one run.
+   The orders named this exact failure and I still made it.
+2. **MY FIRST PATCH SCRIPT WAS WRITTEN IN BYTES MODE WITH ANCHORS CONTAINING
+   `✓`, `✗` AND `→`.** A `\uXXXX` escape means nothing in a bytes literal, so
+   every one of those anchors would have matched zero times. Caught by reading
+   before running, not by any check — I rewrote the whole script in text mode.
+3. **AN ANCHOR MISSED A `**` AND THE SCRIPT REFUSED TO RUN.** The docstring line
+   ends `not papered over here.**"""`, not `."""`. **The guard did exactly its
+   job: matched 0 times, refused, wrote nothing.** This is the second session
+   running in which the anchor-uniqueness rule caught its own author.
+4. **MY FIRST GREP FOR `_rows` IN THE PRODUCTION HALF SAID SIX.** All six were
+   `new_rows`. I caught it because the count for `new_rows` was also six.
+   **That mistake became the best control in the repair** — the positive control
+   now states the naive count out loud, so nobody can quietly regress to a
+   substring search.
+5. **THE DECLARATION COMMIT SUBJECT CARRIES A UTF-8 BOM** (`﻿GATE 3.2b-R9
+   DECLARED…`), because PowerShell 5.1 `Set-Content -Encoding utf8` writes one.
+   Cosmetic, in `git log` forever, not amended because rewriting history is
+   worse than a stray byte. **Next session: write commit messages with Python.**
+
+## THE PREDICTIONS I WROTE BEFORE RUNNING — three, and one is only half right
+
+- **PREDICTION 1 (BX certified green, scored CAUGHT, gate exits 0): RIGHT**, in
+  every particular, including that the recorder would be untouched.
+- **PREDICTION 2 (staticmethod invisible; unsure about classmethod): RIGHT**,
+  and classmethod and property were invisible too.
+- **PREDICTION 3 (the container miss is real, but lower severity because a no-op
+  sabotage goes RED rather than quietly green): THE MISS IS REAL AND THE
+  SEVERITY CLAIM IS UNTESTED SPECULATION.** I never built a container sabotage.
+  The reasoning holds only when the swap reaches NOTHING; BX proved that when
+  the swap reaches the gate's own judge, a no-op sabotage goes quietly GREEN
+  instead. **I am recording it as untested rather than as a result**, because
+  the distinction between those two cases is the whole finding and I nearly
+  filed it the wrong way round.
+
+## THREE MEASUREMENTS THAT BEAT THE DOCUMENTS
+
+**THE MEASUREMENT WINS AND I AM WRITING THE CORRECTION DOWN.**
+
+    the recorder's gate   ORDERS SAY 55 s · LOG SAYS ~4 min
+                          MEASURED, five timed runs: 73, 80, 77, 73, 74 s
+    the funding gate      ORDERS SAY ~85 s   MEASURED 128 s
+    the fear&greed gate   nobody had a figure  MEASURED 40 s
+
+**R-026 doubt 8 said nothing watches this gate's runtime and the one figure on
+record had been wrong by a factor of four in both directions on the same day. It
+is now wrong for a third consecutive session, in two different files.** ~75 s is
+the honest figure for the recorder's gate and ~130 s for funding. `ROADMAP.md`
+corrected.
+
+## THE cp1252 SCAN, WITH A DISCREPANCY WORTH NAMING
+
+I ran the five-fingerprint scan before every commit. **It reports SEVEN hits;
+the previous session reported FIVE and the one before that THREE.** Nothing new
+arrived — **the difference is method.** I count once per fingerprint per line, so
+a line carrying two different fingerprints counts twice. **All seven were
+inside backticks, all seven were deliberate quotations of the damage, and ZERO
+were in anything I wrote.**
+
+**AND THEN THE SCAN CAUGHT ME, WHICH IS THE ONLY REASON THIS PARAGRAPH IS WORTH
+READING.** The first draft of the sentence above QUOTED two of the fingerprints in
+order to explain the counting method, and the scan I ran after appending it duly
+reported NINE. **The document would have shipped saying 'seven' while the scan
+printed nine — a file contradicting itself on its own face.** The quotations are
+removed and the honest figure is now: **SEVEN pre-existing hits, all inside
+backticks, all deliberate, ZERO written by me.** Recorded so the next session
+does not read a rising number as rot — and because a one-line scan that has now
+caught two consecutive sessions is still **RECOMMENDED AND STILL NOT ADOPTED.**
+
+## R-007 — REPRODUCED AT LAST, AFTER EIGHT SESSIONS OF NOBODY LOOKING
+
+I could not wait 2h45m for a real 16:00 UTC boundary, so I reproduced the
+CONSEQUENCE deterministically: the doorway was handed exactly the two answers a
+straddle produces, on a scratch copy outside the repo. **Control first** — three
+contracts agreeing print `next settlement 16:00 UTC`, correct. Then the straddle:
+
+    Funding (8h) : BTC +0.0100%  ·  ETH +0.0010%  ·  SOL +0.0010%
+    (USDT perpetuals · positive = longs pay shorts · next settlement 16:00 UTC
+
+**16:00 has already fired. The next settlement is 00:00.** The line prints a time
+in the past as though it were the next one. **Confirmed, exactly as filed in
+2026-07-26.**
+
+**AND A LIMB R-007 NEVER NAMED, which is why reproducing beats reasoning:** the
+three RATES in that block belong to TWO DIFFERENT settlement periods. BTC's is
+the mature estimate for the one that just fired; ETH's and SOL's are freshly
+reset for the next. **They are printed side by side as one snapshot with nothing
+saying so, and the numbers differ by 10x for that reason alone.**
+
+**GRADED ON THE FINDING REPORT.** Step 0 clean (control first, damage printed,
+not my work). **Step 1 = NO** — measured, not assumed: `journal/snapshots_local.csv`
+has columns `utc_time,asset,timeframe,close,trend,rsi,atr,atr_pct,regime,entropy,adx`
+and **stores no funding data at all**, so no record is damaged; and the ship is
+information-only, so there is nothing here he acts on. **Step 1 = NO means SMALL,
+full stop.** `THE_PATTERN.md` names R-007 as its own worked example of this and
+rating it P3 was correct.
+
+**VERDICT: the window is judged ACCEPTABLE and said so out loud** — which is one
+of the two clean verdicts R-007 itself names. **R-007 is CLEARED on the limb it
+filed.** The rates limb is NEW, I found it, and **a session may not clear what it
+just found**, so it is filed as R-028, CATEGORY B.
+
+## WHAT I DID NOT DO
+
+**R-022 doubt 6 is still untouched** — I had one slot for it or R-007 and I spent
+it on R-007, the older item.
+
+**R-026 doubt 1 IS NOT FIXED.** `_detector_sees_every_shape` still puts seven
+names into the module's `globals()` and takes them out in a `finally`, and
+nothing compares the namespace before and after. My new control installs nothing
+at all, which is better, **but I did not close the old one and I am not going to
+let that pass unsaid.**
+
+**AND PART 2 — DOOR 3 — IS NOT BUILT.** Both my findings graded SERIOUS, and the
+rule for SERIOUS is fix it and stop, build nothing. **I followed the rule. What
+that rule cost today is on the Commander's desk in `SESSION_ORDERS.md`, in his
+own words rather than mine, because the session the rule excused from building is
+the same session that wrote the grade.**

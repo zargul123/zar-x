@@ -365,6 +365,44 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+→ We are at: **PHASE 3 — THE TWELFTH GENERATION. TWO MORE FINDINGS AGAINST THE
+SAME CHECK, ONE DAY AFTER THE LAST TWO, BOTH REPAIRED UNDER GATE 3.2b-R9. A SABOTAGE
+THAT REBOUND A NAME THE RECORDER CANNOT EVEN SEE WAS SCORED **CAUGHT** AND CERTIFIED
+AS REACHING THE MODULE, WHILE THE RECORDER WROTE 180 PERFECT ROWS AND THE GATE
+EXITED 0. **DOOR 3 (R-025) IS STILL NOT BUILT — THE SERIOUS RULE STOPPED THE BUILD,
+AND THAT COLLISION IS ON THE COMMANDER'S DESK.**
+
+    data/open_interest.py   GATE 3.2b-R9 PASSED  exit 0  0 red, 14/14 CAUGHT, 74 s
+    cockpit/fear_greed.py   GATE 3.1-R6  PASSED  exit 0  0 red   40 s
+    cockpit/funding.py      GATE 3.2-R6  PASSED  exit 0  0 red  128 s — SEE R-025
+    lab/verify_vault.py     VAULT INTACT 6/6
+    cockpit/brief.py        3/3 instruments reporting
+    data/oi_history/        3 files, correctly named, 181 lines each, sha256
+                            e3258e82 / 1549a8a1 / e0f91a87 — unchanged all session
+
+**WHAT IS BROKEN OR UNPROVEN, WHICH IS THE POINT OF THIS MARKER.**
+
+- **DOOR 3 IS AN ORDER AND IT IS NOT BUILT.** The Commander ruled R-025 SERIOUS on
+  2026-07-30 (afternoon) and accepted that Context Deck instrument 3 slips a sixth
+  time. **It has now slipped a SEVENTH**, because this session's own findings graded
+  SERIOUS and the rule for SERIOUS is fix-and-stop. **The session that wrote that
+  grade is the session the grade excused from building. He can overrule it in one
+  word and the orders say so.**
+- **R-027 IS OPEN AGAINST GATE 3.2b-R9 AND ITS AUTHOR MAY NOT CLEAR IT.** Ten
+  doubts filed. The strongest: `_named_in_production` is a TEXT search, so a name
+  appearing only in a COMMENT counts as code — the same disease, untested.
+- **THE PROPERTY FIX IS A SHAPE, NOT A FORM.** A getter with a frozen default is
+  now seen; a getter that closes over the value is not, proved in the same run.
+- **R-026 DOUBT 1 IS UNTOUCHED** — the controls still mutate the module's own
+  `globals()` and nothing compares the namespace before and after.
+- **R-022 DOUBT 6 IS UNTOUCHED**, nine sessions now.
+- **THE CATEGORY B PILE IS SIX DEEP** (R-028 joined it tonight).
+- **THE RECORDER'S COMMIT-AND-PUSH BRANCH HAS STILL NEVER FIRED FOR REAL.** The
+  errand is due **1 August**; on 2026-07-30 it was NOT due and the scheduled task
+  reads Status Ready, Next Run 01-Aug-2026 09:00.
+
+**THE PREVIOUS MARKER, KEPT FOR THE RECORD RATHER THAN ERASED:**
+
 → We are at: **PHASE 3 — THE ELEVENTH GENERATION. TWO FINDINGS, BOTH PROVED, ONE
 REPAIRED. THE CHECK BUILT THAT MORNING TO STOP B9's CLASS WAS ITSELF BLIND TO
 THREE OF THE FOUR WAYS IT HAPPENS (repaired under GATE 3.2b-R8), AND R-022 DOUBT 1

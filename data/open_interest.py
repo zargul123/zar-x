@@ -356,7 +356,7 @@ if __name__ == '__main__':
         return os.path.join(history_dir, f"{symbol}{GATE_CSV_SUFFIX}")
 
     ok = True
-    print("GATE 3.2b-R8 — the open-interest recorder's self-test.")
+    print("GATE 3.2b-R9 — the open-interest recorder's self-test.")
     print("It breaks itself on purpose and requires every break to be CAUGHT,")
     print("because on this ship a check nobody has attacked is a check nobody")
     print("has tested. The dataset it guards cannot be recovered if it is lost.")
@@ -1655,6 +1655,7 @@ if __name__ == '__main__':
     # this module has frozen as a DEFAULT ARGUMENT.
     # =====================================================================
     import functools
+    import re
 
     _NOT_PRESENT = object()
 
@@ -1695,14 +1696,42 @@ if __name__ == '__main__':
         shape this file uses. Equality is NOT the answer: it would flag every
         function whose default merely equals the target, and this check's
         silence would stop meaning anything. **The mutable-copy miss is filed
-        in REVIEW_QUEUE.md, not papered over here.**"""
+        in REVIEW_QUEUE.md, not papered over here.**
+
+        **WHAT THIS DETECTOR IS STILL DEAF TO, MEASURED 2026-07-30
+        (evening) BY AN INDEPENDENT SESSION AND WRITTEN DOWN RATHER THAN
+        LEFT IMPLIED.** It was handed nine shapes in this module's own
+        namespace and reported four. It DOES NOT SEE: a value held in a
+        CLOSURE (`__closure__`); a function hidden behind a DECORATOR
+        WRAPPER; a function living inside a module-level CONTAINER - a
+        list or a dict, and `_SABOTAGES` below is exactly that; or an
+        INSTANCE attribute. **Those four are open, they are R-026 doubt
+        3, and naming them here IS the repair: the fault this check keeps
+        repeating is a claim wider than the code behind it.**"""
         target = globals().get(name, _NOT_PRESENT)
         if target is _NOT_PRESENT:
             return ['<no such name in this module>']
 
+        def _unwrap(obj):
+            """GATE 3.2b-R9, 2026-07-30 (evening). **A CLASS BODY DOES
+            NOT STORE WHAT YOU WROTE.** `vars(cls)` hands back the RAW
+            descriptor, and MEASURED ON THIS MACHINE, PYTHON 3.10: a
+            `staticmethod`, a `classmethod` and a `property` taken from
+            `vars(cls)` do not expose `__defaults__` AT ALL. So three of
+            the shapes the docstring above calls 'a class body' were
+            invisible - inside a form this check claims BY NAME to cover.
+            Found by an independent session that planted all three and
+            watched the detector report only the plain ones."""
+            if isinstance(obj, (staticmethod, classmethod)):
+                return getattr(obj, '__func__', obj)
+            if isinstance(obj, property):
+                return obj.fget
+            return obj
+
         def _holds(obj):
             """Does `obj` hold `target` somewhere a later
             `globals()[name] = ...` cannot reach?"""
+            obj = _unwrap(obj)
             for d in (getattr(obj, '__defaults__', None) or ()):
                 if d is target:
                     return True
@@ -1725,6 +1754,71 @@ if __name__ == '__main__':
                     if attr is target or _holds(attr):
                         found.append(f'{fname}.{aname}')
         return sorted(set(found))
+
+    _MAIN_LINE = "if __name__ == '__main__':"
+
+    def _production_half():
+        """GATE 3.2b-R9. The text of this file ABOVE the `__main__` line -
+        the ONLY part that exists when the recorder is imported and run for
+        real by the monthly task. Read from the file itself, never
+        reconstructed, and the split point must appear EXACTLY ONCE or this
+        refuses to guess where the recorder ends and the gate begins."""
+        n = _pristine.count('\n' + _MAIN_LINE)
+        if n != 1:
+            raise RecorderError(f"the __main__ line appears {n} times, "
+                                f"not once - refusing to guess where the "
+                                f"recorder ends and the gate begins")
+        return _pristine.split('\n' + _MAIN_LINE)[0]
+
+    def _named_in_production(name):
+        """GATE 3.2b-R9, 2026-07-30 (evening). **DOES THE RECORDER EVEN
+        MENTION THIS NAME?**
+
+        Check (n) proved a swapped name was not BLOCKED by a frozen default
+        and then printed that the swap 'reaches the module'. **THOSE ARE
+        NOT THE SAME CLAIM.** An independent session added one sabotage
+        rebinding `_rows` - the GATE'S OWN CSV reader, defined inside
+        `__main__`, which the recorder cannot even name - and this gate
+        scored it CAUGHT, certified that the swap reached the module,
+        printed zero red ticks and exited 0, while the recorder wrote 180
+        perfect rows it had never touched. **That is B9's shape with the
+        freeze taken out, and B9 walked through four generations.**
+
+        WHOLE WORD, deliberately: the production half contains `new_rows`
+        six times, so a substring search would have called `_rows` present
+        and proved nothing. A control below plants exactly that trap."""
+        return re.search(r'\b' + re.escape(name) + r'\b',
+                         _production_half()) is not None
+
+    def _reachability_rule_can_fire(verbose=True):
+        """GATE 3.2b-R9 (1) and (2). **A CHECK THAT REPORTS THE ABSENCE OF
+        SOMETHING MUST FIRST BE PROVED ABLE TO DETECT ITS PRESENCE - AND
+        PROVED TO STAY SILENT ABOUT WHAT IT DOES NOT COVER.** Both halves,
+        every run, forever."""
+        say = print if verbose else (lambda *a, **k: None)
+        tick, cross = '\u2713', '\u2717'
+        good = True
+        naive = _production_half().count('_rows')
+        hit = not _named_in_production('_rows')
+        say(f"   {tick if hit else cross} POSITIVE CONTROL: '_rows' - the "
+            f"GATE'S OWN reader, which the recorder cannot name - is "
+            f"reported ABSENT, even though a naive substring search finds "
+            f"it {naive} times in the production half inside 'new_rows'. "
+            f"Whole-word matching is doing real work and this control "
+            f"proves it rather than a comment claiming it")
+        good = good and hit
+        hit2 = not _named_in_production('_no_such_name_anywhere_r9')
+        say(f"   {tick if hit2 else cross} POSITIVE CONTROL: a name that "
+            f"exists nowhere in this file at all is reported ABSENT")
+        good = good and hit2
+        for real in ('_utc_iso', 'record', 'csv_path', 'SYMBOLS'):
+            here = _named_in_production(real)
+            say(f"   {tick if here else cross} NEGATIVE CONTROL: {real!r} "
+                f"IS named in the recorder, so this rule is not simply "
+                f"calling everything unreachable - which would flag all "
+                f"twelve sabotages and mean nothing")
+            good = good and here
+        return good
 
     def _detector_sees_every_shape(verbose=True):
         """GATE 3.2b-R8 (2) and (3). **A CHECK THAT REPORTS THE ABSENCE OF
@@ -1762,6 +1856,19 @@ if __name__ == '__main__':
             def method(self, x=sentinel):
                 return x
 
+            # GATE 3.2b-R9: the three class-body shapes the R8 control
+            # never built. It planted a PLAIN method, and the check then
+            # spoke for the whole of 'a class body'.
+            @staticmethod
+            def static_method(x=sentinel):
+                return x
+
+            @classmethod
+            def class_method(cls, x=sentinel):
+                return x
+
+            prop = property(lambda self, x=sentinel: x)
+
         installed = {
             '_R8_SENTINEL': sentinel,
             '_r8_positional': _r8_positional,
@@ -1792,7 +1899,13 @@ if __name__ == '__main__':
                                'the one that was blind'),
                 ('_r8_partial', 'a functools.partial binding'),
                 ('_R8Holder.attr', 'a class attribute'),
-                ('_R8Holder.method', 'a default on a METHOD')):
+                ('_R8Holder.method', 'a default on a METHOD'),
+                ('_R8Holder.static_method',
+                 'a default on a STATICMETHOD - blind until R9'),
+                ('_R8Holder.class_method',
+                 'a default on a CLASSMETHOD - blind until R9'),
+                ('_R8Holder.prop',
+                 'a default on a PROPERTY getter - blind until R9')):
             hit = label in seen
             say(f"   {tick if hit else cross} POSITIVE CONTROL: the "
                 f"detector sees {what}"
@@ -1829,6 +1942,10 @@ if __name__ == '__main__':
         # believed. This runs FIRST, ahead of even the R7 control.
         if not _detector_sees_every_shape(verbose=verbose):
             return False
+        # GATE 3.2b-R9: and the SECOND rule - a swap can only reach code
+        # that mentions the name - proves it can fire before it speaks.
+        if not _reachability_rule_can_fire(verbose=verbose):
+            return False
         control = _frozen_as_default('SYMBOLS')
         control_ok = 'run' in control
         where = (str(control) if control_ok
@@ -1841,12 +1958,20 @@ if __name__ == '__main__':
         good = True
         for tag, words, attr, _repl, _judge in _SABOTAGES:
             frozen = _frozen_as_default(attr)
-            clean = not frozen
+            reaches = _named_in_production(attr)
+            clean = (not frozen) and reaches
+            if not reaches:
+                why = (f"THE RECORDER NEVER MENTIONS {attr!r}. It is named "
+                       f"ONLY inside this gate, so this sabotage reaches "
+                       f"NOTHING THE PILOT RUNS AND TESTS NOTHING")
+            elif frozen:
+                why = (f"FROZEN as a default argument in {frozen} — THIS "
+                       f"SABOTAGE CANNOT REACH THE MODULE AND TESTS NOTHING")
+            else:
+                why = ("named in the recorder AND looked up at CALL TIME, "
+                       "so the swap reaches the code the pilot runs")
             say(f"   {'✓' if clean else '✗'} {tag:<4} rebinds {attr!r:<12} → "
-                + ("looked up at CALL TIME, so the swap reaches the module"
-                   if clean else
-                   f"FROZEN as a default argument in {frozen} — THIS SABOTAGE "
-                   f"CANNOT REACH THE MODULE AND TESTS NOTHING"))
+                + why)
             good = good and clean
         return good
 
@@ -1924,10 +2049,17 @@ if __name__ == '__main__':
     print("    counted an alias and went red 14 times on a healthy file.")
     installer_ok = _installer_can_install(verbose=True)
     print(f"   {'✓' if installer_ok else '✗'} every globals-swap sabotage "
-          f"targets a name this module looks up at CALL TIME, and the check "
-          f"proved it can see a frozen name in every one of the four places "
-          f"Python freezes one, and stay silent about both the correct "
-          f"pattern and a mere alias, before it certified that")
+          f"targets a name THE RECORDER ITSELF MENTIONS and looks up at "
+          f"CALL TIME. GATE 3.2b-R9: BOTH halves were proved before it "
+          f"spoke - the detector had to FIND a planted freeze in all "
+          f"EIGHT shapes it claims, including the staticmethod, "
+          f"classmethod and property it was blind to yesterday, and stay "
+          f"silent about the correct pattern and a mere alias; and the "
+          f"reachability rule had to FLAG this gate's own reader and "
+          f"clear all four real targets. The old wording said 'the swap "
+          f"reaches the module' while measuring only that it was not "
+          f"frozen out, and a sabotage the recorder could never see "
+          f"walked through it")
     b9_judge_ok = _b9_judge_says_no(verbose=True)
 
     restored = (_disk_matches_source(verbose=True) and _trap_check(verbose=False)
@@ -1955,7 +2087,7 @@ if __name__ == '__main__':
     shutil.rmtree(SCRATCH, ignore_errors=True)
 
     if ok:
-        print("\nGATE 3.2b-R8 PASSED — the backfill is real, the same run twice")
+        print("\nGATE 3.2b-R9 PASSED — the backfill is real, the same run twice")
         print("changes nothing, an empty result fails loudly, the offline drill")
         print("leaves the files byte-identical, tampered history is reported")
         print("rather than overwritten, the `--record` branch the monthly task")
@@ -1976,6 +2108,6 @@ if __name__ == '__main__':
         print("GATE NAMES, from its own list, not the module's. This test has")
         print("demonstrated, this run, that it can say no.")
     else:
-        print("\nGATE 3.2b-R8 FAILED — see the ✗ lines above. Nothing is")
+        print("\nGATE 3.2b-R9 FAILED — see the ✗ lines above. Nothing is")
         print("committed as a pass.")
     sys.exit(0 if ok else 1)

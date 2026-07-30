@@ -2237,3 +2237,179 @@ shipped — which is the entire argument for building the controls first.**
    I have written a control that will actively keep the next session from finding
    it.** That is the most dangerous line in my diff and I do not know how to test
    it from where I am standing.
+
+---
+
+# VERDICTS OF 2026-07-30 (evening) — by the TWELFTH generation, which built none of this
+
+## R-026 — **NOT CLEARED. TWO REAL FINDINGS, ONE DISEASE.**
+
+**ELEVEN OF TWELVE GENERATIONS OF THIS STRUCTURE HAVE NOW BEEN FAILED BY THE NEXT
+PAIR OF EYES.**
+
+**MY NEW QUESTION, THE TENTH:** *"WHOSE CODE DOES THE SWAP REACH — the part under
+test, or the test itself?"*
+
+### FINDING 1 — **CHECK (n) CERTIFIES A SABOTAGE THAT CANNOT TOUCH THE RECORDER**
+
+Check (n) printed, of every globals-swap sabotage, *"looked up at CALL TIME, so
+the swap reaches the module."* **It measured only that the name was not frozen as
+a default argument.** Those are different claims, and the gap is B9's shape with
+the freeze taken out.
+
+One added sabotage, `BX`, rebinding `_rows` — the gate's own CSV reader, defined
+inside `__main__`, which the production half cannot name:
+
+    BX DAMAGE >> the recorder wrote 180 rows to BTCUSDT_4h.csv, spanning
+                 2026-06-30T16:00:00Z .. 2026-07-30T12:00:00Z - UNTOUCHED.
+    ✓ BX  a name ONLY THE GATE reads, never the recorder → CAUGHT
+    ✓ BX  rebinds '_rows' → looked up at CALL TIME, so the swap reaches the module
+    GATE 3.2b-R8 PASSED       exit 0      0 red ticks
+
+**Control first:** the untouched file passed in the real repo (74 s) and again in
+the scratch tree (80 s) before anything was edited.
+
+**THE FINDING REPORT.** Step 0 clean. **Step 1 YES, and it is a CHAIN, said so he
+can weigh it:** a sabotage that tests nothing makes the tally overstate the guard
+on `data/oi_history/` — the one dataset Binance will not sell back — and that is
+not a theory, it is what B9 did for four generations. **2.1 BAD — BY ACCIDENT:**
+B9 was written in good faith by a session that believed a globals swap would
+reach the recorder; the gate has a dozen internal helpers, and `_rows` is a
+near-twin of the module's own `read_stored`. **2.2 BAD — NO:** on his wording,
+the output shows `CAUGHT`, a green certification, zero red ticks and `PASSED`;
+nothing contradicts itself on its face and spotting it needs prior knowledge of
+which names belong to the gate. 2.3 GOOD. **Any Step 2 bad = SERIOUS.**
+
+### FINDING 2 — **THE DETECTOR'S CLASS-BODY CLAIM WAS PROVED FOR ONE SHAPE AND SPOKE FOR ALL OF THEM**
+
+`_frozen_as_default` names "a class body" as one of the four places Python
+freezes a name. Its control built a PLAIN method. Nine shapes were put into the
+module's own namespace and the shipped detector reported four:
+
+    SEEN    plain_attr · plain_method
+    MISSED  static_method · class_method · prop
+    MISSED  closure · decorator wrapper · container · instance attribute
+
+**Three of those misses are inside the form the docstring claims by name.** The
+cause is a language fact measured on this machine: in Python 3.10 a
+`staticmethod`, `classmethod` or `property` taken from `vars(cls)` does not
+expose `__defaults__` at all. **SERIOUS on the same two questions.**
+
+### **BOTH FINDINGS ARE LATENT, AND I SAY IT AS LOUDLY AS THE REST**
+
+All twelve real globals-swap sabotages target `_utc_iso`, `record` and
+`csv_path` — production names, every one correctly certified. This module has one
+class, `RecorderError`, with no methods. **Nothing shipped was weaker than it
+looked. What was wrong was the CLAIM's scope** — word for word what the eleventh
+generation found in the same check one day earlier.
+
+### REPAIRED UNDER GATE 3.2b-R9, DECLARED AND COMMITTED ALONE FIRST
+
+Exit 0, 74 s, zero red ticks, 14/14 CAUGHT, 18 controls. Production half sha256
+`5347bfec…` identical before and after; every diff hunk at line 359 or later.
+Both original attacks re-run and now caught — BX by name and reason, exit 1.
+
+---
+
+## R-027 — **GATE 3.2b-R9 WAS WRITTEN BY THE SESSION THAT FOUND THE FAULTS IT REPAIRS**
+**STATUS: OPEN · P1 · filed by that session against its own work, 2026-07-30
+(evening) · MAY NEVER BE CLEARED BY ITS AUTHOR**
+
+**TWELFTH GENERATION. ELEVEN OF THE PREVIOUS ELEVEN WERE FAILED BY THE NEXT PAIR
+OF EYES. ASSUME THIS ONE IS TOO.**
+
+### THE DOUBTS I FILE AGAINST MY OWN WORK — free hits, recorded not hidden
+
+1. **`_named_in_production` IS A TEXT SEARCH, SO A COMMENT COUNTS AS CODE.** A
+   name that appears ONLY inside a comment or a docstring in the production half
+   is reported as "named in the recorder" and the sabotage is certified.
+   **Untested. This is the most likely way my repair is already wrong**, and it
+   is the same disease again: I check the text and speak about the behaviour.
+2. **THE PROPERTY FIX IS A SHAPE, NOT A FORM.** A property whose getter has a
+   frozen DEFAULT is now seen. A property whose getter CLOSES OVER the value is
+   still invisible — **proved by my own probe in the same run that proved the
+   fix.** I have written a control that will make the next reader think
+   "property" is covered.
+3. **FOUR MISSES REMAIN AND NAMING THEM IS NOT CLOSING THEM.** Closures,
+   decorator wrappers, module-level containers and instance attributes. **The
+   container one is not hypothetical: `_SABOTAGES` itself holds lambdas with
+   frozen defaults today** (B14's `lambda symbol, history_dir=HISTORY_DIR`).
+   Nothing in this module currently swaps `HISTORY_DIR`, so it is latent — **and
+   "currently" is exactly the word that made B9 possible.**
+4. **I NEVER MADE `_production_half` RAISE.** It refuses to run if the
+   `__main__` line appears other than once. I wrote that branch and did not test
+   it. **Untested error paths are how B5 was scored CAUGHT while crashing two
+   lines short of its check.**
+5. **THE RULE READS `_pristine`, WHICH COMES FROM `THIS_FILE`.** The gate takes
+   the ADDRESS of the thing it is judging from the thing it is judging. That is
+   B14's lesson, one level up, inherited and not closed. R-022 doubt 3 says the
+   same about `_REPO_ROOT` in the cockpit gates.
+6. **THE RULE GUARDS `_SABOTAGES` ONLY, NOT `_FILE_SABOTAGES`** — and neither
+   check exists at all in `cockpit/funding.py` or `cockpit/fear_greed.py`.
+   R-024 doubt 4 and R-026 doubt 4, inherited twice now and still open.
+7. **R-026 DOUBT 1 IS UNTOUCHED.** `_detector_sees_every_shape` still writes
+   seven names into the module's `globals()` and removes them in a `finally`,
+   and nothing compares the namespace before and after. My own new control
+   installs nothing, which is better — **but the old hole is exactly where I
+   left it.**
+8. **MY THREE NEW POSITIVE CONTROLS ARE HARDCODED TO NAMES I CHOSE**, and so are
+   the four names in the reachability negative control. If a future session
+   legitimately renames `csv_path` or drops a shape, the gate goes red for a good
+   commit. **R-024 doubt 2 and R-026 doubt 7, repeated knowingly for the third
+   time, because loud is the safer direction.**
+9. **`_unwrap` NOW RUNS OVER EVERY VALUE IN `globals()`**, including `vars()` of
+   imported C types like `datetime`. It did no harm in five runs. **I did not
+   enumerate what it now touches, and "it did no harm in five runs" is the
+   phrasing this ship files rather than trusts.**
+10. **NOTHING STILL WATCHES THE GATE'S RUNTIME**, and the figure on record has
+    now been wrong for three consecutive sessions in two different files.
+
+---
+
+## R-007 — **CLEARED ON THE LIMB IT FILED, AFTER EIGHT SESSIONS UNTOUCHED**
+
+Reproduced deterministically rather than reasoned about: the doorway was handed
+the two answers a straddle produces. **Control first** — three agreeing answers
+print `next settlement 16:00 UTC`, correct. Straddled, it prints
+`next settlement 16:00 UTC` **after 16:00 has already fired**.
+
+**Step 1 = NO, and MEASURED rather than assumed:** `journal/snapshots_local.csv`
+carries `utc_time,asset,timeframe,close,trend,rsi,atr,atr_pct,regime,entropy,adx`
+and **stores no funding data**, so no record is damaged; and the ship is
+information-only, so there is nothing here he acts on. **Step 1 = NO means SMALL.**
+
+**VERDICT: the window is judged ACCEPTABLE and said so out loud** — one of the two
+clean verdicts R-007 itself names. **CLEARED.** P3 was the right rating in
+2026-07-26 and `THE_PATTERN.md` was right to use it as its worked example.
+
+---
+
+## R-028 — **THE SAME RACE MIXES THE RATES, NOT JUST THE CLOCK** · CATEGORY B
+**STATUS: OPEN · P3 · found 2026-07-30 (evening) by the session that reproduced
+R-007 · MAY NOT BE CLEARED BY ITS FINDER**
+
+R-007 named the settlement TIME. It never named this: when the loop straddles a
+boundary, the three RATES belong to TWO DIFFERENT settlement periods — one mature
+estimate for the settlement that just fired, two freshly-reset ones for the next.
+**Printed side by side as one snapshot, differing by 10x for that reason alone,
+with nothing saying so.** Measured in the same deterministic reproduction.
+
+**SMALL on the same Step 1 = NO** — no record stores it, nothing is acted on.
+Filed as CATEGORY B, not repaired, because a SMALL finding is filed.
+
+---
+
+## R-022 — **STILL OPEN. DOUBT 6 STILL UNTOUCHED**, nine sessions now. I had one
+slot and spent it on R-007, the older item.
+
+## R-006 — **UNTOUCHED. NOT THIS SESSION'S TO CLEAR, OR ANY IN-HOUSE SESSION'S.**
+
+## R-021 — **STILL OPEN.** Both gates were run at 13:15-13:20 UTC, 2h45m from the
+nearest settlement, and both passed on the FIRST run. No new data point.
+
+## R-023, R-025 — **NOT TOUCHED.** R-025 is the Commander's standing DOOR 3 order
+and it is **still not built** — see `SESSION_ORDERS.md`, on his desk.
+
+## **THE CATEGORY B PILE IS NOW SIX DEEP** (R-021, R-023, R-028 and the three
+before them), and it is cleared before the ship is used for real, at the same
+moment `cockpit/brief.py` gets its gate.
