@@ -8309,3 +8309,47 @@ your final push, because the cloud watchman can rewrite it underneath you."*
 **Tonight is the second time it has actually happened, and the first time it
 happened to a commit that mattered.** The warning is not theoretical and should
 stay in the orders.
+
+## **CORRECTION — I SUMMARISED B7 IN A WAY THAT READS AS IF THE REAL ARCHIVE HAD BEEN CORRUPTED. IT WAS NOT.**
+
+In the ruling entry above I wrote, in the table that tests the new form:
+
+    B7  (live, real)   ETH 22x wrong, SOL 80x wrong, thirty days, green screen
+
+**The Commander read that and asked why, if it was that serious, we never fixed
+it. That is a completely fair reading of what I wrote, and my wording caused it.**
+
+**WHAT IS TRUE:**
+
+- **B7 IS A SABOTAGE, NOT A BUG.** It is one of the fourteen breaks this gate
+  lights on purpose every single run. It was invented by an independent session
+  on 2026-07-28 to PROVE a weakness, not discovered sitting in the recorder.
+- **THE WEAKNESS IT PROVED WAS REAL AND WAS LIVE:** `_disk_matches_source`,
+  check (e) and check (g) were all hardcoded to BTCUSDT. **For ETHUSDT and
+  SOLUSDT the entire gate only ever COUNTED — 180 rows, 30 days, no duplicates.**
+  Two of three assets were guarded by a row count on the one dataset Binance will
+  not sell back.
+- **THE "22x wrong / 80x wrong / thirty days" FIGURES ARE WHAT THE SABOTAGE DID
+  IN THE TEST'S OWN SCRATCH DIRECTORY**, to demonstrate the blindness. **They
+  are not what happened to `data/oi_history/`.**
+- **IT WAS FIXED THE SAME DAY.** The detector was rebuilt to compare every row of
+  EVERY asset against what Binance served, from the gate's own list rather than
+  the module's. **And B7 was kept as a permanent drill** — it fires every run and
+  must be caught, or the gate goes red.
+- **MEASURED TONIGHT, 2026-07-30:** three files, correctly named, 181 lines each,
+  sha256 `e3258e82…` / `1549a8a1…` / `e0f91a87…`, and GATE 3.2b-R9 compared every
+  row of all three assets against a raw Binance fetch and passed. **The archive is
+  verified correct.**
+
+**WHAT THE TABLE SHOULD HAVE SAID:**
+
+    B7  the GUARD was live and blind - two of three assets protected by a row
+        count only. Proved by a deliberate sabotage in scratch, never in the
+        real archive. Q2 = YES TODAY (a wrong ETH or SOL number would have been
+        saved and nothing would have caught it) -> SERIOUS. FIXED 2026-07-28,
+        and B7 now runs forever as drill 7 of 14.
+
+**WHY THIS CORRECTION IS WORTH ITS OWN ENTRY.** This session spent its whole
+length arguing that a claim wider than the evidence behind it is the fault this
+ship keeps repeating. **I then wrote one myself, in the very entry that adopted
+the rule against it, and it took the Commander one question to find it.**
