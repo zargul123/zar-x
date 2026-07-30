@@ -6982,3 +6982,184 @@ FAIL, is not committed as a pass, and is not called "mostly passed".**
 **AND THE STANDING RULE THIS SESSION IS BOUND BY: I FOUND THIS AND I AM WRITING
 THE REPAIR, SO I MAY NOT CLEAR IT.** A new item goes into `REVIEW_QUEUE.md`
 against my own repair and stays OPEN for whoever comes next.
+
+---
+
+# 2026-07-30 (morning), PART 2 — **GATE 3.2b-R7 BUILT AND PASSED. THE RESULTS.**
+
+*The bar for this work was declared in the entry above and committed alone, with
+no `.py` file in it, before any code was written — `git show --stat` on commit
+`c7b4537` proves it. This entry is what happened afterwards.*
+
+## THE REPAIR, AND WHAT IT ACTUALLY CHANGED
+
+Thirteen byte-exact edits, applied by a script that **refuses to run** unless every
+anchor matches exactly once, in **binary mode**, with the line-ending totals
+printed before and after:
+
+    before        : 89,076 bytes, 1,639 lines, CRLF=1638, bare-LF=0
+    after         : 100,247 bytes, 1,821 lines, CRLF=1820, bare-LF=0
+    prod half sha : 5347bfecdf2ccfb2009770f9161dd6c51374f2ccdeae9a8c50793f3a57e2096f
+                    -> 5347bfecdf2ccfb2009770f9161dd6c51374f2ccdeae9a8c50793f3a57e2096f
+    whole file    : bf735388... -> a34ebe1fd8e1bb3c89e4a502a26d6b22bfbf2bc9e0d6cac82c00d7e90edff0c5
+
+**BAR (5) — NOTHING THE PILOT READS CHANGES — PROVED TWO WAYS, NOT ASSERTED:**
+
+1. The sha256 of the production half (lines 1-242) is **identical** before and
+   after, printed above.
+2. **Every diff hunk sits at line 359 or later**, well past `__main__` at 243 —
+   and `git diff -U0` labels every one of them with `if __name__ == '__main__':`
+   as its enclosing context:
+
+        @@ -359 +359 @@   @@ -410 +410 @@   @@ -555 +555 @@   @@ -563,2 +563,15 @@
+        @@ -582 +595 @@   @@ -587 +600 @@   @@ -673,0 +687,2 @@
+        @@ -1431,2 +1446,7 @@   @@ -1571,0 +1592,34 @@
+        @@ -1589,0 +1644,128 @@   @@ -1603 +1785 @@   @@ -1615 +1797 @@
+        @@ -1636 +1818 @@
+
+**WHAT CHANGED, in plain words.** B9 left `_SABOTAGES` — where it was a
+`globals()` swap that reached nothing — and joined `_FILE_SABOTAGES`, where B8
+already lived, as a **real one-line text edit** on a copy outside the repo. Its
+judge is `_record_does_the_job`, **the same function section (j) already used for
+the healthy case**, reached by a new `source_override` parameter threaded through
+`_record_run`. And a new section **(n)** was added.
+
+## THE RESULT — RUN THREE TIMES: TWICE IN SCRATCH, ONCE IN THE REPO
+
+    scratch run 1   exit 0   14/14 CAUGHT   1 red tick  (see the correction below)
+    scratch run 2   exit 0   14/14 CAUGHT   0 red ticks
+    REPO run        exit 0   14/14 CAUGHT   0 red ticks   GATE 3.2b-R7 PASSED
+
+**Every sabotage caught, B9 among them and now for a real reason:**
+
+    ✓ B1  timestamps converted as LOCAL time           → CAUGHT
+    ✓ B2  timestamps shifted by one hour               → CAUGHT
+    ✓ B3  de-dup key silently drops rows               → CAUGHT
+    ✓ B4  the VALUE column written into the OI column  → CAUGHT
+    ✓ B5  the naive recorder: empty = "no new data"    → CAUGHT
+    ✓ B6  the number rounded on the way to disk        → CAUGHT
+    ✓ B7  ETH and SOL written with BTC's figures       → CAUGHT
+    ✓ B10 the OI column transposed, but only on append → CAUGHT
+    ✓ B11 the report claims rows it never appended     → CAUGHT
+    ✓ B12 the report window comes from the clock       → CAUGHT
+    ✓ B13 the archive pruned to the source window      → CAUGHT
+    ✓ B14 the archive quietly moves to another file    → CAUGHT
+    ✓ B8  the monthly task always exits 0              → CAUGHT   (real text edit)
+    ✓ B9  one asset silently dropped from SYMBOLS      → CAUGHT   (real text edit)
+
+**Section (n), the new one, and note that the POSITIVE CONTROL RUNS FIRST:**
+
+    ✓ POSITIVE CONTROL: the frozen default that caused this finding is found
+      — SYMBOLS is captured by ['run']
+    ✓ B1 …B14  rebinds '_utc_iso' / 'record' / 'csv_path'
+      → looked up at CALL TIME, so the swap reaches the module   (12 lines)
+    ✓ every globals-swap sabotage targets a name this module looks up at CALL
+      TIME, and the check proved it can see a frozen one before it certified that
+
+**Bars (2) and (3) — the judge, and the control before it:**
+
+    ✓ CONTROL: the UNTOUCHED source, driven through the same new override path,
+      still collects all three assets
+      THE DAMAGE >> x the job succeeded → exit 0 (must be 0) · 'Recorded.'
+      printed: True · rows written {'BTCUSDT': 180, 'ETHUSDT': 180, 'SOLUSDT': 0}
+    ✓ B9: its judge RETURNED False — it failed for the reason it claims (an asset
+      missing from disk), it did not crash short of the check
+
+**`SOLUSDT: 0` is the damage, printed rather than summarised.** And note what it
+proves: the sabotage was scored CAUGHT because **an asset did not reach disk** —
+not because a name comparison fired, and not because something crashed.
+
+## **A MISTAKE I MADE AND CORRECTED, RECORDED AS PLAINLY AS THE SUCCESSES**
+
+**Scratch run 1 passed with a `✗` in its output.** `_record_does_the_job(verbose=True)`
+prints its own red tick when it fails, and here it was *meant* to fail — it was
+judging a sabotage. So the gate exited 0 while printing a red tick.
+
+**That is a booby trap and I nearly shipped it.** Every session on this ship greps
+this output for `✗` — I did it myself four times this morning to check the gates on
+arrival. **A gate that PASSES while printing a red tick teaches the next reader
+that a red tick can be ignored**, which is the opposite of everything the last ten
+generations were built for. The damage is now captured and re-emitted with the
+glyph rewritten (`THE DAMAGE >> x …`), so the numbers survive in full and the
+symbol is not borrowed. Scratch run 2 and the repo run both print **zero** red
+ticks. **Filed against myself as R-024 doubt 7, because "I believe that is right"
+is what this ship files rather than trusts.**
+
+## **AND A SECOND MISTAKE, WHICH BRIEFLY CORRUPTED A SHIP DOCUMENT**
+
+I updated `ROADMAP.md` by passing the new text inside a **double-quoted bash
+string containing backticks.** Bash treated every backticked fragment as a command
+substitution and executed it. The result: `command not found` errors, and mangled
+text written into `ROADMAP.md` — `THE DRILL S INSTALLER`, with every
+`` `code span` `` silently deleted.
+
+**I caught it in the same breath, reverted with `git checkout -- ROADMAP.md`,
+confirmed the restore by size and by content, and redid the edit from a FILE read
+by Python.** Nothing corrupt was committed — the document-integrity scan run
+before the final commit reports **THREE** `Â·` hits in `PROGRESS_LOG.md`
+and zero in the other four files — and all three are deliberate QUOTATIONS inside
+backticks, not damage: two in the 2026-07-26 addendum that a note there already
+declares, and the third in this very sentence, because naming the fingerprint
+requires printing it. **The count in the first draft of this paragraph said two,
+which was wrong the moment I wrote it** — the scan found the discrepancy and it is
+corrected here rather than left for the next session to chase.
+
+**THIS IS THE THIRD TIME A SHIP DOCUMENT HAS BEEN SILENTLY MANGLED BY A TOOL, AND
+THE THIRD TIME IT WAS CAUGHT BY A PERSON LOOKING RATHER THAN BY A CHECK.** The
+document-integrity check has been on the Commander's desk since 2026-07-27,
+recommended and not adopted. **It is now recommended by three separate incidents.**
+The rule this session adds to the orders: **put document text in a file and have
+Python read it; never inline it into a shell string.**
+
+## THE SHIP AFTER THE WORK
+
+    data/open_interest.py   GATE 3.2b-R7 PASSED  exit 0  0 red ticks, 14/14
+    cockpit/fear_greed.py   GATE 3.1-R6  PASSED  exit 0  0 red
+    cockpit/funding.py      GATE 3.2-R6  PASSED  exit 0  0 red, 18/18 CAUGHT
+
+### THE FUNDING GATE — AND A CORRECTION I OWE TO MY OWN PLAN
+
+**I said in the entry above that I would run it after 08:45 UTC, and then I ran
+it at 08:29. That was carelessness, not a decision, and I am recording it rather
+than quietly presenting the result.**
+
+    08:29:08 - 08:31:06 UTC   ONE run   PASSED, exit 0, 0 red, 18 sabotages caught
+
+**It took one run.** The result is valid despite my slip, and the reason is worth
+writing down because it is the useful shape of R-021: **the race produces FALSE
+REDS, never false greens.** A bracket that cannot hold a moving rate makes the
+gate reject an honest value; it cannot make it accept a dishonest one. **So a
+green inside the window is evidence; only a red would have needed the clock.**
+
+**AND A MEASUREMENT THAT REFINES R-021 — one observation, offered as one
+observation and not as a law.** This run was **+29 to +31 minutes** after the
+08:00 settlement and passed cleanly. The 2026-07-29 measurements saw failures out
+to +15 minutes and the first passes at +52. **So the risky band on this occasion
+was narrower than the "~45 minutes" the previous orders used.** One green run does
+not establish a boundary, and nobody should shrink the stated window on the
+strength of it. **What it does establish is that the figure is soft and was never
+measured at its edges.** R-021's severity is unchanged: SMALL, CATEGORY B,
+unrepaired.
+    lab/verify_vault.py     VAULT INTACT 6/6
+    cockpit/brief.py        3/3 instruments reporting
+    lab/                    byte-identical (git diff --stat empty)
+    data/oi_history/        byte-identical (git diff --stat empty), 3 files,
+                            correctly named, 181 lines each, sha256
+                            e3258e82… / 1549a8a1… / e0f91a87… unchanged from
+                            arrival through every run of this session
+
+**MEASURED, and it corrects a figure nobody had: a full Gate 3.2b run takes
+~4 MINUTES on this machine.** R-020's fifth doubt had gone unmeasured for two
+sessions. R-7 adds two further `--record` subprocess runs on top of that.
+
+## WHAT I DID NOT DO, SAID PLAINLY
+
+- **R-007 was not examined**, so it could not be cleared. Seven sessions now.
+- **Three of R-022's seven doubts are untouched**, including doubt 1 — its
+  author's own strongest lead, the thread that writes after `_capture` restores
+  the descriptors. I tested two other axes and both held.
+- **R-023 was filed, not fixed.** SMALL findings are filed; that is the rule.
+- **I did not clear R-020, and I did not clear my own repair.** R-024 is open
+  against it with seven doubts I wrote against myself.
+- **I did not build Context Deck instrument 3.** The finding graded SERIOUS, and
+  the rule for SERIOUS is: fix it, and stop, and build nothing.

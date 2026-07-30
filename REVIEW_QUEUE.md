@@ -1537,7 +1537,9 @@ session grades a finding on what it imagines he would notice.
 ---
 
 ## R-020 — Gate 3.2b-R6 was written by the session that found the fault it repairs
-**STATUS: OPEN · P1 · filed by that session, against its own work, 2026-07-29 (evening)**
+**STATUS: OPEN · P1 · filed by that session, against its own work, 2026-07-29 (evening)
+· ATTACKED 2026-07-30 by a session that built none of it — **A REAL LEAK WAS
+FOUND (B9 was a no-op). NOT CLEARED.** See the verdicts at the foot of this file.**
 
 **What to review.** `GATE_CSV_SUFFIX`, `_gate_csv_path`, the named check (c),
 the REFUSES-TO-RUN branch, and the new permanent sabotage B14. **NINTH
@@ -1723,7 +1725,10 @@ the thing that breaks the ship's honesty.**
 
 ## R-022 — **THE REPAIR OF R-016 HAS NOT BEEN INDEPENDENTLY ATTACKED**
 **STATUS: OPEN · P1 · filed by the session that WROTE the repair, against its own
-work, 2026-07-29 (night) · MAY NEVER BE CLEARED BY ITS AUTHOR**
+work, 2026-07-29 (night) · MAY NEVER BE CLEARED BY ITS AUTHOR
+· ATTACKED 2026-07-30 in two directions with a new question and **HELD BOTH
+TIMES**; still OPEN on its author’s doubts 1, 4 and 6. See the verdicts at the
+foot of this file.**
 
 Gates 3.1-R6 and 3.2-R6 both PASSED — 17 and 18 sabotages caught, 55 checks
 green and 0 red on the funding run. **Every one of those sabotages was invented
@@ -1762,3 +1767,193 @@ something.
 7. **THE IMPORT CHECK SPAWNS A SUBPROCESS PER RUN AND THE GATE ALREADY TAKES
    ~130 SECONDS.** Nothing measures whether this gate is getting too slow to be
    run often, and a gate nobody runs is a gate that is not guarding anything.
+
+---
+
+# VERDICTS OF 2026-07-30 (morning) — by a session that built none of this
+
+**The eighth question, and the one this session brought:** *"Is the sabotage
+actually IN EFFECT when the judge runs — or is it scored CAUGHT by a guard that
+fires BEFORE the mechanism it claims to prove?"* The seven before it all ask what
+the gate LOOKS AT. This one asks whether the drill's **INSTALLER** reaches the
+code it claims to have broken.
+
+## R-020 — **NOT CLEARED. A REAL LEAK WAS FOUND.**
+
+**Attacked 2026-07-30 by a session with no memory of writing any of it.**
+Gate 3.2b-R6 passed on arrival, exit 0, zero red lines, all fourteen sabotages
+scored CAUGHT — **and sabotage B9 was doing nothing whatsoever.**
+
+`globals()['SYMBOLS'] = ('BTCUSDT', 'ETHUSDT')` reaches a name only if the name
+is looked up at CALL TIME. `def run(symbols=SYMBOLS, ...)` captures the tuple
+once, when the `def` runs, and `SYMBOLS` is read nowhere else in the module.
+Measured, five predictions written down first and all five correct:
+
+    C1 CONTROL  healthy module            -> ok=True, 3 files, 180 rows each
+    P1 B9 as the drill installs it        -> 3 files, SOLUSDT 180 rows  *** NO-OP ***
+       mod.SYMBOLS ('BTCUSDT','ETHUSDT') · run.__defaults__[0] all three  <- FROZEN
+    P2 CONTROL, the same defect as a REAL one-line edit, fresh interpreter
+                                          -> 2 files, SOLUSDT 0 rows
+    P3 `_covers_every_asset` verbatim, under P1
+       with its name-guard    -> False, drill prints CAUGHT
+       without its name-guard -> True,  drill prints ESCAPED
+
+So B9 was scored CAUGHT by the FIRST LINE of its judge — a name comparison that
+returns before `run()` is ever called — and **the second half of
+`_covers_every_asset`, the half its own docstring calls the only way to catch an
+asset going missing, had never been shown able to fail.** B5's shape exactly.
+
+**BOUNDED, not sweeping.** The other three constant-swaps on this ship were
+tested the same way and **all three reach**: funding S6 `CONTRACTS`, funding S14
+`OFFLINE_WORDS`, fear_greed F13 `OFFLINE_WORDS`. The correct pattern —
+`contracts=None`, resolved from the global inside the body — **already exists on
+this ship, in funding.py.** The recorder does not use it.
+
+**LIMITED, and this is said as loudly as the finding: THE REAL-WORLD DEFECT IS
+STILL CAUGHT.** The whole gate was run against a scratch tree carrying the real
+one-line edit: `✗ SYMBOLS`, `✗ SOLUSDT could not read back`, exit 1. **No asset
+can silently stop being collected. What was broken is the EVIDENCE, not the
+protection.**
+
+**Graded SERIOUS on THE FINDING REPORT before any repair** (Step 2.1 bad — the
+most natural way in Python to write that signature; Step 2.2 bad on the
+Commander's own wording — nothing is wrong on the face of the output, a stranger
+sees a green tick). Repaired under **GATE 3.2b-R7**, declared in `PROGRESS_LOG.md`
+and committed alone with no `.py` file in that commit.
+
+**THE FIVE DOUBTS ITS AUTHOR FILED — where each now stands**
+
+1. **Addresses swept for elsewhere: PARTLY ANSWERED, in a different direction.**
+   This session swept the two Context Deck files for the same class as B9 (a
+   constant the drill rebinds) and found them clean. **The ADDRESS question —
+   `_REPO_ROOT` from `__file__` — was NOT examined and remains R-022 doubt 3.**
+2. **The gate's hardcoded `'_4h.csv'`: NOT TESTED.** Still open.
+3. **The REFUSES-TO-RUN branch: PARTLY ANSWERED — and it exposed R-023.** The
+   branch was not attacked directly, but running the real B9 edit showed that
+   `symbols_ok` has no equivalent branch and the gate ends in a bare traceback.
+4. **B14 judged by one judge: NOT TESTED.** Still open.
+5. **Runtime: MEASURED at last.** The recorder's own gate takes ~4 minutes per
+   full run on this machine (three full 3.2b runs timed 2026-07-30). R-013's
+   4h-boundary exposure is still unwatched.
+
+## R-022 — ATTACKED IN TWO DIRECTIONS AND **HELD BOTH TIMES.** STILL OPEN.
+
+**This is the first time an item on this ship has been attacked and found
+nothing, and it is recorded as the real result it is** — not padded into a
+finding to justify the session.
+
+**Direction 1 — the constant-swaps.** S6, S14 and F13 all genuinely reach the
+module. Healthy and broken output printed side by side. **Clean.**
+
+**Direction 2 — the import door, decomposed.** `_import_writes_nothing` returns
+`right_file and rc_ok and quiet`, the drill scores S18/F17 on that single `and`
+with `verbose=False`, and never says WHICH component failed. Only `quiet` is the
+mechanism the import door claims to prove; a sabotage that CRASHED the import
+would be scored CAUGHT for a reason with nothing to do with the door.
+`_new_judges_say_no` closes exactly this for S16/S17 and **not** for S18/F17. So
+it was measured, control first:
+
+    S18 funding.py     CONTROL   right_file=True  rc_ok=True(exit 0)  quiet=True
+                       SABOTAGED right_file=True  rc_ok=True(exit 0)  quiet=FALSE
+    F17 fear_greed.py  CONTROL   right_file=True  rc_ok=True(exit 0)  quiet=True
+                       SABOTAGED right_file=True  rc_ok=True(exit 0)  quiet=FALSE
+
+**`quiet` is the only component that flips, in both files. Both import doors are
+caught for the reason they claim.** Clean.
+
+**WHY IT STAYS OPEN, NAMED PRECISELY so the next session does not repeat me:**
+doubt 1's **thread that writes after `_capture` has restored the descriptors** —
+its author's own strongest lead — was NOT tested. Neither was doubt 4
+(`os.fstat(fd)[:4]` on Windows, never made to fail on purpose) nor doubt 6. **Two
+axes held; three doubts are untouched.** R-016 is therefore still not settled.
+
+## R-007 — STILL OPEN, AND NOT LOOKED AT
+
+The orders permitted this session to clear it. **It did not examine it, so it
+cannot clear it.** Untouched for seven sessions now.
+
+## R-006 — UNTOUCHED. NOT THIS SESSION'S TO CLEAR, OR ANY IN-HOUSE SESSION'S.
+
+---
+
+## R-023 — **ON THE REAL B9 DEFECT THE GATE ENDS IN A STACK TRACE, NOT A VERDICT**
+**STATUS: OPEN · CATEGORY B · graded SMALL at the Step 1 veto, 2026-07-30 ·
+found by the session that built none of it · deliberately NOT repaired**
+
+Gate 3.2b-R6 run against a scratch tree carrying the real one-line `SYMBOLS`
+edit **never printed `GATE FAILED`, never reached the sabotage drill, and ended
+at line 444 in section (b) with a bare `FileNotFoundError` traceback.** It did
+exit 1, and two red lines were printed above it, so the alarm is correct and
+loud — **only the label on it is unreadable.**
+
+`name_ok` has a REFUSES-TO-RUN branch whose stated reason is that *"a gate that
+ends in a stack trace has not told the Commander anything he can read."*
+**`symbols_ok` has the identical consequence — every check below is reading files
+that do not exist — and no such branch.**
+
+**Why SMALL:** Step 1 veto = NO. The ship stops either way, no record is
+damaged, and nothing false is printed. **Filed, not fixed, because the rules say
+a SMALL finding is filed** — and because the same session had a SERIOUS finding
+to repair and a session that repairs every imaginable weakness has stopped
+protecting the project and become the project.
+
+**The obvious repair is a REFUSES-TO-RUN branch on `symbols_ok` mirroring the
+one on `name_ok`. It is one branch. It is not this session's to make.**
+
+---
+
+## R-024 — **GATE 3.2b-R7 WAS WRITTEN BY THE SESSION THAT FOUND THE FAULT IT REPAIRS**
+**STATUS: OPEN · P1 · filed by that session, against its own work, 2026-07-30 ·
+MAY NEVER BE CLEARED BY ITS AUTHOR**
+
+**TENTH GENERATION OF THE SAME STRUCTURE, and the nine before it were each
+failed by the next pair of eyes.** Assume this one is too.
+
+**What to review.** `_frozen_as_default`, `_installer_can_install`, its positive
+control, `_b9_judge_says_no`, the `source_override` parameter added to
+`_record_run` and `_record_does_the_job`, and B9's new life as a real text edit
+in `_FILE_SABOTAGES`.
+
+**What it PASSED, so you know what is already claimed:** exit 0, zero red lines,
+all FOURTEEN sabotages CAUGHT with B9 now installed by a real one-line edit and
+judged by `_record_does_the_job` — the same function the healthy check uses; the
+positive control found `SYMBOLS` frozen in `run` before certifying anything; the
+untouched source was driven down the new override path first; and B9's judge was
+proved to RETURN False rather than raise.
+
+### THE DOUBTS I FILE AGAINST MY OWN WORK — free hits, recorded not hidden
+
+1. **`_frozen_as_default` COMPARES BY IDENTITY AND I CHOSE THAT DELIBERATELY,
+   WHICH IS NOT THE SAME AS PROVING IT RIGHT.** It can name more functions than
+   it should — a default that happens to be the same interned object, like the
+   integer 15, matches too. I argued that is the safe direction because it
+   over-reports rather than misses. **I did not test the miss case.** Build a
+   module where a constant is frozen as a default and reached at call time by a
+   DIFFERENT function, and see whether this check's verdict is still useful.
+2. **THE POSITIVE CONTROL IS THE ONLY PROOF THE CHECK CAN FIRE, AND IT IS
+   HARDCODED TO ONE NAME.** It asserts `'run' in _frozen_as_default('SYMBOLS')`.
+   If someone ever does fix `run`'s signature — the right fix in itself — **the
+   positive control fails and the gate goes red for a good change.** I chose
+   that direction on purpose, as `GATE_CSV_SUFFIX` did, and it is R-020 doubt 2
+   arriving in my own code. **I am repeating a pattern this ship has already
+   filed a doubt about.**
+3. **I FIXED THE TEST AND LEFT THE PATTERN.** `def run(symbols=SYMBOLS, ...)` is
+   still there. I was bound by the rule that nothing the pilot reads may change,
+   and it is genuinely not a production defect — a real source edit works
+   correctly. **But it is the fifth time on this ship that a session has
+   repaired the one instance it attacked**, and the sister file's
+   `contracts=None` pattern shows what the alternative looks like.
+4. **THE NEW CHECK ONLY GUARDS `_SABOTAGES`. IT DOES NOT GUARD
+   `_FILE_SABOTAGES`,** and it does not exist at all in `cockpit/funding.py` or
+   `cockpit/fear_greed.py`. Those two were measured clean TODAY; nothing stops
+   them acquiring a frozen-default swap tomorrow.
+5. **`_b9_judge_says_no` IS JUDGED BY ONE JUDGE** — itself. Nothing else on this
+   ship can see whether a file sabotage reached the subprocess it was meant to.
+6. **THE GATE IS NOW SLOWER.** It was ~4 minutes; `_b9_judge_says_no` adds two
+   more full `--record` subprocess runs. **A gate nobody runs is a gate that is
+   not guarding anything**, and nothing on this ship watches that number.
+7. **I RE-MARKED A ✗ RATHER THAN REMOVING IT.** The damage B9 does is printed in
+   full, but the judge's own `✗` glyph is rewritten to `x` on the way out so a
+   passing gate contains no red ticks. **I believe that is right** — a PASS
+   containing a red tick teaches the next reader to ignore red ticks — **and "I
+   believe" is what this ship files rather than trusts.**

@@ -365,6 +365,95 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+→ We are at: **PHASE 3 — THE TENTH GENERATION. R-020 WAS ATTACKED AT LAST AND A
+REAL LEAK WAS FOUND: SABOTAGE B9 HAD NEVER TESTED ANYTHING. REPAIRED UNDER GATE
+3.2b-R7. R-022 WAS ATTACKED IN TWO DIRECTIONS AND HELD — THE SHIP'S FIRST CLEAN
+REVIEW RESULT.**
+
+    data/open_interest.py   GATE 3.2b-R7 PASSED  exit 0  0 red ticks, 14/14 CAUGHT
+    cockpit/fear_greed.py   GATE 3.1-R6  PASSED  exit 0  0 red
+    cockpit/funding.py      GATE 3.2-R6  — see item 3 below for when and why
+    lab/verify_vault.py     VAULT INTACT 6/6
+    cockpit/brief.py        3/3 instruments reporting
+    data/oi_history/        3 files, correctly named, 181 lines each,
+                            sha256 unchanged across every run of this session
+
+**WHAT WAS FOUND.** Every sabotage in the recorder's drill is installed with
+`globals()[attr] = repl`, which reaches a name only if the name is looked up **at
+call time.** `def run(symbols=SYMBOLS, ...)` captures the tuple once, when the
+`def` runs, and `SYMBOLS` is read nowhere else in the module — **so B9 changed a
+name nothing reads, and the recorder went on collecting all three assets.** It was
+scored CAUGHT by the first line of its judge, a name comparison that returns
+before `run()` is ever called. **The half of `_covers_every_asset` its own
+docstring calls the only way to catch an asset going missing had never been shown
+able to fail.** Four generations of this gate printed `✓ B9 → CAUGHT` under a
+headline announcing fourteen of fourteen.
+
+**WHAT WAS NOT WRONG, STATED AS LOUDLY.** The real one-line defect **is** caught
+— proved by running the whole gate against a scratch tree carrying it: exit 1,
+two red lines, SOLUSDT visibly absent. **The evidence was broken, not the
+protection.** No asset could ever have silently stopped being collected.
+
+**WHAT WAS BUILT.** GATE 3.2b-R7, declared in `PROGRESS_LOG.md` and committed
+alone with no `.py` file in that commit. B9 is now a **REAL TEXT EDIT** in
+`_FILE_SABOTAGES`, judged by `_record_does_the_job` — the same function the
+healthy check uses — and proved to RETURN False rather than raise. And a new
+permanent check `(n)` proves **the drill's installer is able to install**: no
+globals-swap sabotage may target a name this module has frozen as a default
+argument, and the check carries a positive control that must first find the
+frozen `SYMBOLS` in `run` before its silence is believed.
+
+## **THE TRUTH INCLUDING WHAT IS BROKEN OR UNPROVEN**
+
+1. **GATE 3.2b-R7 HAS NOT BEEN INDEPENDENTLY ATTACKED — R-024.** Written by the
+   session that found the fault it repairs, which may never clear it. **Seven
+   doubts filed against it by its own author**, the sharpest being that its
+   positive control is hardcoded to one name, so **fixing `run`'s signature — the
+   right change in itself — would turn the gate red**, and that the new check
+   guards `_SABOTAGES` only, not `_FILE_SABOTAGES`, and does not exist in the two
+   cockpit files at all.
+
+2. **THE PATTERN WAS FIXED IN THE TEST AND LEFT IN THE MODULE.**
+   `def run(symbols=SYMBOLS, ...)` is still there. It is **not** a production
+   defect — a real source edit works correctly — and the repair rules forbade
+   touching anything the pilot reads. **But it is the fifth time a session has
+   repaired the one instance it attacked**, and `funding.py`'s `contracts=None`
+   pattern shows what the alternative looks like.
+
+3. **THE FUNDING GATE WAS NOT RUN ON ARRIVAL, DELIBERATELY, AND THE REASON IS
+   RECORDED RATHER THAN GLOSSED.** Arrival was 07:53 UTC — seven minutes before
+   the 08:00 settlement, inside R-021's window. Running it there would have
+   proved nothing either way. **It was run after the window cleared and the
+   result is in `PROGRESS_LOG.md`.** R-021 stands: SMALL, CATEGORY B, unrepaired.
+   **OUTSIDE A SETTLEMENT WINDOW A RED FUNDING GATE IS A REAL FAILURE.**
+
+4. **R-023, NEW, CATEGORY B: ON THE REAL B9 DEFECT THE GATE ENDS IN A STACK
+   TRACE.** It exits 1 with two red lines above it, so the alarm is correct and
+   loud — but it never prints `GATE FAILED`, never reaches the drill, and dies on
+   a bare `FileNotFoundError`. `name_ok` has a REFUSES-TO-RUN branch for exactly
+   this reason; `symbols_ok` has the identical consequence and no such branch.
+   **Filed, not fixed — the rules say a SMALL finding is filed.**
+
+5. **R-022 HELD ON TWO AXES AND IS STILL OPEN ON THREE DOUBTS.** The constant
+   swaps all reach; both import doors are caught for the reason they claim,
+   `quiet` being the only component that flips. **NOT tested: doubt 1's thread
+   that writes after `_capture` has restored the descriptors — its author's own
+   strongest lead — nor doubt 4's `os.fstat` on Windows, nor doubt 6.** R-016 is
+   therefore still not settled.
+
+6. **`cockpit/brief.py` STILL HAS NO GATE.** He has ruled: **NOT NOW, BEFORE
+   GOING LIVE.** A standing requirement, not a deferral to re-argue.
+
+7. **THE CATEGORY B PILE IS NOW FIVE DEEP** and is cleared before the ship is
+   used for real, at the same moment `brief.py` finally gets its own gate.
+
+8. **AT PHASE 6 THE "SEPARATION IN TIME" SUBSTITUTE FOR FABLE EXPIRES — R-006,
+   which no in-house session may ever clear.** Unchanged and not waived.
+
+---
+
+# PREVIOUS POSITION MARKER — 2026-07-29 (night), superseded by the above, kept for the record
+
 → We are at: **PHASE 3 — THE BRIEF'S TWO DOORS ARE CLOSED. THE COMMANDER'S
 ORDER, DEFERRED BY TWO SESSIONS, WAS CARRIED OUT ON 2026-07-29 (night).**
 

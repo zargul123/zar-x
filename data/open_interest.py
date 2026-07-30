@@ -356,7 +356,7 @@ if __name__ == '__main__':
         return os.path.join(history_dir, f"{symbol}{GATE_CSV_SUFFIX}")
 
     ok = True
-    print("GATE 3.2b-R6 — the open-interest recorder's self-test.")
+    print("GATE 3.2b-R7 — the open-interest recorder's self-test.")
     print("It breaks itself on purpose and requires every break to be CAUGHT,")
     print("because on this ship a check nobody has attacked is a check nobody")
     print("has tested. The dataset it guards cannot be recovered if it is lost.")
@@ -407,7 +407,7 @@ if __name__ == '__main__':
         # the output. A gate that ends in a stack trace has not told the
         # Commander anything he can read. Same spirit as the anchor-ambiguity
         # refusal in `_record_run`: stop, and name the reason.
-        print("\nGATE 3.2b-R6 REFUSES TO RUN — the recorder is not writing")
+        print("\nGATE 3.2b-R7 REFUSES TO RUN — the recorder is not writing")
         print("where this gate looks. The archive lives at the name printed")
         print("on the right above; the module is using the one on the left.")
         print("Nothing below this point could be measured against anything, so")
@@ -552,7 +552,7 @@ if __name__ == '__main__':
 
     THIS_FILE = os.path.abspath(__file__)
 
-    def _record_run(work_dir, base_url=None):
+    def _record_run(work_dir, base_url=None, source_override=None):
         """Run `--record` on a COPY of this file placed in `work_dir`.
 
         The copy is what makes this safe: `HISTORY_DIR` is derived from the
@@ -560,8 +560,21 @@ if __name__ == '__main__':
         write to that scratch directory. **`data/oi_history/` cannot be touched
         by this check even if it is wrong.**"""
         dest = os.path.join(work_dir, 'oi_under_test.py')
-        with open(THIS_FILE, encoding='utf-8') as fh:
-            src = fh.read()
+        # GATE 3.2b-R7, 2026-07-30: `source_override` lets a FILE sabotage — a
+        # REAL TEXT EDIT, the only mechanism that has ever proved anything about
+        # this file — be driven down the very same subprocess path the healthy
+        # check uses, rather than through a second copy of the idea that merely
+        # agrees with it. B9 needed it, because installed as a `globals()` swap
+        # B9 did nothing at all. See the PROGRESS_LOG entry of 2026-07-30.
+        if source_override is not None:
+            if base_url is not None:
+                raise RecorderError("_record_run: source_override and base_url "
+                                    "are mutually exclusive — refusing to guess "
+                                    "which edit was meant")
+            src = source_override
+        else:
+            with open(THIS_FILE, encoding='utf-8') as fh:
+                src = fh.read()
         if base_url is not None:
             # The newlines are load-bearing. Without them the anchor also
             # matches THIS LINE, because the anchor is written in this file —
@@ -579,12 +592,12 @@ if __name__ == '__main__':
                            capture_output=True, text=True, timeout=300)
         return p.returncode, (p.stdout or '') + (p.stderr or '')
 
-    def _record_does_the_job(verbose=False):
+    def _record_does_the_job(verbose=False, source_override=None):
         """The success half: `--record` must exit 0 AND leave a real window on
         disk for every asset. An exit code nobody earned is not a result."""
         say = print if verbose else (lambda *a, **k: None)
         d = _fresh_dir()
-        code, out = _record_run(d)
+        code, out = _record_run(d, source_override=source_override)
         hist = os.path.join(d, 'oi_history')
         counts = {}
         for s in GATE_SYMBOLS:
@@ -671,6 +684,8 @@ if __name__ == '__main__':
     print("    ANYWHERE: it moved the archive to another filename, and every")
     print("    check here followed it there, because every check asked the")
     print("    module for the address. THIRTEEN of thirteen scored CAUGHT.")
+    print("    Gate 3.2b-R7 moved B9 out of this list, because installed as a")
+    print("    globals swap IT DID NOTHING AT ALL — see section (n).")
     print("    **The count above was stale at ELEVEN while fourteen ran** —")
     print("    R-011's third doubt, found by reading and corrected here.")
     print("(i) AND THE DETECTOR READS THE CSV BACK OFF DISK and compares it,")
@@ -1428,8 +1443,13 @@ if __name__ == '__main__':
         # asset from the module's list, and every loop in the gate said
         # `for symbol in SYMBOLS`, so the gate deleted it too and reported
         # success. Thirty days of SOL, gone for good, all green.
-        ('B9', 'one asset silently dropped from SYMBOLS', 'SYMBOLS',
-         ('BTCUSDT', 'ETHUSDT'), 'covers'),
+        # **B9 IS NO LONGER IN THIS LIST.** GATE 3.2b-R7, 2026-07-30: installed
+        # here as `globals()['SYMBOLS'] = ('BTCUSDT', 'ETHUSDT')` it did
+        # NOTHING. `def run(symbols=SYMBOLS, ...)` captures the tuple when the
+        # `def` runs, and `SYMBOLS` is read NOWHERE ELSE in this module, so the
+        # recorder went on collecting all three assets and the drill scored it
+        # CAUGHT off the first line of its judge. It is now a REAL TEXT EDIT in
+        # `_FILE_SABOTAGES` below, where it works.
         # B10, from the independent review of 2026-07-28 (night). It walked
         # through Gate 3.2b-R2. **It is B4 restricted to the append path** —
         # the only path the monthly task takes from month two onward, and the
@@ -1569,6 +1589,40 @@ if __name__ == '__main__':
           ('\n        sys.exit(0 if recorded else 1)\n',
            '\n        sys.exit(0)\n')],
          _record_alarm_fires),
+        # =================================================================
+        # GATE 3.2b-R7, 2026-07-30, after an independent session brought an
+        # EIGHTH question to Gate 3.2b-R6: **IS THE SABOTAGE ACTUALLY IN
+        # EFFECT WHEN THE JUDGE RUNS, or is it scored CAUGHT by a guard that
+        # fires BEFORE the mechanism it claims to prove?**
+        #
+        # **B9 WAS A NO-OP FOR FOUR GENERATIONS OF THIS GATE.** It was
+        # installed as `globals()['SYMBOLS'] = ('BTCUSDT', 'ETHUSDT')`, and a
+        # `globals()` swap reaches a name only if the name is looked up AT
+        # CALL TIME. Python evaluates a default argument ONCE, when the `def`
+        # runs. `run`'s signature is `def run(symbols=SYMBOLS, ...)` and
+        # `SYMBOLS` appears nowhere else in this module. Measured 2026-07-30:
+        # `mod.SYMBOLS` two assets, `run.__defaults__[0]` three assets,
+        # SOLUSDT_4h.csv 180 rows — the recorder never missed a beat.
+        #
+        # It was scored CAUGHT by the FIRST LINE of `_covers_every_asset`, a
+        # name comparison that returns before `run()` is ever called. So the
+        # second half of that judge — the half its own docstring calls the only
+        # way to catch an asset going missing, "let the module choose, and then
+        # check against a list it did not supply" — **had never been shown able
+        # to fail.** That is B5's shape exactly: CAUGHT while stopping short of
+        # the check it claimed to prove.
+        #
+        # The real one-line source edit WAS and IS caught, so no protection was
+        # ever missing — only the evidence. B9 is now installed the way B8 is,
+        # by a real text edit on a copy outside the repo, and judged by
+        # `_record_does_the_job`: **the SAME function section (j) uses for the
+        # healthy case**, never a second copy of it, which is the rule
+        # `_trap_check` exists to honour.
+        # =================================================================
+        ('B9', 'one asset silently dropped from SYMBOLS',
+         [("\nSYMBOLS = ('BTCUSDT', 'ETHUSDT', 'SOLUSDT')\n",
+           "\nSYMBOLS = ('BTCUSDT', 'ETHUSDT')\n")],
+         _record_does_the_job),
     ]
     for tag, words, edits, judge in _FILE_SABOTAGES:
         try:
@@ -1587,6 +1641,134 @@ if __name__ == '__main__':
               f"{'CAUGHT' if caught else 'ESCAPED — THE GATE IS DECORATIVE'}")
         drill_ok = drill_ok and caught
 
+    # =====================================================================
+    # GATE 3.2b-R7 (4) — **THE DRILL'S INSTALLER IS PROVED ABLE TO INSTALL.**
+    #
+    # Fourteen sabotages, four gate revisions, and nobody had ever asked
+    # whether the mechanism that INSTALLS a sabotage reaches the code it claims
+    # to have broken. B9 did not, and every run for four generations printed
+    # `✓ B9 ... → CAUGHT` underneath a headline announcing fourteen of
+    # fourteen. **A tally counts only what a machine actually checked.**
+    #
+    # This check is the general form of that lesson, so the class cannot come
+    # back: no sabotage installed by rebinding a global may target a name that
+    # this module has frozen as a DEFAULT ARGUMENT.
+    # =====================================================================
+    _NOT_PRESENT = object()
+
+    def _frozen_as_default(name):
+        """Every function in this module that captured `name`'s CURRENT object
+        as a DEFAULT ARGUMENT — and is therefore holding a value that no later
+        `globals()[name] = ...` can reach.
+
+        Identity, not equality, and deliberately so. It can name MORE functions
+        than it strictly should, because a default that happens to be the same
+        interned object matches too. **That is the safe direction:** it can
+        over-report a frozen name, it cannot miss one."""
+        target = globals().get(name, _NOT_PRESENT)
+        if target is _NOT_PRESENT:
+            return ['<no such name in this module>']
+        return sorted(
+            fname for fname, obj in globals().items()
+            if any(d is target
+                   for d in (getattr(obj, '__defaults__', None) or ())))
+
+    def _installer_can_install(verbose=True):
+        """**THE POSITIVE CONTROL RUNS FIRST.** A check that reports the
+        ABSENCE of something must first be proved able to detect its PRESENCE —
+        and here the presence is a matter of record, because it really happened:
+        `run(symbols=SYMBOLS, ...)` is still in this file, untouched, because
+        nothing the pilot reads may change for a repair to the test. So this
+        check is REQUIRED to find it. If it cannot, it is blind and says so."""
+        say = print if verbose else (lambda *a, **k: None)
+        control = _frozen_as_default('SYMBOLS')
+        control_ok = 'run' in control
+        where = (str(control) if control_ok
+                 else 'NOTHING, SO THIS CHECK IS BLIND AND PROVES NOTHING')
+        say(f"   {'✓' if control_ok else '✗'} POSITIVE CONTROL: the frozen "
+            f"default that caused this finding is found — SYMBOLS is captured "
+            f"by {where}")
+        if not control_ok:
+            return False
+        good = True
+        for tag, words, attr, _repl, _judge in _SABOTAGES:
+            frozen = _frozen_as_default(attr)
+            clean = not frozen
+            say(f"   {'✓' if clean else '✗'} {tag:<4} rebinds {attr!r:<12} → "
+                + ("looked up at CALL TIME, so the swap reaches the module"
+                   if clean else
+                   f"FROZEN as a default argument in {frozen} — THIS SABOTAGE "
+                   f"CANNOT REACH THE MODULE AND TESTS NOTHING"))
+            good = good and clean
+        return good
+
+    def _b9_judge_says_no(verbose=True):
+        """GATE 3.2b-R7 (2) and (3). **A SABOTAGE THAT CRASHES IS SCORED
+        "CAUGHT", SO ONE THAT NEVER REALLY RAN LOOKS LIKE A SUCCESS.** The
+        `_FILE_SABOTAGES` loop treats any exception as a catch, so B9's judge is
+        required BY NAME to RETURN False, on its own, without raising — and the
+        UNTOUCHED source is driven down the same new override path first, so a
+        red result cannot be the new plumbing rather than the sabotage."""
+        say = print if verbose else (lambda *a, **k: None)
+        control = _record_does_the_job(verbose=False, source_override=_pristine)
+        say(f"   {'✓' if control else '✗'} CONTROL: the UNTOUCHED source, driven "
+            f"through the same new override path, still collects all three "
+            f"assets — if this is red the rig is broken and nothing below it is "
+            f"evidence")
+        if not control:
+            return False
+        edits = next(e for t, w, e, j in _FILE_SABOTAGES if t == 'B9')
+        broken = _pristine
+        for anchor, repl in edits:
+            if broken.count(anchor) != 1:
+                say(f"   ✗ B9: the anchor {anchor!r} matched "
+                    f"{broken.count(anchor)} times, not once — REFUSING to "
+                    f"edit the first match, because that would prove nothing")
+                return False
+            broken = broken.replace(anchor, repl)
+        # **PRINT THE DAMAGE — a green gate is not the evidence.** But the
+        # judge's own ✗ is re-marked on the way out. Every session on this ship
+        # greps this output for red ticks, and a gate that PASSES while printing
+        # one teaches the next reader that a red tick can be ignored. So the
+        # numbers are shown in full and the glyph is not borrowed.
+        import contextlib
+        import io
+        buf = io.StringIO()
+        raised, verdict = None, None
+        try:
+            with contextlib.redirect_stdout(buf):
+                verdict = _record_does_the_job(verbose=True,
+                                               source_override=broken)
+        except Exception as e:                # noqa: BLE001 - reported below
+            raised = e
+        for line in buf.getvalue().splitlines():
+            say("     THE DAMAGE >> "
+                + line.replace('✗', 'x').replace('✓', 'v').strip())
+        good = (raised is None and verdict is False)
+        say(f"   {'✓' if good else '✗'} B9: its judge RETURNED {verdict!r}"
+            + (f" after RAISING {type(raised).__name__}: {raised}"
+               if raised else "")
+            + " — it failed for the reason it claims (an asset missing from"
+              " disk), it did not crash short of the check")
+        return good
+
+    print("\n(n) THE DRILL'S INSTALLER IS PROVED ABLE TO INSTALL (Gate")
+    print("    3.2b-R7). Fourteen sabotages and four revisions, and nobody had")
+    print("    asked whether the thing that INSTALLS a sabotage reaches the")
+    print("    code it claims to break. B9 did not: `globals()['SYMBOLS']` is")
+    print("    read nowhere, because `def run(symbols=SYMBOLS, ...)` froze the")
+    print("    tuple when the `def` ran. It printed CAUGHT for four")
+    print("    generations off the first line of its judge, under a headline")
+    print("    announcing fourteen of fourteen — and the half of that judge")
+    print("    which actually runs the recorder had never been shown able to")
+    print("    fail. B9 is now a REAL TEXT EDIT; this check makes sure no")
+    print("    globals-swap sabotage can ever again target a frozen default.")
+    installer_ok = _installer_can_install(verbose=True)
+    print(f"   {'✓' if installer_ok else '✗'} every globals-swap sabotage "
+          f"targets a name this module looks up at CALL TIME, and the check "
+          f"proved it can see a frozen one before it certified that")
+    b9_judge_ok = _b9_judge_says_no(verbose=True)
+
     restored = (_disk_matches_source(verbose=True) and _trap_check(verbose=False)
                 and _covers_every_asset(verbose=True)
                 and _record_alarm_fires(verbose=False)
@@ -1600,7 +1782,7 @@ if __name__ == '__main__':
           f"still fires, the printed report still matches the disk INCLUDING "
           f"both ends of its window, and rows the source no longer serves "
           f"still survive the run")
-    ok = ok and drill_ok and restored
+    ok = ok and drill_ok and restored and installer_ok and b9_judge_ok
 
     # ---- (f) THE BRIEF IS UNAFFECTED --------------------------------------
     print("\n(f) THE BRIEF IS UNAFFECTED — this step touches no cockpit file,")
@@ -1612,7 +1794,7 @@ if __name__ == '__main__':
     shutil.rmtree(SCRATCH, ignore_errors=True)
 
     if ok:
-        print("\nGATE 3.2b-R6 PASSED — the backfill is real, the same run twice")
+        print("\nGATE 3.2b-R7 PASSED — the backfill is real, the same run twice")
         print("changes nothing, an empty result fails loudly, the offline drill")
         print("leaves the files byte-identical, tampered history is reported")
         print("rather than overwritten, the `--record` branch the monthly task")
@@ -1633,6 +1815,6 @@ if __name__ == '__main__':
         print("GATE NAMES, from its own list, not the module's. This test has")
         print("demonstrated, this run, that it can say no.")
     else:
-        print("\nGATE 3.2b-R6 FAILED — see the ✗ lines above. Nothing is")
+        print("\nGATE 3.2b-R7 FAILED — see the ✗ lines above. Nothing is")
         print("committed as a pass.")
     sys.exit(0 if ok else 1)
