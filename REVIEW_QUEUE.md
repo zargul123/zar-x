@@ -2094,8 +2094,9 @@ untouched.
 
 ## R-025 — **THE EAR IS DEAF TO ANY WRITE THE DOORWAY DEFERS PAST ITS OWN RETURN**
 **STATUS: OPEN · P1 · found 2026-07-30 (afternoon) by a session that built none
-of it · GRADED SERIOUS ON THE REPORT · DELIBERATELY NOT REPAIRED — the Commander
-rules**
+of it · GRADED SERIOUS ON THE REPORT · **RULED SERIOUS BY THE COMMANDER 2026-07-30
+(afternoon), on the session's recommendation — so DOOR 3 IS AN ORDER, not a proposal** ·
+NOT REPAIRED BY ITS FINDER**
 
 R-022 doubt 1, its author's own strongest lead, tested at last.
 

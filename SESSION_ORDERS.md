@@ -1,4 +1,4 @@
-# ZAR X PHASE 3 — **ATTACK GATE 3.2b-R8 (R-026). THEN THE COMMANDER'S RULING ON R-025 DECIDES YOUR PART 2.**
+# ZAR X PHASE 3 — **ATTACK GATE 3.2b-R8 (R-026). THEN BUILD DOOR 3: THE COMMANDER HAS RULED R-025 SERIOUS.**
 
 *Written 2026-07-30 (afternoon) by the eleventh generation — the session that
 attacked R-024 and R-022, found a blind spot in each, repaired ONE of them, and
@@ -161,19 +161,64 @@ Read them in `REVIEW_QUEUE.md` under **R-026**. The three I would attack first:
 
 ---
 
-# PART 2 — **IT DEPENDS ON HIS RULING ON R-025. HERE IS THE RULE, SO YOU DO NOT GUESS.**
+# PART 2 — **BUILD DOOR 3. THE COMMANDER RULED R-025 SERIOUS ON 2026-07-30 (afternoon). THE BRANCH IS CLOSED.**
 
-**IF HE HAS RULED R-025 SERIOUS (or has not spoken and you must choose):** build
-**DOOR 3** in `cockpit/funding.py` and `cockpit/fear_greed.py`. Gate declared and
-committed alone first, sabotage drill from birth. The design is written out in
-`REVIEW_QUEUE.md` under R-025 — **you do not have to invent it** — including its
-two traps: **a timeout must be a FAILURE, never a quiet pass**, and **the drill
-must plant all three deferred shapes and require all three CAUGHT.**
+**HIS RULING, RECORDED PLAINLY INCLUDING HOW IT WAS REACHED:** he was given both
+findings, the full FINDING REPORT for each, the trade-off in plain words, and a
+THIRD cheaper option nobody had asked for. **He ruled SERIOUS, and he did so on the
+session's recommendation rather than against it** — that is written down because a
+ruling reached by agreeing with the machine is a weaker thing than one reached
+against it, and the next session is entitled to know which it was. **It is still
+his ruling and it stands.**
 
-**IF HE HAS RULED R-025 SMALL:** file it CATEGORY B, say so in the log, and build
-**Context Deck instrument 3 of 5: news headlines, CryptoPanic free tier —
-HEADLINES ONLY, no sentiment score, no invented weights. The cut ghost stays
-cut.** `EXECUTION_PLAN.md` Phase 3 step 3.
+**SO: BUILD DOOR 3 in `cockpit/funding.py` AND `cockpit/fear_greed.py`.** Gate
+declared and committed alone first with no `.py` in that commit, sabotage drill
+from birth, fail-safe to one honest line. **The design is written out in
+`REVIEW_QUEUE.md` under R-025 — you do not have to invent it.**
+
+**WHAT DOOR 3 IS, IN ONE SENTENCE:** door 2 already spawns a fresh interpreter and
+requires it to write nothing AT IMPORT; door 3 is the same proven machinery one
+step further — **a fresh interpreter that imports the module, calls
+`section_text()` on all three paths, and then SHUTS DOWN, with the child's TOTAL
+output required to be empty.** Interpreter shutdown joins non-daemon threads,
+flushes every buffer and runs every atexit handler, **so it catches all three
+deferred shapes deterministically instead of racing them.**
+
+**THE TWO TRAPS, NAMED BEFORE YOU START:**
+
+1. **A TIMEOUT MUST BE A FAILURE, NEVER A QUIET PASS.** A thread that sleeps
+   forever makes the child hang, and "no output before the timeout" is precisely
+   what silence looks like. **This is the single most likely way to build a door 3
+   that guards nothing.**
+2. **THE DRILL MUST PLANT ALL THREE SHAPES AND REQUIRE ALL THREE CAUGHT** — the
+   thread, the kept-alive buffer over descriptor 1, and the atexit handler.
+   Otherwise door 3 is one more check nobody has ever broken. **The exact three
+   are reproduced in R-025 and the patch that installs them is described there.**
+
+**AND A THIRD THING THAT IS PERMITTED BUT IS NOT A SUBSTITUTE.** The Commander was
+also offered a cheap 90% version: a check that simply reads the instrument's own
+source and confirms it contains **no machinery capable of deferring a write at
+all** — no `threading`, no `atexit`, no `subprocess`, no `os.dup`, no `open(1`, no
+`Timer`, no `QueueHandler`, no `__del__`. **He did not choose it; he chose the real
+thing.** You MAY add it as a second, cheaper guard **only after DOOR 3 itself
+passes**, and if you do it needs its own positive control — it must be shown to
+FLAG a planted `threading.Thread` line before its silence on the real file means
+anything. **It may never be built instead of DOOR 3, and a session that ships only
+the cheap version has not carried out this order.**
+
+**MEASURED FACTS YOU WILL NEED, so you do not re-derive them:** the gate calls
+`section_text()` **54 times per run** (counted, from 54 copies of each planted
+marker); the funding gate takes ~85 seconds; both production halves today contain
+**no** deferred-write machinery of any kind, so **the healthy control must come
+back silent and if it does not, something arrived since 2026-07-30 and THAT is your
+session.**
+
+**AND WHAT THIS PUSHES BACK, SAID SO NOBODY THINKS IT WAS FORGOTTEN:** Context Deck
+instrument 3 of 5 — **news headlines, CryptoPanic free tier, HEADLINES ONLY, no
+sentiment score, no invented weights, the cut ghost stays cut** — is
+`EXECUTION_PLAN.md` Phase 3 step 3 and is **next after DOOR 3**. It has now been
+deferred SIX times. **That is the price of this ruling and the Commander was told
+the price before he made it.**
 
 **IF YOU ARE RUNNING SHORT, DO PART 1 PROPERLY AND LEAVE PART 2 ENTIRELY.** A
 half-built part is worse than no part. **I left Part 2 entirely today and said so.**
@@ -336,13 +381,17 @@ the Commander. **It is not repeated here.**
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **R-025 IS THE ONE DECISION THAT CHANGES WHAT THE NEXT SESSION DOES.** Advice
-   can still reach his Brief, through any write the doorway defers past its own
-   return — proved, 162 lines of it, under a gate that passed. **Nothing on the
-   ship does that today and nothing can start to by accident.** I recommend
-   SERIOUS; **the distinction he needs is that R-020 was SERIOUS and LIVE, and
-   this is SERIOUS and NOT LIVE.** One word either way and the next session knows
-   what to build.
+1. **R-025 IS ANSWERED. HE RULED IT SERIOUS ON 2026-07-30 (afternoon) AND DOOR 3
+   IS NOW AN ORDER, NOT A PROPOSAL — DO NOT RE-OPEN IT WITH HIM.** He was shown
+   the proof (162 lines of advice on the pilot's screen under a gate that printed
+   PASSED), both FINDING REPORTS, the plain-words trade-off, and a third cheaper
+   option. He was told before ruling that the price is Context Deck instrument 3
+   slipping a sixth time, and he accepted that price. **He ruled with the
+   session's recommendation rather than against it, which is recorded in Part 2
+   because the next session is entitled to know which kind of ruling it was.**
+   **What he is still owed on it: the result.** When DOOR 3 passes, tell him in
+   plain words that the hole is shut and how you proved it — not that a gate went
+   green.
 2. **HIS RECORDER'S NEWEST GUARD COULD ONLY SEE ONE OF THE FOUR WAYS THE THING IT
    GUARDS AGAINST HAPPENS.** Repaired. **He should know the protection was never
    missing — what was wrong was the claim.** And that **my own first draft of the

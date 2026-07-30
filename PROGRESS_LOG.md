@@ -7720,3 +7720,71 @@ FINAL PUSH CAN HAVE IT REWRITTEN UNDER IT.** Seventeen generations of this patte
 and nobody had hit it, because nobody had needed to rebase in between. **The fix is
 one line of practice, not code: RECORD THE DECLARATION HASH AFTER THE PUSH, or
 verify it after the push and correct it.** It is in the new orders.
+
+# 2026-07-30 (afternoon), PART 3 — **THE COMMANDER RULED. R-025 IS SERIOUS. DOOR 3 IS AN ORDER.**
+
+## THE RULING, AND HOW IT WAS REACHED — RECORDED HONESTLY, NOT FLATTERINGLY
+
+He was handed, in plain words: the proof (162 lines of trading advice on the
+pilot's screen while GATE 3.2-R6 printed *"the doorway wrote NOTHING"* three times
+and exited 0), **both** FINDING REPORTS in full, the distinction that mattered
+(**R-020 was SERIOUS and LIVE; this is SERIOUS and NOT LIVE**), and **a third
+option the orders had not offered him** — a cheap static check that reads the
+instrument's own source and proves it contains no machinery capable of deferring a
+write at all.
+
+**HE RULED SERIOUS. He chose the full repair over the cheap one, and he was told
+the price first** — that Context Deck instrument 3 slips for a sixth time.
+
+**AND THE PART THAT MATTERS FOR THE RECORD: HE RULED WITH THE SESSION'S
+RECOMMENDATION, NOT AGAINST IT.** His words were, in substance, *"it's serious
+then if you say so."* **That is written down deliberately.** R-019 exists on this
+ship because a machine once made a claim about what this person would notice and
+let it carry a grade. The mirror-image risk is a session recommending SERIOUS,
+being agreed with, and then citing the Commander's ruling back as independent
+confirmation of its own judgement. **It is not independent. It is his ruling, it
+stands, and DOOR 3 is now an order — but no future session may cite it as evidence
+that the grade was correct.**
+
+## WHAT WAS DONE WITH THE RULING
+
+Three documents that were waiting on a branch now carry an order instead:
+
+    SESSION_ORDERS.md   title and PART 2 rewritten — the IF/IF branch is GONE.
+                        DOOR 3 spelled out: what it is in one sentence, its two
+                        traps named before any code, the measured facts the next
+                        session would otherwise re-derive (54 doorway calls per
+                        run; ~85s per funding gate; both production halves clean
+                        of deferred-write machinery TODAY, so a noisy healthy
+                        control means something arrived after 2026-07-30 and THAT
+                        is that session's job).
+                        The cheap static check is recorded as PERMITTED AFTER
+                        DOOR 3 PASSES and explicitly NOT a substitute — "a session
+                        that ships only the cheap version has not carried out this
+                        order."
+                        Desk item 1 no longer asks him for a decision he has made;
+                        it now says what he is still owed: THE RESULT, in plain
+                        words, not a green tick.
+    REVIEW_QUEUE.md     R-025's status line: GRADED SERIOUS ON THE REPORT ->
+                        RULED SERIOUS BY THE COMMANDER, DOOR 3 IS AN ORDER.
+                        The item itself, its evidence and its nine-line design
+                        are untouched. Nothing deleted.
+    EXECUTION_PLAN.md   the position marker now records the ruling rather than
+                        describing a decision as pending.
+
+**NOTHING ELSE WAS TOUCHED. NO CODE CHANGED. No gate was re-run, because nothing
+that a gate measures moved** — `git status` clean before and after apart from
+these three documents.
+
+## AND ONE THING HE ASKED THAT IS WORTH KEEPING
+
+He asked, in plain words, why the next session has to attack a repair its author
+already tested — *"is it that important?"* **The answer that satisfied him was not
+an argument, it was the number: eleven generations of this exact structure, and
+TEN of the eleven were failed by the next pair of eyes.** Plus the day's own
+proof: **this session's first draft of its own fix failed its own gate**, and it
+only failed it because the standard had been declared before the code existed.
+
+**Worth recording because it is the first time the loop had to justify itself to
+him rather than to another session** — and the thing that carried it was the
+ship's own history, which is exactly what `PROGRESS_LOG.md` is for.
