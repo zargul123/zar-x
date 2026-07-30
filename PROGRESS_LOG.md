@@ -7509,3 +7509,187 @@ FAIL, is not committed as a pass, and is not called "mostly passed".**
 **Five predictions were correct: the keyword-only miss, the partial miss, the
 loud-ESCAPED consequence, the structural point about check (n) buying less than
 it claims, and all four parts of the deferred-write attack.**
+
+
+# 2026-07-30 (afternoon), PART 2 — **GATE 3.2b-R8 BUILT AND PASSED. THE RESULTS, INCLUDING THE RUN WHERE MY OWN REPAIR FAILED ITS OWN GATE.**
+
+*The bar for this work was declared in the entry above and committed alone, with
+no `.py` file in it — `git show --stat` on `1eebaff` proves it. This entry is what
+happened afterwards.*
+
+## THE REPAIR, AND WHAT IT ACTUALLY CHANGED
+
+Ten byte-exact edits, applied by a script that **refuses to run** unless every
+anchor matches exactly once, in **binary mode**, printing the line-ending totals
+and the production half's sha256 before and after — **and refusing to write at all
+if the production sha moved or if any edit landed before `__main__`:**
+
+    before        : 100,247 bytes, 1,821 lines, CRLF=1820, bare-LF=0
+    after         : 108,941 bytes, 1,982 lines, CRLF=1981, bare-LF=0
+    first changed line: 359   (must be >= 243, the `__main__` line)
+    prod half sha : 5347bfecdf2ccfb2009770f9161dd6c51374f2ccdeae9a8c50793f3a57e2096f
+                 -> 5347bfecdf2ccfb2009770f9161dd6c51374f2ccdeae9a8c50793f3a57e2096f
+
+**AND A SMALL THING THAT COST ME TIME AND IS WORTH LEAVING BEHIND: THE LOG RECORDS
+THAT sha256 BUT NOT ITS RECIPE.** My first attempt produced `c68508e8…` for the
+same 242 lines, which looks like a failure of bar (1) and is not. Six recipes were
+tried and the one the log's figure uses is: **the first 242 lines joined by CRLF
+with NO trailing separator.** It is now written into the orders so the next session
+does not repeat the hunt.
+
+**WHAT CHANGED, in plain words.** `_frozen_as_default` now reads all four places
+Python can freeze a name — `__defaults__`, `__kwdefaults__`, a `functools.partial`
+binding, and a class body — and a new `_detector_sees_every_shape` plants an
+example of each one **in the module's own namespace** and requires the detector to
+FIND all five (positional, keyword-only, partial, class attribute, method default)
+**before it is allowed to say anything about the real sabotages.** It runs ahead
+of even the R7 control. The gate's live banner and its two verdict lines now say
+R8; every other `3.2b-R7` in the file is history and was left exactly as written.
+
+## **THE RUN WHERE MY OWN REPAIR FAILED ITS OWN GATE — RECORDED FIRST, NOT LAST**
+
+**My first draft counted a module-level ALIAS as a freeze. The healthy file went
+RED FOURTEEN TIMES and the gate exited 1:**
+
+    ✗ B1   rebinds '_utc_iso'   → FROZEN as a default argument in ['_UTC_ISO_ORIGINAL']
+    ✗ B3   rebinds 'record'     → FROZEN as a default argument in ['_RECORD_ORIGINAL']
+    ✗ B14  rebinds 'csv_path'   → FROZEN as a default argument in ['original']
+    ... eleven more, and:
+    ✓ POSITIVE CONTROL: ... SYMBOLS is captured by ['GATE_SYMBOLS', 'run']
+
+**`_UTC_ISO_ORIGINAL = _utc_iso` and `_RECORD_ORIGINAL = record` are the drill's
+own saved originals, doing exactly what they were written to do.** And
+`GATE_SYMBOLS` appeared because CPython gave two identical tuple literals the same
+object.
+
+**THE DISTINCTION I HAD WRONG, and it is the useful part of this entry: what
+matters is not that ANOTHER NAME HOLDS the old object — it is that the module USES
+the old object WITHOUT LOOKING THE NAME UP AGAIN.** A frozen default does that. An
+alias only matters if code reads the alias, which is a different question, and the
+drill reads its aliases on purpose.
+
+**I removed the alias rule and turned it into a PERMANENT NEGATIVE CONTROL**, so
+the mistake cannot come back quietly: every run now requires the detector to stay
+silent about a planted alias, with the reason printed in the output.
+
+**I had written bar (3) — the negative control — into the declaration before any
+code existed, and I still made the exact mistake it exists to catch. The gate
+caught its author within one run.** That is the whole argument for declaring the
+controls before the verdict, and it is worth more than a clean first attempt.
+
+**A SECOND MISTAKE, SMALLER: the first run of the repair did not compile.** This
+environment is Python 3.10, where a backslash escape inside an f-string
+*expression* is a SyntaxError — `f"{'✓' if ok else '✗'}"` will not compile. A whole
+gate run was spent finding that out. **The repair script now runs `py_compile`
+before the gate, and the orders carry the lesson.**
+
+## THE RESULT — GATE 3.2b-R8
+
+    scratch, healthy   09:40:29 -> 09:41:29 UTC   exit 0   0 red ticks   14/14 CAUGHT
+                       GATE 3.2b-R8 PASSED
+    scratch, ATTACKED  09:41:31 -> 09:42:29 UTC   exit 1   6 red ticks
+                       GATE 3.2b-R8 FAILED — caught BY NAME
+    REPO, healthy      12:48:39 -> 12:49:33 UTC   exit 0   0 red ticks   14/14 CAUGHT
+                       GATE 3.2b-R8 PASSED
+
+    lab/verify_vault.py   VAULT INTACT — all 6 files match their checksums
+    cockpit/brief.py      3/3 instruments reporting
+    lab/                  byte-identical (git diff --stat empty)
+    data/oi_history/      byte-identical, THREE files, correctly named, 181 lines
+                          each, sha256 e3258e82… / 1549a8a1… / e0f91a87… —
+                          unchanged from arrival through every run of this session
+
+**Bar (1) proved the second way as well: `git diff -U0` labels EVERY ONE of the
+ten hunks with `if __name__ == '__main__':` as its enclosing context**, and the
+first changed line is 359 against a `__main__` line at 243:
+
+    @@ -359 +359 @@   @@ -410 +410 @@   @@ -1656,0 +1657,2 @@
+    @@ -1664,4 +1666,33 @@   @@ -1671,4 +1702,116 @@   @@ -1683,0 +1827,5 @@
+    @@ -1765,0 +1914,11 @@   @@ -1769 +1928,3 @@   @@ -1797 +1958 @@
+    @@ -1818 +1979 @@
+
+**Section (n), the new controls, and note that they run FIRST:**
+
+    ✓ POSITIVE CONTROL: the detector sees an ordinary positional default
+      (__defaults__) - reported as '_r8_positional'
+    ✓ POSITIVE CONTROL: the detector sees a KEYWORD-ONLY default (__kwdefaults__)
+      - the one that was blind - reported as '_r8_kwonly'
+    ✓ POSITIVE CONTROL: the detector sees a functools.partial binding
+      - reported as '_r8_partial'
+    ✓ POSITIVE CONTROL: the detector sees a class attribute
+      - reported as '_R8Holder.attr'
+    ✓ POSITIVE CONTROL: the detector sees a default on a METHOD
+      - reported as '_R8Holder.method'
+    ✓ NEGATIVE CONTROL 1: the CORRECT pattern - resolved from the global in the
+      body - is NOT reported
+    ✓ NEGATIVE CONTROL 2: a plain module-level ALIAS of the same object is NOT
+      reported
+    ✓ POSITIVE CONTROL: the frozen default that caused this finding is found
+      — SYMBOLS is captured by ['run']
+
+**Bar (5) — my own attack re-run against the repaired file, and it now fails for
+the reason it claims rather than incidentally:**
+
+    ✗ B1   rebinds '_utc_iso'   → FROZEN as a default argument in ['fetch_history']
+           — THIS SABOTAGE CANNOT REACH THE MODULE AND TESTS NOTHING
+    ✗ B2   rebinds '_utc_iso'   → FROZEN as a default argument in ['fetch_history']
+    GATE 3.2b-R8 FAILED
+
+**It names the function that froze it.** Before the repair, the same file produced
+a green tick on those two lines.
+
+## MEASURED, AND IT CORRECTS A FIGURE IN THE ENTRY ABOVE
+
+**A full Gate 3.2b run takes about ONE MINUTE on this machine, not ~4 minutes.**
+Wall clock, four separate runs today: 55s, 55s, 55s, 60s. The previous entry's
+"~4 MINUTES" was honestly recorded and is not reproducible this afternoon. **The
+truthful statement is that nobody has measured this gate often enough to quote a
+figure**, because Binance latency dominates it and moved by a factor of four
+across one morning. R-024 doubt 6 rests on a number that moves.
+
+## WHAT I DID NOT DO, SAID PLAINLY
+
+- **R-025 IS NOT REPAIRED.** I graded two findings SERIOUS and repaired one. **The
+  rule says SERIOUS means fix it and stop, so this is a departure and it is said
+  in bold in the entry above, not buried.** Its repair spans two files and needs
+  new subprocess machinery with a timeout that must count as a failure; **a
+  half-built guard is worse than a named hole.** The design is written down.
+- **Context Deck instrument 3 was not built.** Two SERIOUS findings is not a
+  building session.
+- **R-007 was not examined** — the eighth session running. **R-022 doubt 6 was not
+  touched.**
+- **I did not clear R-024** (I failed it), and **I did not clear my own repair** —
+  R-026 is open against it with nine doubts I wrote against myself.
+- **I did not fix the pattern, only the test.** The sixth generation to do so.
+  `def run(symbols=SYMBOLS, ...)` still freezes its global. That change touches
+  what the pilot reads and is the Commander's to order.
+
+## **A THIRD MISTAKE, IN THE CLOSING RITUAL ITSELF, CAUGHT AND CORRECTED**
+
+**My document helper flattened `ROADMAP.md` from CRLF to LF on disk.** It read the
+file with Python's universal newlines and wrote it back with `newline=''`, which
+turns every `\r\n` into a bare `\n`. **207 line endings, silently rewritten, while
+I was busy being careful about em-dashes.**
+
+**It was caught by my own reporting line, which printed `CRLF 0 -> 0` for a file I
+had measured at CRLF=207 four minutes earlier** — and the only reason that
+mismatch was visible is that the helper prints the totals rather than asserting
+they are fine.
+
+**THE COMMITTED CONTENT WAS NEVER AT RISK and that is said as plainly as the
+mistake:** git normalises line endings on both sides here, and
+`git diff --numstat -- ROADMAP.md` reported `1 1` — one line changed, not 207.
+**But the working tree no longer matched what I arrived to, and that is not a
+session's to leave behind.** Restored to CRLF=207, bare-LF=0, verified by a script
+that refuses to write unless the count comes back to exactly the number the file
+had on arrival.
+
+**THIS IS THE FOURTH TIME A TOOL HAS SILENTLY REWRITTEN A SHIP DOCUMENT ON THIS
+SHIP, AND THE FOURTH TIME IT WAS CAUGHT BY SOMEBODY LOOKING RATHER THAN BY A
+CHECK.** PowerShell ate em-dashes twice, bash ate backticks once, and today Python
+ate line endings. **The document-integrity check has now been recommended by four
+separate incidents and is still not adopted.** The scan I ran by hand before this
+commit covers the five cp1252 fingerprints; **it would not have caught this one at
+all.** A complete check needs THREE things: the fingerprints, the line-ending
+totals, and the byte count. **Recommended, not adopted — it is the Commander's
+call, and it is on his desk in the new orders.**

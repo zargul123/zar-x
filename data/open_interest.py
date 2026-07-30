@@ -356,7 +356,7 @@ if __name__ == '__main__':
         return os.path.join(history_dir, f"{symbol}{GATE_CSV_SUFFIX}")
 
     ok = True
-    print("GATE 3.2b-R7 — the open-interest recorder's self-test.")
+    print("GATE 3.2b-R8 — the open-interest recorder's self-test.")
     print("It breaks itself on purpose and requires every break to be CAUGHT,")
     print("because on this ship a check nobody has attacked is a check nobody")
     print("has tested. The dataset it guards cannot be recovered if it is lost.")
@@ -407,7 +407,7 @@ if __name__ == '__main__':
         # the output. A gate that ends in a stack trace has not told the
         # Commander anything he can read. Same spirit as the anchor-ambiguity
         # refusal in `_record_run`: stop, and name the reason.
-        print("\nGATE 3.2b-R7 REFUSES TO RUN — the recorder is not writing")
+        print("\nGATE 3.2b-R8 REFUSES TO RUN — the recorder is not writing")
         print("where this gate looks. The archive lives at the name printed")
         print("on the right above; the module is using the one on the left.")
         print("Nothing below this point could be measured against anything, so")
@@ -1654,6 +1654,8 @@ if __name__ == '__main__':
     # back: no sabotage installed by rebinding a global may target a name that
     # this module has frozen as a DEFAULT ARGUMENT.
     # =====================================================================
+    import functools
+
     _NOT_PRESENT = object()
 
     def _frozen_as_default(name):
@@ -1661,17 +1663,158 @@ if __name__ == '__main__':
         as a DEFAULT ARGUMENT — and is therefore holding a value that no later
         `globals()[name] = ...` can reach.
 
-        Identity, not equality, and deliberately so. It can name MORE functions
-        than it strictly should, because a default that happens to be the same
-        interned object matches too. **That is the safe direction:** it can
-        over-report a frozen name, it cannot miss one."""
+        GATE 3.2b-R8, 2026-07-30 (afternoon). **THIS FUNCTION USED TO READ
+        `__defaults__` AND NOTHING ELSE, AND ITS DOCSTRING CLAIMED IT COULD
+        NOT MISS ONE. THAT CLAIM WAS FALSE.** Python freezes a name in four
+        places and three of them were invisible: a KEYWORD-ONLY default lives
+        in `__kwdefaults__`, a `functools.partial` holds its own bindings, and
+        a class body captures at class-creation time. Measured by a session
+        that built none of this: a real two-line keyword-only edit on
+        `fetch_history` made B1 and B2 no-ops while check (n) printed a green
+        tick over both, in the same run where the drill scored them ESCAPED.
+
+        **A MODULE-LEVEL ALIAS IS DELIBERATELY NOT COUNTED, and the first
+        draft of this repair counted it and FAILED ITS OWN GATE with fourteen
+        red ticks over a perfectly healthy file.** `_RECORD_ORIGINAL = record`
+        holds the old object forever, and that is the drill's own machinery
+        working exactly as designed. **The condition that matters is not
+        'another name holds the old object' - it is 'the module USES the old
+        object without looking the name up again'.** A frozen default does
+        that. An alias only matters if code reads the alias, which is a
+        different question. A NEGATIVE CONTROL below keeps the distinction
+        honest, because this is a mistake that has now actually been made.
+
+        Identity, not equality, and still deliberately so. It can name MORE
+        functions than it strictly should, because a default that happens to
+        be the same interned object matches too, and that is the safe
+        direction. **What it CAN still miss is a MUTABLE copy** -
+        `list(SYMBOLS)` is a different object and identity will not see it.
+        Measured, so the record is right rather than merely cautious:
+        `tuple(SYMBOLS)` and `SYMBOLS[:]` on a tuple return THE SAME OBJECT
+        in CPython, so the copy R-024 doubt 1 feared does not exist for the
+        shape this file uses. Equality is NOT the answer: it would flag every
+        function whose default merely equals the target, and this check's
+        silence would stop meaning anything. **The mutable-copy miss is filed
+        in REVIEW_QUEUE.md, not papered over here.**"""
         target = globals().get(name, _NOT_PRESENT)
         if target is _NOT_PRESENT:
             return ['<no such name in this module>']
-        return sorted(
-            fname for fname, obj in globals().items()
-            if any(d is target
-                   for d in (getattr(obj, '__defaults__', None) or ())))
+
+        def _holds(obj):
+            """Does `obj` hold `target` somewhere a later
+            `globals()[name] = ...` cannot reach?"""
+            for d in (getattr(obj, '__defaults__', None) or ()):
+                if d is target:
+                    return True
+            for d in (getattr(obj, '__kwdefaults__', None) or {}).values():
+                if d is target:
+                    return True
+            if isinstance(obj, functools.partial):
+                if any(a is target for a in obj.args):
+                    return True
+                if any(v is target for v in (obj.keywords or {}).values()):
+                    return True
+            return False
+
+        found = []
+        for fname, obj in list(globals().items()):
+            if _holds(obj):
+                found.append(fname)
+            if isinstance(obj, type):
+                for aname, attr in list(vars(obj).items()):
+                    if attr is target or _holds(attr):
+                        found.append(f'{fname}.{aname}')
+        return sorted(set(found))
+
+    def _detector_sees_every_shape(verbose=True):
+        """GATE 3.2b-R8 (2) and (3). **A CHECK THAT REPORTS THE ABSENCE OF
+        SOMETHING MUST FIRST BE PROVED ABLE TO DETECT ITS PRESENCE - IN EVERY
+        FORM IT CLAIMS TO COVER.** The R7 control proved the detector could
+        see ONE form, and the check then spoke for all of them.
+
+        So the detector is driven against a purpose-built sentinel in all five
+        shapes, EVERY RUN, and **the TWO NEGATIVE controls matter as much as
+        the five positives: a detector that called everything frozen would
+        pass every positive check and mean nothing, and the first draft of
+        this very repair failed its own gate by counting an alias.** The
+        shapes are installed in
+        this module's own namespace, because that is the namespace the real
+        check searches, and removed in a `finally`."""
+        say = print if verbose else (lambda *a, **k: None)
+        # The glyphs are named here because this environment runs Python
+        # 3.10, where a backslash escape inside an f-string EXPRESSION is a
+        # SyntaxError. Caught by the first run of this repair, in scratch.
+        tick, cross = '\u2713', '\u2717'
+        sentinel = ('_R8_SENTINEL',)
+
+        def _r8_positional(x=sentinel):
+            return x
+
+        def _r8_kwonly(*, x=sentinel):
+            return x
+
+        def _r8_call_time(x=None):
+            return globals()['_R8_SENTINEL'] if x is None else x
+
+        class _R8Holder:
+            attr = sentinel
+
+            def method(self, x=sentinel):
+                return x
+
+        installed = {
+            '_R8_SENTINEL': sentinel,
+            '_r8_positional': _r8_positional,
+            '_r8_kwonly': _r8_kwonly,
+            '_r8_call_time': _r8_call_time,
+            '_r8_partial': functools.partial(_r8_positional, sentinel),
+            '_R8Holder': _R8Holder,
+            '_r8_alias': sentinel,
+        }
+        clash = sorted(k for k in installed if k in globals())
+        if clash:
+            say(f"   \u2717 GATE 3.2b-R8: the control names {clash} already "
+                f"exist in this module - REFUSING to overwrite anything, "
+                f"because a control that damages the thing it measures is "
+                f"worse than no control")
+            return False
+        globals().update(installed)
+        try:
+            seen = _frozen_as_default('_R8_SENTINEL')
+        finally:
+            for k in installed:
+                del globals()[k]
+        good = True
+        for label, what in (
+                ('_r8_positional', 'an ordinary positional default '
+                                   '(__defaults__)'),
+                ('_r8_kwonly', 'a KEYWORD-ONLY default (__kwdefaults__) - '
+                               'the one that was blind'),
+                ('_r8_partial', 'a functools.partial binding'),
+                ('_R8Holder.attr', 'a class attribute'),
+                ('_R8Holder.method', 'a default on a METHOD')):
+            hit = label in seen
+            say(f"   {tick if hit else cross} POSITIVE CONTROL: the "
+                f"detector sees {what}"
+                + (f" - reported as {label!r}" if hit else
+                   f" - {label!r} IS MISSING from {seen}, so the detector is "
+                   f"BLIND HERE and its silence about the real sabotages "
+                   f"proves nothing"))
+            good = good and hit
+        quiet = ('_r8_call_time' not in seen)
+        say(f"   {tick if quiet else cross} NEGATIVE CONTROL 1: the "
+            f"CORRECT pattern - resolved from the global in the body - is NOT "
+            f"reported. A detector that called everything frozen would pass "
+            f"every check above and mean nothing")
+        no_alias = ('_r8_alias' not in seen)
+        say(f"   {tick if no_alias else cross} NEGATIVE CONTROL 2: a plain "
+            f"module-level ALIAS of the same object is NOT reported. The "
+            f"first draft of this repair counted one and went RED on a "
+            f"healthy file 14 times, because `_RECORD_ORIGINAL = record` is "
+            f"the drill's own machinery. What matters is a value the module "
+            f"USES without a fresh name lookup, not a second name holding "
+            f"the old object")
+        return good and quiet and no_alias
 
     def _installer_can_install(verbose=True):
         """**THE POSITIVE CONTROL RUNS FIRST.** A check that reports the
@@ -1681,6 +1824,11 @@ if __name__ == '__main__':
         nothing the pilot reads may change for a repair to the test. So this
         check is REQUIRED to find it. If it cannot, it is blind and says so."""
         say = print if verbose else (lambda *a, **k: None)
+        # GATE 3.2b-R8: the detector proves it can see EVERY shape it claims
+        # to cover before a single word it says about the real sabotages is
+        # believed. This runs FIRST, ahead of even the R7 control.
+        if not _detector_sees_every_shape(verbose=verbose):
+            return False
         control = _frozen_as_default('SYMBOLS')
         control_ok = 'run' in control
         where = (str(control) if control_ok
@@ -1763,10 +1911,23 @@ if __name__ == '__main__':
     print("    which actually runs the recorder had never been shown able to")
     print("    fail. B9 is now a REAL TEXT EDIT; this check makes sure no")
     print("    globals-swap sabotage can ever again target a frozen default.")
+    print("    GATE 3.2b-R8, the same day: the check itself was attacked and")
+    print("    it was BLIND. It read `__defaults__` and nothing else, so a")
+    print("    KEYWORD-ONLY default, a functools.partial and a class body all")
+    print("    walked past it - proved by a real two-line edit that made B1")
+    print("    and B2 no-ops while this check printed a green tick over both.")
+    print("    All four places are now read, and the detector must FIND a")
+    print("    planted example of every one of them - and stay SILENT about")
+    print("    the correct pattern AND about a mere alias - before it is")
+    print("    allowed to say anything about the real sabotages. The alias")
+    print("    control is there because the first draft of THIS repair")
+    print("    counted an alias and went red 14 times on a healthy file.")
     installer_ok = _installer_can_install(verbose=True)
     print(f"   {'✓' if installer_ok else '✗'} every globals-swap sabotage "
           f"targets a name this module looks up at CALL TIME, and the check "
-          f"proved it can see a frozen one before it certified that")
+          f"proved it can see a frozen name in every one of the four places "
+          f"Python freezes one, and stay silent about both the correct "
+          f"pattern and a mere alias, before it certified that")
     b9_judge_ok = _b9_judge_says_no(verbose=True)
 
     restored = (_disk_matches_source(verbose=True) and _trap_check(verbose=False)
@@ -1794,7 +1955,7 @@ if __name__ == '__main__':
     shutil.rmtree(SCRATCH, ignore_errors=True)
 
     if ok:
-        print("\nGATE 3.2b-R7 PASSED — the backfill is real, the same run twice")
+        print("\nGATE 3.2b-R8 PASSED — the backfill is real, the same run twice")
         print("changes nothing, an empty result fails loudly, the offline drill")
         print("leaves the files byte-identical, tampered history is reported")
         print("rather than overwritten, the `--record` branch the monthly task")
@@ -1815,6 +1976,6 @@ if __name__ == '__main__':
         print("GATE NAMES, from its own list, not the module's. This test has")
         print("demonstrated, this run, that it can say no.")
     else:
-        print("\nGATE 3.2b-R7 FAILED — see the ✗ lines above. Nothing is")
+        print("\nGATE 3.2b-R8 FAILED — see the ✗ lines above. Nothing is")
         print("committed as a pass.")
     sys.exit(0 if ok else 1)

@@ -365,6 +365,63 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+→ We are at: **PHASE 3 — THE ELEVENTH GENERATION. TWO FINDINGS, BOTH PROVED, ONE
+REPAIRED. THE CHECK BUILT THAT MORNING TO STOP B9's CLASS WAS ITSELF BLIND TO
+THREE OF THE FOUR WAYS IT HAPPENS (repaired under GATE 3.2b-R8), AND R-022 DOUBT 1
+WAS RIGHT: 162 LINES OF ADVICE REACHED THE PILOT'S SCREEN UNDER A GATE THAT
+PASSED (R-025, GRADED SERIOUS, NOT REPAIRED — THE COMMANDER RULES).**
+
+    data/open_interest.py   GATE 3.2b-R8 PASSED  exit 0  0 red ticks, 14/14 CAUGHT
+    cockpit/fear_greed.py   GATE 3.1-R6  PASSED  exit 0  0 red
+    cockpit/funding.py      GATE 3.2-R6  PASSED  exit 0  0 red  — BUT SEE R-025
+    lab/verify_vault.py     VAULT INTACT 6/6
+    cockpit/brief.py        3/3 instruments reporting
+    data/oi_history/        3 files, correctly named, 181 lines each, sha256
+                            unchanged across every run of this session
+
+**FINDING 1, REPAIRED.** `_frozen_as_default` read `__defaults__` and nothing
+else. A KEYWORD-ONLY default, a `functools.partial` and a class body were
+invisible to it. A real two-line edit made B1 and B2 no-ops while check (n)
+printed a green tick over both, **in the same run that scored them ESCAPED**.
+Graded SERIOUS on Step 2.1 — `*,` is ordinary Python — and repaired under GATE
+3.2b-R8, declared and committed alone first (`1eebaff`). **The shipped file had no
+such freeze, and when one was written the drill went red loudly: the CLAIM was
+broken, not the protection.**
+
+**AND THE PART THAT MATTERS MOST ABOUT THE REPAIR: ITS FIRST DRAFT FAILED ITS OWN
+GATE.** It counted a module-level alias as a freeze and a healthy file went red
+fourteen times, because `_RECORD_ORIGINAL = record` is the drill's own saved
+original. The rule was removed and turned into a permanent negative control.
+**The drill caught its author, which is the whole argument for building the
+controls before the verdict.**
+
+**FINDING 2, NOT REPAIRED — R-025, ON THE COMMANDER'S DESK.** The ear shuts the
+instant the doorway returns. A thread, a kept-alive buffer over descriptor 1 and
+an atexit handler put **162 lines of trading advice** on the pilot's screen while
+GATE 3.2-R6 printed *"the doorway wrote NOTHING"* three times, passed its ear
+control 3/3, and **exited 0**. Graded **SERIOUS** on Step 2.2 in the Commander's
+own wording. **NOTHING ON THIS SHIP DEFERS A WRITE TODAY** — measured across both
+production halves — **so it is SERIOUS and NOT LIVE, which is the distinction he
+needs in order to rule.** The repair (DOOR 3: a fresh interpreter that imports,
+calls, and SHUTS DOWN, with a timeout counting as failure) is designed and written
+down in `REVIEW_QUEUE.md` so the next session need not invent it.
+
+**R-022 DOUBT 4 TESTED AND HELD.** `os.fstat(fd)[:4]` returns a real 17-digit
+`st_ino` on this machine and detects both a leak onto the capture file and a leak
+onto another regular file. The doubt's premise — "on Windows st_ino is often 0" —
+is false here. Measured with stdout redirected to a file; a console handle was not
+tested, and that limit is written down rather than counted as cleared.
+
+**WHAT IS NOT DONE.** Context Deck instrument 3 was not built — two findings
+graded SERIOUS is not a building session. **R-007 is untouched for the eighth
+session.** R-022 doubt 6 untouched. **R-026 is open against the repair and its
+author may never clear it.** **Six generations have now fixed the instance and
+left the pattern:** `def run(symbols=SYMBOLS, ...)` and `fetch_history` still
+freeze their globals, and the one-line change that ends the class touches what the
+pilot reads, so only the Commander can order it.
+
+**THE PREVIOUS MARKER, KEPT FOR THE RECORD:**
+
 → We are at: **PHASE 3 — THE TENTH GENERATION. R-020 WAS ATTACKED AT LAST AND A
 REAL LEAK WAS FOUND: SABOTAGE B9 HAD NEVER TESTED ANYTHING. REPAIRED UNDER GATE
 3.2b-R7. R-022 WAS ATTACKED IN TWO DIRECTIONS AND HELD — THE SHIP'S FIRST CLEAN

@@ -1,130 +1,107 @@
-# ZAR X PHASE 3 — **ATTACK GATE 3.2b-R7 (R-024). THEN FINISH R-022: THREE OF ITS SEVEN DOUBTS ARE STILL UNTOUCHED AND ONE OF THEM IS ITS AUTHOR'S OWN STRONGEST LEAD.**
+# ZAR X PHASE 3 — **ATTACK GATE 3.2b-R8 (R-026). THEN THE COMMANDER'S RULING ON R-025 DECIDES YOUR PART 2.**
 
-*Written 2026-07-30 (morning) by the session that attacked R-020, found that
-sabotage B9 had never tested anything, and repaired it. **I may not clear my own
-repair. That is your Part 1.***
+*Written 2026-07-30 (afternoon) by the eleventh generation — the session that
+attacked R-024 and R-022, found a blind spot in each, repaired ONE of them, and
+**failed its own gate once on the way.** I may not clear my own repair. That is
+your Part 1.*
 
 ---
 
 # THE BRIEF, IN PLAIN WORDS — READ THIS BEFORE ANYTHING ELSE
 
 *The rest of this file is the exact bars and commands. This part is the story, so
-you understand WHY before you read WHAT. The Commander is not a programmer and
-asked for it in this form. Write your own report to him the same way.*
+you know WHY before you read WHAT. The Commander is not a programmer and asked for
+it in this form. Write your report to him the same way.*
 
 ## Where the ship is
 
-**THE TENTH GENERATION FOUND SOMETHING, AND IT WAS HIDING IN THE ONE PLACE
-NOBODY HAD LOOKED: the thing that INSTALLS a sabotage.**
-
-    data/open_interest.py   GATE 3.2b-R7 PASSED  exit 0  0 red ticks, 14/14 CAUGHT
+    data/open_interest.py   GATE 3.2b-R8 PASSED  exit 0  0 red, 14/14 CAUGHT
     cockpit/fear_greed.py   GATE 3.1-R6  PASSED  exit 0  0 red
-    cockpit/funding.py      GATE 3.2-R6  — see "what you will walk into" below
+    cockpit/funding.py      GATE 3.2-R6  PASSED  exit 0  0 red  — BUT SEE R-025
     vault INTACT 6/6 · Brief 3/3 · lab/ untouched
     data/oi_history/        3 files, correctly named, 181 lines each, sha256
-                            unchanged across every run of my session
+                            e3258e82… / 1549a8a1… / e0f91a87… unchanged all session
 
-## What I found, in one paragraph
+## What I found, in two paragraphs
 
-Every sabotage in the recorder's drill is installed by rebinding a name:
-`globals()[attr] = repl`. **That reaches the module only if the module looks the
-name up when it runs.** The recorder's doorway is
-`def run(symbols=SYMBOLS, ...)`, and Python evaluates a default argument **once**,
-when the `def` executes. `SYMBOLS` is read **nowhere else in the file.** So
-sabotage B9 — *"one asset silently dropped from SYMBOLS"* — rebound a name
-nothing reads, and **the recorder went on collecting all three assets.** It was
-scored CAUGHT by the *first line* of its judge, a name comparison that returns
-before the recorder is ever called. **Four generations of this gate printed
-`✓ B9 → CAUGHT` under a headline announcing fourteen of fourteen.**
+**FINDING 1 — the check built yesterday morning to stop B9's class coming back
+could only see one of the ways it comes back.** `_frozen_as_default` read
+`__defaults__` and nothing else, so a KEYWORD-ONLY default, a `functools.partial`
+and a class body were all invisible to it. I proved it with a real two-line edit:
+the gate scored B1 and B2 **ESCAPED** on one line and then certified, thirty
+lines later, that **"the swap reaches the module."** Graded SERIOUS on 2.1 (a
+`*,` in a signature is ordinary Python), repaired under GATE 3.2b-R8. **Nothing
+in the shipped file was frozen that way — I had to write it — and when I did the
+drill went red loudly. What was broken was the CLAIM, not the protection.**
 
-## **AND THE HALF OF THAT WHICH IS NOT ALARMING — DO NOT LET ANYONE DROP IT**
+**FINDING 2 — R-022 doubt 1 was right, and it is NOT repaired.** The ear shuts the
+instant the doorway returns. A thread, a kept-alive buffer over descriptor 1 and
+an atexit handler put **162 lines of trading advice on the pilot's screen** while
+GATE 3.2-R6 printed *"the doorway wrote NOTHING"* three times, passed its own ear
+control 3/3, and exited 0. **I graded it SERIOUS and left it on the Commander's
+desk as R-025.**
 
-**THE REAL DEFECT WAS ALWAYS CAUGHT.** I edited the real `SYMBOLS` line in a
-scratch copy and ran the whole gate against it: exit 1, two red lines, SOLUSDT
-visibly missing. **No asset could ever have silently stopped being collected.
-What was broken was the EVIDENCE, not the protection.** I graded it SERIOUS
-anyway, and the reason is this ship's own rule: *a tally counts only what a
-machine actually checked* — which is what voided the 48/48.
+## **THE MOST USEFUL THING I CAN TELL YOU: MY FIRST DRAFT FAILED ITS OWN GATE**
 
-## What is now in place, so you know what you are attacking
-
-B9 is a **real text edit** on a copy outside the repo, judged by
-`_record_does_the_job` — **the same function the healthy check uses**, not a
-second copy that merely agrees with it — and proved to RETURN False rather than
-raise. And new check **(n)** proves **the drill's installer is able to install:**
-no globals-swap sabotage may target a name this module has frozen as a default
-argument, and the check must first FIND the frozen `SYMBOLS` in `run` before its
-silence is believed.
+I counted a module-level alias as a freeze. The healthy file went **red fourteen
+times** — because `_RECORD_ORIGINAL = record` is the drill's own saved original,
+working as designed. **The distinction I had wrong: what matters is not that
+another name holds the old object, it is that the module USES the old object
+without looking the name up again.** I removed the rule and turned it into a
+permanent negative control. **Read R-026 doubt 9 before you trust that control:
+it encodes MY judgement, and if my judgement is wrong the control will actively
+stop you finding the thing it hides.**
 
 ## **WHAT YOU WILL WALK INTO — DO NOT MISTAKE IT FOR YOUR OWN BREAKAGE**
 
 **`python cockpit\funding.py` GOES RED NEAR A FUNDING SETTLEMENT AND IS GREEN THE
-REST OF THE TIME. R-021, CATEGORY B, graded SMALL at the Step 1 veto.**
+REST OF THE TIME. R-021, CATEGORY B, SMALL.** Binance settles at **00:00, 08:00
+and 16:00 UTC**. I ran it at **+55 minutes** and it passed first time.
 
-**BINANCE SETTLES AT 00:00, 08:00 AND 16:00 UTC. CHECK THE UTC CLOCK BEFORE YOU
-BELIEVE A RED FUNDING GATE.** I arrived at 07:53 UTC — seven minutes before a
-settlement — and **deliberately did not run it until the window cleared**, because
-a result from inside the window proves nothing either way. Do the same.
-
-**>>> AND THE WARNING THAT MATTERS MOST: OUTSIDE A SETTLEMENT WINDOW, A RED
-FUNDING GATE IS A REAL FAILURE. TREAT IT AS ONE.** A session that shrugs at a red
-gate because *"R-021 says it does that"* is doing the exact thing this ship exists
-to prevent. **If it is red: check the clock, run it again, and say how many runs
-it took.**
-
-**IF YOU REPAIR IT: TIGHTEN THE BRACKET, NEVER THE BAR.** The obvious move is to
-allow "close enough" and that is R-001's conviction in one line of diff. The honest
-repair is **bounded re-observation** — a fresh bracket, a small fixed number of
-times, still demanding EXACT equality against a value Binance actually served.
+**>>> OUTSIDE A SETTLEMENT WINDOW, A RED FUNDING GATE IS A REAL FAILURE. TREAT IT
+AS ONE.** Check the clock, run it again, and say how many runs it took.
 
 ## **WHAT THE COMMANDER HAS ALREADY RULED — DO NOT ASK HIM AGAIN**
 
-**1. `cockpit/brief.py` GETS NO GATE YET.** **NOT NOW, BEFORE GOING LIVE.** Do not
-build it and do not re-argue it. **This is NOT the same thing as R-022 doubt 2**,
-which is about the Brief's IMPORT SURFACE — see below, and do not confuse them.
-
-**2. R-016 IS DONE AND OFF HIS DESK.** It is still not CLEARED; that is R-022, and
-it is a session's job, not his.
-
-**3. R-019 IS CLEARED BY HIM.** Step 2.2 of THE FINDING REPORT carries his own
-wording, verbatim, in `THE_PATTERN.md`. **Read it there before you grade
-anything.** It is the question that moves findings.
+1. **`cockpit/brief.py` GETS NO GATE YET — NOT NOW, BEFORE GOING LIVE.** Do not
+   build it, do not re-argue it.
+2. **R-016 IS OFF HIS DESK.** Still not CLEARED — that is R-022, a session's job.
+3. **R-019 IS CLEARED BY HIM.** Step 2.2 of THE FINDING REPORT carries his own
+   wording in `THE_PATTERN.md`. **Read it there before you grade anything.**
 
 ## Your job, in order
 
-**1. ATTACK R-024 — MY REPAIR, GATE 3.2b-R7.** I filed **seven doubts against my
-own work.** They are starting points, **not** the assignment.
+**1. ATTACK R-026 — MY REPAIR, GATE 3.2b-R8.** Nine doubts filed against my own
+work. They are starting points, **not** the assignment.
 
-**2. FINISH R-022.** I attacked it in two directions and both HELD — the ship's
-first clean review result. **Three of its author's seven doubts are still
-untouched, and doubt 1 is his own strongest lead.**
+**2. THEN YOUR PART 2 DEPENDS ON HIS RULING ON R-025** — the rule is written out
+below so you do not have to guess.
 
 **3. THE 1 AUGUST ERRAND — CHECK TODAY'S DATE FIRST.** On 2026-07-30 it was NOT
-due. **Four sets of orders have now got this wrong in one direction or the other.**
+due. **Five sets of orders have now got this wrong in one direction or the other.**
 
 ---
 
 ## READ THESE FIRST
 
 **`THE_PATTERN.md` already told you how a session begins, what every file is for,
-the run environment, and the housekeeping that has bitten this ship. None of it is
-repeated here. It was NOT edited by me** — I earned no new lesson that the pattern
-does not already state.
+the run environment and the housekeeping that has bitten this ship. None of it is
+repeated here. I did NOT edit it** — I earned no lesson it does not already state.
 
 **Specific to THIS job:**
 
-1. **The LAST entry of `PROGRESS_LOG.md`** — my session. **Read it as a CLAIM, not
-   a result. It is what you are auditing.** The file is ~390 KB; reading all of it
+1. **The LAST TWO entries of `PROGRESS_LOG.md`** — my declaration and my results.
+   **Read them as a CLAIM, not a result.** The file is ~420 KB; reading all of it
    will eat your budget.
-2. **`data/open_interest.py`, the `__main__` half only** — specifically
-   `_frozen_as_default`, `_installer_can_install`, `_b9_judge_says_no`, the
-   `source_override` parameter on `_record_run` and `_record_does_the_job`, and
-   B9's entry in `_FILE_SABOTAGES`.
-3. **`REVIEW_QUEUE.md` — R-024 and R-022 are your worklist.** Their recorded
-   doubts are starting points, **not the assignment. R-006 may NEVER be cleared by
-   you or any in-house session.**
+2. **`data/open_interest.py`, the `__main__` half only** — `_frozen_as_default`
+   and its nested `_holds`, `_detector_sees_every_shape` (five positive controls,
+   TWO negative), and the wiring at the top of `_installer_can_install`.
+3. **`REVIEW_QUEUE.md` — R-026 and R-025 are your worklist**, plus R-022 doubt 6
+   and R-007 if you have room. **R-006 may NEVER be cleared by you or any
+   in-house session.**
 4. **`ROADMAP.md`** — the MEASURED facts table. If anything you measure disagrees
-   with it, **your measurement wins and you write the correction down.**
+   with it, **your measurement wins and you write the correction down.** I had to
+   do that twice today.
 
 ---
 
@@ -132,129 +109,107 @@ does not already state.
 
 Write these into your working notes first so they cannot soften as you go:
 
-1. A new sabotage, invented by you, thrown at **Gate 3.2b-R7 (R-024)**, result
+1. A new sabotage, invented by you, thrown at **Gate 3.2b-R8 (R-026)**, result
    recorded either way.
-2. At least one of **R-022's three untested doubts** actually tested — **doubt 1
-   preferred** — result recorded either way.
-3. Any leak found is graded on THE FINDING REPORT **before** any repair, using
-   **the Commander's wording of Step 2.2**, and repaired only if that grade says
-   to.
-4. `lab/` byte-identical, vault INTACT 6/6, the Brief still 3/3, and
-   `data/oi_history/` unchanged **unless a legitimate run appended** — in which
-   case say so, with the row count, and check it. **Confirm there are exactly
-   THREE files named `BTCUSDT_4h.csv`, `ETHUSDT_4h.csv`, `SOLUSDT_4h.csv`** — the
-   check B14 earned. They were 181 lines each on 2026-07-30, sha256
-   `e3258e82…`, `1549a8a1…`, `e0f91a87…`.
+2. **R-022 doubt 6** tested, or **R-007** examined — one of the two that nobody
+   has touched. Recorded either way.
+3. Any leak graded on THE FINDING REPORT **before** any repair, using **the
+   Commander's wording of Step 2.2**, and repaired only if that grade says to.
+4. `lab/` byte-identical, vault INTACT 6/6, Brief 3/3, and **exactly THREE files
+   in `data/oi_history/` named `BTCUSDT_4h.csv`, `ETHUSDT_4h.csv`,
+   `SOLUSDT_4h.csv`** — 181 lines each, sha256 `e3258e82…`, `1549a8a1…`,
+   `e0f91a87…` on 2026-07-30. **A fourth file, or a different name, is B14
+   arriving for real.**
 
 **Four of four or it has not cleared, and "three of four with a good explanation"
 is the phrasing this ship exists to refuse.**
 
 ---
 
-# PART 1 — MY REPAIR (R-024). **NEVER ATTACKED.**
+# PART 1 — MY REPAIR (R-026). **NEVER ATTACKED.**
 
-`python data\open_interest.py` — **~4 minutes, measured.** Fourteen sabotages,
-check (n), zero red ticks. **That is the claim under review, not the verdict.**
+`python data\open_interest.py` — **timed twice today at 55 SECONDS**, not the
+"~4 minutes" the previous log records. Fourteen sabotages, section (n) with five
+positive and two negative controls, zero red ticks. **That is the claim under
+review, not the verdict.**
 
-**Where this repair is strongest — so do NOT spend your time here:** B9 is now a
-real binary-mode text edit with a uniqueness guard that refuses to run on an
-ambiguous anchor; its judge is the SAME function the healthy path uses; the
-untouched source is driven down the new override path FIRST as a control; the
-judge is proved to RETURN False rather than raise; the damage is printed in full
-rather than summarised; and check (n) carries a positive control that must detect
-a frozen default before it certifies that there are none.
+**Where this repair is strongest — do NOT spend your time here:** the detector now
+reads `__defaults__`, `__kwdefaults__`, `functools.partial` bindings and class
+bodies; every one of those four is proved by a planted example the check must FIND
+before it is allowed to speak; two negative controls prove it does not simply
+report everything; the production half's sha256 is byte-identical before and after
+(`5347bfec…`, computed as the first 242 lines joined by CRLF with no trailing
+separator — **that is the recipe the log's figure uses, I had to find it by
+experiment, and it is written down here so you do not have to**); and my own real
+keyword-only edit is now caught by name.
 
-## THE SEVEN DOUBTS I FILED AGAINST MY OWN WORK — free hits
+## THE NINE DOUBTS I FILED AGAINST MY OWN WORK — free hits
 
-1. **`_frozen_as_default` COMPARES BY IDENTITY AND I CHOSE THAT DELIBERATELY,
-   WHICH IS NOT THE SAME AS PROVING IT RIGHT.** It can name more functions than it
-   should — a default that happens to be the same interned object, like the integer
-   `15`, matches too. I argued that is the safe direction because it over-reports
-   rather than misses. **I DID NOT TEST THE MISS CASE.** Build a case where a
-   constant is frozen as a default AND read at call time by a different function,
-   and see whether the verdict is still useful.
-2. **THE POSITIVE CONTROL IS THE ONLY PROOF THE CHECK CAN FIRE, AND IT IS
-   HARDCODED TO ONE NAME.** It asserts `'run' in _frozen_as_default('SYMBOLS')`.
-   **If someone ever fixes `run`'s signature — the right change in itself — the
-   positive control fails and the gate goes red for a good commit.** I chose that
-   direction on purpose, as `GATE_CSV_SUFFIX` did. **It is R-020's doubt 2 arriving
-   in my own code, and I am repeating a pattern this ship has already filed a doubt
-   about.**
-3. **I FIXED THE TEST AND LEFT THE PATTERN.** `def run(symbols=SYMBOLS, ...)` is
-   still there. It is genuinely NOT a production defect — a real source edit works
-   — and the repair rules forbade touching anything the pilot reads. **But it is
-   the fifth time a session has repaired the one instance it attacked**, and
-   `funding.py`'s `contracts=None` shows what the alternative looks like.
-4. **CHECK (n) GUARDS `_SABOTAGES` ONLY.** Not `_FILE_SABOTAGES`, and **it does
-   not exist at all in `cockpit/funding.py` or `cockpit/fear_greed.py`.** Those two
-   were measured clean on 2026-07-30; nothing stops them acquiring a frozen-default
-   swap tomorrow.
-5. **`_b9_judge_says_no` IS JUDGED BY ONE JUDGE — ITSELF.**
-6. **THE GATE IS SLOWER: ~4 MINUTES PLUS TWO MORE `--record` SUBPROCESS RUNS.** A
-   gate nobody runs is a gate that is not guarding anything, and nothing on this
-   ship watches that number.
-7. **I RE-MARKED A `✗` RATHER THAN REMOVING IT.** B9's damage is printed in full,
-   but the judge's own `✗` is rewritten to `x` so a passing gate contains no red
-   ticks. **I believe that is right** — a PASS containing a red tick teaches the
-   next reader to ignore red ticks — **and "I believe" is what this ship files
-   rather than trusts.**
+Read them in `REVIEW_QUEUE.md` under **R-026**. The three I would attack first:
+
+- **DOUBT 9 — the alias negative control encodes MY judgement about which freezes
+  matter.** If I am wrong, that control will keep you from finding the thing it
+  hides. **This is the most dangerous line in my diff.**
+- **DOUBT 1 — the controls put seven names into the module's `globals()` and take
+  them out in a `finally`. Nothing checks the namespace afterwards.** Every check
+  that runs later runs in whatever namespace mine left behind.
+- **DOUBT 3 — I found four places. I do not know there are only four.** Closures
+  (`__closure__`), decorator wrappers, bound methods stored in globals, `__slots__`
+  descriptors, dataclass fields. **The whole finding was a check speaking for
+  places it had never read, and I may be doing a narrower version of the same
+  thing.**
 
 ---
 
-# PART 2 — FINISH R-022. **THREE DOUBTS UNTOUCHED.**
+# PART 2 — **IT DEPENDS ON HIS RULING ON R-025. HERE IS THE RULE, SO YOU DO NOT GUESS.**
 
-`python cockpit\funding.py` and `python cockpit\fear_greed.py`.
+**IF HE HAS RULED R-025 SERIOUS (or has not spoken and you must choose):** build
+**DOOR 3** in `cockpit/funding.py` and `cockpit/fear_greed.py`. Gate declared and
+committed alone first, sabotage drill from birth. The design is written out in
+`REVIEW_QUEUE.md` under R-025 — **you do not have to invent it** — including its
+two traps: **a timeout must be a FAILURE, never a quiet pass**, and **the drill
+must plant all three deferred shapes and require all three CAUGHT.**
 
-**What I tested and what HELD — do not repeat it:**
+**IF HE HAS RULED R-025 SMALL:** file it CATEGORY B, say so in the log, and build
+**Context Deck instrument 3 of 5: news headlines, CryptoPanic free tier —
+HEADLINES ONLY, no sentiment score, no invented weights. The cut ghost stays
+cut.** `EXECUTION_PLAN.md` Phase 3 step 3.
 
-- All three constant-swaps (funding S6 `CONTRACTS`, funding S14 `OFFLINE_WORDS`,
-  fear_greed F13 `OFFLINE_WORDS`) genuinely reach the module. Clean.
-- Both import doors decomposed: `_import_writes_nothing` returns
-  `right_file and rc_ok and quiet` on one `and`, and **`quiet` is the only
-  component that flips** under S18 and F17, controls passing first. Both are
-  caught for the reason they claim. Clean.
-
-**WHAT IS STILL UNTOUCHED — this is your Part 2:**
-
-1. **DOUBT 1, ITS AUTHOR'S OWN STRONGEST LEAD, NEVER TESTED BY ANYONE: a thread
-   that writes AFTER `_capture` has restored the descriptors.** The ear restores
-   the descriptors and THEN reads the capture file. **What writes in that gap?**
-   Also unexamined: a C extension writing to the CRT handle, and a `subprocess`
-   the doorway spawns that inherits the descriptors.
-2. **DOUBT 4: `os.fstat(fd)[:4]` ON WINDOWS**, where `st_ino` is often 0. **It was
-   never made to fail on purpose.**
-3. **DOUBT 6: the silence check runs only the paths the gate thinks exist.**
+**IF YOU ARE RUNNING SHORT, DO PART 1 PROPERLY AND LEAVE PART 2 ENTIRELY.** A
+half-built part is worse than no part. **I left Part 2 entirely today and said so.**
 
 ## HOW TO ATTACK PROPERLY
 
-- **BRING A NEW QUESTION. EIGHT ARE NOW SPENT.** *"Which paths has nobody
+- **BRING A NEW QUESTION. NINE ARE NOW SPENT.** *"Which paths has nobody
   attacked?"* · *"Where does the gate take the module's word?"* · *"Is the gate
   looking at the right object at all?"* · *"What is the gate's own detector deaf
   to?"* · *"What shape does the real world have that the gate's world cannot?"* ·
   *"What if the module puts its work somewhere the gate is not looking?"* · *"What
-  happens BEFORE the gate is alive to watch?"* · **and now mine:** *"Is the
-  sabotage actually IN EFFECT when the judge runs, or is it scored CAUGHT by a
-  guard that fires before the mechanism it claims to prove?"* **All eight are the
-  directions these gates are now strongest in, and reusing any of them is the
-  approach most likely to find nothing.**
-- **Write what you will try and what you PREDICT, BEFORE you run it.** Eight
-  sessions running have now predicted their attacks correctly beforehand, and that
-  is what proves a hole is structural rather than luck. **I wrote five predictions
-  and all five were correct.**
-- **Work on copies OUTSIDE the repo**, and copy the WHOLE repo — it costs nothing.
+  happens BEFORE the gate is alive to watch?"* · *"Is the sabotage actually IN
+  EFFECT when the judge runs?"* · **and now mine:** *"WHEN does the gate stop
+  watching, and what does the part do after that?"* **All nine are the directions
+  these gates are now strongest in, and reusing any of them is the approach most
+  likely to find nothing.**
+- **Write what you will try and what you PREDICT, BEFORE you run it.** Nine
+  sessions running have now done this. **I wrote seven predictions: five were
+  right and TWO WERE WRONG, and both wrong ones are recorded in the log.** Getting
+  one wrong is not a failure — hiding it is.
+- **Work on copies OUTSIDE the repo**, and copy the WHOLE repo; it costs nothing.
   Check `git status` is clean when you are done.
-- **EDIT IN BINARY MODE.** These files are CRLF. **Always print the diff and
-  confirm it is the number of lines you meant, and that the CRLF count did not
-  move** — my patch script printed both and refused to write otherwise.
-- **IF YOUR TEXT ANCHOR MATCHES MORE THAN ONCE, REFUSE TO RUN.** This is not
-  theoretical. **My very first probe refused to run** — I had built a `\n` anchor
-  for a CRLF file and it matched zero times. The guard is the only reason I did not
-  conclude something false from it.
-- **AND A NEW ONE, EARNED THE HARD WAY THIS MORNING: NEVER PUT BACKTICKS INSIDE A
-  DOUBLE-QUOTED SHELL STRING.** I wrote a ROADMAP update that way and bash ate
-  every backticked fragment as a command substitution, writing mangled text into a
-  ship document. I caught it, reverted with `git checkout --`, and redid it from a
-  file. **Put document text in a FILE and have Python read it.**
+- **EDIT IN BINARY MODE.** These files are CRLF. **Print the diff, confirm it is
+  the number of lines you meant, and confirm the CRLF count did not move.** My
+  patch scripts refused to write otherwise, and one of those guards caught me
+  miscounting an insertion by one line.
+- **IF YOUR TEXT ANCHOR MATCHES MORE THAN ONCE, REFUSE TO RUN.**
+- **NEVER PUT BACKTICKS INSIDE A DOUBLE-QUOTED SHELL STRING** — bash eats them as
+  command substitution and writes mangled text into ship documents. **Put document
+  text in a FILE and have Python read it.** I appended every document with a
+  Python helper that prints the byte and line-ending totals before and after.
+- **AND ONE THIS ENVIRONMENT WILL BITE YOU WITH: PYTHON HERE IS 3.10, WHERE A
+  BACKSLASH ESCAPE INSIDE AN F-STRING *EXPRESSION* IS A SyntaxError.**
+  `f"{'✓' if ok else '✗'}"` will not compile. Name the glyphs first.
+  **My first repair run died on exactly that**, which is why the repair script now
+  runs `py_compile` before the gate.
 - **Run the untouched control FIRST — and run it inside the scratch copy too.**
 - **A GREEN GATE IS NOT THE EVIDENCE. PRINT THE DAMAGE.** **A sabotage that
   CRASHES is scored "caught", so one that never really ran looks like a success.**
@@ -262,21 +217,22 @@ a frozen default before it certifies that there are none.
 ## What you are allowed to conclude
 
 **"I attacked it and found nothing" is a real, honest, valuable result.** Say it
-plainly and clear the item. **It has now happened once on this ship — R-022 held
-on two axes — so it is no longer hypothetical.**
+plainly and clear the item. **DO NOT INVENT A FAULT TO JUSTIFY THE SESSION.**
 
-**DO NOT INVENT A FAULT TO JUSTIFY THE SESSION.**
+**You may clear R-026 and R-025** — you built neither. **You may clear R-007**,
+untouched for eight sessions now. **You may NEVER clear R-006.** **And if you fix
+something, you may not clear your own fix.**
 
-**You may clear R-024 and R-022** — you built neither. **You may clear R-007**,
-untouched for seven sessions; I did not look at it, so I could not. **You may
-NEVER clear R-006.** **And if you fix something, you may not clear your own fix.**
+**R-001 has now waited through ELEVEN generations of repair, ten of which were
+failed by the next pair of eyes and the eleventh — mine — untested.** It **moves
+only when a generation survives an independent attack. Untested is not survived.**
 
 ---
 
 # THE 1 AUGUST ERRAND — **CHECK TODAY'S DATE FIRST.**
 
-**Four sets of orders have now got this wrong in one direction or the other. On
-2026-07-30 it was NOT due.**
+**On 2026-07-30 it was NOT due. Five sets of orders have now got this wrong in one
+direction or the other.**
 
 **When 1 August has actually passed:** open `journal/daily_runs.log` and tell the
 Commander PLAINLY whether the monthly recorder task actually committed and pushed
@@ -288,10 +244,10 @@ real new rows.
     The recorder has run EXACTLY ONCE in its whole history: by hand, on
     2026-07-27, and it appended ZERO rows. The commit-and-push branch has
     therefore STILL never fired for real.
-    MEASURED 2026-07-29 evening against a copy of the real archive: a healthy
-    run appends 12 rows per asset and reports 192 stored.
+    A healthy run appends 12 rows per asset and reports 192 stored (measured
+    2026-07-29 against a copy of the real archive).
     MEASURED 2026-07-30: data/oi_history/ holds exactly THREE files, correctly
-    named, 181 lines each, unchanged all session.
+    named, 181 lines each, unchanged all day.
 
 **WRITE DOWN WHAT YOU EXPECT BEFORE YOU READ THE LOG. The honest figure on
 1 August is roughly THIRTY new rows per asset and a stored count near 210** — not
@@ -308,19 +264,6 @@ count the rows yourself.**
 
 ---
 
-# IF BOTH ATTACKS COME BACK CLEAN — THEN, AND ONLY THEN, BUILD
-
-The next thing on the ship is **Context Deck instrument 3 of 5: news headlines,
-CryptoPanic free tier — HEADLINES ONLY, no sentiment score, no invented weights.
-The cut ghost stays cut.** It is `EXECUTION_PLAN.md` Phase 3 step 3. Gate declared
-and committed alone first, sabotage drill from birth, fail-safe to one honest
-offline line.
-
-**IF YOU ARE RUNNING SHORT, DO PART 1 PROPERLY AND LEAVE THE BUILD ENTIRELY.**
-A half-built part is worse than no part.
-
----
-
 # IF ANYTHING LEAKS: GRADE IT FIRST, THEN REPAIR UNDER A GATE DECLARED FIRST
 
 **FILL IN THE FINDING REPORT BEFORE YOU REPAIR ANYTHING.** Four steps, plain
@@ -334,30 +277,32 @@ read it there, not here.** Then:
 
 **If you do repair: DECLARE THE GATE IN `PROGRESS_LOG.md` AND COMMIT THAT ENTRY
 ALONE, WITH NO `.py` FILE IN THE COMMIT, BEFORE WRITING CODE.** Then
-`git show --stat` proves the bar preceded the work. **Sixteen uses of this pattern
-and it has survived audit every time.** Then:
+`git show --stat` proves the bar preceded the work. **Seventeen uses of this
+pattern and it has survived audit every time.** Then:
 
 (a) **NOTHING THE PILOT READS CHANGES.** All edits inside `__main__` — **prove it
     two ways, do not assert it:** every diff hunk at or after the `__main__` line
     (`funding.py` 160, `fear_greed.py` 113, `open_interest.py` 243), AND a sha256
     of the production half before and after, printed side by side.
-    **Current values: `open_interest.py` lines 1-242 =
+    **Current values, and the RECIPE, because the value alone is not
+    reproducible:** hash the first N-1 lines joined by CRLF with **no trailing
+    separator**. `open_interest.py` lines 1-242 =
     `5347bfecdf2ccfb2009770f9161dd6c51374f2ccdeae9a8c50793f3a57e2096f`;
-    funding `95069d1b…`, fear_greed `bb31626c…`.**
+    funding `95069d1b…`, fear_greed `bb31626c…`.
 (b) **THE OUTPUT IS VERIFIED** against a raw fetch using the test's own
     arithmetic. **The helper under test is never called to judge itself, the gate
     never reads a constant belonging to the file it is judging, and THE GATE NEVER
     ASKS THE MODULE WHERE TO LOOK.**
 (c) **THE SABOTAGE DRILL IS PERMANENT** — your new break joins the others, caught
-    every run, originals restored and the restoration verified. **And check that
-    your new break is actually IN EFFECT when its judge runs** — that is the
-    lesson of 2026-07-30 and it is now a check the gate performs, section (n).
+    every run, originals restored and the restoration verified. **And check your
+    new break is actually IN EFFECT when its judge runs.**
 (d) **YOUR ORIGINAL ATTACK IS RE-RUN AGAINST THE REPAIRED FILE** — real text
     edits, not wrappers — and must now be CAUGHT, **and must be shown to fail for
-    the reason it claims, not incidentally.** **And prove your new sabotage's judge
-    returns False rather than raising.**
+    the reason it claims, not incidentally.**
 (e) Everything the old gate did, it still does.
 (f) **NO new file, NO new dependency, NO extra call from the Brief's path.**
+(g) **AND ONE I ADD FROM TODAY: RUN `py_compile` BEFORE THE GATE.** A syntax error
+    costs you a whole run otherwise, and it cost me one.
 
 **PASS = every check green including every sabotage CAUGHT. Anything less is a
 FAIL, is not committed as a pass, and is not called "mostly passed".**
@@ -367,15 +312,8 @@ FAIL, is not committed as a pass, and is not called "mostly passed".**
 # WRITE IT UP EITHER WAY
 
 A `PROGRESS_LOG.md` entry recording what you invented, what you broke, the actual
-output, and the verdict — **including if it is all clean.**
-
-**`REVIEW_QUEUE.md`: you MAY clear R-024 and R-022 (you built neither), and R-007
-too if it settles.** R-001 has now waited through **ten generations of repair, nine
-of which were failed by the next pair of eyes and the tenth — mine — untested.** It
-**moves only when a generation survives an independent attack. Untested is not
-survived.** Items you cannot settle stay OPEN with a note on what is missing;
-**leaving something open is a legitimate recorded outcome. R-006 is not yours,
-ever. Never delete an item. Never edit a cleared verdict.**
+output, and the verdict — **including if it is all clean, and including every
+prediction you got wrong.**
 
 **AND THE STANDING DUTY: if you catch yourself writing "probably", "almost
 certainly", "I believe" or "this should be fine" about anything that ships — FILE
@@ -386,87 +324,74 @@ IT in `REVIEW_QUEUE.md` before the commit that ships it.**
 # BEFORE YOU FINISH
 
 **Do the closing ritual exactly as `THE_PATTERN.md` sets it out** — seven steps,
-ending with the next session's orders, the push, and your plain-words report to the
-Commander. **It is not repeated here.**
+ending with the next session's orders, the push, and your plain-words report to
+the Commander. **It is not repeated here.**
 
 ---
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **HIS SHIP'S RECORDER WAS RUNNING A TEST THAT TESTED NOTHING, AND SAID IT
-   PASSED — for four generations.** It is repaired. **He should know the
-   protection was never actually missing**, and that what failed was the ship's
-   own tally, which is the exact thing that voided the 48/48. **One decision is
-   his: R-024 doubt 2 — the new check's positive control is hardcoded, so if a
-   future session correctly fixes `run(symbols=SYMBOLS, ...)`, the gate will go
-   red for a good change.** I chose the loud direction deliberately. **He can
-   overrule that in one word.**
-2. **R-023, NEW, CATEGORY B: on the real defect the recorder's gate exits 1 but
-   ends in a Python stack trace instead of saying FAILED.** The alarm is right;
-   the label is unreadable to a non-programmer. **One branch would fix it. Filed,
-   not fixed, because the rules say a SMALL finding is filed.** He can order it
-   done in one word.
-3. **THE FUNDING GATE GOES RED NEAR A FUNDING SETTLEMENT (R-021).** ~45 minutes
-   around 00:00, 08:00 and 16:00 UTC, proved by running the untouched previous
-   version side by side. **Deliberately NOT repaired: the rules say a SMALL
-   finding is filed.** He can overrule in one word.
-4. **THE RECORDER'S COMMIT-AND-PUSH BRANCH HAS STILL NEVER FIRED AGAINST REAL NEW
+1. **R-025 IS THE ONE DECISION THAT CHANGES WHAT THE NEXT SESSION DOES.** Advice
+   can still reach his Brief, through any write the doorway defers past its own
+   return — proved, 162 lines of it, under a gate that passed. **Nothing on the
+   ship does that today and nothing can start to by accident.** I recommend
+   SERIOUS; **the distinction he needs is that R-020 was SERIOUS and LIVE, and
+   this is SERIOUS and NOT LIVE.** One word either way and the next session knows
+   what to build.
+2. **HIS RECORDER'S NEWEST GUARD COULD ONLY SEE ONE OF THE FOUR WAYS THE THING IT
+   GUARDS AGAINST HAPPENS.** Repaired. **He should know the protection was never
+   missing — what was wrong was the claim.** And that **my own first draft of the
+   repair failed its own gate**, which is the drill doing its job on its author.
+3. **R-024 doubt 2 IS STILL HIS: the hardcoded positive control.** If a future
+   session correctly fixes `run(symbols=SYMBOLS, ...)`, the gate goes red for a
+   good change. I deliberately did NOT touch it. **He can overrule in one word.**
+4. **AND THE ONE I WOULD MOST LIKE HIM TO SAY YES TO: FIX THE PATTERN, NOT JUST
+   THE TEST.** `def run(symbols=SYMBOLS, ...)` and `fetch_history` still freeze
+   their globals. **The one-line change that ends this entire class is
+   `symbols=None`, resolved from the global in the body — and `funding.py` already
+   does it that way.** It touches what the pilot reads, so no session may make it
+   during a repair to a test. **Six generations have now fixed the instance and
+   left the pattern. Only he can end that.**
+5. **R-023, CATEGORY B: on the real B9 defect the recorder's gate exits 1 but ends
+   in a Python stack trace instead of saying FAILED.** One branch would fix it.
+   Filed, not fixed, because the rules say a SMALL finding is filed.
+6. **THE FUNDING GATE GOES RED NEAR A SETTLEMENT (R-021).** SMALL, unrepaired.
+   +55 minutes was clean today, first run.
+7. **THE RECORDER'S COMMIT-AND-PUSH BRANCH HAS STILL NEVER FIRED AGAINST REAL NEW
    ROWS.** The errand above. **Due 1 August.**
-5. **`cockpit/brief.py` HAS NO GATE — and he has ruled: NOT NOW, BEFORE GOING
-   LIVE.** A standing requirement in `EXECUTION_PLAN.md`. **Do not build it, do
-   not re-argue it.**
-6. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2.
-7. **The risk-doctrine decision** — the 25% position cap means real risk is ~0.49%
-   per trade, not the intended 1%. **Settled BEFORE Phase 6, never after seeing
-   results.**
-8. **`MAX_PLAUSIBLE_RATE`** — measured at 13-16x looser than Binance's published
-   cap. **Recommendation: tighten to ~0.01. STILL NOT DONE.**
-9. **The settled-rate anchor (R-004)** — returned to him on correct facts.
-10. **THE FUNDING LINE STAYED ON THE BRIEF** and he was told. One word reverses it.
-11. **A DOCUMENT-INTEGRITY CHECK.** Nothing on this ship checks that its own
-    documents are not corrupted. **Found by a human looking, twice — and nearly a
-    third time this morning, by me, when bash silently ate every backticked
-    fragment of a ROADMAP update.** I caught that one myself and reverted it.
-    **A one-line scan would close it. Recommended, not adopted.**
-12. **THE CATEGORY B PILE IS FIVE DEEP** and is cleared before the ship is used
+8. **`cockpit/brief.py` HAS NO GATE — he has ruled: NOT NOW, BEFORE GOING LIVE.**
+9. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2.
+10. **The risk-doctrine decision** — the 25% position cap means real risk is
+    ~0.49% per trade, not the intended 1%. **Settled BEFORE Phase 6, never after
+    seeing results.**
+11. **`MAX_PLAUSIBLE_RATE`** — measured 13-16x looser than Binance's published cap.
+    **Recommendation: tighten to ~0.01. STILL NOT DONE.**
+12. **The settled-rate anchor (R-004)** — returned to him on correct facts.
+13. **THE FUNDING LINE STAYED ON THE BRIEF** and he was told. One word reverses it.
+14. **A DOCUMENT-INTEGRITY CHECK.** Recommended three times, not adopted. **I ran
+    one by hand before every commit today** — a Python scan for the five cp1252
+    fingerprints — **and it found five pre-existing hits, all of them deliberate
+    quotations inside backticks, and zero in anything I wrote.** The previous
+    entry recorded "THREE"; the fuller scan finds five across three markers. **A
+    one-line scan would close this. Recommended, not adopted.**
+15. **THE CATEGORY B PILE IS FIVE DEEP** and is cleared before the ship is used
     for real, at the same moment `brief.py` gets its gate.
-13. **THIRTEEN law candidates, none adopted, all his call:**
-    - *"A session may not certify its own work; anything it cannot certify is
-      filed in `REVIEW_QUEUE.md` before the commit that ships it, and only an
-      independent reviewer may clear it."*
-    - *"A claim about what a data source will or will not give us is not a fact
-      until it has been called; planning documents must mark which claims are
-      measured and which are assumed."*
-    - *"A check is not proven until it has been deliberately broken."*
-      **Eighteen working implementations and still not law.**
-    - *"A gate must verify what the pilot READS — the whole line, words included —
-      not what the parser returned."*
-    - *"A sabotage that is scored CAUGHT must be shown to fail for the reason it
-      claims."* **This one just caught B9. It is the strongest unadopted
-      candidate on the list.**
-    - *"A gate must hold EVERY path the pilot can see to the same standard."*
-    - *"A gate may not derive anything it measures by — a word, a list, a limit —
-      from the file it is judging."*
-    - *"A gate must be shown to be watching the OBJECT the pilot actually
-      receives, and the STATE the part is actually in when it runs for real."*
-    - *"Every output a human will act on must be checked against the thing it
-      describes — including the output of the test itself."*
-    - *"A gate must be shown to BUILD the situations it claims to judge."*
-    - *"A gate must hold its own ADDRESS as well as its own expectations."*
+16. **THIRTEEN LAW CANDIDATES, NONE ADOPTED, ALL HIS CALL — and I am proposing NO
+    new one.** Seven laws get read; twelve get skimmed. **What today earned is an
+    AMENDMENT to one already on the list**, and I put it as an amendment on
+    purpose rather than growing the pile:
     - *"A check that reports the ABSENCE of something must first be proved able to
-      detect its PRESENCE. A listener that cannot hear reports silence, and
-      silence is what a passing gate looks like."*
-    - **NEWEST, earned 2026-07-30:** *"A drill must prove that the sabotage it
-      installed was IN EFFECT when its judge ran. A break that never reached the
-      code is indistinguishable, in the output, from a break that was caught."*
-      **Earned by B9: four generations of a gate scored it CAUGHT while it
-      rebound a name the module never reads.**
+      detect its PRESENCE"* → **add: "in EVERY FORM it claims to cover, and it
+      must also be proved to stay SILENT about the forms it does not."** A
+      detector that sees one shape and speaks for all of them is what check (n)
+      was, and a detector that reports everything is what my own first draft was.
+      **Both halves were earned by something that actually happened, one day apart.**
 
-**AND THE ONE THAT DOES NOT EXPIRE: at Phase 6 the "separation in time"
-substitute for Fable EXPIRES.** A second, genuinely independent AI reviews the
-gauntlet's test setup before it runs and its verdict after. That is locked in
+**AND THE ONE THAT DOES NOT EXPIRE: at Phase 6 the "separation in time" substitute
+for Fable EXPIRES.** A second, genuinely independent AI reviews the gauntlet's
+test setup before it runs and its verdict after. That is locked in
 `EXECUTION_PLAN.md` Phase 6, it is R-006, and it is **NOT waived by Fable's
 absence.** Information instruments can carry the lighter guard. **The gauntlet
-cannot.** **Ten generations, nine of them failed by the next pair of eyes, and the
-tenth is sitting in front of you untested — that is what the substitute is worth,
-and it only works if somebody actually attacks.**
+cannot.** **Eleven generations, ten of them failed by the next pair of eyes, and
+the eleventh is sitting in front of you untested — that is what the substitute is
+worth, and it only works if somebody actually attacks.**

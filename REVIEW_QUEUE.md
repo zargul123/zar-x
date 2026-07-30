@@ -1957,3 +1957,282 @@ proved to RETURN False rather than raise.
    passing gate contains no red ticks. **I believe that is right** — a PASS
    containing a red tick teaches the next reader to ignore red ticks — **and "I
    believe" is what this ship files rather than trusts.**
+
+---
+
+# VERDICTS OF 2026-07-30 (afternoon) — by the ELEVENTH generation, which built none of this
+
+**The ninth question, and the one this session brought:** *"WHEN does the gate
+stop watching, and what does the part do after that?"* The seventh question asked
+what happens BEFORE the gate is alive to watch. This one asks about the other end
+of the window — the moment the ear shuts, and every place a name can be frozen
+that the check asking "is this looked up at CALL TIME?" does not read.
+
+**Both findings below came out of that one question, and both were predicted in
+writing before either was run.**
+
+## R-024 — **NOT CLEARED. A REAL BLIND SPOT WAS FOUND IN CHECK (n).**
+
+Gate 3.2b-R7 passed on arrival — exit 0, zero red ticks, fourteen of fourteen —
+**and check (n), built that same morning to make sure B9's class could never come
+back, was blind to four of the five places Python freezes a name.**
+
+`_frozen_as_default` read `getattr(obj, '__defaults__', None)` over `globals()`.
+MEASURED with the function copied VERBATIM into a probe outside the repo, control
+first:
+
+    control_positional   (n) sees it True   swap reaches False   as designed
+    miss_kwonly          (n) sees it FALSE  swap reaches False   *** BLIND ***
+    miss_partial         (n) sees it FALSE  swap reaches False   *** BLIND ***
+    MissClass().go       (n) sees it FALSE  swap reaches False   *** BLIND ***
+    _reads_at_call_time  (n) sees it False  swap reaches TRUE    safe, correct
+    CONTROL VALID: True
+
+**And then for real, not as a probe.** A two-line binary-mode edit on a copy
+outside the repo freezing `_utc_iso` as an ordinary keyword-only default
+(`*, _iso=_utc_iso`), CRLF count printed and unmoved:
+
+    CONTROL, untouched, same scratch tree : exit 0, 0 red, GATE 3.2b-R7 PASSED
+    PATCHED                              : exit 1, 3 red ticks
+
+    line 149  ✗ B1  timestamps converted as LOCAL time  → ESCAPED — THE GATE IS DECORATIVE
+    line 176  ✓ B1   rebinds '_utc_iso'  → looked up at CALL TIME, so the swap reaches the module
+
+**The gate contradicted itself inside one run.**
+
+**LIMITED, and said as loudly as the finding: nothing in the shipped file is
+frozen that way today** — no `*,` in any signature, no `functools`, no classes,
+measured not assumed — **and when I wrote one, the drill went RED LOUDLY.** So
+check (n)'s blindness hid nothing by itself. For it to go silent, a SECOND and
+independent flaw is needed: a judge that fails for a spurious reason. **That, not
+the swap being a no-op, is what actually made B9 silent.** What check (n) buys is
+smaller than its own text claimed.
+
+Graded **SERIOUS** on THE FINDING REPORT before any repair (Step 2.1 bad: a
+keyword-only parameter is ordinary Python and nobody has to intend anything;
+Step 2.2 GOOD on the Commander's own wording, because the run does contradict
+itself on its face). Repaired under **GATE 3.2b-R8**, declared in
+`PROGRESS_LOG.md` and committed alone with no `.py` file in that commit
+(`1eebaff`).
+
+### WHERE R-024's SEVEN DOUBTS NOW STAND
+
+1. **DOUBT 1 — TESTED, AND IT FAILED, in a sharper form than its author framed
+   it.** He asked about identity missing an equal-but-not-identical copy. **The
+   real hole was not identity at all, it was PLACE**: `__kwdefaults__`,
+   `functools.partial`, class bodies and module-level aliases were never read.
+   **And his own worry was measured and does not exist for this file:**
+   `tuple(SYMBOLS)` and `SYMBOLS[:]` on a tuple return THE SAME OBJECT in
+   CPython. A `list` copy would still be missed — see R-026 doubt 2.
+2. **DOUBT 2 — NOT TESTED, and deliberately NOT touched.** The hardcoded
+   positive control is on the Commander's desk. **It is not a session's to
+   overrule**, so the new controls were added beside it, not in place of it. My
+   repair inherits its fragility.
+3. **DOUBT 3 — NOT CLOSED, AND NOW TRUE OF ME TOO.** "I fixed the test and left
+   the pattern." `def run(symbols=SYMBOLS, ...)` and `fetch_history` still freeze
+   their globals. **This is the sixth generation to repair the instance it
+   attacked.** See R-026 doubt 6 and the Commander's desk.
+4. **DOUBT 4 — NOT CLOSED.** Check (n) still guards `_SABOTAGES` only, not
+   `_FILE_SABOTAGES`, and still does not exist in `cockpit/funding.py` or
+   `cockpit/fear_greed.py`.
+5. **DOUBT 5 — NOT TESTED.** `_b9_judge_says_no` is still judged by itself.
+6. **DOUBT 6 — MEASURED, AND THE MEASUREMENT DISAGREES WITH THE LOG.** The log
+   records "~4 MINUTES". **Timed twice today by wall clock in a scratch copy:
+   55 SECONDS and 55 SECONDS**, same file, same machine, same revision. Binance
+   latency dominates and evidently moves by a factor of four across a morning.
+   **The honest statement is that nobody has measured this gate often enough to
+   quote a figure**, and a doubt resting on a number that moves cannot be settled
+   by either number.
+7. **DOUBT 7 — NOT TESTED.** The re-marked `✗` was not attacked.
+
+---
+
+## R-022 — **STILL OPEN. DOUBT 1 WAS TESTED AND IT FAILED. DOUBT 4 WAS TESTED AND HELD.**
+
+### DOUBT 1 — **FAILED. ITS AUTHOR'S OWN STRONGEST LEAD WAS RIGHT.**
+
+Filed as its own item, **R-025** below, because it is a fault in shipped gate
+code and not merely an untested doubt.
+
+### DOUBT 4 — **TESTED AND HELD. `os.fstat(fd)[:4]` DOES ITS JOB ON THIS MACHINE.**
+
+The doubt's stated premise — "on Windows `st_ino` is often 0" — **is false here.**
+MEASURED, with the output redirected to a file, which is how every logged run on
+this ship is made:
+
+    descriptor 1 as the process got it   (33206, 14355223812336767, 240315720, 1)
+    inside the capture                   (33206, 19140298416417993, 240315720, 1)
+    after an HONEST restore              (33206, 14355223812336767, 240315720, 1)
+    honest restore looks unchanged       True   (it must)
+    a leak onto the capture file         DETECTED
+    a leak onto ANOTHER REGULAR FILE     DETECTED
+
+`st_ino` is a real 17-digit file index, not 0. Both leak shapes are caught,
+including the hard one — two files of the same kind. **HELD.**
+
+**The one limit, stated rather than glossed:** measured only with stdout
+redirected to a file. A console handle was not tested, because this session had
+no console. **That is a smaller question than the doubt asked, and it is left
+written down rather than counted as cleared.**
+
+### DOUBT 6 — **STILL UNTOUCHED.** Nobody has attacked the paths the gate does not know exist.
+
+**R-022 therefore stays OPEN, and R-016 with it.** One doubt failed, one held, one
+untouched.
+
+---
+
+## R-007 — **STILL OPEN, AND STILL NOT LOOKED AT.** Eight sessions now. The orders permitted this session to clear it; it did not examine it, so it cannot.
+
+## R-006 — **UNTOUCHED. NOT THIS SESSION'S TO CLEAR, OR ANY IN-HOUSE SESSION'S.**
+
+## R-021 — **STILL OPEN, one more data point.** The funding gate was run at 08:55-08:56 UTC, +55 minutes past the 08:00 settlement, and passed on the FIRST run. Consistent with the previous session's +52 observation. Nobody has measured the edges.
+
+## R-023 — **STILL OPEN.** Not touched; it is a SMALL finding awaiting the Commander's word.
+
+---
+
+## R-025 — **THE EAR IS DEAF TO ANY WRITE THE DOORWAY DEFERS PAST ITS OWN RETURN**
+**STATUS: OPEN · P1 · found 2026-07-30 (afternoon) by a session that built none
+of it · GRADED SERIOUS ON THE REPORT · DELIBERATELY NOT REPAIRED — the Commander
+rules**
+
+R-022 doubt 1, its author's own strongest lead, tested at last.
+
+`_capture` restores descriptors 1 and 2 in a `finally` the instant `call()`
+returns. **Everything after that instant is unwatched.** Three shapes were built
+into `section_text` as a real 26-line insertion on a copy outside the repo:
+
+    A1  a non-daemon thread that sleeps past the end of the gate
+    A2  a buffered wrapper over fd 1, written DURING the call and kept alive so
+        nothing flushes it until interpreter shutdown  <-- the accident shape
+    A3  an atexit handler
+
+    CONTROL FIRST, untouched funding.py in a scratch tree:
+        09:12:06 - 09:13:30 UTC   exit 0   0 red   GATE 3.2-R6 PASSED
+    PATCHED:
+        09:13:30 - 09:17:25 UTC   exit 0   0 red   GATE 3.2-R6 PASSED
+
+**AND WHILE IT PASSED:**
+
+    ✓ the ear HEARD the print() / os.write(fd 1) / logging route   (3/3)
+    ✓ healthy / degraded / offline path: the doorway wrote NOTHING to
+      descriptor 1 or 2 — not by print, not by a raw write, not through a
+      handler it kept a reference to
+    ✓ descriptors 1 and 2 came back unchanged
+    GATE 3.2-R6 PASSED
+    ... and then 162 LINES OF TRADING ADVICE, on the pilot's screen, in the same
+    output, after the verdict. 54 of each marker.
+
+**54 of each is also a measurement nobody had: the gate calls the doorway 54
+times per run.**
+
+**LIMITED, said as loudly as the finding: NOTHING ON THIS SHIP DEFERS A WRITE
+TODAY.** Measured across both production halves — `funding.py` lines 1-159 and
+`fear_greed.py` lines 1-112 contain no `threading`, no `atexit`, no `subprocess`,
+no `os.dup`, no `open(1`, no `QueueHandler`, no `Timer`, no `__del__`. Their only
+dependency is `requests`. **All three shapes had to be written by hand.**
+
+**THE FINDING REPORT.** Step 0 clean (control passed first, damage printed, not
+my own work). Step 1 YES — advice on the Brief is the one thing R-016 exists to
+prevent. **Step 2.1 GOOD: only on purpose.** **Step 2.2 BAD on the Commander's
+own wording: NO.** The harm lands on the Brief, where the line reads like every
+other line; seeing that it is wrong requires knowing this ship forbids advice,
+and his knowledge of his own rules counts as a prediction about him. Step 2.3
+GOOD. **Any Step 2 bad = SERIOUS — the third finding that question has moved.**
+
+**THE DISTINCTION HE NEEDS IN ORDER TO RULE: R-020 was SERIOUS and LIVE. THIS IS
+SERIOUS AND NOT LIVE.** He may reasonably rule it SMALL. A session recommends; he
+rules.
+
+### THE REPAIR, DESIGNED SO THE NEXT SESSION NEED NOT INVENT IT
+
+**DOOR 3 — WHAT DOES THE DOORWAY WRITE AFTER IT HAS ANSWERED?** Door 2 already
+spawns a fresh interpreter and requires it to write nothing at IMPORT. Door 3 is
+the same proven machinery one step further: a fresh interpreter that imports the
+module, calls `section_text()` on all three paths, and **then SHUTS DOWN** — and
+the child's total output must be empty. Interpreter shutdown joins non-daemon
+threads, flushes every buffer and runs every atexit handler, **so it catches all
+three shapes deterministically.**
+
+**And the two traps in building it:**
+- **A TIMEOUT MUST BE A FAILURE, NEVER A QUIET PASS.** A thread that sleeps
+  forever makes the child hang, and "no output before the timeout" is exactly
+  what silence looks like.
+- **THE DRILL MUST PLANT ALL THREE SHAPES AND REQUIRE ALL THREE CAUGHT**, or the
+  new door is one more check nobody has ever broken.
+
+It is needed in **both** `cockpit/funding.py` and `cockpit/fear_greed.py`.
+
+---
+
+## R-026 — **GATE 3.2b-R8 WAS WRITTEN BY THE SESSION THAT FOUND THE FAULT IT REPAIRS**
+**STATUS: OPEN · P1 · filed by that session against its own work, 2026-07-30
+(afternoon) · MAY NEVER BE CLEARED BY ITS AUTHOR**
+
+**ELEVENTH GENERATION OF THE SAME STRUCTURE, and ten of the eleven were failed by
+the next pair of eyes.** Assume this one is too.
+
+**What to review.** `_frozen_as_default`'s new four-place body and its nested
+`_holds`, `_detector_sees_every_shape` with its five positive controls and TWO
+negative controls, and the fact that the controls are installed into the module's
+own `globals()` and removed in a `finally`.
+
+**What it PASSED, so you know what is claimed:** the untouched file exit 0, zero
+red ticks, fourteen of fourteen CAUGHT; the detector proved able to see all five
+planted shapes and to stay silent about both the correct pattern and a mere
+alias; and my own real keyword-only edit now caught with a red tick naming the
+function that froze it.
+
+**AND READ THIS FIRST, BECAUSE IT IS THE MOST USEFUL THING IN THIS ITEM: THE
+FIRST DRAFT OF THIS REPAIR FAILED ITS OWN GATE.** I counted a module-level alias
+as a freeze, and the healthy file went red FOURTEEN TIMES — `_RECORD_ORIGINAL =
+record` and `_UTC_ISO_ORIGINAL = _utc_iso` are the drill's own saved originals,
+working exactly as designed. **The distinction I had wrong: what matters is not
+that another name holds the old object, it is that the module USES the old object
+without looking the name up again.** The alias rule was removed and turned into a
+permanent negative control. **The drill caught its author's mistake before it
+shipped — which is the entire argument for building the controls first.**
+
+### THE DOUBTS I FILE AGAINST MY OWN WORK — free hits, recorded not hidden
+
+1. **THE CONTROLS MUTATE THE MODULE'S OWN NAMESPACE AND NOTHING PROVES THEY LEFT
+   IT AS THEY FOUND IT.** Seven names go into `globals()` and come out in a
+   `finally`. There is a clash guard on the way IN. **There is no check on the
+   way OUT** — nothing compares the namespace before and after, and every check
+   that runs later runs in whatever namespace this one left behind.
+2. **IDENTITY IS STILL THE RULE, SO A MUTABLE COPY IS STILL MISSED.**
+   `list(SYMBOLS)` is a different object. I measured that tuple copies are the
+   SAME object and therefore safe, and I chose not to switch to equality because
+   an equality detector would flag every function whose default merely equals the
+   target and its silence would stop meaning anything. **The miss is real, it is
+   untested, and I am recording it rather than solving it.**
+3. **I FOUND FOUR PLACES. I DO NOT KNOW THAT THERE ARE ONLY FOUR.** `_holds` does
+   not look at closures (`__closure__`), decorator wrappers, bound methods stored
+   in globals, `__slots__` descriptors or dataclass fields. **The whole finding
+   was that a check like this spoke for places it had never read, and I have no
+   proof I am not doing a narrower version of the same thing.**
+4. **CHECK (n) STILL GUARDS `_SABOTAGES` ONLY** — not `_FILE_SABOTAGES` — **and
+   still does not exist at all in `cockpit/funding.py` or
+   `cockpit/fear_greed.py`.** R-024 doubt 4, inherited and not closed.
+5. **`_detector_sees_every_shape` IS JUDGED BY ONE JUDGE — ITSELF.** If the
+   controls are wrong, nothing on this ship can see it.
+6. **I FIXED THE TEST AND LEFT THE PATTERN — THE SIXTH GENERATION TO DO SO.**
+   The one-line change that ends the entire class — `symbols=None`, resolved from
+   the global in the body, which `funding.py` already does — was forbidden to me
+   because nothing the pilot reads may change during a repair to a test. **It is
+   on the Commander's desk, not in my diff.**
+7. **THE POSITIVE CONTROLS ARE HARDCODED TO NAMES I CHOSE**, exactly as R-024
+   doubt 2 was. If a future session renames or removes one of the six shapes for
+   good reasons, the gate goes red for a good commit. **I repeated the pattern
+   this ship has already filed a doubt about, knowingly, because loud is the safer
+   direction — and "I believe that is right" is what this ship files rather than
+   trusts.**
+8. **NOTHING WATCHES THE GATE'S RUNTIME**, and the one figure on record turned out
+   to be wrong by a factor of four in both directions on the same day.
+9. **BOTH NEGATIVE CONTROLS ARE MINE, AND ONE OF THEM EXISTS BECAUSE I GOT IT
+   WRONG.** The alias control encodes MY judgement about which freezes matter. **If
+   that judgement is wrong — if there is a real bypass that looks like an alias —
+   I have written a control that will actively keep the next session from finding
+   it.** That is the most dangerous line in my diff and I do not know how to test
+   it from where I am standing.
