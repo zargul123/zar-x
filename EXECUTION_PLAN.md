@@ -384,7 +384,7 @@ else. A KEYWORD-ONLY default, a `functools.partial` and a class body were
 invisible to it. A real two-line edit made B1 and B2 no-ops while check (n)
 printed a green tick over both, **in the same run that scored them ESCAPED**.
 Graded SERIOUS on Step 2.1 — `*,` is ordinary Python — and repaired under GATE
-3.2b-R8, declared and committed alone first (`1eebaff`). **The shipped file had no
+3.2b-R8, declared and committed alone first (`3434ed6`). **The shipped file had no
 such freeze, and when one was written the drill went red loudly: the CLAIM was
 broken, not the protection.**
 

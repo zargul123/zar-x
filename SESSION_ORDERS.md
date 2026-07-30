@@ -278,7 +278,12 @@ read it there, not here.** Then:
 **If you do repair: DECLARE THE GATE IN `PROGRESS_LOG.md` AND COMMIT THAT ENTRY
 ALONE, WITH NO `.py` FILE IN THE COMMIT, BEFORE WRITING CODE.** Then
 `git show --stat` proves the bar preceded the work. **Seventeen uses of this
-pattern and it has survived audit every time.** Then:
+pattern and it has survived audit every time.**
+
+**AND RECORD THAT HASH *AFTER* YOUR FINAL PUSH, NOT WHEN YOU WRITE THE ENTRY.**
+The cloud watchman pushes every four hours, so `git pull --rebase` before your
+push can rewrite your own commit hashes underneath you. **Mine did**, and three
+documents named a commit that no longer existed until I corrected them. Then:
 
 (a) **NOTHING THE PILOT READS CHANGES.** All edits inside `__main__` — **prove it
     two ways, do not assert it:** every diff hunk at or after the `__main__` line

@@ -7693,3 +7693,30 @@ commit covers the five cp1252 fingerprints; **it would not have caught this one 
 all.** A complete check needs THREE things: the fingerprints, the line-ending
 totals, and the byte count. **Recommended, not adopted — it is the Commander's
 call, and it is on his desk in the new orders.**
+
+## **CORRECTION, APPENDED RATHER THAN EDITED IN: THE DECLARATION COMMIT'S HASH CHANGED**
+
+Three places in this session's records name **`1eebaff`** as the commit that
+declared GATE 3.2b-R8 alone with no `.py` file in it. **That hash no longer
+exists.** `git pull --rebase` before the push replayed my two commits on top of a
+cloud watchman commit that had landed while I worked, and rebasing rewrites hashes.
+
+**THE DECLARATION COMMIT IS `3434ed6`.** Verified after the push, and it still
+proves exactly what it was written to prove:
+
+    3434ed6 GATE 3.2b-R8 DECLARED - two findings proved, no code in this commit
+     PROGRESS_LOG.md | 346 ++++++++++++++++++++++++++++
+     1 file changed, 346 insertions(+)
+
+**One file, no `.py`, the bar before the work.** `EXECUTION_PLAN.md` and
+`REVIEW_QUEUE.md` were corrected in place because they are living documents; **this
+log is append-only, so the wrong hash stays visible above and this note stands
+beside it.**
+
+**AND THE GENERAL LESSON, WHICH IS NOT ABOUT ONE HASH: THIS SHIP'S PROOF THAT A
+GATE WAS DECLARED FIRST IS A COMMIT HASH WRITTEN INTO A DOCUMENT, AND THE CLOUD
+WATCHMAN PUSHES EVERY FOUR HOURS, SO ANY SESSION THAT RECORDS A HASH BEFORE ITS
+FINAL PUSH CAN HAVE IT REWRITTEN UNDER IT.** Seventeen generations of this pattern
+and nobody had hit it, because nobody had needed to rebase in between. **The fix is
+one line of practice, not code: RECORD THE DECLARATION HASH AFTER THE PUSH, or
+verify it after the push and correct it.** It is in the new orders.

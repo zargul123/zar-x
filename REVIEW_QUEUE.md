@@ -2013,7 +2013,7 @@ keyword-only parameter is ordinary Python and nobody has to intend anything;
 Step 2.2 GOOD on the Commander's own wording, because the run does contradict
 itself on its face). Repaired under **GATE 3.2b-R8**, declared in
 `PROGRESS_LOG.md` and committed alone with no `.py` file in that commit
-(`1eebaff`).
+(`3434ed6`).
 
 ### WHERE R-024's SEVEN DOUBTS NOW STAND
 
