@@ -365,6 +365,25 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> THE COLLISION BELOW IS ANSWERED. THE COMMANDER RULED THE SAME EVENING.**
+
+**HE CHANGED HOW FINDINGS ARE JUDGED, AND `THE_PATTERN.md` WAS EDITED ON HIS
+RULING — 98 insertions, ZERO deletions, nothing renumbered, his own Step 2.2
+wording untouched.** Three questions now sit in front of Step 0: **what information
+is this code for · can this fault make it WRONG, MISSING or DELETED, today or after
+how many further mistakes each named · say it in real business terms.**
+
+**HE ALSO SAID, AND IT IS RECORDED IN `PROGRESS_LOG.md` IN HIS OWN WORDS:** *"I'm
+not saying loosen the checks. Show the real faults which can affect when the system
+will run. For those actual faults I'm willing to do 50 sessions."* **THE FOURTEEN
+SABOTAGES STILL RUN EVERY TIME. THE LOOP IS UNCHANGED. Only WHICH findings may stop
+the building has changed.**
+
+**UNDER THE NEW FORM, THIS SESSION'S OWN FINDING SCORES SMALL** — the recorder
+wrote 180 perfect rows, the fault was in the scoreboard, and two further mistakes
+are needed before any number goes wrong. **DOOR 3 IS THE NEXT SESSION'S FIRST JOB
+AND IT IS NOT CONDITIONAL.**
+
 → We are at: **PHASE 3 — THE TWELFTH GENERATION. TWO MORE FINDINGS AGAINST THE
 SAME CHECK, ONE DAY AFTER THE LAST TWO, BOTH REPAIRED UNDER GATE 3.2b-R9. A SABOTAGE
 THAT REBOUND A NAME THE RECORDER CANNOT EVEN SEE WAS SCORED **CAUGHT** AND CERTIFIED

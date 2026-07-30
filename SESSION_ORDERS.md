@@ -1,4 +1,4 @@
-# ZAR X PHASE 3 — **ATTACK GATE 3.2b-R9 (R-027). THEN BUILD DOOR 3 — IT IS STILL HIS ORDER AND IT HAS NOW SLIPPED TWICE.**
+# ZAR X PHASE 3 — **BUILD DOOR 3. THE COMMANDER HAS RULED, AND HE HAS ALSO CHANGED HOW FINDINGS ARE JUDGED — READ THAT FIRST.**
 
 *Written 2026-07-30 (evening) by the twelfth generation — the session that
 attacked R-026, found TWO blind spots, repaired both, and **did not build Door 3
@@ -75,12 +75,48 @@ AS ONE.** Check the clock, run it again, and say how many runs it took.
    re-open the ruling. **Whether it is built BEFORE or AFTER another repair is
    the open question, and that one IS his — item 1 on his desk.**
 
+## **>>> READ THIS BEFORE ANYTHING ELSE: THE RULES FOR JUDGING A FINDING CHANGED TONIGHT**
+
+**THE COMMANDER ADDED THREE QUESTIONS TO THE FINDING REPORT IN `THE_PATTERN.md`,
+2026-07-30 (evening), AFTER A LONG DISCUSSION IN PLAIN WORDS. THEY COME BEFORE
+STEP 0 AND THEY CAN END AN ASSESSMENT ON THEIR OWN. GO AND READ THEM THERE.**
+
+**What he saw, in his words:** *"if we are making scenarios, there are millions of
+scenarios."* Anybody can invent a way to fool a test, every invented one produces
+the same innocent green screen, so every one of them scored SERIOUS on Step 2.2
+and stopped the build. **Phase 3 step 3 has now been deferred SEVEN times.**
+
+**His replacement:** every piece of code here exists to produce ONE piece of
+information. **Q1: name it.** **Q2: can this fault make that information WRONG,
+MISSING or DELETED — today, or after how many further mistakes, each one named?**
+**Q3: say it in real business terms as if the system were running for real.**
+
+**AND THE HALF OF HIS RULING A SESSION MUST NOT QUIETLY DROP:** *"I'm not saying
+loosen the checks. Show the real faults which can affect when the system will run.
+For those actual faults I'm willing to do 50 sessions."* **THE ATTACK IS NOT
+REDUCED. THE GATES ARE NOT RELAXED. THE FOURTEEN SABOTAGES STILL RUN EVERY TIME.**
+**What changed is only WHICH findings are allowed to stop the building.** A session
+that uses this form as an excuse to look less hard has broken it.
+
+**MEASURED AGAINST MY OWN WORK, so you know which way it cuts:** under these
+questions, **tonight's finding scores SMALL** — the recorder wrote 180 perfect
+rows in my own test and I printed them; the fault was in the scoreboard, not the
+data; and two further mistakes are needed before any number goes wrong. **It would
+not have stopped Door 3. That is the point of the change.**
+
 ## Your job, in order
 
-**1. ATTACK R-027 — MY REPAIR, GATE 3.2b-R9.** Ten doubts filed against my own
-work. They are starting points, **not** the assignment.
+**1. BUILD DOOR 3. IT IS THE ORDER AND IT IS NOT CONDITIONAL.** It has slipped
+twice already. **If you find something in Part 2 below that scores SERIOUS on the
+new Q2 — wrong, missing or deleted, in the shipped file, today — then fix that
+and stop, exactly as before. Nothing else stops Door 3.**
 
-**2. THEN BUILD DOOR 3** unless he has said otherwise — see his desk, item 1.
+**2. ATTACK R-027 — MY REPAIR, GATE 3.2b-R9 — WITH WHATEVER TIME IS LEFT.** Ten
+doubts filed against my own work. They are starting points, **not** the assignment.
+**The loop is unchanged and the Commander was explicit about that: every session
+still attacks what the last one built, still logs everything, still updates the
+roadmap, still rewrites these orders. Only the ORDER OF THE TWO JOBS moved for this
+one session, because Door 3 has waited long enough.**
 
 **3. THE 1 AUGUST ERRAND — CHECK TODAY'S DATE FIRST.** On 2026-07-30 it was NOT
 due. **Six sets of orders have now got this wrong in one direction or the other.**
@@ -171,7 +207,7 @@ Read them in `REVIEW_QUEUE.md` under **R-027**. The three I would attack first:
 
 ---
 
-# PART 2 — **BUILD DOOR 3, unless the Commander has said otherwise (his desk, item 1).**
+# **DOOR 3 — YOUR FIRST JOB, NOT YOUR SECOND. BUILD IT.**
 
 **HIS RULING STANDS: R-025 IS SERIOUS AND DOOR 3 IS AN ORDER.** He was shown the
 proof (162 lines of trading advice on the pilot's screen under a gate that
@@ -395,7 +431,19 @@ the Commander. **It is not repeated here.**
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **>>> THE ONE THAT MATTERS TONIGHT, AND IT IS A REAL DECISION, NOT A REPORT.
+1. **>>> ANSWERED. HE RULED ON 2026-07-30 (evening) AND IT IS DONE — DO NOT RE-OPEN IT.**
+   He was shown the problem in plain words: his own Step 2.2 asks whether a fault
+   is visible on its face, **and a blind test is never visible on its face**, so
+   every blind spot scored SERIOUS and stopped the build. **He did not weaken the
+   bar. He replaced the question with a better one** — the three questions now in
+   `THE_PATTERN.md`, built around what each piece of code is actually FOR. **And he
+   said plainly that the checks are not to be loosened and that he will sit through
+   fifty sessions for faults that are real.** Door 3 is your first job. **What he
+   is still owed on it is THE RESULT** — when Door 3 passes, tell him in plain
+   words that the hole is shut and how you proved it, not that a gate went green.
+
+1b. **THE OLD ITEM 1, KEPT FOR THE RECORD RATHER THAN ERASED:**
+   **>>> THE ONE THAT MATTERED THAT NIGHT, AND IT WAS A REAL DECISION, NOT A REPORT.
    HIS DOOR 3 ORDER WAS PUSHED BACK BY A GRADE A SESSION WROTE ABOUT ITS OWN
    FINDINGS — AND THAT SESSION IS THE ONE THE PUSH-BACK EXCUSED FROM BUILDING.**
    I graded both of tonight's findings SERIOUS, honestly and on his own wording

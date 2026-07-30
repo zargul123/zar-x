@@ -210,6 +210,101 @@ spotting a dodged question needs no technical knowledge at all.
 **Every question below was earned by something that actually happened on this
 ship.** None was invented for tidiness.
 
+## >>> THE COMMANDER'S THREE QUESTIONS. ASK THESE FIRST. THEY CAN END IT.
+
+**ADOPTED 2026-07-30 (evening) BY THE COMMANDER, AFTER HE READ TWO CONSECUTIVE
+SESSIONS' FINDINGS AND ASKED THE QUESTION NOBODY HAD ASKED: "IF WE ARE MAKING
+SCENARIOS, THERE ARE MILLIONS OF SCENARIOS."**
+
+**HE IS RIGHT AND IT IS THE HOLE IN THE WHOLE THING.** Anybody can invent a way
+to fool a test. There is no end to it, and every invented one produces the same
+innocent green screen, so every one of them scored SERIOUS on Step 2.2 and
+stopped the build. **Six consecutive sessions found something; the Context Deck
+sat at two instruments of five; and Phase 3 step 3 was deferred SEVEN times.**
+
+**HIS REPLACEMENT, IN HIS OWN WORDS:** every piece of code on this ship was
+written to produce ONE piece of information, and the whole ship exists so that
+the fetching and the calculating behind that information are right. **So the
+question is not "can I break it." It is "can this fault make that information
+wrong when the system is doing real work."**
+
+**AND THE THING HE SAID THAT MUST NOT BE LOST WHEN THIS FORM IS USED:** *"I'm
+not saying loosen the checks. Show the real faults which can affect when the
+system will run. For those actual faults I'm willing to do 50 sessions."*
+**THIS FORM EXISTS TO SHARPEN THE ATTACK, NEVER TO EXCUSE ONE.** A session that
+uses it to avoid looking hard has broken it.
+
+    Q1 - WHAT INFORMATION IS THIS CODE FOR?
+
+         Name the thing the COMMANDER ends up reading, not the code. "The
+         Funding line on the Brief." "The 180 open-interest rows saved each
+         month." "The Fear & Greed number."
+         **If a session cannot name it in one line, it does not understand
+         what it is attacking, and that is the finding.**
+
+    Q2 - CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING, OR DELETED?
+
+         **All three words matter and each was earned.** B14 moved the whole
+         archive to another filename with every row inside it PERFECT. B13
+         deleted 34 rows and printed a report that was entirely TRUE about
+         what was left. **A test that asks only "is it wrong" lets both of
+         those walk straight through.**
+
+         YES, IN THE SHIPPED FILE, TODAY ......... SERIOUS. Fix it and stop.
+         YES, AFTER <N> MORE MISTAKES ........... count them and NAME EACH ONE.
+         NO - the information is correct either way ... SMALL.
+
+    Q3 - SAY IT IN REAL BUSINESS TERMS, AS IF THE SYSTEM WERE RUNNING FOR REAL.
+         No computer words. Four plain sentences:
+
+         (a) What would he SEE on his screen? Quote the line, or say
+             "nothing - it would look completely normal."
+         (b) What would it COST him? Which coin, how many days, how many rows,
+             what money, which decision he would get wrong.
+         (c) Would he EVER find out, or never?
+         (d) Can it be UNDONE, or is it gone forever?
+
+### WHAT THE THREE QUESTIONS DECIDE ON THEIR OWN
+
+    Q2 = NO, or TWO OR MORE mistakes away ... SMALL. File it as CATEGORY B.
+                                              **KEEP BUILDING.** Do not run
+                                              the rest of this form.
+    Q2 = ONE mistake away ................... carry on below. Steps 1-4 decide,
+                                              and it will land BORDERLINE or
+                                              worse, so it reaches him.
+    Q2 = YES, TODAY, IN THE SHIPPED FILE .... SERIOUS. Fix it and stop.
+
+**STEP 0 BELOW STILL APPLIES IN ALL THREE CASES.** A finding that is not proven
+is not a finding, whatever it scores.
+
+### THE COUNT MUST BE SPELLED OUT, AND HERE IS WHY
+
+**Whoever answers "how many more mistakes" is also deciding their own workload.**
+That is the same conflict of interest that made R-019 necessary, pointing the
+other way. **So every step in the chain is NAMED, in order, in plain words.**
+Then the Commander reads the chain and asks *"is that really two separate
+mistakes, or is this being stretched?"* - **a judgement that needs no technical
+knowledge at all**, which is the entire point of this form.
+
+### ONE THING WEIGHS HEAVIER THAN THE COUNT
+
+**Is this information read ONCE, or does everything downstream stand on it?**
+`data/oi_history/` is the foundation: it is the raw material for Phase 6, and
+**THE PROMISE allows three sealed attempts and then the signals chapter closes
+forever.** Corrupt data there does not give one bad reading - **it silently
+poisons a test that can never be re-run.** Foundation faults are treated harder
+even when the chain is longer.
+
+### AND SAID HERE, WHERE IT IS READ AT THE MOMENT IT MATTERS
+
+**"I ATTACKED IT HARD AND FOUND NOTHING" IS A SUCCESS. SAY IT PLAINLY AND CLEAR
+THE ITEM.** A session that reports clean has not wasted anybody's time. **The
+pressure to find SOMETHING is exactly what produces a stretched finding, and a
+stretched finding costs the Commander an instrument he actually wanted.**
+**DO NOT MANUFACTURE A DEFECT TO JUSTIFY A SESSION.**
+
+---
+
 ## STEP 0 — IS THE FINDING EVEN TRUSTWORTHY?
 
 *Any wrong answer here and the finding is NOT PROVEN. Do not classify it. Redo
@@ -300,6 +395,9 @@ and B7, which left the first asset perfect and quietly ruined the other two
 
 ## THE SCORING
 
+    Q2 = NO, or 2+ steps away ... SMALL. File it. KEEP BUILDING.
+    Q2 = YES, TODAY, SHIPPED .... SERIOUS. Fix it and stop.
+    Q2 = ONE step away .......... carry on; it reaches him.
     Step 0 wrong ................ not proven. Test again.
     Step 1 = NO ................. SMALL
     Any Step 2 bad .............. SERIOUS

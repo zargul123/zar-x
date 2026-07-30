@@ -8151,3 +8151,146 @@ because nothing had been pushed in the meantime.** If the cloud watchman HAD
 pushed, I would have found out at the push, not before it. **The correct order is
 `git add` first, then `git pull --rebase`, then commit.** Next session: do it in
 that order.
+
+---
+
+# 2026-07-30 (evening) — **THE COMMANDER CHANGED HOW FINDINGS ARE JUDGED. `THE_PATTERN.md` WAS EDITED, AND THIS ENTRY RECORDS THE FAILURE THAT EARNED IT.**
+
+**`THE_PATTERN.md` SAYS A SESSION MAY EDIT IT ONLY ON A GENUINELY NEW LESSON, AND
+THAT WHEN IT DOES, IT MUST SAY HERE WHAT FAILURE EARNED THE CHANGE. THIS ONE WAS
+NOT A SESSION'S IDEA. THE COMMANDER RULED IT AFTER A LONG DISCUSSION IN PLAIN
+WORDS, AND I AM WRITING IT UP BECAUSE I AM ABOUT TO BE MEASURED BY IT.**
+
+## THE FAILURE THAT EARNED IT
+
+**Six consecutive sessions found something. Phase 3 step 3 — the news-headlines
+instrument — has been deferred SEVEN times. The Context Deck has sat at two
+instruments of five since Phase 3 began.** And on this very evening, the session
+writing this had its own SERIOUS grade cancel the Commander's own DOOR 3 order,
+having graded its own finding.
+
+**He read the whole thing and found the hole nobody had found, in one sentence:**
+
+> *"if we are making scenarios, there are millions of scenarios."*
+
+**He is right, and it is structural.** Anybody can invent a way to fool a test.
+There is no end to it. And **every invented flaw produces the same innocent green
+screen**, so every one of them answered NO to Step 2.2 — *would the Commander see
+it with his own eyes* — and **a NO on 2.2 alone makes a finding SERIOUS, and
+SERIOUS stops the build.** Meanwhile finding blind spots is the first job of
+every session.
+
+**So the building could never win.** Not because anything was on fire. Because of
+how two good rules met.
+
+## WHAT WAS NOT CHANGED, SAID FIRST BECAUSE IT MATTERS MOST
+
+**HIS OWN WORDING OF STEP 2.2 IS UNTOUCHED.** It was earned by R-019 and it
+stands exactly as he wrote it. **Steps 0, 1, 2, 3 and 4 are untouched and NOTHING
+WAS RENUMBERED**, because documents all over this ship refer to them by number.
+The diff is **98 insertions and ZERO deletions.**
+
+**AND THE HALF OF HIS RULING THAT A FUTURE SESSION MUST NOT QUIETLY DROP, IN HIS
+OWN WORDS:**
+
+> *"I'm not saying loosen the checks. Show the real faults which can affect when
+> the system will run. For those actual faults I'm willing to do 50 sessions."*
+
+**THE FOURTEEN SABOTAGES STILL RUN EVERY TIME. THE GATES ARE NOT RELAXED. EVERY
+SESSION STILL ATTACKS WHAT THE LAST ONE BUILT, STILL LOGS EVERYTHING, STILL
+UPDATES THE ROADMAP, STILL REWRITES THE ORDERS.** He was explicit and repeated
+it. **What changed is only WHICH findings are allowed to stop the building.**
+
+## WHAT WAS ADDED — his three questions, in front of Step 0
+
+**His insight, in his words:** every piece of code on this ship was written to
+produce ONE piece of information, and the ship exists so the fetching and the
+calculating behind that information are right. **So the question is not "can I
+break it." It is "can this fault make that information wrong when the system is
+doing real work."**
+
+    Q1  WHAT INFORMATION IS THIS CODE FOR?  Name the thing he READS.
+    Q2  CAN THIS FAULT MAKE IT WRONG, MISSING, OR DELETED?
+          today, in the shipped file ....... SERIOUS
+          after N more mistakes ............ name every one of them
+          no ............................... SMALL, keep building
+    Q3  SAY IT IN REAL BUSINESS TERMS, as if the system were running for real:
+          what he'd SEE · what it would COST · would he ever FIND OUT · undoable?
+
+**"WRONG, MISSING OR DELETED" — ALL THREE WORDS ARE MINE AND EACH WAS EARNED BY
+THIS SHIP'S OWN HISTORY.** B14 moved the whole archive to another filename with
+every row inside it perfect. B13 deleted 34 rows and printed a report that was
+entirely TRUE about what was left. **A form asking only "is it wrong" lets both
+of those walk straight through**, and both were real findings that mattered.
+
+**Two more things I added and told him I was adding:** the chain of "further
+mistakes" must be **NAMED step by step**, because whoever counts it is deciding
+their own workload — the same conflict of interest R-019 was earned by, pointing
+the other way; and **foundation information is weighed harder than the count**,
+because `data/oi_history/` feeds Phase 6 and THE PROMISE allows three sealed
+attempts and then closes forever.
+
+**And one moved rather than invented:** *"I attacked it hard and found nothing"
+is a success* now sits **inside** the form, where it is read at the moment it
+matters, instead of further down the file.
+
+## THE TEST THAT SHOWS IT IS NOT RIGGED IN A SESSION'S FAVOUR
+
+**Run against the real record, it downgrades the session proposing it and upholds
+the Commander's own instincts:**
+
+    B7  (live, real)      ETH 22x wrong, SOL 80x wrong, thirty days, green screen
+                          Q2 = YES TODAY        -> SERIOUS      unchanged
+    TONIGHT'S FINDING     recorder wrote 180 PERFECT rows, printed on screen;
+                          the fault was in the scoreboard, not the data
+                          Q2 = 2 mistakes away  -> SMALL        DOWNGRADED
+    R-025 / DOOR 3        one ordinary line puts ADVICE on an information-only
+                          Brief; Q2 = ONE mistake away, and it hits the Brief
+                          -> reaches him        -> he ruled SERIOUS   unchanged
+
+**Tonight's finding, under the new form, would not have stopped DOOR 3. That is
+the entire point of the change, and it costs the session that wrote it.**
+
+## WHAT I ALSO PROPOSED AND HE IMPROVED ON
+
+I first proposed a cruder question — *"was the flaw already in the file, or did
+the session write it in itself?"* **He replaced it with something better:** judge
+the fault against **what the code is FOR**, not against how it was discovered.
+**His version is concrete, it names a real number on a real screen, and he can
+check the answer himself without reading a line of code — which is the whole
+reason THE FINDING REPORT exists.** Mine is dropped. His is what shipped.
+
+## WHAT THIS COSTS, SAID PLAINLY
+
+**A fault that is two or more mistakes away now gets written down instead of
+fixed, and the CATEGORY B pile will grow faster.** That pile is still cleared in
+full before the ship is used for real, at the same moment `cockpit/brief.py`
+gets its gate. **If a future session finds that the pile has become a place
+findings go to die, that is a finding in itself and it outranks this entry.**
+
+## **CORRECTION TO THE ENTRY ABOVE — I WROTE THE WRONG GIT ORDER INTO THE LOG**
+
+Earlier tonight I recorded that the correct order is *"`git add` first, then
+`git pull --rebase`, then commit."* **That is WRONG and I am correcting it before
+anyone follows it.** `git pull --rebase` refuses on a dirty index just as it
+refuses on unstaged changes — it said so to my face:
+
+    error: cannot pull with rebase: Your index contains uncommitted changes.
+
+**THE CORRECT ORDER IS: COMMIT FIRST, THEN `git pull --rebase`, THEN PUSH.**
+
+**And this time the pull actually mattered.** The push was REJECTED —
+*"the remote contains work that you do not have"* — because the cloud watchman
+pushed a snapshot while this session was working. **Earlier tonight the same
+mistake ended safely only because nothing had landed underneath me. Two hours
+later it did.** That is the difference between a rule that works and a rule that
+has not been tested yet, which is the whole subject of this session.
+
+**Nothing was lost.** The changes were staged, the commit simply did not happen.
+
+**AND ONE MORE, THE THIRD TIME TONIGHT THAT QUOTING BIT ME:** I tried to write
+the commit message with a Python one-liner passed through PowerShell, and
+PowerShell ate the double quotes inside it — a syntax error, then it tried to
+run the words `millions` and `faults` as commands. **The orders already say: put
+document text in a FILE and have a tool read it. I did that for every ship
+document tonight and then broke my own rule for a commit message.**
