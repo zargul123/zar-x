@@ -8294,3 +8294,18 @@ PowerShell ate the double quotes inside it — a syntax error, then it tried to
 run the words `millions` and `faults` as commands. **The orders already say: put
 document text in a FILE and have a tool read it. I did that for every ship
 document tonight and then broke my own rule for a commit message.**
+
+## THE RULING'S COMMIT HASH, RECORDED AFTER THE PUSH — **AND THE REBASE DID REWRITE IT, EXACTLY AS THE ORDERS WARNED**
+
+    8c3e42e   THE COMMANDER CHANGED HOW FINDINGS ARE JUDGED - his three questions
+    1179a49   cloud: snapshot + grades 2026-07-30 14:26 UTC   <- landed underneath me
+    2df955d   record the commit hashes AFTER the push
+    b25897a   GATE 3.2b-R9 PASSED
+    5f50f61   GATE 3.2b-R9 DECLARED (PROGRESS_LOG.md only, no .py)
+
+**The ruling commit was `2080be6` when it was made and `8c3e42e` after the
+rebase.** Four sets of orders have carried the warning *"record the hash AFTER
+your final push, because the cloud watchman can rewrite it underneath you."*
+**Tonight is the second time it has actually happened, and the first time it
+happened to a commit that mattered.** The warning is not theoretical and should
+stay in the orders.
