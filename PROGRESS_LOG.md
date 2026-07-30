@@ -7788,3 +7788,144 @@ only failed it because the standard had been declared before the code existed.
 **Worth recording because it is the first time the loop had to justify itself to
 him rather than to another session** — and the thing that carried it was the
 ship's own history, which is exactly what `PROGRESS_LOG.md` is for.
+
+---
+
+# 2026-07-30 (evening) — TWELFTH GENERATION — **GATE 3.2b-R9 DECLARED. TWO FINDINGS AGAINST R-026, BOTH GRADED SERIOUS ON THE REPORT BEFORE ANY REPAIR. NO CODE IN THIS COMMIT.**
+
+*Written by a session that built none of `data/open_interest.py`. The bars below
+are declared BEFORE the code that must meet them exists, so that `git show --stat`
+proves nobody lowered the bar to match what got built.*
+
+## THE SHIP WAS ALIVE WHEN I ARRIVED — measured, not assumed
+
+    data/open_interest.py   GATE 3.2b-R8 PASSED  exit 0  0 red  20 CAUGHT   73 s
+    cockpit/funding.py      GATE 3.2-R6  PASSED  exit 0  0 red             128 s
+    cockpit/fear_greed.py   GATE 3.1-R6  PASSED  exit 0  0 red              40 s
+    lab/verify_vault.py     VAULT INTACT 6/6
+    cockpit/brief.py        3/3 instruments reporting
+    data/oi_history/        exactly THREE files, correctly named, 181 lines each,
+                            sha256 e3258e82… / 1549a8a1… / e0f91a87… — unchanged
+    git status              clean
+
+**Every gate green on its FIRST run, at 13:15 UTC — 2h45m from the nearest funding
+settlement, so R-021's window is nowhere near this and a red gate today would have
+been a real failure.**
+
+**TWO MEASUREMENTS THAT DISAGREE WITH THE ORDERS, AND THE MEASUREMENT WINS.** The
+orders I was handed say the recorder's gate takes **55 seconds** and the funding
+gate **~85 seconds**. Measured today across four runs: the recorder's gate takes
+**73-80 s** and the funding gate **128 s**. R-026 doubt 8 said nothing watches this
+gate's runtime and the one figure on record had been wrong by a factor of four in
+both directions on the same day. **It is now wrong for a third consecutive session,
+in both files.** I am correcting `ROADMAP.md` rather than the other way round.
+
+## WHAT I FOUND — TWO FINDINGS, ONE DISEASE
+
+**MY NEW QUESTION, THE TENTH — nine were spent and reusing one is the approach
+most likely to find nothing:** *"WHOSE CODE DOES THE SWAP REACH — the part under
+test, or the test itself?"*
+
+**FINDING 1 — CHECK (n) CERTIFIES A SABOTAGE THAT CANNOT TOUCH THE RECORDER.**
+Check (n) prints, of every globals-swap sabotage, *"looked up at CALL TIME, so the
+swap reaches the module."* What it actually measures is only that the name is not
+frozen as a default argument. **"Not blocked by a frozen default" is a smaller
+claim than "reaches the production code",** and the gap is exactly B9's shape with
+the freeze taken out. I added ONE sabotage, `BX`, rebinding `_rows` — the gate's
+own CSV reader, defined inside `__main__`, which the production half of the file
+cannot even name. The recorder ran perfectly and the gate applauded:
+
+    BX DAMAGE >> the recorder wrote 180 rows to BTCUSDT_4h.csv, spanning
+                 2026-06-30T16:00:00Z .. 2026-07-30T12:00:00Z - UNTOUCHED.
+                 BX changed NOTHING in the recorder. I now return [] to the
+                 GATE OWN reader, which is the only thing BX can reach.
+    ✓ BX  a name ONLY THE GATE reads, never the recorder → CAUGHT
+    ✓ BX  rebinds '_rows'  → looked up at CALL TIME, so the swap reaches the module
+    GATE 3.2b-R8 PASSED          exit 0     0 red ticks
+
+**FINDING 2 — THE DETECTOR'S CLASS-BODY CLAIM IS PROVED FOR ONE SHAPE AND SPEAKS
+FOR ALL OF THEM.** `_frozen_as_default` names "a class body" as one of the four
+places Python freezes a name, and its positive control builds a PLAIN method. I
+put six more shapes into the module's own namespace and asked the shipped
+detector, in the shipped module, what it could see:
+
+    ATTACK PROBE SEEN    _AttackHolder.plain_attr
+    ATTACK PROBE SEEN    _AttackHolder.plain_method
+    ATTACK PROBE MISSED  _AttackHolder.static_method
+    ATTACK PROBE MISSED  _AttackHolder.class_method
+    ATTACK PROBE MISSED  _AttackHolder.prop
+    ATTACK PROBE MISSED  _closure_fn
+    ATTACK PROBE MISSED  _wrapped_fn
+    ATTACK PROBE MISSED  _container
+    ATTACK PROBE MISSED  _holder_inst
+
+**Three of those misses are INSIDE the form the docstring claims to cover.** The
+reason is a language fact, measured today on this machine: in Python 3.10 a
+`staticmethod`, `classmethod` or `property` object taken from `vars(cls)` does not
+expose `__defaults__` at all, so `_holds` returns False for it.
+
+**BOTH FINDINGS ARE LATENT AND I SAY SO AS LOUDLY AS I SAY THE REST.** All twelve
+real globals-swap sabotages target `_utc_iso`, `record` and `csv_path` — every one
+a production name, every one correctly certified. This module has exactly one
+class, `RecorderError(Exception)`, with no methods at all. **Nothing shipped is
+weaker than it looks today. What is wrong is the CLAIM's scope** — which is word
+for word what the eleventh generation found one day ago, in the same check.
+
+## THE BARS — DECLARED NOW, WITH NO CODE IN THIS COMMIT
+
+**GATE 3.2b-R9 PASSES ONLY IF ALL NINE ARE GREEN.**
+
+1. **A GLOBALS-SWAP SABOTAGE MAY NOT TARGET A NAME THE PRODUCTION HALF NEVER
+   MENTIONS.** Every `_SABOTAGES` target must appear as a WHOLE WORD in this
+   file's production half — line 1 to the `if __name__ == '__main__':` line. A
+   name absent from that text cannot be reached by the recorder whatever it is or
+   is not frozen as, and this is the check finding 1 says does not exist.
+2. **THAT NEW RULE MUST BE PROVED ABLE TO FIRE, EVERY RUN, FOREVER.** A planted
+   gate-only name in the BX shape must be FLAGGED, and the rule must stay SILENT
+   about all twelve real targets. **A check that reports the absence of something
+   must first be proved able to detect its presence — and to stay quiet about
+   what it does not cover.**
+3. **`_frozen_as_default` MUST SEE A FROZEN DEFAULT INSIDE `@staticmethod`,
+   `@classmethod` AND `property`** — the class-body form it already claims — with
+   a planted example of each that the detector must FIND before it may speak.
+4. **BOTH EXISTING NEGATIVE CONTROLS MUST STILL STAY SILENT** — the correct
+   call-time pattern and a plain module-level alias. The eleventh generation's
+   first draft went red fourteen times on a healthy file by widening this
+   detector carelessly, and that is the failure I am most likely to repeat.
+5. **THE DOCSTRING MUST STOP CLAIMING WHAT IT DOES NOT COVER.** Closures,
+   decorator wrappers, container-held functions and instance attributes are
+   MEASURED MISSES as of today and must be named as such in the file, not left
+   implied. **This is the whole disease and a repair that fixes the code while
+   leaving the claim wide has not fixed it.**
+6. **EVERYTHING THE OLD GATE DID, IT STILL DOES:** exit 0, zero red ticks,
+   fourteen of fourteen CAUGHT, and every existing control green.
+7. **NOTHING THE PILOT READS CHANGES — PROVED TWO WAYS, NOT ASSERTED.** Every
+   diff hunk at or after line 243, AND the sha256 of the production half printed
+   before and after: lines 1-242 joined by CRLF with no trailing separator must
+   still be
+   `5347bfecdf2ccfb2009770f9161dd6c51374f2ccdeae9a8c50793f3a57e2096f`.
+8. **BOTH OF MY ORIGINAL ATTACKS RE-RUN AGAINST THE REPAIRED FILE**, as real text
+   edits and not wrappers, and must now be caught — **and shown to fail for the
+   reason they claim, not incidentally.**
+9. **`py_compile` BEFORE THE GATE. NO new file, NO new dependency, NO extra call
+   from the Brief's path.**
+
+**PASS = every check green including every sabotage CAUGHT. Anything less is a
+FAIL, is not committed as a pass, and is not called "mostly passed."**
+
+## WHAT I AM DELIBERATELY NOT REPAIRING, SAID BEFORE I START
+
+**Closures, decorator wrappers, container-held functions and instance attributes
+stay MISSED.** They are R-026 doubt 3, they are honestly out of the scope of a
+repair to a claim, and widening the detector further is how the eleventh
+generation's first draft failed. **I am closing the gap between the claim and the
+code by moving BOTH ends toward each other, and the part of the gap I leave open
+is written into the file in plain words.**
+
+## AND THE THING THE COMMANDER MUST SEE, WRITTEN BEFORE I BENEFIT FROM IT
+
+**THIS GRADE PUSHES BACK HIS OWN DOOR 3 ORDER, AND IT WAS WRITTEN BY THE SESSION
+THAT THE PUSH-BACK EXCUSES FROM BUILDING IT.** That is the same conflict of
+interest R-019 was earned by, pointing the other way, and I am recording it here
+BEFORE the repair rather than explaining it afterwards. **He can overrule it in
+one word.** It is written out for him in `SESSION_ORDERS.md`, on his desk.
