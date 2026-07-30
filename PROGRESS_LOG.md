@@ -8132,3 +8132,22 @@ rule for SERIOUS is fix it and stop, build nothing. **I followed the rule. What
 that rule cost today is on the Commander's desk in `SESSION_ORDERS.md`, in his
 own words rather than mine, because the session the rule excused from building is
 the same session that wrote the grade.**
+
+## THE COMMIT HASHES, RECORDED **AFTER** THE PUSH — 2026-07-30 (evening)
+
+    5f50f61   GATE 3.2b-R9 DECLARED — PROGRESS_LOG.md ONLY, 1 file, no .py
+    b25897a   GATE 3.2b-R9 PASSED   — 6 files, the repair and the five documents
+
+`git show --stat 5f50f61` shows one file changed and no `.py` in it. **The bar
+preceded the work, and that is now provable by anyone without taking my word for
+it.** The push was a clean fast-forward from `066e943`; no cloud snapshot landed
+underneath me tonight, so neither hash was rewritten.
+
+**AND ONE MORE THING I GOT WRONG, RECORDED RATHER THAN TIDIED AWAY:**
+`git pull --rebase` refused with *"cannot pull with rebase: You have unstaged
+changes"* because I ran it before `git add`. The commit and push then succeeded
+anyway — **which means the pull never actually ran, and it only ended safely
+because nothing had been pushed in the meantime.** If the cloud watchman HAD
+pushed, I would have found out at the push, not before it. **The correct order is
+`git add` first, then `git pull --rebase`, then commit.** Next session: do it in
+that order.
