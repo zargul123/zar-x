@@ -6796,3 +6796,189 @@ which was wrong in a way that could have done harm: **told that the gate is red
 three runs in four, a session meeting a red gate would have shrugged.** It is
 now told the opposite — **outside a settlement window a red funding gate is a
 REAL FAILURE and must be treated as one.**
+
+---
+
+# 2026-07-30 (morning) — INDEPENDENT REVIEW OF R-020 AND R-022, AND **GATE 3.2b-R7 DECLARED**
+
+**THIS ENTRY IS COMMITTED ALONE, WITH NO `.py` FILE IN IT, BEFORE ANY CODE IS
+WRITTEN.** `git show --stat` on this commit proves the bar came first. Sixteenth
+use of the pattern.
+
+**Session date 2026-07-30. THE 1 AUGUST ERRAND IS NOT DUE** — checked first, as
+three sets of orders have now got that wrong in one direction or the other.
+
+## THE SHIP WAS PROVED ALIVE BEFORE ANYTHING WAS TOUCHED
+
+    data/open_interest.py    GATE 3.2b-R6  PASSED  exit 0   0 red lines, 14/14 CAUGHT
+    cockpit/fear_greed.py    GATE 3.1-R6   PASSED  exit 0   0 red lines
+    lab/verify_vault.py      VAULT INTACT  6/6
+    cockpit/brief.py         3/3 instruments reporting
+    data/oi_history/         3 files, correctly named, 181 lines each,
+                             byte-identical before and after every run below
+    git status               clean on arrival (the tracked change to
+                             journal/snapshots_local.csv is the scheduled
+                             snapshot task, not this session)
+
+**The funding gate was NOT run on arrival and the reason is recorded rather than
+glossed: arrival was 07:53 UTC, seven minutes before the 08:00 settlement, and
+R-021 says this gate cries wolf for ~45 minutes around 00:00, 08:00 and 16:00
+UTC.** Running it inside that window would have produced a result that proves
+nothing either way. It is run after 08:45 UTC and the result recorded below.
+
+## THE NEW QUESTION THIS SESSION BROUGHT
+
+The orders name seven questions as spent and warn that reusing one is the
+approach most likely to find nothing. This is the eighth:
+
+> **"IS THE SABOTAGE ACTUALLY IN EFFECT WHEN THE JUDGE RUNS — or is it scored
+> CAUGHT by a guard that fires BEFORE the mechanism it claims to prove?"**
+
+The previous seven all ask what the gate LOOKS AT. This one asks whether the
+drill's **INSTALLER** reaches the code it claims to have broken.
+
+## FINDING 1 — **B9 DOES NOTHING. IT HAS NEVER TESTED ANYTHING.** (PROVED)
+
+Every sabotage in `_SABOTAGES` is installed with `globals()[attr] = repl`. That
+reaches a name only if the name is looked up **at call time**. Python evaluates
+a default argument **once**, when the `def` runs. And the recorder's doorway is:
+
+    def run(symbols=SYMBOLS, base_url=FAPI_BASE, history_dir=HISTORY_DIR, ...)
+
+**`SYMBOLS` is never read anywhere else in the module. It exists only as that
+frozen default.** So `globals()['SYMBOLS'] = ('BTCUSDT', 'ETHUSDT')` — sabotage
+B9 — changes a name nothing reads, and the recorder goes on collecting all three
+assets.
+
+Measured in a scratch copy of the whole repo, outside the repo, predictions
+written into notes BEFORE the run:
+
+    C1 CONTROL  healthy module, run() no symbol list
+                -> ok=True, 3 files, 180 rows each              PASSED FIRST
+    P1  B9 installed exactly as the drill installs it
+                mod.SYMBOLS       = ('BTCUSDT', 'ETHUSDT')
+                run.__defaults__[0] = ('BTCUSDT','ETHUSDT','SOLUSDT')   <-- FROZEN
+                -> 3 files, SOLUSDT_4h.csv 180 rows             *** NO-OP ***
+    P2  CONTROL for P1 — the SAME defect as a REAL one-line source edit,
+        binary mode, CRLF preserved, 1 line changed, fresh interpreter
+                -> 2 files, SOLUSDT_4h.csv 0 rows               THE DEFECT IS REAL
+    P3  `_covers_every_asset` reproduced verbatim, under P1
+                WITH its name-guard    -> survived=False  drill prints CAUGHT
+                WITHOUT its name-guard -> survived=True   drill prints ESCAPED
+
+**All five predictions were correct as written in advance.**
+
+So B9 is scored CAUGHT by the FIRST LINE of its judge —
+`if tuple(SYMBOLS) != GATE_SYMBOLS: return False` — which reads the global
+directly and returns before `run()` is ever called. **The second half of
+`_covers_every_asset`, which the gate's own docstring calls the only way to catch
+an asset going missing ("let the module choose, and then check against a list it
+did not supply"), has never been shown able to fail.** This is B5's shape exactly:
+a break scored CAUGHT while stopping short of the check it claimed to prove.
+
+### THE FINDING IS BOUNDED, NOT SWEEPING
+
+Four sabotages on this ship swap a CONSTANT rather than a function. The other
+three were tested the same way and **all three reach the module** — measured,
+output printed side by side:
+
+    funding    S6   CONTRACTS      REACHES   `contracts = CONTRACTS if contracts is None`
+    funding    S14  OFFLINE_WORDS  REACHES   read inside the except branch, at call time
+    fear_greed F13  OFFLINE_WORDS  REACHES   read inside the except branch, at call time
+    open_int.  B9   SYMBOLS        NO-OP     `def run(symbols=SYMBOLS, ...)` — DEF TIME
+
+**The correct pattern already exists on this ship, in a sister file, written by
+an earlier session.** `funding.py` takes `contracts=None` and resolves it from
+the global inside the body. The recorder does not.
+
+### AND THE OTHER HALF OF THE TRUTH, SAID AS PLAINLY AS THE FINDING
+
+**THE REAL-WORLD DEFECT B9 STANDS IN FOR IS STILL CAUGHT.** The full Gate
+3.2b-R6 was run against a scratch tree carrying the real one-line edit:
+
+    ✗ the module's SYMBOLS ('BTCUSDT','ETHUSDT') equals the gate's own copy ...
+    ✗ SOLUSDT: could not read back: FileNotFoundError
+    exit 1
+
+**No asset can silently stop being collected today. What is broken is the gate's
+EVIDENCE, not its protection** — and this entry would be dishonest if it led with
+one and buried the other.
+
+## FINDING 2 — ON THE REAL DEFECT THE GATE ENDS IN A STACK TRACE (PROVED, SMALL)
+
+The same run above never printed `GATE 3.2b-R6 FAILED`, never reached the drill,
+and ended at line 444 in section (b) with a bare `FileNotFoundError` traceback.
+`name_ok` has a REFUSES-TO-RUN branch whose stated reason is that *"a gate that
+ends in a stack trace has not told the Commander anything he can read"*.
+**`symbols_ok` has the identical consequence and no such branch.** The alarm is
+correct and loud; the label on it is unreadable. Graded SMALL at the Step 1 veto
+— the ship stops either way and no record is damaged — and filed as CATEGORY B.
+
+## THE ATTACK ON R-022 FOUND NOTHING, AND THAT IS SAID PLAINLY
+
+The same new question was aimed at the two Context Deck gates in two directions.
+
+1. The three constant-swaps above (S6, S14, F13) — **all reach. Clean.**
+2. `_import_writes_nothing` returns `right_file and rc_ok and quiet`, and the
+   drill scores S18/F17 CAUGHT on that one `and`, with `verbose=False`, never
+   saying WHICH component failed. Only `quiet` is the mechanism the import door
+   claims to prove; a sabotage that CRASHED the import would be scored CAUGHT
+   for a reason that has nothing to do with the door. `_new_judges_say_no` closes
+   exactly this for S16/S17 and **not** for S18/F17. So it was decomposed and
+   measured, control first:
+
+        S18 funding.py     CONTROL   right_file=True rc_ok=True(0) quiet=True
+                           SABOTAGED right_file=True rc_ok=True(0) quiet=FALSE
+        F17 fear_greed.py  CONTROL   right_file=True rc_ok=True(0) quiet=True
+                           SABOTAGED right_file=True rc_ok=True(0) quiet=FALSE
+
+   **`quiet` is the only component that flips, in both files. Both import doors
+   are caught for the reason they claim.** Recorded as a clean result.
+
+## **GATE 3.2b-R7 — DECLARED HERE, BEFORE THE CODE EXISTS**
+
+Finding 1 is recommended **SERIOUS** (the four-step report is in the session
+report and in `REVIEW_QUEUE.md`), so under THE_PATTERN it is repaired and nothing
+else is built. The bar:
+
+**(1) B9 IS INSTALLED BY A REAL TEXT EDIT, NOT A GLOBALS SWAP.** It leaves
+`_SABOTAGES` and joins `_FILE_SABOTAGES` — the mechanism B8 already uses and the
+only one that has ever proved anything about this file: one line of a COPY
+outside the repo, edited in BINARY mode, anchored to a whole line, **REFUSING TO
+RUN if the anchor matches more than once**, with the diff line-counted and the
+CRLF count required not to move, and `--record` driven as a real subprocess.
+
+**(2) ITS JUDGE REQUIRES EVERY GATE-NAMED ASSET ON DISK** from that real
+subprocess run, from the gate's own list, and **is required to RETURN False
+rather than raise** — because a sabotage that crashes is scored CAUGHT, so one
+that never really ran looks like a success.
+
+**(3) THE HEALTHY CONTROL PASSES FIRST** through that same judge, in the same
+scratch tree. If the untouched copy does not collect all three, the rig is broken
+and nothing the check concludes means anything.
+
+**(4) A NEW PERMANENT CHECK — THE DRILL'S INSTALLER IS PROVED ABLE TO INSTALL.**
+For every entry in `_SABOTAGES`, the gate proves the swapped name is not captured
+as a default argument anywhere in the module, and **fails loudly if it is.** And
+because a check that reports the absence of something must first be proved able
+to detect its presence, **it carries a positive control: it must flag the
+`run(symbols=SYMBOLS)` pattern that caused this finding**, or the check itself is
+declared broken and the gate fails.
+
+**(5) NOTHING THE PILOT READS CHANGES — PROVED TWO WAYS, NOT ASSERTED.** Every
+diff hunk at or after line 243 (`if __name__ == '__main__':`), AND the sha256 of
+the production half printed before and after. **Before: lines 1-242, 11,467
+bytes, `5347bfecdf2ccfb2009770f9161dd6c51374f2ccdeae9a8c50793f3a57e2096f`.**
+Whole file before: `bf73538860209620f31e3e1f285d3d7bbfb71664cf9d64b846fff696c26d3025`.
+
+**(6) EVERYTHING THE OLD GATE DID, IT STILL DOES** — every existing check green,
+all FOURTEEN sabotages still caught, exit 0.
+
+**(7) NO new file, NO new dependency, NO extra call from the Brief's path.**
+
+**PASS = every check green including every sabotage CAUGHT. Anything less is a
+FAIL, is not committed as a pass, and is not called "mostly passed".**
+
+**AND THE STANDING RULE THIS SESSION IS BOUND BY: I FOUND THIS AND I AM WRITING
+THE REPAIR, SO I MAY NOT CLEAR IT.** A new item goes into `REVIEW_QUEUE.md`
+against my own repair and stays OPEN for whoever comes next.
