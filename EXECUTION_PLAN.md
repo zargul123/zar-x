@@ -365,6 +365,61 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> DOOR 3 IS BUILT. THE ORDER THAT SLIPPED SEVEN TIMES IS CARRIED OUT.**
+
+→ We are at: **PHASE 3 — THE THIRTEENTH GENERATION. R-025 IS SHUT.** A fresh
+interpreter now imports each cockpit module, calls its doorway on every path the
+pilot can see, and **then shuts down** — and the child's TOTAL output must be
+empty. Interpreter shutdown joins non-daemon threads, flushes every buffer and
+runs every atexit handler, **so the three deferred shapes that put 162 lines of
+trading advice past the gate on 2026-07-30 are now caught deterministically
+instead of raced.**
+
+    cockpit/funding.py      GATE 3.2-R7  PASSED  exit 0  0 red  122 s
+    cockpit/fear_greed.py   GATE 3.1-R7  PASSED  exit 0  0 red   62 s
+    data/open_interest.py   GATE 3.2b-R9 PASSED  exit 0  0 red   56 s
+    lab/verify_vault.py     VAULT INTACT 6/6
+    cockpit/brief.py        3/3 instruments reporting
+    data/oi_history/        3 files, 181 lines each, sha256 e3258e82 /
+                            1549a8a1 / e0f91a87 — byte-identical to 2026-07-30
+
+**ALL THREE RUNTIMES ON RECORD WERE WRONG AGAIN** (128 / 40 / 74). Measured before
+Door 3: **88 / 34 / 56.** Door 3 then cost funding +34 s and fear_greed +28 s.
+**R-027 doubt 10 has now been right for FOUR consecutive sessions.**
+
+**WHAT IS BROKEN OR UNPROVEN, WHICH IS THE POINT OF THIS MARKER.**
+
+- **THE SHIP WAS RED WHEN THIS SESSION ARRIVED, AND NOT FOR A REASON ANYONE HAD
+  BUILT.** `GATE 3.1-R6` exited 1 because sabotage F10 transposed two numbers that
+  were both 28 that day. **The instrument and the Brief were correct throughout.**
+  Graded SMALL; repaired only because **the Commander ruled** it should be, since
+  Door 3 could not be certified into a file whose gate exits 1.
+- **THE SAME DISEASE WAS THEN FOUND IN A SECOND FILE.** `B1` in the recorder is a
+  **no-op on any machine whose clock is UTC** — reproduced deterministically with
+  no file edited, the sabotage being the ENVIRONMENT. R-013 doubt 4 predicted it on
+  2026-07-28 and it sat three sessions as a suspicion. **R-031, CATEGORY B.**
+- **AND THE THING UNDERNEATH BOTH, WHICH NOTHING ON THIS SHIP MEASURES:** a
+  sabotage can satisfy the gate's reachability check completely and still change
+  nothing. In the same failing run the gate printed `✓ B1 rebinds '_utc_iso' → the
+  swap reaches the code the pilot runs` **and** `✗ B1 → ESCAPED`. **Both true.
+  REACH and EFFECT are different things and only the first has ever been checked.**
+- **DOOR 3 IS UNATTACKED.** R-032, ten doubts, filed by its author against his own
+  work. **Twelve of the previous twelve generations were failed by the next pair of
+  eyes.** The sharpest doubt: Door 3 runs the paths the GATE names, inheriting
+  R-022 doubt 6 whole.
+- **R-025 IS NOT CLEARED and this session REFUSED the permission the orders gave
+  it to clear it** — those orders were written before it was known the same session
+  would be ordered to build the repair. **A session may never clear its own work.**
+- **CONTEXT DECK INSTRUMENT 3 OF 5 (news headlines) IS NOW THE NEXT BUILD.** It has
+  been deferred SEVEN times. **Nothing is ahead of it any more.**
+- **THE CATEGORY B PILE IS NINE DEEP**, up from six in one session.
+- **THE 1 AUGUST ERRAND IS DUE TOMORROW.** The recorder's commit-and-push branch
+  has still never fired against real new rows.
+
+---
+
+# PREVIOUS MARKER — 2026-07-30 (evening), kept for the record rather than erased
+
 ## **>>> THE COLLISION BELOW IS ANSWERED. THE COMMANDER RULED THE SAME EVENING.**
 
 **HE CHANGED HOW FINDINGS ARE JUDGED, AND `THE_PATTERN.md` WAS EDITED ON HIS

@@ -2413,3 +2413,189 @@ and it is **still not built** — see `SESSION_ORDERS.md`, on his desk.
 ## **THE CATEGORY B PILE IS NOW SIX DEEP** (R-021, R-023, R-028 and the three
 before them), and it is cleared before the ship is used for real, at the same
 moment `cockpit/brief.py` gets its gate.
+
+---
+
+# VERDICTS OF 2026-07-31 — by the thirteenth generation
+
+**The eleventh question, and the one this session brought:** *"CAN THE SABOTAGE
+THE GATE PLANTS ACTUALLY EXPRESS THE LIE IT CLAIMS TO TELL — OR DOES THE DATA
+SOMETIMES MAKE IT A NO-OP?"* The ten before it all ask whether the GATE is
+looking in the right place. **This one asks whether the SABOTAGE ever spoke.**
+**It found the same disease in two different files on the same day.**
+
+## R-029 — **A SABOTAGE THAT CANNOT SPEAK IS REPORTED AS A GATE THAT FAILED** · CATEGORY B · **REPAIRED ON THE COMMANDER'S RULING**
+**STATUS: OPEN · P2 · found 2026-07-31 on arrival by a session that built none
+of it · GRADED SMALL · **REPAIRED THE SAME DAY BY ITS FINDER, ON THE COMMANDER'S
+EXPLICIT RULING** · MAY NOT BE CLEARED BY ITS FINDER**
+
+**GATE 3.1-R6 WAS RED WHEN THIS SESSION ARRIVED.** F10 transposes yesterday's
+reading and the week-ago one, keeping both dates. **On 2026-07-31 both values
+were 28.** Reproduced deterministically, control first, both strings printed:
+
+    CONTROL (untouched)  : '   (yesterday 28 · a week ago 28)'
+    F10     (swapped)    : '   (yesterday 28 · a week ago 28)'
+    IDENTICAL BYTE FOR BYTE: True
+
+**MEASURED against the index's whole 3,099-day history:** `value[i+1] ==
+value[i+7]` holds on **187 of 3,092 days — 6.05%, one day in every 16.5.**
+
+**THE INSTRUMENT AND THE BRIEF WERE CORRECT THROUGHOUT.** Q2 = NO — nothing
+wrong, missing or deleted; it fails LOUD, never quiet. **SMALL.**
+
+**WHY IT WAS REPAIRED ANYWAY, WHICH IS A RULE BEING BENT AND IS SAID SO:** the
+standing DOOR 3 order could not be certified into a file whose gate exits 1, and
+*"a failing gate is never committed."* Two rules pointed opposite ways. **The
+Commander was given three options in plain words with a recommendation and HE
+RULED: fix F10 first, then build Door 3 in both.** The grade did not change;
+only the permission to act on it did.
+
+**THE REPAIR.** The pair is made distinct by the gate's own number before
+transposition, so the lie is expressible every day of the year. **Both branches
+— and the OLD BROKEN FORM, required to stay SILENT — are proved every run on
+synthetic readings needing no network.** The third control keeps the proof that
+the bug was real alive forever, so no future session can quietly regress it.
+
+**A clean verdict looks like.** Someone who did not build it confirms the three
+controls really do fire, that the old form really was inert, and that nothing
+about the repair depends on what the market did that day.
+
+## R-030 — **A GATE THAT CONTRADICTS ITSELF ABOUT ITS OWN SCOPE** · CATEGORY B
+**STATUS: OPEN · P3 · found 2026-07-31 by reading, not by any check · NOT
+REPAIRED · MAY NOT BE CLEARED BY ITS FINDER**
+
+`cockpit/fear_greed.py` section 3 announces the file is **"broken FOURTEEN
+ways."** The drill runs **SIXTEEN**, and the file's own verdict line says **"all
+SIXTEEN in-process sabotages were caught."** **The file contradicts itself, on
+its own screen, in one run.**
+
+**R-011 doubt 3 exactly** — *"nothing checks that a gate's own description
+matches what it does; a gate that misdescribes its own scope gets quoted later
+as evidence of something it never tested."* Filed 2026-07-27, **and this is the
+second time it has been found by a person reading rather than by any check.**
+
+**NOT REPAIRED, deliberately:** it was not in the bar this session declared, and
+widening a bar mid-flight is the R-001 failure running the other way. **Q2 = NO
+— no number the Commander reads is affected.** SMALL.
+
+## R-031 — **B1 IS A NO-OP ON ANY MACHINE WHOSE CLOCK IS UTC** · CATEGORY B
+**STATUS: OPEN · P2 · found 2026-07-31 by a session that built none of it ·
+GRADED SMALL · NOT REPAIRED · MAY NOT BE CLEARED BY ITS FINDER**
+
+**PREDICTED BY THIS SHIP THREE SESSIONS AGO AND LEFT.** R-013 doubt 4, filed
+2026-07-28: B1 *"replaces the timestamp helper with a naive local conversion,
+which proves nothing on a machine whose clock is UTC."* **It was a suspicion. It
+is now a measurement.**
+
+**REPRODUCED DETERMINISTICALLY. NO FILE WAS EDITED — THE SABOTAGE IS THE
+ENVIRONMENT.** Whole-repo copy outside the repo:
+
+    CONTROL  this machine's own clock (UTC+5)
+             → exit 0, 0 red, all fourteen CAUGHT, GATE 3.2b-R9 PASSED
+    ATTACK   THE SAME FILE, THE SAME TREE, ONLY THE CLOCK CHANGED TO UTC
+             → exit 1, ✗ B1 timestamps converted as LOCAL time → ESCAPED —
+               THE GATE IS DECORATIVE.  GATE 3.2b-R9 FAILED
+
+**AND THE PART WORTH MORE THAN THE FINDING.** In the same failing run, check (n)
+printed `✓ B1 rebinds '_utc_iso' → named in the recorder AND looked up at CALL
+TIME, so the swap reaches the code the pilot runs`. **Both statements are true.
+The swap DOES reach the recorder; it simply changes nothing when it gets
+there.** The eleventh and twelfth generations each spent a session hardening
+that reachability claim. **A sabotage can satisfy it completely and still be
+inert, and nothing on this ship has ever measured EFFECT as opposed to REACH.**
+
+**Q2 = NO, on three things measured rather than assumed:** it fails LOUD;
+**`--record`, the branch the monthly task runs, exits at line 274 BEFORE the
+gate runs at all**, so a red gate cannot stop the archive growing; and nothing
+here runs this gate on a UTC box — the only workflow runs `journal/snapshot.py`
+and `journal/grader.py`. **SMALL. Filed, not repaired.**
+
+**A clean verdict looks like.** Someone who did not find it either repairs B1 so
+it is live on every clock, or judges the loudness acceptable and says so out
+loud — and **checks whether any OTHER sabotage on this ship is inert under some
+reachable condition, because two files have now been caught and nobody has swept
+the third.**
+
+## R-032 — **DOOR 3 WAS BUILT BY THE SESSION THAT WAS ORDERED TO BUILD IT, AND IT CLOSES R-025**
+**STATUS: OPEN · P1 · filed by that session against its own work, 2026-07-31 ·
+MAY NEVER BE CLEARED BY ITS AUTHOR**
+
+**THIRTEENTH GENERATION. TWELVE OF THE PREVIOUS TWELVE WERE FAILED BY THE NEXT
+PAIR OF EYES. ASSUME THIS ONE IS TOO.**
+
+### THE DOUBTS I FILE AGAINST MY OWN WORK — free hits, recorded not hidden
+
+1. **DOOR 3 INHERITS R-022 DOUBT 6 WHOLE.** It calls the paths the GATE names.
+   **A doorway path nobody told it about is a path it does not watch** — and I
+   answered doubt 6 for today's source while building something that depends on
+   it staying answered. **This is the most dangerous line in my diff.**
+2. **THE CHILD IS JUDGED ON `stdout + stderr` OF A PIPE.** A shape that writes
+   to the real console device, or to descriptor 3, or that re-opens `CONOUT$`,
+   is invisible. **I planted none of those and I do not know the answer.**
+3. **A2 MAY BE PASSING FOR A REASON I DID NOT VERIFY.** The child calls the
+   doorway 2-3 times, so the first wrappers are rebound and garbage-collected —
+   possibly flushing EARLY rather than at shutdown. **The marker comes back
+   either way, so my check cannot tell those two mechanisms apart, and the
+   comment claims the shutdown one.**
+4. **THE TIMEOUT NUMBERS ARE GUESSES.** 150 s and 20 s, chosen by feel, exactly
+   as `MAX_PLAUSIBLE_RATE = 0.05` was. **A slow machine could time out honestly
+   and be reported as a deferred write.** R-003 exists because a guess shipped
+   and was measured two steps later; this one is filed the day it shipped.
+5. **EVERY DOOR 3 RUN COSTS SIX CHILD PROCESSES AND REAL NETWORK CALLS.**
+   funding went 88 s → 122 s and fear_greed 34 s → 62 s. **R-022 doubt 7 warned
+   that a gate nobody runs guards nothing, and I made both gates slower.**
+6. **THE DRILL'S ANCHOR SITS INSIDE `section_text`.** Any legitimate edit to
+   that line breaks the drill, and **the obvious move will be to edit the gate
+   to match — which is what R-001 was convicted of.**
+7. **I NEVER MADE `_door3_probe` REPORT AN INCOMPLETE CHILD.** The
+   `seen_n != want` branch and the `right_file` branch are written and
+   **untested.** That is R-027 doubt 4's disease, inherited knowingly.
+8. **THE MARKER CHECK PROVES THE SHAPE SPOKE; IT DOES NOT PROVE NOTHING ELSE
+   DID.** I require the marker to be present, not that the output is exactly the
+   marker.
+9. **A4 PROVES THE TIMEOUT BRANCH FIRES ON A HANG. It does not prove the door
+   distinguishes a hang from a slow honest run** — nothing does, and doubt 4 is
+   why that matters.
+10. **THE GATE-NAME RENAME WAS MECHANICAL.** I bumped R6 → R7 in two strings.
+    **Nothing checks that a gate's printed name matches the bar it was declared
+    under**, which is R-030 one level up.
+
+---
+
+# STATUS OF THE OLDER ITEMS, 2026-07-31
+
+## R-025 — **NOT CLEARED, AND THIS SESSION IS REFUSING A PERMISSION THE ORDERS GAVE IT.**
+The orders say *"you may clear R-027 and R-025 — you built neither."* **That was
+written before it was known the same session would be ORDERED to build Door 3,
+which is R-025's repair.** I built it. **A session may never clear its own
+repair, and that rule outranks a permission written a day earlier by someone who
+could not have known.** **THE HOLE IS SHUT AND PROVED SHUT — but somebody else
+says so, not me.** Filed as R-032.
+
+## R-027 — **STILL OPEN, AND PRECISELY WHY.** Its gate was attacked from a new
+direction and the finding landed on **B1, not on R-027's repair.** **R-027's own
+ten doubts remain untested.** Bringing a different question is what the orders
+asked for; it is not the same as having examined theirs.
+
+## R-022 — **DOUBT 6 ANSWERED AFTER NINE SESSIONS UNTOUCHED.** Every way either
+doorway can return was enumerated from the source: `funding.py` 2 returns + 1
+raise, `fear_greed.py` 2 returns + 0 raises, and **the gate exercises every one
+— as does Door 3.** **THE HONEST LIMIT: this proves the paths that exist TODAY
+are covered. Nothing stops a future path being added without the gate learning
+of it.** Doubts 3, 4, 5 and 7 remain untouched. **The item stays OPEN.**
+
+## R-021 — **STILL OPEN, one clean data point.** The funding gate was run at
+09:42-09:44 UTC and again at 10:15-10:17 UTC, 1h42m and 2h15m past the 08:00
+settlement, and **passed first time on both.** Nobody has measured the edges.
+
+## R-013 doubt 4 — **NO LONGER A SUSPICION. It is R-031, reproduced.**
+
+## R-006 — **UNTOUCHED. NOT THIS SESSION'S TO CLEAR, OR ANY IN-HOUSE SESSION'S.**
+
+## R-023, R-028 — **NOT TOUCHED.**
+
+## **THE CATEGORY B PILE IS NOW NINE DEEP** — R-021, R-023, R-028 and the three
+before them, plus **R-029, R-030 and R-031 added today.** It grew by half again
+in one session. **It is cleared before the ship is used for real, at the same
+moment `cockpit/brief.py` gets its gate, and this session is saying out loud
+that it grew rather than letting it drift.**

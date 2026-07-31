@@ -8568,3 +8568,264 @@ own marker. A timeout scored as a pass. A production-half sha256 that moves. A
 diff hunk before the `__main__` line.** PASS is every check green including every
 sabotage caught, and **anything less is a FAIL, is not committed, and is not
 called "mostly passed."**
+
+---
+
+# 2026-07-31 — **DOOR 3 IS BUILT AND SHUT. GATE 3.2-R7 AND 3.1-R7 PASSED. AND THE SAME DISEASE WAS FOUND IN A SECOND FILE.**
+
+*The thirteenth generation, reporting results against the bars it declared in
+`e9e618d` — a commit containing `PROGRESS_LOG.md` and no `.py` file.*
+
+## WHAT WAS DONE, IN ORDER
+
+    1. proved the ship alive           GATE 3.1-R6 WAS RED ON ARRIVAL
+    2. graded that finding             SMALL (Q2 = NO). Put the collision to him.
+    3. HE RULED                        fix F10 first, then Door 3 in both
+    4. declared both gates             e9e618d, no .py in it
+    5. repaired F10                    GATE 3.1-R7 (a)
+    6. BUILT DOOR 3                    GATE 3.2-R7 / 3.1-R7 (b) — 729c479
+    7. attacked R-027 with a NEW       B1 is a no-op on any UTC machine
+       question
+    8. answered R-022 doubt 6          nine sessions untouched
+
+## THE RESULTS
+
+    cockpit/funding.py     GATE 3.2-R7 PASSED  exit 0  0 red  122 s
+    cockpit/fear_greed.py  GATE 3.1-R7 PASSED  exit 0  0 red   62 s
+    data/open_interest.py  GATE 3.2b-R9 PASSED exit 0  0 red   56 s (control)
+    Brief 3/3 · vault INTACT 6/6 · lab/ untouched
+    data/oi_history/  3 files, sha256 e3258e82… / 1549a8a1… / e0f91a87…
+                      BYTE-IDENTICAL to 2026-07-30
+
+## DOOR 3 — WHAT WAS BUILT, AND WHAT IT PROVED
+
+A fresh interpreter imports the module, calls `section_text()` on every path the
+pilot can see, discards what it returns, and **then shuts down.** The child's
+TOTAL output must be empty bytes.
+
+    the REAL module   funding    3 of 3 paths, exit 0 in 2.61 s, output EMPTY
+                      fear_greed 2 of 2 paths, exit 0 in 2.02 s, output EMPTY
+    the untouched COPY (rig control, same scratch tree) — silent in both
+
+    ✓ A1  a non-daemon THREAD writing after the doorway returned    → CAUGHT
+    ✓ A2  a BUFFERED WRAPPER over descriptor 1, kept alive unflushed → CAUGHT
+    ✓ A3  an ATEXIT handler that writes at interpreter shutdown     → CAUGHT
+    ✓ A4  a thread that NEVER returns — the door must FAIL, not pass → CAUGHT
+
+**EACH SHAPE IS PLANTED ALONE AND MATCHED BY ITS OWN MARKER.** Planting all
+three together and seeing red would prove only that AT LEAST ONE was caught.
+And **a sabotage that CRASHES also produces non-empty output**, so "the child
+wrote something" would have scored a broken patch as a success — the marker is
+what makes each one fail for the reason it claims. That is B5's lesson, applied
+before it could bite rather than after.
+
+**A4 IS THE ONE THAT MATTERS AND IT IS THE ONE R-025 WARNED ABOUT.** It named
+the timeout as *"the single most likely way to build a door 3 that guards
+nothing"*: a thread that sleeps forever hangs the child, and "no output before
+the timeout" is exactly what silence looks like. **That branch is not merely
+written — it is PROVED to fire, every run, forever.**
+
+**TWO PATHS, NOT THREE, FOR `fear_greed.py`.** R-025 designed Door 3 against
+`funding.py`, which has a degraded path; the Fear & Greed doorway has none.
+**Said out loud rather than quietly reported as three.**
+
+## **NOTHING THE PILOT READS CHANGED — PROVED TWO WAYS PER FILE, NOT ASSERTED**
+
+    funding.py     every diff hunk at 874+   (__main__ at 160)
+    fear_greed.py  every diff hunk at 742+   (__main__ at 113)
+    production-half sha256 BEFORE == AFTER:  95069d1b… and bb31626c…
+
+**AND A CORRECTION TO THE RECIPE THAT COST ME AN EXPERIMENT.** The orders record
+ONE recipe for all three files — *"the first N-1 lines joined by CRLF with no
+trailing separator"* — and say it was written down *"so you do not have to find
+it by experiment."* **It is correct for `open_interest.py` and WRONG for both
+cockpit files**, whose recorded hashes only reproduce from the raw byte prefix up
+to `__main__`, i.e. WITH the trailing CRLF. `open_interest.py` reproduced
+`5347bfec…` exactly, which is what proved the recipe rather than my reading of
+it. **The correct recipe per file is now in the orders.**
+
+## THE F10 REPAIR (GATE 3.1-R7 a)
+
+The pair is made distinct by the gate's own number before transposition, so the
+lie is expressible 365 days a year. **Both branches, and the OLD BROKEN FORM,
+are proved on synthetic readings every run:**
+
+    ✓ values DIFFER (28 vs 41) — the transposition speaks
+         honest '(yesterday 28 · a week ago 41)'
+         F10    '(yesterday 41 · a week ago 28)'   → CHANGED, as required
+    ✓ values are EQUAL (28 vs 28) — the repair MAKES it speak
+         honest '(yesterday 28 · a week ago 28)'
+         F10    '(yesterday 91 · a week ago 28)'   → CHANGED, as required
+    ✓ values are EQUAL, through the OLD form — it is a NO-OP
+         honest '(yesterday 28 · a week ago 28)'
+         F10    '(yesterday 28 · a week ago 28)'   → IDENTICAL, as required
+    ✓ F10  the two context values swapped  [old gate: caught] → CAUGHT
+
+**The third control is the one that matters.** It keeps the proof that the bug
+was real alive forever, so **no future session can quietly regress F10 without
+the gate going red and naming it** — and it means this repair carries its own
+evidence instead of my word for it. **No branch waits 6% of days to be
+exercised**, which was the whole disease.
+
+---
+
+# PART 1 — THE ATTACK ON R-027, AND **THE SAME DISEASE IN A SECOND FILE**
+
+## MY NEW QUESTION — the eleventh, and none of the ten spent ones ask it
+
+> **"CAN THE SABOTAGE THE GATE PLANTS ACTUALLY EXPRESS THE LIE IT CLAIMS TO
+> TELL — OR DOES THE DATA SOMETIMES MAKE IT A NO-OP?"**
+
+Every one of the ten before it asks whether the GATE is looking in the right
+place. **Mine asks whether the SABOTAGE ever really spoke.**
+
+**I did not invent it. It walked into this session on its own** — `fear_greed.py`
+was red on arrival for exactly this reason. **And this ship had already written
+it down and left it:** R-013 doubt 4, filed 2026-07-28, said B1 *"proves nothing
+on a machine whose clock is UTC."* **It sat for three sessions as a suspicion.
+It is now a measurement.**
+
+## THE RESULT — PREDICTIONS WRITTEN FIRST, CONTROL FIRST, DAMAGE PRINTED
+
+Predictions were written to notes before anything ran. **Four written, three
+right, one wrong — and the wrong one is recorded below as plainly as the rest.**
+
+    CONTROL   untouched recorder, whole-repo copy outside the repo,
+              this machine's own clock (UTC+5)
+              → exit 0, 0 red, all fourteen CAUGHT, GATE 3.2b-R9 PASSED
+    ATTACK    THE SAME FILE, THE SAME TREE, ONLY THE CLOCK CHANGED
+              → exit 1, 2 red
+              ✗ B1  timestamps converted as LOCAL time → ESCAPED —
+                    THE GATE IS DECORATIVE
+              GATE 3.2b-R9 FAILED
+
+**No file was edited. The sabotage is the environment**, which is why this one
+needs no imagination to arrive: it is one `git clone` onto a UTC box away.
+
+## **THE DETAIL WORTH MORE THAN THE FINDING, and I did not predict it**
+
+In the SAME failing run, check (n) printed:
+
+    ✓ B1  rebinds '_utc_iso'  → named in the recorder AND looked up at CALL
+          TIME, so the swap reaches the code the pilot runs
+
+**Both statements are true at once. The swap DOES reach the recorder. It simply
+changes nothing when it gets there.** The eleventh and twelfth generations both
+spent their sessions hardening that reachability claim — **and a sabotage can
+satisfy it completely and still be inert.** Reachability and effect are two
+different things, and nothing on this ship has ever measured the second.
+
+## THE FINDING REPORT — filed BEFORE any repair, and no repair was made
+
+**STEP 0.** 0.1 the healthy system passed FIRST, in the same tree ✓. 0.2 the
+damage is printed above ✓. 0.3 I built none of `open_interest.py` ✓.
+
+**Q1 — WHAT INFORMATION IS THIS CODE FOR?** The 180+ open-interest rows saved
+each month in `data/oi_history/` — the raw material for Phase 6, on the one
+dataset Binance will not sell back — and specifically the assurance that their
+timestamps are true UTC.
+
+**Q2 — CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING OR DELETED? NO.**
+**Three things measured, not assumed, and the second is the one I nearly got
+wrong:**
+
+1. **It fails LOUD.** The gate exits 1 and names B1. It can never certify a bad
+   recorder; it can only refuse to certify a healthy one.
+2. **`--record`, THE BRANCH THE MONTHLY TASK ACTUALLY RUNS, EXITS BEFORE THE
+   GATE RUNS AT ALL** — `data/open_interest.py` line 274, `sys.exit()` precedes
+   every gate check. **A red gate cannot stop the archive growing.** I went
+   looking for this expecting the opposite, because "the gate goes red so the
+   monthly job records nothing" would have made rows MISSING and been SERIOUS.
+   **It is not so, and checking beat assuming.**
+3. **Nothing on this ship runs this gate on a UTC machine today.** The only
+   workflow, `.github/workflows/cloud_snapshot.yml`, runs `journal/snapshot.py`
+   and `journal/grader.py` — never the recorder gate.
+
+**Q3 — IN REAL BUSINESS TERMS.** (a) He sees nothing; his Brief is untouched.
+(b) It costs nothing — no rows, no coin, no money, no decision. (c) He would
+find out at once, because the gate goes red and names the line. (d) Nothing to
+undo.
+
+**Q2 = NO → SMALL → CATEGORY B → KEEP BUILDING. Filed as R-031, NOT REPAIRED,
+because a SMALL finding is filed.**
+
+## WHERE I WAS WRONG
+
+**PREDICTION 4 WAS WRONG.** I predicted I would find no sabotage that is a no-op
+*today, on this machine* — and I was right about that — but I also wrote that
+finding one *"changes the grade completely."* **It would not have.** The grade
+turns on Q2, and Q2 is NO for the same three reasons whatever the clock says.
+**I wrote a severity claim into my predictions that my own form does not
+support, which is the exact error the twelfth generation recorded against
+itself one day ago.**
+
+## R-022 DOUBT 6 — **ANSWERED AFTER NINE SESSIONS UNTOUCHED**
+
+*"The silence check runs only the paths the gate THINKS exist."* Enumerated from
+the source rather than argued about — **every way either doorway can return:**
+
+    cockpit/funding.py      2 return statements + 1 raise (becomes the except
+                            path). Gate exercises healthy, degraded, offline.
+    cockpit/fear_greed.py   2 return statements, 0 raises.
+                            Gate exercises live, offline.
+
+**Every return statement in both doorways is exercised**, and Door 3 now runs
+the same set. **THE HONEST LIMIT, said rather than buried: this proves the paths
+that exist TODAY are all covered. It does not stop a future path being added
+without the gate learning about it**, and nothing enforces that.
+
+## WHAT I FOUND BY READING AND DID NOT REPAIR
+
+**`cockpit/fear_greed.py` CONTRADICTS ITSELF ABOUT ITS OWN SCOPE.** Section 3
+announces the file is *"broken FOURTEEN ways"*; the drill runs **sixteen** and
+the verdict line says *"all SIXTEEN in-process sabotages were caught."*
+**R-011 doubt 3 exactly — "nothing checks that a gate's own description matches
+what it does" — and found by reading, not by any check, for the second time.**
+Filed as **R-030. NOT repaired: it was not in the bar I declared**, and widening
+a bar mid-flight is the R-001 failure running the other way.
+
+## **R-025 DOES NOT MOVE TO CLEARED, AND I AM REFUSING A PERMISSION THE ORDERS GAVE ME**
+
+The orders say *"You may clear R-027 and R-025 — you built neither."* **That was
+written before it was known that the same session would be ordered to BUILD
+DOOR 3, which is R-025's repair.** I built it. **A session may never clear its
+own repair**, and that rule outranks a permission written a day earlier by
+someone who could not have known. **R-025 stays OPEN. Filed as R-032 against my
+own Door 3, for the next pair of eyes.**
+
+**R-027 ALSO STAYS OPEN, and precisely:** I attacked its gate from a new
+direction and the finding landed on **B1, not on R-027's repair.** **R-027's own
+ten doubts remain untested** — I brought a different question, which is what the
+orders asked for, and it is not the same as having examined theirs.
+
+## THE 1 AUGUST ERRAND — **NOT DUE. TODAY IS 31 JULY.**
+
+Checked the date first, as ordered. **Nothing was read as if it had fired.** The
+recorder has still run exactly once in its whole history, by hand, on
+2026-07-27, appending zero rows. **The commit-and-push branch has still never
+fired against real new rows. It is the next session's errand, tomorrow.**
+
+## MISTAKES, AS PLAINLY AS THE SUCCESSES
+
+1. **My first line-count of the archive said 182 rows and the record says 181.**
+   `count('\n') + 1` overcounts a file that ends in a newline. **The sha256s
+   matched exactly, which is what proved the files unchanged — my arithmetic was
+   the error, not the data.** Recorded because a session that quietly fixes its
+   own bad number teaches the next one nothing.
+2. **My patch script's refusal guard fired on me.** I ordered the gate-name
+   rename AFTER inserting a block that QUOTES the old gate name, so the anchor
+   matched twice and **the script wrote nothing.** Reordered. **That guard has
+   now caught three consecutive sessions and it has never once been wrong.**
+3. **I asserted the log was LF and it is CRLF.** My first check read the file
+   with newline translation on, so it counted zero CRLFs in a file that is 8,355
+   of them. **An assertion in the append script caught it before it corrupted
+   anything.** The five documents are all pure CRLF; the `.py` files are too.
+4. **Prediction 4's severity claim, above.**
+
+## WHAT I COULD NOT CERTIFY ABOUT MY OWN WORK
+
+Ten doubts filed as **R-032**. The three I would attack first are named in the
+orders. **The most dangerous is that Door 3 inherits R-022 doubt 6 whole:** it
+runs the paths the GATE names, so a doorway path nobody told it about is a
+doorway path it does not watch — **and I closed that doubt for today's code
+while building something that depends on it staying closed.**
