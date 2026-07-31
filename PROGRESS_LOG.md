@@ -8353,3 +8353,218 @@ it. That is a completely fair reading of what I wrote, and my wording caused it.
 length arguing that a claim wider than the evidence behind it is the fault this
 ship keeps repeating. **I then wrote one myself, in the very entry that adopted
 the rule against it, and it took the Commander one question to find it.**
+
+---
+
+# 2026-07-31 — **GATE 3.2-R7 AND GATE 3.1-R7 DECLARED BEFORE ANY CODE. DOOR 3, AND THE F10 REPAIR THE COMMANDER RULED ON.**
+
+*Written by the thirteenth generation, at the start of its session, with no `.py`
+file in this commit. `git show --stat` on this commit proves the bar preceded the
+work. Eighteen previous uses of this pattern have survived audit; this is the
+nineteenth.*
+
+## WHAT I WALKED INTO — THE SHIP WAS NOT GREEN
+
+Measured before anything was touched, `git status` carrying only the cloud
+watchman's `journal/snapshots_local.csv`:
+
+    cockpit/funding.py       GATE 3.2-R6  PASSED  exit 0   88 s   09:42-09:44 UTC
+    cockpit/fear_greed.py    GATE 3.1-R6  FAILED  exit 1   34 s   <-- RED ON ARRIVAL
+    data/open_interest.py    GATE 3.2b-R9 PASSED  exit 0   56 s
+    vault INTACT 6/6 · Brief 3/3 · lab/ untouched
+    data/oi_history/  3 files, correctly named, 181 lines each, sha256
+                      e3258e82… / 1549a8a1… / e0f91a87… — unchanged
+
+**THE THREE RUNTIMES ON RECORD WERE ALL WRONG AGAIN** — the orders record
+128 s / 40 s / 74 s. Measured 88 s / 34 s / 56 s. **The measurement wins and the
+correction is written down. That is R-027 doubt 10 being right for the FOURTH
+consecutive session**, and it is the fourth time a runtime figure has had to be
+corrected in three different files.
+
+## THE FINDING ON ARRIVAL — F10 IS A NO-OP ON 6% OF DAYS
+
+**Not my work, and I repaired nothing before grading it.**
+
+`F10` transposes `readings[1]` (yesterday) and `readings[7]` (a week ago),
+preserving both dates so the age labels stay put. **Today both values are 28.**
+Transposing 28 with 28 changes not one byte, so `_core_checks` passed, the drill
+concluded its own lie had survived, and printed
+`✗ F10 … ESCAPED AGAIN — GATE IS DECORATIVE`.
+
+**REPRODUCED DETERMINISTICALLY, CONTROL FIRST, BOTH STRINGS PRINTED:**
+
+    CONTROL   (untouched)  : '   (yesterday 28 · a week ago 28)'
+    F10       (swapped)    : '   (yesterday 28 · a week ago 28)'
+    IDENTICAL BYTE FOR BYTE: True
+    readings[1] value = 28   readings[7] value = 28
+
+**MEASURED AGAINST THE WHOLE HISTORY OF THE INDEX rather than reasoned about:**
+3,099 daily readings from alternative.me. The condition `value[i+1] ==
+value[i+7]` holds on **187 of 3,092 days — 6.05%, about one day in every 16.5.**
+Twenty days in the last year. **This is not rare and it will happen again.**
+
+**THE INSTRUMENT IS CORRECT AND SO IS THE BRIEF.** It printed
+`Fear & Greed : 25 — Extreme Fear   (yesterday 28 · a week ago 28)` and the live
+source returns exactly 25, 28, 28.
+
+## THE FINDING REPORT — THE COMMANDER'S THREE QUESTIONS
+
+**Q1 — WHAT INFORMATION IS THIS CODE FOR?** The Fear & Greed line on the Morning
+Brief, and specifically its context clause "(yesterday 28 · a week ago 28)".
+
+**Q2 — CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING OR DELETED?** **NO.**
+The data is right and the Brief is right; what is wrong is the SCOREBOARD. And
+the direction matters: it fails **LOUD** — red tick, exit 1 — never quiet. **It
+can refuse to certify a healthy file. It cannot certify a sick one.**
+
+**Q3 — IN REAL BUSINESS TERMS.** (a) He sees a completely normal, correct Brief;
+the red appears only if he runs the test himself. (b) It costs nothing — no coin,
+no rows, no money, no decision. (c) He finds out immediately, because the gate
+goes red and names the line. (d) Nothing to undo; nothing was changed.
+
+**Q2 = NO → SMALL → CATEGORY B → keep building.** Filed as **R-029**.
+**I did not stretch it into something bigger to justify a session.**
+
+## **THE COLLISION, AND THE COMMANDER RULED ON IT — THIS IS A RULE BEING BENT AND IT IS SAID IN BOLD**
+
+Door 3 is ordered into **both** cockpit files. `funding.py` is green and could be
+done today. **`fear_greed.py` could not:** however well Door 3 were built there,
+that file's gate would still exit 1 on F10, and **a failing gate is never
+committed and never called "mostly passed."**
+
+Two rules pointed opposite ways. `THE_PATTERN.md` says *"if something is already
+broken when you arrive, that is your session."* The Finding Report says *"SMALL —
+do not fix it, carry on and build."*
+
+**A SESSION MAY RECOMMEND AND NEVER RULE, SO I PUT IT TO HIM IN PLAIN WORDS WITH
+THREE OPTIONS AND MY RECOMMENDATION FIRST. HE RULED: FIX F10 FIRST, THEN BUILD
+DOOR 3 IN BOTH.**
+
+**SAID IN BOLD BECAUSE IT IS EXACTLY WHAT THIS SHIP WATCHES FOR: I AM ABOUT TO
+REPAIR SOMETHING I MYSELF GRADED SMALL.** The rule against that exists so a
+session cannot spend its length on small repairs instead of building. **Here the
+repair is what makes the building certifiable at all**, and only the Commander
+could say so. He did. **R-029 stays filed at its honest grade of SMALL; what
+changed is the permission to repair it, not the grade.**
+
+---
+
+# THE BARS. DECLARED NOW, BEFORE THE CODE EXISTS.
+
+## PART A — GATE 3.1-R7 (a): **THE F10 REPAIR**
+
+**THE PRINCIPLE, AND IT IS THE ONLY ONE THAT MAKES THIS REPAIR HONEST: a
+sabotage that cannot change the output is not evidence about the gate, and
+reporting it as ESCAPED is a FALSE STATEMENT ABOUT THE GATE.** Today's code makes
+that false statement on 6% of days.
+
+**THE THREE OUTCOMES I CONSIDERED, AND WHY TWO ARE REFUSED, written down so
+nobody has to guess later:**
+
+    RED on 6% of days (today's behaviour) .... REFUSED. It is false, and it
+        trains twelve future generations to shrug at a red tick. This ship's
+        whole method is that red means stop.
+    GREEN with F10 marked "inert, skipped" ... REFUSED, and this is the one that
+        looks reasonable. It is a tally counting what a machine did NOT check,
+        which is the exact sin THE_PATTERN names. It also builds an EXCUSE
+        MECHANISM into a gate, and a future sabotage could go silently inert
+        inside it.
+    MAKE THE LIE EXPRESSIBLE EVERY DAY ....... ADOPTED. No skip, no red, nothing
+        the market gets to decide.
+
+**a1.** F10 still transposes yesterday and a week ago. **When and only when the
+two real values are equal, the pair is made distinct FIRST, using a number this
+gate owns and types out** — never one read from the module (B14's lesson, and
+F13's). The lie is then expressible **365 days a year.**
+
+**a2. THE NEW BRANCH MUST NOT BECOME A BRANCH NOBODY RUNS.** The `values are
+equal` path would otherwise execute on 6% of days — **and an untested error path
+is how B5 was scored CAUGHT while crashing two lines short of its check.** So
+**BOTH BRANCHES ARE EXERCISED ON EVERY SINGLE RUN**, on synthetic readings the
+gate builds itself, needing no network:
+
+    - values already DIFFER  → the transposition must CHANGE the string
+    - values are EQUAL       → the repair must make it CHANGE the string
+    - values are EQUAL, run through the OLD, UNREPAIRED logic
+                             → the string must NOT change
+
+**a3.** That third control is the one that matters most and it is required, not
+optional. **It is a positive control proving the bug was real, kept alive
+forever, so no future session can quietly regress F10 to the old form** — the
+gate would go red and name it. **It also means this repair carries its own
+evidence rather than my word for it.**
+
+**a4.** F10 must still be CAUGHT today, on today's real equal-valued data, with
+the whole drill green.
+
+**a5. NOTHING THE PILOT READS CHANGES.** Every diff hunk at or after the
+`__main__` line (`fear_greed.py` 113), and the sha256 of lines 1-112 printed
+before and after. **The recipe, because the value alone is not reproducible:**
+the first N-1 lines joined by CRLF with **no trailing separator**. Current value
+`bb31626c…`.
+
+## PART B — GATE 3.2-R7 / 3.1-R7 (b): **DOOR 3 — WHAT DOES THE DOORWAY WRITE AFTER IT HAS ANSWERED?**
+
+**The Commander's standing order, R-025, deferred SEVEN times.** Door 2 already
+spawns a fresh interpreter and requires it to write nothing **at import**. Door 3
+is the same proven machinery one step further.
+
+**b1.** A fresh interpreter, rooted outside this gate's process, **imports the
+module, calls `section_text()` on EVERY PATH THE PILOT CAN SEE, discards what it
+returns, and then SHUTS DOWN.** The child's **TOTAL output must be empty bytes.**
+Interpreter shutdown joins non-daemon threads, flushes every buffer and runs
+every atexit handler, **so all three deferred shapes are caught deterministically
+instead of raced.**
+
+**b2. THE PATHS ARE TYPED OUT BY THE GATE, NEVER READ FROM THE MODULE ON TRIAL.**
+`funding.py` has THREE (healthy, degraded, offline); **`fear_greed.py` has TWO
+(live, offline) — it has no degraded path, and R-025 said "all three" because it
+was written about funding.** Said plainly rather than quietly reported as three.
+
+**b3. A TIMEOUT IS A FAILURE, NEVER A QUIET PASS.** R-025 named this as *the
+single most likely way to build a door 3 that guards nothing*: a thread that
+sleeps forever hangs the child, and "no output before the timeout" is precisely
+what silence looks like. **The timeout branch is not merely written — it is
+PROVEN, by a fourth deliberate shape (A4) that hangs the child on purpose under a
+short timeout, every run, forever.**
+
+**b4. THE DRILL PLANTS ALL THREE SHAPES AND REQUIRES ALL THREE CAUGHT
+INDIVIDUALLY** — the non-daemon thread, the kept-alive buffered wrapper over
+descriptor 1, and the atexit handler. **Each is planted ALONE in its own copy and
+judged alone.** Planting all three together and seeing red would prove only that
+at least one was caught, which is B5's disease wearing a different hat.
+
+**b5. EACH SHAPE CARRIES ITS OWN DISTINCT MARKER AND THE DRILL REQUIRES THAT
+EXACT MARKER IN THE CHILD'S OUTPUT.** **A sabotage that CRASHES also produces
+non-empty output**, so "the child wrote something" would score a broken patch as
+a success. **The marker is what makes it fail for the reason it claims.**
+
+**b6.** The edits are real text edits to a real copy of the file, **in BINARY,
+OUTSIDE the repo**, at an anchor **proved to match EXACTLY ONCE or the check
+REFUSES TO RUN.** Bytes added and line endings added/converted are printed, so
+the confinement is shown and not asserted.
+
+**b7. THE UNTOUCHED COPY RUNS FIRST, IN THE SAME SCRATCH TREE.** If the healthy
+copy is not silent there, **the rig is broken and nothing below it is evidence.**
+
+**b8.** Door 3 also runs against **the REAL module** in the repo. **Both
+production halves contained no deferred-write machinery on 2026-07-30, so the
+healthy answer must be silent — and if it is not, something arrived since then
+and THAT is the session.**
+
+**b9.** The child reports what it actually did to a **probe FILE, never to a
+stream** — the stream is the thing under test and cannot be borrowed to report on
+itself. **A child that did not complete every path is a FAILURE**, not a pass on
+an empty stream.
+
+**b10.** Everything the old gates did, they still do. **No new file, no new
+dependency, no extra call from the Brief's path**, and `py_compile` before the
+gate.
+
+## WHAT COUNTS AS FAILING THIS DECLARATION
+
+**Any red tick anywhere. Any sabotage not caught. Any shape caught without its
+own marker. A timeout scored as a pass. A production-half sha256 that moves. A
+diff hunk before the `__main__` line.** PASS is every check green including every
+sabotage caught, and **anything less is a FAIL, is not committed, and is not
+called "mostly passed."**
