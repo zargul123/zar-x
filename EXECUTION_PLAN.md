@@ -365,6 +365,72 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> DOOR 3 SURVIVED ITS FIRST INDEPENDENT ATTACK — WITH ONE BLIND SPOT NAMED. AND PHASE 3 STEP 3 IS BLOCKED ON A FREE SIGNUP.**
+
+→ We are at: **PHASE 3 — THE FOURTEENTH GENERATION. NOTHING WAS BUILT AND
+NOTHING WAS REPAIRED, AND FOR THE FIRST TIME THAT IS NOT BECAUSE OF A FINDING.**
+
+    cockpit/funding.py      GATE 3.2-R7  PASSED  exit 0  0 red  (first run,
+                                         11:12-11:14 UTC, +3h12m past settlement)
+    cockpit/fear_greed.py   GATE 3.1-R7  PASSED  exit 0  0 red
+    data/open_interest.py   GATE 3.2b-R9 PASSED  exit 0  0 red
+    lab/verify_vault.py     VAULT INTACT 6/6
+    cockpit/brief.py        3/3 instruments reporting
+    data/oi_history/        3 files, correctly named, 181 lines each, sha256
+                            e3258e82 / 1549a8a1 / e0f91a87 — UNCHANGED. No B14.
+    git status              clean before and after. No .py file was edited.
+
+**F10 DID NOT COME BACK.** The thirteenth generation's repair is not regressed.
+
+**WHAT IS BROKEN OR UNPROVEN, WHICH IS THE POINT OF THIS MARKER.**
+
+- **>>> PHASE 3 STEP 3 IS BLOCKED AND ONLY THE COMMANDER CAN UNBLOCK IT.**
+  `.env` holds exactly one key, `TWELVEDATA_API_KEY`. **There is no CryptoPanic
+  token anywhere in this repo.** Unauthenticated: `/api/v1/posts/` → **HTTP 403**,
+  `/api/developer/v2/posts/` → **HTTP 404**. Every gate on this ship measures a
+  printed line against a raw fetch; **with no fetch there is nothing to measure
+  against, and a gate whose expectations were invented is the one thing this ship
+  exists to refuse.** **THIS IS THE EIGHTH TIME STEP 3 HAS NOT BEEN BUILT AND THE
+  FIRST TIME THE REASON IS NOT A FINDING.**
+- **DOOR 3 IS BLIND TO A DAEMON THREAD — proved by Door 3's own judge.** Shape A5
+  is A1 with `daemon=False` → `daemon=True`; the control ran first and was silent;
+  A1-A4 CAUGHT; **A5 ESCAPED.** The printed pass line says *"nothing was deferred
+  to a thread"* when only NON-DAEMON threads are tested. **R-033, CATEGORY B.**
+- **MEASURED, AND IT IS THE DURABLE PART: Door 3's child stops watching between
+  0.5 s and 1.0 s after the doorway; the Commander's Brief is still on screen
+  until between 1.5 s and 2.0 s.** The judge is deliberately the smallest possible
+  process, so **it watches for less time than the pilot is exposed.**
+- **THAT GAP DOES NOT REACH HIM TODAY, AND ONLY BY ACCIDENT.** A write in that
+  band is caught by **DOOR 1**, because the gate calls the doorway dozens of times
+  in 62 s and the write lands in a later listening window (measured red at 1.25 s
+  and 1.75 s). **Nobody designed that backstop and nothing records that it is
+  load-bearing.** The funding instrument's equivalent protection is **the order of
+  two lines in `brief.py`** — 90 then 91 — **and nothing tests that order.**
+- **THE THIRD FILE'S INERTNESS SWEEP FOUND THE F10/B1 DISEASE AGAIN, WORSE.**
+  `S6` (tickers miswired) is a **complete no-op on 15.84% of settlements — one in
+  6.3**, measured over 6,441 settlements of real Binance history; most recently
+  2026-06-02, all three at +0.0100%. **Two and a half times more common than the
+  F10 defect that turned this ship red yesterday morning. R-034, CATEGORY B.**
+  **HONEST LIMIT: measured on SETTLED rates; the Brief prints the ESTIMATE, so
+  15.84% is an UPPER BOUND and the live figure is unknown.**
+- **THE OTHER SEVENTEEN SABOTAGES IN `funding.py` SWEPT CLEAN** — S2 and S4 are
+  inert on 0 of 6,441 settlements, S1/S3 never (the sign character always moves),
+  S11's hole is already covered on purpose by the rotating partial drill.
+- **NINE OF R-032'S TEN DOUBTS ARE STILL UNTESTED**, including doubt 2 — a write
+  to the real console device, to descriptor 3, or through a re-opened `CONOUT$`.
+  **Nobody knows the answer to that one.**
+- **DOUBT 10 IS CONFIRMED BY OBSERVATION:** both cockpit gates print `…-R6` as
+  their title and `…-R7 PASSED` as their verdict. **Nothing checks that a gate's
+  printed name matches the bar it was declared under.**
+- **THE CATEGORY B PILE IS ELEVEN DEEP.** Cleared before the ship is used for
+  real, at the same moment `cockpit/brief.py` gets its gate.
+- **R-021 has a THIRD clean data point (+3h12m) and its edges are still
+  unmeasured.** **R-006 is untouched and no in-house session may clear it.**
+
+---
+
+## PREVIOUS MARKER, KEPT FOR THE RECORD — 2026-07-31 (morning), the thirteenth generation
+
 ## **>>> DOOR 3 IS BUILT. THE ORDER THAT SLIPPED SEVEN TIMES IS CARRIED OUT.**
 
 → We are at: **PHASE 3 — THE THIRTEENTH GENERATION. R-025 IS SHUT.** A fresh

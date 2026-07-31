@@ -205,3 +205,26 @@ Born from Zargul Trader 2.0 (github.com/zargul123/zargul-trader-2.0 — the muse
 a year of LSTM prediction work, honestly concluded 2026-07-19 with a complete negative
 verdict (tag `prediction-chapter-closed`; full story in its PROGRESS_LOG.md). Zar X
 keeps the proven organs and the honesty discipline; it does not predict.
+
+---
+
+# MEASURED FACTS ADDED 2026-07-31 (afternoon) — THE FOURTEENTH GENERATION
+
+**Nothing shipped this session.** Three facts were MEASURED and one door was
+attacked. Recorded here because the measurement always wins over any planning
+document, including this one.
+
+| What was measured | The number | How |
+|---|---|---|
+| **CryptoPanic free tier is UNREACHABLE from this repo** | `/api/v1/posts/?public=true` → **HTTP 403**; `/api/developer/v2/posts/` → **HTTP 404** | live request, 2026-07-31. `.env` holds one key, `TWELVEDATA_API_KEY`. **There is no CryptoPanic token. Phase 3 step 3 cannot be built or verified without one, and a session cannot create one.** |
+| **S6 (`funding.py`, tickers miswired) is a COMPLETE NO-OP** | **15.84% of settlements — 1020 of 6441, one in 6.3** | Binance settled funding history, BTCUSDT 7549 / ETHUSDT 7315 / SOLUSDT 6516 settlements, 2019→2026. Most recent 2026-06-02 00:00 UTC, all three +0.0100%. **UPPER BOUND — the Brief prints the ESTIMATE, not the settled rate.** |
+| **S2 and S4 (`funding.py`) are never inert** | **0 of 6441 settlements** | same series. They require every rate to round to zero at four decimals of a percent, which has not happened once. |
+| **Door 3's child stops watching sooner than the pilot is exposed** | child **0.5-1.0 s** after the doorway · Brief **1.5-2.0 s** | one daemon thread per delay, planted once, markers counted in both the child's output and the real Brief. |
+| **Door 3 is blind to a DAEMON thread** | shape A5 → **ESCAPED**, by Door 3's own judge | A1 with `daemon=False` → `daemon=True`, planted alone in a whole-repo copy; control silent first; A1-A4 all CAUGHT. |
+| **Door 1 is Door 3's accidental backstop, and it holds today** | red at **1.25 s** and **1.75 s** | the same shape planted in the production path and run against the FULL gate: `GATE 3.1-R7 FAILED` both times. Nothing slower than that reaches the Brief at all. |
+| Gate runtimes, re-measured | funding **122 s** · fear_greed **62 s** · open_interest **56 s** | unchanged from the figures the thirteenth generation put on record. **First session in five where the runtimes on record were right.** |
+| `data/oi_history/` | 3 files, correct names, **181 lines each**, sha256 `e3258e82` / `1549a8a1` / `e0f91a87` | byte-identical since 2026-07-30. The 1 August errand was **not yet due** — `date -u` read 2026-07-31 11:11 UTC. |
+
+**STILL TRUE AND STILL KNOWN-WEAK:** `cockpit/brief.py` has no gate · the
+Category B pile is **eleven** deep · nine of R-032's ten doubts are untested ·
+R-006 may never be cleared in-house.

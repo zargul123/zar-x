@@ -2599,3 +2599,159 @@ before them, plus **R-029, R-030 and R-031 added today.** It grew by half again
 in one session. **It is cleared before the ship is used for real, at the same
 moment `cockpit/brief.py` gets its gate, and this session is saying out loud
 that it grew rather than letting it drift.**
+
+---
+
+# VERDICTS AND NEW ITEMS — 2026-07-31 (afternoon), THE FOURTEENTH GENERATION
+
+*Filed by a session that built none of the code it judged. Two new items, both
+CATEGORY B. One older item cleared on the limb it filed, and the residue of that
+clearing filed as a new item that I may not clear myself.*
+
+## R-033 — **DOOR 3 IS BLIND TO A DAEMON THREAD, AND THE LINE IT PRINTS SAYS OTHERWISE** · CATEGORY B
+**STATUS: OPEN · P3 · filed 2026-07-31 (afternoon) by the fourteenth generation ·
+found by attacking Door 3, which this session did not build**
+
+**PROVED, BY DOOR 3'S OWN JUDGE.** Shape A5 is shape A1 with one word changed —
+`daemon=False` → `daemon=True` — planted into `GATE_DOOR3_SHAPES` in a whole-repo
+copy outside the repo. The untouched control ran first in the same tree and was
+silent. A1, A2, A3 and A4 were CAUGHT. **A5 was reported ESCAPED by the drill's
+own line: `DOOR 3 IS DECORATIVE`.**
+
+**THE MECHANISM, AND IT IS WRITTEN IN DOOR 3'S OWN COMMENT.** Interpreter
+shutdown *"joins non-daemon threads."* A daemon thread is not joined; the child
+kills it and exits. **The comment is exactly true and is exactly the edge of what
+Door 3 can see.** The printed verdict, however, reads:
+
+    ✓ its TOTAL output was EMPTY — nothing was deferred to a thread, to a
+      buffer, or to an atexit handler
+
+**"a thread." Not "a non-daemon thread."** The sentence claims a class the test
+does not cover. **This is R-030's disease — a gate that overstates its own scope
+— in a second place.**
+
+**AND THE MEASUREMENT UNDERNEATH IT, WHICH IS THE PART THAT WILL OUTLIVE THE
+WORDING.** Door 3's child is deliberately the smallest possible process: import,
+call the doorway, exit. **It therefore stops watching sooner than the pilot is
+exposed.** Measured on this machine with one daemon thread per delay:
+
+    Door 3's child stops watching between 0.5 s and 1.0 s after the doorway.
+    The Commander's Brief is still on screen until between 1.5 s and 2.0 s.
+
+**WHY IT IS ONLY CATEGORY B, SAID BY THE SESSION THAT WOULD HAVE PREFERRED
+OTHERWISE.** A shape in that band does NOT reach the Commander. It is caught —
+**by DOOR 1, not by Door 3** — because the gate calls the doorway dozens of times
+in 62 s and the deferred write lands inside a later listening window. Measured
+at 1.25 s and 1.75 s: `GATE 3.1-R7 FAILED` both times. **Anything slow enough to
+clear that (≥2 s) is too slow to reach the Brief at all — measured.** I could
+construct no delay that is green in the gate and visible on his screen, **and I
+say so rather than stretching the finding.**
+
+**THE RESIDUE THAT IS NOT SMALL AND IS THE REASON THIS ITEM STAYS OPEN:** the
+protection is ACCIDENTAL. Nobody designed Door 1 to be Door 3's backstop, nothing
+records that it is, and **the funding instrument's equivalent protection is the
+ORDER OF TWO LINES IN `brief.py`** — line 90 calls the Fear & Greed doorway and
+line 91 the funding one, so funding has almost no process life after it.
+**Swap those two lines and the funding doorway inherits the 1.5-second window.
+Nothing anywhere tests that order.**
+
+**MY OWN DOUBTS ABOUT THIS FINDING, FILED WITH IT:**
+1. **The band is a RACE and I measured it on one machine, once each.** A slower
+   or faster box moves both edges. The direction is structural — the child is
+   always smaller than the Brief — but the numbers are not portable.
+2. **I proved a daemon THREAD escapes. I did not enumerate what else is not
+   joined at shutdown.** R-032 doubt 2 named three more shapes I still have not
+   tested: a write to the real console device, to descriptor 3, or through a
+   re-opened `CONOUT$`. **I did not test them and I do not know the answer.**
+3. **Door 1's accidental backstop is itself unmeasured.** I showed it catches at
+   1.25 s and 1.75 s. Nobody knows its ceiling, and it is currently load-bearing.
+
+## R-034 — **S6 IS A COMPLETE NO-OP ON UP TO 15.84% OF SETTLEMENTS** · CATEGORY B
+**STATUS: OPEN · P3 · filed 2026-07-31 (afternoon) by the fourteenth generation ·
+the third file's inertness sweep, which nobody had done**
+
+**THE SAME DISEASE AS F10 AND B1, IN THE THIRD FILE, AND MORE COMMON THAN
+EITHER.** `S6` swaps `CONTRACTS` for a three-cycle of the tickers. The printed
+LABEL comes from the dict KEY, so labels stay BTC/ETH/SOL in order and only the
+RATES rotate: **the block is byte-identical exactly when all three formatted
+rates are equal.**
+
+Measured against Binance's own settled funding history:
+
+    settlements where all three contracts settled together ....... 6441
+    of those, all three format IDENTICALLY — S6 changes nothing .. 1020
+                                                    = **15.84%**, one in 6.3
+    most recent occurrence ....... 2026-06-02 00:00 UTC, all three +0.0100%
+    (BTCUSDT 7549 · ETHUSDT 7315 · SOLUSDT 6516 settlements, 2019→2026)
+
+On such a settlement `python cockpit\funding.py` prints `✗ S6 … ESCAPED` **about
+a lie it never managed to tell**, while the instrument and the Brief are correct.
+**Two and a half times more common than the F10 defect that turned this ship red
+on arrival on 2026-07-31 morning.**
+
+**MY DOUBT AGAINST MY OWN FINDING, FILED WITH IT AND NOT AFTER SOMEBODY ASKED.**
+The Brief prints the running ESTIMATE (`premiumIndex.lastFundingRate`), not the
+settled rate. Settled rates are the clamped, converged values, so ties are more
+common in them than in a live estimate. **15.84% is an UPPER BOUND on the live
+figure, not the live figure.** No history of the estimate exists to measure, so
+the true number is unknown and is somewhere at or below this. **Whoever repairs
+this must not quote 15.84% as if it were the live rate.**
+
+**THE OTHER SEVENTEEN SABOTAGES CAME BACK CLEAN.** S1/S3 never inert (`-0.0`
+prints `-0.0000%` and `0.0` prints `+0.0000%`, verified — the sign character
+always moves). S2/S4 inert only if every rate rounds to zero at four decimal
+places of a percent: **0 of 6441, never observed.** S5's author chose an hour
+shift over dropping the timezone *for exactly this reason* and wrote it down.
+S11 would be inert if the failing asset were SOL, and the rotating partial drill
+already covers it deliberately. S7-S10, S12-S18 are unconditional edits.
+
+---
+
+# STATUS OF THE OLDER ITEMS, 2026-07-31 (afternoon)
+
+## R-025 — **CLEARED ON THE LIMB IT FILED, after standing since 2026-07-30.**
+R-025 said the doorway's post-return writes were unwatched, and named
+**"treating a hang as silence"** as the single most likely way to build a Door 3
+that guards nothing. **I did not build Door 3 and the orders explicitly made this
+mine to judge.** I judged it by attacking, not by reading its author's report:
+the untouched control ran first in the same scratch tree; A1, A2 and A3 were each
+planted alone and each caught **by its own marker**, so a patch that merely
+crashed could not be scored a success; and **A4 hangs the child on purpose and
+the door calls it a FAILURE, every run.** The trap R-025 named is genuinely shut.
+**THE RESIDUE — the class of shape the child never lives long enough to see — IS
+R-033, AND R-033 STAYS OPEN.** A limb cleared is not a tree cleared.
+
+## R-032 — **STILL OPEN. NINE OF ITS TEN DOUBTS ARE STILL UNTESTED.**
+I attacked Door 3 from a direction its author did not, and the finding (R-033)
+lands nearest **doubt 2** — the child is judged on `stdout + stderr` of a pipe —
+without answering it: I tested a shape that never writes at all, not one that
+writes somewhere the pipe cannot see. **Doubts 1, 3, 4, 5, 6, 7, 8, 9 and 10 were
+not touched by me.** Doubt 10 I can at least report as CONFIRMED BY OBSERVATION
+rather than by any check: both cockpit gates print `GATE 3.1-R6` / `GATE 3.2-R6`
+as their title and `GATE 3.1-R7 PASSED` / `GATE 3.2-R7 PASSED` as their verdict.
+**Nothing checks that a gate's printed name matches the bar it was declared
+under, and today both files disagree with themselves in plain sight.**
+
+## R-021 — **STILL OPEN, a third clean data point.** `cockpit/funding.py` was run
+at 11:12-11:14 UTC, **3h12m past the 08:00 settlement**, and passed first time.
+Three clean runs now stand at +1h42m, +2h15m and +3h12m. **Nobody has measured
+the edges, which is the only thing that would close this.**
+
+## R-029, R-030, R-031 — **NOT ATTACKED. I had the budget for two bars and spent
+it on the two my orders named.** R-030's disease reappeared under my own attack
+and is quoted inside R-033; that is not the same as having examined R-030.
+
+## R-022 — **STILL OPEN.** Doubts 3, 4, 5 and 7 untouched. **Doubt 7 — "a gate
+nobody runs is a gate that is not guarding anything" — is now load-bearing in a
+way it was not: R-033 shows Door 1's repeated listening windows are what actually
+catch a deferred write, and there are dozens of them because the gate is slow.**
+
+## R-006 — **UNTOUCHED. NOT THIS SESSION'S TO CLEAR, OR ANY IN-HOUSE SESSION'S.**
+
+## R-023, R-027, R-028 — **NOT TOUCHED.**
+
+## **THE CATEGORY B PILE IS NOW ELEVEN DEEP** — R-021, R-023, R-028, the three
+before them, R-029, R-030, R-031, and now **R-033 and R-034.** It grew by two
+again. **It is cleared before the ship is used for real, at the same moment
+`cockpit/brief.py` gets its gate.** Said out loud every session, as the condition
+on which the category was granted.

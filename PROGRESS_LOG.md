@@ -8832,3 +8832,285 @@ orders. **The most dangerous is that Door 3 inherits R-022 doubt 6 whole:** it
 runs the paths the GATE names, so a doorway path nobody told it about is a
 doorway path it does not watch — **and I closed that doubt for today's code
 while building something that depends on it staying closed.**
+
+---
+
+# 2026-07-31 (afternoon) — THE FOURTEENTH GENERATION
+
+# **DOOR 3 ATTACKED. IT HOLDS FOR WHAT IT TESTS AND IS BLIND TO ONE THING IT CLAIMS. THE THIRD FILE'S SWEEP FOUND THE SAME DISEASE AT 15.84%. AND PART 2 IS BLOCKED ON A KEY THAT DOES NOT EXIST.**
+
+*Written by a session with no memory of building any of it. I built nothing this
+session and repaired nothing, because both findings graded SMALL and the
+Commander's own rule says SMALL does not stop the building — and then the
+building turned out to be blocked on something only he can supply.*
+
+---
+
+## THE SHIP WAS GREEN ON ARRIVAL. PROVED BEFORE ANYTHING WAS TOUCHED.
+
+    cockpit/funding.py      GATE 3.2-R7  PASSED  exit 0  0 red
+    cockpit/fear_greed.py   GATE 3.1-R7  PASSED  exit 0  0 red
+    data/open_interest.py   GATE 3.2b-R9 PASSED  exit 0  0 red
+    lab/verify_vault.py     VAULT INTACT 6/6
+    cockpit/brief.py        3/3 instruments reporting
+    data/oi_history/        3 files, correctly named, 181 lines each,
+                            sha256 e3258e82 / 1549a8a1 / e0f91a87 — UNCHANGED
+    git status              clean;  lab/ untouched since the Phase 2 commit
+
+**The funding gate passed FIRST TIME, at 11:12-11:14 UTC — 3h12m past the 08:00
+settlement.** R-021 gains a third clean data point and still nobody has measured
+its edges. **F10 did not come back**, so the thirteenth generation's repair is
+not regressed.
+
+---
+
+# PART 1 — THE ATTACK
+
+## MY NEW QUESTION — the twelfth. The eleven before it are spent.
+
+> **"THE CHILD DIES IN ONE SECOND; THE PILOT LIVES FOR A MINUTE.
+> WHAT WRITES IN BETWEEN?"**
+
+Door 3's own comment states its mechanism, and every word of it is true:
+*"interpreter shutdown joins non-daemon threads, flushes every buffer and runs
+every atexit handler."* **It is also the exact edge of what Door 3 can see.**
+A DAEMON thread is not joined at shutdown — the child kills it and exits.
+
+The closest of the eleven spent questions — *"WHEN does the gate stop watching,
+and what does the part do after that?"* — is what produced Door 3. **Mine is the
+next one along: the gate now watches to the end of the CHILD's life, and the
+child's life is shorter than the pilot's.**
+
+## PREDICTIONS, WRITTEN TO NOTES BEFORE ANYTHING RAN
+
+Six written. **Four right, two wrong, and both wrong ones are below in full.**
+
+## RESULT 1 — SHAPE A5 ESCAPES DOOR 3. ITS OWN JUDGE SAYS SO.
+
+A5 is A1 with **one word changed**: `daemon=False` → `daemon=True`. Planted into
+`GATE_DOOR3_SHAPES` in a whole-repo copy outside the repo, so **Door 3's own
+machinery and own judge returned the verdict**, not a re-implementation of it.
+
+    CONTROL   the untouched copy, in the same scratch tree, ran FIRST
+              → silent, exit 0 in 1.27 s. The rig is sound.
+    A1        non-daemon thread    → CAUGHT   (its own marker came back)
+    A2        buffered wrapper     → CAUGHT
+    A3        atexit handler       → CAUGHT
+    A4        a thread that hangs  → CAUGHT   (the door called it a FAILURE)
+    A5        DAEMON thread        → ✗ ESCAPED — DOOR 3 IS DECORATIVE
+
+**Prediction 1 was right.** The child exits, the daemon thread is killed before
+it speaks, the total output is empty, and Door 3 reports a pass.
+
+**AND THE LINE DOOR 3 PRINTS WHEN IT PASSES IS BROADER THAN WHAT IT TESTED:**
+
+    ✓ its TOTAL output was EMPTY — nothing was deferred to a thread, to a
+      buffer, or to an atexit handler
+
+**"a thread." Not "a non-daemon thread."** That is R-030's disease — a gate that
+overstates its own scope — in a second place. Filed as **R-033**.
+
+## RESULT 2 — **PREDICTION 3 WAS WRONG, AND IT IS THE MOST USEFUL THING I DID**
+
+I planted the same A5 payload in the PRODUCTION path of a second whole-repo copy
+and ran the pilot's real Brief, expecting the advice on screen.
+
+    control Brief, untouched copy   → 3/3 reporting, ZERO occurrences
+    Brief with A5 (sleep 2 s)       → 3/3 reporting, **ZERO occurrences**
+
+**MY OWN SABOTAGE WAS INERT IN THE REAL BRIEF — the exact disease I came here to
+sweep for, committed by me, inside an hour of reading about it.** The Brief runs
+57.9 s in total but exits less than 2 s after the Fear & Greed doorway returns.
+
+**So I measured the window instead of arguing about it.** One daemon thread per
+delay, each with its own marker, planted once:
+
+    delay      landed on the pilot's Brief      caught by Door 3's child
+    0.05 s              YES                            YES
+    0.10 s              YES                            YES
+    0.25 s              YES                            YES
+    0.50 s              YES                            YES
+    1.00 s              YES                            **NO**
+    1.50 s              YES                            **NO**
+    2.00 s              no                             **NO**
+    3.00 s              no                             **NO**
+
+**MEASURED, NOT ARGUED: Door 3's child stops watching between 0.5 s and 1.0 s
+after the doorway. The Commander's Brief is still on screen until between 1.5 s
+and 2.0 s. The judge watches for less time than the pilot is exposed** — and it
+is structural, not luck: the child is deliberately the smallest possible process.
+
+## RESULT 3 — **PREDICTION 5 WAS ALSO WRONG, AND IT IS WHY THIS IS ONLY SMALL**
+
+I predicted a shape in the 1.0-1.5 s band would sail through the whole gate. It
+does not. Planted alone in the production path and run against the FULL gate:
+
+    daemon thread, sleep 1.25 s → GATE 3.1-R7 FAILED, exit 1
+                                  ✗ live path: the doorway wrote NOTHING…
+    daemon thread, sleep 1.75 s → GATE 3.1-R7 FAILED, exit 1
+                                  ✗ live path: the doorway wrote NOTHING…
+
+**It is caught — by DOOR 1, not by Door 3.** The gate calls the doorway dozens of
+times over its 62 s, so a write deferred by a second or two lands inside a LATER
+listening window. **That is accidental coverage and nobody designed it**, but it
+is real, and it is what keeps this finding off the Commander's screen.
+
+**I could not construct any delay that is green in the gate AND visible on the
+Brief.** Anything slow enough to clear Door 1's repeated windows (≥2 s) is too
+slow to reach the Brief at all. **I say so plainly rather than stretching it.**
+
+## RESULT 4 — funding.py has the same blind spot and it is not reachable there
+
+**Prediction 4 was right about the machinery and wrong about the consequence.**
+`funding.py` carries the identical Door 3, so it is blind to the identical shape.
+But `brief.py` calls the funding doorway on its LAST line, so almost no process
+life remains after it. Measured: with the same ladder in `funding.py`, only
+delays that fire *during* the doorway reached the Brief — and those are exactly
+what Door 1's ear is built to hear. **The funding instrument is protected by the
+ORDER OF TWO LINES IN `brief.py`, and nothing anywhere tests that order.**
+
+---
+
+# PART 1, SECOND BAR — **THE INERTNESS SWEEP OF `funding.py`. NOBODY HAD DONE IT.**
+
+Two files had already been caught carrying a sabotage the data can silence (F10,
+B1). The third had never been swept. All eighteen, one at a time, asking: *is
+there a data or environment condition under which this changes nothing?*
+
+## **S6 IS A COMPLETE NO-OP ON UP TO 15.84% OF SETTLEMENTS. MEASURED.**
+
+S6 replaces `CONTRACTS` with a three-cycle of the tickers. **The printed LABEL
+comes from the dict KEY**, so the labels stay BTC/ETH/SOL in order and only the
+RATES rotate. The block is therefore byte-identical exactly when all three
+formatted rates are equal.
+
+Measured against Binance's own settled funding history, the way F10's 6.05% was:
+
+    BTCUSDT   7549 settlements   2019-09-10 → 2026-07-31
+    ETHUSDT   7315 settlements   2019-11-27 → 2026-07-31
+    SOLUSDT   6516 settlements   2020-09-13 → 2026-07-31
+    settled together by all three ......................... 6441
+    all three format IDENTICALLY (S6 changes NOTHING) ..... 1020 = **15.84%**
+                                                            one in every 6.3
+    most recent .......... 2026-06-02 00:00 UTC, all three +0.0100%
+
+**That is two and a half times more common than the F10 defect that turned the
+ship red on arrival yesterday**, and it is the same shape: on such a day
+`python cockpit\funding.py` would print `✗ S6 … ESCAPED` **about a lie it never
+managed to tell**, with the instrument perfectly healthy.
+
+**THE HONEST LIMIT, STATED BEFORE ANYONE ASKS.** The Brief prints the running
+ESTIMATE (`premiumIndex.lastFundingRate`), not the settled rate. Settled rates
+are the clamped, converged values, so ties are more common in them. **15.84% is
+an UPPER BOUND on the live number, not the live number.** I did not measure the
+live one and no history of it exists to measure. Filed as a doubt against my own
+finding inside **R-034**.
+
+## THE OTHER SEVENTEEN — SWEPT, AND THE RESULT IS CLEAN
+
+    S1  _fmt_pct sign flipped ....... never inert. -0.0 prints '-0.0000%'
+                                      and 0.0 prints '+0.0000%' — VERIFIED,
+                                      the sign character always moves.
+    S2  _fmt_pct x100 dropped ....... inert only if EVERY rate rounds to zero
+                                      at 4 dp of a percent. **0 of 6441. Never.**
+    S3  _parse_rate sign flipped .... never inert, same reason as S1.
+    S4  _parse_rate x10 ............. same bar as S2. **0 of 6441. Never.**
+    S5  _utc_hhmm shifted an hour ... never inert. The 2026-07-28 comment says
+                                      the hour shift was chosen over dropping
+                                      the timezone for exactly this reason —
+                                      **that session already understood this
+                                      disease and wrote the defence down.**
+    S6  CONTRACTS miswired .......... **15.84% INERT. R-034.**
+    S7  meaning REVERSED ............ literal text edit. never inert.
+    S8  phantom fourth asset ........ never inert.
+    S9  disclaimer deleted .......... never inert.
+    S10 failed asset vanishes ....... judged on the forced-partial path, where
+                                      the marker is always present. never inert.
+    S11 missing asset always 'SOL' .. WOULD be inert if the failing asset were
+                                      SOL — but the drill ROTATES the bogus
+                                      symbol through all three, so BTC's and
+                                      ETH's turns always speak. **Covered, and
+                                      covered deliberately: the rotating drill
+                                      exists because S11 survived a drill that
+                                      only ever broke SOL.**
+    S12 meaning reverses degraded ... never inert on the degraded path.
+    S13 offline line fabricates ..... appends text. never inert.
+    S14 OFFLINE_WORDS reworded ...... never inert.
+    S15 doorway PRINTS advice ....... writes unconditionally. never inert.
+    S16 raw descriptor write ........ never inert.
+    S17 advice via a bound handler .. never inert.
+    S18 advice AT IMPORT time ....... never inert.
+
+**Seventeen of eighteen came back clean and I am saying so plainly.** The one
+that did not is measurable, measured, and reported.
+
+---
+
+# **PART 2 — I BUILT NOTHING, AND IT IS NOT BECAUSE OF MY FINDINGS**
+
+Both findings graded **SMALL**, and the Commander's own three questions say SMALL
+does not stop the building. **So I went to build Context Deck instrument 3 and
+could not, for a reason no previous session has hit.**
+
+    .env holds exactly one key: TWELVEDATA_API_KEY.
+    There is no CryptoPanic token anywhere in this repo.
+
+    https://cryptopanic.com/api/v1/posts/?public=true&currencies=BTC
+        → HTTP 403 (Cloudflare)
+    https://cryptopanic.com/api/developer/v2/posts/?currencies=BTC
+        → HTTP 404
+
+**CryptoPanic's free tier requires an account and an `auth_token`. There is not
+one, and a session cannot create one.** Every check this ship builds measures a
+printed line against a raw fetch. **With no fetch there is nothing to measure
+against, so building it would mean writing a gate whose expectations I invented
+— which is the one thing this ship exists to refuse.**
+
+**THIS IS THE EIGHTH TIME STEP 3 HAS NOT BEEN BUILT, AND IT IS THE FIRST TIME
+THE REASON IS NOT A FINDING.** It is one free signup, and only the Commander can
+do it. It is on his desk in the orders.
+
+---
+
+# MISTAKES, IN FULL
+
+1. **PREDICTION 3 WAS WRONG AND IT WAS MY OWN DISEASE.** I shipped a sabotage
+   with a two-second delay into a process that had 1.5 seconds left, and it said
+   nothing. **I had read about this failure mode twice that hour and committed it
+   anyway.** It is the strongest argument I can offer for the pattern amendment
+   the thirteenth generation put on the Commander's desk.
+2. **PREDICTION 5 WAS WRONG IN THE DIRECTION THAT COSTS ME MY FINDING.** I
+   predicted the 1.0-1.5 s band would clear the whole gate. It does not — Door 1
+   catches it by accident. **I recorded that instead of quietly grading on the
+   prediction**, which is what would have turned a SMALL into a BORDERLINE.
+3. **I OBSERVED, BUT DID NOT TREAT AS NEW, that both cockpit gates print one
+   name in their title and another in their verdict** — `GATE 3.1-R6` at the top,
+   `GATE 3.1-R7 PASSED` at the bottom; same in funding. **That is R-032 doubt 10
+   confirmed by observation, not a new finding, and I am not counting it as one.**
+
+---
+
+# WHAT WAS CHANGED IN THE REPO THIS SESSION
+
+**No `.py` file was edited. No repair was made. `git status` was clean before I
+started and clean after every experiment** — all work was done on five separate
+whole-repo copies outside the repo, in the scratchpad, which cost nothing.
+
+**The five documents are the only change in this commit.**
+
+---
+
+# THE 1 AUGUST ERRAND — **CHECKED FIRST. IT IS NOT DUE.**
+
+`date -u` → **Fri 31 Jul 2026 11:11 UTC**. The machine's local clock is UTC+5 and
+also reads 31 July. **It is not 1 August in any timezone this ship runs in.**
+
+    journal/daily_runs.log  — daily snapshots only, latest 31-Jul 13:05 local.
+                              NO open-interest recorder run. As expected.
+    data/oi_history/        — THREE files, correctly named, 181 lines each,
+                              sha256 e3258e82 / 1549a8a1 / e0f91a87.
+                              **Byte-identical to 2026-07-30. No B14.**
+
+**The commit-and-push branch has still never fired against real new rows.** Eight
+sets of orders have now handled this date; two got it right, both by spending one
+command on `date`.
