@@ -8574,7 +8574,10 @@ called "mostly passed."**
 # 2026-07-31 — **DOOR 3 IS BUILT AND SHUT. GATE 3.2-R7 AND 3.1-R7 PASSED. AND THE SAME DISEASE WAS FOUND IN A SECOND FILE.**
 
 *The thirteenth generation, reporting results against the bars it declared in
-`e9e618d` — a commit containing `PROGRESS_LOG.md` and no `.py` file.*
+`1b39a7a` — a commit containing `PROGRESS_LOG.md` and no `.py` file.*
+
+
+**HASH CORRECTED AFTER THE PUSH, WHICH IS WHY THE ORDERS SAY TO RECORD IT THEN.** I wrote `e9e618d` when I made the declaration commit. The cloud watchman pushed at 10:49 UTC while I was working, `git pull --rebase` replayed my four commits on top of it, and **every hash I had written down changed underneath me.** The declaration is `1b39a7a`, the Door 3 build is `d78b2e0`, this ritual is `7e3aaec`. **`git show --stat 1b39a7a` still shows one file, `PROGRESS_LOG.md`, and no `.py` — the proof survived the rewrite, only the name of it moved.**
 
 ## WHAT WAS DONE, IN ORDER
 
