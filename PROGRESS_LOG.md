@@ -9114,3 +9114,86 @@ also reads 31 July. **It is not 1 August in any timezone this ship runs in.**
 **The commit-and-push branch has still never fired against real new rows.** Eight
 sets of orders have now handled this date; two got it right, both by spending one
 command on `date`.
+
+---
+
+# 2026-07-31 (evening) — **THE COMMANDER SUSPENDED PART 1 FOR ONE SESSION. HIS RULING, RECORDED THE HOUR HE MADE IT.**
+
+*Appended by the fourteenth generation after reporting. **No code was touched.
+The only change is `SESSION_ORDERS.md`, rewritten to carry his ruling, and this
+entry.***
+
+## WHAT HE ASKED, AND IT WAS THE RIGHT QUESTION
+
+He read the report and asked, in substance: **"are these holes serious in real
+time — would they ever actually happen — and if not, why is the next session
+being sent to look for more of them?"**
+
+**HE WAS RIGHT AND THE ORDERS I HAD JUST WRITTEN WERE WRONG FOR HIM.** I checked
+my own file rather than trusting my memory of it, and all four items under
+`PART 1 — WHAT TO ATTACK` were *"go find more."* **Not one said "go fix the
+thing we have now found three times."** I had graded my findings SMALL — which
+was correct — and then followed the rule that SMALL findings are filed and not
+fixed, which put the only fault actually costing him anything onto a pile of
+eleven. **I reported that gap to him plainly rather than defending the file.**
+
+## HIS RULING, 2026-07-31 (evening)
+
+    THE NEXT SESSION DOES NOT ATTACK. It repairs S6 and B1, proves both, and
+    explains both in plain words. This is AN EXCEPTION FOR ONE SESSION ONLY.
+    THE USUAL PRACTICE — attack, then build — STANDS FOR EVERY BUILD AFTER IT.
+
+**`THE_PATTERN.md` WAS NOT EDITED, DELIBERATELY.** The rule has not changed; it
+has been **suspended once, by the only person who may suspend it.** A session
+that finds itself editing the pattern because the Commander waived it for one
+session has turned an exception into a law, and **only he may make a law.** The
+exception is written at the top of `SESSION_ORDERS.md` where the next session
+cannot miss it, and that file is thrown away next session — which is exactly the
+property an exception should have and a law should not.
+
+**WHAT WAS NOT SUSPENDED, WRITTEN INTO THE ORDERS IN BOLD SO IT CANNOT BE
+STRETCHED:** a session may still never clear its own repair; re-running the
+original fault against your own fix is not "attacking" but is what *fixed* means;
+and the gate is still declared first and committed alone with no `.py` in it.
+
+## A FACT HE SUPPLIED THAT CHANGED THE PRIORITY, AND THE MEASUREMENT AGREED
+
+He said his laptop clock and UTC are different. **Measured: UTC+5** — 12:20 UTC
+against 17:20 local.
+
+**THAT MEANS B1 IS NOT BLIND ON HIS MACHINE AND IS NOT COSTING HIM RED SCREENS.**
+B1 only goes inert where local time IS UTC — **which is what the cloud watchman
+almost certainly is.** So the honest order is **S6 first (one settlement in six,
+on his own laptop, every timezone), B1 second (insurance for the cloud).** Both
+are the same twenty-minute shape, so both are ordered together; **but the orders
+now say plainly that B1 was never hurting him, because telling him otherwise
+would be an easy exaggeration and he would have no way to check it.**
+
+## AND THE THING I FOUND WHILE ANSWERING HIS QUESTION, WHICH IS THE BIGGEST ITEM ON THIS SHIP'S DESK
+
+He asked where fake data could reach his screen **in real time**. There are only
+three routes: the code mangles the number (guarded harder than anything else
+here — every gate rebuilds the whole printed line from a raw fetch), something
+writes junk onto the screen (the three doors), **or the SOURCE ITSELF IS WRONG.**
+
+**MEASURED 2026-07-31: no file on this ship talks to more than one source.**
+Fear & Greed comes from alternative.me alone; funding from Binance alone; prices
+from TwelveData alone. **Every gate proves the printed line matches what the
+source SENT. Nothing anywhere asks whether the source was RIGHT.**
+
+**If a source served a wrong number, the Brief would print it in perfect
+confidence and every alarm on this ship would stay green.** That is fake data on
+his screen in real time, in his own words, **and it is the only door with nobody
+standing at it.** Filed on his desk as item 3, recommended as the next real
+attack after the news build. **Thirteen generations have attacked the guards.
+Nobody has asked whether the source can lie.**
+
+## WHAT I GOT WRONG THIS SESSION, ADDED TO THE THREE ALREADY RECORDED
+
+4. **I BURIED THE ONLY RECOMMENDATION THAT MATTERED.** The fix he has now ordered
+   was sitting at position 2 of a fifteen-item desk list, phrased as a rule
+   amendment, in a document he was not going to read. **I had the finding, I had
+   the frequency, I had the measurement — and I put the conclusion where it
+   could not be acted on.** He found it by asking a question I should have
+   answered unprompted in the report. **A correct grade delivered where nobody
+   reads it is not a delivered grade.**

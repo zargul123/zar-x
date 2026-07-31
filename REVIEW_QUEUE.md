@@ -2755,3 +2755,45 @@ before them, R-029, R-030, R-031, and now **R-033 and R-034.** It grew by two
 again. **It is cleared before the ship is used for real, at the same moment
 `cockpit/brief.py` gets its gate.** Said out loud every session, as the condition
 on which the category was granted.
+
+---
+
+# 2026-07-31 (evening) — **R-034 AND R-031 ARE UNDER A REPAIR ORDER FROM THE COMMANDER**
+
+**Both were filed CATEGORY B and both were graded SMALL, which is correct and
+is not being revisited.** On 2026-07-31 (evening) the Commander ruled that the
+next session repairs them anyway, as **a one-session exception** to PART 1.
+**The grades stand; only the schedule changed, and he changed it.**
+
+**S6 (R-034) is the one costing him red screens — one settlement in six, on his
+own laptop.** **B1 (R-031) is NOT blind on his machine: measured 2026-07-31, his
+clock runs UTC+5.** B1 goes inert only where local time IS UTC — the cloud
+watchman. **Both are ordered together because they are the same repair shape,
+but nobody may tell him B1 was hurting him. It was not.**
+
+**NEITHER ITEM MAY BE CLOSED BY THE SESSION THAT REPAIRS IT.** Whoever writes
+the fix files a NEW item against their own fix and leaves it open. **That rule
+was not suspended, and it is the rule that has caught twelve of the last
+thirteen repairs on this ship.**
+
+## R-035 — **NOBODY HAS EVER ASKED WHETHER THE SOURCE ITSELF CAN LIE** · CATEGORY B
+**STATUS: OPEN · P2 · filed 2026-07-31 (evening) by the fourteenth generation,
+in answer to the Commander's own question about fake data in real time**
+
+**MEASURED: no file on this ship talks to more than one source.** Fear & Greed
+comes from alternative.me alone, funding from Binance alone, prices from
+TwelveData alone. **Every gate here proves the printed line matches what the
+source SENT. Nothing anywhere asks whether the source was RIGHT.**
+
+**If a source served a wrong number, the Brief would print it in perfect
+confidence and every alarm would stay green.** Thirteen generations have
+attacked the guards; **nobody has attacked the supply.** Recommended to the
+Commander as the next real attack, after the news build. **P2 rather than P3
+because it is the only route to a WRONG NUMBER on his screen that has no guard
+on it at all — every other route has at least one.**
+
+**MY DOUBT AGAINST MY OWN ITEM:** I have not established that any of these three
+sources has ever served a wrong number, and I am not claiming one has. **This is
+an unguarded door, not a demonstrated leak**, and whoever takes it must grade it
+on THE FINDING REPORT like anything else rather than on the fact that it sounds
+serious.

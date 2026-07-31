@@ -365,6 +365,35 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-07-31 (evening): THE COMMANDER SUSPENDED PART 1 FOR ONE SESSION.**
+
+**The next session does NOT attack. It repairs S6 (R-034) and B1 (R-031),
+proves both, and explains both in plain words. HIS RULING, ONE SESSION ONLY —
+the usual rhythm stands for every build after it, and `THE_PATTERN.md` was
+deliberately NOT edited, because a rule suspended once is not a rule changed.**
+
+    NOT SUSPENDED: a session may never clear its own repair · the gate is
+    declared first and committed alone · re-running the original fault against
+    your own fix is not attacking, it is what "fixed" means.
+
+**MEASURED THE SAME HOUR, AND IT REORDERED THE JOB:** the Commander's laptop
+runs **UTC+5** (12:20 UTC / 17:20 local). **B1 is therefore NOT blind on his
+machine and never cost him a red screen** — it goes inert only where local time
+IS UTC, which is the cloud watchman. **S6 is the one costing him time: one
+settlement in six, on his own laptop, in every timezone.**
+
+**AND THE LARGEST UNGUARDED THING ON THIS SHIP, FOUND WHILE ANSWERING HIS
+QUESTION ABOUT FAKE DATA IN REAL TIME — MEASURED, NOT SUSPECTED: no file here
+talks to more than one source.** Fear & Greed from alternative.me alone, funding
+from Binance alone, prices from TwelveData alone. **Every gate proves the printed
+line matches what the source SENT; nothing asks whether the source was RIGHT.**
+A wrong number from a source would be printed in perfect confidence with every
+alarm green. **R-035, P2 — the only route to a wrong number on his screen with
+no guard on it at all.** Recommended as the next real attack, after the news
+build. **Nothing was built or repaired this session; only documents changed.**
+
+---
+
 ## **>>> DOOR 3 SURVIVED ITS FIRST INDEPENDENT ATTACK — WITH ONE BLIND SPOT NAMED. AND PHASE 3 STEP 3 IS BLOCKED ON A FREE SIGNUP.**
 
 → We are at: **PHASE 3 — THE FOURTEENTH GENERATION. NOTHING WAS BUILT AND
