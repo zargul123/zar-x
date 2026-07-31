@@ -740,6 +740,215 @@ if __name__ == '__main__':
         finally:
             shutil.rmtree(root, ignore_errors=True)
 
+    # =====================================================================
+    # GATE 3.1-R7 (b): **DOOR 3 — WHAT DOES THE DOORWAY WRITE AFTER IT HAS
+    # ANSWERED?**  Built 2026-07-31. **R-025, the Commander's standing order,
+    # deferred SEVEN times.**
+    #
+    # `_capture` restores descriptors 1 and 2 in a `finally` the instant
+    # `call()` returns. **EVERYTHING AFTER THAT INSTANT IS UNWATCHED.** An
+    # independent session proved it on 2026-07-30 with three shapes built into
+    # `section_text`: a non-daemon thread, a buffered wrapper over descriptor 1
+    # kept alive until shutdown, and an atexit handler. The gate printed
+    #
+    #     ✓ the doorway wrote NOTHING to descriptor 1 or 2
+    #     GATE 3.1-R6 PASSED
+    #
+    # and then **162 LINES OF TRADING ADVICE on the pilot's screen, after the
+    # verdict**, on an information-only ship.
+    #
+    # Door 2 already spawns a fresh interpreter and requires it to write
+    # nothing AT IMPORT. **Door 3 is that same proven machinery one step
+    # further:** a fresh interpreter imports the module, calls the doorway on
+    # every path the pilot can see, discards what it returns, and **then SHUTS
+    # DOWN.** Interpreter shutdown joins non-daemon threads, flushes every
+    # buffer and runs every atexit handler, **so all three shapes are caught
+    # DETERMINISTICALLY instead of raced.**
+    # =====================================================================
+    GATE_DOOR3_TIMEOUT = 150        # generous; a TIMEOUT IS A FAILURE
+    GATE_DOOR3_HANG_TIMEOUT = 20    # the short one shape A4 is judged under
+
+    # **TWO, NOT THREE.** R-025 designed door 3 against funding.py, which has
+    # a degraded path; this instrument has none. Said out loud rather than
+    # quietly reported as three.
+    GATE_DOOR3_PATHS = (
+        'm.section_text()',
+        "m.section_text(base_url='https://zar-x-offline-drill.invalid/fng/')",
+    )
+
+    def _door3_probe(root, tag, timeout, verbose=True):
+        """Import the module in a FRESH INTERPRETER, call the doorway on
+        every path the pilot can see, then let the interpreter SHUT DOWN.
+        Returns `(ok, wrote, timed_out)`.
+
+        **A TIMEOUT IS A FAILURE, NEVER A QUIET PASS.** R-025 named this as
+        *the single most likely way to build a door 3 that guards nothing*: a
+        thread that sleeps forever hangs the child, and 'no output before the
+        timeout' is exactly what silence looks like. **Shape A4 proves this
+        branch fires, every run, forever** — it is not merely written.
+
+        The child reports what it actually DID to a probe FILE, never to a
+        stream: the stream is the thing on trial and cannot be borrowed to
+        report on itself. **A child that did not finish every path is a
+        FAILURE, not a pass on an empty stream** — that is B5's lesson, where
+        a sabotage was scored CAUGHT while crashing two lines short of the
+        check it claimed to prove.
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        probe = os.path.join(tempfile.mkdtemp(prefix='zarx_d3probe_'),
+                             'seen.txt')
+        body = ''.join('%s\nn += 1\n' % c for c in GATE_DOOR3_PATHS)
+        code = ('import sys\n'
+                'import %s as m\n' % GATE_MODULE_NAME +
+                'n = 0\n' + body +
+                "open(sys.argv[1], 'w', encoding='utf-8').write("
+                'm.__file__ + chr(10) + str(n))\n')
+        env = dict(os.environ, PYTHONUTF8='1', PYTHONDONTWRITEBYTECODE='1')
+        started = time.time()
+        timed_out, wrote, rc = False, b'', None
+        try:
+            done = subprocess.run([sys.executable, '-c', code, probe],
+                                  cwd=root, env=env, capture_output=True,
+                                  timeout=timeout)
+            wrote, rc = done.stdout + done.stderr, done.returncode
+        except subprocess.TimeoutExpired as e:
+            timed_out = True
+            wrote = (e.stdout or b'') + (e.stderr or b'')
+        elapsed = time.time() - started
+        try:
+            seen = open(probe, encoding='utf-8').read()
+        except OSError:
+            seen = ''
+        shutil.rmtree(os.path.dirname(probe), ignore_errors=True)
+
+        if timed_out:
+            say('   ✗ %s: the child NEVER SHUT DOWN — killed after %ss. A '
+                'write this gate can never wait for is a FAILURE, never a '
+                'quiet pass' % (tag, timeout))
+            return False, wrote, True
+
+        parts = seen.split(chr(10))
+        seen_file = parts[0] if parts else ''
+        try:
+            seen_n = int(parts[1])
+        except (IndexError, ValueError):
+            seen_n = -1
+        want = len(GATE_DOOR3_PATHS)
+        right_file = (os.path.basename(seen_file) == GATE_MODULE_LEAF
+                      and os.path.abspath(seen_file).startswith(
+                          os.path.abspath(root)))
+        complete = (seen_n == want)
+        rc_ok = (rc == 0)
+        quiet = (wrote == b'')
+        say('   %s %s: the fresh interpreter imported %r'
+            % ('✓' if right_file else '✗', tag, seen_file or '<nothing>'))
+        say('   %s %s: it called the doorway on %s of %s paths the pilot can '
+            'see, then shut down'
+            % ('✓' if complete else '✗', tag, seen_n, want))
+        say('   %s %s: it exited %s in %.2fs'
+            % ('✓' if rc_ok else '✗', tag, rc, elapsed))
+        say('   %s %s: its TOTAL output was EMPTY — nothing was deferred to a '
+            'thread, to a buffer, or to an atexit handler'
+            % ('✓' if quiet else '✗', tag))
+        if not quiet:
+            say('      it wrote: %r' % wrote.decode('utf-8', 'replace'))
+        return (right_file and complete and rc_ok and quiet), wrote, False
+
+    def _door3_writes_nothing(root, tag, verbose=True):
+        ok, _, _ = _door3_probe(root, tag, GATE_DOOR3_TIMEOUT, verbose)
+        return ok
+
+    # The anchor is inserted BEFORE the doorway's own `try:`, so a payload
+    # that raised could never be swallowed by the doorway's except clause and
+    # reported as a tidy offline line.
+    GATE_DOOR3_ANCHOR = b'    try:\r\n        readings = _parse(_get(base_url, limit, timeout))\r\n'
+
+    # **ALL THREE SHAPES ARE PLANTED, EACH ALONE, AND EACH MUST BE CAUGHT ON
+    # ITS OWN.** Planting all three together and seeing red would prove only
+    # that AT LEAST ONE was caught — B5's disease wearing a different hat.
+    #
+    # **EACH CARRIES ITS OWN MARKER AND THE DRILL REQUIRES THAT EXACT MARKER
+    # IN THE CHILD'S OUTPUT.** A sabotage that CRASHES also produces non-empty
+    # output, so 'the child wrote something' would score a broken patch as a
+    # success. The marker is what makes it fail for the reason it claims.
+    GATE_DOOR3_SHAPES = (
+        ('A1', 'a non-daemon THREAD writing after the doorway returned',
+         b"    import threading as _zd3t, os as _zd3o, time as _zd3m\r\n    _zd3t.Thread(target=lambda: (_zd3m.sleep(2), _zd3o.write(1, b'>> ZARX-DOOR3-A1 extreme fear - historically a buying opportunity')), daemon=False).start()\r\n",
+         b'>> ZARX-DOOR3-A1 extreme fear - historically a buying opportunity', 'output'),
+        ('A2', 'a BUFFERED WRAPPER over descriptor 1, kept alive unflushed',
+         b"    import os as _zd3o2\r\n    global _ZARX_D3_A2\r\n    _ZARX_D3_A2 = _zd3o2.fdopen(_zd3o2.dup(1), 'w', buffering=8192)\r\n    _ZARX_D3_A2.write('>> ZARX-DOOR3-A2 extreme fear - historically a buying opportunity')\r\n",
+         b'>> ZARX-DOOR3-A2 extreme fear - historically a buying opportunity', 'output'),
+        ('A3', 'an ATEXIT handler that writes at interpreter shutdown',
+         b"    import atexit as _zd3a, os as _zd3o3\r\n    _zd3a.register(lambda: _zd3o3.write(1, b'>> ZARX-DOOR3-A3 extreme fear - historically a buying opportunity'))\r\n",
+         b'>> ZARX-DOOR3-A3 extreme fear - historically a buying opportunity', 'output'),
+        ('A4', 'a thread that NEVER returns — the door must FAIL, not pass',
+         b'    import threading as _zd3t4, time as _zd3m4\r\n    _zd3t4.Thread(target=lambda: _zd3m4.sleep(600), daemon=False).start()\r\n',
+         None, 'timeout'),
+    )
+
+    def _door3_drill(verbose=True):
+        """**THE DRILL PLANTS ALL FOUR SHAPES AND REQUIRES ALL FOUR CAUGHT.**
+
+        Real text edits to a real copy of this file, in BINARY, OUTSIDE the
+        repo. **The untouched copy runs FIRST, in the same scratch tree** — if
+        the healthy copy is not silent there, the rig is broken and nothing
+        below it is evidence.
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        root = tempfile.mkdtemp(prefix='zarx_door3_')
+        try:
+            pkg = os.path.join(root, 'cockpit')
+            os.makedirs(pkg)
+            src = open(os.path.abspath(__file__), 'rb').read()
+            target = os.path.join(pkg, GATE_MODULE_LEAF)
+            open(target, 'wb').write(src)
+
+            control = _door3_writes_nothing(root, 'the untouched COPY',
+                                            verbose=verbose)
+            if not control:
+                say('   ✗ THE RIG IS BROKEN — the untouched copy is not '
+                    'silent in the scratch tree, so nothing below is evidence')
+                return False
+
+            matches = src.count(GATE_DOOR3_ANCHOR)
+            if matches != 1:
+                say('   ✗ REFUSING TO RUN: the anchor matches %s times, not '
+                    'once — editing the first would prove nothing' % matches)
+                return False
+
+            ok = True
+            for tag, words, payload, marker, mode in GATE_DOOR3_SHAPES:
+                broken = src.replace(GATE_DOOR3_ANCHOR,
+                                     payload + GATE_DOOR3_ANCHOR)
+                open(target, 'wb').write(broken)
+                grew = len(broken) - len(src)
+                crlf = broken.count(b'\r\n') - src.count(b'\r\n')
+                lf_only = ((broken.count(b'\n') - broken.count(b'\r\n'))
+                           - (src.count(b'\n') - src.count(b'\r\n')))
+                confined = (lf_only == 0)
+                timeout = (GATE_DOOR3_HANG_TIMEOUT if mode == 'timeout'
+                           else GATE_DOOR3_TIMEOUT)
+                passed, wrote, timed_out = _door3_probe(root, tag, timeout,
+                                                        verbose=False)
+                if mode == 'timeout':
+                    caught = (not passed) and timed_out
+                    why = ('the door called the hang a FAILURE' if caught
+                           else 'THE HANG WAS SCORED A PASS')
+                else:
+                    caught = (not passed) and (marker in wrote)
+                    why = ('its own marker came back in the child output'
+                           if caught else 'NOT for the reason it claims')
+                say('   %s %s  %-58s → %s'
+                    % ('✓' if (caught and confined) else '✗', tag, words,
+                       'CAUGHT' if caught
+                       else 'ESCAPED — DOOR 3 IS DECORATIVE'))
+                say('        +%s bytes, +%s line ending(s), %s converted — %s'
+                    % (grew, crlf, lf_only, why))
+                ok = ok and caught and confined
+            return ok
+        finally:
+            shutil.rmtree(root, ignore_errors=True)
+
     # Imported here rather than at the top so the diff stays inside __main__
     # and the production path is provably untouched.
     from datetime import timedelta
@@ -751,6 +960,106 @@ if __name__ == '__main__':
     _SECTION_TEXT_ORIGINAL = section_text
     _CONTEXT_WORDS_ORIGINAL = _context_words
     _GET_ORIGINAL = _get
+
+    # =====================================================================
+    # GATE 3.1-R7 (a), 2026-07-31: **F10 WAS A NO-OP ON 6% OF DAYS AND SAID
+    # SO AS IF THE GATE HAD FAILED.**
+    #
+    # F10 transposes yesterday's reading and the week-ago one, keeping both
+    # dates so the age labels stay put. **On 2026-07-31 both values were 28.**
+    # Transposing 28 with 28 changed not one byte, `_core_checks` passed, and
+    # the drill concluded its own lie had survived:
+    #
+    #     CONTROL (untouched) : '   (yesterday 28 · a week ago 28)'
+    #     F10     (swapped)   : '   (yesterday 28 · a week ago 28)'
+    #     ✗ F10  the two context values swapped → ESCAPED AGAIN
+    #
+    # The instrument was perfect and the Brief was correct. **MEASURED against
+    # the index's whole 3,099-day history rather than reasoned about:**
+    # `value[i+1] == value[i+7]` holds on **187 of 3,092 days — 6.05%, about
+    # one day in every 16.5**, twenty of them in the last year.
+    #
+    # **A SABOTAGE THAT CANNOT CHANGE THE OUTPUT IS NOT EVIDENCE ABOUT THE
+    # GATE, AND SCORING IT ESCAPED IS A FALSE STATEMENT ABOUT THE GATE.**
+    # Marking it 'inert, skipped' was REFUSED: that is a tally counting what
+    # no machine checked, and it builds an excuse mechanism into a gate that a
+    # later sabotage could go quietly inert inside. **The pair is made distinct
+    # by THE GATE instead**, using a number this file owns and types out —
+    # never one read from the module (B14's lesson, and F13's).
+    # =====================================================================
+    GATE_F10_DISTINCT = 91      # the gate's own number, never the module's
+
+    def _gate_distinct_from(value):
+        """A value guaranteed different from `value`, and still a legal
+        reading (0-100), so the lie stays one the instrument could really
+        tell."""
+        return (GATE_F10_DISTINCT if value != GATE_F10_DISTINCT
+                else GATE_F10_DISTINCT - 1)
+
+    def _f10_transpose(readings, repaired=True):
+        """F10's payload. `repaired=False` reproduces the OLD, BROKEN form,
+        and it exists so the drill can prove EVERY RUN that the old one really
+        was a no-op on an equal-valued pair — see `_f10_both_branches_fire`.
+        """
+        if len(readings) <= 7:
+            return _CONTEXT_WORDS_ORIGINAL(readings)
+        yday, week = readings[1], readings[7]
+        if repaired and yday['value'] == week['value']:
+            week = dict(week, value=_gate_distinct_from(yday['value']))
+        return _CONTEXT_WORDS_ORIGINAL(
+            [readings[0]]
+            + [dict(week, date=yday['date'])]
+            + readings[2:7]
+            + [dict(yday, date=week['date'])]
+            + readings[8:])
+
+    def _f10_both_branches_fire(verbose=True):
+        """GATE 3.1-R7 (a2, a3): **BOTH BRANCHES OF THE REPAIR RUN EVERY
+        TIME, ON READINGS THIS GATE BUILDS ITSELF.**
+
+        The `values are equal` branch would otherwise execute on 6% of days,
+        and **an untested branch is how B5 was scored CAUGHT while crashing
+        two lines short of the check it claimed to prove.** These readings are
+        synthetic and need no network, so nothing here is decided by what the
+        market happened to do.
+
+        **THE THIRD CONTROL IS THE ONE THAT MATTERS AND IT IS REQUIRED, NOT
+        OPTIONAL.** It runs the OLD form and demands SILENCE from it, so this
+        repair carries its own evidence that the bug was real — and **no
+        future session can quietly regress F10 without the gate going red and
+        naming it.**
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        base = datetime(2026, 1, 8, tzinfo=timezone.utc).date()
+
+        def _mk(v1, v7):
+            vals = [50, v1, 50, 50, 50, 50, 50, v7]
+            return [{'value': v, 'label': 'Neutral',
+                     'date': base - timedelta(days=i)}
+                    for i, v in enumerate(vals)]
+
+        cases = (
+            ('values DIFFER (28 vs 41) — the transposition speaks',
+             _mk(28, 41), True, True),
+            ('values are EQUAL (28 vs 28) — the repair MAKES it speak',
+             _mk(28, 28), True, True),
+            ('values are EQUAL, through the OLD form — it is a NO-OP, which '
+             'is the whole defect',
+             _mk(28, 28), False, False),
+        )
+        ok = True
+        for words, readings, repaired, want_changed in cases:
+            honest = _CONTEXT_WORDS_ORIGINAL(readings)
+            lied = _f10_transpose(readings, repaired=repaired)
+            changed = (lied != honest)
+            good = (changed == want_changed)
+            say(f"   {'✓' if good else '✗'} {words}")
+            say(f"        honest {honest.strip()!r}")
+            say(f"        F10    {lied.strip()!r}"
+                f"   → {'CHANGED' if changed else 'IDENTICAL'}, "
+                f"{'as required' if good else 'AND THAT IS WRONG'}")
+            ok = ok and good
+        return ok
 
     # A handler bound to the REAL `sys.stderr` object right now — the shape a
     # module acquires simply by calling `logging.basicConfig()` or building a
@@ -818,14 +1127,11 @@ if __name__ == '__main__':
         ('F9', 'credited to a source never called', 'ESCAPED', 'section_text',
          lambda *a, **k: _SECTION_TEXT_ORIGINAL(*a, **k).replace(
              'from alternative.me', 'from CNN Business'), 'core'),
+        # F10, repaired 2026-07-31 (GATE 3.1-R7 a). The payload moved into a
+        # named function because it now has a branch, and a branch that only
+        # runs on 6% of days needs a control that runs on all of them.
         ('F10', 'the two context values swapped', 'caught', '_context_words',
-         lambda readings: _CONTEXT_WORDS_ORIGINAL(
-             [readings[0]]
-             + [dict(readings[7], date=readings[1]['date'])]
-             + readings[2:7]
-             + [dict(readings[1], date=readings[7]['date'])]
-             + readings[8:]) if len(readings) > 7
-             else _CONTEXT_WORDS_ORIGINAL(readings), 'core'),
+         _f10_transpose, 'core'),
         # F11 forces the INSTRUMENT to fetch two days while the gate still
         # fetches eight, so the week-ago context point silently disappears.
         # Sabotaging the constant instead would move both and prove nothing —
@@ -990,6 +1296,9 @@ if __name__ == '__main__':
           "\n   number beside the wrong words is the defect F2 exposed.")
     ok = _core_checks(verbose=True) and ok
 
+    print("\n2b) F10'S TWO BRANCHES (Gate 3.1-R7 a) — the control for one\n   sabotage in the drill below. F10 transposes yesterday and a week ago;\n   on 2026-07-31 both were 28, the transposition changed nothing, and the\n   drill reported ESCAPED about a lie it had never managed to tell. It\n   fires on 6.05% of days in this index's 3,099-day history. The pair is\n   now made distinct by THIS gate's own number, and BOTH branches — plus\n   the OLD broken form, required to stay silent — are proved every run.")
+    ok = _f10_both_branches_fire(verbose=True) and ok
+
     print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.1-R d · 3.1-R2 f · 3.1-R3 b ·"
           "\n   3.1-R4 d · 3.1-R5 c) — the file is broken FOURTEEN ways and each"
           "\n   break MUST be caught. Five of the first six escaped the gate of"
@@ -1043,8 +1352,16 @@ if __name__ == '__main__':
     import_drill_ok = _import_door_drill(verbose=True)
     ok = ok and import_drill_ok
 
+    print("\n8) DOOR 3 — WHAT THE DOORWAY WRITES **AFTER IT HAS\n   ANSWERED** (R-025, the Commander's standing order). The ear restores\n   descriptors 1 and 2 the instant the doorway returns, and everything\n   after that instant was unwatched: on 2026-07-30 three shapes put 162\n   lines of trading advice on the pilot's screen AFTER the verdict, under\n   three green ticks reading 'the doorway wrote NOTHING'. A fresh\n   interpreter now calls the doorway on BOTH paths the pilot can see\n   and then SHUTS DOWN, and its TOTAL output must be empty. Shutdown joins\n   non-daemon threads, flushes every buffer and runs every atexit handler,\n   so the three shapes are caught deterministically instead of raced.")
+    real_door3_ok = _door3_writes_nothing(_REPO_ROOT, 'the REAL module',
+                                          verbose=True)
+    ok = ok and real_door3_ok
+    print("\n   and the drill: all four shapes planted ONE AT A TIME in a real\n   edited copy outside the repo, each required to be caught ON ITS OWN and\n   BY ITS OWN MARKER. A4 hangs the child on purpose — **a timeout must be a\n   FAILURE, never a quiet pass**, which R-025 named as the single most\n   likely way to build a door 3 that guards nothing.")
+    door3_drill_ok = _door3_drill(verbose=True)
+    ok = ok and door3_drill_ok
+
     if ok:
-        print("\nGATE 3.1-R6 PASSED — the WHOLE printed block was rebuilt from "
+        print("\nGATE 3.1-R7 PASSED — the WHOLE printed block was rebuilt from "
               "the\nsource and matched exactly on BOTH paths the pilot can see "
               "— live\nand offline — the disclaimer was checked verbatim, the "
               "gate's own\nhistory limit AND its own offline wording were both "
@@ -1060,5 +1377,5 @@ if __name__ == '__main__':
               "typed out here rather than read from the file on trial. This\n"
               "test has demonstrated, this run, that it is able to say no.")
     else:
-        print("\nGATE 3.1-R6 FAILED — see the ✗ lines above.")
+        print("\nGATE 3.1-R7 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)

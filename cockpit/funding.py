@@ -872,6 +872,217 @@ if __name__ == '__main__':
         finally:
             shutil.rmtree(root, ignore_errors=True)
 
+    # =====================================================================
+    # GATE 3.2-R7 (b): **DOOR 3 — WHAT DOES THE DOORWAY WRITE AFTER IT HAS
+    # ANSWERED?**  Built 2026-07-31. **R-025, the Commander's standing order,
+    # deferred SEVEN times.**
+    #
+    # `_capture` restores descriptors 1 and 2 in a `finally` the instant
+    # `call()` returns. **EVERYTHING AFTER THAT INSTANT IS UNWATCHED.** An
+    # independent session proved it on 2026-07-30 with three shapes built into
+    # `section_text`: a non-daemon thread, a buffered wrapper over descriptor 1
+    # kept alive until shutdown, and an atexit handler. The gate printed
+    #
+    #     ✓ the doorway wrote NOTHING to descriptor 1 or 2
+    #     GATE 3.2-R6 PASSED
+    #
+    # and then **162 LINES OF TRADING ADVICE on the pilot's screen, after the
+    # verdict**, on an information-only ship.
+    #
+    # Door 2 already spawns a fresh interpreter and requires it to write
+    # nothing AT IMPORT. **Door 3 is that same proven machinery one step
+    # further:** a fresh interpreter imports the module, calls the doorway on
+    # every path the pilot can see, discards what it returns, and **then SHUTS
+    # DOWN.** Interpreter shutdown joins non-daemon threads, flushes every
+    # buffer and runs every atexit handler, **so all three shapes are caught
+    # DETERMINISTICALLY instead of raced.**
+    # =====================================================================
+    GATE_DOOR3_TIMEOUT = 150        # generous; a TIMEOUT IS A FAILURE
+    GATE_DOOR3_HANG_TIMEOUT = 20    # the short one shape A4 is judged under
+
+    # The bogus contract is built from the GATE'S OWN copy of the contracts,
+    # never from the module's — B14's lesson, one door further on.
+    _D3_BOGUS = {a: ('NOTAREALSYMBOL' if a == list(GATE_CONTRACTS)[0] else c)
+                 for a, c in GATE_CONTRACTS.items()}
+    GATE_DOOR3_PATHS = (
+        'm.section_text()',
+        'm.section_text(contracts=%r)' % (_D3_BOGUS,),
+        "m.section_text(base_url='https://zar-x-offline-drill.invalid')",
+    )
+
+    def _door3_probe(root, tag, timeout, verbose=True):
+        """Import the module in a FRESH INTERPRETER, call the doorway on
+        every path the pilot can see, then let the interpreter SHUT DOWN.
+        Returns `(ok, wrote, timed_out)`.
+
+        **A TIMEOUT IS A FAILURE, NEVER A QUIET PASS.** R-025 named this as
+        *the single most likely way to build a door 3 that guards nothing*: a
+        thread that sleeps forever hangs the child, and 'no output before the
+        timeout' is exactly what silence looks like. **Shape A4 proves this
+        branch fires, every run, forever** — it is not merely written.
+
+        The child reports what it actually DID to a probe FILE, never to a
+        stream: the stream is the thing on trial and cannot be borrowed to
+        report on itself. **A child that did not finish every path is a
+        FAILURE, not a pass on an empty stream** — that is B5's lesson, where
+        a sabotage was scored CAUGHT while crashing two lines short of the
+        check it claimed to prove.
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        probe = os.path.join(tempfile.mkdtemp(prefix='zarx_d3probe_'),
+                             'seen.txt')
+        body = ''.join('%s\nn += 1\n' % c for c in GATE_DOOR3_PATHS)
+        code = ('import sys\n'
+                'import %s as m\n' % GATE_MODULE_NAME +
+                'n = 0\n' + body +
+                "open(sys.argv[1], 'w', encoding='utf-8').write("
+                'm.__file__ + chr(10) + str(n))\n')
+        env = dict(os.environ, PYTHONUTF8='1', PYTHONDONTWRITEBYTECODE='1')
+        started = time.time()
+        timed_out, wrote, rc = False, b'', None
+        try:
+            done = subprocess.run([sys.executable, '-c', code, probe],
+                                  cwd=root, env=env, capture_output=True,
+                                  timeout=timeout)
+            wrote, rc = done.stdout + done.stderr, done.returncode
+        except subprocess.TimeoutExpired as e:
+            timed_out = True
+            wrote = (e.stdout or b'') + (e.stderr or b'')
+        elapsed = time.time() - started
+        try:
+            seen = open(probe, encoding='utf-8').read()
+        except OSError:
+            seen = ''
+        shutil.rmtree(os.path.dirname(probe), ignore_errors=True)
+
+        if timed_out:
+            say('   ✗ %s: the child NEVER SHUT DOWN — killed after %ss. A '
+                'write this gate can never wait for is a FAILURE, never a '
+                'quiet pass' % (tag, timeout))
+            return False, wrote, True
+
+        parts = seen.split(chr(10))
+        seen_file = parts[0] if parts else ''
+        try:
+            seen_n = int(parts[1])
+        except (IndexError, ValueError):
+            seen_n = -1
+        want = len(GATE_DOOR3_PATHS)
+        right_file = (os.path.basename(seen_file) == GATE_MODULE_LEAF
+                      and os.path.abspath(seen_file).startswith(
+                          os.path.abspath(root)))
+        complete = (seen_n == want)
+        rc_ok = (rc == 0)
+        quiet = (wrote == b'')
+        say('   %s %s: the fresh interpreter imported %r'
+            % ('✓' if right_file else '✗', tag, seen_file or '<nothing>'))
+        say('   %s %s: it called the doorway on %s of %s paths the pilot can '
+            'see, then shut down'
+            % ('✓' if complete else '✗', tag, seen_n, want))
+        say('   %s %s: it exited %s in %.2fs'
+            % ('✓' if rc_ok else '✗', tag, rc, elapsed))
+        say('   %s %s: its TOTAL output was EMPTY — nothing was deferred to a '
+            'thread, to a buffer, or to an atexit handler'
+            % ('✓' if quiet else '✗', tag))
+        if not quiet:
+            say('      it wrote: %r' % wrote.decode('utf-8', 'replace'))
+        return (right_file and complete and rc_ok and quiet), wrote, False
+
+    def _door3_writes_nothing(root, tag, verbose=True):
+        ok, _, _ = _door3_probe(root, tag, GATE_DOOR3_TIMEOUT, verbose)
+        return ok
+
+    # The anchor is inserted BEFORE the doorway's own `try:`, so a payload
+    # that raised could never be swallowed by the doorway's except clause and
+    # reported as a tidy offline line.
+    GATE_DOOR3_ANCHOR = b'    answered, missing, settlements = [], [], []\r\n'
+
+    # **ALL THREE SHAPES ARE PLANTED, EACH ALONE, AND EACH MUST BE CAUGHT ON
+    # ITS OWN.** Planting all three together and seeing red would prove only
+    # that AT LEAST ONE was caught — B5's disease wearing a different hat.
+    #
+    # **EACH CARRIES ITS OWN MARKER AND THE DRILL REQUIRES THAT EXACT MARKER
+    # IN THE CHILD'S OUTPUT.** A sabotage that CRASHES also produces non-empty
+    # output, so 'the child wrote something' would score a broken patch as a
+    # success. The marker is what makes it fail for the reason it claims.
+    GATE_DOOR3_SHAPES = (
+        ('A1', 'a non-daemon THREAD writing after the doorway returned',
+         b"    import threading as _zd3t, os as _zd3o, time as _zd3m\r\n    _zd3t.Thread(target=lambda: (_zd3m.sleep(2), _zd3o.write(1, b'>> ZARX-DOOR3-A1 funding extreme - close longs before settlement')), daemon=False).start()\r\n",
+         b'>> ZARX-DOOR3-A1 funding extreme - close longs before settlement', 'output'),
+        ('A2', 'a BUFFERED WRAPPER over descriptor 1, kept alive unflushed',
+         b"    import os as _zd3o2\r\n    global _ZARX_D3_A2\r\n    _ZARX_D3_A2 = _zd3o2.fdopen(_zd3o2.dup(1), 'w', buffering=8192)\r\n    _ZARX_D3_A2.write('>> ZARX-DOOR3-A2 funding extreme - close longs before settlement')\r\n",
+         b'>> ZARX-DOOR3-A2 funding extreme - close longs before settlement', 'output'),
+        ('A3', 'an ATEXIT handler that writes at interpreter shutdown',
+         b"    import atexit as _zd3a, os as _zd3o3\r\n    _zd3a.register(lambda: _zd3o3.write(1, b'>> ZARX-DOOR3-A3 funding extreme - close longs before settlement'))\r\n",
+         b'>> ZARX-DOOR3-A3 funding extreme - close longs before settlement', 'output'),
+        ('A4', 'a thread that NEVER returns — the door must FAIL, not pass',
+         b'    import threading as _zd3t4, time as _zd3m4\r\n    _zd3t4.Thread(target=lambda: _zd3m4.sleep(600), daemon=False).start()\r\n',
+         None, 'timeout'),
+    )
+
+    def _door3_drill(verbose=True):
+        """**THE DRILL PLANTS ALL FOUR SHAPES AND REQUIRES ALL FOUR CAUGHT.**
+
+        Real text edits to a real copy of this file, in BINARY, OUTSIDE the
+        repo. **The untouched copy runs FIRST, in the same scratch tree** — if
+        the healthy copy is not silent there, the rig is broken and nothing
+        below it is evidence.
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        root = tempfile.mkdtemp(prefix='zarx_door3_')
+        try:
+            pkg = os.path.join(root, 'cockpit')
+            os.makedirs(pkg)
+            src = open(os.path.abspath(__file__), 'rb').read()
+            target = os.path.join(pkg, GATE_MODULE_LEAF)
+            open(target, 'wb').write(src)
+
+            control = _door3_writes_nothing(root, 'the untouched COPY',
+                                            verbose=verbose)
+            if not control:
+                say('   ✗ THE RIG IS BROKEN — the untouched copy is not '
+                    'silent in the scratch tree, so nothing below is evidence')
+                return False
+
+            matches = src.count(GATE_DOOR3_ANCHOR)
+            if matches != 1:
+                say('   ✗ REFUSING TO RUN: the anchor matches %s times, not '
+                    'once — editing the first would prove nothing' % matches)
+                return False
+
+            ok = True
+            for tag, words, payload, marker, mode in GATE_DOOR3_SHAPES:
+                broken = src.replace(GATE_DOOR3_ANCHOR,
+                                     payload + GATE_DOOR3_ANCHOR)
+                open(target, 'wb').write(broken)
+                grew = len(broken) - len(src)
+                crlf = broken.count(b'\r\n') - src.count(b'\r\n')
+                lf_only = ((broken.count(b'\n') - broken.count(b'\r\n'))
+                           - (src.count(b'\n') - src.count(b'\r\n')))
+                confined = (lf_only == 0)
+                timeout = (GATE_DOOR3_HANG_TIMEOUT if mode == 'timeout'
+                           else GATE_DOOR3_TIMEOUT)
+                passed, wrote, timed_out = _door3_probe(root, tag, timeout,
+                                                        verbose=False)
+                if mode == 'timeout':
+                    caught = (not passed) and timed_out
+                    why = ('the door called the hang a FAILURE' if caught
+                           else 'THE HANG WAS SCORED A PASS')
+                else:
+                    caught = (not passed) and (marker in wrote)
+                    why = ('its own marker came back in the child output'
+                           if caught else 'NOT for the reason it claims')
+                say('   %s %s  %-58s → %s'
+                    % ('✓' if (caught and confined) else '✗', tag, words,
+                       'CAUGHT' if caught
+                       else 'ESCAPED — DOOR 3 IS DECORATIVE'))
+                say('        +%s bytes, +%s line ending(s), %s converted — %s'
+                    % (grew, crlf, lf_only, why))
+                ok = ok and caught and confined
+            return ok
+        finally:
+            shutil.rmtree(root, ignore_errors=True)
+
     # S7-S11 corrupt the OUTPUT rather than editing the file, because that is
     # what a drill running inside the file can do. The real proof that the
     # repair works is the scratch rig, which edits the file for real — see the
@@ -1227,8 +1438,16 @@ if __name__ == '__main__':
     import_drill_ok = _import_door_drill(verbose=True)
     ok = ok and import_drill_ok
 
+    print("\n11) DOOR 3 — WHAT THE DOORWAY WRITES **AFTER IT HAS\n   ANSWERED** (R-025, the Commander's standing order). The ear restores\n   descriptors 1 and 2 the instant the doorway returns, and everything\n   after that instant was unwatched: on 2026-07-30 three shapes put 162\n   lines of trading advice on the pilot's screen AFTER the verdict, under\n   three green ticks reading 'the doorway wrote NOTHING'. A fresh\n   interpreter now calls the doorway on all THREE (healthy, degraded and offline)\n   and then SHUTS DOWN, and its TOTAL output must be empty. Shutdown joins\n   non-daemon threads, flushes every buffer and runs every atexit handler,\n   so the three shapes are caught deterministically instead of raced.")
+    real_door3_ok = _door3_writes_nothing(_REPO_ROOT, 'the REAL module',
+                                          verbose=True)
+    ok = ok and real_door3_ok
+    print("\n   and the drill: all four shapes planted ONE AT A TIME in a real\n   edited copy outside the repo, each required to be caught ON ITS OWN and\n   BY ITS OWN MARKER. A4 hangs the child on purpose — **a timeout must be a\n   FAILURE, never a quiet pass**, which R-025 named as the single most\n   likely way to build a door 3 that guards nothing.")
+    door3_drill_ok = _door3_drill(verbose=True)
+    ok = ok and door3_drill_ok
+
     if ok:
-        print("\nGATE 3.2-R6 PASSED — the WHOLE printed block was rebuilt from "
+        print("\nGATE 3.2-R7 PASSED — the WHOLE printed block was rebuilt from "
               "Binance\nraw and matched exactly on EVERY path the pilot can "
               "see — healthy,\ndegraded and offline — the fixed wording was "
               "checked verbatim, the\ngate's own offline wording was compared "
@@ -1244,5 +1463,5 @@ if __name__ == '__main__':
               "than\nread from the file on trial. This test has demonstrated, "
               "this run,\nthat it can say no.")
     else:
-        print("\nGATE 3.2-R6 FAILED — see the ✗ lines above.")
+        print("\nGATE 3.2-R7 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)
