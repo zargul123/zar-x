@@ -10302,3 +10302,69 @@ on this ship are the ones a machine enforces — the anchor that refuses to run
 when it matches twice, the hash printed before and after, the gate that exits
 non-zero. **Three sessions have now lost commands to PowerShell quoting. That is
 a candidate for a real guard, not a bolder font.**
+
+## **HE FOUND A SECOND HOLE THE SAME WAY, TWENTY MINUTES LATER, AND IT WAS A REAL ONE**
+
+**HIS QUESTION:**
+
+> *"ok and if next session ever build any thing new it will write orders like we
+> always do that next session first attack the build right? we are again making
+> exemption for this time correction for next session"*
+
+**BOTH HALVES OF THAT WERE RIGHT AND THE ORDERS ANSWERED NEITHER.**
+
+**FIRST HALF — THE HOLE.** I had told him in plain words that the cap was narrow
+and applied only to my repairs. **The document did not enforce it.** Item 9 said
+"do not carry the cap forward"; **nothing anywhere said that a session which
+BUILDS something must send the next one at that build with no cap.** A session
+that built the news instrument, reached the end tired, and wrote its orders from
+memory could have carried its own cap onto its own new code — **and that is a
+builder marking their own homework, the one thing this ship has never allowed.**
+**This is the identical failure he caught earlier today about the exemption, in
+a new coat.** The repair is a named section in JOB 3 quoting his question, plus
+two lines added to the closing box.
+
+**AND THE REASON THE CAP CANNOT TRANSFER, WHICH IS HIS OWN Q2 AND NOTHING
+ELSE:**
+
+    my two repairs ....... repairs to an ALARM. Nothing found in them can make
+                           a price, a rate or a saved row wrong. Q2 = NO,
+                           SMALL, capped safely.
+    a NEWS INSTRUMENT .... a NEW LINE ON HIS BRIEF that he reads with his own
+                           eyes. A fault puts a wrong or invented headline in
+                           front of him. Q2 = YES. The opposite of SMALL.
+
+**SECOND HALF — "WE ARE AGAIN MAKING EXEMPTION."** He is right to be suspicious
+and the honest answer is: **a cap and an exemption are the same animal at
+different sizes.** An exemption removes PART 1; a cap bounds it to a checklist.
+**The difference is real but it is a difference of degree.**
+
+    2026-07-31   exemption   PART 1 removed
+    2026-08-03   exemption   PART 1 removed
+    2026-08-03   cap         PART 1 bounded to four questions   <- this one
+
+**THREE SESSIONS RUNNING. Each was justified on its own and the third is the
+narrowest of the three, but THREE IN A ROW IS A DIRECTION.** The count is now
+written into the closing box of `SESSION_ORDERS.md` so nobody has to reconstruct
+it from this log, **with the instruction that a FOURTH is the moment to stop and
+ask him outright whether the outside check still exists.**
+
+**WHAT IS NOT REDUCED, AND IT MATTERS TO THE HONESTY OF ALL THIS:** the check
+was **redirected, not abolished.** JOB 1 — the 123 rescued rows measured against
+Binance before the evidence expires — **is a harder and more valuable check than
+any of the last three sessions ran**, and it is aimed at irreplaceable data
+instead of at a test.
+
+**AND A THIRD THING HE HAS NOW CAUGHT THAT NO CHECK DID.** Twice today he has
+found a gap by asking whether the document enforced what he had been told.
+**Both times the answer was no. That is now four times in two sessions that
+reading has beaten testing on this ship**, and every one of them was a person
+asking a plain question rather than any machine.
+
+## **A LEFTOVER I INTRODUCED AND CAUGHT WHILE REPAIRING THE ABOVE**
+
+**My JOB 3 rewrite left the same paragraph in the file twice** — "build it under
+the rule that cost this ship four sessions" appeared once as I intended it and
+once as a leftover of the block I had replaced. **Found by reading the section
+before editing it, not by any check.** Removed. **A duplicated paragraph is
+harmless; the fact that nothing would ever have reported it is not.**

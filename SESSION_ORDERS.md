@@ -240,10 +240,41 @@ must be **proved to change the output** before its verdict means anything.
 `collection_guard.py` was built that way from birth. **Do not retrofit it four
 generations later, three times over, as we did with F10, S6 and B1.**
 
-**AND IF YOU BUILD ANYTHING AT ALL, BUILD IT UNDER THE RULE THAT COST THIS SHIP
-FOUR SESSIONS:** every sabotage must be **proved to change the output** before
-its verdict means anything. `collection_guard.py` was built that way from birth.
-Do not retrofit it four generations later, three times, as we did.
+## **>>> AND THE THING YOU MUST WRITE INTO YOUR OWN ORDERS. THE COMMANDER ASKED FOR THIS BY NAME ON 2026-08-03.**
+
+**HIS QUESTION:** *"and if next session ever build any thing new it will write
+orders like we always do that next session first attack the build right?"*
+
+**HE IS RIGHT, AND HE FOUND A SECOND HOLE THE SAME WAY HE FOUND THE FIRST — BY
+ASKING WHETHER THE DOCUMENT ENFORCED WHAT HE HAD BEEN TOLD.** It did not. This
+section is the repair.
+
+    >>> IF YOU BUILD THE NEWS INSTRUMENT, THE ORDERS YOU WRITE MUST SEND THE
+    >>> SESSION AFTER YOU TO ATTACK IT — FULLY, AND WITH NO CAP OF ANY KIND.
+
+**AND HERE IS WHY THE CAP YOU ENJOY DOES NOT TRANSFER, IN ONE LINE THAT USES
+HIS OWN Q2 AND NOTHING ELSE:**
+
+    my two repairs .......... repairs to an ALARM. Nothing found in them can
+                              make a price, a rate or a saved row wrong.
+                              Q2 = NO → SMALL → capped, and safely.
+    a NEWS INSTRUMENT ....... a NEW LINE ON HIS BRIEF, which he reads with
+                              his own eyes. A fault in it puts a WRONG or
+                              INVENTED headline on his screen.
+                              Q2 = YES → it is the exact opposite of SMALL.
+
+**A BRAND-NEW INSTRUMENT THAT NOBODY HAS EVER ATTACKED IS THE SINGLE STRONGEST
+CASE FOR PART 1 THAT EXISTS ON THIS SHIP.** Every instrument here leaked when
+somebody finally tried: Gate 3.2 reported 48/48 with four lies walking through
+it, Gate 3.1-R let five through, and both rebuilds were failed the next day by a
+session that invented seven more. **Not one of those was found by its builder
+being careful.**
+
+**SO: THE CAP WAS HIS RULING ABOUT MY REPAIRS, IN THIS SESSION, AND IT DIES WITH
+THIS SESSION EXACTLY AS THE EXCEPTION BEFORE IT DID.** You may not extend it to
+your own work. **A builder capping the review of their own build is not a cap at
+all — it is a builder marking their own homework, which is the one thing this
+ship has never allowed.**
 
 ---
 
@@ -388,10 +419,21 @@ writing the next orders from memory could have carried an exemption forward
 without ever deciding to.
 
     >>> AN EXEMPTION DIES WITH THE SESSION IT WAS GRANTED TO.
+    >>> SO DOES A CAP. THEY ARE THE SAME ANIMAL AT DIFFERENT SIZES.
     >>> THE ORDERS YOU WRITE MUST SAY: PART 1 ATTACK, THEN PART 2 BUILD.
-    >>> YOU MAY NOT GRANT AN EXEMPTION TO ANYONE, INCLUDING THE SESSION
-        AFTER YOU. ONLY THE COMMANDER CAN, AND ONLY HE CAN DECIDE TO
-        DO IT AGAIN.
+    >>> AND IF YOU BUILT ANYTHING, THEY MUST SEND THE NEXT SESSION AT IT
+        WITH NO CAP AND NO LIMIT.
+    >>> YOU MAY NOT GRANT AN EXEMPTION OR A CAP TO ANYONE, INCLUDING THE
+        SESSION AFTER YOU. ONLY THE COMMANDER CAN, AND ONLY HE CAN DECIDE
+        TO DO IT AGAIN.
+
+**AND THE COUNT, SO NOBODY HAS TO RECONSTRUCT IT FROM THE LOG.** The outside
+check has now been reduced **three sessions running**: exemption (2026-07-31),
+exemption (2026-08-03), cap (2026-08-03, yours). **Each one was justified on its
+own and the third was the narrowest of the three — but three in a row is a
+direction, and somebody has to say the number out loud to him rather than let it
+be discovered later.** **If a fourth is proposed, that is the moment to stop and
+ask him directly whether the outside check still exists.**
 
 **WHY THIS MATTERS MORE THAN IT LOOKS.** He has granted it twice. **Twice is how
 a suspension quietly becomes the normal state** — and PART 1 is the only thing on
