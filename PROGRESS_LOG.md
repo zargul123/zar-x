@@ -9799,3 +9799,31 @@ it would have looked fine to me forever and been unresolvable for everyone
 else.** All four references are corrected to `3dc11e6`, and the correction
 script first PROVED the new hash is the code-free declaration before rewriting
 anything — `git show --stat 3dc11e6` is one file, 120 lines, no `.py`.
+
+
+## **THE COMMANDER FOUND A HOLE IN MY ORDERS BY ASKING A QUESTION**
+
+**He asked, in his own words:** *"the next session understand the exemption is
+only for him — if it builds something, the next session there will be no
+exemption in his next orders. am i understanding right?"*
+
+**HE WAS RIGHT, AND THE ORDERS I HAD JUST WRITTEN DID NOT ENFORCE IT.** The line
+*"the session after you attacks again"* sat alone in the box at the top of
+`SESSION_ORDERS.md` with **nothing in the closing instructions to carry it
+through**. The orders I INHERITED had that instruction — *"Your orders for the
+session after you must restore the normal rhythm... The exception was for you
+only"* — **and I dropped it when I rewrote the file.**
+
+**A session reaching the end and writing the next orders from memory could have
+carried its own exemption forward without ever deciding to.** That is how a
+suspension quietly becomes the normal state, and the exemption suspends the ONE
+thing a builder cannot do for themselves.
+
+**FIXED:** `SESSION_ORDERS.md` now carries a closing section quoting his
+question verbatim and stating in a box that **the exemption dies with that
+session, that its orders must restore PART 1 ATTACK, and that a session may not
+grant an exemption to anyone including its successor.** The seven closing-ritual
+steps are listed there too, which my rewrite had also dropped.
+
+**RECORDED AS A SEVENTH MISTAKE. It was found by the Commander, not by me and
+not by any check** — the third time in this session that reading beat testing.

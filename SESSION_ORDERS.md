@@ -297,6 +297,72 @@ repeated here.**
 
 ---
 
+---
+
+# **>>> HOW YOUR SESSION ENDS — AND THE ONE THING YOU MUST NOT GET WRONG**
+
+**THE COMMANDER ASKED FOR THIS IN WRITING ON 2026-08-03, IN THESE WORDS:**
+
+> *"the next session understand the exemption is only for him — if it builds
+> something, the next session there will be no exemption in his next orders. am i
+> understanding right?"*
+
+**HE IS UNDERSTANDING IT EXACTLY RIGHT, AND HE FOUND A HOLE IN THESE ORDERS BY
+ASKING.** The line *"the session after you attacks again"* was sitting alone in
+the box at the top of this file with nothing in the closing instructions to
+enforce it. **A session that reached the end and wrote the next orders from
+memory could have carried its own exemption forward without ever deciding to.**
+
+    >>> THE EXEMPTION IS YOURS AND IT DIES WHEN YOUR SESSION DOES.
+    >>> THE ORDERS YOU WRITE MUST SAY: PART 1 ATTACK, THEN PART 2 BUILD.
+    >>> YOU MAY NOT GRANT AN EXEMPTION TO ANYONE, INCLUDING THE SESSION
+        AFTER YOU. ONLY THE COMMANDER CAN DO THAT, AND ONLY HE CAN DECIDE
+        TO DO IT AGAIN.
+
+**WHY THIS MATTERS MORE THAN IT LOOKS.** He has now granted this exemption twice.
+**Twice is how a suspension quietly becomes the normal state** — and the whole
+reason the exemption exists at all is that PART 1 is the only thing on this ship
+that a builder cannot do for themselves. **If a session ever writes "and the
+exemption continues" into the next orders, the ship has lost its only
+independent check and nobody will have decided to give it up.**
+
+**If you genuinely think the session after you should also skip the attack, you
+say so TO HIM, in your report, as a recommendation — and you write the orders
+with PART 1 restored anyway.** He rules; you recommend. That is the same rule as
+every finding on this ship.
+
+## THE CLOSING RITUAL — SEVEN STEPS, NONE OPTIONAL
+
+**`THE_PATTERN.md` sets these out in full and they are not repeated here. In
+order:**
+
+    1. PROGRESS_LOG.md .... what happened, the real numbers, and EVERY mistake
+                            as plainly as every success. Append only.
+    2. REVIEW_QUEUE.md .... one OPEN item against EACH of your two repairs.
+                            You may not clear your own. You may not clear
+                            R-038, R-039, R-040 or R-041 either — you did not
+                            create them, but check first whether you are the
+                            one who would benefit from clearing them.
+    3. EXECUTION_PLAN.md .. the CURRENT POSITION MARKER, rewritten to the
+                            truth including what is broken. Keep the old
+                            markers below it.
+    4. ROADMAP.md ......... tick what shipped; correct any MEASURED fact that
+                            moved.
+    5. SESSION_ORDERS.md .. rewritten IN FULL, opening with a plain-words
+                            brief, **WITH PART 1 ATTACK RESTORED** — see the
+                            box above. Write it for someone with NO memory of
+                            you.
+    6. Commit. Push. **Then check your commit hashes again** — the cloud
+       watchman pushes every four hours and `git pull --rebase` rewrites them
+       underneath you. **That happened on 2026-08-03 and left four references
+       pointing at a hash that had ceased to exist.**
+    7. **REPORT TO HIM IN PLAIN WORDS** — what you tried, what broke, what
+       held, **what you got wrong**, and what decision is his.
+
+**AND THE STANDING DUTY: if you catch yourself writing "probably", "almost
+certainly" or "this should be fine" about anything that ships — FILE IT in
+`REVIEW_QUEUE.md` before the commit that ships it.**
+
 # ON THE COMMANDER'S DESK (do not let these drop)
 
 1. **>>> ONE COMMAND HE MUST RUN AS ADMINISTRATOR, AND IT IS THE ONLY THING HE
