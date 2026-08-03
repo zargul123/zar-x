@@ -10023,7 +10023,7 @@ an alarm. All four instruments were proved green BEFORE I touched anything.
 
 ## THE GATE WAS DECLARED FIRST, ALONE, AS ALWAYS
 
-`9979cf3` — one file, 163 lines, **no `.py` in the commit.** The twenty-first
+`4d21191` — one file, 163 lines, **no `.py` in the commit.** The twenty-first
 use of this rule and the twenty-first to survive its own audit. Both bars, both
 sets of edge cases, and the deviation below were all written down before a line
 of code existed.

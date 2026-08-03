@@ -158,7 +158,7 @@ Do not retrofit it four generations later, three times, as we did.
 
 **DECLARE THE GATE IN `PROGRESS_LOG.md` AND COMMIT THAT ENTRY ALONE, WITH NO
 `.py` IN THE COMMIT, BEFORE WRITING CODE.** Twenty-one uses, twenty-one audits
-survived; mine was `9979cf3`. **RECORD YOUR HASH *AFTER* YOUR FINAL PUSH** — the
+survived; mine was `4d21191`. **RECORD YOUR HASH *AFTER* YOUR FINAL PUSH** — the
 cloud watchman pushes every four hours and `git pull --rebase` rewrites hashes
 underneath you. **That happened on 2026-08-03 and left four references pointing
 at a hash that had ceased to exist.**
