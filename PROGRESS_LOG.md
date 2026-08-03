@@ -10278,3 +10278,27 @@ it does not have to be rediscovered.
 the orders did not match the advice, and half right about "nothing was wrong."
 The correction was his, not mine, and it is the fourth time in two sessions that
 reading has beaten testing on this ship.**
+
+## **AND I MADE THE SAME MISTAKE A SECOND TIME, TWENTY MINUTES AFTER WRITING IT DOWN**
+
+**I passed a multi-line commit message to PowerShell as a here-string. It
+mangled, and `git` tried to read thirty words of the message as filenames.**
+
+**THIS IS THE SECOND TIME IN ONE SESSION.** The first is recorded above. **And
+the housekeeping section of the orders I INHERITED names the exact fix in bold —
+`git commit -F <file>` for multi-line messages, because PowerShell here-strings
+mangle quotes.** I had also, an hour earlier, written that same warning into the
+orders for the NEXT session, in stronger words than I found it.
+
+**NOTHING WAS DAMAGED.** `git add` had already run, so the changes were staged
+and safe; the commit simply did not happen and the push reported
+"Everything up-to-date" over an unchanged tree. **The failure was loud, which is
+the only reason it cost one retry instead of a silent half-commit.**
+
+**THE HONEST LESSON, AND IT IS NOT "BE MORE CAREFUL".** I read that warning,
+wrote that warning, strengthened that warning, and then walked into it twice.
+**A warning in a document is not a guard.** The guards that have actually held
+on this ship are the ones a machine enforces — the anchor that refuses to run
+when it matches twice, the hash printed before and after, the gate that exits
+non-zero. **Three sessions have now lost commands to PowerShell quoting. That is
+a candidate for a real guard, not a bolder font.**
