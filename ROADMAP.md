@@ -295,3 +295,22 @@ The real figure, measured on 3 August, is **41 per asset and 221 stored.**
 it caught up at 11:47:41 on 3 August and collected nothing while reporting
 success.** *"Catches up"* is now known to be a claim about the trigger, not about
 the work. **R-037.**
+
+# SHIPPED 2026-08-03 (second) — **THE COLLECTION GUARD, GATE 3.2c-R1**
+
+| What | Where | State |
+|---|---|---|
+| **The collection guard (Phase 3, Step 3.2c) — reads `data/oi_history/` off disk and reports the newest row and its age. It asks THE DATA, never the job.** Built after R-037: the recorder fired on 2026-08-03, reported `Last Result: 0`, and collected nothing, while `CHECK_STATUS.bat` — the one screen the Commander runs — read that 0 and printed **OK**. **The status screen would have confirmed the failure as a success.** The cause of Windows' 0 is unproven and now unprovable (the Task Scheduler event log was off), **so the repair deliberately does not depend on knowing it.** GATE 3.2c-R1 PASSED, exit 0, zero red: all THREE verdicts — fresh, stale, and past Binance's own 30-day window — are driven every run from timestamps **the gate writes itself**, so no branch waits on the calendar to be seen firing (F10's lesson, applied from birth rather than retrofitted four sessions later). An archive under another filename is reported **MISSING**, not followed (B14). A file that exists but holds no row **fails loudly** (the recorder's empty-result trap). The log-sharing detector must FIND a planted collision — including one hidden behind `set LOG=` — and stay SILENT about a clean pair, before it is believed about the real batch files. The exit-code fault was **reproduced** (old shape reports a reassuring 0 while failing) and **proved fixed** (new shape reports 1), with a healthy run required to still report 0. Check (g) runs the **pilot path in a fresh interpreter** and requires its output to be the five-line block EXACTLY — added because the first draft printed the whole 90-line self-test on the Commander's status screen. **THE GATE WENT RED TWICE ON ITS AUTHOR'S OWN WORK BEFORE IT PASSED**, and its pass line names what it does NOT test (R-030 and R-033 were both gates overstating their scope). **R-039: the log-contention fault could not be reproduced on demand, so the gate asserts the SHAPE — nothing else writes where the recorder writes — and never the race.** **R-041 is open against this repair and its author may never clear it.** | `data/collection_guard.py` | ✅ |
+| **The recorder's schedule and alarm, repaired.** MONTHLY → **WEEKLY** (Mondays 09:00, catch-up preserved, next run 10-Aug-2026, verified in `schtasks`). **The old reasoning in the batch header — "a single missed month loses nothing" — was WRONG and is corrected in place rather than deleted:** the task did not miss, it RAN and did nothing, so ONE silent failure was enough to put 99 irreplaceable rows a month from deletion. On a weekly cadence a silent failure costs **nothing**. The recorder now writes **its own log**, and ends with `exit /b %RC%` so Windows is told the recorder's result rather than the `copy`'s. | `run_oi_recorder.bat` | ✅ |
+| **The status screen stopped trusting the job.** The word `OK` against a task is gone — it reads `exit 0`, a fact, with the line *"a job that does nothing can still report exit 0 - that is R-037"* underneath, and the archive's real age below that. | `CHECK_STATUS.bat` | ✅ |
+
+## MEASURED FACTS ADDED 2026-08-03 (second)
+
+| What | Measured | Note |
+|---|---|---|
+| `ZarX Open Interest` schedule | **Weekly, Mondays 09:00**, next run **10-Aug-2026 09:00** | `StartWhenAvailable` preserved; verified in the task XML after the change |
+| Task Scheduler operational log | **DISABLED, and enabling it needs Administrator** | `wevtutil sl Microsoft-Windows-TaskScheduler/Operational /e:true` — on the Commander's desk |
+| Batch files still sharing one log | **`run_daily.bat` + `run_snapshot.bat` → `journal\daily_runs.log`** | printed by the gate every run rather than hidden. R-040 |
+| The four files the pilot reads | `brief.py` `6fa5ff96` · `funding.py` `bc0819ee` · `fear_greed.py` `d0c71344` · `open_interest.py` `98f95133` | **IDENTICAL before and after this session's work**, printed not asserted |
+| `data/collection_guard.py` gate | **~10 s**, the fastest gate on the ship | it makes no network call at all |
+| A LF-only `.bat` under `cmd` | **no output, exit 1, silently refused** | the 2026-07-19 incident, reproduced by accident 2026-08-03 |

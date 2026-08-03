@@ -2970,3 +2970,112 @@ a session may not extend a suspension of the rules to itself.
 repairs did not land, so nothing came off. **R-037 is NOT in the pile — it is
 SERIOUS and it is on the Commander's desk.** The pile is cleared before the ship
 is used for real, at the same moment `brief.py` gets its gate.
+
+# 2026-08-03 (second) — **R-037 REPAIRED UNDER GATE 3.2c-R1. THREE NEW ITEMS, ONE OF THEM AGAINST MY OWN REPAIR.**
+
+## R-037 — **REPAIRED, NOT CLEARED. I BUILT THE FIX AND I MAY NOT JUDGE IT.**
+
+Shipped under GATE 3.2c-R1, exit 0, zero red: the recorder is **weekly**, writes
+its **own log**, reports an **honest exit code**, and `CHECK_STATUS.bat` now
+shows **the archive's age instead of Windows' opinion of the job**.
+
+**IT STAYS OPEN.** The rule that has caught twelve of thirteen repairs on this
+ship is that the author does not certify the repair. **R-041 is the item against
+it and the next session that is not me decides.**
+
+## R-039 — **THE FAULT THAT STARTED THIS CANNOT BE REPRODUCED ON DEMAND, AND THE GATE THEREFORE DOES NOT TEST IT** · CATEGORY B
+
+**WHAT IS MEASURED AND NOT IN DOUBT:** six jobs report `Last Run Time 11:47:41,
+Last Result 0` and the log holds ONE entry for that second. **Reproduced once**,
+by launching six identical batches together: one wrote, five wrote nothing at all.
+
+**WHAT I COULD NOT DO:** make it fire deterministically. I built a storm that
+**proves its own lock is real** — it probes with `echo probe >> log` until the
+redirection genuinely fails — and **the recorder still wrote its work through it,
+every single time.** So either the mechanism is not a simple exclusive-open, or
+the losing condition needs a narrower window than I can arrange on purpose.
+
+**WHAT I DID ABOUT IT: I TOOK THE DRILL OUT.** A check that passes on timing goes
+red on a slow morning and green on a fast one, which is R-021 wearing a new hat,
+and this ship has already spent four sessions on gates that cried wolf. **In its
+place the gate asserts the SHAPE — no two batch files may write to the same log —
+with a positive control (it must FIND a planted collision, including one hidden
+behind `set LOG=`) and a negative control (it must stay SILENT about a clean
+pair) before it is believed about the real files.**
+
+**THE HONEST CONSEQUENCE, WRITTEN DOWN RATHER THAN GLOSSED:** the shipped repair
+is justified by evidence from the real world and by one reproduction, **not by a
+drill that runs forever.** If the true mechanism is something other than log
+contention, **the separate log file may not be the thing that saved us** — though
+the weekly cadence and the outcome check both work regardless of mechanism, which
+is precisely why they were chosen.
+
+## R-040 — **THE OTHER JOBS STILL SHARE ONE LOG** · CATEGORY B
+
+`run_daily.bat` and `run_snapshot.bat` both append to `journal\daily_runs.log`,
+and **five scheduled tasks run them.** The gate PRINTS this every run rather than
+hiding it:
+
+    · still shared by 2 jobs: journal\daily_runs.log  <- run_daily.bat, run_snapshot.bat
+
+**NOT FIXED ON PURPOSE, AND THE REASON IS THE ONE THAT DECIDES EVERYTHING HERE:
+they collect snapshot rows, which CAN be re-fetched. The recorder's rows CANNOT.**
+Fixing five more batch files is five more chances to break something that works,
+for data that is recoverable. **Recommended as a small, low-risk job for a
+session with room. Not urgent.**
+
+## R-041 — **MY OWN REPAIR. NOBODY HAS CHECKED GATE 3.2c-R1 OR THE GUARD IT PROTECTS.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT**
+
+I found R-037, designed the fix, wrote the gate that judges the fix, and ran it.
+**Every one of those is the same pair of eyes.**
+
+**THE SPECIFIC THINGS I WANT ATTACKED, NAMED SO THE NEXT SESSION DOES NOT HAVE TO
+GUESS:**
+
+1. **`WARN_DAYS = 10.0` AND `SOURCE_WINDOW_DAYS = 30.0` ARE MY NUMBERS.** Ten was
+   chosen because the recorder now runs weekly, so a healthy archive reaches
+   about seven days old between runs. **Nobody has checked that a healthy weekly
+   cadence never crosses ten** — a run that slips a day, plus a weekend, and the
+   Commander gets a false alarm. **A guard that cries wolf is a guard he stops
+   reading, and this ship has been there.**
+2. **THE `--gate` SPLIT IS NEW AND IT IS EXACTLY WHERE A LIE WOULD HIDE.** The
+   pilot path and the gate path are now different code paths through one file.
+   **Sabotage B8's whole shape was a branch nobody executed.** Check (g) runs the
+   pilot path in a fresh interpreter — **but check (g) was written by the same
+   session that wrote the split.**
+3. **CHECK (g) COMPARES A FORMATTED AGE AND COULD IN PRINCIPLE FLAKE.** It runs a
+   child interpreter and compares its output to a block this process builds a
+   moment earlier. The age is printed to one decimal, so the two could straddle a
+   rounding boundary and go red with nothing wrong. **I estimate the odds as very
+   small and I am filing it rather than writing "this should be fine", which is
+   this ship's standing duty.** **If it ever goes red once and green immediately
+   after, this is why — and it is R-021 in a part I built while complaining about
+   R-021.**
+4. **THE GUARD READS ONLY `data/oi_history/`.** It says nothing about whether the
+   ROWS are right — only how fresh they are. **A recorder writing perfect
+   nonsense on schedule would keep this guard quiet forever.** That is R-035
+   arriving in a new part, and it is not a defect in this repair so much as the
+   boundary of it.
+5. **THE WEEKLY SCHEDULE LIVES IN WINDOWS, NOT IN THE REPO.** Nothing in git
+   knows the task is weekly. **If the laptop is rebuilt, or the task is
+   recreated from an old note, it silently returns to monthly and no gate
+   anywhere will say so.** The batch file's header says WEEKLY in words; that is
+   documentation, not a check.
+
+## R-038 — **UNCHANGED AND STILL OPEN, AND ITS DEADLINE HAS NOT MOVED.** The 123
+rows appended on 2026-08-03 can only be checked against Binance while they remain
+inside the rolling 30-day window — **until about 2026-09-02.**
+
+## R-034 (S6) AND R-031 (B1) — **STILL OPEN, AND NOW UNDER A SECOND EXCEPTION.**
+**The Commander granted the one-session exception again on 2026-08-03, for the
+session after this one: no attack, repair S6 and B1.** His ruling, recorded the
+hour he made it. `THE_PATTERN.md` is NOT edited — a rule suspended twice is still
+a rule suspended, not a rule changed.
+
+## R-006 — **UNTOUCHED, AND NO IN-HOUSE SESSION MAY EVER CLEAR IT.**
+
+## **THE CATEGORY B PILE IS NOW SIXTEEN DEEP** — R-039, R-040 and R-041 added,
+nothing removed. **It is cleared before the ship is used for real, at the same
+moment `brief.py` gets its gate.** **Sixteen is a lot and somebody should say so
+out loud: this pile has grown every session since it was created and has never
+once shrunk.**

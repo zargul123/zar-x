@@ -435,6 +435,55 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-03 (second): R-037 IS REPAIRED UNDER GATE 3.2c-R1, AND THE COMMANDER HAS GRANTED THE EXCEPTION AGAIN.**
+
+**WHERE THE SHIP IS:**
+
+    cockpit/fear_greed.py       GATE 3.1-R7  PASSED  exit 0  0 red
+    cockpit/funding.py          GATE 3.2-R7  PASSED  exit 0  0 red
+    data/open_interest.py       GATE 3.2b-R9 PASSED  exit 0  0 red
+    data/collection_guard.py    GATE 3.2c-R1 PASSED  exit 0  0 red   <- NEW
+    vault INTACT · Brief 3/3 · lab/ untouched · git status clean
+    data/oi_history/  3 files, 222 lines each, a1ed6729 / a077cf03 / c8d97f71
+
+**HIS TWO RULINGS OF 2026-08-03, RECORDED THE HOUR HE MADE THEM:**
+
+1. **R-037 IS SORTED FIRST.** Done this session, under a gate declared and
+   committed alone as `30c44b3` before any code existed.
+2. **THE ONE-SESSION EXCEPTION IS GRANTED AGAIN, FOR THE NEXT SESSION ONLY:**
+   **no attack, repair S6 (R-034) and B1 (R-031).** `THE_PATTERN.md` is NOT
+   edited — a rule suspended twice is still a rule suspended, not a rule changed.
+
+**WHAT THE REPAIR ACTUALLY IS, AND WHY IT IS SHAPED THIS WAY.** `CHECK_STATUS.bat`
+read Windows' `LastTaskResult` and printed **`OK`** when it was 0 — **so on
+3 August the one screen the Commander checks would have confirmed the failure as
+a success.** The cause of Windows' `0` is unproven and now unprovable, because
+the Task Scheduler event log was switched off. **Only an outcome check survives a
+cause nobody has proved. So the repair stops asking the job and asks the data.**
+
+    the recorder .......... MONTHLY -> WEEKLY (Mondays 09:00, catch-up kept).
+                            One silent failure now costs NOTHING, because the
+                            next run still reaches back a full 30 days.
+    its log ............... its OWN file. Nothing else writes there, and the
+                            gate proves that every run with both controls.
+    its exit code ......... HONEST. The old batch ended on `copy` and reported
+                            the copy's success; reproduced, and proved fixed.
+    the status screen ..... shows the ARCHIVE's newest row and its age. The
+                            word OK against a task is gone; it says `exit 0`
+                            and says underneath what that is worth.
+
+**NOTHING THE PILOT READS CHANGED** — `brief.py`, `funding.py`, `fear_greed.py`
+and `open_interest.py` are byte-identical, sha256 printed before and after.
+
+**WHAT IS STILL OPEN, PLAINLY:** the Task Scheduler event log is **still off**
+(needs Administrator — one command, on his desk); the five sibling jobs **still
+share one log** (R-040, their data is re-fetchable); **the contention fault could
+not be reproduced on demand, so the gate asserts the SHAPE and not the race**
+(R-039, and the gate says so in its own pass line); and **R-038's deadline of
+about 2026-09-02 has not moved.**
+
+---
+
 ## **>>> 2026-08-03: THE COLLECTING FAILED SILENTLY. THE INSTRUMENTS ARE CORRECT AND ALWAYS WERE.**
 
 **WHERE THE SHIP ACTUALLY IS, INCLUDING WHAT IS BROKEN:**

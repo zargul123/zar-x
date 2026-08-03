@@ -9623,3 +9623,163 @@ screen that can never turn red.
    compartment.** This is a new compartment, and Law 2 says a compartment owns
    its own code. **Saying so here, in bold, before building, because the rule is
    that you announce a rule you are about to be measured by.**
+
+# 2026-08-03 (third) — **R-037 REPAIRED UNDER GATE 3.2c-R1. THE GATE CAUGHT MY OWN REPAIR TWICE BEFORE IT PASSED.**
+
+*The Commander ordered R-037 sorted before anything else, and granted the
+one-session exception again for the session after this one. Both recorded in the
+gate declaration above, which was committed ALONE as `30c44b3` — `git show
+--stat 30c44b3` is one file, 120 lines, no code.*
+
+## THE FINDING THAT DECIDED THE DESIGN, AND NOBODY HAD NOTICED IT
+
+**`CHECK_STATUS.bat` — the one screen the Commander runs to see whether the ship
+is healthy — read Windows' `LastTaskResult` and printed `OK` when it was 0.**
+
+**SO ON 3 AUGUST THAT SCREEN WOULD HAVE ACTIVELY CONFIRMED THE FAILURE AS A
+SUCCESS.** Not silent about it — agreeing with it.
+
+**That is why the repair is not "make the job more reliable".** Every mechanism
+fix guards a cause, and **the cause of Windows' `0` is unproven and now
+unprovable** — the event log was switched off and the record of 11:47:41 is gone.
+**Only an outcome check survives a cause nobody has proved. So: stop asking the
+job, ask the data.**
+
+## WHAT SHIPPED
+
+    data/collection_guard.py   NEW COMPARTMENT, 508 lines. Production half:
+                               read the archive off disk, report the newest
+                               row and its age. __main__: GATE 3.2c-R1,
+                               breaking itself every run, forever.
+    run_oi_recorder.bat        WEEKLY, its OWN log, and an HONEST exit code.
+    CHECK_STATUS.bat           shows the ARCHIVE's age, not Windows' opinion.
+    ZarX Open Interest task     Monthly -> WEEKLY, Mondays 09:00, catch-up kept.
+                               Next run 10-Aug-2026 09:00. VERIFIED in schtasks.
+
+**THE FOUR FILES THE PILOT READS WERE NOT TOUCHED — sha256 before and after,
+printed rather than asserted:**
+
+    cockpit/brief.py        6fa5ff9619b4f6db -> 6fa5ff9619b4f6db  IDENTICAL
+    cockpit/funding.py      bc0819ee02a5f734 -> bc0819ee02a5f734  IDENTICAL
+    cockpit/fear_greed.py   d0c71344a4d0bcef -> d0c71344a4d0bcef  IDENTICAL
+    data/open_interest.py   98f95133a5eca5c2 -> 98f95133a5eca5c2  IDENTICAL
+
+## **THE WEEKLY CHANGE IS THE BIGGEST PART OF THE REPAIR AND IT IS NOT CODE**
+
+The batch file's own comment said: *"every run reaches back the full 30 days, so
+a single missed month loses nothing. TWO missed months in a row would."*
+**THAT REASONING WAS WRONG AND THIS IS WHERE IT BROKE.** The task did not MISS —
+**it RAN, silently did nothing, and reported success**, and the next attempt was
+a month away. **ONE silent failure was enough to put 99 irreplaceable rows one
+month from deletion.** On a weekly cadence a silent failure costs **nothing**,
+because the next run still reaches back a full 30 days. **The old comment has
+been replaced in the file with the corrected reasoning, not deleted.**
+
+## >>> THE GATE WENT RED TWICE, ON MY OWN WORK, AND BOTH TIMES IT WAS RIGHT
+
+**FIRST RED — TWO CHECKS I HAD DECLARED MUST FAIL CAME BACK GREEN.** My declared
+bar said: *"If 2a or 3a comes back GREEN, the repair is unproven and must not
+ship."* Both did.
+
+    FAIL THE OLD SHAPE - sharing ONE log: it wrote NOTHING...
+         > shared log, recorder wrote its work: True   exit 0
+    FAIL THE OLD SHAPE - a failed recorder ending on `copy` reports 0...
+
+**The exit-code drill was simply broken** — relative paths in the scratch batch —
+and once fixed it reproduces perfectly: the old shape reports **0** while
+failing, the new shape reports **1**.
+
+**THE CONTENTION DRILL IS THE ONE THAT MATTERS AND I COULD NOT MAKE IT WORK.** I
+built a storm that PROVES its own lock is real (it probes with `echo probe >>`
+until the redirection fails) and **the recorder still wrote its work through it,
+every time.** I reproduced the fault once — six batches launched together, one
+entry in the log — **and I could not make it fire on demand.**
+
+**SO I TOOK IT OUT OF THE GATE RATHER THAN LEAVE A CHECK THAT PASSES ON TIMING.**
+A gate that depends on a race is a gate that goes red on a slow morning and green
+on a fast one, which is R-021 with a new name. **In its place is the thing that
+IS deterministic: no two batch files may write to the same log.** That check
+carries a POSITIVE control (it must find a planted collision, including one
+hidden behind `set LOG=`) and a NEGATIVE control (it must stay silent about a
+clean pair) before it is believed about the real files. **Filed as R-039.**
+
+**SECOND RED — AND THIS ONE THE GATE DID NOT CATCH; I CAUGHT IT BY READING.**
+The gate PASSED, and its own closing sentence still said:
+
+    THE CONTENTION FAULT WAS REPRODUCED AND THEN PROVED FIXED, with the old
+    shape REQUIRED to fail
+
+**That was FALSE. I had deleted that drill twenty minutes earlier.** It is
+exactly R-030 and R-033 — a gate overstating its own scope — and my orders warned
+me about it in those words: *"DO NOT COPY DOOR 3'S PASS LINE VERBATIM... Write
+what you actually test."* **The pass line now ends with a paragraph naming what
+this gate does NOT test.**
+
+## THE THIRD MISTAKE: I PUT THE WHOLE SELF-TEST ON HIS STATUS SCREEN
+
+First version of `CHECK_STATUS.bat` called `collection_guard.py` with no
+arguments, and `__main__` ran the gate — **so his status screen printed 90 lines
+of self-test.** Caught by running the thing rather than trusting it, which is the
+housekeeping note that has now earned itself twice in one day.
+
+**The gate hides behind `--gate` now, exactly as the recorder's `--record` does,
+and check (g) runs the no-argument path IN A FRESH INTERPRETER and requires its
+output to be the five-line block EXACTLY** — nothing added, nothing on stderr.
+**Every other check runs in a process where this file is already imported and
+could never have seen a stray print.**
+
+## WHAT THE COMMANDER'S STATUS SCREEN NOW SAYS
+
+    --- Laptop alarms: what WINDOWS believes (not evidence - see below) ---
+      ZarX Open Interest       03-Aug 11:47  exit 0
+      (a job that does nothing can still report exit 0 - that is R-037)
+
+    --- Open-interest archive (the rows that CANNOT be re-bought) ---
+      BTCUSDT  newest row 2026-08-03T08:00:00Z  0.2 days old
+      ETHUSDT  newest row 2026-08-03T08:00:00Z  0.2 days old
+      SOLUSDT  newest row 2026-08-03T08:00:00Z  0.2 days old
+      ARCHIVE OK - the recorder is keeping up.
+
+**The word `OK` against the task is gone. It says `exit 0` — a fact — and says
+underneath what that is worth.**
+
+## THE THREE BRANCHES ARE PROVED EVERY RUN, WHICH IS F10'S LESSON APPLIED FROM BIRTH
+
+    OK  a FRESH archive (0.2 days) - the guard stays QUIET
+    OK  a STALE archive (14 days) - the guard goes LOUD, nothing lost yet
+    OK  an archive past BINANCE'S OWN 30-DAY WINDOW (33 days) - the guard says
+        rows are GONE, which is a different sentence from "stale"
+
+**Built from timestamps THIS GATE writes, so no branch waits on the market or on
+the calendar to be seen firing.** This is the first part on this ship built that
+way from birth rather than repaired into it four sessions later.
+
+## WHAT I DID NOT DO
+
+1. **THE TASK SCHEDULER EVENT LOG IS STILL OFF.** Enabling it needs
+   Administrator and I did not elevate. **One command, on his desk.**
+2. **THE FIVE SIBLING JOBS STILL SHARE ONE LOG.** `run_daily.bat` and
+   `run_snapshot.bat` both write `journal\daily_runs.log` and the gate PRINTS
+   that fact every run rather than hiding it. **They collect rows that CAN be
+   re-fetched. R-040.**
+3. **S6 AND B1 ARE STILL NOT REPAIRED.** They are the next session's job under
+   the exception the Commander granted again today.
+4. **I still cannot say why Windows reported `0`.** The outcome check is
+   deliberately built so that nobody needs to know.
+
+## MISTAKES, IN FULL
+
+1. **Two drills I declared must fail came back green.** The gate refused to pass
+   and it was right.
+2. **I could not reproduce the contention fault on demand** and removed the drill
+   rather than ship a flaky one. R-039.
+3. **I let the gate keep a pass line describing a drill I had deleted.** Caught
+   by reading, not by any check — the same way B5 and the six corrupted arrows
+   were caught.
+4. **I printed a 90-line self-test on the Commander's status screen.**
+5. **I wrote a debug batch with LF line endings and cmd silently refused it** —
+   the 2026-07-19 incident, recorded in this repo's own `.gitattributes`, which
+   I had read earlier the same session.
+6. **I lost two commands to backslashes inside a `python -c` payload**, which is
+   the exact trap `SESSION_ORDERS.md` warns about in bold. Both times the fix
+   was to write the script to a file, which is what the orders say to do.
