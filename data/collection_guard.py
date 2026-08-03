@@ -156,7 +156,7 @@ def report(now=None, history_dir=None, symbols=None):
 if __name__ == '__main__':
     # =====================================================================
     # GATE 3.2c-R1 — declared in PROGRESS_LOG.md and committed ALONE, with no
-    # code in that commit, BEFORE this file existed. `git show --stat 30c44b3`.
+    # code in that commit, BEFORE this file existed. `git show --stat 3dc11e6`.
     #
     # Everything below lives inside `__main__` on purpose: the production half
     # above is what `CHECK_STATUS.bat` runs, and it must be provably untouched

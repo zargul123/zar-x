@@ -9628,8 +9628,8 @@ screen that can never turn red.
 
 *The Commander ordered R-037 sorted before anything else, and granted the
 one-session exception again for the session after this one. Both recorded in the
-gate declaration above, which was committed ALONE as `30c44b3` — `git show
---stat 30c44b3` is one file, 120 lines, no code.*
+gate declaration above, which was committed ALONE as `3dc11e6` — `git show
+--stat 3dc11e6` is one file, 120 lines, no code.*
 
 ## THE FINDING THAT DECIDED THE DESIGN, AND NOBODY HAD NOTICED IT
 
@@ -9783,3 +9783,19 @@ way from birth rather than repaired into it four sessions later.
 6. **I lost two commands to backslashes inside a `python -c` payload**, which is
    the exact trap `SESSION_ORDERS.md` warns about in bold. Both times the fix
    was to write the script to a file, which is what the orders say to do.
+
+
+## **A SIXTH MISTAKE, MADE AFTER THE PUSH AND CORRECTED IN THE SAME BREATH**
+
+**I recorded the gate-declaration commit as `30c44b3` in four places, then ran
+`git pull --rebase` before pushing — and the rebase rewrote it to `3dc11e6`.**
+The cloud watchman had pushed a snapshot while I worked, exactly as
+`SESSION_ORDERS.md` says it does, and the warning I walked past is in those
+orders in bold: **"RECORD THAT HASH *AFTER* YOUR FINAL PUSH, NOT WHEN YOU WRITE
+THE ENTRY."**
+
+**The dead hash still resolves on this laptop, which is what makes it dangerous:
+it would have looked fine to me forever and been unresolvable for everyone
+else.** All four references are corrected to `3dc11e6`, and the correction
+script first PROVED the new hash is the code-free declaration before rewriting
+anything — `git show --stat 3dc11e6` is one file, 120 lines, no `.py`.

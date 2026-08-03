@@ -449,7 +449,7 @@ answer, built into this plan:
 **HIS TWO RULINGS OF 2026-08-03, RECORDED THE HOUR HE MADE THEM:**
 
 1. **R-037 IS SORTED FIRST.** Done this session, under a gate declared and
-   committed alone as `30c44b3` before any code existed.
+   committed alone as `3dc11e6` before any code existed.
 2. **THE ONE-SESSION EXCEPTION IS GRANTED AGAIN, FOR THE NEXT SESSION ONLY:**
    **no attack, repair S6 (R-034) and B1 (R-031).** `THE_PATTERN.md` is NOT
    edited — a rule suspended twice is still a rule suspended, not a rule changed.

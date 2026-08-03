@@ -32,7 +32,7 @@ suspended, not a rule changed.** The session after you attacks again, as always.
    IT IS WHAT "FIXED" MEANS.** A repair nobody re-tested is a hope.
 3. **THE GATE IS STILL DECLARED FIRST AND COMMITTED ALONE, WITH NO `.py` IN THAT
    COMMIT.** Twenty uses, survived audit every time — the twentieth was
-   `30c44b3` yesterday.
+   `3dc11e6` yesterday.
 
 ---
 
