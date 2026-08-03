@@ -9990,3 +9990,208 @@ always begins `BTC ` and the sabotaged one never does.
    offset it measured rather than the offset I asked for.**
 
 ---
+
+---
+
+# 2026-08-03 (third) — **BOTH REPAIRS LANDED. S6 AND B1 CAN NO LONGER TELL A LIE THAT CHANGES NOTHING, AND BOTH OLD DEFECTS WERE REPRODUCED BEFORE THEY WERE CALLED FIXED.**
+
+*The sixteenth generation, under the Commander's second one-session exception:
+no attack, repair S6 and B1. **Both were ordered twice and had landed neither
+time.** They have landed now.*
+
+## THE RESULT, FIRST, IN ONE BLOCK
+
+    cockpit/fear_greed.py     GATE 3.1-R7   PASSED  exit 0  0 red
+    cockpit/funding.py        GATE 3.2-R8   PASSED  exit 0  0 red   <- REPAIRED
+    data/open_interest.py     GATE 3.2b-R10 PASSED  exit 0  0 red   <- REPAIRED
+      the same file again at TZ=UTC0        PASSED  exit 0  0 red   <- AND HERE
+    data/collection_guard.py  GATE 3.2c-R1  PASSED  exit 0  0 red
+    data/oi_history/  3 files, 222 lines each, a1ed6729 / a077cf03 / c8d97f71
+                      — byte for byte what I inherited
+
+**FIVE GATE RUNS. ZERO RED MARKS ANYWHERE. Two files changed and nothing else.**
+
+## WHAT WAS WRONG, IN PLAIN WORDS
+
+Every gate here breaks its own file on purpose and checks the alarm notices.
+**Three of those deliberate breaks broke nothing.** The file was changed, the
+output came back identical, and the gate announced *"my own lie escaped, I am
+decorative"* while the instrument was perfectly healthy.
+
+**NEITHER FAULT WAS EVER IN A NUMBER THE COMMANDER READS.** Both were faults in
+an alarm. All four instruments were proved green BEFORE I touched anything.
+
+## THE GATE WAS DECLARED FIRST, ALONE, AS ALWAYS
+
+`9979cf3` — one file, 163 lines, **no `.py` in the commit.** The twenty-first
+use of this rule and the twenty-first to survive its own audit. Both bars, both
+sets of edge cases, and the deviation below were all written down before a line
+of code existed.
+
+## JOB 1 — S6, REPAIRED UNDER GATE 3.2-R8
+
+**THE DEFECT.** S6 miswires the tickers in a three-cycle, **but the printed
+LABEL comes from the dictionary KEY, not from the contract.** So the labels
+stayed BTC / ETH / SOL in that order and only the RATES rotated — and when all
+three rates format the same, the block is byte-identical. Measured by the
+session that found it: **1,020 of 6,441 settled funding periods, 15.84%, one in
+6.3. That is an UPPER BOUND** measured on settled rates, and the Brief prints
+the running estimate, whose ties are rarer. **It is not the live figure and I
+have not quoted it as one anywhere.**
+
+**THE REPAIR, AND THE HONEST DIFFERENCE FROM MY ORDERS — SEE THE DEVIATION
+BELOW.** The payload now carries **the same three asset-to-contract pairs**,
+with the keys written in an order the gate chose. The rate-lie is untouched; a
+label-lie no market can silence is added on top of it.
+
+**FOUR BRANCHES NOW PRINT EVERY RUN, on rates the gate invents, no network:**
+
+    ✓ rates DIFFER — the REPAIRED form speaks
+    ✓ rates DIFFER, through the OLD form — it speaks too, so the repair did
+      NOT weaken the rate-lie
+    ✓ rates EQUAL, through the OLD form — IDENTICAL, which is the whole defect
+    ✓ rates EQUAL — the REPAIR makes it speak anyway
+
+**THE ORIGINAL FAULT, RE-RUN, NOT REMEMBERED.** In a copy outside the repo,
+Binance was replaced by a stub answering **+0.0100% for all three contracts** —
+the exact condition R-034 measured — and the drill's own judge, `_core_checks`,
+was asked about both payloads:
+
+    SHIPPED S6   printed '  Funding (8h) : BTC +0.0100%  ·  ETH +0.0100%  ·  SOL +0.0100%'
+                 the judge: ESCAPED - THE GATE IS DECORATIVE
+    REPAIRED S6  printed '  Funding (8h) : SOL +0.0100%  ·  BTC +0.0100%  ·  ETH +0.0100%'
+                 the judge: CAUGHT
+
+**The defect reproduced and the repair proved, in one run, against the real
+judge.**
+
+## **>>> THE DEVIATION FROM MY ORDERS. DECLARED BEFORE THE CODE, REPEATED HERE.**
+
+**My orders said the repaired S6 must speak "using a number the GATE holds."
+IT CANNOT, AND THE REASON IS ONE SENTENCE: S6 is attached to the `CONTRACTS`
+dictionary, and nothing a `CONTRACTS` payload can contain decides a RATE** —
+every rate on that line comes from Binance over the network. **What such a
+payload DOES own outright is the labels and their ORDER, because those are its
+keys. So the gate holds an ORDER instead of a number.**
+
+**TWO ALTERNATIVES WERE CONSIDERED AND REJECTED, AND HE CAN OVERRULE ME ON
+EITHER:**
+
+1. **Move S6 onto `read_estimate`, where a gate-held rate really could be
+   injected. REJECTED:** `GATE_CONTRACTS` — the gate's own ticker map — exists
+   for the single reason that S6 miswires `CONTRACTS`. Moving S6 would leave
+   that independence tested by nothing at all, and would double the drill's
+   network calls.
+2. **Point one asset at some other real contract and hope its rate differs.
+   REJECTED: hoping is not a guarantee, and "whatever the market is doing" is
+   the disease being cured.**
+
+## JOB 2 — B1, REPAIRED UNDER GATE 3.2b-R10
+
+**THE DEFECT.** B1 writes the stamp as LOCAL time while still printing the `Z`.
+**On a machine whose clock is already UTC, local time IS UTC**, so it changed
+nothing. **MEASURED, and this is the part he should hold onto: it went green at
+UTC+5 — his own laptop — and RED at UTC, same file, same tree, only the clock
+moved. So B1 has never cost him a red screen. It was blind on the cloud, where
+nobody was watching.**
+
+**THE REPAIR IS S5's, AND S5's AUTHOR WROTE THE REASON DOWN IN 2026-07-28:**
+*"dropping the timezone is a no-op on a machine already set to UTC, and a drill
+that only works on some machines is not a drill."* So when the local stamp comes
+out equal to the honest UTC one — **and only then** — B1 falls back to a fixed
+**seven-hour** shift the gate types out. **Seven, deliberately: one hour is
+already sabotage B2, and two sabotages telling the same lie are one sabotage.
+It is also not a whole multiple of `PERIOD` ('4h'), so a shifted stamp can never
+land exactly on another real row's timestamp.**
+
+**THE TEST IS ON THE STAMP, NOT ON THE OFFSET,** so the guarantee is structural
+rather than argued: the value B1 returns can never equal the honest one.
+
+**WINDOWS HAS NO `time.tzset()`, so a process cannot move its own clock.** The
+offset is therefore a parameter: the live sabotage measures the real one, and
+the control proves every branch in one run on any machine.
+
+    ✓ clock at UTC+5, OLD form — the lie speaks on its own
+    ✓ clock at UTC exactly, OLD form — IDENTICAL, which is the whole defect
+    ✓ clock at UTC exactly, REPAIRED — it speaks anyway
+    ✓ this machine's REAL clock, REPAIRED — whatever it is
+    ✓ at UTC+5:30 the repaired form writes what the old one wrote — the
+      fallback never shifts on top of a clock that already lies
+    ✓ the fallback is 25200 s, which is not B2's one hour
+
+**THE GATE PRINTS THE OFFSET IT MEASURED, BECAUSE "I RAN IT UNDER UTC" IS A
+CLAIM AND A MEASURED OFFSET IS EVIDENCE.** It read **+5.00 h** on the first run
+and **+0.00 h** on the second, so `TZ=UTC0` is now *measured* to be honoured by
+Windows Python rather than believed.
+
+**THE ORIGINAL FAULT, RE-RUN.** The whole repo was copied outside itself, B1
+alone was reverted to its shipped form by one anchored edit, and the gate was
+run at `TZ=UTC0`:
+
+    ✗ B1  timestamps converted as LOCAL time  → ESCAPED — THE GATE IS DECORATIVE
+    ✓ B1  rebinds '_utc_iso' → looked up at CALL TIME, so the swap reaches
+          the code the pilot runs
+    GATE FAILED, exit 1
+
+**BOTH OF THOSE LINES ARE TRUE AT ONCE, AND THAT IS THE WHOLE LESSON OF R-031.**
+The swap reaches the recorder. It simply changes nothing when it gets there.
+**Two generations hardened REACH. Nothing on this ship had ever measured
+EFFECT.**
+
+## NOTHING THE PILOT READS CHANGED — PROVED TWO WAYS, NOT ASSERTED
+
+**Every diff hunk is inside `__main__`,** which begins at line 160 in
+`funding.py` and line 243 in `open_interest.py`. The earliest hunk in either
+file touches line **1172** and **1182**. And the production half of each file
+hashes to exactly what it hashed to before:
+
+    cockpit/funding.py      95069d1bef8316d766910abda18809317400ac1067c4086091aaf965c121a156
+    data/open_interest.py   5347bfecdf2ccfb2009770f9161dd6c51374f2ccdeae9a8c50793f3a57e2096f
+
+**Both recipes were reproduced from the digests in my orders BEFORE any edit was
+made, so the measuring script was proved before it was trusted.**
+
+## **A CORRECTION THE RECORD IS OWED, BECAUSE A ROADMAP ROW WOULD OTHERWISE READ FALSE**
+
+`ROADMAP.md` carries a row *"The four files the pilot reads"* with a **WHOLE
+FILE** sha256 for each. **Two of those four numbers are now stale, and they
+should be** — I edited the test halves of both files on purpose:
+
+    cockpit/funding.py       bc0819ee -> 6f30f42b
+    data/open_interest.py    98f95133 -> 0945a32b
+    cockpit/brief.py         6fa5ff96 -> 6fa5ff96   unchanged
+    cockpit/fear_greed.py    d0c71344 -> d0c71344   unchanged
+
+**A whole-file hash cannot tell those two facts apart**, which is exactly why
+the bar was written against the PRODUCTION HALF and not the file. Corrected in
+`ROADMAP.md` rather than left to look like a contradiction.
+
+## MY OWN MISTAKES, AS PLAINLY AS THE SUCCESSES
+
+1. **I LOST A COMMAND TO THE EXACT TRAP MY ORDERS WARNED ME ABOUT, IN THE SAME
+   SESSION IN WHICH I HAD READ THE WARNING.** I passed a Python script to
+   PowerShell as a here-string; PowerShell ate the quotes and Python died on a
+   raw path. **The orders say, in bold: "Write the script to a FILE and run the
+   file." The fifteenth generation lost two commands to this and wrote it down
+   so I would not. I lost one anyway.** Every script after that was a file.
+2. **I WROTE A `SyntaxError` INTO A HELPER AND CAUGHT IT BY READING, NOT BY
+   RUNNING.** `f"{add.count(b'\\n')}"` — a backslash inside an f-string
+   expression, which Python 3.10 refuses. My orders name that trap too. It was
+   fixed with `bytes([10])` before it ever ran, but **it was caught by eye, and
+   a helper that had been slightly less obvious would have run and misled me.**
+3. **I ALMOST LEFT THE FAILURE BANNER IN `open_interest.py` SAYING "GATE
+   3.2b-R9 FAILED"** while the pass banner said R10. I only noticed because the
+   B1 reproduction run printed the failure banner in front of me. **A gate that
+   names the wrong version of itself when it fails is a small thing that costs
+   the next session an hour.**
+
+## WHAT I DID NOT DO, AND SAY SO PLAINLY
+
+**I ATTACKED NOTHING. That was the order and I kept to it.** I invented no new
+sabotage, and the only things I broke on purpose were the two defects I was sent
+to fix, broken again to prove they had been real.
+
+**I DID NOT CLEAR R-034 OR R-031.** I repaired them; I may not clear my own
+work. **R-042 and R-043 are filed OPEN against my two repairs.** The session
+after me does that job — and it attacks again, because the exception was for me
+and dies with me.

@@ -3079,3 +3079,97 @@ nothing removed. **It is cleared before the ship is used for real, at the same
 moment `brief.py` gets its gate.** **Sixteen is a lot and somebody should say so
 out loud: this pile has grown every session since it was created and has never
 once shrunk.**
+
+---
+
+# 2026-08-03 (third) — **R-034 AND R-031 ARE REPAIRED. THEY ARE NOT CLEARED, AND I AM THE ONE PERSON WHO MAY NOT CLEAR THEM.**
+
+## R-034 (S6) — **REPAIRED under GATE 3.2-R8. STILL OPEN. VERDICT BELONGS TO SOMEONE ELSE.**
+## R-031 (B1) — **REPAIRED under GATE 3.2b-R10. STILL OPEN. VERDICT BELONGS TO SOMEONE ELSE.**
+
+Both defects were **reproduced first and then proved fixed**, both re-runs are
+in `PROGRESS_LOG.md`, and both gates are green with zero red marks — the
+recorder's twice, once at UTC+5 and once at `TZ=UTC0`. **None of that is a
+clearance.** The session after me rules on both.
+
+## R-042 — **MY OWN S6 REPAIR. THE LIE IS NOW LOUDER THAN IT WAS, AND LOUDER IS NOT ALWAYS BETTER.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT**
+
+**THE THING I MOST WANT ATTACKED, NAMED PLAINLY SO NOBODY HAS TO GUESS.** My
+repaired S6 rotates the dictionary's KEYS as well as its values, so the printed
+labels come out in a different order. **That means the sabotage is now catchable
+by ORDER ALONE.** The whole-block exact-equality check catches it either way
+today, so nothing is weaker this run — but **a future gate that regressed to
+checking only the label sequence would still score S6 CAUGHT while being blind
+to the rate-swap that S6 exists to test.**
+
+**WHAT I DID ABOUT IT, SO THE NEXT SESSION JUDGES THE RESIDUE AND NOT THE
+WHOLE:** case 2 of the four-branch control runs the **OLD, value-only form** on
+rates that differ and REQUIRES it to change the line. That is the guard against
+exactly this drift. **But it is a guard I wrote, judged by a control I wrote,
+and it proves the line CHANGES rather than that the GATE CATCHES.**
+
+**THE SECOND DOUBT, AND IT IS MINE ABOUT MY OWN DEVIATION.** My orders said "a
+number the GATE holds". I argued it was impossible through `CONTRACTS` and used
+an ORDER instead. **I believe that argument is sound and I have written it out
+in full twice so it can be checked rather than taken.** If it is wrong, the
+right repair is alternative 1 in the log — move S6 onto `read_estimate` — and
+the cost of that is `GATE_CONTRACTS` losing the only sabotage that tests it.
+**Somebody who did not make this decision should say which way it goes.**
+
+**THE THIRD, SMALLEST, AND STILL WORTH FILING.** The four-branch control judges
+`_s6_line1`, a function **I wrote inside the gate** that rebuilds line 1 from
+the gate's own constants. It is not `section_text`. **It cannot drift from the
+production line silently — but nothing checks that it has not.** The live drill
+still runs against the real `section_text`, so this affects the CONTROL's
+faithfulness, not the drill's.
+
+## R-043 — **MY OWN B1 REPAIR. IT HAS ONLY EVER BEEN RUN ON ONE MACHINE.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT**
+
+1. **BOTH RUNS WERE ON THE COMMANDER'S LAPTOP.** The second one set `TZ=UTC0`
+   and the gate measured `+0.00 h`, which is real evidence and better than a
+   claim. **It is still one machine wearing a different hat.** The cloud
+   watchman has never run this gate, and R-031 was found precisely because
+   nobody had checked the other clock.
+2. **`_b1_machine_offset_s` IS A NEW PIECE OF MACHINERY AND NOBODY HAS ATTACKED
+   IT.** It measures the offset by subtracting two `datetime.fromtimestamp`
+   calls. **I did not test it across a DST boundary on a machine that observes
+   one.** My reasoning is that the measurement is per-timestamp so it must come
+   out right either way, and **I am filing that reasoning rather than writing
+   "this should be fine", which is this ship's standing duty.**
+3. **THE SEVEN-HOUR FALLBACK IS MY NUMBER.** I chose it to avoid B2's one hour
+   and to avoid a whole multiple of `PERIOD` ('4h'). **The gate asserts it is
+   not 3600 s. It does NOT assert it is not a multiple of the period** — that
+   would mean the gate reading `PERIOD` out of the file on trial, which is the
+   R-014 mistake. **So that half of my reasoning is written down and unchecked
+   by any machine.**
+4. **THE REPAIRED B1 IS A DIFFERENT LIE ON A UTC MACHINE THAN ON HIS.** At
+   UTC+5 it writes local time, as it always did. At UTC it writes UTC+7. **Both
+   are "a wrong timestamp", but they are not the same wrong timestamp**, and
+   nobody but me has looked at whether that matters to any judge downstream of
+   `_disk_matches_source`.
+
+## **A RULE THIS SHIP HAS NOW EARNED FOR THE FOURTH TIME, AND IT IS STILL NOT MINE TO ADOPT**
+
+*"A SABOTAGE MUST BE PROVED TO CHANGE THE OUTPUT BEFORE ITS VERDICT MEANS
+ANYTHING."* **F10, S6 and B1 were the same fault in three files. All three are
+now repaired, each one by a different generation, each one after a different
+session found it the hard way.** `collection_guard.py` was built with the rule
+from birth because its author had just watched F10 fail.
+
+**A session may never promote its own idea to law. It is his and only his** —
+and it is now the only candidate on the list that has been proved four separate
+times.
+
+## **THE CATEGORY B PILE IS NOW EIGHTEEN DEEP** — R-042 and R-043 added,
+nothing removed. **It has grown every single session since it was created and
+has never once shrunk.** Cleared before the ship is used for real, at the same
+moment `brief.py` gets its gate. **Eighteen. Somebody should keep saying the
+number out loud.**
+
+## R-038 — **STILL OPEN, AND ITS DEADLINE IS NOW THE NEXT SESSION'S FIRST JOB.**
+The 123 rows appended on 2026-08-03 can only be checked against Binance while
+they stay inside the rolling 30-day window — **until about 2026-09-02.** My
+exception spent the session before that deadline; **the session after me must
+not spend another.**
+
+## R-006 — **UNTOUCHED, AND NO IN-HOUSE SESSION MAY EVER CLEAR IT.**

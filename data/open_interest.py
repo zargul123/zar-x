@@ -1179,6 +1179,147 @@ if __name__ == '__main__':
     _UTC_ISO_ORIGINAL = _utc_iso
     _RECORD_ORIGINAL = record
 
+    # =====================================================================
+    # GATE 3.2b-R10, 2026-08-03 (evening): **B1 WAS A NO-OP ON ANY MACHINE
+    # WHOSE CLOCK IS ALREADY UTC.**
+    #
+    # B1 swaps `_utc_iso` for one that formats the instant as LOCAL time while
+    # still writing the `Z`. **On a machine whose clock IS UTC, local time IS
+    # UTC** — so the swap changes not one byte, the disk still matches the
+    # source, and the drill reports its own lie escaped while the recorder is
+    # perfectly correct.
+    #
+    # **MEASURED, NOT REASONED ABOUT.** R-031, 2026-07-31, the same file and
+    # the same tree with only the clock changed:
+    #
+    #     UTC+5 (this laptop) → exit 0, all fourteen CAUGHT, gate PASSED
+    #     UTC   (the cloud)   → ✗ B1 ... ESCAPED, exit 1, gate FAILED
+    #
+    # **SO THIS FAULT HAS NEVER COST THE COMMANDER A RED SCREEN ON HIS OWN
+    # MACHINE, and saying otherwise would be a lie about his own laptop.** It
+    # is blind where nobody was watching.
+    #
+    # And the part worth more than the finding: in that same failing run the
+    # reachability check printed `✓ B1 rebinds '_utc_iso' → looked up at CALL
+    # TIME, so the swap reaches the code the pilot runs`. **Both statements
+    # were true.** The swap DOES reach the recorder; it simply changed nothing
+    # when it got there. Two generations hardened REACH. **Nothing on this
+    # ship had ever measured EFFECT.**
+    #
+    # **THE REPAIR IS THE ONE S5's AUTHOR WROTE DOWN IN `cockpit/funding.py`
+    # ON 2026-07-28, IN HIS OWN WORDS:** *"S5 shifts by a fixed hour rather
+    # than dropping the timezone: dropping it is a no-op on a machine already
+    # set to UTC, and a drill that only works on some machines is not a
+    # drill."* So when the naive local stamp comes out equal to the honest UTC
+    # one — and only then — B1 falls back to a fixed shift THIS GATE TYPES
+    # OUT. The test is on the STAMP, not on the offset, so the guarantee is
+    # structural: the value B1 returns can never equal the honest one.
+    #
+    # **THE FALLBACK IS DELIBERATELY NOT ONE HOUR.** One hour is already
+    # sabotage B2, and two sabotages telling the same lie are one sabotage. It
+    # is also not a whole multiple of PERIOD ('4h'), so a shifted stamp can
+    # never land exactly on some other real row's timestamp.
+    #
+    # **THE OFFSET IS A PARAMETER, AND THAT IS WHAT MAKES THIS TESTABLE AT
+    # ALL.** Windows has no `time.tzset()`, so a process cannot move its own
+    # clock. `_b1_stamp` therefore takes the offset it is pretending to sit
+    # at; the live sabotage measures the REAL one; and the control below
+    # proves every branch — UTC, UTC+5, UTC+5:30 — in one run, on any machine,
+    # with no clock changed and no network touched.
+    # =====================================================================
+    GATE_B1_FMT = '%Y-%m-%dT%H:%M:%SZ'      # the gate's own copy of the format
+    GATE_B1_UTC_FALLBACK_S = 7 * 3600       # the gate's own number. NOT 3600,
+                                            # which is already B2, and not a
+                                            # whole multiple of PERIOD ('4h').
+    GATE_B1_FIXED_MS = int(datetime(2026, 6, 27, 16, 0,
+                                    tzinfo=timezone.utc).timestamp() * 1000)
+
+    def _b1_machine_offset_s(ms):
+        """This machine's own UTC offset at that instant, MEASURED here rather
+        than assumed. `datetime.fromtimestamp(ms)` with no timezone is exactly
+        what the shipped B1 did, so the live sabotage reproduces the original
+        lie byte for byte wherever the original lie was ever real."""
+        local = datetime.fromtimestamp(ms / 1000)
+        utc = datetime.fromtimestamp(ms / 1000, timezone.utc).replace(
+            tzinfo=None)
+        return (local - utc).total_seconds()
+
+    def _b1_stamp(ms, offset_s, repaired=True):
+        """What B1 writes when the machine's clock sits `offset_s` from UTC.
+
+        `repaired=False` reproduces the OLD, SHIPPED form, and it exists so the
+        control can prove EVERY RUN that the old one really was a no-op at
+        offset zero — see `_b1_both_branches_fire`.
+        """
+        honest = datetime.fromtimestamp(ms / 1000, timezone.utc).strftime(
+            GATE_B1_FMT)
+        stamp = datetime.fromtimestamp(ms / 1000 + offset_s,
+                                       timezone.utc).strftime(GATE_B1_FMT)
+        if repaired and stamp == honest:
+            stamp = datetime.fromtimestamp(
+                ms / 1000 + GATE_B1_UTC_FALLBACK_S,
+                timezone.utc).strftime(GATE_B1_FMT)
+        return stamp
+
+    def _b1_both_branches_fire(verbose=True):
+        """GATE 3.2b-R10 (g, h, j): **EVERY BRANCH RUNS EVERY TIME, AT CLOCK
+        OFFSETS THIS GATE NAMES, ON AN INSTANT IT HOLDS.**
+
+        The `clock is UTC` branch would otherwise never execute on the
+        Commander's laptop at all, and **an untested branch is how B5 was
+        scored CAUGHT while crashing two lines short of the check it claimed
+        to prove.** Nothing here touches the network or the archive.
+
+        **THE SECOND CASE IS THE ONE THAT MATTERS AND IT IS REQUIRED, NOT
+        OPTIONAL.** It runs the OLD, SHIPPED form at offset zero and demands
+        SILENCE from it, so this repair carries its own evidence that the
+        defect was real — and no future session can quietly regress B1 without
+        the gate going red and naming it.
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        ms = GATE_B1_FIXED_MS
+        honest = datetime.fromtimestamp(ms / 1000, timezone.utc).strftime(
+            GATE_B1_FMT)
+        real = _b1_machine_offset_s(ms)
+        say(f"   ·  the instant under test, honestly stamped: {honest!r}")
+        say(f"   ·  THIS RUN'S ACTUAL MACHINE OFFSET, MEASURED: "
+            f"{real / 3600:+.2f} h from UTC — evidence, not a claim. This gate "
+            f"is required to be run a second time with the clock at +0.00.")
+        cases = (
+            ('clock at UTC+5, OLD form — a non-UTC clock makes the lie speak '
+             'on its own', 5 * 3600, False, True),
+            ('clock at UTC exactly, OLD form — IDENTICAL, which is the whole '
+             'defect', 0, False, False),
+            ('clock at UTC exactly, REPAIRED — the repair makes it speak '
+             'anyway', 0, True, True),
+            ("this machine's REAL clock, REPAIRED — whatever it happens to be",
+             real, True, True),
+        )
+        ok = True
+        for words, offset_s, repaired, want_changed in cases:
+            wrote = _b1_stamp(ms, offset_s, repaired=repaired)
+            changed = (wrote != honest)
+            good = (changed == want_changed)
+            say(f"   {'✓' if good else '✗'} {words}")
+            say(f"        B1 wrote {wrote!r}"
+                f"   → {'CHANGED' if changed else 'IDENTICAL'}, "
+                f"{'as required' if good else 'AND THAT IS WRONG'}")
+            ok = ok and good
+
+        half = 5 * 3600 + 1800
+        no_double = (_b1_stamp(ms, half, repaired=True)
+                     == _b1_stamp(ms, half, repaired=False))
+        say(f"   {'✓' if no_double else '✗'} at UTC+5:30 the repaired form "
+            f"writes what the old one wrote — the fallback fires ONLY when the "
+            f"clock is UTC and never shifts on top of a clock that already lies")
+        ok = ok and no_double
+
+        not_b2 = (GATE_B1_UTC_FALLBACK_S != 3600)
+        say(f"   {'✓' if not_b2 else '✗'} the fallback shift is "
+            f"{GATE_B1_UTC_FALLBACK_S} s, which is not B2's one hour — two "
+            f"sabotages telling the same lie would be one sabotage")
+        return ok and not_b2
+
     def _sab_dedup_drops(symbol, base_url=FAPI_BASE, history_dir=HISTORY_DIR,
                          period=PERIOD, limit=LIMIT, timeout=TIMEOUT):
         """De-dup key reduced to the timestamp's DATE, so all but one row per
@@ -1418,9 +1559,12 @@ if __name__ == '__main__':
     # path, which a healthy BTCUSDT write cannot see; judging it by the disk
     # comparison would record a guaranteed escape as if the gate were blind.
     _SABOTAGES = [
+        # B1, REPAIRED under GATE 3.2b-R10, 2026-08-03. Same lie — the stamp
+        # written as this machine's LOCAL time — but on a machine already at
+        # UTC, where "local" used to change nothing, it falls back to a fixed
+        # shift the gate holds. See the block above `GATE_B1_FMT`.
         ('B1', 'timestamps converted as LOCAL time', '_utc_iso',
-         lambda ms: datetime.fromtimestamp(ms / 1000).strftime(
-             '%Y-%m-%dT%H:%M:%SZ'), 'disk'),
+         lambda ms: _b1_stamp(ms, _b1_machine_offset_s(ms)), 'disk'),
         ('B2', 'timestamps shifted by one hour', '_utc_iso',
          lambda ms: datetime.fromtimestamp(ms / 1000 + 3600,
                                            timezone.utc).strftime(
@@ -1550,6 +1694,22 @@ if __name__ == '__main__':
           f"were proved outside the window first, so this check cannot quietly "
           f"become a no-op")
     ok = ok and archive_ok
+
+    # ---- (o) B1'S BRANCHES (Gate 3.2b-R10 g, h, j) ------------------------
+    print("\n(o) B1'S BRANCHES — the control for one sabotage in the drill")
+    print("    below. B1 writes the stamp as LOCAL time, and on a machine")
+    print("    whose clock is already UTC, local time IS UTC — so it changed")
+    print("    nothing, the disk still matched the source, and the drill")
+    print("    reported ESCAPED about a lie it had never managed to tell.")
+    print("    MEASURED 2026-07-31: green at UTC+5, RED at UTC, same file.")
+    print("    It has therefore never gone red on the Commander's own laptop;")
+    print("    it was blind on the cloud, where nobody was watching. Windows")
+    print("    has no `time.tzset()`, so the offset is a PARAMETER and every")
+    print("    branch is proved here in one run, on any machine, plus the OLD")
+    print("    form required to stay silent at UTC — the defect proved rather")
+    print("    than remembered.")
+    b1_ok = _b1_both_branches_fire(verbose=True)
+    ok = ok and b1_ok
 
     drill_ok = True
     for tag, words, attr, repl, judge in _SABOTAGES:
@@ -2087,7 +2247,13 @@ if __name__ == '__main__':
     shutil.rmtree(SCRATCH, ignore_errors=True)
 
     if ok:
-        print("\nGATE 3.2b-R9 PASSED — the backfill is real, the same run twice")
+        print("\nGATE 3.2b-R10 PASSED — B1 CAN NO LONGER BE SILENCED BY A "
+              "CLOCK\nTHAT IS ALREADY UTC: it falls back to a fixed shift this "
+              "gate holds,\nthe OLD form is run beside it every time and "
+              "REQUIRED to stay silent,\nand the offset this run actually "
+              "measured is printed rather than\nclaimed. And everything R9 "
+              "did, it still does —\n")
+        print("GATE 3.2b-R9 PASSED — the backfill is real, the same run twice")
         print("changes nothing, an empty result fails loudly, the offline drill")
         print("leaves the files byte-identical, tampered history is reported")
         print("rather than overwritten, the `--record` branch the monthly task")
@@ -2108,6 +2274,6 @@ if __name__ == '__main__':
         print("GATE NAMES, from its own list, not the module's. This test has")
         print("demonstrated, this run, that it can say no.")
     else:
-        print("\nGATE 3.2b-R9 FAILED — see the ✗ lines above. Nothing is")
+        print("\nGATE 3.2b-R10 FAILED — see the ✗ lines above. Nothing is")
         print("committed as a pass.")
     sys.exit(0 if ok else 1)

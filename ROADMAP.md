@@ -314,3 +314,41 @@ the work. **R-037.**
 | The four files the pilot reads | `brief.py` `6fa5ff96` · `funding.py` `bc0819ee` · `fear_greed.py` `d0c71344` · `open_interest.py` `98f95133` | **IDENTICAL before and after this session's work**, printed not asserted |
 | `data/collection_guard.py` gate | **~10 s**, the fastest gate on the ship | it makes no network call at all |
 | A LF-only `.bat` under `cmd` | **no output, exit 1, silently refused** | the 2026-07-19 incident, reproduced by accident 2026-08-03 |
+
+# SHIPPED 2026-08-03 (third) — **S6 AND B1 REPAIRED. GATE 3.2-R8 AND GATE 3.2b-R10.**
+
+| What | Where | State |
+|---|---|---|
+| **S6 can no longer be silenced by three matching rates (GATE 3.2-R8).** S6 miswires the tickers, but the printed LABEL comes from the dictionary KEY, so only the RATES rotated and the block was byte-identical whenever all three formatted the same — **up to 15.84% of settled funding periods, one in 6.3, and that is an UPPER BOUND measured on settled rates, never the live figure.** On those runs the drill reported ESCAPED about a lie it had never managed to tell, while the instrument and the Brief were correct. The payload now carries **the same three asset-to-contract pairs with the keys written in the GATE's own order**, so the rate-lie is untouched and a label-lie no market can silence is added on top of it. **FOUR branches print every run on rates the gate invents, with no network** — including the OLD form required to speak on differing rates (proving the repair did not weaken the rate-lie) and to stay SILENT on matching ones (proving the defect was real rather than remembered). **THE ORIGINAL FAULT WAS RE-RUN, NOT REMEMBERED:** Binance stubbed to answer +0.0100% for all three contracts, and the drill's own judge said **ESCAPED** for the shipped form and **CAUGHT** for the repaired one. **R-042 is open against this repair and its author may never clear it.** | `cockpit/funding.py` | ✅ |
+| **B1 can no longer be silenced by a clock that is already UTC (GATE 3.2b-R10).** B1 writes the stamp as LOCAL time while still printing the `Z`; on a UTC machine local time IS UTC, so it changed nothing. **Measured: green at UTC+5 — the Commander's own laptop — and RED at UTC, same file, same tree, only the clock moved. It has therefore never cost him a red screen; it was blind on the cloud.** The repair is S5's, whose author wrote the reason down in 2026-07-28: when the local stamp comes out equal to the honest UTC one, and only then, B1 falls back to a **fixed seven-hour shift the gate types out** — deliberately not B2's one hour, and not a whole multiple of `PERIOD`. **The test is on the STAMP, not the offset, so the guarantee is structural.** Windows has no `time.tzset()`, so the offset is a PARAMETER: the live sabotage measures the real one and the control proves UTC, UTC+5 and UTC+5:30 in one run on any machine. **THE GATE PRINTS THE OFFSET IT MEASURED, because "I ran it under UTC" is a claim and a measured offset is evidence.** **THE ORIGINAL FAULT WAS RE-RUN:** the whole repo copied outside itself with B1 alone reverted, run at `TZ=UTC0` — ESCAPED, gate FAILED, exit 1, **while the reachability check printed its green tick in the same run.** **R-043 is open against this repair and its author may never clear it.** | `data/open_interest.py` | ✅ |
+
+## MEASURED FACTS ADDED 2026-08-03 (third)
+
+| What | Measured | Note |
+|---|---|---|
+| Every gate on the ship, after both repairs | `3.1-R7` · `3.2-R8` · `3.2b-R10` · `3.2c-R1` — **all exit 0, all zero red** | five runs, because the recorder's gate was run twice |
+| The recorder's gate on a **UTC** clock | **exit 0, zero red, B1 CAUGHT** | the clock R-031 said it was blind on |
+| `TZ=UTC0` under Windows Python | **HONOURED — measured, not believed** | the gate itself printed `+5.00 h` then `+0.00 h` |
+| The OLD B1 on a UTC clock | **ESCAPED, gate FAILED, exit 1** — and the reachability check went GREEN in the same run | REACH and EFFECT are different questions; nothing here had ever measured the second |
+| The OLD S6 on three equal rates | **ESCAPED** — the repaired form **CAUGHT** | judged by `_core_checks`, the drill's own judge, not by a new one |
+| Production half of `cockpit/funding.py` | `95069d1b…` **unchanged** | lines 1..159 joined by CRLF, with a trailing CRLF |
+| Production half of `data/open_interest.py` | `5347bfec…` **unchanged** | lines 1..242 joined by CRLF, no trailing separator |
+| Earliest diff hunk in either file | line **1172** (`funding.py`) and **1182** (`open_interest.py`) | against `__main__` at 160 and 243 — confinement proved, not asserted |
+| B1's fallback shift | **25,200 s (7 h)** | not B2's 3,600 s, and not a whole multiple of `PERIOD` ('4h') |
+| `data/oi_history/` after five gate runs | 3 files, 222 lines each, `a1ed6729` / `a077cf03` / `c8d97f71` | **byte for byte what the session inherited** |
+
+## **A CORRECTION THIS SESSION OWES THE ROW ABOVE IT**
+
+**The row "The four files the pilot reads" in the 2026-08-03 (second) table
+carries a WHOLE-FILE sha256 for each, and two of those four numbers are now
+stale — correctly so.** The test halves of two files were edited on purpose:
+
+    cockpit/funding.py       bc0819ee -> 6f30f42b     test half edited
+    data/open_interest.py    98f95133 -> 0945a32b     test half edited
+    cockpit/brief.py         6fa5ff96 -> 6fa5ff96     unchanged
+    cockpit/fear_greed.py    d0c71344 -> d0c71344     unchanged
+
+**A whole-file hash cannot tell "the pilot's code changed" apart from "the test
+around it changed" — which is exactly why the bar for these repairs was written
+against the PRODUCTION HALF and not the file.** Both production halves are
+unchanged and both digests are in the table above.

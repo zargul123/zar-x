@@ -1169,6 +1169,127 @@ if __name__ == '__main__':
                          "go long")
         return _SECTION_TEXT_ORIGINAL(*a, **k)
 
+    # =====================================================================
+    # GATE 3.2-R8, 2026-08-03 (evening): **S6 WAS A COMPLETE NO-OP WHENEVER
+    # ALL THREE RATES FORMATTED THE SAME, AND ANNOUNCED IT AS IF THE GATE HAD
+    # FAILED.**
+    #
+    # S6 miswires the tickers in a three-cycle. **But the printed LABEL comes
+    # from the dictionary KEY, not from the contract**, so the labels stayed
+    # BTC / ETH / SOL in that order and only the RATES rotated. When all three
+    # rates format identically the block is byte-identical, `_core_checks`
+    # passes, and the drill concludes its own lie survived:
+    #
+    #     ✗ S6   CONTRACTS — tickers miswired  → ESCAPED — GATE IS DECORATIVE
+    #
+    # while the instrument is perfect and the Brief is correct. **MEASURED
+    # against Binance's own settled funding history rather than reasoned
+    # about:** over 6,441 settlements where all three contracts settled
+    # together, all three formatted identically on 1,020 — **15.84%, one
+    # settlement in 6.3.** **THAT FIGURE IS AN UPPER BOUND AND MUST NEVER BE
+    # QUOTED AS THE LIVE ONE:** it is measured on SETTLED rates, and the Brief
+    # prints the running ESTIMATE, whose ties are rarer. R-034's own author
+    # filed that limit alongside the finding.
+    #
+    # **A SABOTAGE THAT CANNOT CHANGE THE OUTPUT IS NOT EVIDENCE ABOUT THE
+    # GATE, AND SCORING IT ESCAPED IS A FALSE STATEMENT ABOUT THE GATE.**
+    # Marking it 'inert, skipped' was refused for F10 and is refused here for
+    # the same reason: that is a tally counting what no machine checked.
+    #
+    # **THIS REPAIR HOLDS AN ORDER WHERE F10'S HELD A NUMBER, AND THE REASON
+    # IS ONE SENTENCE: NOTHING A `CONTRACTS` PAYLOAD CAN CONTAIN DECIDES A
+    # RATE** — every rate on that line comes from Binance over the network, so
+    # no number this gate types out can reach the printed block through S6's
+    # own attachment point. **What a `CONTRACTS` payload DOES own outright is
+    # the labels and their ORDER, because those are its keys.** So the
+    # repaired payload carries **THE SAME THREE ASSET-TO-CONTRACT PAIRS as the
+    # shipped one, with the keys written in an order this gate chose**: the
+    # rate-lie is unweakened, and a label-lie no market can silence is added on
+    # top of it. The honest block always begins `BTC ` and the sabotaged one
+    # never does.
+    #
+    # **S6 STAYS ATTACHED TO `CONTRACTS` DELIBERATELY.** `GATE_CONTRACTS`,
+    # twenty lines into this block, exists for the single reason that S6
+    # miswires `CONTRACTS`. Moving S6 onto a function where a rate COULD be
+    # injected would leave that independence tested by nothing at all.
+    # =====================================================================
+    GATE_S6_PAIRS = {           # the gate's own miswiring, never the module's
+        'BTC-USD': 'SOLUSDT',
+        'ETH-USD': 'BTCUSDT',
+        'SOL-USD': 'ETHUSDT',
+    }
+    # The gate's own ORDER. This, and only this, is what the repair adds.
+    GATE_S6_ORDER = ('SOL-USD', 'BTC-USD', 'ETH-USD')
+
+    def _s6_miswired(repaired=True):
+        """S6's payload. `repaired=False` reproduces the OLD, SHIPPED form, and
+        it exists so the drill can prove EVERY RUN that the old one really was
+        a no-op when the three rates matched — see `_s6_both_branches_fire`.
+
+        **Both forms carry exactly the same asset-to-contract pairs.** The only
+        difference is the order the keys are written in, which is the order the
+        labels are printed in.
+        """
+        order = GATE_S6_ORDER if repaired else tuple(GATE_CONTRACTS)
+        return {asset: GATE_S6_PAIRS[asset] for asset in order}
+
+    def _s6_line1(mapping, rate_of_contract):
+        """The Brief's funding line as it WOULD be printed for this contract
+        mapping, built from the GATE's own wording and the GATE's own
+        arithmetic. `section_text` and `_fmt_pct` are deliberately not called:
+        they are the things on trial, and `section_text` would need Binance.
+        """
+        return GATE_LINE1_PREFIX + GATE_SEP.join(
+            f"{asset.split('-')[0]} {_expected_pct(rate_of_contract[contract])}"
+            for asset, contract in mapping.items())
+
+    def _s6_both_branches_fire(verbose=True):
+        """GATE 3.2-R8 (a, b, c, e): **BOTH BRANCHES OF THE REPAIR RUN EVERY
+        TIME, ON RATES THIS GATE MAKES UP ITSELF.**
+
+        The `all three equal` branch would otherwise execute on up to one
+        settlement in six, and **an untested branch is how B5 was scored CAUGHT
+        while crashing two lines short of the check it claimed to prove.**
+        These rates are invented here and need no network, so nothing below is
+        decided by what the market happened to be doing.
+
+        **FOUR CASES, NOT THREE, AND THE TWO EXTRA ONES EARN THEIR PLACE.**
+        Case 2 runs the OLD form on rates that DIFFER and requires it to speak:
+        that is what proves **the repair did not weaken the rate-lie**, only
+        add to it. Case 3 runs the OLD form on rates that MATCH and demands
+        SILENCE from it, so this repair carries its own evidence that the
+        defect was real — and **no future session can quietly regress S6
+        without the gate going red and naming it.**
+        """
+        say = print if verbose else (lambda *a, **k: None)
+        differ = {'BTCUSDT': '0.00003300', 'ETHUSDT': '-0.00001300',
+                  'SOLUSDT': '0.00003400'}
+        same = {c: '0.00010000'
+                for c in ('BTCUSDT', 'ETHUSDT', 'SOLUSDT')}
+        cases = (
+            ('rates DIFFER (+0.0033% · -0.0013% · +0.0034%) — the REPAIRED '
+             'form speaks', differ, True, True),
+            ('rates DIFFER, through the OLD form — it speaks too, so the '
+             'repair did not weaken the rate-lie', differ, False, True),
+            ('rates are EQUAL (all +0.0100%), through the OLD form — it is a '
+             'NO-OP, which is the whole defect', same, False, False),
+            ('rates are EQUAL (all +0.0100%) — the REPAIR makes it speak '
+             'anyway', same, True, True),
+        )
+        ok = True
+        for words, rates, repaired, want_changed in cases:
+            honest = _s6_line1(GATE_CONTRACTS, rates)
+            lied = _s6_line1(_s6_miswired(repaired=repaired), rates)
+            changed = (lied != honest)
+            good = (changed == want_changed)
+            say(f"   {'✓' if good else '✗'} {words}")
+            say(f"        honest {honest.strip()!r}")
+            say(f"        S6     {lied.strip()!r}"
+                f"   → {'CHANGED' if changed else 'IDENTICAL'}, "
+                f"{'as required' if good else 'AND THAT IS WRONG'}")
+            ok = ok and good
+        return ok
+
     # The six from the audit of 2026-07-26 and the five from the independent
     # review of 2026-07-27, kept by name so the fix stays legible. S5 shifts by
     # a fixed hour rather than dropping the timezone: dropping it is a no-op on
@@ -1193,9 +1314,12 @@ if __name__ == '__main__':
          lambda ms: datetime.fromtimestamp(ms / 1000 + 3600,
                                            timezone.utc).strftime('%H:%M'),
          'core'),
-        ('S6', 'CONTRACTS — tickers miswired', 'ESCAPED', 'CONTRACTS',
-         {'BTC-USD': 'SOLUSDT', 'ETH-USD': 'BTCUSDT', 'SOL-USD': 'ETHUSDT'},
-         'core'),
+        # S6, REPAIRED under GATE 3.2-R8, 2026-08-03. The pairs are unchanged;
+        # the payload now comes from `_s6_miswired`, which writes the keys in
+        # the gate's own order so the lie cannot be silenced by three matching
+        # rates. See the block above `GATE_S6_PAIRS`.
+        ('S6', 'CONTRACTS — tickers AND labels miswired', 'ESCAPED',
+         'CONTRACTS', _s6_miswired(), 'core'),
         ('S7', 'the meaning REVERSED, digits intact', 'ESCAPED',
          'section_text', _sab_reversed_meaning, 'core'),
         ('S8', 'a phantom fourth asset appended', 'ESCAPED',
@@ -1344,6 +1468,19 @@ if __name__ == '__main__':
           "\n   helper of the instrument is used to judge the instrument.")
     ok = _core_checks(verbose=True) and ok
 
+    print("\n2b) S6'S FOUR BRANCHES (Gate 3.2-R8 a) — the control for one"
+          "\n   sabotage in the drill below. S6 miswires the tickers, but the"
+          "\n   LABEL comes from the dictionary KEY, so only the RATES rotated"
+          "\n   and the block was byte-identical whenever all three formatted"
+          "\n   the same — up to 15.84% of settlements, an UPPER BOUND measured"
+          "\n   on settled rates, not the live figure. On those runs the drill"
+          "\n   reported ESCAPED about a lie it had never managed to tell. The"
+          "\n   keys are now written in THIS gate's own order, and both branches"
+          "\n   — plus the OLD form, required to stay silent on matching rates"
+          "\n   and to still speak on differing ones — are proved every run, on"
+          "\n   rates this gate invents, with no network involved.")
+    ok = _s6_both_branches_fire(verbose=True) and ok
+
     print("\n3) EXHIBIT A, MADE PERMANENT (Gate 3.2-R e, f · 3.2-R2 f ·"
           "\n   3.2-R3 c · 3.2-R4 d · 3.2-R5 c · 3.2-R6 e) — the file is broken"
           "\n   SEVENTEEN ways in this process, and an EIGHTEENTH in section 10"
@@ -1447,7 +1584,12 @@ if __name__ == '__main__':
     ok = ok and door3_drill_ok
 
     if ok:
-        print("\nGATE 3.2-R7 PASSED — the WHOLE printed block was rebuilt from "
+        print("\nGATE 3.2-R8 PASSED — S6 CAN NO LONGER BE SILENCED BY THREE "
+              "MATCHING\nRATES: its keys are written in this gate's own order, "
+              "and the OLD form\nis run beside it every time and REQUIRED to "
+              "stay silent, so the defect\nis proved rather than remembered. "
+              "And everything R7 did, it still does —\n")
+        print("GATE 3.2-R7 PASSED — the WHOLE printed block was rebuilt from "
               "Binance\nraw and matched exactly on EVERY path the pilot can "
               "see — healthy,\ndegraded and offline — the fixed wording was "
               "checked verbatim, the\ngate's own offline wording was compared "
@@ -1463,5 +1605,5 @@ if __name__ == '__main__':
               "than\nread from the file on trial. This test has demonstrated, "
               "this run,\nthat it can say no.")
     else:
-        print("\nGATE 3.2-R7 FAILED — see the ✗ lines above.")
+        print("\nGATE 3.2-R8 FAILED — see the ✗ lines above.")
     sys.exit(0 if ok else 1)

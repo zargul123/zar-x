@@ -435,6 +435,66 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-03 (third): S6 AND B1 ARE REPAIRED. EVERY GATE ON THE SHIP IS GREEN, AND THE RECORDER'S IS GREEN ON TWO DIFFERENT CLOCKS.**
+
+**WHERE THE SHIP IS:**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red  <- REPAIRED
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red  <- REPAIRED
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red  <- AND HERE
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red
+    vault INTACT · Brief 3/3 · lab/ untouched · git status clean
+    data/oi_history/  3 files, 222 lines each, a1ed6729 / a077cf03 / c8d97f71
+                      — byte for byte what this session inherited
+
+**THE THIRD AND LAST OF THE INERT-SABOTAGE FAULTS IS GONE.** F10 (2026-07-31),
+then S6 and B1 together (today). **All three were the same fault in three
+different files: a deliberate break that could not change the output, scored
+ESCAPED, turning a gate red about a lie it had never managed to tell.**
+
+**NEITHER FAULT WAS EVER IN A NUMBER THE COMMANDER READS.** Both were faults in
+an alarm, and all four instruments were proved green before either was touched.
+
+    S6 was costing him red screens — up to one settlement in six, on his own
+       laptop. That is the one he could see.
+    B1 was costing him nothing on his machine, because it runs at UTC+5.
+       It was blind on the CLOUD, where nobody was watching. Measured, and
+       said plainly rather than dressed up as urgent.
+
+**BOTH DEFECTS WERE REPRODUCED BEFORE THEY WERE CALLED FIXED.** S6: Binance
+stubbed to answer the same rate for all three contracts — the shipped form
+ESCAPED, the repaired form was CAUGHT. B1: the whole repo copied outside itself
+with B1 alone reverted and run at `TZ=UTC0` — ESCAPED, gate FAILED, exit 1,
+**while the reachability check printed its green tick in the same run.** Both
+statements were true at once, and that is the whole of R-031.
+
+**NOTHING THE PILOT READS CHANGED**, proved two ways: every diff hunk sits
+inside `__main__` (earliest at line 1172 and 1182, against `__main__` starting
+at 160 and 243), and the production half of each file hashes to what it hashed
+to before — `95069d1b…` and `5347bfec…`, both recipes reproduced from the
+inherited digests before any edit was made.
+
+**GATE 3.2-R8 AND GATE 3.2b-R10 WERE DECLARED TOGETHER AND COMMITTED ALONE**,
+no `.py` in the commit. **The declaration also carries a DEVIATION, written
+before the code existed:** S6 could not be made to speak "using a number the
+gate holds", because nothing a `CONTRACTS` payload contains decides a rate.
+**The gate holds an ORDER instead.** Two alternatives were named and rejected in
+writing so the Commander can overrule either.
+
+**WHAT IS OPEN, PLAINLY.** R-042 and R-043 are filed against these two repairs
+and **their author may not clear them.** R-034 and R-031 are repaired but **NOT
+cleared** — that verdict belongs to the next session. **R-038's deadline is
+about 2026-09-02 and this session's exception spent the run before it, so
+checking those 123 rows against Binance is the next session's FIRST job.** The
+Category B pile stands at **eighteen** and has never once shrunk.
+
+**THE EXCEPTION DIED WITH THIS SESSION.** The orders written for the next one
+restore PART 1 — ATTACK — then PART 2 — BUILD. **No session may grant an
+exemption, including to its successor. Only the Commander can.**
+
+---
+
 ## **>>> 2026-08-03 (second): R-037 IS REPAIRED UNDER GATE 3.2c-R1, AND THE COMMANDER HAS GRANTED THE EXCEPTION AGAIN.**
 
 **WHERE THE SHIP IS:**
