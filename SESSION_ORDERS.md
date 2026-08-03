@@ -401,6 +401,22 @@ it is repeated here.**
   you know whether YOU added any** — cheaper and surer than eyeballing.
 - **RUN THE THING AND READ ITS OUTPUT.** "Success" from a tool is not evidence.
 - **Run env:** `C:\Users\hp\miniconda3\envs\tfdml\python.exe`, `PYTHONUTF8=1`.
+- **>>> ANY COMMAND YOU HAND THE COMMANDER MUST CARRY THE FOLDER AND THE FULL
+  INTERPRETER PATH. `python …` ON ITS OWN DOES NOT WORK ON HIS MACHINE** — bare
+  `python` hits a **pyenv shim with no version selected** and answers
+  *"No global/local python version has been set yet."* **Measured 2026-08-03,
+  when he pasted a command of mine into a fresh shell and got exactly that.**
+  His PowerShell opens at `C:\WINDOWS\system32`, so a relative path finds
+  nothing either. The working form is one line:
+
+      cd "C:\Users\hp\Downloads\zargul trader\zar-x"; $env:PYTHONUTF8=1; & "C:\Users\hp\miniconda3\envs\tfdml\python.exe" cockpit\brief.py
+
+  **AND BEFORE REACHING FOR A COMMAND AT ALL, REACH FOR THE `.bat`.**
+  `SHOW_REPORT.bat` opens the latest Brief in Notepad, `run_daily.bat` produces
+  a fresh one, `CHECK_STATUS.bat` shows the collection's health. **They already
+  carry the `cd /d` and the full interpreter path, which is why the scheduled
+  task works.** He is a non-programmer; **a gray-box command he cannot run is a
+  failure of `THE_PATTERN.md`'s own housekeeping rule, not a typo.**
 
 ---
 

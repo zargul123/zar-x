@@ -10368,3 +10368,45 @@ the rule that cost this ship four sessions" appeared once as I intended it and
 once as a leftover of the block I had replaced. **Found by reading the section
 before editing it, not by any check.** Removed. **A duplicated paragraph is
 harmless; the fact that nothing would ever have reported it is not.**
+
+## **I GAVE THE COMMANDER A COMMAND THAT ONLY WORKS FROM WHERE I WAS STANDING**
+
+**In my report I wrote `python cockpit\brief.py` as the way to see the Brief. He
+pasted it into a fresh PowerShell and got:**
+
+    PS C:\WINDOWS\system32> python cockpit\brief.py
+    No global/local python version has been set yet. Please set the global/local
+    version by typing:
+    pyenv global 3.7.4
+
+**TWO FAULTS IN ONE LINE, BOTH MINE:**
+
+1. **It assumed his shell was already in the repo.** PowerShell opens at
+   `C:\WINDOWS\system32`. There is no `cockpit\brief.py` there.
+2. **It assumed bare `python` reaches the right interpreter. IT DOES NOT ON HIS
+   MACHINE** — `python` resolves to a **pyenv shim with no version selected**,
+   which is what answered him. **`THE_PATTERN.md` records the run environment as
+   `C:\Users\hp\miniconda3\envs\tfdml\python.exe`, and I did not use it in the
+   one place it actually mattered: a command handed to HIM.**
+
+**NOTHING WAS BROKEN AND NOTHING WAS AT RISK.** The instruments were fine; the
+command never reached them.
+
+**WHY THIS IS WORTH A LOG ENTRY RATHER THAN A SHRUG.** `THE_PATTERN.md` says, in
+the housekeeping every session reads: *"The Commander is a non-programmer. Plain
+words, gray-box commands."* **A gray-box command he cannot run is a failure of
+that rule, not a typo.** It is the same shape as the two document faults he
+caught earlier today — **I said the right thing in prose and wrote something
+weaker into the artefact he actually uses.** Three times in one session.
+
+**THE WORKING FORM, VERIFIED FROM A FRESH SHELL BEFORE BEING GIVEN TO HIM:**
+
+    cd "C:\Users\hp\Downloads\zargul trader\zar-x"; $env:PYTHONUTF8=1; & "C:\Users\hp\miniconda3\envs\tfdml\python.exe" cockpit\brief.py
+
+**AND THE BETTER ANSWER, WHICH ALREADY EXISTED AND WHICH I SHOULD HAVE POINTED
+AT FIRST.** He does not need a command at all. **`run_daily.bat` carries the
+full interpreter path and the `cd /d` inside it** — which is exactly why the
+scheduled task works and my line did not — and **`SHOW_REPORT.bat` opens the
+latest Brief in Notepad.** Those are his buttons. **A future session handing him
+a way to run something should reach for the `.bat` first and the command line
+second.**
