@@ -10195,3 +10195,86 @@ to fix, broken again to prove they had been real.
 work. **R-042 and R-043 are filed OPEN against my two repairs.** The session
 after me does that job — and it attacks again, because the exception was for me
 and dies with me.
+
+---
+
+# 2026-08-03 (third, after the report) — **THE COMMANDER READ THE ORDERS I HAD JUST WRITTEN AND FOUND THE HOLE IN THEM IN ONE SENTENCE.**
+
+**HIS WORDS, RECORDED THE HOUR HE SAID THEM:**
+
+> *"and how a quick look to your repairs like system then make hundred of
+> scenarios to challenge you and then we will again stuck in non stop circle."*
+
+**HE IS RIGHT, AND MY ORDERS WERE THE THING AT FAULT.** I had told him — in my
+own report, twenty minutes earlier — that the next session should give my
+repairs *"twenty minutes, not a session."* **Then I wrote orders that said
+"ATTACK the two repairs I just made" with no limit of any kind on the word
+ATTACK.** He spotted the gap between what I recommended and what I actually
+wrote down. **A promise to be brief, sitting in a document that authorises an
+open hunt, is worth nothing** — and this ship has the record to prove it: six
+consecutive sessions each found something, the severity falling the whole way,
+while Phase 3 step 3 was deferred seven times.
+
+## HE ALSO CHALLENGED THE PREMISE, AND HE WAS HALF RIGHT
+
+**His words: "so the thing is nothing was wrong actually."** Half right, and the
+half he had wrong is worth writing down so it is not lost:
+
+    NOTHING WAS WRONG WITH ANY NUMBER HE READS. True, and I said so.
+    NOTHING WAS WRONG AT ALL ....................  NOT true. S6 was throwing
+                                                   him a red failure screen up
+                                                   to one settlement in six.
+
+**A gate that cries wolf at him is a real cost, because a gate he stops reading
+is a gate that has stopped working.** B1, by contrast, genuinely cost him
+nothing on his own machine, and I had already said so plainly.
+
+## WHAT HE RULED, AND THE ARGUMENT I GAVE HIM BEFORE HE RULED
+
+**I told him the ship's own rules were on his side and pointed at both of them
+rather than paraphrasing:** `THE_PATTERN.md`'s *"a session that repairs every
+imaginable weakness in a test before it is allowed to build has stopped
+protecting the project and become the project"*, and **his own Q2** — a fault
+that cannot make the information wrong scores SMALL, and SMALL has never meant
+stop. **My two repairs are repairs to an ALARM. Nothing found in them can make a
+price, a funding rate or a saved row wrong. So they were SMALL before anyone
+started looking.**
+
+**I also told him what I would NOT recommend capping**, and he did not ask me to:
+
+1. **R-038 — the 123 rescued rows — is not a test check.** It is real,
+   irreplaceable data, and Binance stops serving the evidence about 2026-09-02.
+   **It gets harder scrutiny, not less.**
+2. **The cap is for THIS session only, about MY repairs.** Written into the
+   orders in item 9 with an explicit instruction not to carry it forward.
+3. **There is a difference between "do not over-check a test" and "stop
+   checking."** He has suspended PART 1 twice already. **Twice is where a pause
+   quietly becomes the normal state**, and the outside check is the one thing a
+   builder cannot do for themselves. **I said that to him in plain words before
+   he decided, not after.**
+
+**HIS RULING:** *"if you say so i follow your lead."* **Recorded as his, made on
+my recommendation, with my reasoning above given to him first.**
+
+## WHAT THE ORDERS NOW SAY
+
+    JOB 1  R-038. The rescued rows against Binance. It EXPIRES ~2026-09-02
+           and it has already been deferred once by his own exception.
+    JOB 2  A CAPPED pass over my two repairs. FOUR named questions, about
+           half an hour, and NOT ONE new way to break them may be invented.
+           Breakable only by a finding that reaches a number he reads or the
+           saved archive — which nothing in these two repairs can.
+    JOB 3  BUILD THE NEWS INSTRUMENT. No longer "if there is room". It has
+           been deferred eight times and jobs 1 and 2 are capped so that
+           this one happens.
+
+**AND WHERE THE REAL ATTACK EFFORT WAS REDIRECTED TO, RATHER THAN ABOLISHED:**
+**R-035 — nobody has ever asked whether a SOURCE ITSELF can lie.** Every gate
+here proves the printed line matches what the source sent; **nothing asks
+whether the source was right.** Named in the orders as the next real attack so
+it does not have to be rediscovered.
+
+**THE HONEST SUMMARY OF THIS EXCHANGE: he was right about the circle, right that
+the orders did not match the advice, and half right about "nothing was wrong."
+The correction was his, not mine, and it is the fourth time in two sessions that
+reading has beaten testing on this ship.**

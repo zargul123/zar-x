@@ -1,4 +1,4 @@
-# ZAR X PHASE 3 — **THE NORMAL RHYTHM IS BACK. YOU ATTACK FIRST, THEN YOU BUILD.**
+# ZAR X PHASE 3 — **CHECK THE DATA THAT EXPIRES, GIVE MY REPAIRS HALF AN HOUR AND NO MORE, THEN BUILD THE NEWS INSTRUMENT.**
 
 *Written 2026-08-03 (third) by the sixteenth generation, whose one-session
 exception died with it. **There is no exception in these orders and I had no
@@ -19,6 +19,47 @@ second of those was mine. It is over.**
 Only the Commander can, and only he can decide to do it again.** If you think
 the ship would be better served by another one, **say so to him in your report
 as a recommendation** — and do PART 1 anyway unless he answers.
+
+---
+
+# **>>> BUT PART 1 IS CAPPED, AND THE CAP IS HIS RULING, MADE 2026-08-03.**
+
+**HE READ THESE ORDERS AND FOUND THE HOLE IN THEM IMMEDIATELY. HIS WORDS:**
+
+> *"and how a quick look to your repairs like system then make hundred of
+> scenarios to challenge you and then we will again stuck in non stop circle."*
+
+**HE IS RIGHT AND THE SHIP'S OWN HISTORY PROVES IT.** *"Take a quick look"* has
+no floor. **Six consecutive sessions each found something; the Context Deck sat
+at two instruments of five; Phase 3 step 3 was deferred SEVEN times** — while
+the severity of what was found fell from *"prints the opposite of the truth"* to
+*"would not catch a line nobody has written."* **A promise to be brief has never
+once held on this ship. A written cap is the only thing that has.**
+
+    >>> PART 1 IS A BOUNDED CHECKLIST THIS SESSION, NOT AN OPEN HUNT.
+    >>> IT IS JOB 2 BELOW: FOUR QUESTIONS AND A TIME LIMIT.
+    >>> YOU MAY NOT INVENT A NEW WAY TO BREAK MY TWO REPAIRS. NOT ONE.
+    >>> JOB 3 IS A REAL BUILD AND IT IS THE POINT OF YOUR SESSION.
+
+**AND HERE IS WHAT KEEPS THE CAP HONEST RATHER THAN LAZY — IT IS HIS OWN Q2,
+ALREADY WRITTEN IN `THE_PATTERN.md`:**
+
+    a finding about a TEST ............. Q2 = NO → SMALL. File it and KEEP
+                                         BUILDING. It does not stop you.
+    a finding about a NUMBER HE READS .. it STOPS you. Report before repair.
+    a finding about the SAVED ARCHIVE .. it STOPS you. Foundation faults are
+                                         treated harder even when the chain
+                                         is longer.
+
+**THAT IS THE WHOLE CAP.** My two repairs are repairs to an ALARM. **Nothing you
+can find in them makes a price, a funding rate or a saved row wrong** — so by
+his own scoring they are SMALL before you start, and SMALL has never meant stop.
+
+**THIS IS NOT AN EXEMPTION AND IT IS NOT A LOOSENING OF ANY CHECK.** PART 1 still
+happens and still gets written up either way. **JOB 1 below is a HARDER check
+than any session has run in a fortnight — it is aimed at real, irreplaceable
+data instead of at a test.** What is capped is only the re-auditing of an alarm
+that cannot cost him anything.
 
 ---
 
@@ -88,16 +129,56 @@ you may clear it.**
 
 ---
 
-# **JOB 2 — PART 1 PROPER: ATTACK THE TWO REPAIRS I JUST MADE**
+# **JOB 2 — THE CAPPED PASS OVER MY TWO REPAIRS. FOUR QUESTIONS. HALF AN HOUR.**
 
-**I repaired S6 and B1, I wrote the gates that judge my own repairs, and I ran
-them. Every one of those is the same pair of eyes.** That is exactly the
-condition PART 1 exists for. **Twelve of thirteen repairs on this ship have been
-caught out by the session that came next.**
+## **>>> THE CAP, BECAUSE IT IS THE POINT OF THIS JOB**
 
-**R-042 AND R-043 ARE MY OWN DOUBTS ABOUT MY OWN WORK, FILED WITH THE REPAIRS
-AND NOT AFTER SOMEBODY ASKED. Read them in `REVIEW_QUEUE.md` — they name what I
-want attacked so you do not have to guess.** The short version:
+    YOU MAY ...... run the two gates, read R-042 and R-043, and answer the
+                   four questions below. That is the whole job.
+    YOU MAY NOT .. invent a single new way to break either repair. Not one.
+                   That is not caution being suspended; it is the Commander
+                   ruling that an alarm which cannot cost him anything does
+                   not get re-audited while a real build waits.
+    STOP AT ...... about half an hour. If you are still here, it is over.
+                   Write down what you found, file anything loose as
+                   CATEGORY B, and go to JOB 3.
+
+**THE ONE THING THAT MAY BREAK THE CAP:** a finding that makes a **number he
+reads** wrong, or that touches the **saved archive**. Then stop, fill in THE
+FINDING REPORT, and report before repairing. **Nothing else stops you** — and
+nothing in these two repairs can reach either of those, which is why the cap is
+safe.
+
+## THE FOUR QUESTIONS
+
+    1. Do all four gates still pass — green, exit 0, zero red — INCLUDING
+       the recorder's gate run a second time with TZ=UTC0?
+    2. Does `2b) S6'S FOUR BRANCHES` in funding.py still print all four
+       lines, and does the OLD form still come out IDENTICAL on matching
+       rates? (That line is the proof the defect was real. If it ever goes
+       green-by-changing, the repair has been regressed.)
+    3. Does `(o) B1'S BRANCHES` print a measured offset of +5.00 h on the
+       normal run and +0.00 h on the TZ=UTC0 run? A printed offset is
+       evidence; anything else is a claim.
+    4. Read R-042's FIRST doubt — my S6 lie is now catchable by label ORDER
+       alone. **Say yes or no: is that acceptable?** One line. That is a
+       judgement, not an investigation.
+
+**THEN RULE ON R-034 AND R-031.** They are repaired and **NOT cleared** — I may
+not clear my own work. **You may, and this is the moment.** Say plainly whether
+each holds.
+
+**"I CHECKED IT AND IT HOLDS" IS A COMPLETE, HONEST, SUCCESSFUL RESULT. SAY IT
+AND MOVE ON.** `THE_PATTERN.md`: **do not manufacture a defect to justify a
+session.** The pressure after a session that repaired something is to also find
+something, and **a stretched finding costs the Commander an instrument he
+actually wanted.**
+
+## For context only — the doubts I filed against myself
+
+**R-042 AND R-043 ARE MY OWN DOUBTS, FILED WITH THE REPAIRS AND NOT AFTER
+SOMEBODY ASKED.** Read them in `REVIEW_QUEUE.md`. **They are background for
+question 4, not a worklist.** The short version:
 
 **R-042 — S6.** My repaired payload rotates the dictionary's KEYS as well as its
 values, so the labels print in a different order. **The sabotage is therefore
@@ -121,31 +202,43 @@ by any machine.**
 **THEN RULE ON R-034 AND R-031.** They are repaired and **NOT cleared** — I may
 not clear my own work. **You may.** Say plainly whether each repair holds.
 
-## **AND THE ATTACK I WOULD MOST LIKE SOMEBODY TO INVENT**
+## **WHERE THE REAL ATTACK EFFORT GOES INSTEAD — AND IT IS NOT AT ME**
 
-**A NEW sabotage that no author of these three repairs would have thought of.**
-`THE_PATTERN.md` is blunt about this: **you cannot invent an attack you are
-blind to, and a gate is strongest exactly where it has already been attacked.**
-The three inert-sabotage faults were each found by fresh eyes, never by a
-builder being careful.
+**DO NOT SPEND IT ON MY REPAIRS. Spend it on the door nobody is standing at.**
 
-**Aim it at the thing all three repairs now share:** every one of them proves a
-break CHANGES THE OUTPUT before trusting the verdict. **Nobody has asked whether
-that new machinery can itself go quietly inert.**
+**R-035: NOBODY HAS EVER ASKED WHETHER A SOURCE ITSELF CAN LIE.** No file on this
+ship talks to more than one source. **Every gate proves the printed line matches
+what the source SENT. Nothing anywhere asks whether the source was RIGHT.** The
+Commander's own words: *fake data on his screen in real time.*
+
+**THAT IS THE NEXT REAL ATTACK, IT IS WORTH A WHOLE SESSION, AND IT IS NOT THIS
+ONE.** It is named here so the next set of orders does not have to rediscover
+it. **JOB 1 above is this session's real check; JOB 3 is this session's point.**
 
 ---
 
-# **JOB 3 — PART 2: BUILD, BUT ONLY IF PART 1 LEAVES ROOM**
+# **JOB 3 — BUILD THE NEWS INSTRUMENT. THIS IS THE POINT OF YOUR SESSION.**
 
-**IF JOBS 1 AND 2 FILL YOUR SESSION, STOP AND WRITE GOOD ORDERS. A half-built
-part is worse than no part**, and PART 1 is the only thing on this ship a
-builder cannot do for themselves.
+**IT HAS BEEN DEFERRED EIGHT TIMES AND THE COMMANDER HAS RUN OUT OF PATIENCE
+WITH THAT, RIGHTLY.** Jobs 1 and 2 are capped precisely so this one gets built.
+**It is not "if there is room" any more. Make the room.**
 
-**If there is room: THE NEWS INSTRUMENT, Phase 3 step 3.** It has been deferred
-eight times and is now third in line. Everything needed is in
-`git show 5e6d306:SESSION_ORDERS.md` and `EXECUTION_PLAN.md` Phase 3 step 3.
-**MEASURE R-036 BEFORE ANY CODE.** CryptoPanic is dead and the publishers' own
-feeds are adopted.
+**Phase 3, step 3. Everything needed is in `git show 5e6d306:SESSION_ORDERS.md`
+and `EXECUTION_PLAN.md` Phase 3 step 3.** CryptoPanic is dead — the Commander
+found that himself — three replacements were probed and rejected, and **the
+publishers' own feeds are adopted.**
+
+**MEASURE R-036 BEFORE ANY CODE.** Then: declare the gate, commit it alone with
+no `.py` in it, name the awkward cases before writing anything, build, and run
+it green.
+
+**IF THE BUILD WILL NOT FIT, BUILD NOTHING AND SAY SO.** A half-built instrument
+is worse than no instrument — that rule is not capped and never will be.
+
+**AND BUILD IT UNDER THE RULE THAT COST THIS SHIP FOUR SESSIONS:** every sabotage
+must be **proved to change the output** before its verdict means anything.
+`collection_guard.py` was built that way from birth. **Do not retrofit it four
+generations later, three times over, as we did with F10, S6 and B1.**
 
 **AND IF YOU BUILD ANYTHING AT ALL, BUILD IT UNDER THE RULE THAT COST THIS SHIP
 FOUR SESSIONS:** every sabotage must be **proved to change the output** before
@@ -225,6 +318,15 @@ FAIL, is not committed as a pass, and is not called "mostly passed."**
 7. **R-037 WAS ORDERED SORTED FIRST AND IT WAS.** Done 2026-08-03.
 8. **THE EXCEPTION IS OVER.** Granted twice, spent twice, dead. **See the box at
    the bottom of this file.**
+9. **>>> PART 1 IS CAPPED FOR YOU, AND HE RULED IT ON 2026-08-03 AFTER READING
+   THE FIRST DRAFT OF THESE ORDERS.** *"how a quick look to your repairs like
+   system then make hundred of scenarios to challenge you and then we will
+   again stuck in non stop circle."* **JOB 2 is four questions and half an
+   hour. You may not invent a new way to break my repairs. DO NOT ASK HIM TO
+   REOPEN THIS** — but **do NOT carry the cap forward into the orders you
+   write, either.** It was his ruling about MY repairs, in THIS session. **The
+   session after you gets the normal, uncapped PART 1 unless he says otherwise,
+   for exactly the reason the box at the bottom of this file exists.**
 
 # READ THESE FIRST
 
