@@ -264,3 +264,34 @@ and none is news.**
 **UNMEASURED AND FILED AS R-036:** whether a news gate can verify anything at
 all, given headlines land between two fetches. **The design rests on an
 expectation nobody has tested.**
+
+# MEASURED FACTS ADDED 2026-08-03 — THE FIFTEENTH GENERATION
+
+**Nothing was built and neither ordered repair landed.** What shipped is **data**:
+the open-interest archive was collected and pushed after the scheduled task
+failed to do it. Every fact below was measured this session.
+
+| What | Measured 2026-08-03 | Note |
+|---|---|---|
+| `data/oi_history/` | 3 files, correct names, **222 lines each (221 rows)**, sha256 `a1ed6729` / `a077cf03` / `c8d97f71` | window `2026-06-27T16:00:00Z → 2026-08-03T08:00:00Z`. Was 181 lines / `e3258e82` / `1549a8a1` / `e0f91a87`. **41 rows appended per asset, 123 total.** |
+| Archive integrity across the write | **The old byte prefix of every file still hashes to its old value** — `e3258e82` / `1549a8a1` / `e0f91a87` at 11927 / 12115 / 11985 bytes | nothing rewritten, nothing pruned, first data row still `2026-06-27T16:00:00Z` |
+| Binance's live 30-day window | `2026-07-03T12:00:00Z → 2026-08-03T08:00:00Z`, **186 rows** at `period=4h` | measured by the recorder's own gate, not assumed |
+| Rows we hold that Binance NO LONGER serves | **35 per asset** | the archive is already irreplaceable; this is the number that proves it |
+| Rows that would have been lost by 1 Sep | **33 per asset — 99 total** | had nothing run before the next scheduled date |
+| The recorder's commit-and-push branch | **FIRED FOR REAL, FIRST TIME EVER** — `5c7c54a`, 3 files, 123 insertions, pushed | scoped to `data/oi_history` only; the pathspec held |
+| `ZarX Open Interest` scheduled task | `Last Run Time 03-Aug-2026 11:47:41`, `Last Result: 0` — **and it did nothing** | no header, no Python, no rows, no commit |
+| The other five ZarX tasks | **all six report `11:47:41, result 0`; the log holds ONE entry for that second** | five produced no evidence of any kind |
+| Reproduced outside the repo | six identical batches appending to one log with `>>`: **one wrote, five wrote nothing — not even their header** | control first: one batch alone writes and exits 0 |
+| Task Scheduler operational log | **DISABLED on this machine** | the record of 11:47:41 does not exist and cannot be recovered |
+| Gate run times, this session | fear_greed **~60 s** · open_interest **~55 s** · funding **~125 s** | consistent with the figures of 2026-07-30 evening |
+
+**THE CORRECTION THIS SESSION OWES THE RECORD.** The line in the recorder's
+roadmap row saying *"the honest expectation on 1 Aug is roughly THIRTY per asset
+and a stored figure near 210"* was **never tested, because the task never ran.**
+The real figure, measured on 3 August, is **41 per asset and 221 stored.**
+
+**AND THE ONE THAT MATTERS MORE:** the same row records the recorder as
+`SCHEDULED 2026-07-27 … catches up if the laptop was off.` **It does catch up —
+it caught up at 11:47:41 on 3 August and collected nothing while reporting
+success.** *"Catches up"* is now known to be a claim about the trigger, not about
+the work. **R-037.**

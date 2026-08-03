@@ -2849,3 +2849,124 @@ thing on this ship that points the other way.
 ## **THE CATEGORY B PILE IS NOW TWELVE DEEP** — R-036 added. It drops to ten when
 the two ordered repairs land. **Cleared before the ship is used for real, at the
 same moment `brief.py` gets its gate.**
+
+# 2026-08-03 — **THE FIFTEENTH GENERATION. ONE NEW ITEM, AND IT IS THE FIRST FAULT ON THIS SHIP THAT IS NOT IN A GATE.**
+
+## R-037 — **AN UNATTENDED JOB CAN DO NOTHING, WRITE NOTHING, AND REPORT SUCCESS** · **SERIOUS — ON THE COMMANDER'S DESK**
+
+**THE MEASURED FACT, WHICH IS NOT IN DOUBT.** On 2026-08-03 at 11:47:41 six Zar X
+scheduled tasks were released together by `StartWhenAvailable` after the laptop
+had been off for two days. **Windows records all six as `Last Result: 0`.**
+`journal/daily_runs.log` holds **exactly one entry** for that second. Five jobs —
+including **`ZarX Open Interest`, the one whose data cannot be re-bought** —
+produced no header, no output, no rows and no commit, and every one of them
+reported success.
+
+**REPRODUCED OUTSIDE THE REPO, CONTROL FIRST.** One batch alone writes its header
+and its work and exits 0. Six identical batches launched together, all appending
+to one log with `>>`: **one wrote, five wrote nothing at all — not even the
+header line that precedes any work.** When the redirection fails, the recorder's
+Python never starts.
+
+**AND THE PART THAT MAKES IT SILENT INSTEAD OF LOUD.** `run_oi_recorder.bat`
+writes its own failure alarm — *"RECORDER FAILED — NOTHING WAS WRITTEN"* — with
+`>> journal\daily_runs.log`. **The alarm is addressed to the file that is
+unavailable. The single line that exists to tell the Commander it failed cannot
+be written for precisely the reason it needed writing.** That part needs no
+theory; it is plain in the file.
+
+**WHAT I COULD NOT PROVE, AND I AM FILING IT UNSETTLED RATHER THAN ROUNDING IT
+UP.** In my rig the losing batch exits **1**; Windows recorded **0** for all six.
+**So contention explains the silence and does NOT explain the reported success.**
+The Task Scheduler operational log is **disabled on this machine**, so the record
+of 11:47:41 does not exist and cannot be recovered. **A session that explains a
+fault it has not fully reproduced is doing the thing Step 0 forbids, so this item
+says "mechanism partly unknown" and stops there.**
+
+### THE THREE QUESTIONS, ANSWERED BEFORE ANY REPAIR
+
+**Q1 — WHAT INFORMATION IS THIS CODE FOR?** The 4-hourly open-interest rows in
+`data/oi_history/` — the raw material Phase 6 stands on.
+
+**Q2 — CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING, OR DELETED?**
+**YES — MISSING, and ZERO further mistakes are required, because it has already
+happened.** The recorder was due 1 August, reported success, and collected
+nothing. Measured against what Binance was actually serving on 2026-08-03
+(`2026-07-03T12:00Z → 2026-08-03T08:00Z`): **41 rows per asset were missing and
+still buyable**, and had nothing run before the next scheduled date of
+1 September, **33 rows per asset — 99 rows — would have been gone permanently.**
+**SERIOUS.**
+
+**Q3 — IN REAL BUSINESS TERMS.**
+**(a) What he would SEE:** nothing. It would look completely normal — every gate
+green, the Brief 3/3, `git status` clean, and Task Scheduler itself showing the
+job as `Ready` with its last result `0`.
+**(b) What it would COST:** 99 four-hourly open-interest readings across BTC, ETH
+and SOL covering 27 July → 2 August, unbuyable at any price. **The archive
+already holds 35 rows per asset that Binance no longer serves** — so this is a
+hole punched in the middle of a record that exists in three files and nowhere
+else on earth.
+**(c) Would he EVER find out?** No — not unless somebody counted the rows by
+hand. Nothing on any screen would ever say so, and the gap would be discovered
+years later by whoever ran Phase 6.
+**(d) Can it be UNDONE?** **The rows missing as of 2026-08-03 were recovered and
+are now on disk and pushed.** Anything that falls out of the rolling 30-day
+window in future cannot be.
+
+### WEIGHED HEAVIER THAN THE COUNT, BY THE FORM'S OWN RULE
+
+**This is foundation data.** `THE_PATTERN.md`: *"Corrupt data there does not give
+one bad reading — it silently poisons a test that can never be re-run."* **THE
+PROMISE allows three sealed slots and then the signals chapter closes.** A hole
+in the open-interest archive is not a bad number on a screen; it is a hole in the
+only evidence a one-shot test will ever have.
+
+### WHAT WAS DONE, AND WHAT WAS DELIBERATELY NOT DONE
+
+**DONE:** the real `run_oi_recorder.bat` was run by hand. 41 rows per asset
+appended, 221 stored, committed as `5c7c54a` and pushed. The pre-existing rows
+were proved byte-identical by hashing each file's old-length prefix.
+
+**NOT DONE — AND THIS IS THE DECISION THAT IS HIS:** **the mechanism is not
+repaired.** Nothing stops this happening again at the next boot after a gap, and
+**1 September is the next scheduled run.** I did not repair it because the fix
+changes how his unattended machinery works, the root cause of the reported `0` is
+still unproven, and this ship's rule is that the report reaches him before the
+repair. **THE RECOMMENDATIONS ARE IN `SESSION_ORDERS.md` ON HIS DESK. A SESSION
+MAY RECOMMEND; IT MAY NEVER RULE.**
+
+## R-038 — **MY OWN WORK. NOBODY HAS CHECKED THE 123 ROWS I JUST PUT IN THE ARCHIVE.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT**
+
+I ran the recorder and pushed 123 new rows into the foundation dataset. **The
+recorder's own gate passed minutes earlier and its check (m) proves old rows
+survive a run — but that gate ran against scratch copies, not against this
+write.** What I verified myself: the old byte prefix still hashes to its old
+value in all three files, the first data row is unchanged, the row counts moved
+181 → 222 lines, and the printed report matched. **What nobody independent has
+verified: that the 41 new rows in each file are the rows Binance actually served,
+row for row.**
+
+**FILED BECAUSE THE RULE IS THE RULE.** I found the problem, I performed the
+remedy, and I am therefore the last person whose word should settle it. **The
+next session reads the new rows back off disk and compares them to its own raw
+fetch — while they are still inside the 30-day window and can still be checked at
+all.** After roughly 2026-09-02 that check becomes impossible forever.
+
+## R-034 (S6) AND R-031 (B1) — **STILL OPEN. I WAS ORDERED TO REPAIR BOTH AND I REPAIRED NEITHER.**
+
+**Not deferred by my judgement of their severity — displaced by R-037.** Both are
+untouched and both measurements in them still stand. **S6 was scored CAUGHT in
+today's run only because the three live rates happened to differ; that is luck,
+not a repair.** **B1 was scored CAUGHT only because this laptop is UTC+5**, which
+is exactly what R-031 says.
+
+**THE COMMANDER'S ONE-SESSION EXCEPTION WAS SPENT ON A SESSION THAT DID NOT USE
+IT. Whether it carries to the next session is his to say and nobody else's** —
+a session may not extend a suspension of the rules to itself.
+
+## R-006 — **UNTOUCHED, AND NO IN-HOUSE SESSION MAY EVER CLEAR IT.**
+
+## **THE CATEGORY B PILE IS NOW THIRTEEN DEEP** — R-038 added; the two ordered
+repairs did not land, so nothing came off. **R-037 is NOT in the pile — it is
+SERIOUS and it is on the Commander's desk.** The pile is cleared before the ship
+is used for real, at the same moment `brief.py` gets its gate.

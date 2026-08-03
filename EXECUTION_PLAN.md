@@ -435,6 +435,47 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-03: THE COLLECTING FAILED SILENTLY. THE INSTRUMENTS ARE CORRECT AND ALWAYS WERE.**
+
+**WHERE THE SHIP ACTUALLY IS, INCLUDING WHAT IS BROKEN:**
+
+    cockpit/fear_greed.py    GATE 3.1-R7  PASSED  exit 0  0 red
+    cockpit/funding.py       GATE 3.2-R7  PASSED  exit 0  0 red
+    data/open_interest.py    GATE 3.2b-R9 PASSED  exit 0  0 red
+    vault INTACT · Brief 3/3 · lab/ untouched · git status clean
+    data/oi_history/  3 files, 222 lines each (221 rows), sha256
+                      a1ed6729bef45be6 / a077cf034bf66c26 / c8d97f7122544f70
+                      window 2026-06-27T16:00:00Z → 2026-08-03T08:00:00Z
+
+**THE 1 AUGUST ERRAND FIRED AND DID NOTHING.** Six scheduled tasks were released
+together at 11:47:41 on 3 August after two days with the laptop off. **Windows
+records all six as `Last Result: 0`. The log holds exactly ONE entry for that
+second.** The recorder wrote no header, ran no Python, appended no rows and
+committed nothing — **and reported success.** Filed as **R-037, SERIOUS, on the
+Commander's desk.**
+
+**THE DATA WAS RECOVERED IN TIME AND THAT PART IS FINISHED.** The real batch was
+run by hand: **41 rows per asset appended, 221 stored, committed `5c7c54a` and
+pushed.** The pre-existing rows were proved byte-identical by hashing each file's
+old-length prefix. **Had nothing run before the next scheduled date of
+1 September, 33 rows per asset — 99 rows — would have been gone permanently.**
+
+**>>> THE COMMIT-AND-PUSH BRANCH HAS NOW FIRED FOR REAL, AGAINST REAL NEW ROWS,
+FOR THE FIRST TIME IN THIS SHIP'S HISTORY.** It committed only
+`data/oi_history`; the pathspec held.
+
+**WHAT IS STILL BROKEN, PLAINLY:** **the mechanism is NOT repaired.** Nothing
+stops this recurring at the next boot after a gap, and the next scheduled run is
+1 September. **Contention is reproduced and explains the SILENCE; it does not
+explain the reported SUCCESS, and the Task Scheduler operational log is disabled
+so the record of 11:47:41 does not exist.** Recorded as partly unproven.
+
+**AND WHAT WAS ORDERED AND NOT DONE: S6 (R-034) AND B1 (R-031) WERE NOT
+REPAIRED.** The Commander's one-session exception was spent on a session that
+did not use it. **Whether it carries forward is his ruling alone.**
+
+---
+
 ## **>>> 2026-07-31 (evening, second): CRYPTOPANIC IS DEAD AND THE COMMANDER RULED THE REPLACEMENT.**
 
 **He went to get the token this ship had asked him for eight times and found it
