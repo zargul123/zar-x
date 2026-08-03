@@ -210,33 +210,140 @@ FAIL, is not committed as a pass, and is not called "mostly passed."**
 
 # **AFTER THE REPAIRS: THE NEWS INSTRUMENT — CONDITIONAL, AND ONLY IF THERE IS ROOM**
 
-**FIRST, CHECK THE KEY:**
+## **>>> THERE IS NOTHING TO SIGN UP FOR ANY MORE. THE SOURCE CHANGED ON 2026-07-31 (EVENING) AND THE COMMANDER RULED IT.**
 
-    read the key NAMES in .env  —  is there a CryptoPanic token?
+**DO NOT GO LOOKING FOR A CRYPTOPANIC KEY. THERE IS NO FREE TIER.** It became a
+paid product; measured the same day, unauthenticated it answers **HTTP 403** and
+**HTTP 404**. **`EXECUTION_PLAN.md` Phase 3 step 3 carries the full correction
+with the struck words left visible — READ IT THERE BEFORE YOU BUILD, because it
+also records the three replacements that were probed and rejected and why.**
 
-**THERE WAS NOT ONE ON 2026-07-31.** `.env` held exactly `TWELVEDATA_API_KEY`.
-Unauthenticated the API answers **HTTP 403** and **HTTP 404**. The Commander was
-asked to sign up — free, five minutes, cryptopanic.com.
+**THE ADOPTED SOURCE IS THE PUBLISHERS' OWN PUBLIC FEEDS, READ DIRECTLY.**
+Measured working 2026-07-31: CoinDesk 25 items (newest 3 minutes old),
+Cointelegraph 30 items, Decrypt and Bitcoin Magazine both answering. **No
+account, no key, no signup, no expiry, and NO new dependency** — Python's own
+`xml.etree.ElementTree` reads them.
 
-    NO KEY .......... build NOTHING. Do not substitute another news source.
-                      The orders name CryptoPanic and the orders outrank a
-                      session's own ideas. Put it back on his desk.
-    KEY, AND THE TWO REPAIRS ARE DONE AND GREEN, AND YOU HAVE REAL TIME LEFT
-                   .. begin Context Deck instrument 3. EXECUTION_PLAN Phase 3
-                      step 3. HEADLINES ONLY, no sentiment score, no invented
-                      weights, the cut ghost stays cut.
-    ANY DOUBT ....... **STOP AND LEAVE IT.** A half-built instrument is worse
-                      than no instrument, and the Commander was told plainly
-                      that repairs plus a full news build is TWO sessions, not
-                      one. **Delivering two solid repairs is a complete,
-                      successful session. Say so without apologising.**
+    Sources ...... CoinDesk · Cointelegraph · Decrypt · The Block · Blockworks
+                   FIVE, different owners. **NOT one hundred.**
+    Print ........ three headlines, plus the COUNT of stories in the last N h
+    Scope ........ CRYPTO ONLY. Macro is instrument 4 (event calendar) and,
+                   later, NUMBERS (DXY, NASDAQ) — never world headlines.
+    Never ........ a sentiment score, a weight, or a signal. The cut ghost
+                   stays cut and Phase 6's three slots are locked BY NAME.
 
-**IF YOU DO BUILD IT: DOOR 1, DOOR 2 AND DOOR 3 FROM BIRTH**, a sabotage drill
-from birth, **and every sabotage proved able to CHANGE THE OUTPUT before its
-verdict counts** — which is the entire lesson of the two repairs you just made.
-**And do not copy Door 3's pass line verbatim: it claims "nothing was deferred to
-a thread" and tests only non-daemon threads (R-033). Write what you actually
-test.**
+## **>>> THE ONE MEASUREMENT THAT DECIDES HOW THIS IS BUILT. DO IT FIRST, BEFORE ANY CODE.**
+
+**NEWS DOES NOT SIT STILL AND FUNDING DOES.** The funding gate works because a
+rate holds for eight hours, so the gate's own fetch and the module's fetch see
+the same number. **Headlines land every few minutes.** So:
+
+    09:00:01  the instrument reads the feed   → top story "Kalshi sued"
+    09:00:04  the GATE reads the feed         → a new story has landed
+              the two disagree → THE GATE GOES RED AND NOTHING IS WRONG
+
+**THAT IS R-021 AND R-034 ARRIVING BY DESIGN, IN A PART NOBODY HAS WRITTEN YET.**
+**Measure it before you build:** fetch each feed twice about 90 seconds apart and
+record how often the top story changed, plus the median gap between consecutive
+stories. **Write the numbers into `PROGRESS_LOG.md` either way.** The fourteenth
+generation proposed this measurement and did not run it — **it is R-036 and it is
+yours.**
+
+**THE FIX, IF THE MEASUREMENT SHOWS THE COLLISION IS REAL — ONE FETCH, TWO
+READERS.** The gate fetches ONCE and hands the SAME raw bytes to the instrument
+and to its own rebuild, so both judge identical input and timing cannot make them
+disagree. `funding.py` already accepts an injected `base_url` for the offline
+drill; **this is the same idea one step further — inject the DATA, not just the
+address.**
+
+**BUT THAT ALONE IS NOT ENOUGH AND HERE IS THE TRAP:** if every check runs on
+handed-over bytes, **nothing ever tests the real trip to the internet.** You need
+BOTH, and they are different bars:
+
+    injected bytes ... EXACT equality. Deterministic. Never a false alarm.
+                       This is where the printed line is proved correct.
+    a REAL live fetch  LOOSE on purpose — it reached the internet and got
+                       something headline-shaped back. Never exact equality.
+
+**A gate that only does the first is decorative. A gate that only does the second
+is R-021 with a new name.**
+
+## THE AWKWARD CASES — NAMED BEFORE ANY CODE, WHICH IS THIS SHIP'S RULE
+
+Every one of these will happen eventually. **Decide each one before you write, not
+after you discover it:**
+
+1. **A HEADLINE THAT IS ITSELF ADVICE** — *"Analysts say buy the dip."* **THE
+   COMMANDER HAS RULED: print it, in quotes, attributed to the publisher.** It is
+   a FACT that someone said it. **But the Brief's own voice must never adopt it,
+   and F7/S15 exist because a doorway once printed advice of its own.**
+2. **A headline containing this ship's own disclaimer wording** — would satisfy a
+   lazy "the words are present" check. S14 is what that costs.
+3. **NON-ASCII IN A TITLE** — accents, emoji, currency symbols. **This ship has
+   been bitten by character corruption TWICE.** Handle it and prove it.
+4. **A very long headline** that destroys the deck's layout.
+5. **ONE publisher down, the others up** — print what answered and **NAME what
+   did not**, exactly as funding prints `[no data: SOL]`. Silently dropping a
+   source is S10.
+6. **ALL publishers down** — one honest line, no traceback, nothing appended.
+7. **>>> A FEED THAT ANSWERS HTTP 200 WITH ZERO STORIES.** **This is not
+   hypothetical: `cryptocurrency.cv` did exactly this during the probe.**
+   **It must FAIL LOUDLY. Printing "0 headlines" as though the world were quiet
+   is the single worst outcome this instrument can produce**, and it is the
+   recorder's empty-result trap wearing a new hat.
+8. **THE FEED ADDRESS MOVES.** Publishers reorganise; CoinDesk's path looks
+   especially fragile. It must fail honestly and visibly, never silently.
+
+## THE ARCHIVE — **THE COMMANDER HAS RULED YES, AND HERE IS THE HONEST FRAMING**
+
+Save a daily count. One line a day, and nothing reads it for a year:
+
+    date,       total,  coindesk,  cointelegraph,  decrypt,  theblock,  blockworks
+    2026-07-31,   47,       22,          25,           …
+
+**WHY, IN PLAIN WORDS: you cannot know that 43 headlines an hour is unusual
+unless you know that 11 is normal — and the feeds hand you only the last 25 or 30
+stories, a few hours' worth. THERE IS NO ARCHIVE AND THE PAST CANNOT BE BOUGHT**
+(old articles are edited, retitled and deleted, so any sold "news history" is
+polluted by hindsight, which Law 7 says the Lab's own numbers can never detect).
+**`data/oi_history/` exists for exactly this reason.**
+
+**AND THE HONEST QUALIFICATION, SAID OUT LOUD BECAUSE A SESSION OVERSTATED IT
+ONCE ALREADY: the news-storm flag is NOT a scheduled step in Phases 3-8.** It is
+in the README's vision and the research file. **So this archive is CHEAP
+INSURANCE FOR A MAYBE, not a requirement.** Build the boring file. **Do NOT build
+the flag.**
+
+**Each story carries a permanent id in the feed — use it to count without
+double-counting**, the same duplicate guard `open_interest.py` already uses.
+
+## HOW TO BUILD IT
+
+- **Declare the gate and commit it ALONE with no `.py` in that commit.**
+- **A sabotage drill from birth** — not added later — **and every sabotage proved
+  able to CHANGE THE OUTPUT before its verdict counts.** That is the entire
+  lesson of the two repairs you just made; **you are the first session that gets
+  to build it in from the start rather than discover it.**
+- **DOOR 1, DOOR 2 AND DOOR 3 FROM BIRTH.** The machinery exists in both cockpit
+  files and can be copied. **A new instrument without all three doors is a new
+  hole, and the last two were retrofitted at the cost of four sessions.**
+- **DO NOT COPY DOOR 3'S PASS LINE VERBATIM.** It claims *"nothing was deferred
+  to a thread"* and tests only NON-DAEMON threads (R-033). **Write what you
+  actually test.**
+- **NO new dependency.** `requests` and `xml.etree.ElementTree` are enough.
+- **Law 2: the compartment owns its own source list.** The feed addresses live in
+  this file and nowhere else — **so a paid feed could be swapped in later in an
+  afternoon if the free one ever proves clumsy. The Commander was told that
+  explicitly and it is why "start free" is reversible rather than final.**
+
+## **IF THERE IS NOT ROOM, STOP — AND DO NOT APOLOGISE FOR IT**
+
+    THE TWO REPAIRS ARE THE PROMISED RESULT. The news instrument is not.
+    ANY DOUBT — STOP AND LEAVE IT ENTIRELY. A half-built instrument is worse
+    than no instrument. The Commander was told plainly that repairs plus a
+    full news build is TWO sessions and not one, and that the archive makes
+    it larger still. **Delivering two solid repairs is a complete, successful
+    session. Say so without apologising.**
 
 ---
 
@@ -352,10 +459,15 @@ ATTACK, then PART 2 BUILD. The exception was for you only.**
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **>>> THE FREE CRYPTOPANIC TOKEN. Five minutes, and it is the only thing
-   standing in front of the third instrument.** Unauthenticated the API answers
-   403 and 404, and no session can create an account. **Eight sessions have not
-   built step 3 and this is the first time the reason is not a finding.**
+1. **>>> THE CRYPTOPANIC SIGNUP IS OFF HIS DESK PERMANENTLY — HE KILLED IT
+   HIMSELF, AND HE WAS RIGHT.** He checked and found it is now a paid product.
+   Measured: **HTTP 403** and **HTTP 404** unauthenticated. **There is nothing
+   left for him to sign up for, pay for, or manage — the adopted source needs no
+   account and no key.** He also brought a candidate of his own
+   (`cryptocurrency.cv`); it was probed properly and rejected for a reason worth
+   remembering — **it answered `totalCount: 0` and then `totalCount: 2750` on the
+   same address inside two minutes.** **The full correction, with the struck
+   words left visible, is in `EXECUTION_PLAN.md` Phase 3 step 3.**
 2. **>>> THE RULE HE HAS NOT YET ADOPTED, NOW EARNED BY THREE FILES AND FOUR
    SESSIONS:** *"A SABOTAGE MUST BE PROVED TO CHANGE THE OUTPUT BEFORE ITS
    VERDICT MEANS ANYTHING."* **F10, B1 and S6 are the same fault in three

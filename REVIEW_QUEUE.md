@@ -2797,3 +2797,55 @@ sources has ever served a wrong number, and I am not claiming one has. **This is
 an unguarded door, not a demonstrated leak**, and whoever takes it must grade it
 on THE FINDING REPORT like anything else rather than on the fact that it sounds
 serious.
+
+---
+
+# 2026-07-31 (evening, second) — **THE NEWS SOURCE CHANGED. ONE NEW DOUBT, FILED UNMEASURED.**
+
+## R-036 — **NOBODY HAS MEASURED WHETHER A NEWS GATE CAN CHECK ANYTHING AT ALL** · CATEGORY B
+**STATUS: OPEN · P2 · filed 2026-07-31 (evening) by the fourteenth generation,
+against its OWN recommendation, BEFORE a line of the part exists**
+
+**THE FUNDING GATE WORKS BECAUSE A RATE SITS STILL FOR EIGHT HOURS.** The gate
+fetches Binance itself, rebuilds the printed line by its own arithmetic, and
+demands exact equality. **Both sides see the same number because the number does
+not move.**
+
+**HEADLINES MOVE. A NEW STORY CAN LAND BETWEEN THE MODULE'S FETCH AND THE
+GATE'S**, the two rebuilds disagree, and **the gate goes red with nothing wrong.**
+**That is R-021 and R-034 arriving BY DESIGN, in a part nobody has written yet —
+and I recommended the source that has this property.**
+
+**THE PROPOSED FIX, WHICH IS ALSO UNTESTED: ONE FETCH, TWO READERS.** The gate
+fetches once and hands the SAME raw bytes to the instrument and to its own
+rebuild, so timing cannot make them disagree. **PLUS a separate, deliberately
+LOOSE live check** — because a gate that only ever judges handed-over bytes
+**never tests the real trip to the internet**, and that gate would be decorative.
+
+**WHY THIS IS FILED RATHER THAN ANSWERED: I PROPOSED THE MEASUREMENT AND DID NOT
+RUN IT.** The Commander asked for the documents first and that was his call. **So
+a design decision is currently resting on my expectation of an answer nobody has,
+and this ship's standing duty is to file exactly that rather than write "this
+should be fine."**
+
+**WHAT THE NEXT SESSION MUST MEASURE, BEFORE ANY CODE:** fetch each feed twice
+about 90 seconds apart; record how often the top story changed, the median gap
+between consecutive stories, and stories per hour per publisher. **Write the
+numbers into `PROGRESS_LOG.md` either way — including if the collision turns out
+to be too rare to matter, which is a real and useful result.**
+
+**MY SECOND DOUBT, AGAINST THE SAME RECOMMENDATION:** I probed the five adopted
+feeds **once each**, in one hour, on one machine. **I have not measured their
+uptime, whether their addresses are stable, or whether any of them rate-limits a
+repeat caller.** CoinDesk's path in particular looks fragile. **Nobody should
+read "measured working 2026-07-31" as "measured reliable."**
+
+## R-035 — **UNCHANGED AND STILL OPEN.** Nothing on this ship asks whether a
+source is RIGHT, only whether the printed line matches what it SENT. **The news
+instrument will make this worse before it makes it better** — it adds a fifth and
+sixth outside source, though reading FIVE publishers instead of one is the first
+thing on this ship that points the other way.
+
+## **THE CATEGORY B PILE IS NOW TWELVE DEEP** — R-036 added. It drops to ten when
+the two ordered repairs land. **Cleared before the ship is used for real, at the
+same moment `brief.py` gets its gate.**

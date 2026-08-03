@@ -85,8 +85,11 @@ User is a non-programmer; explain in plain words; he runs commands from gray box
    (R-012). **Step 3.2b SHIPPED 2026-07-27** — the open-interest recorder — the
    open-interest recorder (30-day window, backfill at birth), still the only
    dataset on this ship that expires and its deadline did not pause for the
-   audit** · then news headlines (CryptoPanic free
-   tier), event calendar, whale watch. Information ONLY, never signals. This closes the user's known blind spot: the system
+   audit** · then news headlines
+   (~~CryptoPanic free tier~~ **DEAD 2026-07-31 — now a PAID product, HTTP 403.
+   REPLACED BY THE PUBLISHERS’ OWN PUBLIC FEEDS: CoinDesk, Cointelegraph,
+   Decrypt, The Block, Blockworks. No account, no key, no new dependency.
+   Full correction in EXECUTION_PLAN.md Phase 3 step 3**), event calendar, whale watch. Information ONLY, never signals. This closes the user's known blind spot: the system
    is math-only today; news/whales knowledge comes from the pilot until this ships.
 4. **Layer 7 — Carry Monitor** (Kimi's structural edge): delta-neutral funding carry
    monitor with annualized-rate readout + risk caveats (exchange counterparty, funding
@@ -228,3 +231,36 @@ document, including this one.
 **STILL TRUE AND STILL KNOWN-WEAK:** `cockpit/brief.py` has no gate · the
 Category B pile is **eleven** deep · nine of R-032's ten doubts are untested ·
 R-006 may never be cleared in-house.
+
+---
+
+# MEASURED FACTS ADDED 2026-07-31 (evening) — **THE NEWS SOURCE CHANGED**
+
+**The Commander found that CryptoPanic is no longer free. The plan named a dead
+source and nobody had checked.** Full correction, with the wrong plan struck and
+left visible, in `EXECUTION_PLAN.md` Phase 3 step 3.
+
+| Source probed | Result | Verdict |
+|---|---|---|
+| **CryptoPanic** `/api/v1/posts/?public=true` | **HTTP 403** | **DEAD — paid product now** |
+| **CryptoPanic** `/api/developer/v2/posts/` | **HTTP 404** | **DEAD** |
+| **cryptocurrency.cv** `/api/news` | HTTP 200, **`totalCount` 0 then 2750 on the same address inside two minutes**; `?lang=en` → **0 articles under HTTP 200**; declared `perPage: 10`, returned 3 | **REJECTED — cannot be checked. Also a middleman for the feeds below** |
+| **newsapi.org** | free tier = **24-hour delay** + licence bars production use "including internally"; paid from **$449/month** | **REJECTED — day-old news, and forbidden** |
+| **newapi.ai** | an AI API gateway | **NOT A NEWS SERVICE** |
+| **CoinGecko** `/api/v3/news` | **HTTP 401** | **REJECTED — needs a key now** |
+| **CoinDesk RSS** | **25 items, newest 3 minutes old at fetch** | **ADOPTED** |
+| **Cointelegraph RSS** | **30 items, newest 11:35 UTC** | **ADOPTED** |
+| **Decrypt RSS** · **Bitcoin Magazine RSS** | both answering | **ADOPTED / reserve** |
+
+**ADOPTED DESIGN, ruled by the Commander 2026-07-31 (evening):** five publishers
+(CoinDesk, Cointelegraph, Decrypt, The Block, Blockworks) — **NOT one hundred,
+because beyond a handful the extra outlets return the same story reworded and
+would corrupt any future count** · three headlines printed plus a count · **crypto
+only** · a daily count archived from day one as **cheap insurance, not a
+requirement** · **no new dependency** (`xml.etree.ElementTree` is standard
+library) · **news is NEVER a signal — Phase 6's three slots are locked by name
+and none is news.**
+
+**UNMEASURED AND FILED AS R-036:** whether a news gate can verify anything at
+all, given headlines land between two fetches. **The design rests on an
+expectation nobody has tested.**

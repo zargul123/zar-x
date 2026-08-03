@@ -160,8 +160,78 @@ each appearing as a new section on the Morning Brief.
    correction in Phase 6. The dataset that DOES expire is Binance OPEN
    INTEREST (30-day window only), which instrument #5 below needs; it gets
    its own step (3.2b) with a 30-day backfill at birth.
-3. News headlines (CryptoPanic free tier) — headlines ONLY, no sentiment
-   score, no invented weights (the cut ghost stays cut).
+3. News headlines — headlines ONLY, no sentiment score, no invented weights
+   (the cut ghost stays cut).
+   ~~(CryptoPanic free tier)~~
+   **CORRECTED 2026-07-31 (evening) BY THE COMMANDER, ON MEASURED EVIDENCE.
+   THE STRUCK WORDS ARE LEFT VISIBLE RATHER THAN DELETED so nobody re-derives
+   the same dead plan from a clean page** — the same discipline used on the
+   Slot 2 correction above.
+
+   **CRYPTOPANIC NO LONGER HAS A USABLE FREE TIER.** The Commander checked and
+   found it is now a paid product. Measured the same day: unauthenticated,
+   `/api/v1/posts/?public=true` returns **HTTP 403** and
+   `/api/developer/v2/posts/` returns **HTTP 404**. **There is no free tier to
+   build against.**
+
+   **THREE REPLACEMENTS WERE PROBED AND ALL THREE FAILED, WITH REASONS:**
+   - **`cryptocurrency.cv`** (a free aggregator the Commander found) — **it
+     contradicts itself.** Called four times in two minutes on the SAME
+     address it answered `totalCount: 0` then `totalCount: 2750`; adding the
+     innocuous parameter `lang=en` returned **zero articles under HTTP 200**.
+     **A source that answers differently each time cannot be checked at all,
+     and every gate on this ship works by rebuilding the printed line from a
+     raw fetch and demanding an exact match.** It is also a middleman: its own
+     source list is CoinDesk, The Block, Decrypt, Cointelegraph — feeds we can
+     read directly.
+   - **`newsapi.org`** — free tier delivers articles with a **24-hour delay**
+     and its licence says it **"cannot be used in a staging or production
+     environment (including internally)."** A morning brief cannot print
+     day-old news, and the licence forbids the only use we have. Paid starts
+     at **$449/month**.
+   - **`newapi.ai`** — **not a news service at all.** It is an AI API gateway.
+     Name collision only.
+
+   **THE ADOPTED SOURCE: THE PUBLISHERS' OWN PUBLIC FEEDS, READ DIRECTLY.**
+   Measured working 2026-07-31: **CoinDesk 25 items** (newest 3 minutes old),
+   **Cointelegraph 30 items**, **Decrypt** and **Bitcoin Magazine** both
+   answering. **No account, no key, no signup, no expiry.** Parsed with
+   `xml.etree.ElementTree` from the standard library — **NO new dependency.**
+
+   **AND THE STRUCTURAL REASON, WHICH IS WHY THIS IS NOT MERELY "THE FREE
+   OPTION":** a news API exists to be sold, so its fresh, usable data will
+   always end up behind a payment — that is its business model and CryptoPanic
+   is the proof. **A publisher's feed exists to be spread as widely as
+   possible, because that is how the publisher gets readers.** The incentive
+   points the other way and does not change.
+
+   **DECIDED WITH IT, 2026-07-31 (evening):**
+   - **Sources: CoinDesk, Cointelegraph, Decrypt, The Block, Blockworks.**
+     Five, different owners. **NOT one hundred.** Beyond a handful, extra
+     sources return THE SAME STORY reworded, which adds no information and
+     **actively corrupts any future headline COUNT** — one ordinary story
+     covered by fifty outlets would read as a storm.
+   - **Print three headlines plus the count** of stories in the last N hours.
+   - **CRYPTO NEWS ONLY.** Macro is already scheduled elsewhere and better:
+     instrument 4 is the event calendar (FOMC, CPI) and the research file
+     names macro risk-on/off as **DXY and NASDAQ correlation — NUMBERS.**
+     **Numbers for the machine, headlines for the Commander.** Turning a
+     sentence into a number is where a system starts inventing things.
+   - **UNSCHEDULED SHOCKS — war, an equity crash — ARE ALREADY COVERED AND NOT
+     BY NEWS.** The regime vane prints `Weather: Chaotic` from PRICE, and
+     price moves in seconds where a headline arrives minutes later. The
+     research file already ruled speed-based news trading **"unwinnable for
+     retail."**
+   - **NEWS IS NEVER A SIGNAL AND CANNOT BECOME ONE.** Phase 6's three slots
+     are locked BY NAME — Turtle/Donchian, funding-rate fade, on-chain cycle
+     thermometer. **None is news, and changing them after the fact is
+     cheating.** The README's "news-storm flag" is **vision, not a scheduled
+     step**, and any session that finds itself building a signal out of
+     headlines has misread this page.
+   - **SUBSCRIBING LATER COSTS NOTHING EXTRA.** Law 2 seals each source inside
+     its own compartment, so a paid feed could be swapped in an afternoon if
+     the free one ever proves genuinely clumsy in real use. **Start free
+     because it is reversible**, not because free is a virtue.
 4. Event calendar (manual JSON file the Commander can edit + known recurring
    events: FOMC, CPI dates).
 5. WHALE WATCH (the Commander's requested gap-closer): what the big money is
@@ -364,6 +434,27 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+
+## **>>> 2026-07-31 (evening, second): CRYPTOPANIC IS DEAD AND THE COMMANDER RULED THE REPLACEMENT.**
+
+**He went to get the token this ship had asked him for eight times and found it
+is now a PAID product. Nobody had checked.** Three replacements were probed and
+rejected with reasons; **the publishers' own public feeds were adopted — no
+account, no key, no signup, no expiry, no new dependency.** **Phase 3 step 3 now
+carries the correction with the wrong plan STRUCK AND LEFT VISIBLE**, following
+the Slot 2 precedent of 2026-07-26.
+
+**THERE IS NOTHING LEFT ON HIS DESK TO SIGN UP FOR.** The news instrument is
+unblocked and needs nothing from him.
+
+**AND ONE THING THE NEXT SESSION MUST MEASURE BEFORE IT BUILDS: a news gate may
+not be able to verify anything at all.** Funding rates sit still for eight hours;
+headlines land every few minutes, so the gate's fetch and the module's fetch can
+legitimately disagree and **the gate would go red with nothing wrong — R-021 and
+R-034 by design, in a part nobody has written.** **R-036, filed unmeasured by the
+session that recommended the source.**
+
+---
 
 ## **>>> 2026-07-31 (evening): THE COMMANDER SUSPENDED PART 1 FOR ONE SESSION.**
 

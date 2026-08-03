@@ -9197,3 +9197,120 @@ Nobody has asked whether the source can lie.**
    could not be acted on.** He found it by asking a question I should have
    answered unprompted in the report. **A correct grade delivered where nobody
    reads it is not a delivered grade.**
+
+---
+
+# 2026-07-31 (evening, second) — **THE COMMANDER KILLED CRYPTOPANIC AND RULED THE REPLACEMENT. THE PLAN WAS WRONG AND HE FOUND IT.**
+
+*Appended by the fourteenth generation. **No code was touched. Documents only.***
+
+## HE FOUND IT, NOT A SESSION
+
+**He went to sign up for the CryptoPanic token this ship had been asking him for
+and discovered it is now a PAID product.** Eight sets of orders, my own included,
+had named a free tier that no longer exists. **Nobody had checked. He checked.**
+
+    https://cryptopanic.com/api/v1/posts/?public=true   →  HTTP 403
+    https://cryptopanic.com/api/developer/v2/posts/     →  HTTP 404
+
+## THREE CANDIDATES PROBED, ALL THREE REJECTED, EACH FOR A NAMED REASON
+
+**`cryptocurrency.cv`** — **his own find, and I probed it fairly rather than
+dismissing it.** Free, no key, and it does work for casual use. **It was rejected
+because it contradicts itself.** Four calls in two minutes:
+
+    /api/news                 HTTP 200   articles 0   totalCount 0
+    /api/news  (1 min later)  HTTP 200   articles 3   totalCount 2750
+    /api/news?limit=10        HTTP 200   articles 0   totalCount 0
+    /api/news?lang=en         HTTP 200   articles 0   totalCount 0
+    /api/news?category=bitcoin HTTP 200  articles 3   totalCount 41
+
+**It also declared `perPage: 10` and returned 3.** **A source that answers
+differently each time cannot be checked AT ALL**, and every gate on this ship
+works by rebuilding the printed line from a raw fetch and demanding exact
+equality. **It is also a middleman** — its own `sources` list is CoinDesk, The
+Block, Decrypt, Cointelegraph, Bitcoin Magazine, Blockworks: feeds readable
+directly.
+
+**`newsapi.org`** — free tier serves articles with a **24-hour delay** and its
+licence states it **"cannot be used in a staging or production environment
+(including internally)."** A morning brief cannot print day-old news and the
+licence forbids the only use this ship has. Paid tiers start at **$449/month**.
+
+**`newapi.ai`** — **not a news service.** An AI API gateway. Name collision only.
+
+## THE ADOPTED SOURCE, MEASURED THE SAME HOUR
+
+    CoinDesk        25 items · newest 12:28 UTC, THREE MINUTES OLD at fetch
+    Cointelegraph   30 items · newest 11:35 UTC
+    Decrypt         answering
+    Bitcoin Magazine answering
+    CoinGecko /news  HTTP 401 — needs a key now. Rejected.
+
+**No account, no key, no signup, no expiry, and NO new dependency** —
+`xml.etree.ElementTree` is in Python's standard library.
+
+**THE STRUCTURAL ARGUMENT, WHICH IS WHY THIS IS NOT MERELY "THE FREE OPTION":**
+a news API exists to be sold, so its fresh usable data always ends up behind a
+payment — **CryptoPanic is the proof and it happened to us.** A publisher's feed
+exists to be spread as widely as possible, because that is how a publisher gets
+readers. **The incentive points the other way and does not change.**
+
+## WHAT ELSE HE RULED, AND ONE THING HE CORRECTED IN ME
+
+- **FIVE sources, not one hundred.** He initially wanted *"all the best
+  resources"* and changed his mind on the argument: **beyond a handful, extra
+  outlets return THE SAME STORY reworded.** One ordinary event covered by fifty
+  outlets would read as a storm and **corrupt the very count the archive exists
+  to feed.**
+- **Print three headlines plus a count.** **Crypto only.**
+- **Save the daily count from day one** — cheap insurance, his ruling.
+- **A headline that is itself advice: print it, quoted and attributed.** His
+  call, taken after I put it to him as genuinely his.
+
+## **THE CORRECTION I HAD TO MAKE TO MYSELF, MID-CONVERSATION, AND IT MATTERED**
+
+He said *"eventually the system is made to give signals, so it will use the news
+eventually."* **I began answering as though that were true. It is not, and the
+plan says so — I checked instead of agreeing.**
+
+**Phase 6's three slots are locked BY NAME: Turtle/Donchian breakout,
+funding-rate extreme fade, on-chain cycle thermometer. NONE IS NEWS, and the plan
+calls changing them after the fact cheating.** Phase 3's own title is
+**"CONTEXT DECK — information, never signals."**
+
+**AND THE PART I HAD OVERSTATED AN HOUR EARLIER:** I had told him the
+"news-storm flag" was planned and that the archive was therefore necessary.
+**I then read Phases 3-8 and it is NOT a scheduled step anywhere** — it lives in
+the README's vision and the research file. **I corrected it to him unprompted and
+downgraded my own recommendation from "you must" to "cheap insurance for a
+maybe."** **That correction is the reason the orders now say build the file and
+NOT the flag.**
+
+## WHAT I RAISED THAT NOBODY HAD, AND THEN DID NOT MEASURE
+
+**Funding rates sit still for eight hours; headlines land every few minutes.** So
+the gate's fetch and the module's fetch can legitimately disagree, and **the gate
+would go red with nothing wrong — R-021 and R-034 arriving BY DESIGN in a part
+nobody has written yet.** The fix is **one fetch, two readers** — the gate hands
+the same raw bytes to the instrument and to its own rebuild — **plus a separate,
+deliberately LOOSE live check, because a gate that only ever judges handed-over
+bytes never tests the real trip to the internet.**
+
+**I PROPOSED THE MEASUREMENT AND DID NOT RUN IT. The Commander stopped it and
+asked for the documents first, which was his call and the right one.** **Filed as
+R-036, unmeasured, and written into the next orders as the FIRST thing the
+news-building session does.** **I am recording it as unmeasured rather than
+letting a design decision rest on my expectation of the answer.**
+
+## WHY HE ASKED FOR ALL OF THIS IN WRITING, IN HIS OWN WORDS
+
+*"why im discussing all this — because you have made session orders for next
+session, in our plan we have to make news with CryptoPanic, and now we are not
+doing it. so update it with all the reasoning so next sessions always
+understand."*
+
+**He is right and it is the whole point of the nine files.** The struck text in
+`EXECUTION_PLAN.md` follows the precedent already set by the Slot 2 correction of
+2026-07-26: **the wrong plan is left visible and crossed out, so nobody re-derives
+it from a clean page.**
