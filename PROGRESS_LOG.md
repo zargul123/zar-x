@@ -9503,3 +9503,123 @@ next session has everything it needs to do both.**
     the five documents      the closing ritual
 
 **No `.py` file was edited. No new file was created. No dependency was added.**
+
+# 2026-08-03 (second) — **GATE 3.2c-R1 DECLARED. THE COMMANDER ORDERED R-037 SORTED BEFORE ANYTHING ELSE.**
+
+*Declared BEFORE any code exists, committed ALONE with no `.py` and no `.bat` in
+this commit, so `git show --stat` proves the bar came first and nobody lowered it
+to match what got built. Twentieth use of this law.*
+
+## HIS RULING, IN HIS OWN WORDS
+
+> *"first we have to sort the problem you resolved so tell how or what we do that
+> next time our system dont miss the info. second for next order i also want you
+> to make the same exemption only for next order to not attack and repair s6 and
+> b1."*
+
+**TWO RULINGS. BOTH RECORDED.** R-037 is repaired this session. **The one-session
+exception is GRANTED AGAIN, for the next session only: no attack, repair S6 and
+B1.** It is his to grant and he has granted it; `THE_PATTERN.md` is NOT edited,
+because a rule suspended twice is still a rule suspended, not a rule changed.
+
+## THE THING NOBODY HAD NOTICED, AND IT DECIDES THE WHOLE DESIGN
+
+**`CHECK_STATUS.bat` — the one screen the Commander runs to see whether the ship
+is healthy — reads `LastTaskResult -eq 0` and prints `OK`.**
+
+**SO ON 3 AUGUST IT WOULD HAVE TOLD HIM THE RECORDER WAS FINE.** The status
+screen was not merely silent about the failure; **it would have actively
+confirmed the failure as a success**, because it asks Windows how the JOB went
+and Windows was wrong.
+
+**THEREFORE THE REPAIR IS NOT "MAKE THE JOB MORE RELIABLE". IT IS "STOP ASKING
+THE JOB AND ASK THE DATA."** Every mechanism fix guards a cause. Only an outcome
+check guards against a cause nobody has proved — **and the cause of the reported
+`0` is still unproven and now unprovable, because the Windows event log was
+switched off.**
+
+## WHAT IS BEING BUILT
+
+    data/collection_guard.py   NEW COMPARTMENT. Production half: read the
+                               archive off disk and report its newest row and
+                               its age in days. __main__: THIS GATE, breaking
+                               itself on every run, forever.
+    run_oi_recorder.bat        its OWN log file, and an HONEST exit code.
+    CHECK_STATUS.bat           shows the ARCHIVE's age, not the job's opinion.
+    Task Scheduler             WEEKLY, not monthly.
+    Task Scheduler event log   ENABLED, so a next time leaves evidence.
+
+**NO `.py` FILE THAT ALREADY EXISTS IS TOUCHED.** Not `brief.py`, not
+`funding.py`, not `fear_greed.py`, not `open_interest.py`. **Proved by sha256 of
+all four, printed before and after, not asserted.**
+
+## >>> THE BAR. EVERY LINE GREEN OR THE GATE FAILS. NO "MOSTLY PASSED".
+
+    1  CONTROL FIRST — the healthy, untouched system passes before anything
+       else is believed. Step 0.1, earned by sabotage B5.
+
+    2  THE CONTENTION DRILL, AND IT MUST SHOW BOTH SIDES:
+       2a  the OLD batch, with five jobs hammering the shared log at the same
+           instant, WRITES NOTHING AND REPORTS SUCCESS — required to FAIL, so
+           the defect is PROVED to exist rather than remembered. This is
+           F10's third branch and it is not optional.
+       2b  the NEW batch, under the identical storm, still writes its log and
+           still does its work.
+
+    3  THE HONEST EXIT CODE:
+       3a  forced to fail, the OLD batch exits 0 — the lie Windows recorded.
+       3b  forced to fail, the NEW batch exits NON-ZERO.
+       3c  healthy, the NEW batch exits 0. A batch that always fails is not
+           an alarm, it is a broken part.
+
+    4  THE STALENESS CHECK, BOTH BRANCHES PROVED EVERY RUN — because a check
+       that has never been made to fire is decorative, which is the entire
+       lesson of F10, S6 and B1:
+       4a  a FRESH archive → the guard is QUIET and says so.
+       4b  an archive aged past the bar, in a scratch copy → the guard goes
+           LOUD and NAMES the asset and the age.
+       4c  an archive aged past BINANCE'S OWN 30-DAY WINDOW → the guard must
+           say the rows are GONE, not merely stale. Those are different
+           sentences and only one of them is an emergency.
+       4d  the age is computed from THE GATE'S OWN clock and THE GATE'S OWN
+           timestamps — never from anything the guard under test parsed.
+           R-014's lesson, and B14's.
+
+    5  IT MUST READ THE FILE AT THE GATE'S OWN ADDRESS, never one the module
+       names. B14 moved the archive to another filename with every row inside
+       it perfect and twenty-three checks followed it there.
+
+    6  THE ARCHIVE IS UNTOUCHED BY ALL OF THIS — sha256 of all three CSVs
+       printed before and after and identical. This gate reads; it never
+       writes to data/oi_history.
+
+    7  NOTHING THE PILOT READS CHANGES — sha256 of brief.py, funding.py,
+       fear_greed.py and open_interest.py printed before and after, identical.
+
+    8  THE THREE EXISTING GATES STILL PASS — 3.1-R7, 3.2-R7, 3.2b-R9, run
+       after the change, exit 0, zero red.
+
+## WHAT WOULD MAKE ME CALL THIS A FAILURE
+
+**If 2a or 3a comes back GREEN, the repair is unproven and must not ship** — it
+would mean the fault I am repairing was never there and I have built something
+for no reason. **If 4b or 4c comes back QUIET, the guard is decorative and is
+worse than nothing**, because it would put a reassuring line on the Commander's
+screen that can never turn red.
+
+## WHAT THIS REPAIR DOES **NOT** DO, SAID BEFORE IT IS BUILT
+
+1. **It does not fix the other five scheduled jobs.** They still share one log
+   and can still lose their entries. **They collect snapshot rows, which CAN be
+   re-fetched; the recorder's rows CANNOT.** Recommended, not done.
+2. **It does not explain why Windows reported `0`.** That is still unproven and
+   the evidence is gone. **The outcome check is deliberately designed so that it
+   does not need to know.**
+3. **`cockpit/brief.py` IS NOT TOUCHED.** The Commander ruled it gets no gate
+   until just before going live, so no new check goes into the one file with no
+   guard. The freshness line goes on `CHECK_STATUS.bat` instead.
+4. **A NEW FILE IS BEING CREATED**, which the last orders forbade. **That ban was
+   written for the S6/B1 repairs — changes to a test inside an existing
+   compartment.** This is a new compartment, and Law 2 says a compartment owns
+   its own code. **Saying so here, in bold, before building, because the rule is
+   that you announce a rule you are about to be measured by.**
