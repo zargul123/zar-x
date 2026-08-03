@@ -9827,3 +9827,166 @@ steps are listed there too, which my rewrite had also dropped.
 
 **RECORDED AS A SEVENTH MISTAKE. It was found by the Commander, not by me and
 not by any check** — the third time in this session that reading beat testing.
+
+
+---
+
+# 2026-08-03 (evening) — **GATE 3.2-R8 AND GATE 3.2b-R10 DECLARED. THE BAR FOR THE S6 AND B1 REPAIRS, COMMITTED ALONE, BEFORE ONE LINE OF CODE EXISTS.**
+
+*The sixteenth generation. `SESSION_ORDERS.md` carries the Commander's second
+exception: **no attack this session — repair S6 and B1 and prove them.** This
+entry is the bar. It is committed with no `.py` file in it so `git show --stat`
+can prove nobody lowered it afterwards to match what got built.*
+
+## THE PROBLEM, IN PLAIN WORDS
+
+**Every gate on this ship breaks its own file on purpose and checks that the
+alarm notices.** Three of those deliberate breaks turned out to break
+**nothing** — the file was changed, the output came back identical, and the gate
+announced *"my own lie escaped, I am decorative"* while the instrument was
+perfectly healthy.
+
+    F10  (fear_greed)     — REPAIRED 2026-07-31. Verified green again today.
+    S6   (funding)        — OPEN. Mine.
+    B1   (open_interest)  — OPEN. Mine.
+
+**NEITHER FAULT IS IN A NUMBER THE COMMANDER READS.** Both are faults in an
+alarm. All four instruments were proved green before this entry was written:
+`3.1-R7`, `3.2-R7`, `3.2b-R9`, `3.2c-R1`, every one exit 0 with zero red marks.
+
+## THE BAR — **GATE 3.2-R8**, `cockpit/funding.py`, sabotage S6
+
+**(a) A NAMED CONTROL SECTION PRINTS THREE LINES ON EVERY RUN**, on rates the
+gate makes up itself, and every one must land as required or the run is RED:
+
+    1. rates DIFFER              — the shipped rotation CHANGES the line
+    2. rates EQUAL, OLD form     — IDENTICAL. The defect, proved not remembered
+    3. rates EQUAL, REPAIRED     — CHANGES the line anyway
+
+**(b) THE CONTROL TOUCHES NO NETWORK AND NO MARKET DATA.** Same three verdicts
+on any machine, at any hour, whatever Binance is doing. A repair that only
+proves itself on a day the rates happen to differ is the same disease with the
+sign flipped.
+
+**(c) THE CONTROL NEVER CALLS THE THINGS ON TRIAL** — not `section_text`, not
+`_fmt_pct`, not the module's `CONTRACTS`. It compares using the gate's own
+constants and its own arithmetic (R-014's lesson; S14 is what happens when it
+is ignored).
+
+**(d) S6 STAYS ATTACHED TO `CONTRACTS`, AND ITS ASSET-TO-CONTRACT PAIRS ARE
+UNCHANGED** from the shipped ones. The rate-lie is not weakened by the repair.
+
+**(e) THE ORIGINAL FAULT, RE-RUN AGAINST THE REPAIRED FILE.** With all three
+rates forced equal — the exact condition that turned the gate red — the repaired
+S6 must change the block where the shipped S6 does not. Both printed, side by
+side. **A repair nobody re-tested is a hope.**
+
+**(f) ALL EIGHTEEN FUNDING SABOTAGES STILL CAUGHT**, every original restored,
+and `_core_checks`, `_partial_checks`, `_offline_checks` and `_silence_checks`
+all pass again afterwards.
+
+## THE BAR — **GATE 3.2b-R10**, `data/open_interest.py`, sabotage B1
+
+**(g) THE SAME THREE-LINE CONTROL**, on a timestamp the gate holds, no network:
+
+    1. clock is NOT UTC          — the shipped local conversion CHANGES it
+    2. clock IS UTC, OLD form    — IDENTICAL. The defect
+    3. clock IS UTC, REPAIRED    — CHANGES it anyway
+
+**(h) THE REPAIRED B1 CHANGES `_utc_iso`'S OUTPUT AT ANY MACHINE OFFSET,
+INCLUDING EXACTLY ZERO.** Its fallback shift is a fixed number of seconds
+**typed out in the gate**, never read from the module — and it is **NOT** one
+hour, because one hour is already sabotage B2 and two sabotages telling the same
+lie is one sabotage.
+
+**(i) THE FINISHED GATE IS RUN TWICE, END TO END** — once on this laptop's clock
+and once with `TZ=UTC0` — and **BOTH runs must be exit 0 with zero red marks and
+B1 CAUGHT in both.** A repair for a UTC-only fault that was never run on a UTC
+clock is not tested.
+
+**(j) THE RUN PRINTS THE OFFSET IT IS ACTUALLY RUNNING AT.** *"I ran it under
+UTC"* is a claim; the printed offset is evidence. **`schtasks` reported success
+for a job that did nothing, and a status screen printed that success as OK.**
+
+**(k) EVERY SABOTAGE IN `_SABOTAGES` AND `_FILE_SABOTAGES` STILL CAUGHT, IN BOTH
+RUNS.**
+
+## THE BAR — **BOTH REPAIRS**
+
+**(l) NOTHING THE PILOT READS CHANGES, PROVED TWO WAYS, NEVER ASSERTED.** Every
+diff hunk at or after the `__main__` line — `funding.py` 160, `open_interest.py`
+243 — **AND** the sha256 of the production half unchanged, printed before and
+after:
+
+    cockpit/funding.py        95069d1bef8316d766910abda18809317400ac1067c4086091aaf965c121a156
+                              (lines 1..159 joined by CRLF, WITH a trailing CRLF)
+    data/open_interest.py     5347bfecdf2ccfb2009770f9161dd6c51374f2ccdeae9a8c50793f3a57e2096f
+                              (lines 1..242 joined by CRLF, NO trailing separator)
+
+**Both recipes were reproduced from the orders' stated digests before this entry
+was written, so the measuring script is proved before it is trusted.**
+
+**(m) `py_compile` CLEAN BEFORE EITHER GATE RUNS.** Python here is 3.10.
+
+**(n) NO NEW FILE, NO NEW DEPENDENCY, NO EXTRA CALL ON THE BRIEF'S PATH.**
+
+**(o) `data/collection_guard.py --gate` GREEN BEFORE I FINISH**, and
+`cockpit/fear_greed.py` still green with F10 CAUGHT. **A red F10 is a regression
+of a shipped repair and is SERIOUS.**
+
+**(p) ONE OPEN REVIEW ITEM AGAINST EACH OF MY TWO REPAIRS.** I may not clear my
+own. The session after me does that.
+
+**PASS = every check green including every sabotage CAUGHT. Anything less is a
+FAIL, is not committed as a pass, and is not called "mostly passed."**
+
+## **>>> A DEVIATION FROM MY ORDERS, DECLARED IN BOLD BEFORE THE CODE EXISTS**
+
+**My orders say the repaired S6 must speak "using a number the GATE holds."
+IT CANNOT, AND HERE IS WHY, IN ONE SENTENCE: S6 is attached to the `CONTRACTS`
+dictionary, and nothing a `CONTRACTS` payload can contain decides a RATE —
+every rate on that line comes from Binance over the network.**
+
+So no number this gate holds can reach the printed block through S6's own
+attachment point. **What a `CONTRACTS` payload DOES own outright is the labels
+and their ORDER, because those come from the dictionary's keys.**
+
+    >>> SO THE GATE HOLDS AN ORDER INSTEAD OF A NUMBER.
+
+The repaired payload carries **the same three asset-to-contract pairs as the
+shipped one**, with the keys typed in a rotated order. The rate-lie is unchanged
+byte for byte; a label-lie is added on top of it, and the label-lie is
+guaranteed visible on every machine and in every market because the honest block
+always begins `BTC ` and the sabotaged one never does.
+
+**TWO ALTERNATIVES CONSIDERED AND REJECTED, NAMED HERE SO HE CAN OVERRULE ME:**
+
+1. **Move S6 off `CONTRACTS` and onto `read_estimate`**, where a gate-held rate
+   really could be injected. **REJECTED: `GATE_CONTRACTS` — the gate's own
+   ticker map, twenty lines into `__main__` — exists for the single reason that
+   S6 miswires `CONTRACTS`.** Moving S6 elsewhere would leave that independence
+   untested by anything, and it would double the drill's network calls.
+2. **Point one asset at some other real Binance contract and hope its rate
+   differs. REJECTED: hoping is not a guarantee, and "whatever the market is
+   doing" is the disease being cured.**
+
+## THE EDGE CASES, NAMED BEFORE THE CODE RATHER THAN DISCOVERED AFTER
+
+1. **All three funding rates format identically** — the whole point. Measured at
+   up to 15.84% of settlements, **an UPPER BOUND from settled rates, not the
+   live figure** (R-034's own author filed that limit with the finding).
+2. **Two of three equal, one different** — the shipped S6 already speaks; the
+   repaired one must too, not instead.
+3. **`-0.0` formats `-0.0000%` and `0.0` formats `+0.0000%`** — the sign
+   character always moves, so those two are never "equal". Already measured.
+4. **A machine at exactly UTC+0** — B1's whole point, and what the cloud
+   watchman almost certainly runs at.
+5. **A machine at a half-hour offset (UTC+5:30)** — local conversion already
+   differs, so the repaired B1 must NOT shift on top of it and become B2.
+6. **A zone that is UTC+0 in winter and UTC+1 in summer** — the test is per
+   timestamp, not per machine, so it must come out right either way.
+7. **`TZ=UTC0` may simply be ignored by Windows Python.** If it is, the second
+   run proves nothing at all. **That is why (j) requires the run to print the
+   offset it measured rather than the offset I asked for.**
+
+---
