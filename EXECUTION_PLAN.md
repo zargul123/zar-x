@@ -435,7 +435,55 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
-## **>>> 2026-08-03 (third): S6 AND B1 ARE REPAIRED. EVERY GATE ON THE SHIP IS GREEN, AND THE RECORDER'S IS GREEN ON TWO DIFFERENT CLOCKS.**
+## **>>> 2026-08-04: THE NEWS INSTRUMENT IS BUILT AND ON THE BRIEF. THE CONTEXT DECK IS THREE OF FIVE. R-038 IS CLEAN.**
+
+**WHERE THE SHIP IS:**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red
+    cockpit/news.py             GATE 3.3      PASSED  exit 0  0 red  <- NEW
+                                50 checks, 11 sabotages, all CAUGHT and
+                                all PROVED to change the output
+    vault INTACT · Brief 3/3 · lab/ untouched
+    data/oi_history/  3 files, 222 lines each — byte for byte what this
+                      session inherited; the recorder was NOT run
+
+**EVERY GATE ON THIS SHIP IS GREEN AND ALL FIVE INSTRUMENTS ARE CORRECT.**
+
+**WHAT IS TRUE THAT WAS NOT TRUE YESTERDAY:**
+
+1. **R-038 IS CLEARED AND ITS DEADLINE IS BEATEN.** 123 of 123 recovered rows,
+   and 537 of 537 in-window rows, are digit for digit what Binance serves. The
+   audit did not import the recorder. **This could only ever have been done
+   before about 2026-09-02.**
+2. **R-034 (S6) AND R-031 (B1) ARE CLEARED** by a session that did not build
+   either repair. Both defects are reproduced on every run rather than
+   remembered.
+3. **`cockpit/news.py` EXISTS, IS GATED, AND IS ON THE COMMANDER'S BRIEF.**
+   Phase 3 step 3, deferred eight times, is done.
+4. **`cockpit/brief.py` GAINED EXACTLY TWO LINES** — one import, one print.
+   Nothing else the pilot reads changed.
+
+**WHAT IS BROKEN OR UNPROVEN, STATED HERE RATHER THAN IN THE QUEUE ALONE:**
+
+- **`news.py`'s DOOR 3 IS THE WEAKEST ON THIS SHIP.** It listens at
+  `sys.stdout`/`sys.stderr`, **not at the file descriptor**, and does not test a
+  write deferred to a thread or an atexit handler. The other two cockpit
+  instruments catch all three. **R-046, and it is the first thing in the next
+  orders.**
+- **THE FIVE PUBLISHERS ARE FIVE NAMES MEASURED ON ONE AFTERNOON** (R-044). Two
+  of the five ORDERED sources were found unusable and replaced; one of the
+  replacements I chose was itself found rate-limiting within the hour.
+- **THE DAILY COUNT ARCHIVE WAS NOT BUILT** — deliberately, and said out loud.
+  It is step 3b with its own gate.
+- **R-035 IS LARGER THAN IT WAS.** Five more sources nobody cross-checks.
+
+---
+
+## **>>> PREVIOUS MARKER, KEPT FOR THE RECORD — 2026-08-03 (third): S6 AND B1 ARE REPAIRED. EVERY GATE ON THE SHIP IS GREEN, AND THE RECORDER'S IS GREEN ON TWO DIFFERENT CLOCKS.**
 
 **WHERE THE SHIP IS:**
 

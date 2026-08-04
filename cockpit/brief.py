@@ -22,6 +22,7 @@ from regime.vane import RegimeVane
 from risk.calculator import RiskCalculator
 from cockpit.fear_greed import section_text as fear_greed_section
 from cockpit.funding import section_text as funding_section
+from cockpit.news import section_text as news_section
 
 TIMEFRAME = '4h'
 CANDLES = 300
@@ -89,6 +90,7 @@ def run_brief() -> int:
     # says so in its own line and the rest of the deck prints unchanged.
     print(fear_greed_section())
     print(funding_section())
+    print(news_section())
     print(f"\n{'=' * 62}")
     print(f"  {ok}/{len(ASSETS)} instruments reporting. "
           f"Facts, not advice — the pilot decides.")

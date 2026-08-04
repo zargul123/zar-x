@@ -10559,3 +10559,191 @@ fail-safe, its own duplicate guard and its own gate** — `open_interest.py` is
 half of both is exactly what "a half-built part is worse than no part" forbids.
 **It is written into the next session's orders as its own step with its own
 gate, and the Commander is told in the report rather than left to notice.**
+
+---
+
+# 2026-08-04 — **R-038 IS CLEAN, THE TWO REPAIRS HOLD, AND THE NEWS INSTRUMENT IS BUILT AND ON THE BRIEF.**
+
+*Seventeenth generation. PART 1 was done, capped exactly as the Commander ruled.
+PART 2 was built. **The cap died with this session and the orders below restore
+the full, uncapped attack.***
+
+## JOB 1 — R-038. **123 OF 123 RECOVERED ROWS ARE EXACTLY WHAT BINANCE SERVES. CLEARED.**
+
+**THE DEADLINE IS MET WITH FOUR WEEKS TO SPARE AND IT WILL NEVER COME ROUND
+AGAIN.** These rows could only be checked while inside Binance's rolling 30-day
+window — until about 2026-09-02. It had already been deferred once.
+
+**METHOD, AND THE PART THAT MATTERS:** the audit script **does not import
+`data/open_interest.py`.** It builds its own request, parses its own JSON and
+formats its own timestamps, so a fault in the recorder cannot also be the thing
+that judges the recorder. That is `THE_PATTERN.md`'s rule (b) applied to a
+one-off check rather than to a gate.
+
+    run 2026-08-04T13:06:47Z, all three assets
+    rows compared ................ 537
+    rows matched ................. 537
+    rows MISMATCHED .............. 0
+    THE 123 RECOVERED ROWS ....... 123 compared, 123 matched, 0 mismatched
+    stored rows outside window ... 126 (uncheckable now and forever)
+    live rows not yet on disk .... 21 (7 per asset since the 2026-08-03 write)
+
+**EVERY FIGURE MATCHED DIGIT FOR DIGIT — `sumOpenInterest` and
+`sumOpenInterestValue` both, as strings, so no float comparison could hide a
+difference.** **I did not create R-038, so I may clear it, and I do.**
+
+**TWO THINGS THE CHECK ALSO SHOWED, NEITHER A FAULT.** 126 stored rows per the
+three files have now fallen out of Binance's window — they are correct as far as
+anyone will ever be able to say, and that is exactly why the recorder exists. And
+21 rows exist live that are not on disk, because the recorder runs WEEKLY and
+last wrote on 2026-08-03; next run 10-Aug-2026 09:00.
+
+## JOB 2 — THE CAPPED PASS. **FOUR QUESTIONS, ALL FOUR ANSWERED, NOTHING FOUND.**
+
+**I OBEYED THE CAP. I did not invent a single new way to break either repair.**
+The Commander's ruling was that an alarm which cannot make a price, a rate or a
+saved row wrong does not get re-audited while a real build waits. It did not.
+
+**Q1 — DO ALL FOUR GATES STILL PASS?** Yes. Every one exit 0, zero red marks.
+
+    cockpit/fear_greed.py     GATE 3.1-R7    PASSED  exit 0  0 red
+    cockpit/funding.py        GATE 3.2-R8    PASSED  exit 0  0 red
+    data/open_interest.py     GATE 3.2b-R10  PASSED  exit 0  0 red
+      the same file TZ=UTC0   GATE 3.2b-R10  PASSED  exit 0  0 red
+    data/collection_guard.py  GATE 3.2c-R1   PASSED  exit 0  0 red
+
+**Q2 — DOES `2b) S6'S FOUR BRANCHES` STILL PRINT ALL FOUR, AND IS THE OLD FORM
+STILL IDENTICAL ON MATCHING RATES?** Yes to both, and the second half is the
+one that matters — it is the standing proof that the defect was real rather
+than remembered:
+
+    rates DIFFER, REPAIRED form ....... CHANGED, as required
+    rates DIFFER, OLD form ............ CHANGED — the repair did not weaken it
+    rates EQUAL, OLD form ............. IDENTICAL, as required  <<< the defect
+    rates EQUAL, REPAIRED form ........ CHANGED, as required
+
+**Q3 — DOES `(o) B1'S BRANCHES` PRINT A MEASURED OFFSET?** Yes, and both
+numbers are printed as evidence rather than claimed:
+
+    normal run ....... "THIS RUN'S ACTUAL MACHINE OFFSET, MEASURED: +5.00 h from UTC"
+    TZ=UTC0 run ...... "THIS RUN'S ACTUAL MACHINE OFFSET, MEASURED: +0.00 h from UTC"
+
+At `+0.00` the OLD form came out IDENTICAL — the defect — and the REPAIRED form
+still spoke. That is the whole of R-031 reproduced and fixed in one run.
+
+**Q4 — IS IT ACCEPTABLE THAT S6'S LIE IS NOW CATCHABLE BY LABEL ORDER ALONE?
+YES.** One line, as asked, and the reasoning in one more: the gate's judgement is
+**whole-block exact equality**, so order and values sit inside the same
+comparison and there is no path today where catching the order substitutes for
+catching the rates. The residue R-042 names is a hypothetical about a future
+gate nobody has written, and case 2 of the four-branch control — the OLD form on
+differing rates, required to speak — is a standing tripwire against exactly that
+drift. **And making a sabotage LOUDER is the right direction: the failure that
+earned this repair was a sabotage too QUIET to be seen.**
+
+**VERDICTS. R-034 (S6) HOLDS. R-031 (B1) HOLDS.** Both repaired, both proved
+this run, neither by the session that built them. **R-042 and R-043 remain OPEN
+— they are the builder's own doubts about the residue, and clearing them is not
+the same act as ruling the repairs good.**
+
+## JOB 3 — **THE NEWS INSTRUMENT IS BUILT, GATED, AND ON THE COMMANDER'S BRIEF. THE NINTH DEFERRAL DID NOT HAPPEN.**
+
+**`cockpit/news.py`, 813 lines. `GATE 3.3 PASSED — 50 checks, 0 red`, eleven
+sabotages, every one CAUGHT and every one PROVED to change what somebody reads
+before its verdict was counted.** The gate was declared in commit `016024e`,
+alone, with no `.py` in it.
+
+**WHAT HE NOW SEES, MEASURED FROM A REAL RUN OF `cockpit\brief.py`:**
+
+    News (24h)   : 81 stories from 5 of 5 publishers
+      "Sorry everyone, Bitcoin is headed down to $43,500: Michael Terpin" — Cointelegraph, 2m ago
+      "Dollar Index Trapped at 100 as Hawkish Fed Meets Official Selling" — BeInCrypto, 5m ago
+      "After Leaked Buy Yen Note, Bessent Explains U.S. Move to Save Japanese Currency" — BeInCrypto, 24m ago
+    (crypto headlines from 5 publishers — information, not a signal)
+
+**AND AWKWARD CASE 1 ARRIVED ON THE VERY FIRST REAL RUN, UNPROMPTED.** The top
+headline is a price prediction. **It is printed in quotes, attributed to
+Cointelegraph and to Michael Terpin by name, and the instrument's own voice says
+nothing about it.** That is the Commander's own ruling working the first time it
+was tested by reality rather than by me.
+
+**THE CONTEXT DECK IS NOW THREE INSTRUMENTS OF FIVE.** It sat at two for six
+sessions.
+
+## **>>> R-036 IS MEASURED, AND IT FOUND TWO THINGS NOBODY WAS LOOKING FOR**
+
+The numbers are in the gate-declaration entry above, written before any code.
+**The headline-collision fear turned out to be real but rare: 0 of 4 feeds
+changed their top story in 90 seconds, and a publisher lands about one story an
+hour.** The one-fetch-two-readers door was built anyway, because it is nearly
+free and it is what lets GATE 3.3 demand byte-for-byte equality instead of
+hoping.
+
+**BUT THE MEASUREMENT KILLED TWO OF THE FIVE ORDERED PUBLISHERS**, and the
+second one is the dangerous shape:
+
+**BLOCKWORKS ANSWERS HTTP 200 WITH FIFTY REAL, WELL-FORMED, CORRECTLY-DATED
+STORIES AND THE NEWEST IS 209 DAYS OLD.** The feed is abandoned and nothing in
+the response says so. **An instrument written the obvious way would have put a
+January headline on his Brief this morning under today's date.** It is
+`open_interest.py`'s empty-list trap wearing its best suit — and strictly worse,
+because zero stories at least looks wrong while fifty stories look perfect.
+**A dead-feed guard the orders never asked for is check (d) of GATE 3.3 and is
+in the file from birth.** THE BLOCK is edge-blocked: HTTP 403 on four addresses
+and two user-agents, eight attempts, no path in.
+
+## **>>> WHAT I GOT WRONG, AND BOTH OF THEM ARE THE SAME MISTAKE**
+
+**1. I ADOPTED CRYPTOSLATE ON A SINGLE PROBE — THE EXACT ERROR R-036'S SECOND
+DOUBT WARNED ABOUT — AND MY OWN GATE CAUGHT ME INSIDE THE HOUR.** R-036 said, in
+writing, *"I have not measured their uptime, whether their addresses are stable,
+or whether any of them rate-limits a repeat caller."* I read that, wrote
+CryptoSlate into `FEEDS` on one fresh reading, and the first full gate run came
+back `[no data: CryptoSlate]`. Measured immediately after: **HTTP 429 behind a
+Cloudflare "Just a moment..." challenge.** It rate-limits a repeat caller.
+**Swapped for BeInCrypto, which answered HTTP 200 on three consecutive rounds
+twenty seconds apart.** The gate declaration above still names CryptoSlate; **the
+measurement wins and this is the correction, written down rather than quietly
+edited into the older entry.**
+
+**THE PART WORTH KEEPING: THE FAIL-SAFE BEHAVED PERFECTLY WHILE I WAS WRONG.**
+CryptoSlate's 429 produced `[no data: CryptoSlate]` on the deck and the other
+four publishers printed normally. **The instrument named its own missing source
+instead of quietly showing four and calling it five** — which is awkward case 5,
+tested by accident, by a real outage, on its first day.
+
+**2. I WROTE A SABOTAGE THAT COULD NOT CHANGE ANYTHING — WHILE WRITING THE RULE
+THAT FORBIDS IT.** My first draft's N9 was `HEADLINES` 3 → 3. **It is a no-op.
+It would have been reported INERT and failed my own gate.** I caught it by
+reading the list back before running it, not by any check. **F10, S6 and B1 were
+each this exact fault and each cost a different generation a session.** The
+lesson is not that I caught it — it is that **a person who had just spent an
+hour writing "a sabotage must be proved to change the output" still wrote an
+inert sabotage twenty minutes later.** The rule cannot rely on care. It is
+enforced by machine in `(l)`, and that is why.
+
+## WHAT GATE 3.3 DOES **NOT** PROVE — SAID HERE, NOT IN A FOOTNOTE
+
+**DOOR 3 IN THIS FILE LISTENS AT `sys.stdout` AND `sys.stderr` — THE PYTHON
+LEVEL — NOT AT THE FILE DESCRIPTOR**, and nothing in it tests a write deferred
+to a thread or to an `atexit` handler. The two cockpit instruments have that
+machinery; this one does not yet. **The gate's own pass line says so in plain
+words rather than copying `funding.py`'s wording, because R-033 exists precisely
+because a door-3 pass line once claimed more than it checked.** It is filed OPEN
+as R-046.
+
+**AND THE DAILY COUNT ARCHIVE WAS NOT BUILT.** It was in the orders and the
+Commander ruled yes to it. **It is a WRITER, and a writer on this ship needs its
+own fail-safe, its own duplicate guard and its own gate.** Building half of it
+beside a full instrument is what *"a half-built part is worse than no part"*
+forbids. **It is step 3b of the next session's orders with its own gate, and he
+is told in the report rather than left to find out.**
+
+## HOUSEKEEPING
+
+**Nothing the pilot reads changed except the thing that was supposed to.**
+`cockpit/brief.py` gained exactly TWO lines — one import, one `print` — proved
+by `git diff --stat`: `1 file changed, 2 insertions(+)`. `fear_greed.py`,
+`funding.py`, `open_interest.py` and `collection_guard.py` were **not touched at
+all**, and `git status` names only `brief.py`, the new `news.py` and the cloud
+watchman's own snapshot CSV.
