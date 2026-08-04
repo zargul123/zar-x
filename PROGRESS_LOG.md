@@ -10410,3 +10410,152 @@ scheduled task works and my line did not — and **`SHOW_REPORT.bat` opens the
 latest Brief in Notepad.** Those are his buttons. **A future session handing him
 a way to run something should reach for the `.bat` first and the command line
 second.**
+
+---
+
+# 2026-08-04 — **GATE 3.3 IS DECLARED HERE, BEFORE `cockpit/news.py` EXISTS.**
+
+**THIS ENTRY IS COMMITTED ALONE, WITH NO `.py` IN THE COMMIT.** `git show --stat`
+on this commit is the proof that the bar was written before the thing it
+measures, and that nobody lowered it afterwards to match what got built. That is
+the twenty-second use of this rule and the twenty-second audit it must survive.
+
+## WHAT IS BEING BUILT, IN ONE LINE
+
+**A fourth Context Deck instrument: three crypto headlines and a 24-hour story
+count, read straight from five publishers' own public feeds.** Phase 3, step 3.
+Deferred eight times. **INFORMATION ONLY — never a sentiment score, never a
+weight, never a signal.**
+
+## R-036 IS MEASURED. THE NUMBERS CAME BEFORE THE DESIGN, WHICH IS THE POINT.
+
+**THE FEAR:** headlines move, so the instrument's fetch and the gate's fetch
+would see different top stories and **the gate would go red with nothing wrong**
+— R-021 and R-034 arriving by design.
+
+**MEASURED 2026-08-04 13:08-13:10Z, each feed fetched twice 90 seconds apart:**
+
+    source          top story changed in 90 s   new stories   median gap   per hour
+    CoinDesk                 no                      0          32.8 min     0.96
+    Cointelegraph            no                      0          47.8 min     1.13
+    Decrypt                  no                      0          60.9 min     0.33
+    Blockworks               no                      0         444.9 min     0.06
+    The Block          NOT MEASURABLE - HTTP 403
+
+**0 of 4 changed their top story. A publisher lands roughly one story an hour.**
+**SO THE COLLISION IS REAL BUT RARE, NOT THE DESIGN-BREAKER IT WAS FEARED TO
+BE** — and the ordered fix is being built anyway, because it is nearly free and
+it makes the gate deterministic instead of merely lucky. **One fetch, two
+readers: the gate builds the bytes and hands the SAME bytes to the instrument
+and to its own rebuild**, plus a separate deliberately LOOSE live check so that
+something still tests the real trip to the internet.
+
+## **>>> AND THE MEASUREMENT FOUND SOMETHING NOBODY WAS LOOKING FOR. TWO OF THE FIVE ORDERED PUBLISHERS ARE UNUSABLE.**
+
+**THE BLOCK — HTTP 403, AND IT IS NOT THE ADDRESS.** Four addresses
+(`/rss.xml`, `/feed`, `/feeds/rss`, `/rss/all`), two user-agents, eight
+attempts, **403 every time** with a ~5.5 KB block page. It is edge-blocked to
+non-browsers. **There is no path in.**
+
+**BLOCKWORKS — AND THIS ONE IS THE DANGEROUS SHAPE.** It answers **HTTP 200**
+with **50 real, well-formed, correctly-dated stories**. Every one of them is
+from **December 2025 or early January 2026**. Newest: `2026-01-07T14:00:00Z` —
+**209 DAYS OLD.** The feed is abandoned and nothing about the response says so.
+
+    A recorder written the obvious way would have printed a JANUARY headline
+    on his Brief this morning, under today's date, and nothing anywhere
+    would have said a word.
+
+**THAT IS `open_interest.py`'S EMPTY-LIST TRAP WEARING ITS BEST SUIT.** The
+orders named awkward case 7 — *"a feed that answers HTTP 200 with ZERO
+stories"* — and this is strictly worse, because zero stories at least looks
+wrong. **Fifty stories look perfect.** So a guard the orders did not ask for is
+being built in from birth and is check (d) below.
+
+**THE SUBSTITUTION, AND IT IS A DECISION ON THE COMMANDER'S DESK.** The ruling
+he made was *"five publishers, different owners, NOT one hundred"* — that is the
+principle. The five NAMES came from a single probe on 2026-07-31. Two are now
+measured dead. **Law 2 says the compartment owns its own source list**, so the
+list is being kept at five with two replacements, both measured fresh within the
+hour on 2026-08-04:
+
+    KEPT       CoinDesk         25 items   newest 15 min old
+               Cointelegraph    30 items   newest 37 min old
+               Decrypt          39 items   newest 41 min old
+    ADDED      CryptoSlate      10 items   newest 30 min old
+               Bitcoin.com      10 items   newest 26 min old
+    DROPPED    The Block        HTTP 403 x8
+               Blockworks       HTTP 200, 209 DAYS STALE
+
+**HE MAY OVERRULE THE TWO NAMES WITH ONE WORD, AND CHANGING THEM IS A ONE-LINE
+EDIT INSIDE THIS ONE FILE** — which is the whole reason Law 2 puts the list
+there. **Candidates measured and NOT chosen, so he is not asked to trust a
+shortlist of one:** BeInCrypto (fresh, 25 min), The Defiant (fresh, 100 items),
+Bitcoin Magazine (SLOW — newest 15.9 h), Bitcoinist (SLOW — 27.4 h),
+CoinJournal (thin — 9 items, median gap 25 h), CryptoBriefing (**rejected: 25.8
+stories/hour, a firehose that would drown a five-publisher count on its own**).
+
+## **GATE 3.3 — THE BAR, WRITTEN NOW, MEASURED LATER**
+
+    (a)  THE MEASUREMENT CAME FIRST. R-036's numbers are in this entry, above,
+         in the commit that precedes the code.
+    (b)  INJECTED BYTES, EXACT EQUALITY. The gate builds its own feed XML from
+         its own constants, hands the SAME bytes to the instrument, rebuilds
+         the whole printed block by its own arithmetic, and demands it match
+         BYTE FOR BYTE. **Not "the words are present" — that bar is what S14
+         cost.**
+    (c)  A REAL LIVE FETCH, LOOSE ON PURPOSE. The instrument reaches the real
+         internet and the bar is only that something headline-shaped came
+         back. **Never exact equality.** A gate that only judges handed-over
+         bytes never tests the trip to the internet and is decorative.
+    (d)  **THE DEAD-FEED GUARD, EARNED BY BLOCKWORKS TODAY.** A feed that
+         answers HTTP 200 with fifty perfect, months-old stories must be named
+         as no-data and must contribute **NEITHER a headline NOR one unit of
+         the count.**
+    (e)  THE EMPTY-FEED GUARD. HTTP 200 with zero stories is a loud failure for
+         that publisher, **never quiet weather.**
+    (f)  ONE PUBLISHER DOWN, THE OTHERS UP. The block prints what answered and
+         **NAMES what did not**, exactly as funding prints `[no data: SOL]`.
+         Silently dropping a source is S10.
+    (g)  ALL PUBLISHERS DOWN. One honest line, no traceback, nothing else —
+         judged by EXACT EQUALITY against the gate's own verbatim copy.
+    (h)  NON-ASCII SURVIVES BYTE FOR BYTE — accents, emoji, currency symbols.
+         **This ship has been bitten by character corruption twice.**
+    (i)  A VERY LONG HEADLINE IS CLIPPED **VISIBLY**, never silently, and the
+         clip marker itself is checked.
+    (j)  A HEADLINE THAT IS ADVICE is printed in quotes and attributed, and
+         **the instrument's own voice never adopts it.** F7 and S15 exist
+         because a doorway once printed advice of its own.
+    (k)  A HEADLINE CARRYING THIS SHIP'S OWN DISCLAIMER WORDING satisfies
+         nothing. **That is exactly the lazy check S14 walked through.**
+    (l)  **EVERY SABOTAGE IS PROVED TO CHANGE THE OUTPUT BEFORE ITS VERDICT
+         COUNTS.** A sabotage whose output is identical to the honest one is
+         reported **INERT** and **FAILS THIS GATE**. **This is the rule that
+         cost this ship four sessions across F10, S6 and B1 — three
+         retrofits. This file is the second ever built with it from birth.**
+    (m)  DOOR 1. The gate never reads its expectation out of the file on
+         trial, never calls the helper under test to judge itself, and never
+         asks the module where to look.
+    (n)  DOOR 2. The doorway NEVER raises, on every path.
+    (o)  DOOR 3. The doorway prints NOTHING to stdout or stderr on any path,
+         **and the ear is proved able to hear before its silence is believed.**
+         **The pass line will say what was actually tested** — R-033 is on the
+         books because door 3's wording claimed more than it checked.
+    (p)  DEDUPLICATION. The same story id twice counts once.
+    (q)  THE WINDOW. Only stories inside the last 24 hours are counted, and a
+         story with no usable date is excluded and cannot be quoted.
+
+**PASS = exit 0, ZERO red marks, every sabotage CAUGHT, and every sabotage
+proved able to change the output. Anything less is a FAIL, is not committed as
+a pass, and is not called "mostly passed."**
+
+## WHAT IS **NOT** BEING BUILT THIS SESSION, SAID PLAINLY RATHER THAN QUIETLY
+
+**THE DAILY COUNT ARCHIVE IS NOT IN THIS BUILD.** The orders describe it and
+the Commander ruled yes to it. **It is a WRITER, and a writer needs its own
+fail-safe, its own duplicate guard and its own gate** — `open_interest.py` is
+2279 lines and 1600 of them are that argument. **The orders themselves rank it
+"cheap insurance for a maybe", and rank the instrument as the point.** Building
+half of both is exactly what "a half-built part is worse than no part" forbids.
+**It is written into the next session's orders as its own step with its own
+gate, and the Commander is told in the report rather than left to notice.**
