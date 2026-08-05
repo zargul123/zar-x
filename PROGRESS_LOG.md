@@ -10882,3 +10882,170 @@ WILL move, and that is the job, not a leak.** Both hashes — before and after �
 and the new `__main__` line number are recorded below after the run, so the next
 session inherits a recipe that is true rather than one it must re-derive.
 
+
+---
+
+# 2026-08-05 — EIGHTEENTH GENERATION · **THE RESULT: GATE 3.3-R1 PASSED, 54 CHECKS, 0 RED. X1 IS REPAIRED. I BUILT NOTHING ELSE, AND THAT WAS THE RULE, NOT A SHORTAGE OF TIME.**
+
+## WHAT I DID, IN ORDER
+
+**PART 1 — I ATTACKED `cockpit/news.py` WITH FIVE SABOTAGES THE BUILDER NEVER
+WROTE.** The bars for the review were written down before anything was run.
+Control first: the untouched copy of the whole repo, outside the repo, passed
+GATE 3.3 — 50 checks, 0 red — so the rig was known good before any conclusion
+from a broken copy meant anything.
+
+    X1  markup inside a <title>            -> **FOUND. SERIOUS. REPAIRED.**
+    X2  a future stamp defeats the
+        dead-feed guard                    -> FOUND. SMALL. FILED, NOT FIXED.
+    X3  one feed carrying both RSS and
+        Atom                               -> FOUND. SMALL. FILED, NOT FIXED.
+    X4  the last inch — does the BRIEF
+        print what the doorway returned?   -> **ATTACKED HARD, FOUND NOTHING.**
+    X5  is door 3 deaf below sys.stdout?   -> **R-046 CONFIRMED, and SMALL.**
+
+**THE BUILDER POINTED ME AT FIVE PLACES AND THE REAL FINDING WAS IN NONE OF
+THEM.** X1 is not on his list. **That is Layer 3 doing the one thing a builder
+cannot do for themselves, and it is worth saying plainly: his own list was
+honest, careful, and looked in the wrong place — which is exactly why the list
+is not allowed to be the review.**
+
+## X1 — THE REPAIR
+
+**The fault, restated in one line:** `ElementTree.findtext` returns the text
+BEFORE an element's first child and nothing after it, so a headline written
+`Bitcoin <b>crashes</b> 20% as ETF outflows accelerate` reached the Brief as the
+single word `Bitcoin`, with no clip mark and nothing anywhere saying so.
+
+**The repair:** a helper `_text(parent, tag)` that returns `''.join(el.itertext())`
+— every scrap of text inside the element — used at all five places `_parse` read
+a field. **It fixes the CLASS, not the instance**: title, guid, link, pubDate and
+the Atom equivalents were all reading through the same broken door. **Desk item 8
+has complained for twelve generations that sessions fix the instance and leave
+the pattern; this one did not.**
+
+**THE ORIGINAL FAULT RE-RUN AGAINST THE REPAIR (rule (e) — a repair nobody
+re-tested is a hope):**
+
+    BEFORE  "Bitcoin" — CoinDesk, 5m ago
+    AFTER   "Bitcoin crashes 20% as ETF outflows accelerate" — CoinDesk, 5m ago
+
+    BEFORE  markup FIRST -> story dropped, [no data: CoinDesk], 4 of 5
+    AFTER   "Breaking: Bitcoin crashes 20% as ETF outflows accelerate", 5 of 5
+
+## THE BAR WAS MET — ALL SEVEN CLAUSES, NONE WAIVED
+
+    (r1) markup in the middle survives whole, EXACT EQUALITY ......... GREEN
+    (r2) markup first survives whole, story NOT dropped .............. GREEN
+    (r3) a <guid> carrying markup is read whole, so the story
+         counted ONCE and not twice ................................. GREEN
+    (r4) markup + over 84 chars still clipped VISIBLY, judged
+         against the SAME string as the plain case in (i) ........... GREEN
+    (r5) N12 — `_parse` reverted to leading-text-only — was PROVED
+         to change the block and then CAUGHT. **Not INERT.** ......... GREEN
+    (r6) all 50 pre-existing checks still green, live fetch included . GREEN
+    (r7) the five real publishers re-probed, the number RECORDED ..... DONE
+
+**GATE 3.3-R1: 54 checks, 0 red, exit 0.** Twelve sabotages, twelve CAUGHT, and
+the originals proved restored — `_text` added to the restoration assertion so
+the drill cannot leave its own break installed.
+
+## (r7) THE MEASUREMENT, RECORDED WHATEVER IT SAID — AND IT WEAKENED MY FINDING
+
+**All five shipped publishers, read once each on 2026-08-05, every title element
+inspected:**
+
+    CoinDesk        25 titles      markup inside: 0
+    Cointelegraph   30 titles      markup inside: 0
+    Decrypt         59 titles      markup inside: 0
+    BeInCrypto      12 titles      markup inside: 0
+    Bitcoin.com     10 titles      markup inside: 0
+                   ---                          ---
+                   136                            0
+
+**X1 WAS NOT FIRING THIS MORNING AND I SAY SO IN THE SAME BREATH AS THE
+FINDING.** I ran that probe specifically to try to talk myself out of my own
+finding, and I have reported the result that argues against me. **The Commander
+may rule X1 SMALL on this ground and he would not be being careless.** My
+recommendation stayed SERIOUS because Step 2 has two bad answers: it arrives BY
+ACCIDENT (2.1) and the output is plausible on its face (2.2).
+
+## CONFINEMENT — PROVED TWO WAYS, NOT ASSERTED
+
+**THE PRODUCTION HALF CHANGED, AND THAT WAS THE JOB.** `_parse` is what the
+pilot reads; repairing it is the whole point, so the hash MUST move. Both are
+recorded here so the next session inherits a true recipe:
+
+    __main__ was at line 250, production half = lines 1..249
+             is  at line 272, production half = lines 1..271
+
+    BEFORE  0f0d638662695c1de49d074823c09fe6aac841447a5fa6d1d9adb48e3ca9346a
+    AFTER   503663762315b2f271d74dd2bdcf43bdd3c1840fc24462bc1f2e2643f5bc99a4
+
+**THE RECIPE ITSELF WAS RE-VERIFIED RATHER THAN TRUSTED**, as the orders demand:
+lines 1..271 joined by CRLF **WITH** a trailing CRLF, and the join PROVED to be
+byte-for-byte the raw prefix of the file — the tool refuses to print a hash
+otherwise. The no-trailing-separator form is `6f4f69f4377e4158…` and is NOT the
+prefix. **Bare LF anywhere in the file: 0.**
+
+**AND THE DIFF HUNKS.** Exactly THREE hunks fall in the production half —
+`@@ -126,0 +127,22 @@` (the new `_text`, immediately above `_parse`),
+`@@ -139,4 +161,4 @@` and `@@ -145,4 +167,4 @@` (the two call sites inside
+`_parse`). **Every other hunk is at or after `if __name__ == '__main__'`.**
+Nothing outside `_parse` and its new helper was touched, and no other file on
+this ship was touched at all.
+
+## THE SHIP WAS ALIVE BEFORE AND IS ALIVE AFTER
+
+    cockpit/fear_greed.py       GATE 3.1-R7   exit 0  0 red
+    cockpit/funding.py          GATE 3.2-R8   exit 0  0 red   (12:10 UTC)
+    data/collection_guard.py    GATE 3.2c-R1  exit 0  0 red   green first time
+    data/open_interest.py       GATE 3.2b-R10 exit 0  0 red
+      the same file at TZ=UTC0  GATE 3.2b-R10 exit 0  0 red
+    cockpit/news.py             GATE 3.3      exit 0  0 red   50 -> 54 checks
+    vault INTACT — all 6 files match their checksums
+    Brief 3/3 · live news line healthy · data/oi_history/ untouched
+
+## X4 — I ATTACKED THE LAST INCH AND FOUND NOTHING. THAT IS A REAL RESULT.
+
+**GATE 3.3 proves what `section_text()` RETURNS. The Commander does not read a
+return value — he reads the Brief, and nobody had ever checked the inch between
+the two.** I ran the real `brief.py` with a spy on `news_section`, captured what
+the doorway returned and what the Brief printed, and compared:
+
+    doorway returned 404 chars
+    block appears in the Brief verbatim : True
+    appears exactly once                : True
+
+**`brief.py:93` is a bare `print(news_section())` and it alters nothing.** I
+looked for a reason to distrust the last inch and there is not one. **Saying so
+plainly matters: a review that only appears in the log when it finds something
+teaches the next session that silence means safety.**
+
+## WHAT I GOT WRONG
+
+**1. I NEARLY GRADED X1 BEFORE MEASURING WHETHER IT COULD HAPPEN.** My first
+pass through the finding form had the answer to Q2 as a reasoned argument about
+how publishers behave. **That is exactly the shape of R-016 — a claim about the
+world, made by a machine, carrying the grade.** I stopped and went and read 136
+real titles instead. **The measurement did not change my recommendation, but it
+changed what the Commander is being asked to trust: a count, not my opinion.**
+
+**2. X3 IS A WEAK FINDING AND I AM NOT DRESSING IT UP.** I built a document
+carrying an RSS `<item>` and an Atom `<entry>` together, and the Atom half — the
+NEWER story — was silently ignored. It is a real behaviour. **But I have never
+seen a feed shaped like the one I built, and the shape I built is not a shape
+real publishers produce.** It is filed as R-048 with that weakness stated in the
+item itself, not buried. **Filing a weak finding honestly is better than
+inflating it, and better than hiding it.**
+
+## WHAT I DID **NOT** BUILD, AND WHY
+
+**JOB 3 — THE DAILY NEWS COUNT ARCHIVE — IS NOT BUILT.** The orders made it
+conditional on PART 1 leaving room, and the rule is not about room: **X1 graded
+SERIOUS, and SERIOUS means fix it and stop, build nothing.** I followed that.
+**It is the second session running that this archive has been deferred, and the
+Commander should know that number is climbing** — the seventeenth generation
+deferred it as a half-built writer, and I deferred it under the stop rule. **It
+is JOB 2 of the next orders with its gate still undeclared.**
+

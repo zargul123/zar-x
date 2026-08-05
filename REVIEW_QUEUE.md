@@ -3307,3 +3307,167 @@ source could confirm digit for digit.** Still the strongest candidate for a real
 attack. **His own words: fake data on his screen in real time.**
 
 ## R-006 — **UNTOUCHED, AND NO IN-HOUSE SESSION MAY EVER CLEAR IT.**
+
+---
+
+# 2026-08-05 — THE EIGHTEENTH GENERATION'S VERDICTS AND ITS OWN DOUBTS
+
+## >>> VERDICTS ON THE ITEMS I WAS ASKED TO RULE ON. I DID NOT BUILD ANY OF THEM.
+
+## R-046 — **VERIFIED, AND DELIBERATELY NOT CLEARED.**
+
+**I PROVED IT RATHER THAN AGREED WITH IT.** I wrapped the doorway in a function
+that returns the real block and then writes to descriptor 1 directly:
+
+    os.write(1, b'  >> consider trimming exposure before the weekend')
+
+**GATE 3.3's door 3 heard `''` — literally nothing — and would have ticked
+"the doorway wrote NOTHING to stdout or stderr" while the advice line printed
+on the terminal underneath it.** The identical message sent through `print`
+was heard in full. **R-046 is not a suspicion any more; it is a measured fact,
+and the builder described it accurately before anybody looked.**
+
+**AND ITS GRADE IS SMALL, WHICH IS THE PART THAT MATTERS.** Q2: can this fault
+make a headline or a count on the Brief wrong, missing or deleted? **No.** A
+deaf ear prints nothing; it only fails to notice a write that some FUTURE edit
+would have to introduce into the doorway. That is one more mistake away, by us,
+in a file under a gate. **CATEGORY B.**
+
+**I RULE THE BUILDER'S TRADE WAS RIGHT.** A fully-gated instrument with an
+honestly named weakness beat a half-built one, and the gate's own pass line
+states the gap in plain words instead of copying `funding.py`'s. **But I did not
+clear it, and the reason is a conflict of interest I have to name: clearing
+R-046 would excuse ME from copying `funding.py`'s machinery.** The rule is to
+check whether you are the one who benefits. I am. **It stays OPEN.**
+
+## R-045 — **THE PART I COULD MEASURE IS SETTLED. THE REST STAYS OPEN.**
+
+**THE PART THE BUILDER "LIKED LEAST" IS NOW MEASURED RATHER THAN REASONED.** He
+treats "publishers answered but no story falls inside 24 hours" as a fault, and
+filed the reasoning because it was reasoning. **Two independent readings today
+gave 86 and 87 stories in 24 hours from five publishers — about 3.6 an hour.**
+For that window to be genuinely empty, all five publishers would have to stop
+together for a day. **His reasoning was right and it now has a number under it.**
+
+**`DEAD_FEED_H = 48` IS STILL HIS NUMBER AND STILL UNPROVEN — AND I FOUND
+SOMETHING THAT MATTERS MORE THAN WHETHER 48 IS RIGHT.** See R-047: the guard
+that constant controls **can be walked around entirely** by a feed whose newest
+stamp is in the future. **Arguing about 48 versus 72 is arguing about the height
+of a fence with a gap in it.** `WINDOW_H = 24` and `TITLE_MAX = 84` are
+untouched and unmeasured. **OPEN.**
+
+## R-044 — **BETTER EVIDENCED, NOT CLEARED.**
+
+**The doubt asked for a specific thing: all five fetched once an hour for a day,
+counting the non-200s.** I did not do that. I read all five three times in one
+morning — the standalone probe, the gate's live check (c), and a real Brief run
+— and **all five answered every time**: CoinDesk 25 stories, Cointelegraph 30,
+Decrypt 59, BeInCrypto 12, Bitcoin.com 10. **BeInCrypto, the Cloudflare one that
+bit the builder as CryptoSlate, was clean on all three.**
+
+**THAT IS A SECOND DAY OF EVIDENCE, NOT THE EVIDENCE THE ITEM ASKED FOR.** Three
+readings inside one morning cannot see a weekend, a holiday, or a rate-limiter
+with a long memory. **OPEN**, and the item still names what would settle it.
+
+## R-042 AND R-043 — **UNTOUCHED. I SPENT MY SESSION WHERE THE ORDERS SENT IT.**
+
+The orders offered them and made `news.py` the job. **I found something in
+`news.py` that graded SERIOUS, which under the stop rule ended my session.** I
+have no verdict on either and I am not going to invent one. **OPEN.**
+
+## >>> MY OWN DOUBTS. I MAY NOT CLEAR ANY OF THESE.
+
+## R-047 — **X2: ONE FUTURE-DATED STAMP WALKS STRAIGHT PAST THE DEAD-FEED GUARD.** · CATEGORY B · **OPEN**
+
+**THE GUARD THIS WHOLE FILE IS SHAPED AROUND HAS A GAP, AND I AM FILING IT
+RATHER THAN FIXING IT BECAUSE IT GRADES SMALL.** `_gather` calls a feed
+abandoned when its NEWEST story is older than `DEAD_FEED_H`. The newest story is
+`stories[0]` after a newest-first sort. **A story stamped in the FUTURE sorts to
+the front, and `age_h` comes out NEGATIVE, so `age_h > DEAD_FEED_H` is False and
+the guard never fires.**
+
+**PROVED, PRINTED, WITH ITS OWN CONTROL.** Blockworks' exact shape — fifty
+perfect stories, newest 209 days old — plus one stamp a week ahead:
+
+    WITH the future stamp : News (24h) : 4 stories from 5 of 5 publishers
+    WITHOUT it            : News (24h) : 4 stories from 4 of 5 publishers
+                                              [no data: BeInCrypto]
+
+**The abandoned feed is counted as a publisher that answered, and it is NOT
+NAMED.** The ingredient is observed, not invented: **The Defiant really served a
+stamp slightly ahead of our clock on 2026-08-04.**
+
+**WHY IT IS SMALL AND NOT SERIOUS, SAID AGAINST MYSELF:** **no stale headline
+reaches the Brief.** The window check `0 <= (now - when) <= 24h` still refuses
+every one of those 209-day stories, and it refuses the future one too. **The
+only thing that goes wrong is the publisher COUNT — "5 of 5" where the truth is
+"4 of 5" — and the loss of the `[no data:]` naming.** It also needs two things
+at once from a company we do not control: a feed that has been abandoned AND a
+future-dated stamp in it. **Q2 = wrong, but two steps away and only in a health
+number. CATEGORY B.**
+
+**WHAT WOULD FIX IT, FOR WHOEVER TAKES IT:** judge the feed's age on its newest
+NON-FUTURE story, or treat a newest stamp far in the future as its own named
+failure. **It is a handful of lines inside `_gather`. I did not write them,
+because the report comes before the repair and this report says SMALL.**
+
+## R-048 — **X3: A FEED CARRYING BOTH RSS AND ATOM LOSES ITS ATOM HALF IN SILENCE.** · CATEGORY B · **OPEN — AND WEAK, WHICH I SAY HERE RATHER THAN LET SOMEONE DISCOVER**
+
+`_parse` collects RSS `<item>` elements and only looks for Atom `<entry>` **if
+it found no items at all.** A document carrying both keeps the RSS half and
+drops the Atom half without a word. I served one where the Atom story was the
+NEWEST: it never appeared, the older RSS story took the headline slot, and the
+count was one short.
+
+**THE HONEST WEAKNESS OF THIS FINDING: I have never seen a real feed shaped
+this way, and the document I built to prove it is not a shape real publishers
+produce.** Real feeds carry `<atom:link>` for self-reference, which is not an
+`<atom:entry>` and is not affected. **This is a fault in principle with no
+observed instance.** The builder named the ordering himself as the fifth place
+he would look, and said *"I have not seen one. I have not looked."* **I looked,
+in a laboratory, and found what he predicted. That is not the same as finding it
+in the wild.** Graded SMALL on Q2: no publisher is known to be able to trigger it.
+
+## R-049 — **MY OWN X1 REPAIR. I FOUND THE FAULT AND I WROTE THE FIX, SO I FILE AGAINST MYSELF AND LEAVE IT OPEN.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT**
+
+**`_text` now returns `''.join(el.itertext())` where `findtext` returned
+`el.text`. Three things about that are unproven and a fresh session should
+attack all three.**
+
+**1. I CHANGED HOW EVERY FIELD IS READ, NOT JUST THE TITLE.** `pubDate`, `guid`,
+`link` and the three Atom fields all go through the new helper. **I judged that
+fixing the class rather than the instance was right — desk item 8 has asked for
+exactly that for twelve generations — but a wider change is a wider blast
+radius, and I made it during a repair.** `pubDate` is the one to look at: it now
+concatenates text across children before parsing, and I did not test a `<pubDate>`
+containing markup because I could not think what would produce one. **That is
+reasoning, not a measurement, and this ship's standing duty is to file it.**
+
+**2. `itertext()` INCLUDES TEXT FROM EVERY DESCENDANT, HOWEVER DEEP.** I tested
+one level (`<b>`, `<em>`). **I did not test a title containing a nested tree, an
+XML comment, or a processing instruction.** ElementTree skips comments and PIs
+in `itertext`, and I believe that is right — **"I believe" is the word this ship
+requires me to file.**
+
+**3. NOBODY BUT ME HAS RUN THE NEW CHECKS.** (r1)-(r4) and N12 were written by
+the same session that wrote the repair they measure. **N12 reverts `_text` to
+the exact fault and is proved to change the block before its verdict counts, so
+it is not the inert kind — but it was still authored by the person it is meant
+to catch.** **A fresh session should try to make the repaired `_parse` lie in a
+way N12 would not notice.**
+
+## **THE CATEGORY B PILE IS NOW TWENTY-TWO DEEP.** R-047, R-048 and R-049 added;
+nothing cleared, because the two items I could have cleared — R-046 and R-044 —
+were **verified rather than resolved**, and clearing R-046 would have benefited
+me. **The pile has now grown every single session since it was created and has
+never once shrunk.** It is cleared before the ship is used for real, at the same
+moment `cockpit/brief.py` finally gets its gate. **Twenty-two. Somebody should
+keep saying the number out loud to him, and this is me saying it.**
+
+## R-035 — **STILL UNTOUCHED, AND X1 IS A NEW ARGUMENT FOR IT.**
+Nothing on this ship asks whether a source is RIGHT. **X1 was not a source
+lying — it was us mis-reading a source that was telling the truth perfectly —
+but it landed in the same place: a false headline on his Brief that nothing
+would ever have flagged.** Still the strongest candidate for a whole session.
+
+## R-006 — **UNTOUCHED, AND NO IN-HOUSE SESSION MAY EVER CLEAR IT.**

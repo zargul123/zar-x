@@ -435,6 +435,66 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-05: THE NEWS INSTRUMENT WAS ATTACKED BY A SESSION THAT DID NOT BUILD IT. IT LEAKED. THE LEAK IS REPAIRED AND THE GATE NOW BREAKS ITSELF TWELVE WAYS.**
+
+**WHERE THE SHIP IS:**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red  (12:10 UTC)
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  first time
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red  <- REPAIRED
+                                54 checks (was 50), 12 sabotages (was 11),
+                                all CAUGHT and all PROVED to change the output
+    vault INTACT · Brief 3/3 · lab/ untouched
+    data/oi_history/  3 files, 222 lines each — untouched; the recorder was
+                      NOT run. Next scheduled run 10-Aug-2026 09:00.
+
+**EVERY GATE ON THIS SHIP IS GREEN AND ALL FIVE INSTRUMENTS ARE CORRECT.**
+
+**WHAT IS TRUE THAT WAS NOT TRUE YESTERDAY:**
+
+1. **THE NEWS INSTRUMENT SILENTLY REWROTE PUBLISHERS' HEADLINES, AND NOW IT
+   DOES NOT.** `ElementTree.findtext` returns the text before an element's
+   first child and nothing after it, so a headline written
+   `Bitcoin <b>crashes</b> 20% as ETF outflows accelerate` reached the Brief as
+   the single word **`Bitcoin`** — no clip mark, nothing anywhere saying so,
+   fifty green checks while it happened. **Repaired in `_parse` with a helper
+   that reads every scrap of text in the element, applied to ALL SIX fields
+   rather than only the one that was caught.**
+2. **IT WAS NOT FIRING, AND THAT WAS MEASURED RATHER THAN HOPED.** 136 real
+   titles read across all five shipped publishers on 2026-08-05: **none carried
+   markup.** The finding was reported with the measurement that weakens it.
+3. **THE BUILDER'S OWN LIST OF FIVE WEAK SPOTS DID NOT CONTAIN THE FINDING.**
+   That is Layer 3 earning its place: a builder cannot invent the attack they
+   are blind to, however honest their list.
+4. **THE LAST INCH WAS ATTACKED FOR THE FIRST TIME AND IS CLEAN.** Nobody had
+   ever checked that `brief.py` prints what `news.py` returns. It does —
+   verbatim, exactly once. **"Attacked hard, found nothing" is a real result.**
+
+**WHAT IS BROKEN OR UNPROVEN, STATED HERE RATHER THAN IN THE QUEUE ALONE:**
+
+- **THE DEAD-FEED GUARD HAS A GAP AND IT IS FILED, NOT FIXED (R-047).** One
+  story stamped in the FUTURE sorts to the front of the feed, makes the
+  computed age NEGATIVE, and walks the abandoned-feed check straight past.
+  Proved against its own control. **It costs the publisher COUNT and the
+  `[no data:]` naming — no stale headline reaches the Brief, which is why it
+  graded SMALL and was left for the Commander to rule on.**
+- **`news.py`'s DOOR 3 IS STILL THE WEAKEST ON THIS SHIP (R-046), AND IT IS NOW
+  PROVEN RATHER THAN SUSPECTED.** An `os.write(1, ...)` from inside the doorway
+  was completely inaudible to it, while the same words through `print` were
+  heard. **Graded SMALL — a deaf ear cannot itself put anything on his screen —
+  and deliberately NOT cleared, because the session that would be excused by
+  clearing it is the one that verified it.**
+- **THE DAILY NEWS COUNT ARCHIVE IS STILL NOT BUILT.** Deferred twice now: once
+  as a half-built writer, once under the stop rule. **Phase 3 step 3b.**
+- **`cockpit/brief.py` STILL HAS NO GATE**, by the Commander's own ruling: not
+  now, before going live. It now imports three instruments and prints three
+  sections, and the inch between them and the screen is checked only by hand.
+
+**THE PREVIOUS MARKER IS KEPT BELOW FOR THE RECORD.**
+
 ## **>>> 2026-08-04: THE NEWS INSTRUMENT IS BUILT AND ON THE BRIEF. THE CONTEXT DECK IS THREE OF FIVE. R-038 IS CLEAN.**
 
 **WHERE THE SHIP IS:**

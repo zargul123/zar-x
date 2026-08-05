@@ -124,6 +124,28 @@ def _when_atom(text):
     return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
 
 
+def _text(parent, tag):
+    """EVERY scrap of text inside <tag> — not merely the text before its first
+    child.
+
+    **`ElementTree.findtext` returns `element.text` ALONE**, so a headline a
+    publisher wrote as `Bitcoin <b>crashes</b> 20% as ETF outflows accelerate`
+    came back as the single word `Bitcoin` and reached the Brief as a plausible
+    short headline wearing NO CLIP MARK. That is the one thing `_clip` exists to
+    prevent — this instrument quietly rewriting a publisher — arriving through a
+    door `_clip` never sees, because the rewriting happened here, before `_clip`
+    was reached. And when the markup came FIRST the text was empty, so the story
+    failed the usability filter below and vanished from the count in silence.
+
+    Found 2026-08-05 by the eighteenth generation, attacking a file it did not
+    build. It was NOT firing that morning — 136 titles across all five shipped
+    publishers, not one carrying markup — and it needed no mistake by anyone on
+    this ship to start: one publisher formatting one headline with emphasis.
+    """
+    el = parent.find(tag)
+    return '' if el is None else ''.join(el.itertext())
+
+
 def _parse(raw):
     """Feed bytes -> newest-first [(when, title, story_id)]. Raises on anything
     this part cannot honestly read.
@@ -136,16 +158,16 @@ def _parse(raw):
     root = ET.fromstring(raw)
     found = []
     for item in root.iter('item'):                       # RSS 2.0
-        found.append((_when_rss(item.findtext('pubDate')),
-                      (item.findtext('title') or '').strip(),
-                      (item.findtext('guid') or item.findtext('link')
-                       or '').strip()))
+        found.append((_when_rss(_text(item, 'pubDate')),
+                      _text(item, 'title').strip(),
+                      (_text(item, 'guid')
+                       or _text(item, 'link')).strip()))
     if not found:
         for entry in root.iter(ATOM + 'entry'):          # Atom
-            found.append((_when_atom(entry.findtext(ATOM + 'published')
-                                     or entry.findtext(ATOM + 'updated')),
-                          (entry.findtext(ATOM + 'title') or '').strip(),
-                          (entry.findtext(ATOM + 'id') or '').strip()))
+            found.append((_when_atom(_text(entry, ATOM + 'published')
+                                     or _text(entry, ATOM + 'updated')),
+                          _text(entry, ATOM + 'title').strip(),
+                          _text(entry, ATOM + 'id').strip()))
     if not found:
         raise FeedError("HTTP 200 with ZERO stories — a broken feed, not "
                         "quiet news")
@@ -313,6 +335,22 @@ if __name__ == '__main__':
         out.append('</channel></rss>')
         return ''.join(out).encode('utf-8')
 
+    def _rss_raw(items):
+        """The same, but the title and the id are inserted RAW, so a check can
+        put REAL MARKUP inside a <title>. `_rss` above escapes; this one
+        deliberately does not, and that is the whole difference. Both are built
+        HERE, from nothing, by a gate that never asks the module for its input.
+        Added 2026-08-05 for X1."""
+        out = ['<?xml version="1.0" encoding="UTF-8"?>',
+               '<rss version="2.0"><channel><title>gate</title>']
+        for when, title, sid in items:
+            stamp = when.strftime('%a, %d %b %Y %H:%M:%S +0000')
+            out.append('<item><title>' + title + '</title>'
+                       '<guid>' + sid + '</guid>'
+                       '<pubDate>' + stamp + '</pubDate></item>')
+        out.append('</channel></rss>')
+        return ''.join(out).encode('utf-8')
+
     def ago(minutes):
         return NOW - timedelta(minutes=minutes)
 
@@ -441,6 +479,69 @@ if __name__ == '__main__':
     mark(long_line == expect_long,
          "clipped to 84 characters and marked with a visible ellipsis",
          f"len(headline)={len(LONG)} -> printed {len(long_line) - 26} chars")
+
+    print("\n(r) >>> MARKUP INSIDE A HEADLINE — X1, FOUND 2026-08-05 BY A"
+          "\n    SESSION THAT DID NOT BUILD THIS FILE. ElementTree's findtext"
+          "\n    returns the text BEFORE an element's first child and NOTHING"
+          "\n    AFTER IT, so a headline written `Bitcoin <b>crashes</b> 20%`"
+          "\n    reached the Brief as the single word `Bitcoin` — a plausible"
+          "\n    short headline wearing NO CLIP MARK. The XML is valid, nothing"
+          "\n    raised, and all fifty checks stayed green while it happened."
+          "\n    It is `_clip`'s own promise broken through a door `_clip`"
+          "\n    cannot see, because the rewriting happens in `_parse`.")
+    MARKUP_MID = 'Bitcoin <b>crashes</b> 20% as ETF outflows accelerate'
+    MARKUP_FIRST = '<em>Breaking</em>: ETF outflows accelerate'
+    markup_bytes = dict(GOLDEN_BYTES)
+    markup_bytes['CoinDesk'] = _rss_raw([(ago(5), MARKUP_MID, 'cd-m1')])
+    markup_bytes['Cointelegraph'] = _rss_raw([(ago(61), MARKUP_FIRST,
+                                               'ct-m1')])
+    markup_expect = (
+        '  News (24h)   : 5 stories from 5 of 5 publishers\n'
+        '    "Bitcoin crashes 20% as ETF outflows accelerate" — CoinDesk, '
+        '5m ago\n'
+        '    "Breaking: ETF outflows accelerate" — Cointelegraph, 1h01m ago\n'
+        '    "' + ADVICE + '" — Decrypt, 2h05m ago\n'
+        '  (crypto headlines from 5 publishers — information, not a signal)'
+    )
+    markup_block = golden(fetched=markup_bytes)
+    same_markup = markup_block == markup_expect
+    mark(same_markup,
+         "(r1)(r2) markup in the MIDDLE and markup FIRST — both headlines "
+         "survived WHOLE, byte for byte, and neither story was dropped")
+    if not same_markup:
+        print("     ---- the gate expected ----")
+        for line in markup_expect.split('\n'):
+            print(f"     {line!r}")
+        print("     ---- the doorway returned ----")
+        for line in markup_block.split('\n'):
+            print(f"     {line!r}")
+
+    print("\n    (r3) THE SAME FAULT IN THE STORY ID. Deduplication is keyed"
+          "\n    on the id, so HALF an id is a DIFFERENT id and one story would"
+          "\n    be counted twice. The identical story is served twice — once"
+          "\n    with a plain guid, once with that same guid wrapped in markup.")
+    dup_bytes = dict(GOLDEN_BYTES)
+    dup_bytes['CoinDesk'] = _rss_raw([
+        (ago(5), 'Bitcoin ETF inflows hit a fresh weekly high', 'cd-1'),
+        (ago(5), 'Bitcoin ETF inflows hit a fresh weekly high',
+         'cd-<b>1</b>'),
+    ])
+    dup_head = golden(fetched=dup_bytes).split('\n')[0]
+    mark(dup_head == '  News (24h)   : 5 stories from 5 of 5 publishers',
+         "(r3) a guid carrying markup was read WHOLE, so the story counted ONCE",
+         dup_head.strip())
+
+    print("\n    (r4) AND THE REPAIR MUST NOT BECOME A WAY PAST `_clip`. A"
+          "\n    headline carrying markup AND longer than 84 characters is cut"
+          "\n    in the same place, with the same visible mark, as the plain"
+          "\n    one in (i) — judged against the SAME expected string.")
+    long_markup = dict(GOLDEN_BYTES)
+    long_markup['CoinDesk'] = _rss_raw([
+        (ago(1), 'Regulators unveil a sweeping new <b>framework</b> for '
+                 'digital asset custody, reporting and disclosure across '
+                 'every member state', 'cd-lm')])
+    mark(golden(fetched=long_markup).split('\n')[1] == expect_long,
+         "(r4) clipped at 84 with the visible mark, identical to the plain case")
 
     print("\n(d) >>> THE DEAD-FEED GUARD. EARNED TODAY, NOT IMAGINED."
           "\n    Blockworks answers HTTP 200 with FIFTY real, well-formed,"
@@ -660,6 +761,9 @@ if __name__ == '__main__':
     def w_names():
         return str(tuple(n for n, _ in FEEDS))
 
+    def w_markup():
+        return golden(fetched=markup_bytes)
+
     def j_golden():
         return golden() == GOLDEN_EXPECTED
 
@@ -682,6 +786,15 @@ if __name__ == '__main__':
     def j_names():
         return tuple(n for n, _ in FEEDS) == EXPECT_NAMES
 
+    def j_markup():
+        return golden(fetched=markup_bytes) == markup_expect
+
+    def _text_leading(parent, tag):
+        """X1 EXACTLY AS IT SHIPPED: the text before the first child, and
+        nothing after it. This is what `findtext` does."""
+        el = parent.find(tag)
+        return '' if el is None else (el.text or '')
+
     def _shout(*a, **k):
         block = _honest_section(*a, **k)
         print("  >> consider trimming exposure before the weekend")
@@ -698,6 +811,7 @@ if __name__ == '__main__':
         return f"{minutes // 60}h{minutes % 60:02d}m ago"
 
     _honest_gather = _gather
+    _honest_text = _text
 
     def _gather_silent_drop(now, feeds, fetched, timeout):
         live, _dead = _honest_gather(now, feeds, fetched, timeout)
@@ -738,6 +852,8 @@ if __name__ == '__main__':
          'section_text', _shout, w_stdout, j_silent),
         ('N11', 'a publisher vanishes from the source list',
          'FEEDS', FEEDS[:4], w_names, j_names),
+        ('N12', 'a headline with markup is silently truncated (X1)',
+         '_text', _text_leading, w_markup, j_markup),
     ]
 
     print()
@@ -771,11 +887,12 @@ if __name__ == '__main__':
           "\n    drill that left a break installed would hand the next check a"
           "\n    sabotaged module and call the result evidence.")
     mark(golden() == GOLDEN_EXPECTED,
-         "after eleven breaks and eleven repairs, the block is byte-identical "
+         "after twelve breaks and twelve repairs, the block is byte-identical "
          "to where it started")
     mark(tuple(n for n, _ in FEEDS) == EXPECT_NAMES
          and WINDOW_H == 24 and HEADLINES == 3 and DEAD_FEED_H == 48
-         and section_text is _honest_section and _gather is _honest_gather,
+         and section_text is _honest_section and _gather is _honest_gather
+         and _text is _honest_text,
          "every constant and every function this drill touched is back")
 
     # ------------------------------------------------------------------
@@ -794,7 +911,7 @@ the file on trial. The real internet was reached once, judged LOOSELY
 on purpose, because a gate that only ever judges bytes it handed over
 never tests the trip and is decorative.
 
-AND EVERY ONE OF THE ELEVEN SABOTAGES WAS PROVED TO CHANGE WHAT SOMEONE
+AND EVERY ONE OF THE TWELVE SABOTAGES WAS PROVED TO CHANGE WHAT SOMEONE
 READS BEFORE ITS VERDICT WAS COUNTED — on the channel it actually
 affects, which is why N10, whose returned block is byte-identical to
 the honest one, is witnessed at STDOUT and not at the block. F10, S6
