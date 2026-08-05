@@ -10747,3 +10747,138 @@ by `git diff --stat`: `1 file changed, 2 insertions(+)`. `fear_greed.py`,
 `funding.py`, `open_interest.py` and `collection_guard.py` were **not touched at
 all**, and `git status` names only `brief.py`, the new `news.py` and the cloud
 watchman's own snapshot CSV.
+
+---
+
+# 2026-08-05 — EIGHTEENTH GENERATION · PART 1 · **X1: THE NEWS INSTRUMENT SILENTLY REWRITES A PUBLISHER'S HEADLINE, THROUGH THE ONE DOOR `_clip` DOES NOT WATCH**
+
+## GATE 3.3-R1 — **DECLARED HERE, BEFORE THE REPAIR EXISTS. THIS COMMIT CARRIES NO `.py`.**
+
+**THE SHIP WAS ALIVE WHEN I ARRIVED AND I PROVED IT BEFORE TOUCHING ANYTHING.**
+Six gate invocations, every one exit 0 with zero red: `fear_greed.py`
+GATE 3.1-R7 · `funding.py` GATE 3.2-R8 (run at 12:10 UTC, **3h50m clear of the
+16:00 settlement**, so R-021 is not in play) · `collection_guard.py` GATE 3.2c-R1
+green on check (g) FIRST TIME · `open_interest.py` GATE 3.2b-R10 green twice,
+normally and at `TZ=UTC0` · `news.py` GATE 3.3, 50 checks, 0 red. **Vault
+INTACT, all 6 files match their checksums.** `data/oi_history/` untouched.
+
+## THE FINDING, PRINTED RATHER THAN DESCRIBED
+
+`_parse` reads a story's title with `item.findtext('title')`. **ElementTree's
+`findtext` returns `element.text` — the text BEFORE the element's first child,
+and nothing after it.** So a headline a publisher wrote as
+
+    <title>Bitcoin <b>crashes</b> 20% as ETF outflows accelerate</title>
+
+arrives at the doorway as the single word `Bitcoin`, and the Brief prints:
+
+        News (24h)   : 5 stories from 5 of 5 publishers
+          "Bitcoin" — CoinDesk, 5m ago
+          "Custody firm files for a trust charter" — Cointelegraph, 1h01m ago
+          "Stablecoin supply crosses a new mark" — Decrypt, 2h05m ago
+        (crypto headlines from 5 publishers — information, not a signal)
+
+**THERE IS NO CLIP MARK, NO `[no data:]`, AND NOTHING ANYWHERE SAYS A WORD.** It
+is a well-formed, plausible, short headline. **This is the exact thing `_clip`
+exists to prevent — its own docstring says *"a silent truncation would be this
+instrument quietly rewriting a publisher"* — arriving through a door `_clip`
+never sees, because the rewriting happens in `_parse`, before `_clip` is
+reached.** The XML is perfectly valid; nothing is malformed; no exception is
+raised.
+
+**AND THE SECOND HALF OF THE SAME BUG.** When the markup comes FIRST —
+`<title><em>Breaking</em>: Bitcoin crashes 20%</title>` — `element.text` is
+empty, the story fails `_parse`'s usability filter and is **DROPPED**. With that
+publisher's other stories still present it vanishes from the count in silence;
+only when it is the publisher's ONLY story does the failure become loud
+(`[no data: CoinDesk]`, which is what my rig printed). **Q2's three words are
+"wrong, missing or deleted". This one fault does the first two.**
+
+## THE COMMANDER'S THREE QUESTIONS
+
+**Q1 — WHAT INFORMATION IS THIS CODE FOR?** The three quoted headlines and the
+`N stories from M of 5 publishers` line on the Context Deck of his Brief.
+
+**Q2 — CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING OR DELETED?**
+**WRONG and MISSING — yes, proved above. TODAY, IN THE SHIPPED FILE — NO, and I
+measured that rather than assuming it.** I read all five shipped feeds once this
+morning and inspected every title element: **CoinDesk 25, Cointelegraph 30,
+Decrypt 59, BeInCrypto 12, Bitcoin.com 10 — 136 titles, and NOT ONE carries
+markup.** The chain to harm is **ONE step, and it is NOT A MISTAKE BY ANYONE ON
+THIS SHIP**: one of the five publishers formats one headline with an inline
+element — emphasis, a link, a line break — which is an ordinary editorial act by
+a company we do not control. **There is no second step. There is no alarm. And
+nothing on this ship would ever tell us it had happened.**
+
+**Q3 — IN REAL BUSINESS TERMS.**
+(a) **What he SEES:** `"Bitcoin" — CoinDesk, 15m ago`. Nothing else. It looks
+    completely normal.
+(b) **What it COSTS him:** the content of the story. *"Bitcoin crashes 20% as
+    ETF outflows accelerate"* becomes *"Bitcoin"*. **Meaning can invert:
+    `Analysts warn: <b>do not</b> buy the dip` prints as `Analysts warn:`.**
+    No money moves — news is information and can never become a signal — but the
+    line exists to tell him what the market has been reading, and it would be
+    telling him nothing while looking like it was telling him something.
+(c) **Would he EVER find out?** No. Not from the Brief, not from GATE 3.3, not
+    from any check on this ship.
+(d) **Can it be UNDONE?** Yes. Nothing is saved; the next run is fresh. **No
+    archive is touched and `data/oi_history/` is nowhere near this.**
+
+## STEPS 0 TO 4
+
+**STEP 0 — IS THE FINDING TRUSTWORTHY?** 0.1 the healthy untouched copy passed
+FIRST — GATE 3.3 PASSED, 50 checks, 0 red, run in the copy outside the repo
+before any attack. 0.2 the broken output is PRINTED above. 0.3 I did not build
+this file; the seventeenth generation did, yesterday. **PROVEN.**
+
+**STEP 1 — THE VETO.** Would it change something he would act on, or damage a
+record we keep? **It damages no record.** It changes what he believes the market
+has been reading. **YES — continue.**
+
+**STEP 2.** 2.1 by accident or on purpose? **BY ACCIDENT** — an ordinary
+formatting choice by a publisher. **BAD.** 2.2 would he SEE it with his own
+eyes? **Answered ONLY from what the output shows, per his own wording in
+`THE_PATTERN.md`: `"Bitcoin" — CoinDesk, 15m ago` is well-formed, plausible and
+self-consistent. A stranger who knew nothing about this ship would see nothing
+wrong. NO. BAD.** 2.3 could it be undone? **Yes — nothing is saved. Not bad.**
+
+**STEP 3.** 3.1 would the system still report "all fine"? **Yes — GATE 3.3
+passes green while it happens.** 3.2 saved records? **No.** 3.3 anything that
+tells him to act? **No — news is information by law.** 3.4 one thing once, or
+everything? **Every affected headline, every run, until repaired.**
+
+**STEP 4.** (4.1) *A publisher adds ordinary emphasis to one headline, and from
+that morning on his Brief quietly prints the first few words of it as though
+they were the whole thing, and nothing anywhere says so.* (4.2)
+**MY RECOMMENDATION: SERIOUS — two bad answers in Step 2. So I fix it and I
+build nothing else.** **I say plainly that it is not firing today**; the
+Commander may rule it SMALL on that ground and he would not be unreasonable.
+**I did not stretch it: I measured 136 live titles specifically to try to talk
+myself out of it, and reported the result that weakened my own finding.**
+
+## >>> THE BAR. PASS IS EVERY CHECK GREEN AND N12 CAUGHT. ANYTHING LESS IS A FAIL.
+
+    (r1) A title carrying an inline element in the MIDDLE reaches the block
+         WHOLE — judged by EXACT EQUALITY against a string typed out in the
+         gate, never "the words are present".
+    (r2) A title whose markup comes FIRST also reaches the block WHOLE, and its
+         story is NOT dropped from the count.
+    (r3) A <guid> carrying an inline element is read WHOLE. Deduplication is
+         keyed on that id: half an id is a different id, and the same story
+         would count twice.
+    (r4) A title carrying an inline element and ALSO longer than TITLE_MAX is
+         clipped VISIBLY, at the same place, with the mark. The repair must not
+         become a way to smuggle 200 characters past `_clip`.
+    (r5) N12 — A NEW PERMANENT SABOTAGE: `_parse` reverted to reading leading
+         text only. It must be PROVED TO CHANGE THE OUTPUT and then CAUGHT.
+         **INERT is a FAIL**, and the drill stays in the file forever.
+    (r6) All 50 existing checks stay green, including the live fetch (c).
+    (r7) The five real publishers are re-probed and the number of markup-bearing
+         titles is RECORDED in this log, whatever it is.
+
+**AND THE HONEST NOTE ABOUT WHAT CHANGES.** This repair is inside `_parse`,
+which is in the half of the file the pilot reads. **The production-half sha256
+WILL move, and that is the job, not a leak.** Both hashes — before and after —
+and the new `__main__` line number are recorded below after the run, so the next
+session inherits a recipe that is true rather than one it must re-derive.
+
