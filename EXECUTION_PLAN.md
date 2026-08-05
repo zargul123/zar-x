@@ -493,6 +493,23 @@ answer, built into this plan:
   now, before going live. It now imports three instruments and prints three
   sections, and the inch between them and the screen is checked only by hand.
 
+**WHAT THE COMMANDER RULED THE SAME DAY, WHICH DECIDES WHAT HAPPENS NEXT:**
+
+1. **R-047 AND R-048 ARE SMALL.** Filed, not fixed, **not cleared.**
+2. **THE NEXT SESSION IS EXEMPT FROM PART 1** and does not attack the X1
+   repair. **His exemption, granted in words, for ONE session. It dies with
+   that session and no session may extend it.** **The price is that R-049 goes
+   unverified, and he was told so before he ruled.**
+3. **STEP 3b, THE DAILY NEWS COUNT ARCHIVE, WAITS UNTIL THE WHOLE PROGRAMME IS
+   COMPLETE.** His words: *"we will build news section after when all the
+   programme will be completed."* **He was told once that this is the only
+   deferral on the ship whose cost is permanent — the past cannot be bought
+   back. He ruled. It waits.**
+
+**SO THE NEXT BUILD IS PHASE 3 INSTRUMENT 4 OF 5 — THE EVENT CALENDAR**
+(`cockpit/events.py`, NOT `calendar.py`, which would shadow a standard library
+module). **The Context Deck goes to four of five.**
+
 **THE PREVIOUS MARKER IS KEPT BELOW FOR THE RECORD.**
 
 ## **>>> 2026-08-04: THE NEWS INSTRUMENT IS BUILT AND ON THE BRIEF. THE CONTEXT DECK IS THREE OF FIVE. R-038 IS CLEAN.**

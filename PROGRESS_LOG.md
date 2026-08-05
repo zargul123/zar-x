@@ -11049,3 +11049,77 @@ Commander should know that number is climbing** — the seventeenth generation
 deferred it as a half-built writer, and I deferred it under the stop rule. **It
 is JOB 2 of the next orders with its gate still undeclared.**
 
+
+---
+
+# **>>> 2026-08-05 — THREE RULINGS BY THE COMMANDER. DO NOT ASK HIM AGAIN, AND DO NOT REOPEN ANY OF THEM WITHOUT NEW EVIDENCE.**
+
+**HE READ THE FINDINGS IN PLAIN WORDS, DISCUSSED THEM, AND RULED. HIS WORDS:**
+*"news is working and it only for me and i want to move forward"* — and
+*"i exempt only this for next session."*
+
+## RULING 1 — **R-047 AND R-048 ARE SMALL. BOTH STAY FILED, NEITHER IS FIXED.**
+
+The session that found them recommended SMALL for both and he agreed. **The
+"should this be repaired NOW" question is CLOSED.** Both remain **CATEGORY B and
+OPEN**, cleared with the rest of the pile before the ship is used for real, at
+the same moment `cockpit/brief.py` gets its gate. **A severity ruling is NOT a
+clearance and must never be recorded as one.**
+
+**WHAT HE WAS TOLD BEFORE HE RULED, so the ruling stands on the full facts:**
+
+1. **R-047's damage is a broken WARNING LIGHT, not a false headline.** No stale
+   story reaches the Brief — the 24-hour window blocks every one of them
+   independently of the dead-feed guard. What is lost is the publisher count and
+   the `[no data:]` naming.
+2. **AND THE PART THAT ARGUED AGAINST THE SMALL GRADE, PUT TO HIM PLAINLY
+   RATHER THAN BURIED:** GATE 3.3's live check (c) reads *"at least 3 of 5
+   publishers answered"* **out of the very line R-047 corrupts.** A dead
+   publisher counted as alive is counted as alive BY THE ALARM TOO. **He ruled
+   SMALL knowing that.**
+3. **R-048 was described to him as weaker than "small"** — a fault provable only
+   in a laboratory, using a feed shape nobody has seen in the wild.
+4. **He was told the Category B pile is 22 deep and has never once shrunk**, and
+   that "small, cheap, and inside a warning system" is the shape most likely to
+   become a finding that quietly dies in the pile. **He ruled anyway, which is
+   his to do and nobody else's.**
+
+## RULING 2 — **>>> AN EXEMPTION FOR THE NEXT SESSION ONLY: IT DOES NOT ATTACK THE X1 REPAIR.**
+
+**THE COMMANDER — AND ONLY THE COMMANDER — MAY GRANT THIS, AND HE HAS GRANTED
+IT ONCE, EXPLICITLY, FOR ONE SESSION.** PART 1 is OFF for the session that
+follows 2026-08-05. **It does not attack `_parse`, `_text`, N12 or checks
+(r1)-(r4). It builds.**
+
+**>>> THE EXEMPTION DIES WITH THE SESSION IT WAS GRANTED TO. IT IS NOT
+INHERITED, NOT RENEWED BY SILENCE, AND NO SESSION MAY EXTEND IT TO ITSELF OR TO
+ANYONE ELSE. THE SESSION AFTER THAT ONE ATTACKS AGAIN, UNCAPPED, UNLESS HE SAYS
+OTHERWISE HIMSELF.**
+
+**WHAT IS BEING TRADED AWAY, RECORDED HERE SO IT IS NEVER LOST:** **R-049 goes
+UNVERIFIED.** The X1 repair changed how all six fields of every story are read,
+it was written by the session that found the fault, and **the checks that say it
+works were written by the same session.** Nobody independent will have looked at
+it. **R-049 is therefore filed CATEGORY B and stays OPEN**, and the first
+session not covered by this exemption should treat it as live work.
+
+**WHAT HE WAS TOLD BEFORE HE RULED:** that the repair was verified as far as its
+own author could verify it — 116 real stories read through both the old and the
+new code with **zero disagreements**, the Brief running 3/3, and GATE 3.3-R1
+green at 54 checks — **and that none of that is the same as an independent
+attack, because a builder cannot invent the attack they are blind to.**
+
+## RULING 3 — **STEP 3b, THE DAILY NEWS COUNT ARCHIVE, IS DEFERRED UNTIL THE PROGRAMME IS COMPLETE.**
+
+His words: *"we will build news section after when all the programme will be
+completed."* **The news instrument is finished and working and he is satisfied
+with it. The count archive waits.**
+
+**THE ONE COST OF WAITING, STATED ONCE AND NOT NAGGED ABOUT:** the archive is the
+only deferred item on this ship whose price is **permanent**. The feeds hand out
+only the last few hours of stories, and **old articles are edited, retitled and
+deleted, so the past cannot be bought back at any price** — which is the same
+reason `data/oi_history/` exists. **Every day without it is a day of counts that
+can never be recovered.** **He has been told this plainly and has ruled. It
+waits.**
+
