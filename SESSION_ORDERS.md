@@ -288,7 +288,7 @@ it is repeated here.**
 1. **`REVIEW_QUEUE.md` — R-047, R-048 and R-049 are your worklist**, plus
    R-042 to R-046 if you want them. **R-006 may NEVER be cleared by you or any
    in-house session.**
-2. **`cockpit/news.py`** — the whole file. It is 918 lines; **the part the pilot
+2. **`cockpit/news.py`** — the whole file. It is 930 lines; **the part the pilot
    reads is lines 1..271** and the gate is everything from line 272 on. **The
    repair is `_text` at lines 127-148 and its two call sites in `_parse`.**
 3. **The LAST TWO entries of `PROGRESS_LOG.md`.** The file is ~600 KB; reading
