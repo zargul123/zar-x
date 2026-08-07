@@ -1,9 +1,9 @@
 ========================================================
   ZAR X GRADER — trend-claim report card (v2)
 ========================================================
-  Rows in all notebooks: 498 (159 duplicate candle-claims discarded)
-  Unique claims        : 339
-  Not yet gradable     : 12 (younger than 24h of market)
+  Rows in all notebooks: 501 (159 duplicate candle-claims discarded)
+  Unique claims        : 342
+  Not yet gradable     : 15 (younger than 24h of market)
   No directional claim : 104 (MIXED)
   GRADED               : 223
   CORRECT              : 88  (39.5%)
