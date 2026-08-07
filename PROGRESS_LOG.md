@@ -11123,3 +11123,190 @@ reason `data/oi_history/` exists. **Every day without it is a day of counts that
 can never be recovered.** **He has been told this plainly and has ruled. It
 waits.**
 
+
+---
+
+# 2026-08-07 — THE NINETEENTH GENERATION. **GATE 3.4 DECLARED BEFORE `cockpit/events.py` EXISTS.**
+
+**THIS ENTRY IS COMMITTED ALONE, WITH NO `.py` FILE IN THE COMMIT.** `git show
+--stat` on this commit is the proof the bar came first and that nobody quietly
+lowered it to match whatever got built. Twenty-three uses, twenty-three audits
+survived; the eighteenth generation's was `f17f32f`.
+
+## WHAT THIS SESSION IS
+
+**PART 1 IS SKIPPED. THE COMMANDER GRANTED THE EXEMPTION HIMSELF ON 2026-08-05**
+— *"news is working and it only for me and i want to move forward"*, *"i exempt
+only this for next session."* **It covers the X1 repair only** (`_text`,
+`_parse`, sabotage N12, checks (r1)-(r4) in `cockpit/news.py`). **It dies with
+this session and the orders written at the end of it restore PART 1 uncapped.**
+
+**THE SHIP WAS PROVED ALIVE BEFORE ANYTHING WAS TOUCHED**, on 2026-08-07:
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red  54 checks
+                                live: 82 stories from 5 of 5 publishers
+    lab/verify_vault.py         VAULT INTACT  6 of 6 files
+    cockpit/brief.py            3/3 instruments reporting
+    data/oi_history/            untouched. Next scheduled run 10-Aug-2026 09:00.
+
+## WHAT IS BEING BUILT — PHASE 3, INSTRUMENT 4 OF 5
+
+`cockpit/events.py` — **NOT `cockpit/calendar.py`**, which would shadow a
+standard-library module. A Context Deck line saying what is COMING, so the
+Commander is never surprised by a scheduled event he could have seen. **The
+plan's own words are the specification:** *"Event calendar (manual JSON file the
+Commander can edit + known recurring events: FOMC, CPI dates)."*
+
+**INFORMATION, NEVER A SIGNAL.** *"FOMC in 2 days"* is a fact. *"FOMC in 2 days
+— consider reducing exposure"* is advice and is forbidden. Phase 6's three slots
+are locked BY NAME and none of them is a calendar.
+
+## THE DATES WERE MEASURED BEFORE THE CODE, AND HERE IS WHERE THEY CAME FROM
+
+**NO DATE ON THIS SHIP IS REMEMBERED BY A MODEL. Every one below was read off
+the issuing authority's own page on 2026-08-07 and is recorded here with its
+source, because a fabricated date is exactly the shape of lie this instrument
+exists to prevent.**
+
+**FOMC — `federalreserve.gov/monetarypolicy/fomccalendars.htm`, read 2026-08-07.**
+The decision is the SECOND day of each two-day meeting, 14:00 US Eastern.
+Remaining 2026: **16 Sep, 28 Oct, 9 Dec.** 2027, which the Fed's own page marks
+**TENTATIVE** — *"Each meeting date is tentative until confirmed at the meeting
+immediately preceding it"* — 27 Jan, 17 Mar, 28 Apr, 9 Jun, 28 Jul, 15 Sep,
+27 Oct, 8 Dec. **The word "tentative" is carried onto the Commander's screen for
+the 2027 dates rather than dropped.**
+
+**US CPI — `bls.gov/schedule/news_release/cpi.htm`, read 2026-08-07**, 08:30 US
+Eastern. Remaining: **12 Aug, 11 Sep, 14 Oct, 10 Nov, 10 Dec 2026.**
+
+**AND THE MEASUREMENT THAT SHAPES THE WHOLE INSTRUMENT: THE BLS PUBLISHES ABOUT
+A YEAR AHEAD AND ITS SCHEDULE STOPS DEAD AT 10 DEC 2026.** The built-in CPI list
+therefore **runs out in roughly four months.** This is not a hypothetical
+horizon written in to look careful — **it is a dated fact, and on 11 Dec 2026
+this instrument's staleness guard fires for real.** It is checked in this gate
+by advancing the clock rather than by waiting.
+
+**HOW THE BLS PAGE WAS READ, RECORDED BECAUSE IT IS THE BLOCKWORKS SHAPE AGAIN:**
+`bls.gov` answers **HTTP 403 to a non-browser fetch** — the same edge block that
+killed The Block on 2026-08-04. The page was read in a real browser instead.
+**A session that could not reach an authority and filled the gap from memory
+would produce a calendar that looks exactly like this one and is wrong.**
+
+## >>> THE TRAP THIS INSTRUMENT IS SHAPED AROUND
+
+**A HARDCODED LIST OF DATES GOES STALE, AND A STALE CALENDAR LOOKS EXACTLY LIKE
+A HEALTHY ONE.** This is Blockworks a second time — HTTP 200, fifty perfect
+stories, the newest 209 days old — and the recorder's empty-list trap a third.
+
+    A calendar with nothing ahead of it MUST SAY SO LOUDLY.
+    IT MUST NEVER PRINT NOTHING AND LET SILENCE READ AS "no events coming".
+
+## THE DESIGN, FIXED HERE BEFORE THE CODE, SO THE GATE CANNOT BE FITTED TO IT
+
+1. **`data/events.json` is the Commander's own file.** It declares its own
+   `"timezone"` **inside the file**, because an undeclared zone is how this
+   instrument would one day be a day out with nothing saying so.
+2. **The built-in FOMC and CPI lists live in `cockpit/events.py` and nowhere
+   else** (Law 2), each with its own **published horizon** — the last date its
+   authority has actually published — carried as a constant beside it.
+3. **Every event is an INSTANT**, not a bare date: a date, a time and a zone.
+   **"today" / "tomorrow" / "in N days" are counted in the reader's OWN local
+   date**, because the Commander reads his Brief nine hours ahead of New York
+   and a count done in New York's date would tell him "tomorrow" on the very
+   morning a release lands. The absolute local date and time are always printed
+   beside the words, so nothing is ambiguous.
+4. **Law 3 — the doorway never raises and never prints; it RETURNS.** Any
+   failure becomes one honest line and the Brief carries on.
+
+## >>> THE BAR. PASS = EVERY CHECK GREEN AND EVERY SABOTAGE CAUGHT. EXIT 0, 0 RED.
+
+**Anything less is a FAIL, is not committed as a pass, and is not called
+"mostly passed".**
+
+    (a) EXACT EQUALITY ON THE GOLDEN BLOCK. The gate writes its OWN events file,
+        hands the doorway a fixed clock and a fixed local zone, and demands the
+        WHOLE block match a copy typed out in this gate CHARACTER FOR CHARACTER.
+        "The words are present" is the bar S14 walked through and it is used
+        nowhere in this file.
+
+    (b) >>> THE STALENESS TRAP, WHICH IS THE ONE THING THIS INSTRUMENT MUST GET
+        RIGHT. With the clock advanced past a built-in list's published horizon,
+        the block MUST carry a LOUD line naming THAT list by name. Judged by
+        exact equality, not by "a warning appeared".
+
+    (c) NOTHING AHEAD AT ALL -> a LOUD line, judged by exact equality. The
+        instrument may never print an empty deck line, and may never omit the
+        line entirely.
+
+    (d) EVERY AWKWARD CASE NAMED BEFORE THE CODE, each judged by exact equality
+        or by an exact string typed out in this gate:
+            * the file is MISSING entirely
+            * the file is MALFORMED — he edits it by hand, so this WILL happen
+            * the file is EMPTY, or is `[]`
+            * an event dated in the PAST
+            * an impossible date (2026-13-45) and a non-date ("next tuesday")
+            * an event with NO name
+            * a name 300 characters long -> clipped VISIBLY, never silently
+            * TWO events on the SAME DAY
+            * TODAY vs TOMORROW vs in N days vs months away — the wording differs
+            * the file declares NO timezone, or one that cannot be resolved
+            * a refused entry is COUNTED AND SAID, never silently dropped
+
+    (e) DOOR 1 — THE GATE HOLDS ITS OWN EXPECTATIONS. It never reads its
+        expectation out of the file on trial, never calls a helper under test to
+        judge itself, and NEVER ASKS THE MODULE WHERE TO LOOK. R-014 was exactly
+        that. The module's constants are checked against copies typed in here.
+
+    (f) DOOR 2 — THE DOORWAY NEVER RAISES. Poison shapes, each required to
+        RETURN a string rather than throw.
+
+    (g) DOOR 3 — AT THE FILE DESCRIPTOR, not merely at `sys.stdout`. The ear is
+        PROVED TO HEAR down the print, raw-`os.write` and logging-handler routes
+        before its silence is believed, and a FRESH INTERPRETER proves the module
+        writes nothing at IMPORT and nothing after the doorway has answered.
+        **`cockpit/news.py` does not have this and it is R-046; this instrument
+        carries it from birth because its doorway is simple enough to.**
+
+    (h) A REAL READING — the SHIPPED `data/events.json` and the real clock
+        through the real doorway, judged LOOSELY by shape. Never exact equality:
+        that is R-021 with a new name.
+
+    (i) TZ INDEPENDENCE — the golden block is identical under two different
+        local zones, and THE WHOLE GATE IS RUN TWICE, once normally and once at
+        `TZ=UTC0`, exactly as the recorder's is.
+
+    (j) >>> THE SABOTAGE DRILL, PERMANENT, EVERY RUN. Each break is installed,
+        the OBSERVABLE IT AFFECTS is captured honest and broken, and its verdict
+        counts ONLY IF THE TWO DIFFER. **AN UNPROVABLE SABOTAGE IS REPORTED
+        INERT AND FAILS THIS GATE.** F10, S6 and B1 were each a break that could
+        change nothing, scored ESCAPED by three different gates, and each cost a
+        generation to find. **This file is built with that rule from birth.**
+
+        The twelve breaks are named HERE, before the code:
+            E1  the staleness guard switched off
+            E2  a PAST event shown as coming
+            E3  the day count off by one
+            E4  a long name clipped with NO visible mark
+            E5  a refused entry dropped SILENTLY
+            E6  the missing-file absence swallowed
+            E7  the events reversed, so the furthest is shown as next
+            E8  the disclaimer quietly reworded
+            E9  the file's declared timezone ignored, UTC assumed silently
+            E10 ADVICE printed to stdout while the returned block is unchanged
+            E11 a built-in list silently emptied
+            E12 the "nothing ahead" loud line replaced by silence
+
+    (k) THE ORIGINALS ARE PROVED RESTORED AFTERWARDS, NOT ASSUMED.
+
+    (l) NOTHING THE PILOT ALREADY READS CHANGES except the one added Context
+        Deck line in `cockpit/brief.py`. Proved two ways, never asserted: every
+        diff hunk in the other instrument files at or after their `__main__`
+        line, AND a sha256 of each production half printed before and after.
+
+**AND THE STANDING RULE THIS ENTRY IS SUBJECT TO:** if the build will not fit,
+**BUILD NOTHING AND SAY SO.** A half-built part is worse than no part.
