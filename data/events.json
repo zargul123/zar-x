@@ -1,0 +1,16 @@
+{
+  "timezone": "UTC",
+
+  "_1_what_this_file_is": "Your own event calendar. Anything you put in the 'events' list below appears on the Context Deck of your Morning Brief, saying how many days away it is. It is INFORMATION ONLY - the Brief never tells you what to do about it.",
+
+  "_2_you_do_not_need_this_file_for_FOMC_or_CPI": "Those are already built in to cockpit/events.py and appear on the Brief without you doing anything. This file is for anything else YOU want to be reminded of.",
+
+  "_3_the_timezone_line_matters": "The 'timezone' at the top says which clock the dates and times below are on. It ships as UTC. If you would rather write your own local times, change it to your zone - for example 'Asia/Karachi', 'Europe/London' or 'America/New_York' - and every entry below is then read on that clock. The Brief always prints the time converted to THIS COMPUTER'S clock and labels it 'local', so if a time comes out looking wrong, this line is what to check.",
+
+  "_4_how_to_add_one": "Add a line inside the square brackets below, like this, with a comma between entries: {\"date\": \"2026-09-01\", \"time\": \"14:30\", \"name\": \"Exchange maintenance window\"}. The 'time' is optional - leave it out and the day is treated as midday.",
+
+  "_5_if_you_break_it": "Nothing breaks. Editing JSON by hand is fiddly and a missed comma or bracket is easy. If that happens the Brief simply says '[no data: data/events.json unreadable]' on the events line and carries on with everything else. If one single entry is malformed, only that entry is dropped and the line says how many were refused - it is never dropped silently.",
+
+  "events": [
+  ]
+}

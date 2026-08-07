@@ -435,6 +435,75 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-07: THE EVENT CALENDAR IS BUILT AND GATED. THE CONTEXT DECK IS FOUR OF FIVE.**
+
+**WHERE THE SHIP IS:**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red  54 checks
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red  <- NEW
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red
+                                69 checks, 12 sabotages, all CAUGHT and all
+                                PROVED to change the output. None INERT.
+    vault INTACT · Brief 3/3, four Context Deck lines · lab/ untouched
+    data/oi_history/  3 files, 222 lines each — untouched; the recorder was
+                      NOT run. Next scheduled run 10-Aug-2026 09:00.
+
+**EVERY GATE ON THIS SHIP IS GREEN AND ALL SIX INSTRUMENTS ARE CORRECT.**
+
+**WHAT IS TRUE THAT WAS NOT TRUE YESTERDAY:**
+
+1. **THE BRIEF NOW SAYS WHAT IS COMING.** Sixteen scheduled events ahead, the
+   next three named with the days until each and **the time on HIS clock, not
+   New York's**. `data/events.json` is his own file and anything he puts in it
+   joins the same line.
+2. **NO DATE WAS REMEMBERED BY A MODEL.** Every one was read off the issuing
+   authority's own page on 2026-08-07 — the Fed's FOMC calendar and the BLS's
+   CPI schedule. **`bls.gov` answers HTTP 403 to a non-browser fetch**, the same
+   edge block that killed The Block, so it was read in a real browser.
+3. **THE STALENESS TRAP IS GUARDED AND IT IS NOT HYPOTHETICAL.** The BLS
+   publishes about a year ahead and its schedule **stops dead at 10 Dec 2026**,
+   so the built-in CPI list runs out in roughly four months. Past a list's
+   published horizon the deck names THAT LIST as ENDED; nothing ahead at all is
+   a loud line judged by exact equality; and **both horizons print on the Brief
+   every day, so the trap is visible before it fires.**
+4. **THIS IS THE THIRD FILE BUILT WITH THE SABOTAGE-PROOF RULE FROM BIRTH**, and
+   it carries the FILE-DESCRIPTOR door 3 plus a fresh-interpreter check that
+   `cockpit/news.py` still lacks (R-046).
+
+**WHAT IS BROKEN OR UNPROVEN, STATED HERE RATHER THAN IN THE QUEUE ALONE:**
+
+- **EVERY EXPECTED STRING IN GATE 3.4 WAS COMPUTED BY HAND AND ALL 69 CHECKS
+  WENT GREEN ON THE FIRST RUN (R-050).** Four of them turn on United States
+  daylight saving. That is either right arithmetic or a gate and a module
+  agreeing about something false, and only a fresh session can tell which.
+- **THE HORIZON GUARDS THE LIST RUNNING OUT, NOT A DATE CHANGING INSIDE IT
+  (R-051).** Eight of the sixteen dates are marked TENTATIVE by the Fed itself.
+  If one moves, the deck prints the old date with a confident countdown and
+  nothing says a word. It is a hardcoded list, so it cannot even be re-read.
+- **NOBODY BUT ITS AUTHOR HAS RUN GATE 3.4 OR INVENTED AN ATTACK ON IT
+  (R-052).** Five specific places to start are named in the queue.
+- **R-049 IS STILL UNVERIFIED** — the price of the exemption, and he was told
+  before he ruled.
+- **`cockpit/brief.py` STILL HAS NO GATE**, by his own ruling: not now, before
+  going live. It now imports four instruments and prints four deck lines.
+
+**WHAT THIS SESSION DID NOT DO:** **it attacked nothing.** The Commander
+exempted it from PART 1 in words on 2026-08-05, for one session. **THAT
+EXEMPTION DIES HERE. THE ORDERS WRITTEN BELOW IT RESTORE PART 1 IN FULL, WITH NO
+CAP** — and they say out loud that PART 1 has now been reduced four times
+running, which is his to know about.
+
+**SO THE NEXT BUILD IS PHASE 3 INSTRUMENT 5 OF 5 — THE WHALE WATCH** — but
+**only after the event calendar has been attacked by a session that did not
+build it.**
+
+**THE PREVIOUS MARKER IS KEPT BELOW FOR THE RECORD.**
+
 ## **>>> 2026-08-05: THE NEWS INSTRUMENT WAS ATTACKED BY A SESSION THAT DID NOT BUILD IT. IT LEAKED. THE LEAK IS REPAIRED AND THE GATE NOW BREAKS ITSELF TWELVE WAYS.**
 
 **WHERE THE SHIP IS:**

@@ -11310,3 +11310,173 @@ stories, the newest 209 days old — and the recorder's empty-list trap a third.
 
 **AND THE STANDING RULE THIS ENTRY IS SUBJECT TO:** if the build will not fit,
 **BUILD NOTHING AND SAY SO.** A half-built part is worse than no part.
+
+---
+
+# 2026-08-07 (later) — **THE EVENT CALENDAR IS BUILT AND GATED. THE CONTEXT DECK IS FOUR OF FIVE.**
+
+*The nineteenth generation. PART 1 skipped by the Commander's own exemption,
+which dies with this entry. GATE 3.4 was declared in the commit above this one,
+alone, before `cockpit/events.py` existed.*
+
+## WHAT SHIPPED, IN PLAIN WORDS
+
+**A new line on the Morning Brief that says what is COMING.** Today it reads:
+
+    Events       : 16 ahead · next in 5 days
+      in 5 days   — US CPI release (Wed 12 Aug 2026, 17:30 local)
+      in 35 days  — US CPI release (Fri 11 Sep 2026, 17:30 local)
+      in 40 days  — FOMC decision (Wed 16 Sep 2026, 23:00 local)
+    (from data/events.json and the built-in lists — FOMC to 08 Dec 2027 · US CPI to 10 Dec 2026
+     — information, not a signal)
+
+**The times are shown on HIS clock, not New York's**, which is the whole reason
+this instrument stores an instant rather than a date. And **`data/events.json`
+is his own file** — anything he puts in it appears on the same line.
+
+## THE NUMBERS
+
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red  69 checks
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red  69 checks
+                                12 sabotages, all CAUGHT, none INERT
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red  54 checks
+    lab/verify_vault.py         VAULT INTACT  6 of 6
+    cockpit/brief.py            3/3 instruments reporting, four deck lines
+    data/oi_history/            untouched. Next scheduled run 10-Aug-2026 09:00.
+
+## THE DATES ARE THE PART THAT MATTERED MOST, AND THEY WERE NOT REMEMBERED
+
+**A calendar is nothing but its dates, and a model that fills a date from memory
+produces something that looks exactly like a correct calendar.** So every date
+shipped was read off the issuing authority's own page on 2026-08-07:
+
+**FOMC**, from `federalreserve.gov/monetarypolicy/fomccalendars.htm` — the
+decision is the SECOND day of each two-day meeting, 14:00 US Eastern. 2026:
+16 Sep, 28 Oct, 9 Dec. 2027, which **the Fed's own page marks TENTATIVE**:
+27 Jan, 17 Mar, 28 Apr, 9 Jun, 28 Jul, 15 Sep, 27 Oct, 8 Dec. **The word
+"tentative" is printed on his screen for those eight rather than dropped.**
+
+**US CPI**, from `bls.gov/schedule/news_release/cpi.htm`, 08:30 US Eastern:
+12 Aug, 11 Sep, 14 Oct, 10 Nov, 10 Dec 2026.
+
+**AND THE MEASUREMENT THAT SHAPED THE WHOLE INSTRUMENT: THE BLS SCHEDULE STOPS
+DEAD AT 10 DEC 2026.** They publish about a year ahead. **So the built-in CPI
+list runs out in roughly four months — this is a dated fact, not a decorative
+horizon — and on 11 Dec 2026 the deck will start printing**
+
+    ⚠ the built-in US CPI list ENDED on 10 Dec 2026 — it needs new dates
+
+**GATE 3.4 check (b) proves that by advancing the clock to January 2027 rather
+than by waiting for it, and requires the FOMC list to carry on working in the
+same block.**
+
+**HOW THE BLS PAGE WAS READ, AND IT IS THE BLOCKWORKS SHAPE AGAIN: `bls.gov`
+ANSWERS HTTP 403 TO A NON-BROWSER FETCH** — the same edge block that killed The
+Block on 2026-08-04. It was read in a real browser instead. **A session that hit
+that 403 and quietly filled the gap from memory would have produced a calendar
+indistinguishable from this one and wrong.**
+
+## THE TRAP THIS INSTRUMENT IS SHAPED AROUND, AND WHAT WAS BUILT AGAINST IT
+
+**A HARDCODED LIST OF DATES GOES STALE AND A STALE CALENDAR LOOKS EXACTLY LIKE
+A HEALTHY ONE.** Blockworks a second time; the recorder's empty-list trap a
+third. **An empty deck line and a genuinely quiet month are indistinguishable.**
+
+    * each built-in list carries the last date its authority has PUBLISHED, and
+      past it the deck names THAT LIST as ENDED — check (b)
+    * nothing ahead at all is a LOUD line, judged by exact equality — check (c)
+    * both horizons are printed on the Brief EVERY DAY, so the trap is visible
+      before it fires rather than only after
+
+## THE TIME-ZONE DECISION, WHICH IS WHERE THIS WOULD HAVE BEEN A DAY OUT
+
+Every event is an **INSTANT** — a date, a time and a zone — never a bare date,
+and `data/events.json` declares its own zone inside the file. **"today" /
+"tomorrow" / "in N days" are counted in the READER'S OWN local date.**
+
+**THE REASON, MEASURED RATHER THAN ASSUMED:** his machine runs UTC+5 — an 08:30
+New York release printed as 17:30 on his Brief. Counting in New York's date
+instead would have told him *"US CPI tomorrow"* **on the very morning the
+release lands**, every single time, and nothing would have said so. GATE 3.4
+check (i) is the control: the same file rendered for Karachi and for UTC must
+DISAGREE, because a check that could not tell those apart would pass a doorway
+that ignored the zone entirely.
+
+## WHAT I GOT WRONG, AND ONE THING THE ORDERS HAVE WRONG
+
+**1. MY FIRST LIVE-SHAPE CHECK WOULD HAVE GONE RED ABOUT THE INSTRUMENT WORKING
+CORRECTLY.** Check (r) reads the real file with the real clock and required at
+least one event line. **On 09 Dec 2027, when the last built-in date passes, that
+check would have turned the gate red about the loud "NOTHING AHEAD" line that
+check (c) exists to demand** — and taught whoever saw it that a working warning
+was a fault. Found by reading my own gate after its first green run, not by any
+check. **Repaired, and a permanent check now proves the branch is not dead code
+by asserting that the prefix it keys on is the one the doorway really prints.**
+
+**2. I SCANNED FOR MOJIBAKE WITH THE WRONG FINGERPRINTS THE FIRST TIME**, then
+compared line endings against `git show HEAD:<file>` — **which hands back the
+blob, and the blob is LF, so every CRLF file on this ship looks LF-only in
+HEAD.** The comparison was meaningless and I nearly reported `README.md` and
+`SHIP_LAWS.md` as damaged when they have been LF-only all along and no session
+may change either. Corrected: line endings are judged in the working tree, and
+only the five documents a session rewrites are held to zero bare LF.
+
+**3. THE ORDERS' HASH RECIPE FOR ONE FILE IS AN ARTIFACT — MEASURED, NOT
+GUESSED.** `SESSION_ORDERS.md` records that `funding.py` and `news.py` join
+**WITH** a trailing CRLF while `open_interest.py` joins with **NO** trailing
+separator. **Both joins are byte-for-byte raw prefixes of ALL FIVE instrument
+files.** There is no difference between the files; the recorded recipe is just
+which variant each session happened to pick, and all three remembered hashes
+reproduce exactly once the matching variant is used. **A session that follows
+the orders literally could see a mismatch and conclude the pilot's code changed
+when nothing had.** Filed as R-053 and corrected in the orders.
+
+## THE CONFINEMENT, PROVED TWO WAYS RATHER THAN ASSERTED
+
+**Production-half sha256, working tree against HEAD, with the join VERIFIED to
+be byte-for-byte the raw prefix of the file before any hash was printed:**
+
+    cockpit/fear_greed.py       __main__ line 113   bb31626c493a1ac6…  UNCHANGED
+    cockpit/funding.py          __main__ line 160   95069d1bef8316d7…  UNCHANGED
+    cockpit/news.py             __main__ line 272   503663762315b2f2…  UNCHANGED
+    data/open_interest.py       __main__ line 243   c68508e881524cf0…  UNCHANGED
+    data/collection_guard.py    __main__ line 156   d6518cd7208eb611…  UNCHANGED
+
+**And git, which knows what actually changed on disk:** `cockpit/brief.py` in
+two hunks — one import line, one `print(events_section())`, plus a comment that
+said "two instruments" and now says four. Nothing else tracked changed except
+`journal/snapshots_local.csv`, which is the laptop's own scheduled task and is
+committed separately.
+
+## THE GATE WAS PROVED TO SAY NO, ON A COPY OUTSIDE THE REPO
+
+The twelve sabotages say no twelve times every run, and each is proved to change
+what somebody reads before its verdict counts — **none scored INERT.** On top of
+that, three breaks the drill does not contain were installed in a copy outside
+the repo:
+
+    CONTROL — nothing touched ................. PASSED, 0 red
+    one shipped CPI date moved by a day ....... FAILED, 4 red
+    the CPI horizon quietly extended a year ... FAILED, 6 red
+    the loud NOTHING AHEAD wording softened ... FAILED, 5 red
+
+**The control passing first is what makes the other three mean anything.**
+
+## WHAT IS NOT PROVEN, SAID HERE RATHER THAN IN A FOOTNOTE
+
+**Every expected string in GATE 3.4 was computed in my head — weekdays, day
+counts across month boundaries, and four answers that depend on United States
+daylight saving — and all sixty-nine checks went green on the FIRST run.** That
+is either right arithmetic or a gate and a module agreeing with each other about
+something false. **R-050**, and a fresh session should check the DST rows
+against a clock that has nothing to do with this ship.
+
+**And the horizon guards the list RUNNING OUT, not a date CHANGING inside it.**
+Eight of the sixteen dates are marked tentative by the Fed itself. If one moves,
+this instrument prints the old date with a confident countdown and nothing says
+a word — **R-051**, which is R-035 in a narrower and more actionable form.

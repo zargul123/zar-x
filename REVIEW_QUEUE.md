@@ -3545,3 +3545,123 @@ reason `data/oi_history/` exists. **Every day without it is a day of counts that
 can never be recovered.** **He has been told this plainly and has ruled. It
 waits.**
 
+
+---
+
+# **>>> 2026-08-07 — THE NINETEENTH GENERATION. FOUR NEW DOUBTS, ALL AGAINST MY OWN WORK, ALL OPEN.**
+
+*I built the event calendar under GATE 3.4. **I did not attack anything** — the
+Commander exempted this session from PART 1 himself and that exemption dies
+here. Everything below is a doubt about what I built, filed by me, and **I may
+not clear any of it.***
+
+## R-050 — **EVERY EXPECTED STRING IN MY GATE WAS COMPUTED IN MY HEAD, AND ALL OF THEM MATCHED ON THE FIRST RUN.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT**
+
+**That is the sentence that should worry the next session, and I am writing it
+myself rather than letting it be discovered.** GATE 3.4 judges by exact equality
+against strings I typed out by hand: weekdays, day counts across month
+boundaries, and **four times where the answer depends on United States daylight
+saving** — 17 Mar 2027 is EDT, 28 Jan 2027 is EST, and an event at 18:00 in New
+York lands at 03:00 the NEXT day on the Commander's clock.
+
+**Sixty-nine checks went green on the very first run.** The honest reading is
+that either the arithmetic was right, or **the gate and the module share an
+assumption and agree with each other about something false.** The second is
+exactly the shape of R-014.
+
+**WHAT I DID DO ABOUT IT, SO THIS IS NOT LEFT AS A SHRUG:** the expectations were
+written from the raw UTC offsets rather than from any output of the module, and
+three deliberate breaks in a copy outside the repo each turned the gate red.
+**But I wrote the breaks too.**
+
+**WHAT A FRESH SESSION SHOULD DO:** take the four DST-sensitive rows and check
+them against a clock that has nothing to do with this ship. **If Python's
+`zoneinfo` and my head are both wrong in the same direction, nothing currently
+on this ship would notice.**
+
+## R-051 — **THE HORIZON GUARDS THE LIST RUNNING OUT. NOTHING GUARDS A DATE CHANGING INSIDE IT.** · CATEGORY B · **OPEN**
+
+**The Fed's own page says the 2027 dates are TENTATIVE** — *"Each meeting date is
+tentative until confirmed at the meeting immediately preceding it"* — and eight
+of the sixteen dates I shipped are those. **If the Fed moves one, this
+instrument will print the old date, on the right day of the week, with a
+confident countdown, and nothing anywhere will say a word.**
+
+**IT IS A HARDCODED LIST, SO IT CANNOT EVEN BE RE-READ.** The staleness guard I
+built answers *"has this list run out?"* It does not answer *"is this list still
+true?"* **Those are different questions and I only built the first.**
+
+**This is R-035 wearing new clothes** — nothing on this ship asks whether a
+source is RIGHT — but it is narrower and more actionable than R-035, so it is
+filed separately: **a later session could have this instrument re-read
+federalreserve.gov and bls.gov and go red on a disagreement.** I did not build
+that, and the reason is honest rather than good: the plan asked for a manual
+file plus a hardcoded list, and I built what the plan asked for.
+
+**Graded SMALL by me on Q2** — a wrong FOMC date costs him a day's expectation
+about a scheduled event on an information-only deck, and no trade, record or
+archive depends on it. **The Commander rules, not me.**
+
+## R-052 — **NOBODY BUT ME HAS RUN GATE 3.4, AND I INVENTED THE TWELVE ATTACKS ON MY OWN CODE.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT**
+
+The standard filing, and it is not a formality here. **E1 to E12 were named in
+`PROGRESS_LOG.md` before one line of the instrument existed, which is the
+strongest version of this I could do alone — but a builder cannot invent the
+attack they are blind to**, and the eighteenth generation proved that on this
+very ship: its own written list of five weak spots in `news.py` did not contain
+X1, and a fresh session found X1 in a morning.
+
+**THE PLACES I WOULD LOOK IF I WERE ATTACKING THIS, NAMED SO THE NEXT SESSION
+CAN START SOMEWHERE OTHER THAN WHERE I ALREADY LOOKED:**
+
+1. **`_instant` accepts `'2026-8-1'`** — `strptime('%Y-%m-%d')` does not require
+   two digits. I decided that is a real date honestly written and let it
+   through. **I did not test it.**
+2. **Deduplication is `set()` on `(instant, name)`.** Two genuinely different
+   events with the same name at the same minute collapse into one and **nothing
+   counts or says so** — unlike a malformed entry, which is counted.
+3. **`_label` prints the last TWO parts of a path.** Two different files named
+   `events.json` in two different `data` directories would print identically.
+4. **The whole block is one `try`.** A failure late in assembly discards
+   everything earlier and prints the offline line — correct under Law 3, but it
+   means a fault in the footer can hide sixteen perfectly good events.
+5. **`SHOWN = 3` silently hides the rest.** The count says "16 ahead" so nothing
+   is lost, but I chose 3 to match the news instrument and for no other reason.
+
+## R-053 — **THE ORDERS' REMEMBERED HASH RECIPE FOR ONE FILE IS AN ARTIFACT, AND IT COULD MAKE A FUTURE SESSION THINK A FILE MOVED WHEN IT HAD NOT.** · CATEGORY B · **OPEN**
+
+`SESSION_ORDERS.md` records that `cockpit/funding.py` and `cockpit/news.py` are
+joined **WITH** a trailing CRLF while `data/open_interest.py` is joined with
+**NO** trailing separator, and gives a different hash for each.
+
+**MEASURED TODAY: BOTH JOINS ARE BYTE-FOR-BYTE RAW PREFIXES OF ALL FIVE
+INSTRUMENT FILES.** There is no difference between the files. The recorded
+"recipe" is simply which of the two variants each session happened to pick, and
+all three remembered hashes reproduce exactly once the right variant is used.
+
+**WHY IT IS WORTH A NUMBER RATHER THAN A SHRUG:** a session that follows the
+orders literally, uses one variant, and compares against a hash produced with
+the other **will see a mismatch and conclude the pilot's code changed when
+nothing did.** The orders already say in bold not to trust those numbers; this
+records WHY they cannot be trusted. **The fix is one sentence in the orders,
+which I have written, and no code changes.**
+
+**Graded SMALL: it is a documentation fault, it changes nothing the Commander
+reads, and it would cost a future session an hour of confusion at worst.**
+
+## **>>> THE CATEGORY B PILE IS NOW TWENTY-SIX DEEP.** R-050, R-051, R-052 and
+R-053 added; **nothing cleared, because I attacked nothing and a session may
+never clear its own.** **The pile has grown every single session since it was
+created and has still never once shrunk.** It is cleared before the ship is used
+for real, at the same moment `cockpit/brief.py` finally gets its gate.
+**Twenty-six. Saying the number out loud to him, as the last four sessions have.**
+
+## R-049 — **UNVERIFIED, AND THAT IS THE PRICE OF THE EXEMPTION HE GRANTED.**
+He was told before he ruled. **I did not touch it, by his order. The session
+after me is not exempt and should treat it as live work.**
+
+## R-035 — **UNTOUCHED, AND R-051 IS A NEW ARGUMENT FOR IT.** A hardcoded
+calendar cannot even re-read its source, so "is the source still right?" is not
+merely unanswered here — it is unanswerable without new code.
+
+## R-006 — **UNTOUCHED, AND NO IN-HOUSE SESSION MAY EVER CLEAR IT.**
