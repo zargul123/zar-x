@@ -12071,3 +12071,217 @@ words, and both say he asked for it.**
 
 **NO `.py` FILE WAS MODIFIED. NO RULING CHANGED. This is the same two rulings,
 written so that a stranger cannot misread them.**
+
+# 2026-08-11 (night) — THE TWENTY-FIRST GENERATION · **THE SHIP IS ALIVE, THE SOURCES ARE RE-PROBED, AND THE EDGE CASES AND THE FOURTEEN BREAKS ARE NAMED HERE BEFORE `cockpit/whales.py` EXISTS.**
+
+**THIS ENTRY IS COMMITTED ALONE, WITH NO `.py` FILE IN THE COMMIT.** GATE 3.5
+condition 13 requires every awkward edge case to be named in this log BEFORE the
+code is written, and condition 9 requires the sabotages to be named the same way
+— `cockpit/events.py`'s twelve were, and it is the only file on this ship whose
+drill has never had to be retrofitted. `git show --stat` on this commit is the
+proof.
+
+**AND THE GATE ITSELF IS NOT MINE AND I DO NOT TOUCH IT.** GATE 3.5 was declared
+this morning by the twentieth generation, which is stopping. **I did not write a
+word of the bar I am about to be measured by, and I have not edited one.** If I
+think a condition is wrong I say so to the Commander in my report; I do not
+reinterpret it.
+
+## MY SESSION, AS THE ORDERS DEFINE IT
+
+**PART 1 — NONE. The Commander exempted this session himself, in words, on
+2026-08-11 (evening).** *"we are only making exemption for next session to not
+attack your check and i think there is nothing to attack for next session what
+have you done."* **The exemption covers the twentieth generation's work and
+R-049. It does not cover proving the ship alive, it does not cover the sabotage
+drill inside what I build, it does not loosen GATE 3.5, and IT DIES WITH ME.**
+
+**AND THE NUMBER, SAID OUT LOUD AS THE STANDING DUTY REQUIRES: THIS IS THE FIFTH
+TIME PART 1 HAS BEEN REDUCED** — 2026-07-31, 2026-08-03 (twice), 2026-08-05, and
+now. **The streak was broken in between**: the twentieth generation ran Part 1
+uncapped and found three sabotages walking through a green gate in a morning.
+**R-049 is now deferred three times.** I am not arguing with him about it; the
+duty is to say the number, and it is said.
+
+**PART 2 — THE WHALE WATCH, INSTRUMENT 5 OF 5, UNDER GATE 3.5.** My whole
+session.
+
+## THE SHIP WAS PROVED ALIVE BEFORE ANYTHING WAS TOUCHED
+
+All eight invocations from one script, output captured to a file and READ, red
+ticks counted BY MACHINE and not by eye:
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red  58 green   65.1 s
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red  71 green  123.4 s
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red  88 green   50.1 s
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red  88 green   49.6 s
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red   0 green    0.7 s
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red  54 green    5.2 s
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red  69 green    0.3 s
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red  69 green    0.3 s
+    lab/verify_vault.py         VAULT INTACT — all 6 files match their checksums
+    cockpit/brief.py            3/3 assets, FOUR Context Deck lines, exit 0
+
+**ZERO `✗` IN THE WHOLE 2,000-LINE CAPTURE. ZERO `FAILED`.** Every gate printed
+its own PASSED line.
+
+**AND A MEASUREMENT THAT CORRECTS THE FIGURES I INHERITED, BECAUSE THE
+MEASUREMENT WINS.** The orders quote open_interest at 65.5 s and events at 1.5 s.
+They ran in **50.1 s** and **0.3 s** today. Faster, not slower, so nothing is
+wrong — but the numbers on record are wrong and the correction is written down
+rather than left for the next session to wonder about.
+
+**>>> AND A HOLE IN MY OWN MACHINE COUNT, FILED AGAINST MYSELF BEFORE ANYBODY
+FINDS IT.** I counted `✗` characters. **`data/collection_guard.py` DOES NOT USE
+`✗` — it prints `OK  ` and `FAIL`**, so my counter scored it "0 red, 0 green"
+and would have scored a genuine failure there **0 red as well.** I caught it
+because 0 green on a gate that takes 7.6 s looked wrong, read the output by hand,
+and then counted `FAILED` across the whole capture as a second, independent
+machine pass. **A tally counts only what a machine actually checked, and mine
+nearly counted nothing while looking green.** That is R-057.
+
+## R-056 — THE SOURCES WERE RE-PROBED BEFORE ANYTHING WAS CHOSEN
+
+**Nine endpoints answering on one morning is not nine endpoints that work.**
+CryptoSlate was found rate-limiting within an hour of being adopted. So every
+candidate was called again, 2026-08-11 12:33 UTC, roughly four hours after the
+twentieth generation's probe:
+
+    /futures/data/topLongShortPositionRatio    BTC/ETH/SOL  200  0.41-0.51 s  3 rows  newest 3.1 min
+    /futures/data/topLongShortAccountRatio     BTC/ETH/SOL  200  0.30-0.39 s  3 rows  newest 3.1 min
+    /futures/data/globalLongShortAccountRatio  BTC/ETH/SOL  200  0.31 s       3 rows  newest 3.1 min
+    /futures/data/takerlongshortRatio          BTC/ETH/SOL  200  0.30-0.38 s  3 rows  newest 8-13 min
+    api.blockchair.com/bitcoin/stats                        200  1.24 s
+    mempool.space/api/v1/fees/recommended                   200  0.63 s
+
+**AND TWO THINGS THE FIRST PROBE DID NOT ASK.** A burst of **twelve** requests
+against the chosen endpoint in a few seconds returned **twelve HTTP 200s and no
+rate-limit** — the CryptoSlate question, asked before adoption this time rather
+than after. And the `period` parameter was probed: `5m`, `1h`, `4h`, `1d` all
+answer 200; **`7d` is refused with code -1130**, so the supported set is real and
+bounded rather than assumed.
+
+**READINGS AT 12:33 UTC, BTCUSDT:** top accounts by position 60.84% long
+(ratio 1.5536), top accounts by count 61.61% (1.6048), all accounts 60.76%
+(1.5484).
+
+## WHAT I AM BUILDING, AND — MORE IMPORTANTLY — WHAT IT IS NOT
+
+**TWO ENDPOINTS, SIDE BY SIDE, FOR BTC / ETH / SOL:**
+
+  * `/futures/data/topLongShortPositionRatio` — **Binance's largest accounts,
+    weighted by position size.** The closest honest thing to "big money" that
+    exists for free.
+  * `/futures/data/globalLongShortAccountRatio` — **every account on the
+    venue.** Beside it, so the reader can see whether the big accounts are
+    leaning differently from everybody else, which is the only reason the first
+    number is interesting at all.
+
+**>>> AND THE GAP I AM NOT PAPERING OVER, WHICH IS THE WHOLE HONESTY OF THIS
+INSTRUMENT. Exchange RESERVE and NETFLOW — the series the plan asks for most
+directly — ARE PAID.** CryptoQuant, Glassnode and Whale Alert all require a key.
+**So this is NOT an exchange-flow instrument, it is NOT wallet tracking, and it
+is NOT the world's whales.** It is **one venue's own published figures about its
+own customers**, and GATE 3.5 condition 4 requires that limit to be on the
+BRIEF, in the Commander's sight, not buried in a docstring. It will be.
+
+**AND CONDITION 3 MATTERS MORE HERE THAN ANYWHERE ELSE ON THIS SHIP.** *"Big
+money is 61% long"* is one sentence away from a trade recommendation. **Phase 6's
+three signal slots are locked BY NAME — Turtle/Donchian, funding-rate fade,
+on-chain cycle thermometer — and a positioning number is not one of them.** The
+whole block is scanned for advice words on every path, healthy and broken alike.
+
+## THE EDGE CASES, NAMED BEFORE THE CODE — CONDITION 13
+
+1. **THE EMPTY LIST.** Binance answers HTTP 200 with `[]`. It looks exactly like
+   a healthy reply. **It is named `no rows` and contributes nothing.**
+2. **THE STALE-BUT-PERFECT ROW.** Blockworks' shape: well-formed, plausible,
+   and hours old. **Older than 30 minutes is named as stale WITH ITS AGE and
+   contributes nothing.** No number, no count.
+3. **WHICH ROW.** If more than one row comes back, the **NEWEST** is the one
+   that means anything. Using the oldest would be a lie nobody could see.
+4. **THE ROUNDING BOUNDARY.** Binance sends `"0.6085"` as a STRING. `0.6085` in
+   binary floating point is `60.849999…`, so `f"{0.6085*100:.1f}"` prints
+   **60.8** where half-up rounding gives **60.9**. **The whole parse runs in
+   `Decimal` from the raw string** and the rounding is `ROUND_HALF_UP`, declared.
+5. **THE SWAP.** `longAccount` and `shortAccount` are the same shape. Printing
+   short as long prints the exact opposite of the truth on a screen that looks
+   perfectly normal — **that is the funding instrument's original sin, the very
+   first sabotage this ship ever caught.** The row carries a THIRD, redundant
+   field, `longShortRatio`, so the module refuses any row where
+   `ratio × short` disagrees with `long`. **A swap moves that product from 0.6085
+   to 0.9459 and is refused rather than printed.**
+6. **THE SHARES THAT DO NOT ADD UP.** `long + short` must be 1 within 0.001, and
+   each share must be within 0 to 1. A payload that fails is refused BY NAME.
+7. **PARTIAL FAILURE.** Six readings, six independent fates. **The ones that
+   answered are printed and the ones that did not are NAMED**, each with its own
+   reason. B7's shape — first asset perfect, the other two quietly ruined — is
+   the thing this rule exists to stop.
+8. **EVERY FAILURE SEPARATELY, CONDITION 6.** timeout · HTTP status · unreachable
+   · unreadable reply · not a list · no rows · a missing field named · a
+   non-numeric field named · shares out of range · shares that do not add up ·
+   the ratio disagreeing · stale with its age. **"The whale watch is a bit
+   broken" is not something anybody can act on.**
+9. **NOTHING ANSWERED AT ALL.** Not silence, and not a bare offline line that
+   loses the reasons: the header says **`0 of 6 readings`** and all six reasons
+   are named under it. The `🔌` line stays as the Law 3 backstop for a failure
+   inside the doorway itself.
+10. **THE CLOCK.** Ages are computed in UTC milliseconds from the row's own
+    stamp. `TZ=UTC0` and `TZ` unset must produce the same block, and the gate is
+    run both ways.
+
+## THE FOURTEEN BREAKS, NAMED BEFORE THE CODE — CONDITION 9
+
+**Each is installed on every run, forever; each is PROVED to change what
+somebody reads before its verdict counts; and the witness is PER-SABOTAGE.**
+
+    W1   the staleness guard switched off — a stale row printed as current
+    W2   long and short SWAPPED — the exact opposite of the truth
+    W3   rounding truncated instead of half-up — 60.9% printed as 60.8%
+    W4   a failed reading dropped SILENTLY instead of named (S10's shape)
+    W5   the reason genericised to "unavailable" — condition 6 defeated
+    W6   the readings count inflated to the total — "6 of 6" over four
+    W7   the OLDEST row used instead of the newest
+    W8   the two populations swapped — "all accounts" printed under "top"
+    W9   the share-sum sanity check switched off — garbage accepted
+    W10  ADVICE printed while the returned block stays byte-identical (S15,
+         E10) — witnessed AT THE FILE DESCRIPTOR, not at the block
+    W11  the disclaimer quietly reworded
+    W12  a whole asset row dropped when one of its two readings fails (B7)
+    W13  the ratio cross-check switched off — a swapped payload accepted
+    W14  the "oldest reading" stamp showing the newest instead
+
+**W10's witness is the file descriptor because its returned block is byte-
+identical to the honest one.** A drill that measured every break on one channel
+would score it INERT and delete the only check that catches it. F10, S6 and B1
+each cost a generation exactly that way.
+
+## THE THRESHOLDS AND THE DEFAULTS — CONDITIONS 11 AND 12, WHICH R-054 PAID FOR
+
+**EVERY THRESHOLD IS TESTED AT THE EXACT VALUE WHERE IT TURNS OVER, AND ONE STEP
+EITHER SIDE.** There are six, and every one gets three checks:
+
+    the staleness limit .... 29m59s fresh · exactly 30m00s fresh · 30m01s STALE
+    the row minimum ........ 0 rows refused · 1 row kept · 2 rows -> the NEWEST
+    the rounding rule ...... 0.60849 -> 60.8 · 0.60850 -> 60.9 · 0.60851 -> 60.9
+    the share range ........ exactly 0 and exactly 1 kept · -0.0001 and 1.0001 refused
+    the share-sum window ... 0.0009 kept · exactly 0.0010 kept · 0.0011 refused
+    the ratio window ....... 0.0019 kept · exactly 0.0020 kept · 0.0021 refused
+
+**AND EVERY DEFAULT THE COMMANDER IS INVITED TO RELY ON IS EXERCISED BY A CHECK,
+NOT MERELY PINNED AS A CONSTANT.** A recording transport is handed to the
+doorway with **no other argument at all**, and it writes down every request the
+module actually made — so the base address, both paths, all three symbols in
+order, the period, the row count and the timeout are judged by **what the module
+DID**, not by what its constants say. **Pinning `DEFAULT_TIME == '12:00'` did not
+stop the default-time PATH being changed with GATE 3.4 still green.** The default
+staleness limit and the default clock are exercised the same way: a row stamped
+31 minutes ago, with no `max_age` and no `now` passed, must come back named as
+stale.
+
+## WHAT I EXPECT TO GET WRONG
+
+**I am the builder and I wrote every check below, so the one thing I cannot do is
+invent the attack I am blind to.** That is Layer 3, and **the Commander closed
+this hole himself on 2026-08-11: the session AFTER me attacks what I build, and
+my exemption does not reach it.** Its orders will say so in plain words.
