@@ -11758,3 +11758,127 @@ recomputing, R-053's recipe never came up, and `git status` showed only
 `journal/snapshots_local.csv` (the laptop's own scheduled snapshot) and the
 untracked `journal/oi_recorder.log`. **R-049 was not verified** — I ran out of
 room after the calendar, and it stays live work for whoever comes next.
+
+# 2026-08-11 — **GATE 3.5 IS DECLARED HERE, BEFORE `cockpit/whales.py` EXISTS — AND BY A SESSION THAT WILL NOT BUILD IT.**
+
+**THIS ENTRY IS COMMITTED ALONE, WITH NO `.py` FILE IN THE COMMIT.** `git show
+--stat` on this commit is the proof the bar came first. Twenty-four uses,
+twenty-four audits survived; the nineteenth generation's was `32af26d`.
+
+**AND THIS ONE IS STRONGER THAN THE TWENTY-THREE BEFORE IT, FOR A REASON WORTH
+WRITING DOWN.** Every previous gate was declared by the session that then went
+on to build the thing. **This one is declared by a session that is stopping
+here.** The builder therefore cannot lower it to match what got built, cannot
+quietly reinterpret a word, and cannot argue that a check turned out to be
+impractical — because the bar was set by somebody with nothing to gain from
+where it sits. **That is Layer 1 working the way Layer 1 was always supposed to
+work, and it happened by accident of the clock rather than by design.**
+
+## WHAT IS BEING GATED — PHASE 3, INSTRUMENT 5 OF 5, THE WHALE WATCH
+
+**THE PLAN'S OWN WORDS ARE THE SPECIFICATION:** *"what the big money is doing,
+from FREE sources only … Plain-words line on the Brief. INFORMATION ONLY. True
+wallet-by-wallet whale tracking is paid/unreliable; we show the honest free
+footprint, not a fake x-ray. IF no free source proves reliable at build time →
+the instrument reports 'whale watch: no honest free source available' rather
+than showing garbage."*
+
+**THE SOURCES ARE ALREADY MEASURED — 2026-08-11 08:44 UTC, in ROADMAP.md — SO
+THE BUILDER DOES NOT GET TO CHOOSE ON A GUESS.** The exchange reserve and
+netflow series the plan asks for most directly are **paid** (CryptoQuant,
+Glassnode, Whale Alert) and are therefore out. What answered, free and keyless,
+is Binance's own positioning data, on a host this ship already reaches.
+
+## THE BAR. EVERY LINE OF IT IS A PASS/FAIL CONDITION.
+
+**(1) EXACT EQUALITY, ON BYTES THE GATE HANDED OVER.** The gate builds its own
+API responses, hands the SAME BYTES to the doorway, and demands the WHOLE
+returned block match a copy typed out IN THE GATE, character for character.
+**"The words are present" is the bar S14 walked through and it may not appear in
+this file.**
+
+**(2) THE GATE HOLDS ITS OWN EXPECTATIONS, ALWAYS.** It may never read an
+expected value out of the file on trial (R-014), never call a helper under test
+to judge itself, and **never ask the module where to look** (B14). Every
+constant the module ships is compared to a copy typed out in the gate.
+
+**(3) INFORMATION, NEVER A SIGNAL — HELD ON EVERY PATH.** No word of advice, no
+score, no ranking, no ">>". F8 printed *">> strong buy signal"* on the deck of
+an information-only ship while its gate applauded. **The whole block is checked
+for advice words on every path the gate exercises, healthy and broken alike.**
+**This one matters more here than anywhere else on the ship: "big money is 61%
+long" is one sentence away from being a trade recommendation, and Phase 6's
+three signal slots are locked BY NAME. A positioning number is not one of them.**
+
+**(4) THE HONEST-NAME RULE.** Whatever it shows, it must NAME what it is
+measuring and NAME its limits on the Brief itself, not in a docstring. It is one
+venue's own reported figures about its own customers. **If the line could be
+read as "all the whales in the world", the wording FAILS this gate.**
+
+**(5) THE DEAD/STALE-SOURCE GUARD, FROM BIRTH.** Blockworks answered HTTP 200
+with fifty perfect stories 209 days old. A reading older than a stated maximum
+age is **named as no-data and contributes nothing** — no number, no count.
+**Silence is forbidden: an absent source is said out loud, by name.** The gate
+proves this by handing over a stale-but-perfect payload and requiring the block
+to say so.
+
+**(6) EVERY FAILURE NAMED SEPARATELY.** HTTP failure, timeout, malformed JSON,
+an empty list, a missing field, a non-numeric field, a stale stamp — each
+produces its OWN named line. *"The whale watch is a bit broken"* is not
+something anybody can act on.
+
+**(7) LAW 3 — THE DOORWAY NEVER RAISES AND NEVER PRINTS; IT RETURNS.** At least
+nine shapes of poisoned input, each required to RETURN rather than throw.
+
+**(8) DOOR 3, AT THE FILE DESCRIPTOR, WITH A FRESH INTERPRETER.** The standard
+`cockpit/events.py` set, not the weaker `news.py` one (R-046): a non-daemon
+thread, a buffered wrapper over descriptor 1, an `atexit` handler, and **a hang,
+which must be a FAILURE and never a quiet pass.**
+
+**(9) A PERMANENT SABOTAGE DRILL, AT LEAST TWELVE BREAKS, AND EVERY ONE PROVED
+TO CHANGE WHAT SOMEBODY READS BEFORE ITS VERDICT COUNTS.** An unprovable
+sabotage is reported **INERT and FAILS this gate.** The witness is
+**PER-SABOTAGE**: a break that prints while returning a byte-identical block is
+witnessed at STDOUT, not at the block. F10, S6 and B1 each cost a generation.
+**Originals restored and the restoration VERIFIED, not assumed.**
+
+**(10) ONE REAL FETCH, JUDGED LOOSELY, ON PURPOSE.** A gate that only ever
+judges bytes it handed over never tests the trip and is decorative. The live
+check states its own loose bar out loud.
+
+**(11) >>> AND THE ONE THIS GATE HAS THAT NO GATE BEFORE IT HAD, BECAUSE THE
+SESSION THAT DECLARED IT HAD JUST WATCHED THREE SABOTAGES WALK THROUGH GATE 3.4
+AT A BOUNDARY NOBODY TESTED: EVERY THRESHOLD IN THIS INSTRUMENT IS TESTED AT
+THE EXACT VALUE WHERE IT TURNS OVER, AND ONE STEP EITHER SIDE OF IT.** A
+staleness limit, a minimum row count, a rounding rule — each gets three checks:
+just inside, exactly on, just outside. **A threshold tested only far from its
+edge is a threshold nobody has tested. GATE 3.4's staleness guard was exercised
+26 days and a year past its horizon and never once on the day it fires, and an
+off-by-one and twenty days of slack both walked straight through it in a
+measured drill on 2026-08-11.**
+
+**(12) AND EVERY DEFAULT THE COMMANDER IS INVITED TO RELY ON IS EXERCISED BY A
+CHECK, NOT MERELY PINNED AS A CONSTANT.** If a file or a docstring promises him
+a behaviour when he leaves something out, **a check writes that exact input and
+compares the whole block.** Pinning `DEFAULT_TIME == '12:00'` did not stop the
+default-time PATH being changed with the gate still green.
+
+**(13) THE STANDING RULES.** Nothing the pilot reads changes except the one new
+line — proved two ways, never asserted. `py_compile` before the gate. Every
+awkward edge case named in this log BEFORE the code is written. **A failing gate
+is never committed and never called "mostly passed".**
+
+## PASS
+
+**Every check green, every sabotage CAUGHT and none INERT, exit 0, zero red
+ticks — run twice, once normally and once at `TZ=UTC0`.** Anything less is a
+FAIL.
+
+## AND THE ACCEPTABLE OUTCOME THAT IS NOT A FAILURE
+
+**If the builder measures the free sources at build time and judges that none of
+them can be reported honestly, the instrument says
+`whale watch: no honest free source available` and THAT PASSES THIS GATE.** It
+is written into the plan as an acceptable result, it is written here, and a
+session that reaches it has not failed. **What does NOT pass is showing a number
+nobody can stand behind because a blank line looked like a wasted session.**
