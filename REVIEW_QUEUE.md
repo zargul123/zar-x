@@ -3906,3 +3906,109 @@ drill inside what gets built; or any condition of GATE 3.5 — **conditions 11 a
 the next session and no session may renew it.**
 
 ## **>>> THE CATEGORY B PILE IS STILL TWENTY-SEVEN.** Nothing was cleared this evening and nothing was added. **Two rulings, no movement.**
+
+# **>>> 2026-08-11 (night) — THE TWENTY-FIRST GENERATION. THE WHALE WATCH WAS BUILT. THREE DOUBTS FILED, NOTHING CLEARED, AND I EXPLAIN WHY I CLEARED NOTHING.**
+
+## R-057 — **MY OWN MACHINE COUNT WOULD HAVE SCORED A REAL FAILURE AS ZERO RED.** · CATEGORY B · **OPEN — I FOUND IT IN MY OWN WORK, SO I MAY NOT CLEAR IT**
+
+The script that proves the ship alive counted `✗` characters across every
+gate's output and reported "0 red" for the whole run.
+
+**`data/collection_guard.py` DOES NOT PRINT `✗`. It prints `OK  ` and `FAIL`.**
+So it scored *0 red, 0 green* — and **a genuine failure inside it would have
+scored 0 red too.** The headline "zero red across the whole run" was arithmetic
+over an incomplete set, which is 48/48's shape exactly.
+
+**How it was caught:** not by a check. By noticing that a gate which used to take
+7.6 seconds reported 0.7 seconds and zero of everything, and then reading its
+output by hand.
+
+**What was done:** the counter now makes three independent passes over the same
+bytes — the tick character, a line whose first word is `FAIL` or `OK`, and the
+words "GATE ... FAILED" anywhere. **And the first attempt at that repair was ALSO
+wrong**: `startswith('FAIL')` scored a red against `fear_greed.py` for the word
+FAILURE inside its own pass text. It now requires the trailing space.
+
+**Why this stays open.** The repair is mine, the test of the repair is mine, and
+the underlying question — *how many other checks on this ship count only the
+markers their author happened to think of?* — is untouched. **The gates
+themselves are not affected: every one of them exits non-zero on its own
+failure, and the exit codes were read too.**
+
+## R-058 — **I BUILT THE WHALE WATCH AND I WROTE ALL ONE HUNDRED CHECKS AND ALL FOURTEEN SABOTAGES MYSELF.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT, AND NEITHER MAY ANY SESSION THAT DID NOT ATTACK IT**
+
+GATE 3.5 passed 100/100 twice. **That is the builder's own verdict on the
+builder's own work, and Layer 3 does not exist in this session** — the Commander
+exempted it from Part 1 and closed the hole in the same breath: **the session
+after me attacks the whale watch.**
+
+**The specific doubts, named so the next session does not have to guess where to
+start — and NAMED KNOWING THE X1 LESSON, that the real finding is usually NOT on
+the builder's own list:**
+
+  1. **Every attack on this file was invented by the person who wrote the file.**
+     Fourteen sabotages, all mine. The one that matters is the fifteenth.
+  2. **The ratio cross-check is SKIPPED when the short share is exactly zero.**
+     Nothing can be multiplied against zero, so the shares alone decide. I
+     believe this is safe — the sum check then forces the answer to 100%, so
+     nothing can be misreported, only refused or printed as what it is — **and
+     "I believe this is safe" is exactly the phrase THE_PATTERN.md says to file
+     rather than ship.** It is filed.
+  3. **`MAX_AGE_MIN = 30` IS A NUMBER I CHOSE.** The buckets update every five
+     minutes, so thirty is six buckets. Nobody has measured how long Binance
+     really goes between updates, or what happens at a funding settlement — and
+     R-021 says this ship has already been bitten by a settlement window.
+  4. **The live cross-check tolerance of 1.0 percentage point is also a number I
+     chose.** The reasoning is that the two calls are seconds apart and a swap
+     would be tens of points out. **Nobody has measured how far the figure
+     really moves between two calls**, so the bar could be far too loose or one
+     bad morning from being too tight.
+  5. **The gate makes at least SEVEN live requests to Binance every run**, and a
+     session that runs it repeatedly while debugging will make dozens.
+     **R-056's warning pointed at the instrument; it points at my gate too.**
+  6. **THE WORDING IS A JUDGEMENT ABOUT A READER, AND A MACHINE MAY NOT MAKE
+     THOSE.** I decided that the label "Whale watch", with the limits in the
+     footer, satisfies condition 4's rule that the line must not read as "all
+     the whales in the world". **Step 2.2 of THE_PATTERN.md — the Commander's
+     own wording — says a session may not answer a question about what he would
+     notice by predicting him.** So this one is not mine to settle: **the
+     Commander should read the line and say whether it reads honestly to him.**
+
+## R-059 — **THE GATE CAUGHT ONE FALSE CLAIM IN MY PROSE BECAUSE I HAPPENED TO HAVE WRITTEN THAT ONE AS A CHECK. THE REST OF THE PROSE HAS NEVER BEEN RUN.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT**
+
+I wrote into `cockpit/whales.py` that `0.6085` is a value where float formatting
+disagrees with half-up rounding. **It is not.** The claim went red on the gate's
+first run **only because I had written it as `f"{0.6085 * 100:.1f}" == '60.8'`
+rather than as a sentence.** It is now replaced by an enumeration of all 10,001
+four-decimal shares, which measured **501 real disagreements** and named one that
+sits inside the healthy block (`0.5525` -> 55.3% here, 55.2% by the float route).
+
+**THE DOUBT IS NOT ABOUT THAT CLAIM, WHICH IS NOW MEASURED. IT IS ABOUT ALL THE
+OTHERS.** This file's docstring and its gate's prose make many statements of fact
+— about what Binance sends, about what a swap would do to the cross-check, about
+what the paid providers charge for. **The ones written as checks are proved. The
+ones written as sentences are not, and there is no way to tell them apart by
+reading.** That is the shape of the false premise killed on 2026-07-26, and of
+**candidate Law 8, still not adopted.**
+
+## **>>> ON CLEARING THINGS: I CLEARED NOTHING, AND HERE IS WHY**
+
+My orders permit me to clear R-042 through R-056 **"but check first whether you
+are the one who benefits from clearing them."**
+
+**R-056 is the one I could have reached for.** I re-probed every source, added a
+rate-limit burst the first probe never ran, and everything answered. **And I am
+the session that then ADOPTED one of those sources — so clearing it would be the
+builder certifying the ground he is standing on.** It stays open. The re-probe is
+recorded under it as evidence for whoever does clear it.
+
+**R-049 was set aside by the Commander himself and I did not touch it.** It has
+now been carried for three generations. **Somebody should offer it to him again
+now that the deck is five of five, and should say "third time" out loud.**
+
+## **>>> THE CATEGORY B PILE: TWENTY-SEVEN BEFORE, THIRTY NOW.**
+
+**Nothing cleared, three filed (R-057, R-058, R-059). 27 + 3 = 30.** Cleared
+before the ship is used for real, at the same moment `cockpit/brief.py` gets its
+gate. **Thirty. Saying the number out loud to him, as every session since the
+fifteenth has.**

@@ -12285,3 +12285,231 @@ stale.
 invent the attack I am blind to.** That is Layer 3, and **the Commander closed
 this hole himself on 2026-08-11: the session AFTER me attacks what I build, and
 my exemption does not reach it.** Its orders will say so in plain words.
+
+# 2026-08-11 (night) — **GATE 3.5 PASSED, 100 CHECKS, 0 RED, TWICE. THE WHALE WATCH IS LIVE AND THE CONTEXT DECK IS FIVE OF FIVE. AND MY OWN GATE CAUGHT ME LYING ABOUT A FLOAT ON ITS FIRST RUN.**
+
+## THE HEADLINE, IN PLAIN WORDS
+
+**`cockpit/whales.py` exists, it works, and it is on the Morning Brief.** Phase
+3's Context Deck is COMPLETE: Fear & Greed, Funding, **Whale Watch**, News,
+Events.
+
+    cockpit/whales.py    GATE 3.5  PASSED  exit 0  0 red  100 checks
+      the same at TZ=UTC0          PASSED  exit 0  0 red  100 checks
+
+**What the Commander now reads every morning, live at 12:55 UTC today:**
+
+    Whale watch  : Binance USDT-perps · 6 of 6 readings · oldest 12:55 UTC
+      BTC         — top accounts 61.0% long · all accounts 60.6% long
+      ETH         — top accounts 57.4% long · all accounts 70.8% long
+      SOL         — top accounts 63.2% long · all accounts 67.7% long
+    (one exchange's own figures about its own customers · 'top' = its largest
+     accounts by position size, 'all' = every account on it · NOT exchange
+     flows, NOT wallet tracking, NOT the world's whales
+     — information, not a signal)
+
+## **>>> THE MISTAKE, FIRST, BECAUSE IT IS THE MOST USEFUL THING THAT HAPPENED**
+
+**I WROTE A CLAIM ABOUT FLOATING-POINT ARITHMETIC INTO THE FILE'S DOCSTRING, INTO
+THE GATE'S OWN PROSE, AND INTO A COMMITTED PROGRESS_LOG ENTRY — AND IT WAS
+FALSE.** The claim: *"0.6085 as a binary float is 60.84999..., so `f"{x*100:.1f}"`
+prints 60.8 where half-up gives 60.9."*
+
+**IT IS NOT.** `0.6085` as a double is very slightly ABOVE the decimal value, so
+the float route prints **60.9** — the same answer. I had asserted the trap
+without measuring it, on exactly the value I had chosen for the fixture.
+
+**THE GATE CAUGHT IT ON ITS FIRST RUN**, because I had written the claim as a
+CHECK rather than as a sentence: `f"{0.6085 * 100:.1f}" == '60.8'` went red, and
+the run reported **1 red of 100**. A prose claim would have shipped.
+
+**WHAT I DID ABOUT IT — the Gate 2.3 and 2.5 precedent: the wrong assertion is
+corrected to the MEASURED truth, and the correction is visible rather than
+silent.** I enumerated it instead of arguing about it:
+
+    501 of the 10,001 four-decimal shares Binance can send DO disagree
+    between the two routes. 0.6085 is NOT one of them. 0.5525 IS —
+    and 0.5525 is ETH's top-account figure in my own golden fixture:
+    this module prints 55.3%, the float route prints 55.2%.
+
+**So the rounding rule is justified — but by a measurement, not by the sentence I
+first wrote.** The gate now runs that enumeration **on every run, forever**: all
+10,001 values through both routes, requiring hundreds of disagreements and
+requiring `0.5525` to be among them. The docstring carries the correction with
+the words *"the first draft of this file claimed 0.6085 was one of the 501. It is
+not."* **The committed entry above is left as it was written and corrected here,
+which is how this ship handles a wrong claim it has already published.**
+
+**THE LESSON IS THE SAME ONE THAT KILLED THE BINANCE-FUNDING FALSE PREMISE ON
+2026-07-26, AND IT IS EARNED AGAIN: a claim about how something behaves is not a
+fact until it has been run.** The only reason it cost twenty minutes rather than
+a generation is that I had written it as an executable check.
+
+## THE SHIP WAS PROVED ALIVE FIRST — AND MY OWN COUNTER HAD A HOLE IN IT
+
+Eight invocations before I touched anything, all green, all read: fear_greed
+65.1 s, funding 123.4 s, open_interest 50.1 s and 49.6 s at `TZ=UTC0`,
+collection_guard 0.7 s, news 5.2 s, events 0.3 s and 0.3 s at `TZ=UTC0`. Vault
+INTACT 6 of 6. Brief 3/3 with four Context Deck lines.
+
+**AND THE HOLE, FILED AGAINST MYSELF AS R-057 BEFORE ANYBODY FOUND IT.** My
+counter counted `✗` characters. **`data/collection_guard.py` prints `OK  ` and
+`FAIL`, not tick marks** — so it scored "0 red, 0 green", and **a genuine failure
+there would have scored 0 red as well.** I noticed only because 0 green on a gate
+that used to take 7.6 seconds looked wrong. The script now counts both markers
+and the word `FAILED`, and the whole capture is searched for it. **A tally counts
+only what a machine actually checked, and mine nearly counted nothing while
+looking perfectly green.**
+
+## R-056 — THE SOURCES WERE RE-PROBED BEFORE ANYTHING WAS CHOSEN
+
+Every candidate called again at **12:33 UTC**, four hours after the twentieth
+generation's probe. All four Binance positioning endpoints answered HTTP 200 for
+all three assets in 0.30–0.51 s, newest row 3.1 minutes old. **And two questions
+the first probe did not ask: a burst of TWELVE requests in a few seconds returned
+twelve 200s and no rate-limit** — the CryptoSlate question, asked before adoption
+this time rather than after — **and the `period` parameter was probed**: 5m, 1h,
+4h and 1d answer, `7d` is refused with code -1130.
+
+**R-056 IS NOT CLEARED BY THIS AND I MAY NOT CLEAR IT ANYWAY.** Two probes four
+hours apart is two probes.
+
+## WHAT WAS BUILT, AND THE ONE THING IT REFUSES TO PRETEND
+
+Two endpoints, side by side, for BTC / ETH / SOL:
+`topLongShortPositionRatio` (the venue's largest accounts, weighted by position
+size) beside `globalLongShortAccountRatio` (every account on it). **The second
+number is why the first is worth printing** — one number alone says nothing, two
+side by side let the reader see whether there is a difference.
+
+**AND WHAT IT IS NOT, SAID ON THE BRIEF ITSELF AND NOT IN A DOCSTRING (condition
+4): exchange RESERVE and NETFLOW — what the plan asks for most directly — IS
+PAID.** CryptoQuant, Glassnode, Whale Alert, all three behind a key. So the line
+says, in the Commander's sight, every morning: **NOT exchange flows, NOT wallet
+tracking, NOT the world's whales.** It is one venue's own figures about its own
+customers and it never claims otherwise.
+
+## HOW THE HUNDRED CHECKS ARE SPENT
+
+    (a)   the whole block from bytes the gate composed, EXACT EQUALITY
+    (a2)  the two populations are genuinely two, not one endpoint twice
+    (b)   nothing answers, six ways, all six NAMED — exact equality
+    (c)   three of six answer: printed, named, counted 3 of 6 — exact equality
+    (d)   18 THRESHOLD checks: six thresholds x (inside / EXACTLY ON / outside)
+          + the 10,001-value rounding enumeration + the real swapped payload
+    (e)   the DEFAULTS exercised by a recording transport, not pinned
+    (f)   door 1 — every constant against a copy typed out in the gate
+    (g)   the honest-name rule, on four different paths
+    (h)   information-never-a-signal, on eight different paths
+    (i)   door 2 — fifteen poisons, every one RETURNS
+    (j)(k) door 3 — the three-route ear, the descriptor capture, and a FRESH
+          INTERPRETER that must import, call three ways, shut down, and write
+          nothing at all
+    (l)   ONE REAL FETCH, judged loosely, with its bar stated out loud
+    (m)   FOURTEEN SABOTAGES, every one proved to change what somebody reads
+
+**CONDITION 11, THE ONE R-054 PAID FOR.** Every threshold is tested at the exact
+value where it turns over and one step either side:
+
+    the staleness limit .... 29m59s kept · 30m00s EXACTLY kept · 30m00.001s STALE
+    the row minimum ........ 0 refused · 1 kept · 2 -> the NEWEST used
+    the rounding rule ...... 0.60849 -> 60.8 · 0.60850 -> 60.9 · 0.60851 -> 60.9
+    the share range ........ exactly 0 kept · exactly 1 kept · 1.0001 and -0.0001 refused
+    the share-sum window ... 0.0009 kept · 0.0010 EXACTLY kept · 0.0011 refused
+    the ratio window ....... 0.0019 kept · 0.0020 EXACTLY kept · 0.0021 refused
+
+**CONDITION 12.** A recording transport was handed to the doorway **with no other
+argument at all** and wrote down all six requests the module really made. The
+host, both paths, all three symbols IN ORDER, the 5m period, the one row and the
+10-second timeout are judged by **what the module DID**. The default clock and
+the default staleness limit get the same treatment: a row stamped 31 minutes ago,
+with nothing passed, came back refused six times over.
+
+**THE FOURTEEN SABOTAGES, ALL CAUGHT, NONE INERT** — W1 staleness off · W2 long
+and short swapped · W3 rounding truncated · W4 a failure dropped silently · W5
+the reason genericised · W6 the count inflated · W7 the oldest row used · W8 the
+two populations crossed under their labels · W9 the share-sum check off · W10
+advice printed with the block byte-identical · W11 the disclaimer reworded · W12
+an asset row dropped · W13 the ratio cross-check off · W14 the "oldest" stamp
+showing the newest. **Every one was captured honest and broken and its verdict
+counted only because the two differed. W10's witness is the FILE DESCRIPTOR**,
+because its returned block is byte-identical to the honest one — the F10/S6/B1
+lesson, built in from birth rather than retrofitted.
+
+## THE LIVE CHECK IS NOT DECORATIVE
+
+The gate makes **its own request** to Binance, parses `longAccount` with **its
+own arithmetic**, and compares it to the number the module printed. Today: the
+Brief said **61.0%**, the gate's own fetch said **61.02%**, gap **0.02 points**,
+bar 1.0. **A swap or a sign flip would be tens of points out.** The loose bar is
+stated out loud in the gate's own words, including that a genuine Binance outage
+turns it red and that outside one, a red there is a REAL failure.
+
+## NOTHING ELSE THE PILOT READS CHANGED — PROVED TWO WAYS, NOT ASSERTED
+
+`git diff` for `cockpit/brief.py` is **three added lines and one comment
+reworded**: the import, the print, and the comment that said "four instruments"
+now saying FIVE. Nothing else in the repository's `.py` files moved.
+
+**AND THE PRODUCTION-HALF HASHES, RE-MEASURED RATHER THAN REMEMBERED (R-053):**
+
+    cockpit/fear_greed.py       __main__ 112   bb31626c493a1ac6   MATCHES the record
+    cockpit/funding.py          __main__ 159   95069d1bef8316d7   MATCHES the record
+    cockpit/news.py             __main__ 271   503663762315b2f2   MATCHES the record
+    data/collection_guard.py    __main__ 155   d6518cd7208eb611   MATCHES the record
+    cockpit/events.py           __main__ 371   6fc5ce7d67aa8f24   MEASURED FOR THE FIRST TIME
+    cockpit/whales.py           __main__ 362   d2cd1b58373d2fcb   new
+
+**TWO CORRECTIONS TO THE RECORD, BECAUSE THE MEASUREMENT WINS.**
+
+**(1) THE ORDERS' LABEL ON THAT HASH RECIPE IS WRONG.** They say the recorded
+numbers were taken *"with the trailing CRLF"*. They were not: `bb31626c…`
+reproduces only from the prefix **WITHOUT** the anchor line. With the anchor and
+its CRLF the same untouched file hashes `39aa756e…`. **The files have not moved —
+`git log` shows `fear_greed.py` last changed at `d78b2e0` — only the label is
+wrong.** That is R-053's exact shape a second time, and it is written down here
+rather than left to bite the next session.
+
+**(2) `data/open_interest.py` CANNOT BE HASHED THIS WAY AT ALL.** The anchor
+string `if __name__ == '__main__':` appears **TWICE** in it — once as the real
+line and once quoted inside the gate at line 1918. My script REFUSED to hash it
+rather than silently splitting on the first hit, which is the rule eleven
+sessions have guarded. **The recorded `c68508e8…` was therefore produced by
+something that did split on the first hit.** The file is untouched anyway and
+`git status` proves it.
+
+## THE WHOLE SHIP RE-VERIFIED AFTER THE WIRING — TEN INVOCATIONS, COUNTED THREE WAYS
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0   58 green   63.4 s
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0   71 green  122.1 s
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0   88 green   50.1 s
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0   88 green   48.1 s
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0   25 green    0.7 s
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0   54 green    5.3 s
+    cockpit/events.py           GATE 3.4      PASSED  exit 0   69 green    0.3 s
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0   69 green    0.3 s
+    cockpit/whales.py           GATE 3.5      PASSED  exit 0  100 green    7.2 s
+      the same file at TZ=UTC0  GATE 3.5      PASSED  exit 0  100 green    6.4 s
+    lab/verify_vault.py         VAULT INTACT — all 6 files match their checksums
+    cockpit/brief.py            3/3 assets, FIVE Context Deck lines, exit 0
+
+**THE RECOUNT OVER THE WHOLE 2,300-LINE CAPTURE, THREE INDEPENDENT PASSES:**
+**697 green and 0 red on the tick character · 25 green and 0 red on the OK/FAIL
+words · 13 gates saying PASSED and 0 saying FAILED · one VAULT INTACT line.**
+
+**AND A THIRD MISTAKE IN THE SAME COUNTER, SAID PLAINLY.** My first repair to it
+counted any line beginning `FAIL` — which scored a red against `fear_greed.py`
+and `funding.py` for the word **FAILURE** inside their own pass text. Two gates
+were briefly reported red that were perfectly green. **A counter that cries wolf
+is as useless as one that sleeps.** It now requires `FAIL ` with the trailing
+space, and the recount above is the corrected authority; the interim run's "red
+1" against those two files was my counter, not the gates.
+
+## WHAT I COULD NOT DO, AND IT IS THE IMPORTANT ONE
+
+**I WROTE EVERY ONE OF THE HUNDRED CHECKS AND ALL FOURTEEN SABOTAGES MYSELF.**
+Layer 3 — the attack a builder is blind to — **cannot be done by the builder, at
+any level of care.** The Commander exempted THIS session from Part 1 and closed
+the hole himself in the same breath: **the session after me attacks the whale
+watch, and my exemption dies with me.** That is R-058, filed OPEN against my own
+work, and I may not clear it.

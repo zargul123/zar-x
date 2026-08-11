@@ -435,6 +435,67 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-11 (night): PHASE 3'S CONTEXT DECK IS COMPLETE. FIVE INSTRUMENTS OF FIVE. GATE 3.5 PASSED 100/100 TWICE.**
+
+**WHERE THE SHIP IS — CHANGED, FOR THE FIRST TIME TODAY.** `cockpit/whales.py`
+exists and is on the Morning Brief. Every gate on this ship is green:
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red  (x2, TZ=UTC0)
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red  (x2, TZ=UTC0)
+    cockpit/whales.py           GATE 3.5      PASSED  exit 0  0 red  100 checks (x2)
+    vault INTACT 6 of 6 · Brief 3/3, FIVE Context Deck lines · lab/ untouched
+
+**WHAT IS DONE:** Phase 3 Step 3.5, the whale watch, instrument 5 of 5. Two
+Binance endpoints side by side for BTC/ETH/SOL — its largest accounts by
+position size, beside every account on the venue. **Exchange reserve and netflow
+data is PAID and therefore out, and the line on the Brief says so in the
+Commander's sight: NOT exchange flows, NOT wallet tracking, NOT the world's
+whales.**
+
+**WHAT IS NOT DONE, AND IT IS THE IMPORTANT ONE. NOBODY BUT ITS AUTHOR HAS EVER
+LOOKED AT `cockpit/whales.py`.** One hundred checks and fourteen sabotages, all
+written by the session that wrote the code. **That is R-058, and the next
+session's JOB 1 is to attack it.** The Commander exempted the twenty-first
+generation from Part 1 and closed the hole himself in the same breath: *"in next
+session when he write session orders and well after others too every time new
+session has to attack the build of previous session."* **The exemption died with
+that session and no session may renew one.**
+
+**WHAT WENT WRONG, RECORDED HERE AND NOT ONLY IN THE LOG:**
+
+1. **A FALSE CLAIM ABOUT FLOATING-POINT ARITHMETIC** was written into the file's
+   docstring, its gate's prose and a COMMITTED log entry. The gate caught it on
+   its first run — 1 red of 100 — **only because it had been written as a check
+   rather than as a sentence.** Corrected by enumeration: 501 of 10,001
+   four-decimal shares really do disagree between the two rounding routes, and
+   `0.6085` is not one of them while `0.5525` is. **R-059 is the residue: the
+   rest of the prose in that file has never been run.**
+2. **THE SHIP-ALIVE COUNTER WOULD HAVE SCORED A REAL FAILURE AS ZERO RED**
+   (R-057) because `data/collection_guard.py` prints `OK`/`FAIL` rather than
+   tick marks. Found by noticing a suspicious timing, not by any check.
+3. **TWO CORRECTIONS TO THE RECORDED HASH RECIPE**, both measured: the orders'
+   label *"with the trailing CRLF"* is wrong — the recorded numbers come from
+   the prefix WITHOUT the anchor — and `data/open_interest.py` cannot be hashed
+   that way at all, because the anchor string appears TWICE in it.
+
+**THE CATEGORY B PILE IS THIRTY.** Nothing was cleared this session and the
+reason is written into the queue: the only item within reach, R-056, is one the
+builder benefits from clearing.
+
+**WHERE THE SHIP GOES NEXT.** Phase 3's five instruments are built. **The next
+session attacks the whale watch — that is its whole first job — and only then
+looks at what Phase 3 has left**, which is the Commander's decisions rather than
+new code: R-049 (deferred three times), the `data/events.json` timezone, the two
+publisher names, and the Category B pile that is cleared when `cockpit/brief.py`
+finally gets its own gate before the ship is used for real.
+
+**THE MARKERS BEFORE THIS ONE ARE KEPT BELOW FOR THE RECORD.**
+
+
 ## **>>> 2026-08-11 (evening, second ruling): THE NEXT SESSION HAS ONE JOB — BUILD INSTRUMENT 5 OF 5. PART 1 IS EXEMPTED BY THE COMMANDER HIMSELF.**
 
 **HIS WORDS, VERBATIM:** *"we are only making exemption for next session to not
