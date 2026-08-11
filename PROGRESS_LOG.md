@@ -12026,3 +12026,48 @@ recorded against the item) · `EXECUTION_PLAN.md` (the position marker) ·
 `ROADMAP.md` (the ruling on the record) · `SESSION_ORDERS.md` (JOB 1 is now
 "there isn't one", with the edges of the exemption spelled out and the number
 said out loud). **No `.py` file was modified, and none should have been.**
+
+# **>>> 2026-08-11 (evening, third exchange) — THE COMMANDER CLOSED THE HOLE IN HIS OWN EXEMPTION, AND HE FOUND IT BY ASKING RATHER THAN BY BEING TOLD.**
+
+**HIS QUESTION, VERBATIM:**
+
+> *"like when its build whale watcher next session has to attack the build. am i
+> understand rightly."*
+
+**AND HIS OWN STATEMENT OF THE RULE, VERBATIM:**
+
+> *"we are exempting only next session to not attack. he has to build but in
+> next session when he write session orders and well after others too every time
+> new session has to attack the build of previous session."*
+
+## HE IS RIGHT, AND THIS IS NOW WRITTEN AS A SENTENCE RATHER THAN LEFT AS A CONCLUSION
+
+**The exemption is a ONE-TIME SKIP, for ONE session.** The twenty-first
+generation builds the whale watch and attacks nothing. **The twenty-second
+attacks the whale watch**, then builds. **The twenty-third attacks what the
+twenty-second built. And so on, forever.**
+
+**HE MOVED ONE CHECK, ONCE. HE DID NOT REMOVE IT.** The whale watch still gets
+attacked by a session that did not build it — just afterwards, rather than the
+builder spending its session attacking older work first.
+
+## THE GAP THIS CLOSED, AND IT WAS A REAL ONE, AND IT WAS MINE
+
+**The orders said the exemption "dies with your session" and the rulebook says a
+session attacks what the last one built. Both true. NEITHER SAID, IN WORDS,
+"WHEN YOU WRITE THE NEXT ORDERS, THEIR JOB 1 IS TO ATTACK WHAT YOU JUST
+BUILT."** A session would have had to derive it from two documents.
+
+**A RULE THAT HAS TO BE DERIVED IS A RULE THAT EVENTUALLY IS NOT.** That is the
+same shape as every other thing this ship writes down instead of remembering,
+and **the Commander caught it by asking a question about his own ruling — twice,
+until he was satisfied he had it right.** He did not accept the first answer as
+a summary; he restated the rule himself and asked whether he had it correct.
+
+**IT IS NOW WRITTEN IN TWO PLACES IN `SESSION_ORDERS.md`:** in the exemption's
+own edges, and inside the closing ritual at step 5, where the next session is
+actually writing the orders it would otherwise get wrong. **Both carry his own
+words, and both say he asked for it.**
+
+**NO `.py` FILE WAS MODIFIED. NO RULING CHANGED. This is the same two rulings,
+written so that a stranger cannot misread them.**

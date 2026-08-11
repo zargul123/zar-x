@@ -141,6 +141,27 @@ carrying markup — the bug it fixes has never once fired in real life.**
                      the session after you, or grant one to anybody.** Only he
                      can, and he says so in words when he does.
 
+## **>>> AND THE SENTENCE HE ASKED FOR HIMSELF, IN HIS OWN WORDS: "EVERY TIME NEW SESSION HAS TO ATTACK THE BUILD OF PREVIOUS SESSION."**
+
+    YOU ARE EXEMPT. **THE SESSION AFTER YOU IS NOT.**
+
+**HE ASKED THIS QUESTION DIRECTLY ON 2026-08-11 AND THIS IS HIS ANSWER, NOT A
+SESSION'S:** the exemption is a **one-time skip, for one session, and the loop
+goes straight back to normal afterwards.** He put it plainly: *"in next session
+when he write session orders and well after others too every time new session
+has to attack the build of previous session."*
+
+**SO WHEN YOU FINISH THE WHALE WATCH AND WRITE THE NEXT ORDERS, THEIR JOB 1 IS:
+ATTACK THE WHALE WATCH YOU JUST BUILT.** Not R-049, not the calendar, not
+anything older — **the thing that did not exist this morning and that you wrote
+every check for yourself.** That is Layer 3 and it is the only part of this ship
+a builder can never do for themselves.
+
+**AND THE SAME RULE APPLIES TO THE SESSION AFTER THAT, AND THE ONE AFTER THAT,
+FOREVER.** **NOTHING HE HAS RULED CHANGES THIS.** He moved one check, once. He
+did not remove it: **the whale watch still gets attacked — by the session after
+it exists, rather than by the session that had to build it.**
+
 **>>> AND THE NUMBER SOMEBODY MUST KEEP SAYING OUT LOUD TO HIM.** This is the
 **FIFTH** time Part 1 has been reduced — 2026-07-31, 2026-08-03 (twice),
 2026-08-05, and now. **The streak WAS broken: the twentieth generation ran Part
@@ -405,6 +426,12 @@ it is repeated here.**
     4. ROADMAP.md ......... tick what shipped; correct any MEASURED fact that
                             moved.
     5. SESSION_ORDERS.md .. rewritten IN FULL, opening with a plain-words brief.
+                            **>>> AND THEIR JOB 1 IS: ATTACK THE WHALE WATCH
+                            YOU JUST BUILT. Your exemption does NOT reach the
+                            session after you — it dies with you. Write that
+                            job in plainly; do not leave it to be worked out
+                            from the rulebook. THE COMMANDER ASKED FOR THIS
+                            SENTENCE HIMSELF ON 2026-08-11.**
     6. Commit. Push. **Then check your commit hashes again.**
     7. **REPORT TO HIM IN PLAIN WORDS** — what you tried, what broke, what held,
        **what you got wrong**, and what decision is his.
