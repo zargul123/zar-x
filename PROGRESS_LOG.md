@@ -11882,3 +11882,64 @@ them can be reported honestly, the instrument says
 is written into the plan as an acceptable result, it is written here, and a
 session that reaches it has not failed. **What does NOT pass is showing a number
 nobody can stand behind because a blank line looked like a wasted session.**
+
+# **>>> 2026-08-11 (evening) — THE COMMANDER RULED. R-054 IS SMALL. THE NEXT SESSION BUILDS.**
+
+**HIS WORDS, REPRODUCED VERBATIM AND NOT PARAPHRASED, because a session must
+never soften or sharpen a ruling into what it would have preferred to hear:**
+
+> *"OK MAKE IT IN SMALL CATEGORY AND I THINK SESSION WILL BUILT THE NEXT STEP.
+> UPDATE ALL THE MAIN FILES LIKE EXECUTION , PROGRESS, ETC."*
+
+## WHAT HE RULED
+
+**R-054 IS SMALL. CATEGORY B. FILED, NOT REPAIRED, NOT CLEARED.** The three
+sabotages that walked through GATE 3.4 — twenty days of slack in the staleness
+guard, an off-by-one in it, and the `DEFAULT_TIME` path changed while the
+constant stayed pinned — **are recorded as a known, unfixed weakness in the
+TEST, and building continues.**
+
+**He read the recommendation AND the argument against it.** Both were put in
+front of him in plain words: the case for SERIOUS is that this can happen by
+accident and the ship's own scoring says any bad Step 2 answer is SERIOUS; the
+case for SMALL is that the shipped output is right, proved three ways, and wrong
+information needs one further editing mistake that has not happened. **He chose
+SMALL, knowing both.** That is his to do and it is not to be re-argued.
+
+## AND THE SECOND HALF OF IT, WHICH IS AN EXPECTATION AND NOT AN EXEMPTION
+
+**"I THINK SESSION WILL BUILT THE NEXT STEP."** The next session is expected to
+build the whale watch, instrument 5 of 5.
+
+**THAT IS NOT AN EXEMPTION FROM PART 1 AND NO SESSION MAY TREAT IT AS ONE.** He
+has granted exemptions before and when he does it he says so in words — *"i
+exempt only this for next session"* was the last one. **He did not use those
+words here, so PART 1 STANDS, uncapped.** What has changed is the priority: Part
+1 is done properly and efficiently, and **unless it finds something that makes
+what the Commander reads WRONG TODAY, the session builds.** If a session wants
+Part 1 reduced, it asks him; it does not read a reduction into a sentence about
+building.
+
+## THE PRECEDENT THIS RULING SETS, WRITTEN DOWN SO THE NEXT SESSION DOES NOT HAVE TO GUESS
+
+**A GAP IN A TEST, WHERE THE SHIPPED OUTPUT IS PROVED CORRECT, IS SMALL AND DOES
+NOT STOP A BUILD.** That is now a decided question on this ship rather than an
+argument each session has with itself. **It cuts one way only:** it says nothing
+about a fault that makes the Brief wrong today, which remains SERIOUS and still
+stops everything.
+
+**AND IT DOES NOT LOOSEN GATE 3.5.** Conditions 11 and 12 of the gate declared
+this morning — every threshold tested at the exact value where it turns over,
+and every default the Commander is invited to rely on exercised by a check —
+**were written because of R-054 and they stand exactly as written.** His ruling
+says the old gap need not be repaired now; it does not say the new instrument
+may be built with the same gap in it. **The pile is cleared before the ship is
+used for real, and R-054 is in it.**
+
+## WHAT WAS UPDATED ON HIS INSTRUCTION
+
+`PROGRESS_LOG.md` (this entry) · `REVIEW_QUEUE.md` (R-054 carries his ruling) ·
+`EXECUTION_PLAN.md` (a new position marker, the morning's kept below) ·
+`ROADMAP.md` (the ruling on the record) · `SESSION_ORDERS.md` (the build is now
+the headline job and R-054 is off his desk). **No `.py` file was modified by
+this ruling and none should have been.**

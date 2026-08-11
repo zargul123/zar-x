@@ -1,4 +1,4 @@
-# ZAR X PHASE 3 — **VERIFY R-049. THEN BUILD INSTRUMENT 5 OF 5 UNDER A GATE THAT IS ALREADY DECLARED AND THAT YOU CANNOT LOWER.**
+# ZAR X PHASE 3 — **BUILD INSTRUMENT 5 OF 5. HE HAS RULED, NOTHING IS BLOCKING YOU, AND YOUR GATE IS ALREADY DECLARED BY SOMEBODY WHO CANNOT LOWER IT.**
 
 *Written 2026-08-11 by the twentieth generation, which attacked the event
 calendar uncapped, cleared two review items, filed three, built nothing, and
@@ -10,9 +10,29 @@ declared GATE 3.5 before stopping.*
 
     YOUR SESSION:  PART 1 — **VERIFY R-049**, the X1 repair in `cockpit/news.py`.
                             Unverified for TWO generations now.
-                   PART 2 — **BUILD THE WHALE WATCH under GATE 3.5**, which is
-                            already declared in `PROGRESS_LOG.md`, committed
-                            alone, by a session that will never build it.
+                   PART 2 — **BUILD THE WHALE WATCH under GATE 3.5.**
+                            **THIS IS THE ONE HE IS EXPECTING.**
+
+## **>>> HIS RULING, 2026-08-11 (evening), IN HIS OWN WORDS**
+
+> *"OK MAKE IT IN SMALL CATEGORY AND I THINK SESSION WILL BUILT THE NEXT STEP."*
+
+**R-054 IS SMALL. NOTHING IS ON HIS DESK THAT BLOCKS YOU. HE EXPECTS THE BUILD.**
+
+**AND THE THING YOU MUST NOT READ INTO IT: THAT IS NOT AN EXEMPTION FROM PART 1.**
+When he exempts a session he says so in words — *"i exempt only this for next
+session"* was the last one, on 2026-08-05. **He did not use those words here.**
+**Part 1 stands, uncapped. What changed is the priority, not the duty:**
+do Part 1 properly and without wandering, and **unless it finds something that
+makes what he READS WRONG TODAY, build.**
+
+**THE PRECEDENT HIS RULING SETS, so you do not have to re-argue it with
+yourself:** **a gap in a TEST, where the shipped output is proved correct, is
+SMALL and does not stop a build.** It cuts one way only — it says nothing about
+a fault that makes the Brief wrong today, which is still SERIOUS and still stops
+everything. **And it does NOT loosen GATE 3.5:** conditions 11 and 12 were
+written because of R-054 and stand exactly as written. He excused the OLD gap
+from being repaired now. **He did not license a NEW one.**
 
 **PART 1 IS UNCAPPED AND UNEXEMPTED.** The 2026-08-05 exemption is long spent
 and nothing has replaced it. **The count that the last three sessions were told
@@ -65,7 +85,8 @@ YOU WOULD OTHERWISE HAVE INHERITED.** The old orders said news ~25 s and events
    ship has asked a source whether it still says the same thing. It took four
    minutes. **`bls.gov` still answers HTTP 403 to a non-browser fetch.**
 3. **BUT THREE OF FOUR NEW SABOTAGES WALKED STRAIGHT THROUGH GATE 3.4** at a
-   boundary nobody had ever tested. **That is R-054 and it is on his desk.**
+   boundary nobody had ever tested. **That is R-054, and he RULED IT SMALL
+   the same evening — filed, not repaired, not cleared, and NOT blocking you.**
 4. **R-050 AND R-052 ARE CLEARED. THE CATEGORY B PILE SHRANK FOR THE FIRST TIME
    EVER — and still went up, to twenty-seven.**
 5. **NOTHING WAS BUILT, ON PURPOSE.** An instrument to this ship's standard
@@ -75,7 +96,14 @@ YOU WOULD OTHERWISE HAVE INHERITED.** The old orders said news ~25 s and events
 
 ---
 
-# **JOB 1 — VERIFY R-049. IT HAS BEEN WAITING TWO GENERATIONS.**
+# **JOB 1 — VERIFY R-049. IT HAS BEEN WAITING TWO GENERATIONS. DO IT, THEN BUILD.**
+
+**HE HAS SAID HE EXPECTS THE BUILD, SO THIS JOB IS DONE PROPERLY AND WITHOUT
+WANDERING.** That is not permission to perform a review instead of doing one —
+a session that hurries Part 1 to get to the fun part has reviewed nothing. It
+is permission to stop when you are finished rather than hunting for a second
+finding. **"I attacked it hard and found nothing" is a real result and he has
+just demonstrated, in writing, what he does with a stretched one.**
 
 `cockpit/news.py`'s X1 repair changed how **all six fields of every story** are
 read — title, guid, link, pubDate and both Atom stamps. **The session that found
@@ -113,7 +141,7 @@ DEFECT TO JUSTIFY A SESSION.**
 
 ---
 
-# **JOB 2 — THE WHALE WATCH, INSTRUMENT 5 OF 5, UNDER GATE 3.5**
+# **JOB 2 — THE WHALE WATCH, INSTRUMENT 5 OF 5, UNDER GATE 3.5. THIS IS THE ONE HE IS EXPECTING.**
 
 **READ THE GATE FIRST. It is the 2026-08-11 entry in `PROGRESS_LOG.md`, thirteen
 numbered conditions and one acceptable outcome that is not a failure.** Two of
@@ -239,6 +267,15 @@ FAIL, is not committed as a pass, and is not called "mostly passed."**
 
 # **WHAT THE COMMANDER HAS ALREADY RULED — DO NOT ASK HIM AGAIN**
 
+**>>> RULED 2026-08-11 (evening), AND IT IS THE ONE THAT DECIDES YOUR SESSION:
+R-054 IS SMALL.** *"OK MAKE IT IN SMALL CATEGORY AND I THINK SESSION WILL BUILT
+THE NEXT STEP."* The three sabotages that walked through GATE 3.4 are **filed as
+CATEGORY B, not repaired, not cleared, and no session may clear them.** He was
+shown the argument for SERIOUS as well and chose SMALL knowing both. **Do not
+re-argue it, and do not repair GATE 3.4 as a favour to him — the whole Category
+B pile is cleared at one moment, before the ship is used for real, when `brief.py`
+gets its gate.**
+
 1. **R-047 AND R-048 ARE SMALL.** Ruled 2026-08-05. Filed, not fixed, not
    cleared.
 2. **THE DAILY NEWS COUNT ARCHIVE WAITS UNTIL THE WHOLE PROGRAMME IS
@@ -342,14 +379,13 @@ certainly" or "this should be fine" about anything that ships — FILE IT in
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **>>> NEW AND THE ONLY ONE THAT BLOCKS ANYTHING: R-054 — THREE SABOTAGES
-   WALKED THROUGH GATE 3.4.** Twenty days of slack in the calendar's staleness
-   guard, an off-by-one in it, and a change to the default-time path that moved
-   one of his own events a whole day — **all three with the gate green.**
-   **Recommended SMALL (file it, keep building); the argument for SERIOUS is
-   written out beside it so he can overrule.** **If he rules SERIOUS, the next
-   session repairs GATE 3.4 — three boundary checks and one default-time check,
-   all below the `__main__` line — and builds nothing else.**
+1. **>>> R-054 IS RULED AND OFF HIS DESK. DO NOT PUT IT BACK.** He ruled it SMALL
+   on 2026-08-11 (evening) after reading both the recommendation and the argument
+   against it. **It is CATEGORY B: recorded, unrepaired, uncleared, and part of
+   the pile that is cleared before the ship is used for real.** **What IS still
+   his — and it is not urgent — is that GATE 3.4 remains blind at its boundary
+   until that day comes, and somebody should keep saying so rather than letting a
+   ruling of SMALL quietly become a ruling of FINE.**
 2. **>>> R-049 HAS NOW BEEN CARRIED FOR TWO GENERATIONS UNVERIFIED.** It is
    Job 1 above. **He should know it slipped twice.**
 3. **>>> ONE COMMAND HE MUST RUN AS ADMINISTRATOR** — still the only thing he

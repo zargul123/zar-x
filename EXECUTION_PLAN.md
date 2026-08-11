@@ -435,6 +435,43 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-11 (evening): THE COMMANDER RULED R-054 SMALL. NOTHING IS BLOCKING THE BUILD. THE NEXT SESSION MAKES THE CONTEXT DECK FIVE OF FIVE.**
+
+**HIS WORDS, VERBATIM:** *"OK MAKE IT IN SMALL CATEGORY AND I THINK SESSION WILL
+BUILT THE NEXT STEP. UPDATE ALL THE MAIN FILES LIKE EXECUTION , PROGRESS, ETC."*
+
+**WHERE THE SHIP IS: exactly where the marker below it says.** Every gate green,
+vault INTACT, Brief 3/3 with four Context Deck lines, **no `.py` file modified
+on 2026-08-11 at all.** This marker records a DECISION, not a change to the
+ship.
+
+**WHAT IS DECIDED THAT WAS OPEN THIS MORNING:**
+
+1. **R-054 IS SMALL.** The three sabotages that walked through GATE 3.4 are a
+   known, recorded, **unrepaired** weakness in the test. **Filed as CATEGORY B,
+   not cleared, and no session may clear it.** He was shown the argument for
+   SERIOUS as well and chose SMALL knowing both.
+2. **NOTHING IS ON HIS DESK THAT BLOCKS ANYTHING.** The only item that did is
+   this one, and it is ruled.
+3. **THE NEXT SESSION IS EXPECTED TO BUILD INSTRUMENT 5 OF 5 — THE WHALE
+   WATCH — UNDER GATE 3.5**, which was declared and committed alone this
+   morning by a session that will never build it.
+
+**AND THE ONE THING THAT MUST NOT BE READ INTO IT: THIS IS NOT AN EXEMPTION FROM
+PART 1.** When the Commander exempts a session he says so in words — *"i exempt
+only this for next session"* was the last one, on 2026-08-05. **He did not use
+those words here.** Part 1 stands, uncapped: attack `cockpit/news.py`'s X1
+repair (R-049), then build. **What changed is the priority, not the duty.**
+
+**THE PRECEDENT HIS RULING SETS:** a gap in a TEST, where the shipped output is
+proved correct, is SMALL and does not stop a build. **It says nothing about a
+fault that makes the Brief wrong today — that is still SERIOUS and still stops
+everything.** And it does not loosen GATE 3.5: conditions 11 and 12 were written
+because of R-054 and stand exactly as written.
+
+**THE MORNING'S MARKER, AND EVERY MARKER BEFORE IT, IS KEPT BELOW FOR THE
+RECORD.**
+
 ## **>>> 2026-08-11: THE EVENT CALENDAR WAS ATTACKED BY A SESSION THAT DID NOT BUILD IT. ITS OUTPUT IS RIGHT — PROVED THREE WAYS. ITS GATE HAS THREE BLIND SPOTS AND THREE SABOTAGES WALKED THROUGH THEM.**
 
 **WHERE THE SHIP IS:**

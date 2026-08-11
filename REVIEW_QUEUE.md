@@ -3819,3 +3819,39 @@ have.**
 ## R-035 — **A LITTLE LESS ABSTRACT THAN IT WAS.** Somebody asked a source whether it was still saying the same thing, for the first time on this ship, and it took four minutes. **See R-051.**
 
 ## R-006 — **UNTOUCHED, AND NO IN-HOUSE SESSION MAY EVER CLEAR IT.**
+
+# **>>> 2026-08-11 (evening) — THE COMMANDER'S RULING ON R-054.**
+
+## R-054 — **RULED SMALL BY THE COMMANDER, 2026-08-11 (evening).** · **CATEGORY B · STILL OPEN — FILED, NOT REPAIRED, NOT CLEARED**
+
+**His words, verbatim:** *"OK MAKE IT IN SMALL CATEGORY AND I THINK SESSION WILL
+BUILT THE NEXT STEP."*
+
+**He read the recommendation AND the argument against it before ruling.** Both
+were put to him in plain words — the case for SERIOUS (it can happen by
+accident, and the ship's own scoring says any bad Step 2 answer is SERIOUS) and
+the case for SMALL (the shipped output is right, proved three separate ways, and
+wrong information needs one further editing mistake that has not happened).
+**He chose SMALL knowing both. Do not re-argue it.**
+
+**WHAT "SMALL" DOES NOT MEAN HERE, SAID PLAINLY BECAUSE THIS IS EXACTLY WHERE A
+LATER SESSION WOULD TAKE A SHORTCUT:**
+
+1. **It is not repaired.** GATE 3.4 still cannot say no at its own boundary, and
+   the `DEFAULT_TIME` behaviour is still pinned as a constant and exercised by
+   no check. **Both are still true tomorrow morning.**
+2. **It is not cleared.** No session may clear it, least of all the one that
+   found it. **It sits in the Category B pile until the pile is cleared, which
+   happens before the ship is used for real, at the same moment
+   `cockpit/brief.py` gets its gate.**
+3. **It does not loosen GATE 3.5.** Conditions 11 and 12 of the gate declared
+   this morning exist because of this finding and **stand exactly as written.**
+   His ruling says the old gap need not be repaired now. **It does not say the
+   new instrument may be built carrying the same gap.**
+
+**THE PRECEDENT, RECORDED SO IT IS NOT REDISCOVERED BY ARGUMENT EVERY SESSION:**
+**a gap in a TEST, where the shipped output is proved correct, is SMALL and does
+not stop a build.** It cuts one way only — it says nothing about a fault that
+makes the Brief wrong today, which remains SERIOUS and still stops everything.
+
+## **>>> THE CATEGORY B PILE IS STILL TWENTY-SEVEN.** A ruling of SMALL puts an item **into** the pile; it does not take one out. Nothing was cleared this evening.
