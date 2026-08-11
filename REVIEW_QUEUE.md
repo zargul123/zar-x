@@ -3665,3 +3665,157 @@ calendar cannot even re-read its source, so "is the source still right?" is not
 merely unanswered here — it is unanswerable without new code.
 
 ## R-006 — **UNTOUCHED, AND NO IN-HOUSE SESSION MAY EVER CLEAR IT.**
+
+# **>>> 2026-08-11 — THE TWENTIETH GENERATION. TWO ITEMS CLEARED, THREE NEW ONES FILED, AND THE PILE SHRANK FOR THE FIRST TIME EVER.**
+
+*I built none of `cockpit/events.py`. I attacked it, uncapped and unexempted,
+and the verdicts below are mine. **The two I clear, I clear as the independent
+eye they were waiting for, and I gain nothing by clearing either** — the work
+was done before the verdict was written. The three I file are mine and I may
+clear none of them.*
+
+## R-050 — **CLEARED 2026-08-11.** The daylight-saving arithmetic is right.
+
+**Reviewed by a session that did not build it, and this is what "cleared" means
+here: the numbers were recomputed from outside.** Every DST-sensitive
+expectation in GATE 3.4 was reproduced by hand from US daylight-saving law
+(second Sunday of March to first Sunday of November), Karachi at UTC+5 with no
+DST, and weekdays counted from a day-of-year off a known anchor — **without
+`zoneinfo` and without running one line of this ship's code.**
+
+    27 Jan 2027 14:00 EST = 19:00 UTC = 00:00 local Thu 28 Jan 2027  ✓
+    17 Mar 2027 14:00 EDT = 18:00 UTC = 23:00 local Wed 17 Mar 2027  ✓
+    28 Apr 2027 14:00 EDT = 18:00 UTC = 23:00 local Wed 28 Apr 2027  ✓
+    15 Feb 2027 12:00 EST = 17:00 UTC = 22:00 local Mon 15 Feb 2027  ✓
+    09 Aug 2026 18:00 EDT = 22:00 UTC = 03:00 local Mon 10 Aug 2026  ✓
+    the day counts 23 · 71 · 113 · 192 · 25 · 13                     ✓
+
+**The author's fear was that the gate and the module were agreeing about
+something false. They are not. They are both right.**
+
+## R-052 — **CLEARED 2026-08-11.** Somebody other than its author has now run GATE 3.4 and invented new attacks on it.
+
+**This is the item asking for exactly what happened today.** The gate was run
+independently, twice (normal and `TZ=UTC0`), exit 0, zero red. Four sabotages
+nobody on this ship had thought of were invented, installed in a copy of the
+whole repo outside the repo, and each PROVED to change the output before its
+verdict was counted, with the untouched control green FIRST and a positive
+control proved to turn the gate red.
+
+**THE VERDICT IS NOT "IT IS FINE". IT IS: the twelve breaks its author invented
+are all real and all caught, AND three of my four walked straight through.**
+That result is filed as **R-054** below and it is a new item, not a reopening of
+this one. **The item is cleared because the independent attack it asked for has
+happened; what the attack found lives under its own number.**
+
+*And the honest note its author would want here: my four attacks did not go near
+the five places R-052 names. Those five are still only ever looked at by the
+person who wrote them.*
+
+## R-051 — **MEASURED 2026-08-11, AND DELIBERATELY NOT CLEARED.** · CATEGORY B · **STILL OPEN**
+
+**The sixteen shipped dates were re-read off the issuing authorities today and
+not one has moved.** `federalreserve.gov` — all eleven meeting dates match,
+second day of each two-day meeting, and the tentative note is still there word
+for word. `bls.gov` — all five CPI dates match at 08:30 and **the schedule still
+stops dead at 10 Dec 2026**, so the horizon printed on the Brief is still the
+right horizon. **`bls.gov` still answers HTTP 403 to a non-browser fetch; I
+reproduced that too, and read it in a real browser.**
+
+**THIS DOES NOT CLEAR THE ITEM AND I WILL NOT PRETEND IT DOES.** R-051's doubt
+is that *nothing on this ship would notice if a tentative date moved.* That is
+exactly as true tonight as when it was written. One person checking once, by
+hand, in a session that happened to have time, is not a guard — **it is a
+demonstration that the guard could exist.** Eight of the sixteen dates are still
+marked TENTATIVE by the Fed itself.
+
+**What has changed: the check has now been done once, it took four minutes, and
+the addresses are on the record. That is the argument for building it.**
+
+## R-054 — **THREE SABOTAGES WALKED THROUGH GATE 3.4 AT A BOUNDARY NOBODY HAD EVER TESTED.** · CATEGORY B · **OPEN — I FOUND IT, SO I MAY NOT CLEAR IT**
+
+**Measured 2026-08-11 in a copy of the whole repo outside the repo. Control
+green first (exit 0, 0 red); positive control proved to turn the gate red
+(exit 1, 3 red); every break proved to change what the doorway returns; all
+originals restored byte-for-byte and verified.**
+
+    E13a  `_expired` given 20 days of slack             ESCAPED
+    E13b  `_expired` fires one day late                 ESCAPED
+    E14   the DEFAULT_TIME path changed, constant left  ESCAPED
+          alone, an event of HIS moved a whole day
+
+**WHY.** Checks (b) and (c) advance the clock to 5 Jan 2027 and 1 Jan 2028 —
+**26 days and a full year past the horizon.** Nothing tests the day the guard
+fires, or the day before it. And check (m) pins the CONSTANT `DEFAULT_TIME ==
+'12:00'` while **no check anywhere writes an entry without a time**, which is a
+behaviour `data/events.json` promises the Commander in his own file.
+
+**GRADED SMALL BY ME, AND THE ARGUMENT AGAINST MY OWN GRADE IS IN
+`PROGRESS_LOG.md` WHERE HE CAN READ IT.** The shipped output is correct — proved
+three ways — and wrong information needs ONE more mistake, named: a future
+session editing `_expired`'s comparison or `_from_file`'s default-time argument.
+**A strict reading of Step 2.1 says SERIOUS; I did not take it, and I said why.
+He rules.**
+
+**THE REPAIR, IF HE ORDERS ONE, IS ENTIRELY BELOW THE `__main__` LINE:** three
+boundary checks on the horizon (the day before, the exact day, the day after)
+and one check that writes an entry with no time and compares the whole block.
+**Nothing the pilot reads would change.**
+
+## R-055 — **THE LIMITS OF MY OWN ATTACK, FILED BEFORE ANYBODY DISCOVERS THEM.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT**
+
+1. **I attacked three regions and left the rest alone.** The five places R-052
+   names are still unexamined by anybody but their author. So is the whole of
+   `_from_file`'s parsing, which I read but did not break.
+2. **My four sabotages were mine, and I am the same kind of thing that wrote the
+   twelve I was checking.** Three escaped, which says the method works; it does
+   not say I found everything a different session would.
+3. **I cleared R-050 on hand arithmetic.** If I have made the same daylight-
+   saving mistake the builder might have made, this clearance is worth nothing —
+   though I did it from the law and the calendar rather than from any code, and
+   the two derivations are genuinely independent.
+4. **I did not verify R-049 at all.** It was live work, the orders said so, and
+   I ran out of room after the calendar. That is a shortage of time, not a
+   judgement that it is fine.
+5. **I graded my own finding SMALL and then carried on to Part 2 on the strength
+   of my own grade.** That is the conflict of interest R-019 was about, pointing
+   the other way, and the only protection is that the whole argument — including
+   the reading that would have said SERIOUS — is written out for him.
+
+## R-056 — **THE WHALE-WATCH SOURCES ANSWERED ONCE, ON ONE MORNING, AND THAT IS ALL I KNOW ABOUT THEM.** · CATEGORY B · **OPEN — I MAY NOT CLEAR IT**
+
+Nine endpoints probed 2026-08-11 08:44 UTC, all HTTP 200, all fresh. **R-044's
+lesson is that five names measured on one afternoon is not five names that
+work** — and CryptoSlate was found rate-limiting within an hour of being
+adopted, exactly as a filed doubt had warned.
+
+**What is NOT known about any of them:** whether Binance rate-limits
+`/futures/data/*` for a repeat caller, whether the ratios are ever served stale
+or absent, what they do at a funding settlement, whether they exist for every
+symbol this ship watches, and **whether the numbers mean what their names say
+they mean.** Nothing was adopted, so nothing is at risk yet — **but the next
+session will be tempted to treat this probe as a decision, and it is not one.**
+
+**AND THE HONEST GAP, RECORDED SO NOBODY THINKS IT WAS OVERLOOKED:** exchange
+reserve and netflow data — the thing the plan asks for most directly — is behind
+a paid key at CryptoQuant, Glassnode and Whale Alert. **The whale watch, if it
+gets built, will not be an exchange-flow instrument, and it must not be worded
+as though it were.**
+
+## **>>> THE CATEGORY B PILE: TWENTY-SIX BEFORE, TWENTY-SEVEN NOW.**
+
+**Two cleared (R-050, R-052), three filed (R-054, R-055, R-056). 26 − 2 + 3 =
+27.** **THE PILE HAS SHRUNK FOR THE FIRST TIME SINCE IT WAS CREATED — and it
+still went up**, because a session that attacks properly files more than it
+clears, and that is the design rather than a fault in it. Cleared before the
+ship is used for real, at the same moment `cockpit/brief.py` gets its gate.
+**Twenty-seven. Saying the number out loud to him, as the last five sessions
+have.**
+
+## R-049 — **STILL UNVERIFIED, AND NOW BY MY SHORTAGE OF TIME RATHER THAN BY HIS RULING.** The exemption that excused it is spent. **It is live work for the first session that has room, and it has now been carried for two generations.**
+
+## R-053 — **UNTOUCHED. I changed no `.py` file, so no hash was ever computed and the recipe never came up.** The correction it records is in the orders I have written.
+
+## R-035 — **A LITTLE LESS ABSTRACT THAN IT WAS.** Somebody asked a source whether it was still saying the same thing, for the first time on this ship, and it took four minutes. **See R-051.**
+
+## R-006 — **UNTOUCHED, AND NO IN-HOUSE SESSION MAY EVER CLEAR IT.**

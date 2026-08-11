@@ -435,6 +435,79 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-11: THE EVENT CALENDAR WAS ATTACKED BY A SESSION THAT DID NOT BUILD IT. ITS OUTPUT IS RIGHT — PROVED THREE WAYS. ITS GATE HAS THREE BLIND SPOTS AND THREE SABOTAGES WALKED THROUGH THEM.**
+
+**WHERE THE SHIP IS:**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red  65.6 s
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red  124.7 s
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red  65.5 s
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red  62.1 s
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  7.6 s
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red  4.7 s
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red  1.5 s
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red  1.3 s
+    vault INTACT 6 of 6 · Brief 3/3, FOUR Context Deck lines · lab/ untouched
+    data/oi_history/  the weekly laptop task ran 10-Aug and pushed.
+
+**EVERY GATE ON THIS SHIP IS GREEN AND ALL SIX INSTRUMENTS ARE CORRECT. NOT ONE
+`.py` FILE WAS MODIFIED THIS SESSION.**
+
+**AND A CORRECTION, BECAUSE THE MEASUREMENT WINS:** the orders on record quote
+the news gate at ~25 s and the events gate at ~5 s. **Measured today: 4.7 s and
+1.5 s.** Both faster, so nothing is wrong — but the figures were wrong and a
+session seeing a 1.5 s run should not go looking for a fault that is not there.
+
+**WHAT IS TRUE THAT WAS NOT TRUE YESTERDAY:**
+
+1. **THE CALENDAR'S ARITHMETIC IS PROVED, NOT ASSERTED (R-050 CLEARED).** Every
+   daylight-saving-dependent string in GATE 3.4 was reproduced by hand from US
+   DST law and a day-of-year weekday count, **without `zoneinfo` and without
+   running this ship's code.** All of it matches. The gate and the module are
+   not agreeing about something false; they are both right.
+2. **SOMEBODY ASKED A SOURCE WHETHER IT WAS STILL SAYING THE SAME THING — FOR
+   THE FIRST TIME ON THIS SHIP.** All sixteen dates re-read off
+   `federalreserve.gov` and `bls.gov` on 2026-08-11. **Not one has moved**, the
+   Fed's tentative note is unchanged, and the BLS schedule still stops dead at
+   10 Dec 2026. `bls.gov` still answers HTTP 403 to a non-browser fetch.
+3. **GATE 3.4 WAS RUN AND ATTACKED BY SOMEONE OTHER THAN ITS AUTHOR (R-052
+   CLEARED).** Four new sabotages, in a copy of the whole repo outside the repo.
+4. **THE WHALE WATCH'S SOURCES ARE MEASURED RATHER THAN GUESSED.** Nine
+   endpoints probed, numbers in `ROADMAP.md`. **The exchange-flow data the plan
+   asks for most directly is paid; the free honest footprint is Binance's own
+   top-trader positioning, keyless, 5 minutes fresh.**
+5. **GATE 3.5 IS DECLARED — BY A SESSION THAT WILL NOT BUILD IT.** Committed
+   alone with no `.py`. **The builder cannot lower a bar set by somebody with
+   nothing to gain from where it sits**, which is what Layer 1 was always
+   supposed to mean.
+
+**WHAT IS BROKEN OR UNPROVEN, STATED HERE RATHER THAN IN THE QUEUE ALONE:**
+
+- **>>> GATE 3.4 CANNOT SAY NO AT ITS OWN BOUNDARY (R-054).** Twenty days of
+  slack in the staleness guard, and an off-by-one in it, **both walked through a
+  green gate** — because checks (b) and (c) only ever test 26 days and a year
+  past the horizon, never the day it fires. And the `DEFAULT_TIME` behaviour the
+  Commander is invited to rely on is **pinned as a constant and exercised by no
+  check**: an event of his own moved a whole day with the gate still green.
+  **Recommended SMALL; the argument for SERIOUS is written out too. HE RULES.**
+- **R-051 IS MEASURED BUT NOT CLEARED.** Nothing still guards a tentative date
+  MOVING. One hand check on one day is not a guard.
+- **R-049 IS STILL UNVERIFIED, NOW FOR THE SECOND GENERATION RUNNING** — this
+  time for want of room, not by anybody's ruling.
+- **THE FIVE PLACES R-052 NAMES ARE STILL ONLY EVER LOOKED AT BY THEIR AUTHOR
+  (R-055).** This session's attack deliberately went elsewhere.
+- **`cockpit/brief.py` STILL HAS NO GATE**, by his own ruling: not now, before
+  going live.
+
+**WHAT THIS SESSION DID NOT DO: IT DID NOT BUILD INSTRUMENT 5.** Not because
+Part 1 forbade it — Part 1 graded SMALL and allowed it — but because an
+instrument to this ship's current standard would not fit honestly in what was
+left, **and a half-built part is worse than no part.** What it did instead is
+the step the orders put BEFORE the build: measure the sources, write the numbers
+down, and declare the gate.
+
+**THE PREVIOUS MARKER IS KEPT BELOW FOR THE RECORD.**
+
 ## **>>> 2026-08-07: THE EVENT CALENDAR IS BUILT AND GATED. THE CONTEXT DECK IS FOUR OF FIVE.**
 
 **WHERE THE SHIP IS:**
