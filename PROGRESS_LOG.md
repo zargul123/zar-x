@@ -11480,3 +11480,281 @@ against a clock that has nothing to do with this ship.
 Eight of the sixteen dates are marked tentative by the Fed itself. If one moves,
 this instrument prints the old date with a confident countdown and nothing says
 a word — **R-051**, which is R-035 in a narrower and more actionable form.
+
+# 2026-08-11 — THE TWENTIETH GENERATION · PART 1 · **THE CALENDAR'S OUTPUT IS RIGHT AND I PROVED IT THREE WAYS. THE GATE AROUND IT HAS THREE BLIND SPOTS AND THREE OF MY FOUR SABOTAGES WALKED THROUGH.**
+
+**PART 1 WAS UNCAPPED AND UNEXEMPTED. The 2026-08-05 exemption died with the
+session before me, exactly as the orders said, and nobody renewed it.** So the
+number the last two sessions were told to say out loud stops here: **Part 1 has
+been reduced four times running and this is the fifth session, which was NOT
+reduced.** There is nothing for the Commander to decide about it.
+
+## THE SHIP WAS PROVED ALIVE BEFORE ANYTHING WAS TOUCHED
+
+All eight invocations run from one script, output captured to a file and read:
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red  65.6 s
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red  124.7 s
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red  65.5 s
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red  62.1 s
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  7.6 s
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red  4.7 s
+                                live: 80 stories, 5 of 5 publishers
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red  1.5 s
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red  1.3 s
+    lab/verify_vault.py         VAULT INTACT  6 of 6 files
+    cockpit/brief.py            3/3 instruments, FOUR Context Deck lines
+    data/oi_history/            the weekly laptop task ran 10-Aug and pushed;
+                                `journal/oi_recorder.log` appeared with it.
+
+**ZERO red ticks across the whole run** — counted by machine, not by eye.
+
+**AND A MEASUREMENT THAT CORRECTS THE ORDERS I INHERITED, BECAUSE THE
+MEASUREMENT WINS:** the orders quote the news gate at **~25 s**. It ran in
+**4.7 s** today, and the events gate — quoted at ~5 s — ran in **1.5 s**. Both
+are faster, not slower, so nothing is wrong; but the figures on record are wrong
+and I am writing the correction down rather than leaving the next session to
+wonder whether its fast run means something broke.
+
+## WHAT I ATTACKED, AND THE BARS I SET BEFORE RUNNING ANYTHING
+
+The bars were written to a scratch file **before the rig was built and before
+one break was installed**: the ship alive first; R-050's daylight-saving
+arithmetic reproduced by MY OWN hand without this ship's code and without
+`zoneinfo`; the sixteen shipped dates re-read off the issuing authorities
+TODAY; at least one NEW sabotage in a copy of the whole repo outside the repo
+with the untouched control green FIRST; and every break PROVED to change the
+output before its verdict counted.
+
+**I deliberately did not start in the five places R-052 names.** The X1 lesson
+is that the finding is probably not on the builder's own list, so I read the
+list to know where he had already looked and went elsewhere: the staleness
+guard's BOUNDARY, the fact that `HORIZONS` duplicates by hand the last date in
+`RECURRING`, and `DEFAULT_TIME` — which `data/events.json` promises the
+Commander in plain words and which no check appeared to exercise.
+
+## FINDING 1 — R-050 IS CLEAN. THE DAYLIGHT-SAVING ARITHMETIC IS RIGHT.
+
+**This is the item its author was most worried about and it comes back clean.
+I am saying that plainly rather than hunting for something to replace it with.**
+
+Every date, weekday, day-count and converted local time that GATE 3.4 asserts
+was recomputed by hand from first principles — **US DST law (second Sunday of
+March to first Sunday of November), Karachi at UTC+5 with no daylight saving,
+and weekdays counted from a day-of-year off a known anchor** — with no help
+from `zoneinfo` and no output from the module. All of it matches:
+
+    27 Jan 2027 14:00 EST  = 19:00 UTC = 00:00 local THU 28 Jan 2027  ✓
+    17 Mar 2027 14:00 EDT  = 18:00 UTC = 23:00 local WED 17 Mar 2027  ✓
+      (DST 2027 starts Sun 14 Mar — Mar 1 2027 is a Monday, so the
+       second Sunday is the 14th. The 17th is inside it.)
+    28 Apr 2027 14:00 EDT  = 18:00 UTC = 23:00 local WED 28 Apr 2027  ✓
+    15 Feb 2027 12:00 EST  = 17:00 UTC = 22:00 local MON 15 Feb 2027  ✓
+    09 Aug 2026 18:00 EDT  = 22:00 UTC = 03:00 local MON 10 Aug 2026  ✓
+    day counts 23 · 71 · 113 · 192 · 25 · 13 — all reproduced by hand ✓
+
+**R-050 IS CLEARED. I did not build this file and I gain nothing by clearing
+it** — the work was done either way.
+
+## FINDING 2 — THE SIXTEEN SHIPPED DATES ARE STILL TRUE TODAY. R-051 STAYS OPEN ANYWAY.
+
+**Nobody had ever asked whether the source itself was still saying the same
+thing (R-035, R-051). I asked, today.**
+
+**FOMC — `federalreserve.gov/monetarypolicy/fomccalendars.htm`, re-read
+2026-08-11.** All eleven shipped meeting dates match the Fed's own page, second
+day of each two-day meeting: 2026 — 15-16 Sep, 27-28 Oct, 8-9 Dec. 2027 —
+26-27 Jan, 16-17 Mar, 27-28 Apr, 8-9 Jun, 27-28 Jul, 14-15 Sep, 26-27 Oct,
+7-8 Dec. **The tentative note is still there, word for word.** Nothing has moved
+since 2026-08-07.
+
+**US CPI — `bls.gov/schedule/news_release/cpi.htm`, re-read 2026-08-11.**
+`bls.gov` **still answers HTTP 403 to a non-browser fetch** — I reproduced it —
+so it was read in a real browser again. All five shipped dates match at 08:30:
+12 Aug, 11 Sep, 14 Oct, 10 Nov, **10 Dec 2026 — and the schedule still stops
+dead there**, so the horizon on the Brief is still the right horizon and the
+guard still fires for real on 11 Dec 2026.
+
+**R-051 IS NOT CLEARED BY THIS.** One day's agreement is not a guard. The doubt
+it filed — *nothing on this ship would notice if a tentative date moved* —
+is exactly as true tonight as it was on 2026-08-07. What has changed is that
+somebody has now checked once, and the answer is on the record.
+
+## FINDING 3 — **THREE OF MY FOUR SABOTAGES ESCAPED GATE 3.4.** THIS IS THE FINDING.
+
+The rig: **a copy of the WHOLE repo outside the repo**, every break installed by
+exact byte replacement in binary, and **the harness refuses to run if an anchor
+matches anything other than exactly once.**
+
+**THE CONTROL WAS GREEN FIRST — exit 0, 0 red — and a positive control break was
+proved to turn the gate RED**, so the rig is capable of saying no. Every break
+was proved to change what the doorway RETURNS before its verdict was counted;
+none was INERT. **Originals restored byte-for-byte and verified, and the gate
+re-run green afterwards.**
+
+    E13a  the staleness guard given 20 days of slack        ESCAPED
+    E13b  the staleness guard fires one day late            ESCAPED
+    E14   an entry with no time read at 23:59, not midday   ESCAPED
+    CTRL  only two events quoted instead of three           CAUGHT (3 red)
+
+**WHAT E13 LOOKS LIKE ON HIS SCREEN.** On 11 Dec 2026 — the morning after the
+BLS list runs out — the honest instrument prints:
+
+    Events       : 8 ahead · next in 48 days
+      in 48 days  — FOMC decision (tentative) (Thu 28 Jan 2027, 00:00 local)
+      ...
+      ⚠ the built-in US CPI list ENDED on 10 Dec 2026 — it needs new dates
+
+and the sabotaged one prints **exactly the same block with that last line
+gone**, while GATE 3.4 exits 0 with zero red. **A calendar whose list has died,
+looking exactly like a healthy one. That is Blockworks, in the one place this
+file's own docstring says it exists to prevent it.**
+
+**WHY IT ESCAPES:** checks (b) and (c) advance the clock to **5 Jan 2027** and
+**1 Jan 2028** — 26 days and a year past the horizon. **Nothing anywhere tests
+the day the guard is supposed to fire, or the day before it.** Any slack up to
+25 days, and an off-by-one in either direction, is invisible.
+
+**WHAT E14 LOOKS LIKE.** `data/events.json` tells the Commander in his own file:
+*"The 'time' is optional - leave it out and the day is treated as midday."*
+Not one check in the gate writes an entry without a time. Check (m) pins the
+CONSTANT `DEFAULT_TIME == '12:00'`, so I left the constant alone and changed the
+line that USES it. An event he wrote for the 20th moved to the 21st:
+
+    honest   in 13 days  — No time written (Thu 20 Aug 2026, 21:00 local)
+    broken   in 14 days  — No time written (Fri 21 Aug 2026, 08:59 local)
+
+**A whole day out, on an entry he wrote himself, gate green.** The constant is
+pinned and the behaviour is not — and B14's lesson was that pinning the name is
+not the same as watching what the code does with it.
+
+## THE FINDING REPORT — FILLED IN BEFORE ANY REPAIR. NOTHING WAS REPAIRED.
+
+**Q1 — WHAT INFORMATION IS THIS CODE FOR?** The Events line on the Morning
+Brief: how many scheduled events are ahead, which three are next, how many days
+away, on his clock.
+
+**Q2 — CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING OR DELETED?**
+**Not today, and I want to be exact about why.** What I found is not a defect in
+what ships — the shipped output is right, and I proved it three separate ways
+(hand arithmetic, the Fed's page, the BLS's page). **What I found is that the
+gate cannot say no in three places.** For the Commander to read something wrong,
+somebody must first edit one of two lines and get it wrong. **That is ONE more
+mistake, and I name it: a future session touching `_expired`'s comparison or
+`_from_file`'s default-time argument.** It is one, not two, and I am not
+stretching it into two to make my own life easier.
+
+**Q3 — IN REAL BUSINESS TERMS.**
+(a) **What would he SEE?** Nothing. The deck would look completely normal —
+    that is the entire problem with both of them.
+(b) **What would it COST him?** In the E13 case: up to three weeks believing a
+    dead CPI list is alive, in December 2026, when it is going to die on a known
+    date. In the E14 case: one of his own reminders on the wrong day. **No
+    money, no trade, no archive row.** Nothing in `data/oi_history/` is touched
+    by any of this.
+(c) **Would he EVER find out?** For E13, yes — on the day a CPI release he was
+    expecting did not appear on the deck. For E14, probably not.
+(d) **Can it be UNDONE?** Yes, completely. Nothing is written, nothing deleted.
+
+**STEP 0 — IS THE FINDING TRUSTWORTHY?** 0.1 the untouched copy passed FIRST,
+exit 0, 0 red — **yes.** 0.2 the broken output is printed above and is visibly
+wrong — **yes.** 0.3 am I judging my own work — **no; I built none of this.**
+
+**STEP 1 — THE VETO.** Would it change something he would act on? **Yes** — he
+plans his day around "CPI tomorrow". Continue.
+
+**STEP 2.** 2.1 could it happen by accident — **yes, a careless edit would do
+it.** 2.2 would he see it on its face — **no.** 2.3 could it be undone —
+**yes.**
+
+**STEP 3.** 3.1 would the system still report "all fine" — **yes, that is the
+whole finding.** 3.2 does it touch records that cannot be re-bought — **no.**
+3.3 does it touch anything that tells him to act — **no; this instrument is
+information only and check (n) holds every path to it.** 3.4 one thing once, or
+everything forever — **one line on one deck.**
+
+**STEP 4.1 — IN ONE SENTENCE.** If a future session edits either of two lines
+carelessly, the Commander's Brief would tell him a dead calendar is alive, or an
+event of his own is a day later than it is, and every check on this ship would
+still say PASSED.
+
+**STEP 4.2 — MY RECOMMENDATION: SMALL. FILE IT AS CATEGORY B AND KEEP
+BUILDING.** And I am going to give the argument against my own recommendation
+rather than hide it, because he is the one who rules:
+
+> **The case for SERIOUS:** Step 2.1 is bad — this can happen by accident —
+> and the ship's own scoring says any bad Step 2 answer is SERIOUS.
+>
+> **Why I did not take that reading:** on that reading, EVERY untested line on
+> this ship is SERIOUS, because every one of them is one careless edit away from
+> being wrong invisibly. That is the exact machine that stopped six consecutive
+> sessions building and left the Context Deck at two instruments of five, and it
+> is what the Commander's own Three Questions were adopted to end. **His test is
+> "can this fault make that information wrong when the system is doing real
+> work", and the honest answer here is no: the system, when it runs, is right —
+> I measured it running.**
+
+**HE RULES, NOT ME. If he says fix it, the repair is entirely inside the gate
+half — three checks, below the `__main__` line — and touches nothing the pilot
+reads.**
+
+## PART 2 — WHAT I DID AND, MORE IMPORTANTLY, WHAT I DID NOT
+
+**I DID NOT BUILD THE WHALE WATCH, AND THAT IS A DECISION, NOT AN OVERSIGHT.**
+The orders are explicit that a half-built part is worse than no part and that
+the rule is never exempted. An instrument to this ship's current standard is the
+size of `cockpit/events.py` — 69 checks, twelve sabotages, door 3 at the file
+descriptor with a fresh interpreter — and building that honestly plus the
+closing ritual would not fit in what I had left after Part 1. **So I did the
+step the orders put BEFORE the build, and I did it properly.**
+
+**"PROBE THE SOURCES FIRST AND WRITE THE NUMBERS DOWN BEFORE CHOOSING."** Done,
+2026-08-11 08:44 UTC. Every number is in ROADMAP.md's measured-facts section.
+The short version:
+
+**THE HONEST FREE FOOTPRINT EXISTS AND IT IS ON A HOST THIS SHIP ALREADY
+REACHES.** Binance publishes, free and with no key:
+
+    /futures/data/topLongShortPositionRatio    HTTP 200  0.48 s  age 5 min
+    /futures/data/topLongShortAccountRatio     HTTP 200  0.33 s  age 5 min
+    /futures/data/globalLongShortAccountRatio  HTTP 200  0.33 s  age 5 min
+    /futures/data/takerlongshortRatio          HTTP 200  0.30 s  age 10 min
+
+**`topLongShortPositionRatio` is the closest thing to "what the big money is
+doing" that exists behind no paywall and no key** — it is the largest accounts
+on the venue, weighted by the size of their positions — and putting it beside
+`globalLongShortAccountRatio`, which is everybody, is an honest contrast rather
+than a fake x-ray. Measured at 08:44 UTC today: **top traders 61.01% long by
+position, 63.02% long by account; the crowd 62.09% long.** Big money and the
+crowd are sitting in almost the same place, which is itself the sort of fact
+this instrument would exist to say.
+
+**THE KEYLESS ON-CHAIN HOSTS ALSO ANSWERED:** `api.blockchain.info` charts
+(HTTP 200, ~1.1 s), `api.blockchair.com/bitcoin/stats` (HTTP 200, 1.04 s),
+`mempool.space` (HTTP 200, 0.61 s). **They give chain-wide totals, not exchange
+flows.**
+
+**AND THE HONEST GAP, SAID PLAINLY RATHER THAN BURIED:** the thing the plan asks
+for most directly — **exchange reserve and netflow series** — is CryptoQuant and
+Glassnode, and **both put it behind a paid key.** Whale Alert's
+large-transaction feed needs a key too. **None of them was probed, because none
+of them is free.** So the instrument that gets built cannot be an exchange-flow
+instrument, and calling it one would be the fake x-ray the plan forbids.
+
+## WHAT I GOT WRONG
+
+1. **I told PowerShell to run a helper script I had not written yet**, and got
+   *"can't open file"* — the exact mistake `THE_PATTERN.md` warns about in its
+   very first numbered step, for a different reason. It cost one command.
+2. **I very nearly graded this session's finding SERIOUS on a mechanical reading
+   of Step 2.1** and stopped the build over a coverage gap in a test. I have
+   written both readings above rather than only the one I acted on, because the
+   Commander cannot overrule an argument he was never shown.
+
+## WHAT I DID NOT TOUCH, SAID SO NOBODY LOOKS FOR IT
+
+**Not one `.py` file on this ship was modified this session.** No hash needed
+recomputing, R-053's recipe never came up, and `git status` showed only
+`journal/snapshots_local.csv` (the laptop's own scheduled snapshot) and the
+untracked `journal/oi_recorder.log`. **R-049 was not verified** — I ran out of
+room after the calendar, and it stays live work for whoever comes next.
