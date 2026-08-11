@@ -11943,3 +11943,86 @@ used for real, and R-054 is in it.**
 `ROADMAP.md` (the ruling on the record) · `SESSION_ORDERS.md` (the build is now
 the headline job and R-054 is off his desk). **No `.py` file was modified by
 this ruling and none should have been.**
+
+# **>>> 2026-08-11 (evening, second ruling) — THE NEXT SESSION IS EXEMPT FROM PART 1. HE ASKED FIRST, HE WAS ANSWERED, AND HE RULED.**
+
+**HIS WORDS, VERBATIM:**
+
+> *"we are only making exemption for next session to not attack your check and i
+> think there is nothing to attack for next session what have you done."*
+
+## HOW THIS RULING WAS REACHED, RECORDED BECAUSE THE PROCESS MATTERS AS MUCH AS THE ANSWER
+
+**He asked three questions before ruling anything: what R-049 actually is, what
+there was to attack in this session's work, and what the next session's orders
+actually said.** He was answered in plain words, including the part that argues
+against the ruling he was about to make. **He did not rule from a summary.**
+
+## THE HALF HE OBSERVED, AND HE WAS RIGHT
+
+**"There is nothing to attack in what you have done."** Correct, and the reason
+is worth writing down: **the twentieth generation wrote ZERO LINES OF PROGRAM
+CODE.** It attacked somebody else's file, cleared two doubts, re-read sixteen
+dates off two government websites, measured nine data sources and declared a
+gate. **None of that is machinery a session can break in a scratch copy.** The
+only things of its that can be questioned are its two clearances and the bar it
+set — **and it filed those against itself as R-055 rather than waiting to be
+caught.**
+
+**A SESSION THAT SHIPS NO CODE LEAVES NOTHING FOR LAYER 3 TO BITE ON. That is
+not a loophole; it is arithmetic, and he saw it before anybody pointed it out.**
+
+## THE HALF HE JUDGED, AND IT HAS A COST THAT IS NAMED HERE RATHER THAN SOFTENED
+
+**R-049 is NOT this session's work.** It is six days old, and setting it aside
+is a judgement rather than an observation. **He was told the cost before he
+ruled:** the repair is self-marked — the session that found the fault wrote the
+fix and wrote the checks that say the fix works — it changed how **all six
+fields of every story** are read, and it runs on every headline on his Brief
+every morning.
+
+**THIS IS THE THIRD TIME R-049 HAS BEEN PASSED OVER.** 2026-08-07 (his
+exemption, bought knowingly), 2026-08-11 (this session, for want of room), and
+now by his ruling.
+
+**THE ONE MEASUREMENT THAT ARGUES FOR HIM, and it is a real one:** 136 real
+titles across all five publishers, **not one carrying markup.** The bug the
+repair fixes **has never once fired in production.** That was measured by the
+repair's own author, reported against his own interest, and it is the strongest
+thing anybody can say in favour of leaving it.
+
+## THE NUMBER, SAID OUT LOUD, AS THE STANDING DUTY REQUIRES
+
+**THIS IS THE FIFTH TIME PART 1 HAS BEEN REDUCED** — 2026-07-31, 2026-08-03
+(twice), 2026-08-05, and now.
+
+**AND THE THING THAT MUST BE SAID WITH IT, BECAUSE IT CHANGES WHAT THE NUMBER
+MEANS: THE STREAK WAS BROKEN.** The twentieth generation ran Part 1 in full,
+uncapped and unexempted, **and found three sabotages walking through a green
+gate in a morning.** So this is not "four in a row" any more, and the orders
+that told three consecutive sessions to raise it with him have been retired.
+**It is still the fifth, R-049 is still deferred three times, and the outside
+check is still the only thing on this ship that has ever caught what a builder
+could not see.**
+
+## THE EXEMPTION'S EXACT EDGES, WRITTEN DOWN SO NOBODY WIDENS THEM
+
+    IT COVERS ...... attacking the twentieth generation's work, and R-049.
+    IT DOES NOT .... cover proving the ship alive before touching anything.
+                     Eight invocations, read, red ticks counted by machine.
+    IT DOES NOT .... cover the sabotage drill inside what gets built. GATE 3.5
+                     condition 9 is twelve permanent breaks, each proved to
+                     change what somebody reads. That is not an outside check;
+                     it is the thing being built.
+    IT DOES NOT .... loosen GATE 3.5 in any way. Conditions 11 and 12 were
+                     written because of R-054 and stand exactly as written.
+    IT DIES ........ with the next session. No session may renew it, extend it,
+                     or grant one to anybody. Only the Commander can.
+
+## WHAT WAS UPDATED
+
+`PROGRESS_LOG.md` (this entry) · `REVIEW_QUEUE.md` (R-049's third deferral
+recorded against the item) · `EXECUTION_PLAN.md` (the position marker) ·
+`ROADMAP.md` (the ruling on the record) · `SESSION_ORDERS.md` (JOB 1 is now
+"there isn't one", with the edges of the exemption spelled out and the number
+said out loud). **No `.py` file was modified, and none should have been.**

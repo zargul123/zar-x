@@ -1,4 +1,4 @@
-# ZAR X PHASE 3 — **BUILD INSTRUMENT 5 OF 5. HE HAS RULED, NOTHING IS BLOCKING YOU, AND YOUR GATE IS ALREADY DECLARED BY SOMEBODY WHO CANNOT LOWER IT.**
+# ZAR X PHASE 3 — **YOU HAVE ONE JOB: BUILD INSTRUMENT 5 OF 5 AND FINISH THE CONTEXT DECK. HE EXEMPTED YOU FROM PART 1 HIMSELF, AND THE EXEMPTION DIES WITH YOU.**
 
 *Written 2026-08-11 by the twentieth generation, which attacked the event
 calendar uncapped, cleared two review items, filed three, built nothing, and
@@ -8,37 +8,47 @@ declared GATE 3.5 before stopping.*
 
 # **>>> READ THIS FIRST. YOUR GATE IS ALREADY WRITTEN AND IT IS NOT YOURS TO EDIT.**
 
-    YOUR SESSION:  PART 1 — **VERIFY R-049**, the X1 repair in `cockpit/news.py`.
-                            Unverified for TWO generations now.
+    YOUR SESSION:  PART 1 — **NONE. HE EXEMPTED YOU HIMSELF, IN WORDS.**
+                            Its exact edges are in JOB 1 below and they are
+                            narrower than "skip the checking".
                    PART 2 — **BUILD THE WHALE WATCH under GATE 3.5.**
-                            **THIS IS THE ONE HE IS EXPECTING.**
+                            **IT IS YOUR WHOLE SESSION.**
 
-## **>>> HIS RULING, 2026-08-11 (evening), IN HIS OWN WORDS**
+## **>>> HIS TWO RULINGS OF 2026-08-11 (evening), IN HIS OWN WORDS**
 
 > *"OK MAKE IT IN SMALL CATEGORY AND I THINK SESSION WILL BUILT THE NEXT STEP."*
+>
+> *"we are only making exemption for next session to not attack your check and
+> i think there is nothing to attack for next session what have you done."*
 
-**R-054 IS SMALL. NOTHING IS ON HIS DESK THAT BLOCKS YOU. HE EXPECTS THE BUILD.**
+**RULING ONE — R-054 IS SMALL.** The three sabotages that walked through GATE
+3.4 are CATEGORY B: **recorded, not repaired, not cleared, and no session may
+clear them.** He was shown the argument for SERIOUS as well and chose SMALL
+knowing both. **Do not re-argue it and do not repair GATE 3.4 as a favour — the
+whole pile is cleared at one moment, before the ship is used for real, when
+`brief.py` gets its gate.**
 
-**AND THE THING YOU MUST NOT READ INTO IT: THAT IS NOT AN EXEMPTION FROM PART 1.**
-When he exempts a session he says so in words — *"i exempt only this for next
-session"* was the last one, on 2026-08-05. **He did not use those words here.**
-**Part 1 stands, uncapped. What changed is the priority, not the duty:**
-do Part 1 properly and without wandering, and **unless it finds something that
-makes what he READS WRONG TODAY, build.**
+**RULING TWO — YOU ARE EXEMPT FROM PART 1.** He asked to be told what R-049 was
+and what there was to attack, was answered in plain words including the cost,
+and ruled. **He was right about the half he observed** — the twentieth
+generation shipped no code, so there is genuinely nothing of its to break — and
+**he made a judgement about the other half**, R-049, which is six days old and
+is now deferred for the third time.
 
-**THE PRECEDENT HIS RULING SETS, so you do not have to re-argue it with
-yourself:** **a gap in a TEST, where the shipped output is proved correct, is
-SMALL and does not stop a build.** It cuts one way only — it says nothing about
-a fault that makes the Brief wrong today, which is still SERIOUS and still stops
-everything. **And it does NOT loosen GATE 3.5:** conditions 11 and 12 were
-written because of R-054 and stand exactly as written. He excused the OLD gap
-from being repaired now. **He did not license a NEW one.**
+**WHAT NEITHER RULING DOES, AND THIS IS THE PART A LATER SESSION WOULD WIDEN:**
 
-**PART 1 IS UNCAPPED AND UNEXEMPTED.** The 2026-08-05 exemption is long spent
-and nothing has replaced it. **The count that the last three sessions were told
-to say out loud — "Part 1 has been reduced four times running" — is finished
-business: the session before you was not reduced, and neither are you. Do not
-raise it with him again unless somebody reduces Part 1 a fifth time.**
+- **It does not loosen GATE 3.5.** Conditions 11 and 12 were written because of
+  R-054 and stand exactly as written. **He excused an OLD gap from repair. He
+  did not license a NEW one.**
+- **It does not excuse the sabotage drill inside what you build.** That is not
+  an outside check; it is the thing you are building.
+- **It does not survive you.** **The exemption dies with your session and you
+  may not renew it or pass it on.**
+
+**THE PRECEDENT RULING ONE SETS, so you do not re-argue it with yourself:** a
+gap in a TEST, where the shipped output is proved correct, is SMALL and does not
+stop a build. **It cuts one way only — it says nothing about a fault that makes
+the Brief wrong today, which is still SERIOUS and still stops everything.**
 
 ## **>>> AND THE THING THAT MAKES YOUR BUILD DIFFERENT FROM EVERY BUILD BEFORE IT**
 
@@ -96,52 +106,68 @@ YOU WOULD OTHERWISE HAVE INHERITED.** The old orders said news ~25 s and events
 
 ---
 
-# **JOB 1 — VERIFY R-049. IT HAS BEEN WAITING TWO GENERATIONS. DO IT, THEN BUILD.**
+# **JOB 1 — THERE ISN'T ONE. HE CANCELLED IT HIMSELF, IN TWO PARTS, AND HERE IS EXACTLY WHAT HE CANCELLED.**
 
-**HE HAS SAID HE EXPECTS THE BUILD, SO THIS JOB IS DONE PROPERLY AND WITHOUT
-WANDERING.** That is not permission to perform a review instead of doing one —
-a session that hurries Part 1 to get to the fun part has reviewed nothing. It
-is permission to stop when you are finished rather than hunting for a second
-finding. **"I attacked it hard and found nothing" is a real result and he has
-just demonstrated, in writing, what he does with a stretched one.**
+**PART A — THERE IS NOTHING OF THE LAST SESSION'S TO ATTACK, AND HE SAW THAT
+BEFORE ANYBODY TOLD HIM.** His words: *"i think there is nothing to attack for
+next session what have you done."* **He is right, and the reason is simple: the
+twentieth generation wrote ZERO LINES OF PROGRAM CODE.** It attacked somebody
+else's file, cleared two doubts, re-read sixteen dates off two government
+websites, measured nine data sources and declared a gate. **None of that is
+machinery you can break.** The only things of its that could be questioned are
+its two clearances and the bar it set, **and it filed those against itself as
+R-055 rather than waiting to be caught.**
 
-`cockpit/news.py`'s X1 repair changed how **all six fields of every story** are
-read — title, guid, link, pubDate and both Atom stamps. **The session that found
-the fault wrote the fix, and the checks that say it works were written by that
-same session.** It went unverified because the Commander bought a build with it,
-knowingly; the session after that ran out of room; **you are the third.**
+**PART B — AND HE ALSO SET ASIDE R-049, WHICH IS A DIFFERENT DECISION AND A
+REAL COST.** R-049 is NOT the last session's work; it is six days old, and
+setting it aside was a judgement, not an observation. **He was told the cost in
+plain words before he ruled** — that the repair is self-marked, that it changed
+how all six fields of every story are read, and that **this is the THIRD time it
+has been passed over.** He ruled anyway, on the strength of the one measurement
+that argues for it: **136 real headlines across all five publishers, not one
+carrying markup — the bug it fixes has never once fired in real life.**
 
-**What that means concretely:** `_text` walks an element and gathers every scrap
-of text in it. Checks (r1)-(r4) and sabotage N12 exist to prove it. **Attack the
-repair, not the original fault** — the original fault is well documented and
-reproducing it proves nothing new.
+## **>>> THE EXEMPTION'S EXACT EDGES. READ THEM BEFORE YOU USE IT.**
 
-**AND THE MEASUREMENT THE REPAIR'S OWN AUTHOR REPORTED AGAINST HIS OWN
-INTEREST:** 136 real titles across all five publishers, **not one carrying
-markup**. The repair has never once fired in production. **That cuts both ways
-and you should say which way you think it cuts.**
+    IT COVERS ...... attacking the twentieth generation's work, and R-049.
+    IT DOES NOT .... cover proving the ship alive before you touch anything.
+                     Run all EIGHT invocations and READ them. That is not
+                     Part 1; that is not starting work on a broken ship.
+    IT DOES NOT .... cover the sabotage drill INSIDE what you build. GATE 3.5
+                     condition 9 is twelve breaks, permanent, every one proved
+                     to change what somebody reads. **That is not an outside
+                     check, it is the thing you are building.**
+    IT DIES ........ with your session. **You may not renew it, extend it to
+                     the session after you, or grant one to anybody.** Only he
+                     can, and he says so in words when he does.
 
-**IF R-049 COMES UP CLEAN QUICKLY, SAY SO PLAINLY AND MOVE TO JOB 2.** "I
-attacked it hard and found nothing" is a real result. **DO NOT MANUFACTURE A
-DEFECT TO JUSTIFY A SESSION.**
+**>>> AND THE NUMBER SOMEBODY MUST KEEP SAYING OUT LOUD TO HIM.** This is the
+**FIFTH** time Part 1 has been reduced — 2026-07-31, 2026-08-03 (twice),
+2026-08-05, and now. **The streak WAS broken: the twentieth generation ran Part
+1 in full, uncapped, and it found three sabotages walking through a green gate
+in a morning.** So this is not four in a row any more. **But it is still the
+fifth, R-049 has now been deferred three times, and the outside check is the
+only thing on this ship that has ever caught what a builder could not see.**
+**Say the number to him. Do not argue with him about it.**
 
-## HOW PART 1 IS DONE — THE TEETH, NOT A SUMMARY
+## WHAT YOU STILL OWE, EXEMPTION OR NOT
 
-1. **Write the bars for "this review clears" BEFORE running anything.**
-2. **Invent at least one NEW sabotage.** Break it in a copy of the WHOLE repo
-   **outside the repo**, and **run the untouched copy FIRST — if the control is
-   not green the rig is broken and nothing you conclude means anything.** Prove
-   a positive control can turn the gate RED before you believe any green.
-3. **Every break must be PROVED to change what somebody reads before its verdict
-   counts.** A break that changes nothing is INERT and proves nothing.
-4. **FILL IN THE FINDING REPORT BEFORE REPAIRING ANYTHING.** `THE_PATTERN.md`
-   carries it; the Commander's Three Questions come first. **THE REPORT COMES
-   BEFORE THE REPAIR, ALWAYS.**
-5. `git status` clean afterwards. Verdict recorded in `REVIEW_QUEUE.md`.
+1. **PROVE THE SHIP IS ALIVE FIRST.** All eight gate invocations, output to a
+   file, red ticks counted BY MACHINE and not by eye. **If something is already
+   broken when you arrive, that is your session — say so and fix that instead.**
+2. **Every break in your own drill must be PROVED to change what somebody reads
+   before its verdict counts.** A break that changes nothing is INERT and
+   proves nothing.
+3. **IF YOU FIND SOMETHING ANYWAY — in your own build, or in passing — FILL IN
+   THE FINDING REPORT BEFORE REPAIRING ANYTHING.** `THE_PATTERN.md` carries it;
+   the Commander's Three Questions come first. **THE REPORT COMES BEFORE THE
+   REPAIR, ALWAYS.**
+4. **FILE A REVIEW ITEM AGAINST YOUR OWN WORK AND LEAVE IT OPEN**, and
+   `git status` clean when you finish.
 
 ---
 
-# **JOB 2 — THE WHALE WATCH, INSTRUMENT 5 OF 5, UNDER GATE 3.5. THIS IS THE ONE HE IS EXPECTING.**
+# **JOB 2 — AND IT IS YOUR ONLY JOB: THE WHALE WATCH, INSTRUMENT 5 OF 5, UNDER GATE 3.5.**
 
 **READ THE GATE FIRST. It is the 2026-08-11 entry in `PROGRESS_LOG.md`, thirteen
 numbered conditions and one acceptable outcome that is not a failure.** Two of
@@ -276,6 +302,15 @@ re-argue it, and do not repair GATE 3.4 as a favour to him — the whole Categor
 B pile is cleared at one moment, before the ship is used for real, when `brief.py`
 gets its gate.**
 
+**>>> RULED THE SAME EVENING: YOU ARE EXEMPT FROM PART 1, AND R-049 WITH IT.**
+*"we are only making exemption for next session to not attack your check and i
+think there is nothing to attack for next session what have you done."* **He
+asked, he was answered in plain words including the cost, and he ruled. Do not
+re-open it and do not thank him for it by doing Part 1 anyway** — if you find
+yourself attacking something, you have decided you know better than his ruling,
+and the honest move is to say so to him rather than to spend his session on it.
+**The exemption's edges are in JOB 1 and it dies with you.**
+
 1. **R-047 AND R-048 ARE SMALL.** Ruled 2026-08-05. Filed, not fixed, not
    cleared.
 2. **THE DAILY NEWS COUNT ARCHIVE WAITS UNTIL THE WHOLE PROGRAMME IS
@@ -306,8 +341,9 @@ it is repeated here.**
 2. **`REVIEW_QUEUE.md`, the 2026-08-11 block** — R-054, R-055, R-056, and the
    two clearances.
 3. **`ROADMAP.md`, the 2026-08-11 measured facts** — your source numbers.
-4. **`cockpit/news.py`** for Job 1, **`cockpit/events.py`** as the model for
-   Job 2.
+4. **`cockpit/events.py`** — your model. The newest instrument and the most
+   completely guarded. **`cockpit/news.py`** is the model for anything that
+   fetches over the internet.
 5. **`EXECUTION_PLAN.md` PHASE 3, instrument 5** — the plan's own words are the
    specification.
 
@@ -386,8 +422,15 @@ certainly" or "this should be fine" about anything that ships — FILE IT in
    his — and it is not urgent — is that GATE 3.4 remains blind at its boundary
    until that day comes, and somebody should keep saying so rather than letting a
    ruling of SMALL quietly become a ruling of FINE.**
-2. **>>> R-049 HAS NOW BEEN CARRIED FOR TWO GENERATIONS UNVERIFIED.** It is
-   Job 1 above. **He should know it slipped twice.**
+2. **>>> R-049 IS DEFERRED FOR THE THIRD TIME, AND THIS TIME BY HIS OWN
+   RULING.** He asked what it was, was told in plain words — a self-marked
+   repair touching all six fields of every story, never checked by anybody
+   outside — and set it aside so the deck could be finished. **The measurement
+   that supports him: 136 real headlines, not one carrying markup, so the bug
+   it fixes has never once fired in real life.** **The measurement that does
+   not: nobody has ever proved the repair works, and it runs on every headline
+   he reads every morning.** **Somebody should offer it to him again once the
+   deck is five of five, and should say "third time" out loud when they do.**
 3. **>>> ONE COMMAND HE MUST RUN AS ADMINISTRATOR** — still the only thing he
    personally owes the R-037 repair. The Task Scheduler event log is off, so a
    next time would leave no evidence either:

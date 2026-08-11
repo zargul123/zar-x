@@ -435,6 +435,44 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-11 (evening, second ruling): THE NEXT SESSION HAS ONE JOB — BUILD INSTRUMENT 5 OF 5. PART 1 IS EXEMPTED BY THE COMMANDER HIMSELF.**
+
+**HIS WORDS, VERBATIM:** *"we are only making exemption for next session to not
+attack your check and i think there is nothing to attack for next session what
+have you done."*
+
+**WHERE THE SHIP IS: unchanged. Every gate green, vault INTACT, Brief 3/3 with
+four Context Deck lines, and no `.py` file modified on 2026-08-11 at all.** This
+marker records a second DECISION, not a change to the ship.
+
+**WHAT IS DECIDED:**
+
+1. **THE NEXT SESSION DOES NOT ATTACK ANYTHING.** He was right about the half he
+   observed — **the twentieth generation shipped no code, so there is nothing of
+   its to break.** He judged the other half, R-049, and set it aside.
+2. **R-049 IS DEFERRED FOR THE THIRD TIME.** He was told the cost first: a
+   self-marked repair, touching all six fields of every story, running on every
+   headline he reads. **The measurement that supports him is real — 136 real
+   headlines, not one carrying markup, so the bug has never once fired.**
+3. **THE NEXT SESSION'S WHOLE JOB IS THE WHALE WATCH UNDER GATE 3.5.** Finishing
+   it makes the Context Deck five of five and closes Phase 3's instruments.
+
+**THE EXEMPTION'S EDGES, BECAUSE AN EXEMPTION NOBODY BOUNDED IS AN EXEMPTION
+SOMEBODY WILL WIDEN:** it covers attacking the last session's work and R-049.
+**It does NOT cover proving the ship alive first, it does NOT cover the sabotage
+drill inside what gets built, and it does NOT loosen one condition of GATE
+3.5** — conditions 11 and 12 were written because of R-054 and stand exactly as
+written. **IT DIES WITH THAT SESSION.**
+
+**AND THE NUMBER, SAID OUT LOUD AS THE STANDING DUTY REQUIRES: THIS IS THE FIFTH
+REDUCTION OF PART 1** — 2026-07-31, 2026-08-03 twice, 2026-08-05, now. **The
+streak was broken in between: the twentieth generation ran Part 1 in full and
+found three sabotages walking through a green gate in a morning. That is what
+the outside check is for, and it is the only thing on this ship that has ever
+caught what a builder could not see.**
+
+**THE MARKERS BEFORE THIS ONE ARE KEPT BELOW FOR THE RECORD.**
+
 ## **>>> 2026-08-11 (evening): THE COMMANDER RULED R-054 SMALL. NOTHING IS BLOCKING THE BUILD. THE NEXT SESSION MAKES THE CONTEXT DECK FIVE OF FIVE.**
 
 **HIS WORDS, VERBATIM:** *"OK MAKE IT IN SMALL CATEGORY AND I THINK SESSION WILL

@@ -3855,3 +3855,54 @@ not stop a build.** It cuts one way only — it says nothing about a fault that
 makes the Brief wrong today, which remains SERIOUS and still stops everything.
 
 ## **>>> THE CATEGORY B PILE IS STILL TWENTY-SEVEN.** A ruling of SMALL puts an item **into** the pile; it does not take one out. Nothing was cleared this evening.
+
+# **>>> 2026-08-11 (evening, second ruling) — R-049 IS DEFERRED A THIRD TIME, BY THE COMMANDER, AND THE NEXT SESSION IS EXEMPT FROM PART 1.**
+
+## R-049 — **DEFERRED A THIRD TIME BY HIS RULING, 2026-08-11 (evening).** · CATEGORY B · **STILL OPEN — STILL UNVERIFIED — STILL UNCLEARABLE BY ITS AUTHOR**
+
+**His words, verbatim:** *"we are only making exemption for next session to not
+attack your check and i think there is nothing to attack for next session what
+have you done."*
+
+**HE ASKED WHAT R-049 WAS BEFORE HE RULED, AND HE WAS ANSWERED IN PLAIN WORDS
+INCLUDING THE PART THAT ARGUED AGAINST THE RULING:** the repair is self-marked —
+the session that found X1 wrote the fix and also wrote the checks that say the
+fix works — it changed how **all six fields of every story** are read, and it
+runs on every headline on his Brief every morning.
+
+**THE DEFERRAL COUNT IS NOW THREE:**
+
+    2026-08-07  his exemption, bought knowingly, and he was told first
+    2026-08-11  the twentieth generation, for want of room after Part 1
+    2026-08-11  this ruling
+
+**THE MEASUREMENT THAT SUPPORTS HIM, AND IT IS GENUINE:** 136 real titles across
+all five publishers, **not one carrying markup** — measured by the repair's own
+author and reported against his own interest. **The bug this repair fixes has
+never once fired in production.**
+
+**THE MEASUREMENT THAT DOES NOT:** nobody outside its author has ever shown the
+repair works. **Those are different statements and both are true.**
+
+**SOMEBODY SHOULD OFFER IT TO HIM AGAIN ONCE THE CONTEXT DECK IS FIVE OF FIVE,
+AND SHOULD SAY "THIRD TIME" OUT LOUD WHEN THEY DO.** **No session may clear this
+item, and no session may quietly let a third deferral become a decision that it
+does not matter.**
+
+## **>>> THE NEXT SESSION HAS NO PART 1. THE EDGES OF THAT, RECORDED HERE TOO.**
+
+**He was right about the half he observed:** the twentieth generation shipped no
+code, so there is nothing of its to break in a scratch copy. **R-055 already
+records the only things of its that can be questioned** — its two clearances and
+the bar it set — and it filed them against itself.
+
+**THIS IS THE FIFTH REDUCTION OF PART 1** (2026-07-31, 2026-08-03 twice,
+2026-08-05, now). **The streak WAS broken: the twentieth generation ran Part 1
+in full and found three sabotages walking through a green gate in a morning.**
+
+**THE EXEMPTION DOES NOT COVER:** proving the ship alive first; the sabotage
+drill inside what gets built; or any condition of GATE 3.5 — **conditions 11 and
+12 were written because of R-054 and stand exactly as written.** **It dies with
+the next session and no session may renew it.**
+
+## **>>> THE CATEGORY B PILE IS STILL TWENTY-SEVEN.** Nothing was cleared this evening and nothing was added. **Two rulings, no movement.**
