@@ -453,3 +453,20 @@ them faithfully; it cannot see an endpoint that answers today and rate-limits
 next week; and it proves nothing whatever about whether positioning data is
 USEFUL. **This is an information instrument. It will never become a signal.
 Phase 6's three slots are locked BY NAME.**
+
+---
+
+# MEASURED FACTS ADDED 2026-08-18 — THE TWENTY-SECOND GENERATION
+
+**Nothing shipped this session. Not one byte of any `.py` file changed.** What
+follows was measured while attacking `cockpit/whales.py`, which this session did
+not build.
+
+| What was measured | The measurement |
+|---|---|
+| **GATE 3.5 CANNOT SEE A FAULT IN `_get`, THE ONLY CODE ON THIS SHIP THAT ACTUALLY SPEAKS TO BINANCE.** Almost every check injects a fake transport, so the real four-line function never runs; the excellent recording transport proves what the module ASKED FOR, but it REPLACES `_get` and cannot testify about it. The one check that executes `_get` is the live fetch, whose only numeric bar is the BTC top-account figure within 1.0 point. | **Two sabotages inside `_get`, each PROVED to change the live block, each walking through `GATE 3.5 PASSED — 100 checks, 0 red`. X15** (hardcode the symbol `BTCUSDT`): ETH and SOL printed BTC's numbers — all three coins showed `59.9% / 60.3%`. **X16** (ask the TOP endpoint for both populations): every coin printed the same figure under both names — `BTC 59.9/59.9, ETH 58.4/58.4, SOL 61.2/61.2` — **which is precisely what the gate's own check (a2) exists to forbid, proved on fixtures only.** Control X26 (row limit 1 → 500) was CAUGHT, exit 1, 2 red, so the rig was proved able to go red. **R-060, BORDERLINE, on the Commander's desk. NOT REPAIRED.** |
+| **THE SHIPPED DOORWAY IS ROBUST — MEASURED, NOT ASSUMED.** Fed NaN, infinities, huge-exponent zeros, non-numeric fields, rows that are not dicts, replies that are not lists, negative timestamps and absurd timestamps. | **It never raised and never printed.** Every hostile payload came back as a named absence inside the block. The `Decimal`/`ROUND_HALF_UP` path, the six-independent-fates design and the named-refusal vocabulary all held. |
+| **FOUR SMALLER MEASUREMENTS, ALL DATA CASES, NO CODE CHANGED.** | **(1)** The header is built OUTSIDE the per-reading guard: an unrenderable stamp collapses the block to `🔌 Whale watch offline (OSError)` — **but only when it is the last reading standing**, because `_oldest` takes the minimum (R-061). **(2)** A timestamp tie is broken by POSITION while `_newest`'s docstring says it is not — the same two rows in opposite order printed **60.9%** then **20.0%** (R-062). **(3)** The staleness guard only looks one way: a row six hours in the future printed as healthy; **one year** in the future printed `oldest 12:00 UTC` and looked current, because `_hhmm` carries no date (R-063). **(4)** **R-058's doubt 2 is settled AGAINST its author** — with no shorts in the population the cross-check is skipped and a swap prints `100.0% long` where the truth is 0% (R-064). |
+| **THE LIVE WHALE WATCH, 2026-08-18 08:40 UTC** — recorded because a second real reading of this instrument now exists to compare against the first. | **BTC top 59.9% / all 60.3% · ETH top 58.4% / all 71.8% · SOL top 61.2% / all 69.9%.** (First reading, 2026-08-11 12:55 UTC: BTC 61.0/60.6, ETH 57.4/70.8, SOL 63.2/67.7.) |
+| **ALL TEN GATE INVOCATIONS, TIMED ON THIS MACHINE THIS MORNING** — because the figures on record have been wrong three times in two files (R-026 doubt 8). | `fear_greed` **63.4 s** · `funding` **124.3 s** · `open_interest` **56.2 s**, and **57.6 s** at `TZ=UTC0` · `collection_guard` **6.7 s** · `news` **5.9 s** · `events` **0.6 s**, and **1.4 s** at `TZ=UTC0` · `whales` **8.4 s**, and **6.9 s** at `TZ=UTC0`. **All exit 0, all 0 red.** |
+| **A CRUDE RED-COUNTER INVENTS FAILURES AS WELL AS MISSING THEM (R-057, pointing the other way).** | This session's own machine counter scored the funding gate as **1 red**. It was **the word "escaped" beginning a sentence of the gate's own explanatory prose**, line 137. Cleared by a human reading the line — never by a check. |

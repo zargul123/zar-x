@@ -4012,3 +4012,140 @@ now that the deck is five of five, and should say "third time" out loud.**
 before the ship is used for real, at the same moment `cockpit/brief.py` gets its
 gate. **Thirty. Saying the number out loud to him, as every session since the
 fifteenth has.**
+
+---
+
+# 2026-08-18 — THE TWENTY-SECOND GENERATION'S BLOCK
+
+*I built nothing. I attacked `cockpit/whales.py`, which I did not write.*
+
+## R-058 — **ANSWERED, NOT CLEARED. IT WAS ATTACKED AND IT DID NOT SURVIVE CLEAN.**
+
+**The attack happened**, which is the thing R-058 said had not happened: a
+session that did not write the file copied the repo outside the repo, passed the
+untouched control first, invented five sabotages that were not on the author's
+list of fourteen, and proved a rig capable of going red before trusting a single
+green.
+
+**IT IS NOT CLEARED, FOR THREE REASONS.**
+
+1. **The attack found something** — R-060 below, BORDERLINE, on the Commander's
+   desk. A doubt whose investigation produced a live finding does not close.
+2. **Doubts 3 and 4 are untouched.** Nobody has still measured how long Binance
+   really goes between bucket updates (`MAX_AGE_MIN = 30`), and nobody has
+   measured how far the BTC figure really moves between two calls seconds apart
+   (the 1.0-point live tolerance). **I did not measure them either.** Both are
+   still numbers somebody chose.
+3. **Doubt 6 is the Commander's and only his.** Whether the line reads honestly
+   to him is on his desk, and Step 2.2 forbids a machine answering it.
+
+**DOUBT 2 IS SETTLED, AGAINST ITS AUTHOR.** See R-064. **DOUBT 1 — "the one that
+matters is the fifteenth" — was right**, twice over: the finding was X15 and X16,
+and neither was on his list.
+
+**DOUBT 5 stands and I made it worse:** I ran GATE 3.5 eight times today between
+control and sabotage copies, so several dozen more live Binance requests.
+
+## R-060 — **THE REAL TRANSPORT IS THE ONE FUNCTION NOBODY CHECKS. TWO SABOTAGES INSIDE IT CHANGED THE COMMANDER'S BRIEF AND GATE 3.5 SAID `100 checks, 0 red`.** · **BORDERLINE — ON THE COMMANDER'S DESK** · **OPEN**
+
+`cockpit/whales.py`, the function `_get`, four lines long, the only code on this
+ship that actually speaks to Binance.
+
+**WHY NOTHING SEES IT.** Almost every check in GATE 3.5 injects a fake transport
+and never runs `_get` at all. That includes the excellent recording transport,
+which proves the module **asked** for the right host, paths, symbols, period,
+row count and timeout — and which caught my control sabotage X26 immediately.
+**But a recording transport replaces `_get`; it cannot testify about it.** The
+single check that executes the real `_get` is condition 10, whose only numeric
+bar is the BTC top-account figure within 1.0 percentage point. **Five of the six
+numbers on his Brief are verified by nothing anywhere.**
+
+**PROVED, NOT ARGUED.**
+
+    X15  `_get` hardcodes the symbol BTCUSDT
+         -> ETH and SOL print BTC's numbers.  GATE 3.5: 100 checks, 0 red.
+    X16  `_get` asks the TOP endpoint for both populations
+         -> "all accounts" prints the top-account figure for every coin.
+            GATE 3.5: 100 checks, 0 red.
+
+**AND CHECK (a2) OF THAT GATE EXISTS TO FORBID EXACTLY WHAT X16 DID.** Its own
+words: *"If the module asked one endpoint twice, or crossed the labels, the
+block above would still look perfectly reasonable."* It proves that on fixtures.
+The real transport can cross them anyway.
+
+**THE FINDING REPORT IS IN FULL IN `PROGRESS_LOG.md` under 2026-08-18.**
+Verdict recommended: BORDERLINE. Step 2 clean (a stranger would see three coins
+carrying identical numbers), Step 3.1 hit hard (the system reports perfect health
+throughout). **NOT REPAIRED — the Commander rules.**
+
+**THE REPAIR I WOULD RECOMMEND, WRITTEN DOWN AND DELIBERATELY NOT APPLIED:** a
+check that runs the REAL `_get` against a server the gate controls — a
+`http.server` on `127.0.0.1` started by the gate, which records the path and
+query string it was asked for and answers with bytes the gate typed out. That
+exercises the actual transport end to end, needs no Binance request at all, and
+would have caught both X15 and X16 on the first run. **It belongs inside
+`__main__`; not one byte of the production half needs to change.**
+
+## R-061 — the header is built OUTSIDE the per-reading guard · CATEGORY B · OPEN
+
+Every reading has its own guard; `_hhmm(_oldest(stamps))` in the head does not.
+A stamp that passes validation and cannot be rendered collapses the whole
+instrument to `  🔌 Whale watch offline (OSError)`. **Measured, and then
+measured again honestly: it only bites when the poisoned reading is the last one
+standing**, because `_oldest` takes the minimum and any healthy reading wins.
+Requires Binance to send an absurd timestamp, and the result is an honest
+"offline" line rather than a wrong number. **SMALL.**
+
+## R-062 — a timestamp tie is broken by POSITION, and the docstring says it is not · CATEGORY B · OPEN
+
+`_newest` promises rows are chosen *"BY ITS OWN STAMP rather than by position in
+the list"*. `stamp > best_stamp` is false on a tie, so the first row wins by
+position. **Measured: the same two rows in opposite order printed 60.9% and
+20.0%.** Unreachable while `limit=1`. **SMALL — but the docstring states as fact
+something the code does not do, which is candidate Law 8's shape again.**
+
+## R-063 — the staleness guard only looks one way · CATEGORY B · OPEN
+
+`now - stamp > limit` cannot see a row from the future. **Measured:** a row
+stamped six hours ahead printed as healthy with `oldest 18:00 UTC` on a block
+built at 12:00; a row stamped **one year** ahead printed `oldest 12:00 UTC` and
+was indistinguishable from a current reading, because `_hhmm` carries no date;
+and a future row beside a genuinely fresh one **wins and hides it**. Requires
+Binance to send a bad stamp. **SMALL.**
+
+## R-064 — **R-058's DOUBT 2 IS SETTLED AGAINST ITS AUTHOR: THE NO-SHORTS CASE CAN MISREPORT** · CATEGORY B · OPEN
+
+Its author wrote *"I believe this is safe... nothing can be misreported, only
+refused or printed as what it is."* **Measured otherwise.** Where a population
+has no shorts the cross-check is skipped, and a swap of the truth
+`longAccount 0.0000 / shortAccount 1.0000` prints `top accounts 100.0% long` —
+**the exact opposite of the truth, unrefused.** Two mistakes away (a code swap
+AND a degenerate population), so **SMALL**. Filed because the belief was wrong
+and THE_PATTERN says "I believe this is safe" is a thing you file, not ship.
+
+## R-065 — **AGAINST MY OWN WORK. I MAY NOT CLEAR IT.** · CATEGORY B · OPEN
+
+1. **My red counter invented a failure.** It scored the word "escaped", written
+   in the funding gate's prose, as a red. I found that by reading, not by a
+   check. **That is R-057's disease in the mirror and I caught it in my own
+   tooling within the hour.**
+2. **I graded my own finding.** THE_PATTERN forbids grading your own repair; I
+   made no repair, but I both found R-060 and recommended its severity. **A
+   later session should re-grade it independently**, particularly Step 2.2,
+   where I answered YES on the ground that three coins showing identical numbers
+   is visible on its face. **A different reader might say no, and that single
+   answer moves R-060 from BORDERLINE to SERIOUS.**
+3. **I proved a blind spot with two deliberate-looking breaks.** My argument
+   that an ACCIDENTAL fault in `_get` is realistic rests on the claim that a
+   future session will edit that function for rate-limiting. **That is a
+   prediction, not a measurement**, and it is doing real work in the grade.
+4. **I did not measure R-058's doubts 3 and 4** and left both open. Somebody
+   should actually time Binance's bucket updates and sample the BTC figure
+   across repeated calls rather than reasoning about them.
+
+## **>>> THE CATEGORY B PILE: THIRTY BEFORE, THIRTY-FIVE NOW.**
+
+**Nothing cleared, five filed (R-061, R-062, R-063, R-064, R-065). 30 + 5 = 35.**
+R-060 is not counted in the pile: it is BORDERLINE and awaiting the Commander's
+ruling. **Thirty-five. Saying the number out loud to him, as every session since
+the fifteenth has.**

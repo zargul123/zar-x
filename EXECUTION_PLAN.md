@@ -435,6 +435,49 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-18: THE WHALE WATCH WAS ATTACKED BY A SESSION THAT DID NOT BUILD IT, AND IT DID NOT SURVIVE CLEAN. ONE BORDERLINE FINDING IS ON THE COMMANDER'S DESK. NOTHING WAS REPAIRED AND NOTHING WAS BUILT.**
+
+**WHERE THE SHIP IS.** Unchanged in code — **not one byte of any `.py` file was
+altered.** Every gate still green, all ten invocations run before anything was
+touched:
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red  (x2, TZ=UTC0)
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red  (x2, TZ=UTC0)
+    cockpit/whales.py           GATE 3.5      PASSED  exit 0  0 red  100 checks (x2)
+    vault INTACT 6 of 6 · Brief 3/3, FIVE Context Deck lines · lab/ untouched
+
+**WHAT IS BROKEN, STATED AS THE MARKER MUST STATE IT.** Nothing in the shipped
+code is producing a wrong number today. **What is broken is a gate's reach:**
+GATE 3.5 cannot see a fault in `_get`, the four-line function that is the only
+code on this ship that actually speaks to Binance. Two sabotages inside it —
+hardcoding the symbol, and asking the top endpoint for both populations — each
+put wrong numbers on the Commander's Brief while the gate reported
+**`100 checks, 0 red`**. That is **R-060, BORDERLINE, awaiting his ruling.**
+It is NOT repaired: THE_PATTERN says a BORDERLINE finding is reported and the
+Commander decides.
+
+**FOUR SMALLER THINGS were measured and filed CATEGORY B** — the header built
+outside the per-reading guard (R-061), a timestamp tie broken by position while
+the docstring denies it (R-062), the one-way staleness guard (R-063), and
+R-058's doubt 2 settled against its author: the no-shorts case CAN misreport
+(R-064). **One item is filed against this session's own work (R-065).**
+
+**R-058 IS ANSWERED, NOT CLEARED.** The independent attack happened; its doubts
+3, 4 and 6 are untouched and doubt 6 is the Commander's alone.
+
+**THE CATEGORY B PILE IS THIRTY-FIVE.**
+
+**WHERE THE NEXT SESSION STANDS.** Phase 3's five instruments are complete and
+there is no sixth to build. **The next session's Job 1 is R-060's ruling if the
+Commander has given one**, and its Job 2 is what has been on his desk for three
+generations. **The plan has not advanced a step and should not pretend it has.**
+
+---
+
 ## **>>> 2026-08-11 (night): PHASE 3'S CONTEXT DECK IS COMPLETE. FIVE INSTRUMENTS OF FIVE. GATE 3.5 PASSED 100/100 TWICE.**
 
 **WHERE THE SHIP IS — CHANGED, FOR THE FIRST TIME TODAY.** `cockpit/whales.py`

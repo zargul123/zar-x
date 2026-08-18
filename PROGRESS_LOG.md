@@ -12513,3 +12513,229 @@ any level of care.** The Commander exempted THIS session from Part 1 and closed
 the hole himself in the same breath: **the session after me attacks the whale
 watch, and my exemption dies with me.** That is R-058, filed OPEN against my own
 work, and I may not clear it.
+
+---
+
+# 2026-08-18 — **GENERATION 22. I ATTACKED `cockpit/whales.py` AND IT DID NOT SURVIVE CLEAN. TWO INVENTED SABOTAGES CHANGED WHAT THE COMMANDER READS AND GATE 3.5 REPORTED `100 checks, 0 red` FOR BOTH.**
+
+*Written by the twenty-second generation, which built nothing. Its orders said
+JOB 1 was to attack the whale watch (R-058) and that Part 2 was conditional.
+Part 1 found something, the verdict is BORDERLINE, and THE_PATTERN says a
+BORDERLINE finding is reported and NOT repaired. **Nothing was repaired and
+nothing was built.***
+
+## THE SHIP WAS ALIVE BEFORE I TOUCHED ANYTHING — ALL TEN INVOCATIONS
+
+Run from one driver, output written to files, red counted BY MACHINE three ways
+per R-057: the tick character, the first word of each line, and the phrase
+"GATE ... FAILED".
+
+    01 cockpit/fear_greed.py           exit 0    63.4s   0 red
+    02 cockpit/funding.py              exit 0   124.3s   0 red
+    03 data/open_interest.py           exit 0    56.2s   0 red
+    04 data/open_interest.py TZ=UTC0   exit 0    57.6s   0 red
+    05 data/collection_guard.py --gate exit 0     6.7s   0 red
+    06 cockpit/news.py --gate          exit 0     5.9s   0 red
+    07 cockpit/events.py --gate        exit 0     0.6s   0 red
+    08 cockpit/events.py --gate UTC0   exit 0     1.4s   0 red
+    09 cockpit/whales.py --gate        exit 0     8.4s   0 red   100 checks
+    10 cockpit/whales.py --gate UTC0   exit 0     6.9s   0 red   100 checks
+
+**AND MY OWN COUNTER RAISED A FALSE ALARM, WHICH I AM RECORDING BECAUSE IT IS
+EVIDENCE FOR R-057 POINTING THE OTHER WAY.** My first-word rule scored
+`02_funding` as one red. It was not a red. It was **line 137 of the funding
+gate's own explanatory prose**, which begins with the word "escaped" in a
+sentence about history. R-057 asks how many checks on this ship count only the
+markers their author thought of; **the same crudeness that misses a real failure
+also invents one, and I invented one within an hour of arriving.** I cleared it
+by reading the line, not by any check — which is exactly the complaint.
+
+## MY BARS, WRITTEN BEFORE THE RIG EXISTED
+
+Recorded in scratch before a single attack ran, so they could not be moved
+afterwards: the untouched control must pass FIRST; at least four sabotages NOT
+on the author's list of fourteen; every sabotage PROVED to change what somebody
+reads before its verdict counts; the doorway must never raise and never print;
+the FINDING REPORT before any repair; `git status` clean at the end.
+
+## THE RIG
+
+The whole repo (39 MB) copied to a scratch directory **outside** the repo. Every
+patch applied at the BYTE level to the CRLF file, with an anchor that **refuses
+to run** unless it matches exactly once, a refusal if the patch changed nothing,
+and a refusal if the patched file was left carrying a single bare newline.
+`py_compile` before every gate run.
+
+**STEP 0.1 FIRST: the untouched control copy passed GATE 3.5, exit 0, 0 red,
+100 checks.** Everything below stands on that.
+
+**AND THE RIG WAS PROVED CAPABLE OF SAYING NO.** X26 — the row limit asked of
+Binance changed from 1 to 500 — was **CAUGHT, exit 1, 2 red**, by the recording
+transport and the constants check. A rig that never goes red proves nothing.
+
+## >>> THE FINDING: `_get` IS THE ONLY CODE ON THIS SHIP THAT ACTUALLY TALKS TO BINANCE, AND ONE OF THE SIX NUMBERS IT FETCHES IS THE ONLY ONE ANY CHECK EVER VERIFIES
+
+**HOW THE GATE IS BUILT, AND IT IS BUILT WELL.** Ninety-odd of its hundred
+checks hand the doorway a **fake transport** — bytes the gate typed out itself —
+and compare the whole returned block to a copy typed out here, character for
+character. There is even a **recording transport** that proves the module asked
+for exactly the right host, both paths, all three symbols in order, the 5m
+period, the one row and the 10-second timeout. That is why X26 was caught.
+
+**BUT THE RECORDING TRANSPORT *REPLACES* `_get`.** It proves what
+`section_text` **asked for**. It cannot prove what `_get` **did with it**,
+because `_get` never runs. The only check in the whole file that executes the
+real `_get` is condition 10, the one live fetch — and its only numeric bar is
+**the BTC top-account figure, within 1.0 percentage point.** The other five of
+the six numbers on the Commander's Brief are judged on SHAPE alone: does the row
+start with the right label, does it contain "% long".
+
+**TWO SABOTAGES, BOTH INSIDE `_get`, BOTH PROVED TO CHANGE THE LIVE BLOCK, BOTH
+WALKED THROUGH "GATE 3.5 PASSED — 100 checks, 0 red":**
+
+    the honest live block (2026-08-18):
+      BTC — top accounts 59.9% long · all accounts 60.3% long
+      ETH — top accounts 58.4% long · all accounts 71.8% long
+      SOL — top accounts 61.2% long · all accounts 69.9% long
+
+    X15  `_get` hardcodes the symbol BTCUSDT      GATE: 100 checks, 0 red
+      BTC — top accounts 59.9% long · all accounts 60.3% long
+      ETH — top accounts 59.9% long · all accounts 60.3% long   <- BTC's numbers
+      SOL — top accounts 59.9% long · all accounts 60.3% long   <- BTC's numbers
+
+    X16  `_get` asks the TOP endpoint for both     GATE: 100 checks, 0 red
+      BTC — top accounts 59.9% long · all accounts 59.9% long
+      ETH — top accounts 58.4% long · all accounts 58.4% long
+      SOL — top accounts 61.2% long · all accounts 61.2% long
+
+**X16 IS THE ONE THAT STINGS.** Check (a2) of this gate says, in its own words:
+*"AND THE TWO POPULATIONS REALLY ARE TWO. If the module asked one endpoint
+twice, or crossed the labels, the block above would still look perfectly
+reasonable."* **It then proves that on fixtures only.** The real transport can
+do precisely the thing (a2) exists to forbid, and (a2) cannot see it. The whole
+instrument is built on the DIFFERENCE between the big accounts and everybody
+else; X16 prints the same number under both names and the gate applauds.
+
+## THE TWO THAT WERE INERT, SAID PLAINLY BECAUSE AN INERT BREAK PROVES NOTHING
+
+    X17  `_get` loses `raise_for_status()`     INERT — verdict thrown away
+    X25  a timestamp tie keeps the LAST row    INERT — verdict thrown away
+
+X17 I tried a second time against the condition it is actually about, by asking
+Binance for a contract it does not list. **Binance answers HTTP 200 with an
+empty list, not an error**, so honest and broken printed the identical line
+`[no data: top accounts — no rows]`. I could not prove it changes anything and
+**its escape therefore counts for nothing.** X25 needs Binance to return more
+than one row for `limit=1`, which it does not.
+
+## FOUR SMALLER THINGS, FOUND BY FEEDING THE SHIPPED DOORWAY PAYLOADS NO FIXTURE USED
+
+**None of these required changing a line of code.** They are DATA cases.
+
+1. **THE HEADER IS BUILT OUTSIDE THE PER-READING GUARD.** Every reading is
+   individually protected, but `_hhmm(_oldest(stamps))` in the head is not. A
+   stamp that passes validation and cannot be rendered by the clock collapses
+   the **entire** instrument to one line: `  🔌 Whale watch offline (OSError)`.
+   **I then tried to make it bite with five good readings beside it and it did
+   not** — `_oldest` picks the minimum, so a far-future stamp is never chosen
+   while any honest reading survives. It only bites when the poisoned reading is
+   the only one left. **Narrower than it looked, and I am saying so rather than
+   dressing it up.** Filed R-061.
+2. **A TIE ON THE TIMESTAMP IS BROKEN BY POSITION, AND THE DOCSTRING SAYS IT IS
+   NOT.** `_newest` promises rows are picked *"BY ITS OWN STAMP rather than by
+   position in the list"*. On equal stamps `stamp > best_stamp` is false, so the
+   FIRST row wins — by position. The same two rows in the opposite order printed
+   **60.9%** and then **20.0%**. Unreachable at `limit=1`. Filed R-062.
+3. **THE STALENESS GUARD ONLY LOOKS ONE WAY.** `now - stamp > limit` cannot see
+   a row from the FUTURE. A row stamped six hours ahead printed as a healthy
+   reading with `oldest 18:00 UTC` in a block built at 12:00; a row stamped **one
+   year** ahead printed `oldest 12:00 UTC`, indistinguishable from now, because
+   `_hhmm` carries no date. And a future row placed beside a genuinely fresh one
+   **wins**, hiding the real reading. Needs Binance to send a bad stamp. Filed
+   R-063.
+4. **R-058's DOUBT 2, NOW MEASURED INSTEAD OF ARGUED.** Its author wrote *"I
+   believe this is safe... nothing can be misreported, only refused or printed
+   as what it is."* **Measured: it can be misreported.** Where a population has
+   no shorts at all, the cross-check is skipped, and a long/short swap of the
+   truth `longAccount 0.0000 / shortAccount 1.0000` prints
+   `top accounts 100.0% long` — **the exact opposite of the truth, unrefused.**
+   It takes a code swap AND a degenerate population, so it is two mistakes away
+   and it is SMALL. **But "I believe this is safe" was wrong, and the belief is
+   what R-058 filed.** Filed R-064.
+
+## WHAT I DID NOT FIND
+
+The doorway **never raised and never printed** on anything I could construct —
+NaN, infinities, huge-exponent zeros, non-numeric fields, rows that are not
+dicts, replies that are not lists, negative and absurd timestamps. Every one
+came back as a named absence inside the block. The Decimal / ROUND_HALF_UP path,
+the six-independent-fates design, the named-refusal vocabulary and the
+recording-transport check are all sound, and the fixture half of this gate is
+the strongest on the ship. **The finding is not that the file is careless. It is
+that the one function nobody can fake is the one function nobody checks.**
+
+## WHAT I GOT WRONG
+
+1. **My red counter cried wolf on the word "escaped".** Above, in full.
+2. **I over-read the header collapse before I tested it properly**, and had to
+   walk it back from "one bad reading destroys the block" to "only when it is
+   the last reading standing". The second test is the one in the record.
+3. **I mistyped probe X21e**, giving it the same payload as X21d, so it proved
+   nothing on its own run; the swap was re-tested properly afterwards and that
+   later run is the evidence for R-064.
+
+## WHAT I DID NOT DO, ON PURPOSE
+
+**I REPAIRED NOTHING.** THE_PATTERN: *"BORDERLINE — do NOT fix it. Report and
+stop. The Commander rules."* The finding report is in the session report and in
+R-060. **The repair I would recommend is written in the next session's orders
+and deliberately not applied**, because a session that repairs first and grades
+afterwards has spent the time it was supposed to be deciding about.
+
+**I ALSO BUILT NOTHING.** Part 2 was conditional and the condition was not met.
+
+## THE FINDING REPORT, IN FULL, AS THE PATTERN REQUIRES
+
+**Q1 — WHAT INFORMATION IS THIS CODE FOR?** The Whale watch line on the Morning
+Brief: six positioning percentages, two for each coin.
+
+**Q2 — CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING OR DELETED?** Not
+today — `_get` is correct today and the numbers on this morning's Brief are
+right. **YES AFTER ONE MORE MISTAKE, AND THE CHAIN HAS EXACTLY ONE LINK:**
+somebody edits the four-line `_get`. There is no second step. The gate goes
+green, the block prints, and it is on his Brief the next morning.
+
+**Q3 — IN REAL BUSINESS TERMS.** (a) He would see a normal-looking Whale watch
+line with numbers on it. (b) It would cost him nothing in money — this
+instrument is information, it is never a signal, and nothing it prints is
+recorded to any archive — but he would be reading one coin's positioning under
+another coin's name, or one population's figure under both names, on the deck he
+consults every morning. (c) He would find out only if he noticed that the
+numbers repeated; nothing would tell him. (d) It is fully undoable: the Brief is
+regenerated every morning and no record is kept.
+
+**STEP 0 — IS THE FINDING TRUSTWORTHY?** 0.1 the healthy control passed first,
+exit 0, 0 red. 0.2 the broken output is printed above and is visibly wrong.
+0.3 I did not write this file. **PROVEN.**
+
+**STEP 1 — THE VETO.** Would it change something he would act on, or damage a
+record? **YES on the first half** — the Context Deck exists to inform how he
+reads the market. **NO on the second** — nothing here is recorded.
+
+**STEP 2.** 2.1 **by accident?** Not the two breaks I wrote, which are
+deliberate-looking. **But `_get` is exactly the function the next maintenance
+edit will touch** — R-056 already points at rate-limiting, and a retry, a
+session object, a header or a proxy all land in those four lines, where an
+ordinary slip is invisible. 2.2 **would he see it?** For the two I proved,
+**YES** — three coins showing byte-identical numbers is wrong on its face, and
+Step 2.2 is answered from the output alone. A subtler `_get` fault would not be.
+2.3 **undoable?** Yes. **STEP 2 IS CLEAN.**
+
+**STEP 3.** 3.1 **would the system still report all fine? YES — 100 checks,
+0 red, twice.** 3.2 no. 3.3 no. 3.4 it would affect every Brief until noticed.
+
+**STEP 4.** 4.1 A single edit to the one function that talks to Binance could
+put the wrong coin's or the wrong population's numbers on his Brief every
+morning, while every gate on the ship reported perfect health. 4.2
+**MY RECOMMENDATION: BORDERLINE.** Step 2 is clean, Step 3.1 is hit, and the
+scoring says the Commander rules. **I did not repair it.**
