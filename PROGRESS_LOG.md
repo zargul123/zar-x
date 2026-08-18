@@ -12819,3 +12819,162 @@ numbers.
   the pile.
 - **It cannot prove Binance's own figures are honest**, and it cannot see an
   endpoint that answers today and rate-limits next week (R-056).
+
+---
+
+# 2026-08-18 (later) — **GATE 3.5-R1 PASSED, 107 CHECKS, 0 RED, TWICE. THE REPAIR THE COMMANDER ORDERED IS BUILT, AND THE ATTACK THAT BEAT THE OLD GATE THIS MORNING NOW TURNS IT RED.**
+
+*Same session, second half. The Commander read R-060 in plain words and ruled
+**"OK CORRECT IT."** The bar was declared and committed alone before this
+existed — commit `cacf355`, one file changed, no `.py` in it.*
+
+## WHAT WAS BUILT
+
+**A server the gate owns, so the real transport is finally watched making the
+trip.** The gate stands up an HTTP server on `127.0.0.1` on a port the operating
+system picks, and calls the doorway with `base_url` pointing at it and **no
+transport argument**, so the genuine `_get` runs over a real socket. The server
+writes down the path and the `symbol`, `period` and `limit` of every request.
+
+**BOTH HALVES ARE JUDGED, because R-060 had two halves.** What was **asked for**
+is compared to six tuples typed out in the gate as literal strings; what came
+**back** is held to `GOLD_EXPECTED`, the very same block the fake transport must
+already produce. **Two roads, one destination** — and if anything between them
+lies, they arrive somewhere different.
+
+**AND NOT ONE REQUEST TO BINANCE IS MADE BY THE NEW CHECK.** R-058's doubt 5 —
+that this gate already makes seven live requests a run — is not made worse.
+
+**THREE NEW PERMANENT SABOTAGES, W15, W16 AND W17**, installed on every run
+forever, each proved to change the observable before its verdict counts. W15 and
+W16 are the two breaks that beat this gate this morning. **W17 is the one that
+was INERT this morning** — I could not prove it changed anything, so I threw its
+verdict away. It is provable now, because the gate's own server answers an
+unrecognised request with **HTTP 500** and the block must name it. **That is the
+first thing on this ship ever to exercise `raise_for_status`.**
+
+`_get` also joins the restoration check, so the honest one is **proved** back
+after the drill rather than assumed.
+
+## THE RESULTS
+
+    GATE 3.5-R1   normal    exit 0   0 red   107 checks   6.9 s
+    GATE 3.5-R1   TZ=UTC0   exit 0   0 red   107 checks   8.4 s
+    the tick sequence of the two runs is IDENTICAL, compared by machine
+
+    W15 the REAL transport pinned to one symbol (R-060)      -> CAUGHT
+    W16 the REAL transport pinned to one endpoint (R-060)    -> CAUGHT
+    W17 the REAL transport losing raise_for_status()         -> CAUGHT
+
+    ✓ THE REAL `_get` WALKED TO A SERVER THIS GATE OWNS AND ASKED FOR
+      EXACTLY THE RIGHT SIX THINGS — 6 requests recorded
+    ✓ the block it built matched the SAME copy the fake transport is held
+      to, BYTE FOR BYTE
+    ✓ a request the server refuses comes back named `HTTP 500`
+          BTC         — [no data: top accounts — HTTP 500]
+    ✓ the gate's own server was SHUT DOWN, its socket closed and its thread
+      joined
+
+## >>> CONDITION 10 — THE ONE THAT ACTUALLY CERTIFIES A REPAIR
+
+**A repair is not certified by the drill it ships with.** The drill installs its
+breaks in memory, by the hand that wrote the repair. **So the three original
+faults were re-applied as REAL TEXT EDITS to a copy of the repaired repo outside
+the repo, exactly as they were made this morning**, and the repaired control was
+required to pass first.
+
+    control (repaired, untouched)   exit 0   0 red   PASSED  <- Step 0.1
+    X15  symbol pinned to BTCUSDT   exit 1   4 red   CAUGHT
+    X16  both populations one path  exit 1   3 red   CAUGHT
+    X17  raise_for_status dropped   exit 1   2 red   CAUGHT
+
+**THIS MORNING ALL THREE WALKED THROUGH `100 checks, 0 red`. THEY DO NOT NOW.**
+
+**AND A PROPERTY WORTH WRITING DOWN, BECAUSE IT WAS NOT DESIGNED — IT FELL OUT.**
+When the real fault is already sitting in the file, the matching sabotage reports
+**INERT**, because installing the same break on top of an already-broken file
+changes nothing. INERT is a FAIL by this ship's rules, so **each fault turns the
+gate red for two independent reasons**: the direct check sees the wrong request,
+and the drill notices its own break has stopped mattering. **The second signal is
+the interesting one — a drill going INERT is now a way of saying "this break is
+already installed."**
+
+## THE PRODUCTION HALF DID NOT MOVE, PROVED TWO WAYS AND NOT ASSERTED
+
+    sha256 of the production half BEFORE   d2cd1b58373d2fcb   (baseline)
+    sha256 of the production half AFTER    d2cd1b58373d2fcb   UNCHANGED
+
+    every diff hunk:  @@ 1222  @@ 1244  @@ 1358  @@ 1396  @@ 1406  @@ 1439
+    the __main__ line is 363. The nearest change is 859 lines below it.
+
+The patch script **checked all seven anchors before writing a single byte**,
+refused if any matched other than exactly once, refused if the patched file
+carried one bare newline, and **refused if the production hash moved.** It also
+verified the baseline before starting: the recipe reproduces `events`
+`6fc5ce7d67aa8f24` and `news` `503663762315b2f2` exactly, so the recipe is right
+and not just agreeable.
+
+**A SMALL MEASURED CORRECTION, RECORDED BECAUSE THE MEASUREMENT WINS.** The
+record says whales' `__main__` is at line 362; measured, it is **363**. The hash
+is identical, so the prefix is identical — the difference is only whether the
+anchor line itself is counted. Nothing depends on it, and it is written down
+rather than quietly left.
+
+## WHAT I DID NOT DO
+
+- **The production half is untouched.** Nothing the Commander reads changed.
+- **R-058's doubts 3 and 4 are still unmeasured.** Nobody has timed how long
+  Binance really goes between bucket updates, and nobody has sampled how far the
+  BTC figure moves between two calls. **This repair was about the telephone, not
+  the numbers it carries**, and saying otherwise would be the overclaim this
+  ship keeps catching.
+- **R-061 to R-064 are untouched.** CATEGORY B, they wait for the pile.
+- **I did not clear R-060 and I may not.** I found it, I graded it, I wrote the
+  repair. **R-066 is filed against this repair and stays OPEN**, and the next
+  session's Job 1 is to attack it.
+
+## >>> AND THE BRIEF CAME BACK 2/3, WHICH IS NOT THIS REPAIR AND MUST NOT BE FILED AS ONE
+
+Running `cockpit/brief.py` afterwards, **BTC's price data failed**: TwelveData
+timed out reading, the Yahoo fallback answered with a `JSONDecodeError`, and the
+Brief printed
+
+    🔌 DATA INSTRUMENT OFFLINE for BTC-USD (4h).
+      🔌 data instrument offline — no briefing for this asset
+    ...
+      2/3 instruments reporting. Facts, not advice — the pilot decides.
+
+**IT IS NOT THE WHALE WATCH AND IT IS NOT THIS REPAIR.** The production half of
+`whales.py` was never touched, its hash is identical, and **the whale watch line
+on that very Brief read `6 of 6 readings`** — as did all five Context Deck
+instruments. ETH and SOL briefed normally. **The failure is in the price data
+engine**, and it is either a transient or the TwelveData key that has been
+awaiting rotation since Phase 2.
+
+**AND THE FAIL-SAFE BEHAVED EXACTLY AS LAW 3 SAYS IT MUST.** The dead asset was
+**named**, the other two carried on, the deck was untouched, and the footer said
+**2/3** rather than pretending. That is the design working, not the design
+failing.
+
+**>>> AND THEN I RAN IT AGAIN, BECAUSE "RUN THE THING AND READ ITS OUTPUT" CUTS
+BOTH WAYS. THE SECOND RUN WAS 3/3.**
+
+    run 1, 15:58   BTC data instrument OFFLINE      2/3 instruments reporting
+    run 2, 16:0x   BTC $64,259.99  (+0.99% vs 24h)  3/3 instruments reporting
+
+**So it was a TRANSIENT — one TwelveData read timeout — and the ship stands at
+3/3.** I am recording the failure anyway, in full, because **a session that only
+writes down the run that suited it is not keeping a log.** It is also the second
+kind of evidence this ship keeps needing: the fail-safe was exercised for real,
+by accident, and it named the dead instrument instead of hiding it.
+
+## WHAT I GOT WRONG IN THIS HALF
+
+**Nothing broke, and I am saying that plainly rather than manufacturing a
+confession.** One thing is worth recording as a near miss: the first draft of the
+shutdown check ended with `_DoorHandler.log is not None`, **which is true no
+matter what** — a check that cannot fail, in the very same session that filed
+R-057 about checks that count only what their author thought of. It was replaced
+before it ever ran, with `door_thread.is_alive()` and `socket.fileno() == -1`,
+both of which can and do say no. **It was caught by re-reading my own work, not
+by any machine, which is precisely the complaint in R-065.**

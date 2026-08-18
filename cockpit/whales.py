@@ -1219,7 +1219,166 @@ if __name__ == '__main__':
              f"the Brief says {printed.group(1)}%, the gate's own fetch says "
              f"{own_share:.2f}%, gap {gap:.2f} points (bar: 1.0)")
 
-    print("\n(m) >>> CONDITION 9 — THE SABOTAGE DRILL. Fourteen breaks,"
+    print("\n(l2) >>> CONDITION 14 (GATE 3.5-R1) — THE DELIVERY BOY IS"
+          "\n    FINALLY WATCHED LEAVING THE SHOP. Every check above this"
+          "\n    one hands the doorway a transport of the gate's own making,"
+          "\n    so `_get` — the four lines that are the ONLY code on this"
+          "\n    ship that actually speaks to Binance — never runs. Even the"
+          "\n    recording transport of (e), which is the best check in this"
+          "\n    file, REPLACES `_get` and therefore can never testify about"
+          "\n    it. The one check that does execute it, the live fetch of"
+          "\n    (l), verifies ONE of the six numbers on the Brief."
+          "\n"
+          "\n    ON 2026-08-18 A SESSION THAT DID NOT BUILD THIS FILE PROVED"
+          "\n    WHAT THAT COSTS. Two breaks inside `_get` — one pinning the"
+          "\n    symbol to BTCUSDT so ETH and SOL printed BITCOIN'S NUMBERS,"
+          "\n    one pinning the path so `all accounts` printed the"
+          "\n    top-account figure for every coin — each walked through this"
+          "\n    gate while it printed `100 checks, 0 red`. The second is"
+          "\n    precisely what check (a2) above exists to forbid, and (a2)"
+          "\n    proves it on fixtures only. That is R-060, and the Commander"
+          "\n    ruled: correct it."
+          "\n"
+          "\n    SO THE GATE NOW STANDS UP A SERVER OF ITS OWN on 127.0.0.1,"
+          "\n    on a port the operating system picks, and calls the doorway"
+          "\n    with `base_url` pointing at it and NO transport argument, so"
+          "\n    THE REAL `_get` MAKES THE TRIP. The server writes down the"
+          "\n    path and the symbol, period and limit of every request, and"
+          "\n    the gate compares that log to six tuples TYPED OUT HERE as"
+          "\n    literal strings — never read from the file on trial. **NOT"
+          "\n    ONE REQUEST TO BINANCE IS MADE BY THIS CHECK.**")
+
+    import http.server
+    import socketserver
+    import threading
+    import urllib.parse
+
+    # The gate's own literals. R-014: an expectation read out of the module
+    # follows the module into its own mistake and confirms it.
+    DOOR_TOP = '/futures/data/topLongShortPositionRatio'
+    DOOR_ALL = '/futures/data/globalLongShortAccountRatio'
+    DOOR_EXPECT = (
+        (DOOR_TOP, 'BTCUSDT', '5m', '1'),
+        (DOOR_ALL, 'BTCUSDT', '5m', '1'),
+        (DOOR_TOP, 'ETHUSDT', '5m', '1'),
+        (DOOR_ALL, 'ETHUSDT', '5m', '1'),
+        (DOOR_TOP, 'SOLUSDT', '5m', '1'),
+        (DOOR_ALL, 'SOLUSDT', '5m', '1'),
+    )
+    # The same bytes GOLD serves, so the block that comes back down the real
+    # road must equal the block the fake road already has to produce. Two
+    # roads, one destination, or something between them is lying.
+    DOOR_BODY = dict(GOLD)
+    DOOR_REFUSED = b'{"code":-1121,"msg":"the gate did not serve this"}'
+
+    class _DoorHandler(http.server.BaseHTTPRequestHandler):
+        """Answers ONLY what this gate typed out. Anything else gets a 500,
+        which is the only thing on this ship that has ever exercised
+        `raise_for_status` — W17 was INERT on 2026-08-18 for want of it."""
+
+        log = []
+
+        def do_GET(self):
+            split = urllib.parse.urlsplit(self.path)
+            query = urllib.parse.parse_qs(split.query)
+
+            def one(name):
+                got = query.get(name, [''])
+                return got[0] if got else ''
+
+            _DoorHandler.log.append((split.path, one('symbol'),
+                                     one('period'), one('limit')))
+            body = DOOR_BODY.get((split.path, one('symbol')))
+            if body is None:
+                self.send_response(500)
+                body = DOOR_REFUSED
+            else:
+                self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Content-Length', str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+
+        def log_message(self, *args):
+            """Silent. The default writes every request to stderr, and Door 3
+            listens at that descriptor."""
+
+    door_server = socketserver.TCPServer(('127.0.0.1', 0), _DoorHandler)
+    DOOR_URL = 'http://127.0.0.1:%d' % door_server.server_address[1]
+    door_thread = threading.Thread(target=door_server.serve_forever,
+                                   daemon=True)
+    door_thread.start()
+
+    # A proxy configured in the environment would send a request for
+    # 127.0.0.1 out to the internet. Set here, inside the test, and put back
+    # afterwards; the production half is not involved.
+    _door_no_proxy = os.environ.get('NO_PROXY')
+    os.environ['NO_PROXY'] = '127.0.0.1,localhost'
+
+    def door_run():
+        """The REAL `_get`, over a real socket, to a server this gate owns.
+        Returns what was ASKED FOR beside what came BACK, because a check
+        that saw only one of those halves would miss half of R-060."""
+        _DoorHandler.log = []
+        block = section_text(base_url=DOOR_URL, now=NOW)
+        return tuple(_DoorHandler.log), block
+
+    def door_refusal():
+        """One asset the server does not serve, so it answers HTTP 500."""
+        _DoorHandler.log = []
+        return section_text(base_url=DOOR_URL, now=NOW,
+                            symbols=(('BTC', 'NOTSERVEDUSDT'),),
+                            populations=(('top accounts', TOP_PATH),)
+                            ).split(chr(10))[1]
+
+    DOOR_REFUSED_LINE = ('    BTC         — [no data: top accounts — '
+                         'HTTP 500]')
+
+    door_log, door_block = door_run()
+    mark(door_log == DOOR_EXPECT,
+         "THE REAL `_get` WALKED TO A SERVER THIS GATE OWNS AND ASKED FOR "
+         "EXACTLY THE RIGHT SIX THINGS — both paths, all three contracts in "
+         "order, the 5m period and the single row, read off the wire rather "
+         "than out of the module",
+         f"{len(door_log)} requests recorded")
+    if door_log != DOOR_EXPECT:
+        for want, got in zip(DOOR_EXPECT, list(door_log) + [None] * 6):
+            print(f"     wanted {want!r}")
+            print(f"        got {got!r}")
+    mark(same('through the real transport', GOLD_EXPECTED, door_block),
+         "and the block it built from the answers matched the SAME copy the "
+         "fake transport is held to, BYTE FOR BYTE — two roads, one "
+         "destination")
+    mark(door_refusal() == DOOR_REFUSED_LINE,
+         "a request the server refuses comes back named `HTTP 500`, which is "
+         "the first thing on this ship ever to exercise `raise_for_status`",
+         door_refusal().strip())
+
+    def _get_symbol_pinned(base_url, path, params, timeout):
+        return _honest_get(base_url, path, dict(params, symbol='BTCUSDT'),
+                           timeout)
+
+    def _get_path_pinned(base_url, path, params, timeout):
+        return _honest_get(base_url, TOP_PATH, params, timeout)
+
+    def _get_unchecked(base_url, path, params, timeout):
+        reply = requests.get(f"{base_url}{path}", params=params,
+                             timeout=timeout)
+        return reply.content
+
+    def w_door():
+        return door_run()
+
+    def j_door():
+        return door_run() == (DOOR_EXPECT, GOLD_EXPECTED)
+
+    def w_refused():
+        return door_refusal()
+
+    def j_refused():
+        return door_refusal() == DOOR_REFUSED_LINE
+
+    print("\n(m) >>> CONDITION 9 — THE SABOTAGE DRILL. Seventeen breaks,"
           "\n    installed on EVERY run, forever. Each one is captured honest"
           "\n    and broken, and **its verdict counts ONLY IF THE TWO"
           "\n    OBSERVABLES DIFFER.** A break that cannot change what anyone"
@@ -1242,6 +1401,7 @@ if __name__ == '__main__':
     _honest_asset_line = _asset_line
     _honest_count = _count_words
     _honest_oldest = _oldest
+    _honest_get = _get
 
     def w_gold():
         return gold()
@@ -1356,6 +1516,12 @@ if __name__ == '__main__':
          'RATIO_TOL', Decimal('9'), w_swapped, j_swapped),
         ('W14', 'the "oldest reading" stamp showing the NEWEST',
          '_oldest', max, w_gold, j_gold),
+        ('W15', 'the REAL transport pinned to one symbol (R-060)',
+         '_get', _get_symbol_pinned, w_door, j_door),
+        ('W16', 'the REAL transport pinned to one endpoint (R-060)',
+         '_get', _get_path_pinned, w_door, j_door),
+        ('W17', 'the REAL transport losing raise_for_status()',
+         '_get', _get_unchecked, w_refused, j_refused),
     ]
 
     print()
@@ -1394,6 +1560,7 @@ if __name__ == '__main__':
          "after fourteen breaks and fourteen repairs, all six blocks are "
          "byte-identical to where they started")
     mark(section_text is _honest_section and _share is _honest_share
+         and _get is _honest_get
          and _pct is _honest_pct and _newest is _honest_newest
          and _no_data is _honest_no_data and _asset_line is _honest_asset_line
          and _count_words is _honest_count and _oldest is _honest_oldest
@@ -1403,6 +1570,23 @@ if __name__ == '__main__':
          and POPULATIONS == (('top accounts', TOP_PATH),
                              ('all accounts', ALL_PATH)),
          "every constant and every function this drill touched is back")
+
+    # The gate owns this server, so the gate closes it. The thread is a
+    # daemon as well, so nothing that goes wrong anywhere above can leave a
+    # listener behind or wedge the interpreter.
+    door_server.shutdown()
+    door_server.server_close()
+    door_thread.join(timeout=10)
+    if _door_no_proxy is None:
+        os.environ.pop('NO_PROXY', None)
+    else:
+        os.environ['NO_PROXY'] = _door_no_proxy
+    mark(not door_thread.is_alive() and door_server.socket.fileno() == -1,
+         "and the gate's own server was SHUT DOWN, its socket closed and its "
+         "thread joined — a test that leaves a listener running is a test "
+         "that changed the machine it ran on",
+         f"thread alive: {door_thread.is_alive()}, socket fileno: "
+         f"{door_server.socket.fileno()}")
 
     # ------------------------------------------------------------------
     ok = all(nonlocal_ok)
@@ -1436,7 +1620,15 @@ host, both paths, all three symbols in order, the period, the row
 count, the timeout, the default clock and the default staleness
 limit were judged by WHAT THE MODULE DID.
 
-ALL FOURTEEN SABOTAGES WERE PROVED TO CHANGE WHAT SOMEBODY READS
+AND CONDITION 14, ADDED 2026-08-18 AFTER THE COMMANDER RULED ON
+R-060: THE REAL `_get` IS NO LONGER TAKEN ON TRUST. It walked over a
+real socket to a server this gate stood up itself, and both halves
+were judged — WHAT IT ASKED FOR, read off the wire and compared to
+six tuples typed out in this file, and WHAT CAME BACK, held to the
+same block the fake transport must produce. The two breaks that beat
+this gate on 2026-08-18 are now W15 and W16 and they run forever.
+
+ALL SEVENTEEN SABOTAGES WERE PROVED TO CHANGE WHAT SOMEBODY READS
 BEFORE THEIR VERDICTS WERE COUNTED — on the channel each one really
 affects, which is why W10, whose returned block is byte-identical to
 the honest one, is witnessed at the FILE DESCRIPTOR and not at the

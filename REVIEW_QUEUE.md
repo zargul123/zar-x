@@ -4149,3 +4149,69 @@ and THE_PATTERN says "I believe this is safe" is a thing you file, not ship.
 R-060 is not counted in the pile: it is BORDERLINE and awaiting the Commander's
 ruling. **Thirty-five. Saying the number out loud to him, as every session since
 the fifteenth has.**
+
+---
+
+# 2026-08-18 (later) — THE REPAIR BLOCK
+
+*Same session. The Commander ruled on R-060 — "OK CORRECT IT" — so the repair is
+ordered work, not a session's own idea.*
+
+## R-060 — **REPAIRED UNDER GATE 3.5-R1. STILL OPEN, AND ITS AUTHOR MAY NOT CLOSE IT.**
+
+**What was done:** the gate now stands up an HTTP server of its own on
+`127.0.0.1` and makes the REAL `_get` walk to it, judging both what it asked for
+and what it brought back; three permanent sabotages W15, W16 and W17 ride on
+that check forever; `_get` joined the restoration check.
+
+**GATE 3.5-R1 PASSED — 107 checks, 0 red, twice (normal and `TZ=UTC0`),
+identical tick sequences, 6.9 s and 8.4 s.** The production half's sha256 is
+`d2cd1b58373d2fcb` before and after, and every diff hunk is 859 lines below the
+`__main__` line.
+
+**THE ORIGINAL ATTACK WAS RE-RUN AS REAL TEXT EDITS on a copy outside the repo,
+after the repaired control passed first: X15 exit 1 / 4 red, X16 exit 1 / 3 red,
+X17 exit 1 / 2 red. All three walked through `100 checks, 0 red` this morning.**
+
+**IT STAYS OPEN BECAUSE I FOUND IT, GRADED IT AND FIXED IT.** THE_PATTERN: *"If
+you found the fault and wrote the repair, you file a new review item against
+your own repair and leave it open."* That is R-066. **A session that did not do
+any of the three may close R-060.**
+
+## R-066 — **AGAINST MY OWN REPAIR. OPEN. I MAY NOT CLEAR IT.**
+
+1. **THE NEW CHECK PROVES THE TRIP TO A SERVER THAT IS NOT BINANCE.** It proves
+   `_get` sends the right path and parameters and returns what it was given.
+   **It cannot prove anything about how `_get` behaves against the real venue** —
+   redirects, chunked encoding, gzip, a 429 with a `Retry-After`, a connection
+   reset mid-body. My server is polite in ways Binance may not be. **The live
+   check is still the only thing that touches the real venue, and it still
+   verifies one number of six.**
+2. **THE THREE SABOTAGES ARE THE THREE FAULTS I ALREADY KNEW ABOUT.** I wrote
+   the attack this morning and the defence this afternoon. **A gate is strongest
+   exactly where it has already been attacked, which is the same as saying it is
+   weakest everywhere else.** The fourth fault in `_get` is the one that matters
+   and I am the wrong person to imagine it.
+3. **I ADDED A THREAD AND A LISTENING SOCKET TO A GATE THAT HAD NEITHER.** It is
+   a daemon thread, it is shut down explicitly, the socket close is checked by
+   `fileno() == -1`, and both runs finished in under nine seconds. **But this
+   gate now binds a port**, and no session has run it on a machine with a
+   restrictive firewall, with a proxy configured, or twice at the same moment.
+   **I set `NO_PROXY` inside the test and put it back; nobody has tested the
+   path where a proxy really is configured.**
+4. **THE FIRST DRAFT OF MY SHUTDOWN CHECK COULD NOT FAIL.** It ended with
+   `_DoorHandler.log is not None`, which is true whatever happens. I caught it
+   by re-reading, before it ever ran, and replaced it with two conditions that
+   can say no. **It is recorded because the same session had just filed R-057
+   about exactly this, and still nearly shipped one.**
+5. **`DOOR_BODY = dict(GOLD)` REUSES THE FIXTURE'S PAYLOADS.** That is
+   deliberate — it is what lets the real road and the fake road be held to one
+   destination — **but it means a fault in those payloads is now invisible in
+   two places instead of one.**
+
+## **>>> THE CATEGORY B PILE IS STILL THIRTY-FIVE.**
+
+**R-066 is not CATEGORY B: it is an open item against a repair, of the same kind
+as R-020, R-024, R-026, R-027 and R-043.** R-060 is no longer awaiting a ruling —
+he ruled, and it is repaired and open. **Nothing was cleared this session, by
+anybody, including me.**

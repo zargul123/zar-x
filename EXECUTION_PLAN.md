@@ -435,6 +435,68 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-18 (later): THE COMMANDER RULED ON R-060 AND THE REPAIR IS BUILT. GATE 3.5-R1 PASSED — 107 CHECKS, 0 RED, TWICE. THE ATTACK THAT BEAT THE OLD GATE THIS MORNING NOW TURNS IT RED.**
+
+**WHERE THE SHIP IS.** Every gate green. `cockpit/whales.py` is the only file
+that changed, and **only below its `__main__` line**:
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red  ~63 s
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red  ~124 s
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red  (x2, TZ=UTC0)
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  ~7 s
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red  ~6 s
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red  (x2, TZ=UTC0)
+    cockpit/whales.py           GATE 3.5-R1   PASSED  exit 0  0 red  107 checks
+      the same file at TZ=UTC0  GATE 3.5-R1   PASSED  exit 0  0 red  107 checks
+                                17 sabotages, all CAUGHT · 6.9 s / 8.4 s
+    vault INTACT 6 of 6 · lab/ untouched
+    Brief 3/3, FIVE Context Deck lines — but 2/3 on the run before it,
+    a TwelveData read timeout on BTC that cleared on a re-run. Recorded.
+
+**WHAT WAS DONE.** The gate now stands up an HTTP server of its own on
+`127.0.0.1` and makes the REAL `_get` — the four lines that are the only code on
+this ship that actually speaks to Binance — walk to it over a real socket. It
+judges **both halves**: what was asked for, read off the wire and compared to six
+tuples typed out in the gate, and what came back, held to the same block the fake
+transport must produce. **No Binance request is made by the new check.** Three
+permanent sabotages ride on it forever — W15, W16 and the one that was INERT this
+morning, W17, now provable because the gate's own server answers an unrecognised
+request with HTTP 500.
+
+**WHAT CERTIFIES IT.** Not the drill it ships with — **the attack that beat the
+old gate.** X15, X16 and X17 were re-applied as REAL TEXT EDITS to a copy outside
+the repo, after the repaired control passed first: **exit 1 with 4, 3 and 2 red.
+This morning all three walked through `100 checks, 0 red`.**
+
+**WHAT IS STILL BROKEN OR UNPROVEN, STATED AS THE MARKER MUST STATE IT:**
+
+- **R-060 IS REPAIRED BUT NOT CLOSED, AND ITS AUTHOR MAY NOT CLOSE IT.** One
+  session found it, graded it and fixed it. **R-066 is filed against the repair
+  and stays OPEN.**
+- **THE NEW CHECK PROVES THE TRIP TO A SERVER THAT IS NOT BINANCE.** Redirects,
+  gzip, a 429 with `Retry-After`, a reset mid-body — none of that is tested. The
+  live check still verifies one number of six.
+- **R-058's DOUBTS 3 AND 4 ARE STILL UNMEASURED.** Nobody has timed Binance's
+  bucket updates or sampled how far the BTC figure moves between two calls.
+- **THE CATEGORY B PILE IS THIRTY-FIVE** — R-061 to R-065, none repaired, none
+  cleared.
+- **THIS GATE NOW BINDS A PORT.** Nobody has run it behind a firewall, with a
+  proxy really configured, or twice at the same moment.
+- **A REAL FAIL-SAFE EVENT HAPPENED BY ACCIDENT AND IS RECORDED.** On the first
+  Brief run after the repair, BTC's price data went offline — TwelveData timed
+  out, the Yahoo fallback returned a `JSONDecodeError` — and the Brief printed
+  **2/3** with the dead asset NAMED while ETH, SOL and all five deck lines
+  carried on. **An immediate re-run was 3/3.** A transient, not this repair
+  (the production half was never touched, and the whale watch read `6 of 6` on
+  the failing run too). **Written down rather than quietly re-run away.**
+
+**WHERE THE NEXT SESSION STANDS.** Phase 3's five instruments are complete and
+there is no sixth. **Its Job 1 is to attack this repair** — a fresh pair of eyes
+on `__main__` of `cockpit/whales.py`, and the fourth fault in `_get` that its
+author was blind to.
+
+---
+
 ## **>>> 2026-08-18: THE WHALE WATCH WAS ATTACKED BY A SESSION THAT DID NOT BUILD IT, AND IT DID NOT SURVIVE CLEAN. ONE BORDERLINE FINDING IS ON THE COMMANDER'S DESK. NOTHING WAS REPAIRED AND NOTHING WAS BUILT.**
 
 **WHERE THE SHIP IS.** Unchanged in code — **not one byte of any `.py` file was
