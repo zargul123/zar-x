@@ -12739,3 +12739,83 @@ put the wrong coin's or the wrong population's numbers on his Brief every
 morning, while every gate on the ship reported perfect health. 4.2
 **MY RECOMMENDATION: BORDERLINE.** Step 2 is clean, Step 3.1 is hit, and the
 scoring says the Commander rules. **I did not repair it.**
+
+---
+
+# 2026-08-18 (later) — **GATE 3.5-R1 DECLARED. THE COMMANDER RULED ON R-060: "OK CORRECT IT."**
+
+*Declared by the twenty-second generation and **committed ALONE, with no `.py`
+file in this commit**, before one line of the repair exists. `git show --stat`
+on this commit is the proof the bar came first and nobody lowered it afterwards
+to match what got built.*
+
+**THE RULING.** R-060 was graded BORDERLINE and put on the Commander's desk. He
+read it in plain words and ruled: **correct it.** THE_PATTERN says a session may
+recommend and never rule; he ruled, so the repair is ordered work.
+
+**AND THE CONFLICT IS SAID OUT LOUD BEFORE THE WORK STARTS.** I found this fault,
+I graded it, and I am now writing its repair. **THE_PATTERN forbids a session
+grading its own repair, and I will not:** a review item goes in against this
+repair, it stays OPEN, I may not clear it, and the next session's Job 1 is to
+attack it. **The three original faults are also re-run against the repaired file,
+because a repair that has not been shown to stop the thing it was built for is a
+belief, not a fix.**
+
+## WHAT IS BEING REPAIRED, IN ONE SENTENCE
+
+`_get` — four lines, the only code on this ship that actually speaks to Binance —
+is never executed by any check that can judge it, because almost every check
+injects a fake transport and the one live check verifies a single one of the six
+numbers.
+
+## THE BAR. ALL TEN, OR IT IS A FAIL.
+
+1. **THE GATE STANDS UP A SERVER OF ITS OWN AND MAKES THE REAL `_get` WALK TO
+   IT.** An HTTP server on `127.0.0.1`, on a port the operating system picks,
+   started and owned by the gate. `section_text` is called with `base_url`
+   pointing at it and **NO `fetch` argument**, so the genuine `_get` runs.
+   **No request to Binance is made by this check at all.**
+2. **THE SERVER WRITES DOWN WHAT IT WAS ASKED FOR.** For every request: the
+   path, and the `symbol`, `period` and `limit` it carried. The gate requires
+   that list to equal six tuples **TYPED OUT IN THE GATE AS LITERAL STRINGS** —
+   both endpoint paths, all three contracts in order, `'5m'` and `'1'` — never
+   read from the module on trial (rule (b), R-014's lesson).
+3. **AND THE BLOCK BUILT THROUGH THE REAL TRANSPORT MUST EQUAL `GOLD_EXPECTED`
+   BYTE FOR BYTE** — the same expectation the fake transport is already held to.
+   The point is that the two roads must arrive at the same place.
+4. **A REQUEST THE SERVER DOES NOT RECOGNISE IS ANSWERED HTTP 500** with a JSON
+   object as its body, and the block must name it `HTTP 500`. This exists so
+   that `raise_for_status` is exercised by something.
+5. **THREE NEW PERMANENT SABOTAGES, INSTALLED ON EVERY RUN, FOREVER**, each
+   **PROVED TO CHANGE THE OBSERVABLE** before its verdict counts:
+   **W15** `_get` pins the symbol to `BTCUSDT`; **W16** `_get` pins the path to
+   the top endpoint; **W17** `_get` drops `raise_for_status()`.
+   **Every one must be CAUGHT. Any one reported INERT is a FAIL** — and W17 was
+   INERT this morning, which is exactly why check 4 exists.
+6. **`_get` JOINS THE RESTORATION CHECK** — after the drill, the honest one is
+   proved back, not assumed.
+7. **NOT ONE BYTE OF THE PRODUCTION HALF CHANGES, PROVED TWO WAYS AND NEVER
+   ASSERTED:** every diff hunk at or after the `__main__` line, **and** the
+   sha256 of the production half still `d2cd1b58373d2fcb`.
+8. **THE GATE MUST NOT HANG AND MUST NOT LEAK.** The server is shut down before
+   the gate ends, its thread is a daemon so no failure anywhere can wedge the
+   process, and the whole run stays under a minute.
+9. **EVERY CHECK GREEN, INCLUDING ALL SEVENTEEN SABOTAGES, RUN TWICE** — once
+   normally and once at `TZ=UTC0`.
+10. **THE ORIGINAL FAULTS ARE RE-RUN AGAINST THE REPAIR.** X15, X16 and X17 are
+    re-applied as **REAL TEXT EDITS** to a copy of the repo outside the repo —
+    not as in-memory swaps — and each must now turn the gate **RED and exit 1**.
+    **A repair is not certified by the drill it ships with; it is certified by
+    the attack that beat the old one.**
+
+## WHAT THIS REPAIR DELIBERATELY DOES NOT DO
+
+- **It does not touch the production half.** Everything lives inside `__main__`.
+- **It does not make the live Binance check stricter.** R-058's doubts 3 and 4 —
+  the unmeasured 30-minute staleness limit and the unmeasured 1.0-point live
+  tolerance — **stay open and stay unmeasured.** This repair is about the
+  telephone, not about the numbers it carries.
+- **It repairs none of R-061 to R-064.** They are CATEGORY B and they wait for
+  the pile.
+- **It cannot prove Binance's own figures are honest**, and it cannot see an
+  endpoint that answers today and rate-limits next week (R-056).
