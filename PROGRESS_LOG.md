@@ -12978,3 +12978,168 @@ R-057 about checks that count only what their author thought of. It was replaced
 before it ever ran, with `door_thread.is_alive()` and `socket.fileno() == -1`,
 both of which can and do say no. **It was caught by re-reading my own work, not
 by any machine, which is precisely the complaint in R-065.**
+
+---
+
+# 2026-08-18 (night) — **THE COMMANDER GRANTED HIS SECOND EXEMPTION EVER, IN WORDS, AND GATE 4.1 IS DECLARED. NO `.py` IN THIS COMMIT.**
+
+*Same session, third part. Nothing was built and nothing was measured. This
+entry exists to record a ruling and to set a bar before the thing it measures
+exists.*
+
+## THE EXEMPTION, VERBATIM, BECAUSE ONLY HE CAN GRANT ONE AND ONLY OUT LOUD
+
+> *"OK SO WRITE NEXT SESSION ORDER AND ITS THE ONY EXEMPTION FOR NEXT SESSION IT
+> WILL NOT ATTACK YOUR FIX AND IT BUILDS THE NEXT SESSION AND IN NEXT SESSION
+> ORDER AFTER BUILD IT WOULD BE SAME THAT NEXT SESSION WILL ATTACK THE BUILD AND
+> SO ON"*
+
+**WHAT IT MEANS, WRITTEN DOWN SO NOBODY HAS TO INTERPRET IT LATER:**
+
+1. **The twenty-third generation does NOT do Part 1.** It does not attack
+   GATE 3.5-R1. It builds.
+2. **The exemption is ONE SESSION ONLY and it dies with that session.** The
+   generation after it attacks what the twenty-third built, and the rhythm
+   resumes forever — *"and so on"* are his words.
+3. **NO SESSION MAY GRANT ITSELF ONE, AND NO SESSION MAY GRANT ONE TO THE
+   SESSION AFTER IT.** This is the second exemption in the ship's history; the
+   first was 2026-08-11 and it was also his, also in words.
+
+**THE COST OF IT IS NAMED HERE RATHER THAN LEFT TO BE DISCOVERED.** He was told,
+before he ruled, that R-060 was found, graded and repaired by one mind and that
+nobody had checked any of the three. **He ruled anyway, which is his right, and
+the consequence is that R-066 goes UN-ATTACKED for at least one more
+generation.** It is not cleared, it is not closed, and it is carried in
+`REVIEW_QUEUE.md` and in the orders so it cannot quietly fall off. **A deferred
+doubt is not a resolved one.**
+
+## WHAT THE NEXT SESSION BUILDS
+
+**PHASE 4 — `cockpit/carry.py`, THE CARRY MONITOR.** `EXECUTION_PLAN.md` line
+271. Reads funding rates for the three perps, works out what a delta-neutral
+carry (long spot, short perp) pays annualised, and prints it with the risk
+caveats verbatim. **An instrument, never a signal.**
+
+---
+
+# **>>> GATE 4.1 — DECLARED HERE, BEFORE ONE LINE OF `cockpit/carry.py` EXISTS, BY A SESSION THAT WILL NOT BUILD IT.**
+
+**THIS IS THE GOOD SHAPE AND IT IS WORTH SAYING WHY.** GATE 3.5 was the only bar
+on this ship declared by a session that then stopped — and it was the bar that
+held up best under attack, because not a word of it could be reinterpreted to
+match what got built. **This one is declared the same way.** The plan's own line
+for Phase 4 is a single sentence — *"readout matches the exchange's own
+displayed funding within rounding"* — which is far below what the last four
+instruments were held to. **It is replaced by the fourteen conditions below, and
+the plan's sentence survives inside condition 3.**
+
+## FIRST, THE FIVE DESIGN DECISIONS. DECIDE THEM BEFORE CODING, NOT AFTER.
+
+**D1 — WHICH RATE, AND OVER WHAT WINDOW. THIS IS THE BIGGEST HONESTY TRAP IN THE
+WHOLE INSTRUMENT.** One eight-hour funding print of 0.05% annualises to about
+**54% a year**, a number that will never persist and that would sit on the Brief
+looking like a fortune. **A single snapshot may NOT be annualised.** The readout
+is built on an **average of the SETTLED rates over a stated lookback window**,
+and **the window is named on the line in the Commander's sight** — "averaged
+over the last 7 days" or whatever the builder chooses and defends. The settled
+history is `/fapi/v1/fundingRate`, which this ship has already MEASURED as
+serving back to contract inception, free and keyless.
+
+**D2 — THE SIGN. GET THIS BACKWARDS AND THE BRIEF PRINTS THE OPPOSITE OF THE
+TRUTH.** Positive funding means longs pay shorts. The carry position is long
+spot and **SHORT** the perp, so **positive funding means the carry EARNS and
+negative funding means it COSTS.** This is the funding instrument's original
+sin wearing new clothes, and Gate 3.2's check (b) was written for exactly it.
+
+**D3 — SIMPLE, NOT COMPOUNDED, AND SAID SO.** Three settlements a day, 1,095 a
+year. The readout is the average rate times 1,095. **Compounding assumes the
+proceeds are reinvested into the same trade, which is an assumption about the
+reader.** The line says which one it is.
+
+**D4 — IT IS A NUMBER BEFORE COSTS AND MUST SAY SO.** Spot fees, perp fees, the
+spread, and capital tied up on both legs at once. **A carry figure with no cost
+warning is closer to a sales pitch than a readout.**
+
+**D5 — FIXED ORDER, NEVER SORTED.** BTC, ETH, SOL, in that order, always.
+**Sorting the three by which pays most IS a recommendation**, however carefully
+the words around it are chosen. And Law 2: this compartment owns its own source,
+its own symbol mapping and its own doorway — **it does not import
+`cockpit/funding.py`**, so either instrument can be killed without touching the
+other. **The cost of that is named: two instruments will now call the same host
+each morning, which is R-056's territory.**
+
+## THE BAR. FOURTEEN CONDITIONS. ALL OF THEM, OR IT IS A FAIL.
+
+1. **ONE DOORWAY, `section_text()`, WHICH NEVER RAISES AND NEVER PRINTS.** It
+   RETURNS. Every input resolved from `None` **in the body**, never frozen into
+   the signature — `cockpit/whales.py` is the worked example.
+2. **EXACT EQUALITY ON BYTES THE GATE COMPOSED ITSELF.** The gate types out
+   Binance's JSON in the shape it really sends, hands the same bytes to the
+   doorway, and demands the WHOLE block match a copy typed out in the gate,
+   character for character. **"The words are present" is the bar S14 walked
+   straight through and it appears nowhere.**
+3. **THE ARITHMETIC IS CHECKED AGAINST A SECOND, INDEPENDENT CALCULATION TYPED
+   OUT IN THE GATE** — never by calling the helper under test. **And the plan's
+   own sentence is folded in here: one real reading must match the exchange's
+   own displayed funding within rounding.**
+4. **>>> THE SIGN IS PROVED AGAINST AN INDEPENDENT BINANCE SURFACE, AND THIS IS
+   THE CONDITION THAT MATTERS MOST.** Not against this file's own constant, not
+   against its own comment. A worked example is written into the gate in plain
+   words — *"funding is positive, so longs are paying shorts, so a position that
+   is SHORT the perp RECEIVES, so the carry is a PLUS"* — and the printed line
+   must agree with it. **Printing "the carry pays 11%" when it in fact costs 11%
+   is the single worst thing this instrument can do, and no "a number appeared"
+   check would catch it.**
+5. **THE WINDOW IS PROVED TO BE A WINDOW.** Feed the doorway a known run of
+   settled rates and require the printed figure to be the average of exactly the
+   right ones — and require the window to be **named on the line**. A run where
+   one settlement is missing, and a run where the venue returns fewer rows than
+   asked for, are both named absences, never a quiet short average.
+6. **EVERY THRESHOLD TESTED AT THE EXACT VALUE WHERE IT TURNS OVER**, and one
+   step either side. R-054 paid for this rule.
+7. **EVERY FAILURE NAMED SEPARATELY. SILENCE IS FORBIDDEN.** A timeout, an HTTP
+   status, an unreadable reply, a reply that is not a list, an empty list and a
+   missing field are six different names. An asset whose reading failed still
+   gets its row — **B7's shape is an asset that quietly vanishes.**
+8. **A STALE-BUT-PERFECT READING IS REFUSED WITH ITS OWN STAMP.** Blockworks
+   answered 200 with fifty beautiful stories 209 days old.
+9. **>>> THE REAL TRANSPORT IS UNDER A CHECK FROM BIRTH, NOT RETROFITTED.** The
+   door-server check built into `cockpit/whales.py` on 2026-08-18 — the gate
+   stands up its own HTTP server on `127.0.0.1`, calls the doorway with
+   `base_url` pointing at it and **no transport argument**, and judges **both**
+   what was asked for (against tuples typed out in the gate) and what came back.
+   **COPY IT. R-060 cost a session; this instrument does not get to repeat it.**
+10. **DOOR 3.** A FRESH INTERPRETER imports the module, calls the doorway three
+    ways and shuts down, and its TOTAL output must be empty. A timeout is a
+    FAILURE, never a quiet pass.
+11. **A SABOTAGE DRILL FROM BIRTH, PERMANENT, ON EVERY RUN.** Every break
+    **PROVED TO CHANGE WHAT SOMEBODY READS** before its verdict counts, on the
+    channel it really affects. **ANY BREAK REPORTED `INERT` IS A FAIL.** At
+    minimum the drill must include: **the sign flipped**; **the window
+    shortened to one settlement**; **simple silently turned into compounded**;
+    **the cost warning quietly dropped**; **the risk caveats reworded**; **a
+    failed reading dropped silently**; **the three assets sorted by which pays
+    most**; and **ADVICE printed while the returned block stays byte-identical**
+    (S15's and W10's shape, witnessed at the file descriptor, not at the block).
+12. **THE CAVEATS ARE VERBATIM AND UNCONDITIONAL.** Exchange counterparty risk,
+    funding can flip negative, capital needed on both legs — **every run, not
+    only when the number is large.** The line **never** says "do it" and never
+    ranks. `EXECUTION_PLAN.md`'s own words: *"the carry currently pays X%/yr IF
+    you run it"*.
+13. **RUN TWICE — once normally and once with `TZ=UTC0`** — both exit 0, both
+    0 red, and the tick sequences compared by machine.
+14. **THE BRIEF IS TOUCHED BY AS FEW LINES AS POSSIBLE AND THE CONFINEMENT IS
+    PROVED, NEVER ASSERTED:** the wiring into `cockpit/brief.py` is named
+    line by line in the log, and `cockpit/carry.py`'s own production half is
+    separated from its gate at the `__main__` line with a sha256 recorded for
+    whoever comes next.
+
+## WHAT GATE 4.1 DELIBERATELY DOES NOT ASK FOR
+
+- **No Lab gate.** `EXECUTION_PLAN.md` is explicit: this is a readout, not a
+  signal, so it does not go through the Lab and it can never occupy one of
+  Phase 6's three slots, which are locked BY NAME.
+- **No recorder, no CSV, no archive.** Reading only.
+- **It does not repair anything in `cockpit/funding.py`** and does not touch it.
+- **It does not clear R-066 or any Category B item.** The pile stays at
+  thirty-five.

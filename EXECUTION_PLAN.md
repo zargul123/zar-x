@@ -435,6 +435,60 @@ answer, built into this plan:
 
 # CURRENT POSITION MARKER (update this line each session)
 
+## **>>> 2026-08-18 (night): PHASE 3 IS CLOSED. THE SHIP MOVES TO PHASE 4 — THE CARRY MONITOR. GATE 4.1 IS DECLARED AND COMMITTED WITH NO CODE, AND THE COMMANDER HAS GRANTED HIS SECOND EXEMPTION EVER.**
+
+**WHERE THE SHIP IS.** Unchanged since the repair earlier today. Every gate
+green; `cockpit/whales.py` carries GATE 3.5-R1 at 107 checks, 0 red, twice.
+**Nothing was built in this part of the session and nothing was measured.**
+
+**THE RULING, VERBATIM, BECAUSE ONLY HE CAN GRANT ONE AND ONLY IN WORDS:**
+
+> *"OK SO WRITE NEXT SESSION ORDER AND ITS THE ONY EXEMPTION FOR NEXT SESSION IT
+> WILL NOT ATTACK YOUR FIX AND IT BUILDS THE NEXT SESSION AND IN NEXT SESSION
+> ORDER AFTER BUILD IT WOULD BE SAME THAT NEXT SESSION WILL ATTACK THE BUILD AND
+> SO ON"*
+
+**THE TWENTY-THIRD GENERATION DOES NOT DO PART 1. IT BUILDS
+`cockpit/carry.py`.** The exemption is one session, one thing, and **it dies
+with that session** — *"and so on"* are his words, and the rhythm resumes with
+the generation after it.
+
+**GATE 4.1 IS DECLARED** in `PROGRESS_LOG.md` under 2026-08-18 (night):
+**five design decisions and fourteen conditions, committed with no `.py` file**,
+by a session that will not build the thing. That is the shape GATE 3.5 had, and
+GATE 3.5 is the bar that survived attack best.
+
+**THE PLAN'S OWN ONE-LINE GATE FOR PHASE 4 HAS BEEN SUPERSEDED, AND IT IS SAID
+OUT LOUD RATHER THAN DONE QUIETLY.** `EXECUTION_PLAN.md` line 279 says only
+*"readout matches the exchange's own displayed funding within rounding"*. That
+is far below what the last four instruments were held to, so it now lives inside
+condition 3 of a fourteen-condition bar. **The plan's sentence was not deleted
+and was not weakened — it was absorbed.**
+
+**WHAT IS BROKEN OR UNPROVEN, STATED AS THE MARKER MUST STATE IT:**
+
+- **R-066 IS OPEN AND UN-ATTACKED, BY HIS RULING.** One mind found R-060, graded
+  it and repaired it. **A deferral is not a resolution**, and the sentence
+  "R-066 is still un-attacked" is carried in the orders so it cannot fade.
+- **THE CARRY MONITOR IS THE MOST DANGEROUS LINE THIS SHIP HAS EVER PRINTED, AND
+  NOT FOR A TECHNICAL REASON.** Everything on the Brief so far describes: a
+  price, a mood, a headline. This one prints a percent-a-year figure that reads
+  like an opportunity. **The caveats are mandatory and verbatim in the gate, the
+  three assets may never be sorted by which pays most, and whether the whole
+  line still reads as information is the COMMANDER'S judgement, not a
+  session's.**
+- **THE SIGN IS THE TECHNICAL RISK.** Positive funding means longs pay shorts,
+  and the carry is short the perp, so positive funding EARNS. **Printing "pays
+  11%" when it costs 11% is the worst thing this instrument can do**, which is
+  why condition 4 requires the sign proved against an independent Binance
+  surface.
+- **A SINGLE FUNDING PRINT MAY NOT BE ANNUALISED** — one 8-hour reading of 0.05%
+  becomes 54% a year on paper. **The readout averages settled rates over a
+  stated window and names the window on the line.**
+- **THE CATEGORY B PILE IS THIRTY-FIVE.**
+
+---
+
 ## **>>> 2026-08-18 (later): THE COMMANDER RULED ON R-060 AND THE REPAIR IS BUILT. GATE 3.5-R1 PASSED — 107 CHECKS, 0 RED, TWICE. THE ATTACK THAT BEAT THE OLD GATE THIS MORNING NOW TURNS IT RED.**
 
 **WHERE THE SHIP IS.** Every gate green. `cockpit/whales.py` is the only file

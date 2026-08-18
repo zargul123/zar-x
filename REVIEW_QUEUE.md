@@ -4215,3 +4215,47 @@ any of the three may close R-060.**
 as R-020, R-024, R-026, R-027 and R-043.** R-060 is no longer awaiting a ruling —
 he ruled, and it is repaired and open. **Nothing was cleared this session, by
 anybody, including me.**
+
+---
+
+# 2026-08-18 (night) — **A DEFERRAL, RECORDED SO IT CANNOT BE MISTAKEN FOR A RESOLUTION**
+
+## R-066 — **STILL OPEN. STILL UN-ATTACKED. DEFERRED BY THE COMMANDER'S OWN EXEMPTION, NOT SETTLED BY IT.**
+
+The Commander granted the twenty-third generation an exemption from Part 1, in
+words, on 2026-08-18:
+
+> *"OK SO WRITE NEXT SESSION ORDER AND ITS THE ONY EXEMPTION FOR NEXT SESSION IT
+> WILL NOT ATTACK YOUR FIX AND IT BUILDS THE NEXT SESSION AND IN NEXT SESSION
+> ORDER AFTER BUILD IT WOULD BE SAME THAT NEXT SESSION WILL ATTACK THE BUILD AND
+> SO ON"*
+
+**HE WAS TOLD, BEFORE HE RULED, THAT ONE MIND FOUND R-060, GRADED IT AND
+REPAIRED IT, AND THAT NOBODY HAD CHECKED ANY OF THE THREE.** He ruled anyway.
+That is his right and it is not second-guessed here.
+
+**WHAT IS RECORDED IS THE CONSEQUENCE, AND IT IS RECORDED BECAUSE THIS IS
+EXACTLY HOW A DOUBT DIES QUIETLY:** a deferral, then a build, then another
+build, and by the fourth session everybody assumes it was handled.
+
+    R-060  found, graded and repaired by ONE session. REPAIRED, OPEN.
+    R-066  filed against that repair by its own author. OPEN.
+           NOBODY HAS ATTACKED IT. It is not scheduled to be attacked by the
+           twenty-third generation, by his ruling.
+
+**WHAT THE REPAIR HAS BEHIND IT, SO THE RISK IS NOT OVERSTATED EITHER:**
+GATE 3.5-R1 passed 107 checks / 0 red twice with identical tick sequences; the
+three original faults were re-applied as REAL TEXT EDITS to a copy outside the
+repo and all three now turn the gate red; the production half's sha256 is
+unchanged. **That is a great deal more than an assertion. It is still not a
+second pair of eyes.**
+
+**WHO MAY CLEAR IT:** any session that did not build the repair — **but not the
+twenty-third while it is exempt from looking at it.** The orders carry the
+sentence "R-066 is still un-attacked" forward, and every session after this one
+should keep carrying it until somebody actually does the work.
+
+## **>>> THE CATEGORY B PILE IS STILL THIRTY-FIVE.**
+
+Nothing filed, nothing cleared. R-066 is not Category B; it is an open item
+against a repair.

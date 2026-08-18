@@ -1,33 +1,45 @@
-# ZAR X — **YOUR JOB 1 IS TO ATTACK THE REPAIR THE LAST SESSION BUILT. IT FOUND THE FAULT, GRADED IT AND FIXED IT — ALL THREE — AND FILED THAT AGAINST ITSELF AS R-066. YOU DO NOT HAVE AN EXEMPTION AND MAY NOT WRITE YOURSELF ONE.**
+# ZAR X — **YOU HAVE AN EXEMPTION FROM PART 1. THE COMMANDER GRANTED IT HIMSELF, IN WORDS, AND IT IS THE SECOND ONE IN THIS SHIP'S HISTORY. YOU DO NOT ATTACK THE LAST SESSION'S REPAIR. YOU BUILD. AND THE EXEMPTION DIES WITH YOU.**
 
-*Written 2026-08-18 by the twenty-second generation, which attacked
+*Written 2026-08-18 (night) by the twenty-second generation, which attacked
 `cockpit/whales.py`, found two breaks walking through a gate reporting
-`100 checks, 0 red`, took the Commander's ruling — "OK CORRECT IT" — and built
-GATE 3.5-R1 under a bar it committed alone, with no code in that commit.*
+`100 checks, 0 red`, was ordered to correct it, and built GATE 3.5-R1 under a
+bar it committed alone. **It is not the session you are building for. It is the
+session whose work you have been excused from checking.***
 
 ---
 
 # **>>> READ THIS FIRST, IN PLAIN WORDS**
 
-    YOUR SESSION:  PART 1 — **ATTACK GATE 3.5-R1**, the new check in
-                            `cockpit/whales.py` below its `__main__` line.
-                            **The same mind wrote the attack in the morning
-                            and the defence in the afternoon.** That is
-                            R-066 and it is your whole first job.
-                   PART 2 — **CONDITIONAL, AND IT IS NOT A NEW INSTRUMENT.**
-                            Phase 3's five are DONE. See JOB 2.
+    YOUR SESSION:  PART 1 — **NONE. YOU ARE EXEMPT.** Do not attack
+                            GATE 3.5-R1. Do not "just have a quick look".
+                            **Build.**
+                   PART 2 — **BUILD `cockpit/carry.py`, THE CARRY MONITOR.**
+                            Phase 4. The gate is already declared and
+                            committed — you did not write it and you may not
+                            reinterpret it.
 
-**THE COMMANDER'S STANDING RULE, IN HIS OWN WORDS, 2026-08-11:**
+## THE EXEMPTION, IN HIS OWN WORDS, 2026-08-18
 
-> *"in next session when he write session orders and well after others too every
-> time new session has to attack the build of previous session."*
+> *"OK SO WRITE NEXT SESSION ORDER AND ITS THE ONY EXEMPTION FOR NEXT SESSION IT
+> WILL NOT ATTACK YOUR FIX AND IT BUILDS THE NEXT SESSION AND IN NEXT SESSION
+> ORDER AFTER BUILD IT WOULD BE SAME THAT NEXT SESSION WILL ATTACK THE BUILD AND
+> SO ON"*
 
-**HE HAS GRANTED EXACTLY ONE EXEMPTION EVER AND SAID SO IN WORDS. YOU DO NOT
-HAVE ONE.** Only he can give one, and only out loud.
+**THREE THINGS FOLLOW AND NONE OF THEM IS OPTIONAL:**
+
+1. **It is YOURS ALONE and it covers ONE THING** — attacking GATE 3.5-R1.
+2. **IT DIES WITH YOU.** *"and so on"* are his words. **The session after you
+   attacks what YOU build, and you write that into their orders.** You may not
+   pass your exemption on, and you may not grant one.
+3. **IT DEFERS A DOUBT; IT DOES NOT RESOLVE ONE.** **R-066 stays OPEN and
+   UN-ATTACKED** — one mind found R-060, graded it and repaired it, and nobody
+   has checked any of the three. He was told that plainly before he ruled. **Say
+   the words "still un-attacked" when you report to him, so it does not quietly
+   become a thing everyone assumes was handled.**
 
 ---
 
-# THE BRIEF, IN PLAIN WORDS — READ THIS BEFORE ANYTHING ELSE
+# THE BRIEF, IN PLAIN WORDS
 
 ## Where the ship is
 
@@ -44,135 +56,124 @@ HAVE ONE.** Only he can give one, and only out loud.
                                 107 checks, SEVENTEEN sabotages, all CAUGHT
     vault INTACT 6 of 6 · Brief 3/3, FIVE Context Deck lines · lab/ untouched
 
-**PHASE 3'S CONTEXT DECK IS COMPLETE — FIVE INSTRUMENTS OF FIVE. THERE IS NO
-SIXTH AND THE PLAN DOES NOT HAVE ONE.**
+**PHASE 3 IS COMPLETE — FIVE CONTEXT DECK INSTRUMENTS OF FIVE. PHASE 4 IS ONE
+INSTRUMENT AND YOU ARE BUILDING IT.**
 
-## What the last session did, in seven lines
+## What the last session did, in six lines
 
 1. **ATTACKED `cockpit/whales.py`** and found **two breaks inside `_get`** — the
    four lines that are the only code on this ship that actually speaks to
    Binance — **each walking through `GATE 3.5 PASSED — 100 checks, 0 red`.**
-   One made ETH and SOL print Bitcoin's numbers; one made "all accounts" print
-   the top-account figure for every coin.
-2. **THE COMMANDER RULED: CORRECT IT.**
-3. **THE BAR WAS DECLARED AND COMMITTED ALONE** — commit `cacf355`, one document
-   changed, no `.py` in it. `git show --stat cacf355` is the proof.
-4. **THE REPAIR: the gate stands up an HTTP server of its own on `127.0.0.1`**
-   and makes the REAL `_get` walk to it over a real socket, judging **what it
-   asked for** (compared to six tuples typed out in the gate) beside **what came
-   back** (held to the same block the fake transport must produce). **No Binance
-   request is made by the new check.**
-5. **THREE NEW PERMANENT SABOTAGES — W15, W16, W17.** W17 was INERT in the
-   morning and its verdict was thrown away; it is provable now because the
-   gate's own server answers an unknown request with **HTTP 500**.
-6. **CERTIFIED BY THE ATTACK, NOT BY THE DRILL.** X15, X16 and X17 re-applied as
-   REAL TEXT EDITS to a copy outside the repo: **exit 1 with 4, 3 and 2 red**,
-   after the repaired control passed first.
-7. **THE CATEGORY B PILE IS THIRTY-FIVE.** Nothing was cleared by anybody.
+2. **The Commander ruled: correct it.** The bar was declared and committed alone
+   (`cacf355`, no `.py` in it), then built.
+3. **THE REPAIR: the gate stands up an HTTP server of its own on `127.0.0.1`**
+   and makes the REAL `_get` walk to it, judging **what it asked for** against
+   tuples typed out in the gate, beside **what came back**. **>>> YOU ARE
+   COPYING THIS. It is condition 9 of your gate.**
+4. **CERTIFIED BY THE ATTACK, NOT THE DRILL** — the three original faults
+   re-applied as real text edits: exit 1 with 4, 3 and 2 red.
+5. **The Brief went 2/3 once** — a TwelveData read timeout on BTC — **and 3/3 on
+   an immediate re-run.** A transient. The fail-safe named the dead asset.
+6. **THE CATEGORY B PILE IS THIRTY-FIVE.** Nothing was cleared by anybody.
 
 ---
 
-# **JOB 1 — ATTACK GATE 3.5-R1. THIS IS LAYER 3 AND ITS AUTHOR CANNOT DO IT.**
+# **JOB 1 — BUILD `cockpit/carry.py`, THE CARRY MONITOR (PHASE 4)**
 
-## WHERE ITS AUTHOR THINKS IT IS WEAKEST — **AND THEREFORE PROBABLY NOT WHERE THE FINDING IS**
+## WHAT IT IS, IN PLAIN WORDS, BECAUSE YOU WILL HAVE TO EXPLAIN IT TO HIM
 
-Read **R-066** in full. In short:
+There is a way to earn in crypto that needs no view on direction at all: hold
+the coin, and at the same time hold an equal, opposite bet on the futures
+market. The two cancel out, so the price can do what it likes. But every eight
+hours the exchange makes one side of that futures bet pay the other. **The Carry
+Monitor works out what that stream adds up to over a year and prints it.** It is
+a readout. It never tells him to do it.
 
-  * **The new check proves the trip to a server that is NOT Binance.** Redirects,
-    gzip, chunked encoding, a 429 with `Retry-After`, a connection reset
-    mid-body — **my server is polite in ways the real venue may not be.**
-  * **The three sabotages are the three faults its author already knew about.**
-    He wrote the attack in the morning and the defence in the afternoon.
-    **The fourth fault in `_get` is the one that matters.**
-  * **This gate now BINDS A PORT and starts a THREAD.** Nobody has run it behind
-    a firewall, with a proxy genuinely configured, or twice at the same instant.
-  * **`DOOR_BODY = dict(GOLD)`** reuses the fixture payloads on purpose, so a
-    fault in those payloads is now invisible in two places instead of one.
+## >>> THE GATE IS ALREADY DECLARED. GO AND READ IT BEFORE YOU WRITE ANYTHING.
 
-## THINGS WORTH TRYING THAT ITS AUTHOR DID NOT
+**`PROGRESS_LOG.md`, the entry of 2026-08-18 (night): GATE 4.1 — five design
+decisions and fourteen conditions.** It was declared and committed **before this
+instrument existed, by a session that will not build it**, exactly as GATE 3.5
+was — and GATE 3.5 is the bar that held up best under attack, because not a word
+of it could be bent to match what got built.
 
-    · run TWO copies of the gate at the same moment - does either wedge?
-    · set HTTP_PROXY / HTTPS_PROXY in the environment and run it. The gate
-      sets NO_PROXY inside itself and puts it back; nobody has tested the
-      path where a proxy is really configured, or whether it is restored
-      when a check above it raises.
-    · make the gate's own server answer a REDIRECT, or gzip, or hang past
-      the timeout - does `_get` behave, and does anything notice?
-    · kill the server thread mid-run and see what the gate says.
-    · does the gate still pass with no network at all? It should - the new
-      check is local - but the live check (l) will go red, and the two
-      failures must be TELLABLE APART.
-    · read `door_run` and `door_refusal` and ask whether the recorded log
-      could ever be read STALE - it is reset at the top of each call, and
-      the drill calls them repeatedly.
-    · the shutdown check: force an exception between the server starting
-      and the shutdown, and see whether a listener is left behind.
+**YOU MAY NOT LOWER IT, REINTERPRET IT, OR DECIDE A CONDITION "DOES NOT APPLY".**
+If you believe a condition is wrong, **say so to the Commander out loud and let
+him rule** — never quietly.
 
-## WHAT YOU STILL OWE, WHATEVER YOU FIND
+**THE FOUR THINGS IN IT MOST LIKELY TO BE FUDGED, NAMED HERE SO THEY CANNOT BE:**
 
-1. **PROVE THE SHIP IS ALIVE FIRST.** All TEN invocations, output to a file,
-   red counted BY MACHINE **three ways** — the tick character, the first word of
-   a line, and the phrase "GATE ... FAILED" — **and then READ any hit with your
-   own eyes.** `collection_guard.py` prints `OK  `/`FAIL `, not ticks;
-   `fear_greed.py` has FAILURE inside its own pass text; and **the funding
-   gate's prose contains the word "escaped" at the start of a line, which fooled
-   the last session's counter within the hour.**
-2. **WRITE YOUR BARS DOWN BEFORE YOU RUN ANYTHING**, in a scratch file, so you
-   cannot move them afterwards.
-3. **COPY THE WHOLE REPO OUTSIDE THE REPO** (39 MB) and break things THERE.
-   **RUN THE UNTOUCHED CONTROL FIRST** — that is Step 0.1 and it has caught a
-   false finding before.
-4. **PROVE EVERY BREAK CHANGES WHAT SOMEBODY READS** before its verdict counts.
-   The last session threw away two of its own escapes under this rule.
-5. **FILL IN THE FINDING REPORT BEFORE REPAIRING ANYTHING.** The Commander's
-   Three Questions come first and can end it on their own.
-6. **"I ATTACKED IT HARD AND FOUND NOTHING" IS A SUCCESS.** Say it plainly and
-   clear R-066. **DO NOT MANUFACTURE A DEFECT TO JUSTIFY A SESSION.**
-7. **FILE A REVIEW ITEM AGAINST YOUR OWN WORK AND LEAVE IT OPEN.**
-8. `git status` clean when you finish.
+  * **D1 — A SINGLE FUNDING PRINT MAY NOT BE ANNUALISED.** One 8-hour reading of
+    0.05% becomes **54% a year** on paper, and that number would be a lie
+    sitting on his Brief. **Average the SETTLED rates over a stated window and
+    NAME THE WINDOW ON THE LINE.**
+  * **CONDITION 4 — THE SIGN IS PROVED AGAINST AN INDEPENDENT BINANCE SURFACE.**
+    Positive funding means longs pay shorts; the carry is SHORT the perp, so
+    positive funding **earns**. **Printing "pays 11%" when it costs 11% is the
+    worst thing this instrument can do and no "a number appeared" check catches
+    it.**
+  * **CONDITION 9 — THE REAL TRANSPORT UNDER A CHECK FROM BIRTH.** Copy the
+    door-server check out of `cockpit/whales.py`. **R-060 cost a whole session;
+    this instrument does not get to repeat it.**
+  * **CONDITION 11 — EVERY SABOTAGE PROVED TO CHANGE WHAT SOMEBODY READS.**
+    **ANY BREAK REPORTED `INERT` IS A FAIL.** Two INERT verdicts were thrown
+    away on 2026-08-18 and the session said so rather than counting them.
 
-**YOU MAY CLOSE R-060** — you neither found it, graded it nor fixed it — **but
-only after you have satisfied yourself the repair really holds. You may NOT
-clear R-066.**
+## WHAT YOU STILL OWE
+
+1. **PROVE THE SHIP IS ALIVE FIRST.** All TEN invocations, output to a file, red
+   counted BY MACHINE **three ways** — the tick character, the first word of a
+   line, and the phrase "GATE ... FAILED" — **then READ any hit with your own
+   eyes.** `collection_guard.py` prints `OK  `/`FAIL `, not ticks;
+   `fear_greed.py` has FAILURE inside its own pass text; **the funding gate's
+   prose contains the word "escaped" at the start of a line and it fooled the
+   last session's counter within the hour.**
+2. **NAME YOUR AWKWARD EDGE CASES IN `PROGRESS_LOG.md` BEFORE YOU WRITE CODE**,
+   not after discovering them. GATE 4.1 names five; **find your own as well.**
+3. **BUILD. Confine the change and PROVE the confinement two ways** — diff hunk
+   line numbers, and a sha256 of each production half before and after.
+4. **RUN THE GATE. Every check green, every sabotage CAUGHT.** A failing gate is
+   never committed and never called "mostly passed".
+5. **RUN THE BRIEF AND READ IT.** The new line must be on it, and the assets
+   must still report. **If BTC goes offline again, say so — it did once today
+   and recovered.**
+6. **FILE A REVIEW ITEM AGAINST YOUR OWN WORK AND LEAVE IT OPEN.**
+7. `git status` clean when you finish.
+
+**YOU MAY CLOSE R-060** — you neither found it, graded it nor fixed it. **YOU MAY
+NOT CLEAR R-066**, and under your exemption you are not even looking at it.
 
 ---
 
-# **JOB 2 — CONDITIONAL. THERE IS NO INSTRUMENT LEFT TO BUILD.**
+# **JOB 2 — ONLY IF JOB 1 IS FINISHED AND GREEN**
 
-1. **>>> THE BRIEF FAILED ONCE AND THEN RECOVERED ON 2026-08-18 — WATCH IT.**
-   The first run after the repair printed **2/3**: TwelveData timed out reading
-   BTC and the Yahoo fallback returned a `JSONDecodeError`. **An immediate
-   re-run was 3/3**, so it was a transient, and the fail-safe named the dead
-   asset instead of hiding it. **It is not the whale watch and not the repair.**
-   **Run the Brief early in your session and read its output.** If BTC goes
-   offline more than once, that is your session — and item 12 below, the
-   TwelveData key awaiting rotation since Phase 2, is the first suspect.
-2. **R-049, AND SAY "FOURTH TIME" OUT LOUD.** The X1 repair in `cockpit/news.py`
+**A half-built instrument is worse than no instrument. If you run short, finish
+Job 1 properly and leave Job 2 entirely.**
+
+1. **R-049, AND SAY "FOURTH TIME" OUT LOUD.** The X1 repair in `cockpit/news.py`
    is self-marked — the session that found the fault wrote the fix and the
-   checks that say the fix works — and it runs on every headline he sees. The
-   measurement that argues for leaving it: 136 real headlines, not one carrying
-   markup. **Offer it to him; do not decide it.**
-3. **`cockpit/brief.py` STILL HAS NO GATE.** He ruled: not now, before going
-   live. **That is the same moment the whole Category B pile is cleared, and the
-   pile is THIRTY-FIVE.** Keep saying the number.
-4. **R-058's DOUBTS 3 AND 4 ARE STILL UNMEASURED** and both are an afternoon's
-   work: how long Binance really goes between bucket updates (`MAX_AGE_MIN =
-   30`), and how far the BTC figure really moves between two calls seconds apart
-   (the live tolerance of 1.0 point). **Retiring either would be real progress.**
-
-**IF PART 1 FINDS SOMETHING SERIOUS, DO JOB 1 AND STOP.**
+   checks that say the fix works — and it runs on every headline he sees every
+   morning. The measurement that argues for leaving it: 136 real headlines, not
+   one carrying markup. **Offer it; do not decide it.**
+2. **R-058's DOUBTS 3 AND 4 ARE STILL UNMEASURED** and each is an afternoon:
+   how long Binance really goes between bucket updates (`MAX_AGE_MIN = 30`), and
+   how far the BTC figure really moves between two calls seconds apart (the
+   1.0-point live tolerance). **Retiring either is real progress.**
+3. **THE CATEGORY B PILE IS THIRTY-FIVE.** Cleared before the ship is used for
+   real, at the same moment `cockpit/brief.py` gets its gate. **Keep saying the
+   number to him.**
 
 ---
 
 # THE RULES THAT APPLY TO WHATEVER YOU DO
 
-(a) **NOTHING THE PILOT READS CHANGES unless that IS the job — prove it two
-    ways, never assert it:** every diff hunk at or after the `__main__` line,
-    AND a sha256 of the production half printed before and after.
+(a) **NOTHING THE PILOT ALREADY READS CHANGES except the few lines that put your
+    new line on the Brief — prove it two ways, never assert it:** every diff
+    hunk at or after the `__main__` line, AND a sha256 of the production half
+    printed before and after.
 
-    **THE RECIPE, RE-CONFIRMED 2026-08-18: the hash is of the prefix BEFORE the
-    `__main__` line, WITHOUT the anchor line, no trailing separator.** On
-    untouched files:
+    **THE RECIPE, RE-CONFIRMED 2026-08-18: sha256 of the prefix BEFORE the
+    `__main__` line, WITHOUT the anchor line, no trailing separator.**
 
         cockpit/fear_greed.py       __main__ 112   bb31626c493a1ac6
         cockpit/funding.py          __main__ 159   95069d1bef8316d7
@@ -181,13 +182,12 @@ clear R-066.**
         cockpit/events.py           __main__ 372   6fc5ce7d67aa8f24
         cockpit/whales.py           __main__ 363   d2cd1b58373d2fcb
 
-    **THE LINE NUMBERS FOR `news`, `events` AND `whales` ARE ONE HIGHER THAN THE
-    OLDER RECORD SAYS — measured 2026-08-18. The hashes are identical, so only
+    **The line numbers for `news`, `events` and `whales` are ONE HIGHER than the
+    older record says — measured 2026-08-18; the hashes are identical, so only
     the counting of the anchor line differed. The measurement wins.**
 
-    **AND `data/open_interest.py` CANNOT BE HASHED THIS WAY AT ALL: the anchor
-    appears TWICE in it**, once for real and once quoted inside its own gate.
-    **Refuse, and prove that file untouched with `git status` instead.**
+    **AND `data/open_interest.py` CANNOT BE HASHED THIS WAY: the anchor appears
+    TWICE in it.** Refuse, and prove it untouched with `git status`.
 
 (b) **THE GATE NEVER READS ITS EXPECTATION OUT OF THE FILE ON TRIAL**, never
     calls the helper under test to judge itself, and **NEVER ASKS THE MODULE
@@ -195,13 +195,12 @@ clear R-066.**
 (c) **THE DRILL IS PERMANENT** — breaks stay in, caught every run, originals
     restored and **the restoration verified, not assumed.**
 (d) **EVERY SABOTAGE PROVED TO CHANGE THE OUTPUT, ON ITS OWN CHANNEL.**
-(e) **RE-RUN THE ORIGINAL FAULT AGAINST ANY REPAIR YOU MAKE.** This is the one
-    that certified GATE 3.5-R1, and a drill alone would not have.
+(e) **RE-RUN THE ORIGINAL FAULT AGAINST ANY REPAIR YOU MAKE.**
 (f) **RUN ALL TEN INVOCATIONS AND READ THEIR OUTPUT before you change anything.**
 (g) **RUN `py_compile` BEFORE THE GATE.**
 (h) **FILE A REVIEW ITEM AGAINST YOUR OWN WORK AND LEAVE IT OPEN.** You may
     clear R-042 through R-065 — **check first whether you are the one who
-    benefits.** **You may not clear R-066.**
+    benefits.** **Not R-066.**
 
 **PASS = every check green including every sabotage CAUGHT. Anything less is a
 FAIL, is not committed as a pass, and is not called "mostly passed."**
@@ -212,63 +211,68 @@ FAIL, is not committed as a pass, and is not called "mostly passed."**
 
 - **`python cockpit\funding.py` GOES RED NEAR A FUNDING SETTLEMENT** (R-021).
   Binance settles **00:00, 08:00, 16:00 UTC**. **Outside a settlement window a
-  red funding gate is a REAL failure.**
-- **`cockpit\whales.py --gate` STILL READS BINANCE LIVE in its live section** —
-  at least seven requests. **The NEW check does not: it talks only to
-  127.0.0.1.** A genuine Binance outage turns the live section red and that is
-  correct.
-- **`cockpit\whales.py --gate` NOW BINDS A LOCAL PORT.** If your machine refuses
-  that, the new checks go red and it is the machine, not the code — **say so
-  rather than repairing the gate.**
+  red funding gate is a REAL failure — and it will matter to you, because your
+  instrument reads the same numbers.**
+- **`cockpit\whales.py --gate` NOW BINDS A LOCAL PORT** as well as reading
+  Binance live. If your machine refuses the port, those checks go red and it is
+  the machine, not the code.
+- **AN `INERT` W15/W16/W17 IN THE WHALE WATCH MEANS THE REAL FAULT IS ALREADY
+  INSTALLED IN THE FILE.** That is the drill talking, not a false alarm.
 - **`cockpit\news.py --gate` MAY PRINT `[no data: <publisher>]` AND STILL PASS.**
   The bar is 3 of 5 publishers and 3 stories.
-- **ANY DRILL PRINTING `INERT` INSTEAD OF `CAUGHT` IS A FAIL** — **except that
-  an INERT W15/W16/W17 now MEANS the real fault is already installed in the
-  file.** That is not a false alarm; it is the drill saying "this break is
-  already here."
 - **S6, F10 AND B1 NO LONGER GO RED.** If any does, it is a regression and
   SERIOUS.
 - **`data/collection_guard.py --gate` MAY GO RED ON CHECK (g) ONCE AND GREEN
   IMMEDIATELY AFTER** (R-041 doubt 3). **Red TWICE in a row is real.**
+- **THE BRIEF WENT 2/3 ONCE ON 2026-08-18** — TwelveData read timeout on BTC,
+  Yahoo fallback `JSONDecodeError` — **and 3/3 on an immediate re-run.** If it
+  happens more than once, item 11 on his desk is the first suspect.
 - **`journal/snapshots_local.csv` WILL BE MODIFIED IN `git status` AND IT IS NOT
   YOU.** Commit it SEPARATELY, labelled as the laptop task's work.
 - **`journal/oi_recorder.log` IS UNTRACKED AND IT IS NOT YOU EITHER.** Still not
-  in `.gitignore`. **Leave it or ignore it deliberately.**
+  in `.gitignore`. Leave it or ignore it deliberately.
 - **THE WEEKLY OPEN-INTEREST TASK COMMITS LOCALLY WITHOUT PUSHING.** Pull, and
   push whatever it left behind.
 
 # **WHAT THE COMMANDER HAS ALREADY RULED — DO NOT ASK HIM AGAIN**
 
-1. **R-060: HE RULED "CORRECT IT" ON 2026-08-18.** It is corrected. **Do not
-   re-ask; do ATTACK the correction.**
-2. **R-054 IS SMALL.** Ruled 2026-08-11. **R-047 AND R-048 ARE SMALL.** Ruled
-   2026-08-05.
-3. **THE DAILY NEWS COUNT ARCHIVE WAITS UNTIL THE WHOLE PROGRAMME IS COMPLETE.**
-4. **`cockpit/brief.py` GETS NO GATE YET** — not now, before going live.
-5. **R-016 IS OFF HIS DESK.** Still not cleared; that is R-022.
-6. **R-019 IS CLEARED BY HIM.** Step 2.2 carries his own wording in
-   `THE_PATTERN.md`. **Read it there before you grade anything.**
-7. **DOOR 3 IS BUILT IN BOTH COCKPIT INSTRUMENTS, THE CALENDAR AND THE WHALE
+1. **YOUR EXEMPTION.** Ruled 2026-08-18, quoted above. **One session, one thing,
+   and it dies with you.**
+2. **R-060: HE RULED "CORRECT IT".** It is corrected. **Not your business this
+   session.**
+3. **R-054 IS SMALL** (2026-08-11). **R-047 AND R-048 ARE SMALL** (2026-08-05).
+4. **THE DAILY NEWS COUNT ARCHIVE WAITS UNTIL THE WHOLE PROGRAMME IS COMPLETE.**
+5. **`cockpit/brief.py` GETS NO GATE YET** — not now, before going live.
+6. **R-016 IS OFF HIS DESK.** Still not cleared; that is R-022.
+7. **R-019 IS CLEARED BY HIM.** Step 2.2 carries his own wording in
+   `THE_PATTERN.md`.
+8. **DOOR 3 IS BUILT IN BOTH COCKPIT INSTRUMENTS, THE CALENDAR AND THE WHALE
    WATCH. R-025 IS CLEARED.** Residue R-033. **`news.py` is the one without it
    (R-046).**
-8. **THE CRYPTOPANIC SIGNUP IS OFF HIS DESK PERMANENTLY.**
-9. **NEWS, THE CALENDAR AND THE WHALE WATCH ARE INFORMATION AND CAN NEVER
-   BECOME SIGNALS.** Phase 6's three slots are locked BY NAME: Turtle/Donchian,
-   funding-rate fade, on-chain cycle thermometer.
+9. **THE CRYPTOPANIC SIGNUP IS OFF HIS DESK PERMANENTLY.**
+10. **THE CONTEXT DECK AND THE CARRY MONITOR ARE INFORMATION AND CAN NEVER
+    BECOME SIGNALS.** **Phase 6's three slots are locked BY NAME:
+    Turtle/Donchian, funding-rate fade, on-chain cycle thermometer. The carry
+    monitor is not one of them and never can be** — `EXECUTION_PLAN.md` says so
+    and GATE 4.1 repeats it.
 
 # READ THESE FIRST
 
 **`THE_PATTERN.md` already told you how a session begins, what every file is
-for, the run environment and the housekeeping that has bitten this ship.**
+for, the run environment and the housekeeping that has bitten this ship. None of
+it is repeated here.**
 
-1. **`PROGRESS_LOG.md`, the LAST THREE entries** — the attack, the gate
-   declaration, and the repair. The file is ~750 KB; do not read it all.
-2. **`REVIEW_QUEUE.md`, the two 2026-08-18 blocks** — R-058's verdict, R-060 to
-   R-066.
-3. **`cockpit/whales.py`** — the production half (1–363) to know what is being
-   protected, then **the new section `(l2)` and the drill** to know what you are
-   attacking.
-4. **`ROADMAP.md`, the two 2026-08-18 measured-fact tables.**
+1. **`PROGRESS_LOG.md`, the entry of 2026-08-18 (night)** — **GATE 4.1, your
+   bar.** Then the two before it, for the R-060 story you are inheriting.
+   The file is ~750 KB; do not read it all.
+2. **`EXECUTION_PLAN.md` line 271 — PHASE 4**, four lines, the source of the
+   job. And the CURRENT POSITION MARKER at the top of that section.
+3. **`cockpit/whales.py`** — **your template.** Read the production half
+   (1–363) for the doorway shape, then the `(l2)` door-server section, which
+   you are copying.
+4. **`cockpit/funding.py`** — it already reads the very numbers you need, and
+   its gate already proved the SIGN once. **Read how, then do it independently:
+   Law 2 says your compartment owns its own source.**
 
 # HOUSEKEEPING THAT HAS ALREADY BITTEN THIS SHIP
 
@@ -277,10 +281,10 @@ for, the run environment and the housekeeping that has bitten this ship.**
 - **EDIT IN BINARY. These `.py` files are CRLF and so are all five documents.**
   **EMIT PAYLOADS AND ANCHORS WITH `repr()`**, and put **no backslash escapes in
   a payload at all** — use `bytes([10])` for a newline.
-- **CHECK ALL YOUR ANCHORS BEFORE WRITING A SINGLE BYTE**, and refuse on any
-  that matches other than exactly once. **Refuse again if the patched file
-  carries one bare newline, and again if the production hash moved.** That is
-  the shape the last patch used and it is the shape to copy.
+- **CHECK ALL YOUR ANCHORS BEFORE WRITING A SINGLE BYTE**, refuse on any that
+  matches other than exactly once, refuse if the patched file carries one bare
+  newline, and refuse if a production hash moved. **That is the shape the last
+  patch used; copy it.**
 - **>>> DO NOT COMPARE LINE ENDINGS AGAINST `git show HEAD:<file>`. THAT HANDS
   BACK THE BLOB, WHICH IS LF.** Judge line endings in the WORKING TREE.
 - **`.bat` FILES MUST BE CRLF.**
@@ -315,21 +319,23 @@ for, the run environment and the housekeeping that has bitten this ship.**
 
     1. PROGRESS_LOG.md .... what happened, the real numbers, and EVERY mistake
                             as plainly as every success. Append only.
-    2. REVIEW_QUEUE.md .... your verdict on R-066 (you may clear it only if you
-                            did not build the repair), plus one OPEN item
-                            against whatever you did yourself.
+    2. REVIEW_QUEUE.md .... one OPEN item against your own build, plus anything
+                            you could not certify. **R-066 stays open and you
+                            do not touch it.**
     3. EXECUTION_PLAN.md .. the CURRENT POSITION MARKER, rewritten to the truth
                             including what is broken. Keep the old markers.
-    4. ROADMAP.md ......... tick what shipped; correct any MEASURED fact that
-                            moved.
+    4. ROADMAP.md ......... tick the Carry Monitor; add what you MEASURED.
     5. SESSION_ORDERS.md .. rewritten IN FULL, opening with a plain-words brief.
-                            **>>> AND THEIR JOB 1 IS: ATTACK WHATEVER YOU BUILT
-                            OR REPAIRED. If you shipped no code, say so plainly
-                            and give them the next real job — but NEVER write an
-                            exemption. Only the Commander grants one, in words.**
+                            **>>> AND THEIR JOB 1 IS: ATTACK WHAT YOU BUILT.
+                            THE COMMANDER SAID "AND SO ON" AND THAT IS WHAT IT
+                            MEANS. YOUR EXEMPTION IS NOT THEIRS. NEVER WRITE
+                            ONE — only he grants one, in words.**
+                            **AND TELL THEM R-066 IS STILL UN-ATTACKED.**
     6. Commit. Push. **Then check your commit hashes again.**
     7. **REPORT TO HIM IN PLAIN WORDS** — what you tried, what broke, what held,
-       **what you got wrong**, and what decision is his.
+       **what you got wrong**, and what decision is his. **Show him the new
+       Carry line and ask whether it reads as information rather than as a
+       suggestion. That judgement is his, not yours.**
 
 **AND THE STANDING DUTY: if you catch yourself writing "probably", "almost
 certainly" or "this should be fine" about anything that ships — FILE IT in
@@ -337,19 +343,16 @@ certainly" or "this should be fine" about anything that ships — FILE IT in
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **>>> NEW AND FIRST: THE BRIEF'S PRICE DATA FAILED ON 2026-08-18.** Yahoo
-   returned a `JSONDecodeError` for `BTC-USD` when the Brief was run after the
-   repair. **It is not the whale watch and not this repair — the production half
-   was never touched.** It may be a transient, or it may be **the TwelveData key
-   that has been waiting for rotation since Phase 2** (item 12 below). **The
-   next session checks it first.**
-2. **>>> STILL HIS BECAUSE A MACHINE MAY NOT ANSWER IT: DOES THE WHALE WATCH
-   LINE READ HONESTLY TO HIM?** The label says "Whale watch"; the words under it
-   say NOT exchange flows, NOT wallet tracking, NOT the world's whales.
-   **One word changes the label if he wants it changed.** (R-058 doubt 6.)
-3. **>>> R-049 IS DEFERRED THREE TIMES. Offer it again and say "fourth time".**
-4. **THE CATEGORY B PILE IS THIRTY-FIVE.** **Keep saying the number.**
-5. **ONE COMMAND HE MUST RUN AS ADMINISTRATOR** — the only thing he personally
+1. **>>> NEW, AND IT IS THE ONE TO PUT IN FRONT OF HIM WHEN YOU FINISH: DOES THE
+   CARRY LINE READ AS INFORMATION, OR AS A SUGGESTION?** It prints a
+   percent-a-year figure, which is the closest this ship has ever come to
+   something that sounds like an opportunity. **The caveats are mandatory and
+   verbatim, but whether the whole line still reads honestly to him is HIS
+   judgement — Step 2.2 forbids a machine answering it by predicting him.**
+2. **R-066 IS OPEN AND UN-ATTACKED**, by his own exemption. **Say so.**
+3. **R-049 — offer it a FOURTH time.**
+4. **THE CATEGORY B PILE IS THIRTY-FIVE.** Keep saying the number.
+5. **ONE COMMAND HE MUST RUN AS ADMINISTRATOR**, the only thing he personally
    owes the R-037 repair:
 
        wevtutil sl Microsoft-Windows-TaskScheduler/Operational /e:true
@@ -360,31 +363,31 @@ certainly" or "this should be fine" about anything that ships — FILE IT in
    Bitcoin.com.
 8. **THE RULE HE HAS NOT YET ADOPTED, NOW EARNED ELEVEN TIMES:** *"A SABOTAGE
    MUST BE PROVED TO CHANGE THE OUTPUT BEFORE ITS VERDICT MEANS ANYTHING."*
-   **It earned its keep twice on 2026-08-18** — once making a session throw away
-   two of its own escapes, and once turning W17 from a worthless check into a
-   real one. Also unadopted: **"EVERY THRESHOLD IS TESTED AT THE EXACT VALUE
-   WHERE IT TURNS OVER"**, and **candidate Law 8 — "a claim about how something
-   behaves is not a fact until it has been run"**.
+   Also unadopted: **"EVERY THRESHOLD IS TESTED AT THE EXACT VALUE WHERE IT
+   TURNS OVER"**, and **candidate Law 8 — "a claim about how something behaves
+   is not a fact until it has been run"**.
 9. **THE WEEKLY SCHEDULE LIVES IN WINDOWS, NOT IN GIT** (R-041 doubt 5).
 10. **R-051 — nothing re-reads the Fed's and the BLS's pages automatically.**
-11. **R-024 doubt 2 IS STILL HIS: the hardcoded positive control.**
-12. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2, and
-    **now possibly implicated in item 1.**
-13. **The risk-doctrine decision** — the 25% position cap means real risk is
+    **R-024 doubt 2 — the hardcoded positive control.**
+11. **TwelveData key rotation** (.env + GitHub secret) — open since Phase 2, and
+    the first suspect if the Brief drops BTC again.
+12. **The risk-doctrine decision** — the 25% position cap means real risk is
     ~0.49% per trade, not the intended 1%. **Settled BEFORE Phase 6.**
-14. **`MAX_PLAUSIBLE_RATE`** — measured 13-16x looser than Binance's published
-    cap. **Recommendation: tighten to ~0.01. STILL NOT DONE.**
-15. **FIX THE PATTERN, NOT JUST THE TEST.** `def run(symbols=SYMBOLS, ...)` and
+13. **`MAX_PLAUSIBLE_RATE`** — measured 13-16x looser than Binance's published
+    cap. **Recommendation: tighten to ~0.01. STILL NOT DONE** — and it lives in
+    `cockpit/funding.py`, which reads the same numbers your instrument does.
+14. **FIX THE PATTERN, NOT JUST THE TEST.** `def run(symbols=SYMBOLS, ...)` and
     `fetch_history` still freeze their globals. **`cockpit/whales.py` is the
-    worked example built the right way from birth.**
-16. **The settled-rate anchor (R-004).**
-17. **ALL FIVE CONTEXT DECK LINES ARE ON THE BRIEF** and he was told. One word
-    removes any of them.
-18. **A DOCUMENT-INTEGRITY CHECK. RECOMMENDED NINE TIMES, NOT ADOPTED.**
+    worked example built the right way from birth — copy IT, not them.**
+15. **The settled-rate anchor (R-004).**
+16. **ALL FIVE CONTEXT DECK LINES ARE ON THE BRIEF** and he was told. One word
+    removes any of them, and the same will be true of the Carry line.
+17. **A DOCUMENT-INTEGRITY CHECK. RECOMMENDED NINE TIMES, NOT ADOPTED.**
 
 **AND THE ONE THAT DOES NOT EXPIRE: at Phase 6 the "separation in time"
 substitute for Fable EXPIRES.** A second, genuinely independent AI reviews the
 gauntlet's test setup before it runs and its verdict after. Locked in
 `EXECUTION_PLAN.md` Phase 6, it is R-006, and it is **NOT waived by Fable's
-absence.** **Information instruments can carry the lighter guard. The gauntlet
+absence — and it is certainly not waived by an exemption granted for one build
+session.** **Information instruments can carry the lighter guard. The gauntlet
 cannot, at any weight.**
