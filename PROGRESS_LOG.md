@@ -13143,3 +13143,174 @@ each morning, which is R-056's territory.**
 - **It does not repair anything in `cockpit/funding.py`** and does not touch it.
 - **It does not clear R-066 or any Category B item.** The pile stays at
   thirty-five.
+
+# 2026-08-19 (morning) — **THE TWENTY-THIRD GENERATION. THE MEASUREMENTS AND THE EDGE CASES, WRITTEN BEFORE ONE LINE OF `cockpit/carry.py` EXISTS. NO `.py` IN THIS COMMIT.**
+
+*This session holds the Commander's second exemption ever: it does NOT attack
+GATE 3.5-R1, it builds. **R-066 therefore stays OPEN and UN-ATTACKED** — one
+mind found R-060, graded it and repaired it, and nobody has checked any of the
+three. Said here so it cannot quietly become a thing everyone assumes was
+handled.*
+
+## THE SHIP WAS PROVED ALIVE FIRST — TEN INVOCATIONS, RED COUNTED BY MACHINE THREE WAYS
+
+    01 cockpit/fear_greed.py     --gate  exit 0   68.5 s   58 green
+    02 cockpit/funding.py        --gate  exit 0  121.9 s   71 green
+    03 data/open_interest.py     --gate  exit 0   51.2 s   88 green
+    04 the same at TZ=UTC0               exit 0   50.0 s   88 green
+    05 data/collection_guard.py  --gate  exit 0    4.8 s   (prints OK/FAIL, no ticks)
+    06 cockpit/news.py           --gate  exit 0    4.1 s   54 green
+    07 cockpit/events.py         --gate  exit 0    0.4 s   69 green
+    08 the same at TZ=UTC0               exit 0    0.2 s   69 green
+    09 cockpit/whales.py         --gate  exit 0    7.4 s  107 green
+    10 the same at TZ=UTC0               exit 0    6.8 s  107 green
+
+**Counted three ways as ordered: the tick character, the first word of a line,
+and the phrase "GATE ... FAILED". Totals: tick 0, first-word 1, GATE-FAILED 0.**
+**The one hit was read by eye and it is the exact trap the orders named:** the
+funding gate's own PROSE carries the word "escaped" at the start of a line,
+describing sabotages that beat a gate a month ago. It is narrative, not a
+verdict. **It fooled the last session's counter within the hour and it fooled
+this one too — the counter is a flare, the reading is the fence.**
+
+## **>>> THE MISTAKE THIS SESSION MADE FIRST, RECORDED BEFORE ANYTHING IT GOT RIGHT**
+
+Measuring what Binance serves, this session ran the settled-funding endpoint
+with **`startTime=0`**, meaning "from the beginning of time", and got back
+**500 rows reaching only to 2026-03-05** for all three contracts. Read
+literally, that contradicts the MEASURED facts table in `ROADMAP.md`, which
+says this endpoint serves back to contract inception.
+
+**The table was right and the measurement was wrong.** Re-measured with an
+explicit date:
+
+    startTime=2019-09-10  BTCUSDT   1000 rows   2019-09-10 -> 2020-08-08
+    startTime=2019-09-10  ETHUSDT   1000 rows   2019-11-27 -> 2020-10-25
+    startTime=2019-09-10  SOLUSDT   1000 rows   2020-09-13 -> 2021-08-12
+
+Those three first dates are the contract inception dates already in the table,
+to the day. **`startTime=0` is treated by Binance as NOT SET**, and with no
+`startTime` the endpoint returns at most **500 rows however large `limit` is**
+(limit=500, 900 and 1000 all returned exactly 500).
+
+**THE LESSON, AND IT IS NOT THE ONE THE SHIP ALREADY HAS.** "The measurement
+always wins" is a rule this ship has needed four times, and it is still right —
+**but it only wins if the measurement is sound, and a bad measurement wears the
+same authority as a good one.** A zero that meant "from the beginning" silently
+meant "unspecified", the reply was a perfectly healthy HTTP 200 carrying 500
+real rows, and nothing anywhere looked broken. **Had this session trusted its
+own fresh number over a document, it would have written a correction INTO the
+MEASURED facts table that made the table wrong.** The deep history Phase 6
+Slot 2 stands on would have been recorded as gone.
+
+## MEASURED TODAY, AND EVERY ONE OF THESE IS EVIDENCE FOR A DECISION BELOW
+
+    /fapi/v1/fundingInfo LISTS ALL THREE CONTRACTS (760 rows, keyless):
+      BTCUSDT  cap +/-0.00300  fundingIntervalHours 8
+      ETHUSDT  cap +/-0.00300  fundingIntervalHours 8
+      SOLUSDT  cap +/-0.00375  fundingIntervalHours 8
+      (GTCUSDT's cap is 0.02000000 — caps vary a lot by symbol, so a bound
+       that suits OUR three is a Law-2 decision this compartment owns)
+
+    /fapi/v1/fundingRate?symbol=X&limit=21  -> 21 rows, ascending by time,
+      keys: fundingRate, fundingTime, markPrice, rateType, symbol
+
+    >>> THE SETTLEMENT GAPS ARE NOT EXACTLY EIGHT HOURS. Measured across the
+        last 500 settlements of all three contracts, the gap between
+        consecutive settlements takes SEVEN distinct values:
+           28799995, 28799997, 28799998, 28799999, 28800000, 28800001,
+           28800002  milliseconds
+        Exactly-8h accounted for 156 of 499 gaps; the other 343 were off by
+        one to five MILLISECONDS. **A contiguity check written as
+        `gap == 8h` would have refused every window, every day, forever, and
+        the instrument would have shipped dead with its gate green.**
+
+    A BOGUS SYMBOL ANSWERS HTTP 200 WITH `[]` — not an error, an empty list.
+    `limit=1001` ANSWERS HTTP 200 WITH A JSON *OBJECT* carrying
+      {"status":"ERROR", ..., "errorData":"illegal params."} — a 200 whose
+      body is not a list at all.
+
+    Live rates this morning are tiny, and they straddle zero:
+      BTC mean over 21 settlements  +0.00005429...   -> about +5.9%/yr
+      ETH mean over 21 settlements  +0.00004149...   -> about +4.5%/yr
+      SOL mean over 21 settlements  -0.00000102...   -> about -0.1%/yr
+    **SOL is NEGATIVE today.** The Brief will therefore print a plus and a
+    minus side by side on its first live day, which is the best possible
+    weather for condition 4.
+
+## THE FIVE DESIGN DECISIONS GATE 4.1 ORDERED DECIDED BEFORE CODING
+
+**D1 — THE WINDOW: the last 21 SETTLED fundings, which is 7 days at three a
+day, and the words "7d" and "21 settled fundings" both appear on the line the
+Commander reads.** A single print is never annualised. 21 is long enough that
+one spike cannot own the number and short enough to still describe now.
+
+**D2 — THE SIGN: positive funding means longs pay shorts; the carry is SHORT
+the perp; so positive funding EARNS.** The line prints an explicit `+` or `-`
+on every figure and the word `(earns)` or `(costs)` beside it, so the meaning
+does not depend on the reader remembering a convention.
+
+**D3 — SIMPLE, NOT COMPOUNDED: the average rate times 1,095**, and the line
+says "simple, not compounded" in those words.
+
+**D4 — IT IS A NUMBER BEFORE COSTS AND SAYS SO** — spot fee, perp fee, the
+spread, and capital tied up on both legs at once.
+
+**D5 — FIXED ORDER BTC, ETH, SOL, NEVER SORTED.** Sorting by which pays most
+is a recommendation whatever words surround it. This compartment owns its own
+host, its own symbol mapping and its own doorway (Law 2) and does not import
+`cockpit/funding.py`.
+
+## **>>> THE AWKWARD EDGE CASES, NAMED BEFORE THE CODE EXISTS**
+
+GATE 4.1 named five. These are this session's own, and the first is the one
+that would have shipped a dead instrument:
+
+1. **THE MILLISECOND WOBBLE (measured above).** The check that a window has no
+   missing settlement must allow a tolerance. It is set at 60 seconds: 12,000
+   times the largest wobble seen, and still 480 times too small to let a
+   missed 8-hour settlement through.
+2. **THE MULTIPLIER'S HIDDEN ASSUMPTION.** `x 1,095` is only true while
+   Binance settles these contracts every 8 hours. If a contract moved to 4h,
+   the true annual figure would be DOUBLE what this instrument prints and
+   nothing in the numbers themselves would look wrong. **So the spacing check
+   is not pedantry — it is the only thing guarding the multiplier**, and the
+   interval is ALSO read from Binance's own `fundingInfo` surface in the gate,
+   which states `fundingIntervalHours: 8` independently of any arithmetic
+   here.
+3. **A SHORT WINDOW IS A NAMED ABSENCE, NEVER A QUIET SHORT AVERAGE.** Fewer
+   than 21 settled rows returned, for any reason, prints the reason and no
+   number.
+4. **A GAP INSIDE THE WINDOW** — 21 rows that skip a settlement — is refused
+   with the number of missing settlements named.
+5. **DUPLICATE STAMPS.** The same settlement returned twice would silently
+   double-weight it and no total would look wrong. Refused by name.
+6. **ROWS OUT OF ORDER.** Sorted by stamp before anything is measured, never
+   trusted by position — the whale watch's lesson.
+7. **THE STALE-BUT-PERFECT WINDOW.** 21 flawless rows from last year. Refused
+   WITH ITS OWN STAMP, at a limit of 600 minutes: the newest settled funding
+   is up to 480 minutes old in normal running, and 600 leaves two hours of
+   slack without ever accepting a missed settlement.
+8. **THE SIGNED ZERO.** An average that rounds to nought must not print
+   `-0.00%/yr`. Exactly zero prints `0.00%/yr (flat)` with no sign, and the
+   turnover is tested at the exact value and one step either side.
+9. **ONE BAD RATE INSIDE A GOOD WINDOW** is not averaged around. The asset is
+   refused by name — dropping it and averaging the other twenty is precisely
+   the quiet short average condition 5 forbids.
+10. **AN ASSET THAT FAILS KEEPS ITS ROW.** B7's shape is the asset that
+    quietly vanishes while the rest look perfect.
+11. **EVERYTHING IN `Decimal`, PARSED FROM THE RAW STRING, ROUND_HALF_UP.**
+    The whale watch measured that 501 of 10,001 four-decimal values disagree
+    between float and half-up rounding; a float here would decide the rounding
+    on the reader's behalf.
+12. **THE BOUND ON A SINGLE RATE IS 0.01 PER 8 HOURS**, chosen from the
+    measured caps above: 2.7 times SOL's own cap, so it can never refuse a
+    legitimate reading, and one fifth of `cockpit/funding.py`'s 0.05, which
+    the Commander's desk has wanted tightened since Phase 3. It exists to
+    catch a parse disaster, not to second-guess the venue.
+
+**AND THE ONE THING THIS INSTRUMENT MUST NEVER DO, WRITTEN DOWN BEFORE IT
+EXISTS:** it prints a percent-a-year figure, which is the closest this ship has
+ever come to something that sounds like an opportunity. **It is a readout. It
+never ranks the three, never says "do it", and can never occupy one of Phase
+6's three slots, which are locked BY NAME.**
