@@ -13314,3 +13314,315 @@ EXISTS:** it prints a percent-a-year figure, which is the closest this ship has
 ever come to something that sounds like an opportunity. **It is a readout. It
 never ranks the three, never says "do it", and can never occupy one of Phase
 6's three slots, which are locked BY NAME.**
+
+# 2026-08-19 (morning) — **`cockpit/carry.py` SHIPPED. GATE 4.1 PASSED, 87 CHECKS, 0 RED, TWICE, WITH IDENTICAL TICK SEQUENCES — AND THEN CERTIFIED BY ATTACK RATHER THAN BY ITS OWN DRILL. PHASE 4 IS COMPLETE.**
+
+*The twenty-third generation, holding the Commander's second exemption ever. It
+did NOT attack GATE 3.5-R1. **R-066 IS STILL OPEN AND STILL UN-ATTACKED** — one
+mind found R-060, graded it and repaired it, and nobody has checked any of the
+three. That sentence is carried forward deliberately.*
+
+## WHAT WAS BUILT
+
+**`cockpit/carry.py` — the Carry Monitor, Phase 4, Layer 7.** 1,536 lines: the
+production half is lines 1-415, the gate is everything from the `__main__` line
+at 416. **Production half sha256 `ec5455596007b590`** (the recipe re-confirmed
+2026-08-18: the prefix BEFORE the anchor line, without the anchor, no trailing
+separator). Four lines were added to `cockpit/brief.py` and nothing in it was
+modified or deleted.
+
+**The live block, on his Brief this morning:**
+
+    Carry (7d)   : Binance USDT-perps · 3 of 3 assets · window ends 00:00 UTC
+      BTC         — +5.95%/yr (earns)
+      ETH         — +4.54%/yr (earns)
+      SOL         — -0.11%/yr (costs)
+    (long spot + SHORT the perp, delta-neutral — the two cancel out)
+     · the average of the last 21 SETTLED fundings (7d, three a day)
+       x 1095 a year · SIMPLE, not compounded
+     · plus = the carry EARNS it, minus = the carry COSTS it
+     · it pays this IF you run it — this is not advice to run it
+     · BEFORE costs: spot fee, perp fee, the spread, and capital tied
+       up on BOTH legs at once
+     · exchange counterparty risk · funding can flip negative at any
+       settlement
+     — information, not a signal)
+
+**SOL IS NEGATIVE TODAY, WHICH IS THE BEST POSSIBLE WEATHER FOR A FIRST DAY:**
+the Brief printed a plus and a minus side by side, with `(earns)` and `(costs)`
+beside them, so condition 4 was exercised on real money in both directions
+rather than only on fixtures.
+
+## THE GATE
+
+**GATE 4.1 PASSED — 87 checks, 0 red.** Run twice as condition 13 requires,
+once normally and once at `TZ=UTC0`: **both exit 0, both 87 green and 0 red, and
+the two tick sequences compared BY MACHINE are identical.**
+
+**All twenty-one sabotages CAUGHT, and NOT ONE reported INERT.** Every break was
+proved to change what somebody reads before its verdict was counted, on the
+channel it really affects — which is why C8, whose returned block is
+byte-identical to the honest one and which prints advice beside it, is witnessed
+at the FILE DESCRIPTOR and not at the block.
+
+    C1  the SIGN flipped                          C12 an asset row dropped (B7)
+    C2  earns/costs SWAPPED, number left right    C13 the asset count inflated
+    C3  the window shortened to ONE settlement    C14 window checks off (dups)
+    C4  simple turned into COMPOUNDED             C15 the 8h spacing check off
+    C5  the multiplier 1095 -> 365                C16 the staleness guard off
+    C6  the COST warning dropped                  C17 the plausibility bound off
+    C7  the RISK caveats reworded                 C18 rounding truncated
+    C8  ADVICE printed, block identical           C19 `_get` pinned to one symbol
+    C9  the disclaimer reworded                   C20 `_get` shortening the
+    C10 the three assets SORTED by pay                window AT THE WIRE
+    C11 a failed reading dropped silently         C21 `_get` losing
+                                                      raise_for_status()
+
+**C20 IS THE ONE WORTH NAMING.** It shortens the window inside the transport
+itself, so the block that comes back is unchanged and only the REQUEST is a lie.
+It is caught solely because condition 9's door-server judges **what was asked
+for** beside **what came back** — which is precisely the half of R-060 a check
+watching only the output would miss.
+
+## **>>> CERTIFIED BY ATTACK, NOT BY ITS OWN DRILL**
+
+A drill only ever proves a gate can catch a monkeypatch. So five real faults
+were installed as **TEXT EDITS in a copy of the file OUTSIDE the repo** — the
+kind of thing a careless future edit actually produces — and the untouched copy
+was run FIRST as the control (Step 0.1):
+
+    CONTROL — the file exactly as it ships     exit 0   87 green   0 red  PASSED
+    F1 the SIGN flipped inside `_annual`       exit 1   61 green  26 red  FAILED
+    F2 the window shortened to 3 settlements   exit 1   64 green  23 red  FAILED
+    F3 the BEFORE-COSTS caveat deleted         exit 1   78 green   9 red  FAILED
+    F4 the 8-hour spacing check deleted        exit 1   84 green   3 red  FAILED
+    F5 compounded instead of simple            exit 1   69 green  18 red  FAILED
+
+**F4 is the quiet one and it is why that check exists.** Deleting the spacing
+check breaks no arithmetic, loses no row and prints no wrong digit today — it
+removes the only thing standing between the Brief and a contract that has moved
+to four-hourly funding, where every figure would be HALF the truth and every
+digit on the screen would still look healthy. Three red is the smallest margin
+of the five, and it is still a margin.
+
+## WHAT WAS MEASURED, AND WHERE A MEASUREMENT KILLED AN ASSUMPTION
+
+**THE MILLISECOND WOBBLE.** The window is only a window if its settlements are
+eight hours apart, so the first draft of that check was going to be
+`gap == 28800000`. **Measured across the last 500 settlements of all three
+contracts: the gap takes SEVEN distinct values from 28,799,995 to 28,800,002
+ms, and exactly-8h accounts for only 156 of 499.** A strict check would have
+refused every window, every day, forever — **and its gate would have been
+perfectly green, because a gate written by the same mind would have used the
+same fixtures with the same tidy stamps.** The tolerance is 60 seconds: twelve
+thousand times the largest wobble seen, and 480 times too small to admit a
+missed settlement.
+
+**THE INTERVAL IS PROVED AGAINST AN INDEPENDENT BINANCE SURFACE.**
+`/fapi/v1/fundingInfo` — a DIFFERENT endpoint from the one the instrument reads
+— lists all three contracts with `fundingIntervalHours: 8`, beside caps of
+0.00300 (BTC, ETH) and 0.00375 (SOL). The gate asks it on every run and holds
+the answer against eight hours TYPED OUT in the gate. **That is what the x1,095
+now stands on, instead of standing on a sentence in a docstring.**
+
+**THE PLAUSIBILITY BOUND IS EVIDENCE, NOT A GUESS.** `MAX_PLAUSIBLE_RATE` is
+0.01 per 8h: 2.7x the largest of the venue's own caps, so it can never refuse a
+legitimate reading, and one fifth of the 0.05 in `cockpit/funding.py` that item
+13 on the Commander's desk has wanted tightened since Phase 3. The gate proves
+every measured cap sits INSIDE the bound.
+
+**THE LIVE CHECK IS EXACT, WITH NO TOLERANCE AT ALL — the only one on this ship
+that can be.** The whale watch allows 1.0 percentage point because positioning
+moves between two calls seconds apart. **Settled funding rates are historical
+facts and do not move**, so the gate fetches the same window itself, averages it
+in EXACT RATIONAL ARITHMETIC (`fractions.Fraction`, a genuinely different route
+from the module's `Decimal`), and demands the identical digits. It got them:
+BTC +5.9500, ETH +4.5400, SOL -0.1100, digit for digit, all three.
+
+## **>>> THE MISTAKES, AS PLAINLY AS THE SUCCESSES**
+
+1. **THE `startTime=0` BLUNDER, RECORDED IN FULL IN THIS MORNING'S EARLIER
+   ENTRY.** This session measured the settled-funding endpoint with
+   `startTime=0`, got 500 rows reaching back only five months, and briefly held
+   a fresh measurement that contradicted the ROADMAP's MEASURED facts table.
+   **The table was right.** `startTime=0` is treated as UNSET and an unset query
+   caps at 500 rows; with an explicit 2019 date the endpoint serves 1,000-row
+   pages from contract inception, to the day the table already records. **"The
+   measurement wins" only when the measurement is sound, and a bad one wears the
+   same authority as a good one.**
+2. **PYTHON 3.10's BACKSLASH-IN-AN-F-STRING BIT ME**, in a scratch helper, exactly
+   as the orders warn. Cost: one run.
+3. **MY OWN ATTACK HARNESS CRASHED ON THE TICK CHARACTER** — a `cp1252` console
+   in the outer process — after the control and F1 had already run. It proved
+   nothing about the gate, and it is recorded because a harness that dies
+   mid-verdict is how a partial result gets read as a whole one.
+4. **THE FIRST DRAFT PRINTED A NONSENSE REFUSAL.** A gap a hair over tolerance
+   computed `round(gap/8h) - 1 = 0` and would have said *"0 settlement(s)
+   missing from the window"*. Found by reading, before it ran. It now says *"the
+   settlements are not 8 hours apart"*, and the gate tests the turnover at
+   exactly 60 s and at 60.001 s.
+5. **I DID NOT CAPTURE THE FIRST BRIEF RUN.** See below — it went 2/3 and I
+   cannot now say which asset dropped, because I only kept the tail of the
+   output. The next two runs were 3/3.
+
+## **>>> THE BRIEF WENT 2/3 AGAIN — THE SECOND SIGHTING, AND HE SHOULD SEE IT**
+
+The orders warned: it went 2/3 once on 2026-08-18 (a TwelveData read timeout on
+BTC) and 3/3 on an immediate re-run, and **"if it happens more than once, item
+11 on his desk is the first suspect"** — the TwelveData key rotation, open since
+Phase 2.
+
+**It happened again this morning, on the first run after wiring.** Immediate
+re-run: 3/3. Third run: 3/3. **It is NOT the Carry Monitor** — the four added
+lines run after the asset count is already computed, and `carry` printed 3 of 3
+assets on every run including the 2/3 one. **But it is now twice, and I could
+not name the asset because I did not keep the output.**
+
+## THE REST OF THE EVIDENCE
+
+- **The ship was proved alive BEFORE anything was touched:** ten invocations,
+  all exit 0, red counted by machine three ways, the single hit read by eye and
+  found to be the funding gate's own prose. Recorded in this morning's earlier
+  entry.
+- **Vault INTACT, 6 of 6**, checked after the build.
+- **`py_compile` before the gate**, as ordered.
+- **Door 3:** a fresh interpreter imports the module, calls the doorway three
+  ways and shuts down, and its TOTAL output is empty — proved by a probe FILE,
+  never by the stream that is on trial.
+- **Confinement PROVED, not asserted.** `cockpit/brief.py`: **4 insertions, 0
+  deletions, 0 modifications**, in exactly two hunks — the import at line 28,
+  and two comment lines plus the print at lines 100-102. `git diff --stat` says
+  `1 file changed, 4 insertions(+)`. Nothing the pilot already reads moved.
+- **`git status` carried exactly what the orders said it would:** the laptop
+  task's `journal/snapshots_local.csv` and the untracked `journal/oi_recorder.log`,
+  neither of them mine, committed separately.
+
+## WHAT THIS SESSION DID NOT DO
+
+- **It did not attack GATE 3.5-R1**, by his exemption, and **R-066 remains open
+  and un-attacked**.
+- **It cleared nothing.** **The Category B pile is still THIRTY-FIVE.**
+- It did not touch `cockpit/funding.py`, the Lab, the vault, or any recorder.
+- **It did not do Job 2** (R-049's fourth offer, R-058's unmeasured doubts) —
+  the build and its certification took the session, and a half-done review is
+  worse than none.
+
+# 2026-08-19 (morning, second part) — **GATE 5.1 DECLARED, BEFORE ONE LINE OF `journal/log_trade.py` EXISTS, BY A SESSION THAT WILL NOT BUILD IT.**
+
+*Same session, second part. Nothing was built here and nothing was measured.
+This entry exists only to set a bar before the thing it measures exists.*
+
+**WHY IT IS DECLARED HERE RATHER THAN BY WHOEVER BUILDS IT.** GATE 3.5 and GATE
+4.1 were both declared by a session that then stopped, and both are the bars that
+survived attack best — not a word of either could be bent to match what got
+built. **This is now twice-proven and it is the shape to keep.** The plan's own
+one-line gate for Phase 5 — *"log 2 fake trades, run mirror, numbers check out
+by hand"* — is far below what the last five instruments were held to. It is not
+deleted and not weakened: **it is absorbed into condition 10.**
+
+**AND A CORROBORATION THIS SESSION OWES PHASE 6.** Measuring for the Carry
+Monitor, this session independently re-confirmed the 2026-07-26 correction that
+Phase 6 Slot 2 stands on: `/fapi/v1/fundingRate` **does** serve settled history
+back to contract inception (BTC 2019-09-10, ETH 2019-11-27, SOL 2020-09-13,
+1,000-row pages with an explicit `startTime`). **The funding-fade slot needs no
+collection and can be tested whenever the ship chooses.** See this morning's
+first entry for how a careless `startTime=0` nearly buried that fact.
+
+---
+
+# **>>> GATE 5.1 — `journal/log_trade.py`, THE TRADE LOGGER**
+
+## WHAT IT IS, IN PLAIN WORDS
+
+One command the Commander runs after he closes a trade. It asks him, in plain
+words: which coin, long or short, what price he got in at, what price he got out
+at, how big, **WHY he took it in one line**, and **how he felt in one word.** It
+writes that to `journal/my_trades.csv` and says nothing else. **It never judges
+at entry time** — the judging is `mirror.py`'s job, monthly, and Phase 5's
+second half.
+
+## THE FIVE DESIGN DECISIONS. DECIDE THEM BEFORE CODING, NOT AFTER.
+
+**D1 — THE DOORWAY TAKES VALUES; THE ASKING IS A THIN SHELL AROUND IT.** An
+interactive prompt cannot be gate-tested, and a file whose only entry point is
+`input()` is a file no gate can reach. **The recorded truth is a function that
+takes the seven fields and returns what it wrote.** The questions are a shell
+over it, and the shell is the ONLY thing allowed to call `input()`.
+
+**D2 — APPEND-ONLY, AND IT NEVER REWRITES HISTORY.** B13 deleted 34 rows of a
+real archive and printed a report that was entirely TRUE about what was left.
+**This file may only ever add a line to the end.** No tidy-up, no
+de-duplication, no "keeping it in step" with anything.
+
+**D3 — >>> DUPLICATES ARE LEGITIMATE HERE AND MUST NOT BE REFUSED.** Every other
+recorder on this ship dedups, because a settlement or a candle is a fact that
+happens once. **A pilot can genuinely make the same trade twice in one day, at
+the same price, in the same size.** A logger that silently swallowed the second
+one would erase a real trade and the Mirror would grade him on a lie. **This is
+the one place where the ship's own habit is the wrong instinct, and it is
+written down before anybody builds it.**
+
+**D4 — THE COMMANDER'S OWN WORDS ARE THE PAYLOAD, AND A COMMA MUST NOT BE ABLE
+TO DESTROY A ROW.** He will type a WHY line with commas, quotes, apostrophes and
+possibly non-English text in it. **Use `csv` from the standard library for
+writing, never string-joining**, and prove with a check that a WHY line
+containing a comma, a double quote and a newline comes back out of the file
+BYTE-IDENTICAL to what went in. **A row that silently shifts a column would put
+his stop price in the size field forever.**
+
+**D5 — NUMBERS ARE KEPT AS HE TYPED THEM, AND ALSO AS `Decimal`.** The row
+stores exactly what he entered. A value that is not a number is REFUSED with a
+named reason and **nothing is written at all** — a half-written row is worse
+than a refused one.
+
+## THE BAR. TWELVE CONDITIONS. ALL OF THEM, OR IT IS A FAIL.
+
+1. **ONE DOORWAY that never raises and never prints; it RETURNS.** Every input
+   resolved from `None` **in the body**. `cockpit/whales.py` and
+   `cockpit/carry.py` are the worked examples.
+2. **EXACT EQUALITY ON A FILE THE GATE READS BACK OFF DISK.** Not on what the
+   function says it wrote — **on the bytes in the file**, compared to a copy
+   typed out in the gate. B11 wrote a true-looking report about a disk that had
+   not changed.
+3. **THE ARCHIVE SURVIVES, PROVED AGAINST A SEEDED FILE THE GATE WROTE FIRST.**
+   Seed rows the logger did not write, append through the real doorway, and
+   require **every seeded row byte-identical afterwards.** B13's shape.
+4. **A REFUSED ENTRY WRITES NOTHING.** File size and contents identical before
+   and after, proved by sha256, for every refusal shape.
+5. **EVERY REFUSAL NAMED SEPARATELY. SILENCE IS FORBIDDEN.** An unknown asset, a
+   direction that is neither long nor short, a price that is not a number, a
+   negative or zero size, an empty WHY, a feeling that is more than one word —
+   six different names.
+6. **EVERY THRESHOLD TESTED AT THE EXACT VALUE WHERE IT TURNS OVER**, and one
+   step either side. R-054 paid for this rule.
+7. **D4 PROVED WITH A HOSTILE STRING**: a comma, a double quote, a newline, a
+   leading `=`, and a non-ASCII character, all in one WHY line, read back
+   byte-identical.
+8. **D3 PROVED**: the SAME trade logged twice produces TWO rows, and the gate
+   says so out loud.
+9. **DOOR 3.** A fresh interpreter imports the module, calls the doorway three
+   ways and shuts down, and its TOTAL output must be empty. A timeout is a
+   FAILURE.
+10. **THE PLAN'S OWN SENTENCE, ABSORBED: two fake trades are logged and the
+    numbers are checked BY HAND** — in the gate, by a second calculation typed
+    out there, never by calling the helper under test.
+11. **A SABOTAGE DRILL FROM BIRTH, PERMANENT, ON EVERY RUN.** Every break PROVED
+    TO CHANGE WHAT SOMEBODY READS OR WHAT LANDS ON DISK before its verdict
+    counts. **ANY BREAK REPORTED `INERT` IS A FAIL.** At minimum: a column
+    silently swapped; the WHY line truncated at the first comma; a refusal that
+    writes anyway; an append that rewrites the file instead; the header written
+    twice; a duplicate silently swallowed (D3); the numbers rounded; and
+    **JUDGEMENT printed at entry time**, which the plan forbids in as many
+    words.
+12. **RUN TWICE — once normally and once with `TZ=UTC0`** — both exit 0, both
+    0 red, tick sequences compared by machine. **And every stamp the logger
+    writes is UTC with the zone on it**, because the Mirror will one day compare
+    these rows against snapshots taken by a cloud machine in another timezone.
+
+## WHAT GATE 5.1 DELIBERATELY DOES NOT ASK FOR
+
+- **NOT `journal/mirror.py`.** That is Phase 5's second half and it gets its own
+  bar. **A half-built Mirror is worse than no Mirror.**
+- **No grading, no scoring, no judgement of any kind at entry time.**
+- **No new dependency.** `csv` and `decimal` are in the standard library.
+- **It does not touch `journal/snapshots_*.csv`, the grader, or the vault.**

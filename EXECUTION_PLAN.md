@@ -434,6 +434,66 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-08-19 (morning): PHASE 4 IS COMPLETE. `cockpit/carry.py` SHIPPED UNDER GATE 4.1 — 87 CHECKS, 0 RED, TWICE, AND CERTIFIED BY ATTACK. THE EXEMPTION IS SPENT.**
+
+**WHERE THE SHIP IS.** Every gate green. The Morning Brief now carries the five
+Context Deck instruments **and, below them, the Carry Monitor** — its own
+instrument, not a sixth context line.
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red   ~68 s
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red  ~122 s
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red   ~51 s
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red   ~50 s
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red    ~5 s
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red    ~4 s
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red   ~0.4 s
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red   ~0.2 s
+    cockpit/whales.py           GATE 3.5-R1   PASSED  exit 0  0 red    ~7 s
+      the same file at TZ=UTC0  GATE 3.5-R1   PASSED  exit 0  0 red    ~7 s
+    cockpit/carry.py            GATE 4.1      PASSED  exit 0  0 red   ~35 s
+      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0  0 red   ~35 s
+                                87 checks, TWENTY-ONE sabotages, all CAUGHT,
+                                none INERT, tick sequences identical
+    vault INTACT 6 of 6 · Brief 3/3 · lab/ untouched
+
+**Production half of `cockpit/carry.py`: lines 1-415, sha256 `ec5455596007b590`.**
+
+**WHAT IS BROKEN OR UNPROVEN, STATED AS THE MARKER MUST STATE IT:**
+
+- **R-067: NOBODY BUT THE AUTHOR HAS LOOKED AT `cockpit/carry.py`.** The
+  Commander's exemption removed the LAST session's check, not this one's. **The
+  next session's Job 1 is to attack it, and the exemption is spent** — *"and so
+  on"* are his words.
+- **R-066 IS STILL OPEN AND STILL UN-ATTACKED.** One mind found R-060, graded it
+  and repaired it. Two generations have now passed without a second pair of eyes
+  on it. **A deferral is not a resolution and it must not fade.**
+- **R-069: THE LIVE CHECK IN GATE 4.1 CAN GO RED THROUGH NO FAULT OF THE FILE**
+  if a funding settlement (00:00, 08:00, 16:00 UTC) lands between the module's
+  fetch and the gate's own. It is R-021's shape and it was a deliberate choice:
+  the alternative was weakening the only exact, no-tolerance live check on this
+  ship.
+- **THE BRIEF WENT 2/3 FOR THE SECOND TIME**, on the first run after wiring, and
+  3/3 on the two runs after it. **It is not the Carry Monitor** — the four added
+  lines run after the asset count is computed. **Item 11 on his desk, the
+  TwelveData key rotation, is the first suspect and it is now twice.**
+- **THE CATEGORY B PILE IS THIRTY-SEVEN.** Nothing was cleared this session, by
+  anybody.
+
+**WHAT PHASE 4 DELIBERATELY DID NOT DO.** No Lab gate, no recorder, no CSV, no
+archive — `EXECUTION_PLAN.md` is explicit that this is a readout. **It can never
+occupy one of Phase 6's three slots, which are locked BY NAME: Turtle/Donchian,
+funding-rate fade, on-chain cycle thermometer.**
+
+**AND THE ONE THAT DOES NOT EXPIRE:** at Phase 6 the "separation in time"
+substitute for Fable EXPIRES. A second, genuinely independent AI reviews the
+gauntlet's test setup before it runs and its verdict after. It is R-006, no
+in-house session may clear it, **and it is certainly not waived by an exemption
+granted for one build session.**
+
+**NEXT: PHASE 5 — THE TRADE LOGGER & MIRROR** (`journal/log_trade.py`), after
+the next session has attacked what this one built.
+
+---
 
 ## **>>> 2026-08-18 (night): PHASE 3 IS CLOSED. THE SHIP MOVES TO PHASE 4 — THE CARRY MONITOR. GATE 4.1 IS DECLARED AND COMMITTED WITH NO CODE, AND THE COMMANDER HAS GRANTED HIS SECOND EXEMPTION EVER.**
 

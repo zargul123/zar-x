@@ -4259,3 +4259,87 @@ should keep carrying it until somebody actually does the work.
 
 Nothing filed, nothing cleared. R-066 is not Category B; it is an open item
 against a repair.
+
+---
+
+# 2026-08-19 (morning) — **FILED BY THE TWENTY-THIRD GENERATION AGAINST ITS OWN BUILD**
+
+## R-067 — **NOBODY BUT THE AUTHOR HAS LOOKED AT `cockpit/carry.py`. THE NEXT SESSION'S JOB 1 IS TO ATTACK IT.**
+
+One mind decided the design, wrote the production half, wrote the gate that
+judges it, chose the fixtures, chose the sabotages, and then reported that all
+of them passed. **That is the exact shape this ship has been burned by, and the
+Commander's exemption removed the LAST session's check, not this one's.**
+
+**WHAT IT HAS BEHIND IT, so the risk is neither overstated nor waved away:**
+GATE 4.1 passed 87 checks / 0 red twice with identical tick sequences; twenty-one
+sabotages were caught with none INERT; **five real faults installed as text edits
+in a copy outside the repo all turn the gate red while the untouched control
+passes**; the live figures matched an independent rational-arithmetic
+recomputation digit for digit. **That is a great deal more than an assertion. It
+is still one mind.**
+
+**WHERE I WOULD ATTACK IT IF I WERE NOT ITS AUTHOR — named because a builder
+cannot invent the attack he is blind to, but can at least say where he did not
+look:**
+
+1. **`_window` is the whole instrument and it has one author.** Its refusals are
+   ordered — duplicates, then count, then slice, then spacing — and I chose that
+   order. A window that is BOTH short AND gapped reports only the first fault
+   found. Is any ordering wrong in a way that hides something?
+2. **The `60_000 ms` tolerance is my judgement**, defended by a measurement of
+   500 settlements on ONE morning. Nobody has watched the wobble over a week.
+3. **`MAX_AGE_MIN = 600` was reasoned, not measured.** 480 minutes is the normal
+   worst case; I added two hours of slack by argument alone.
+4. **The gate reads `SYMBOLS` from the module in check (j)** when asking Binance
+   about the interval. That is R-014's shape — an expectation taking its
+   coordinates from the file on trial. I judged it safe because the SYMBOL LIST
+   is not what that check judges, but I am the wrong person to be sure.
+5. **Nothing tests what happens when a rate is a valid number in a field that
+   Binance renames.** `_rate` names a missing `fundingRate`, but a venue that
+   started sending `fundingRateV2` beside a stale `fundingRate` would be read
+   silently and correctly-looking.
+
+## R-068 — **`_order()` IS CODE THAT EXISTS FOR A TEST, AND I SAY SO RATHER THAN HIDING IT**
+
+`_order(entries)` returns its argument unchanged. It exists so the drill can
+replace it with a sort-by-size and prove the gate refuses a ranked block (D5).
+
+**The argument for it:** "the three are never sorted" is a promise the Commander
+is invited to rely on, and a promise no check can reach is a promise nobody can
+keep. **The argument against it:** it is a seam in production code whose only
+purpose is testing, and a future reader may delete it as dead weight — at which
+point sabotage C10 becomes untestable and the gate quietly loses a check.
+
+**I could not settle it, so it is filed rather than argued in a commit message.
+CATEGORY B.**
+
+## R-069 — **THE LIVE EXACT-EQUALITY CHECK WILL GO RED IF A SETTLEMENT LANDS BETWEEN TWO FETCHES, AND I CHOSE THAT DELIBERATELY**
+
+Check (m) demands the module's figure and the gate's own figure agree **to the
+digit, with no tolerance**, because settled rates are historical facts. **But the
+two fetches are seconds apart, and Binance settles at 00:00, 08:00 and 16:00
+UTC.** If a settlement lands between them, the two windows differ by one row of
+twenty-one, the averages differ, and **the gate goes red on a file that is
+perfectly correct.**
+
+This is R-021's shape in a new file, and it was a choice: a tolerance would have
+made the strongest check on this ship into a weak one, and this failure is loud,
+rare and self-explaining. **But it is a booby trap for the session that runs the
+gate at 08:00:03 UTC and concludes the instrument is broken.**
+
+**IT IS WRITTEN INTO THE NEXT SESSION'S ORDERS UNDER "WHAT YOU WILL WALK INTO".**
+The honest repair, if a later session wants it: detect the straddle by comparing
+the two window-end stamps and re-fetch once, saying so out loud. **I did not
+build that, because I could not test it without waiting for a settlement, and I
+will not ship a repair whose only evidence is that it looks right. CATEGORY B.**
+
+## **>>> THE CATEGORY B PILE IS NOW THIRTY-SEVEN.**
+
+R-068 and R-069 are CATEGORY B. **R-067 is not: it is an open item against a
+build, of the same kind as R-058, and only a session that did not write
+`cockpit/carry.py` may clear it.**
+
+**R-066 IS STILL OPEN AND STILL UN-ATTACKED.** This session was exempt from
+looking at it and did not look at it. **Nothing was cleared this session, by
+anybody, including me.**

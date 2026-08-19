@@ -25,6 +25,7 @@ from cockpit.funding import section_text as funding_section
 from cockpit.whales import section_text as whales_section
 from cockpit.news import section_text as news_section
 from cockpit.events import section_text as events_section
+from cockpit.carry import section_text as carry_section
 
 TIMEFRAME = '4h'
 CANDLES = 300
@@ -96,6 +97,9 @@ def run_brief() -> int:
     print(whales_section())
     print(news_section())
     print(events_section())
+    # The Carry Monitor (Phase 4) prints BELOW the deck: it is its own
+    # instrument, not a sixth context line. Information, never a signal.
+    print(carry_section())
     print(f"\n{'=' * 62}")
     print(f"  {ok}/{len(ASSETS)} instruments reporting. "
           f"Facts, not advice — the pilot decides.")
