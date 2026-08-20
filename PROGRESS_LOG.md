@@ -14113,3 +14113,363 @@ anything else.**
 demanded. **It has now gone 2/3 twice on other days and this session did not
 reproduce it, so item 11 on his desk — the TwelveData key rotation — remains
 the first suspect and remains unproven.**
+
+---
+
+# 2026-08-20 (afternoon) — **THE TWENTY-FIFTH GENERATION. PART 1 ONLY. R-072 ATTACKED AND NOT CLEARED: THREE OF SIX REAL FAULTS WALKED THROUGH GATE 5.1 WHILE IT PRINTED `PASSED — 64 checks, 0 red`. AND R-066, UN-ATTACKED FOR THREE GENERATIONS, WAS ATTACKED AT LAST — ITS FOURTH FAULT EXISTS AND IT ESCAPES TOO.**
+
+**NOTHING WAS BUILT. NOTHING WAS REPAIRED. `journal/mirror.py` DOES NOT EXIST
+AND THIS SESSION DID NOT START IT.** The finding is graded BORDERLINE and the
+rule for BORDERLINE is: do not fix it, report, and stop. **The Commander rules.**
+
+**I held no exemption, asked for none, and attacked what my predecessor built.**
+
+---
+
+## 1. THE SHIP WAS PROVED ALIVE BEFORE ANYTHING WAS TOUCHED
+
+**All FOURTEEN invocations, output to files, red counted BY MACHINE three ways,
+then every hit READ BY EYE.**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0   58 green   63.3 s
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0   71 green  122.2 s
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0   88 green   58.5 s
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0   88 green   55.5 s
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0   OK/FAIL     5.2 s
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0   54 green    5.8 s
+    cockpit/events.py           GATE 3.4      PASSED  exit 0   69 green    0.5 s
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0   69 green    1.4 s
+    cockpit/whales.py           GATE 3.5-R1   PASSED  exit 0  107 green    8.3 s
+      the same file at TZ=UTC0  GATE 3.5-R1   PASSED  exit 0  107 green    6.6 s
+    cockpit/carry.py            GATE 4.1      PASSED  exit 0   87 green    4.5 s
+      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0   87 green    3.2 s
+    journal/log_trade.py        GATE 5.1      PASSED  exit 0   64 green    1.5 s
+      the same file at TZ=UTC0  GATE 5.1      PASSED  exit 0   64 green    0.5 s
+
+**1,013 GREEN ACROSS THE FOURTEEN. ZERO CROSS TICKS. NO NONZERO EXIT.**
+Vault **INTACT 6 of 6**. Brief **3/3**, whole output kept, all five Context Deck
+lines and the Carry line present. `journal/my_trades.csv` **does not exist**,
+which is correct.
+
+**THE THREE MACHINE COUNTS AND WHAT THEY CAUGHT.** Way 1 (the cross tick) — 0
+everywhere. Way 3 (`GATE .* FAILED`) — 0 everywhere. Way 2 (a red word as the
+FIRST WORD of a line) — **three hits, all prose, all read by eye:**
+`fear_greed` line 147 and `funding` line 190, both the phrase *"FAILURE, never
+a quiet pass"* inside their own PASS text; and **`funding` line 69, the word
+"escaped" starting a line — the trap the orders say has now fooled the counters
+of THREE consecutive sessions. It did not fool this one, because the orders
+named it.** That sentence in the orders did its job and is worth keeping.
+
+---
+
+## 2. WHAT I ATTACKED, AND THE BARS I WROTE DOWN BEFORE RUNNING ANYTHING
+
+The bars for "R-072 clears" and my candidate attacks were written to notes
+**before any sabotage was run**, so that I could not claim afterwards to have
+planned an attack I stumbled into.
+
+**THE FAMILY I CHOSE IS NOT ONE OF THE AUTHOR'S FIVE.** He named five places he
+had not looked; the best attack is one that appears nowhere on his list. Mine
+was this, reasoned out before I knew whether it would work:
+
+> `log_trade` has four settings that resolve from `None` in the body — `path`,
+> `assets`, `directions`, `now`. The gate exercises the module's own `ASSETS`
+> and `DIRECTIONS` on every call. It **injects** `path=` and `now=` on every
+> check that looks at the disk. **So the one line that stamps every real row he
+> will ever log — `datetime.now(timezone.utc)` — is executed by exactly ONE
+> check in the whole gate, and that check looks only at whether the returned
+> line starts with `logged: `.**
+
+---
+
+## 3. **MY FIRST RIG WAS CONTAMINATED AND ITS RESULTS WERE WORTHLESS. THIS IS RECORDED FIRST, BEFORE THE FINDING, BECAUSE IT NEARLY BECAME THE FINDING.**
+
+My first run reported A1 and A2 as **CAUGHT**. Both were false.
+
+My witness drives the doorway the way the shell does, which includes a call
+with **no `path`** — and that call **writes into the copy's own `journal/`
+folder**. I ran the witness against the same copy I then ran the gate against.
+The gate's last check — *"the REAL journal was never created or touched"* —
+found a `my_trades.csv` sitting there and went red **for a reason that had
+nothing whatever to do with the fault I had installed.** Both faults were
+scored CAUGHT by a red I had planted myself.
+
+**I caught it by reading which check went red instead of accepting the verdict.**
+Had I accepted it, I would have written up "attacked hard, found nothing" and
+cleared R-072 over two live escapes.
+
+**The repair: the witness and the gate now run against TWO SEPARATE COPIES.**
+Everything below rests only on the second, clean run. **Step 0.1 and 0.2 exist
+for exactly this, and this is the second time in three sessions that a rig, not
+a ship, produced the first answer.**
+
+---
+
+## 4. THE RESULT — SIX FAULTS, INSTALLED AS TEXT EDITS IN COPIES OUTSIDE THE REPO
+
+The writer refused on an ambiguous anchor, on an anchor splitting a CRLF pair,
+on a result carrying a bare LF, and on an edit that changed nothing.
+**Source: 51,279 bytes, 1,061 CRLF, 0 bare LF.**
+
+**AND ONE THING WORTH SAYING BECAUSE THE WRITER REFUSED RATHER THAN GUESSED:**
+the obvious one-line anchor for A1 **matches TWICE** — the gate's own T10
+sabotage `_stamp_local` copies the production line character for character. The
+anchor was lengthened to include the line after it, which is unique.
+
+    CONTROL   GATE 5.1 PASSED — 64 checks, 0 red.   exit 0
+              stamp offset from true UTC: +0.00 hours
+
+    A1  the REAL CLOCK relabelled UTC instead of converted
+        GATE 5.1 PASSED — 64 checks, 0 red.  exit 0   >>> ESCAPED
+    A2  the ARCHIVE moved to another filename (the B14 shape)
+        GATE 5.1 PASSED — 64 checks, 0 red.  exit 0   >>> ESCAPED
+    A3  the append REWRITES the file (mode `w`)
+        GATE 5.1 FAILED — 8 red of 64.       exit 1   >>> CAUGHT
+    A4  the feeling left in the case he typed
+        GATE 5.1 FAILED — 3 red of 64.       exit 1   >>> CAUGHT
+    A5  a module constant the gate DOES exercise (the stored coin name)
+        GATE 5.1 FAILED — 6 red of 64.       exit 1   >>> CAUGHT
+    A6  the same hole as A1, loudly: the real clock FROZEN at 2020
+        GATE 5.1 PASSED — 64 checks, 0 red.  exit 0   >>> ESCAPED
+
+**EVERY ONE OF THE SIX WAS PROVED TO CHANGE THE PRODUCTION PATH BEFORE ITS
+VERDICT WAS COUNTED, and the stamp was judged by its OFFSET FROM TRUE UTC
+rather than by string equality, because a timestamp differs on every run and a
+naive comparison would have scored all six "changed" for free.**
+
+**A3 AND A4 ARE THE REASON THE WITNESS LOGS TWO TRADES AND USES A MIXED-CASE
+FEELING.** My first witness logged one trade with `feeling='calm'`, and against
+it both A3 and A4 were **byte-identical to the control** — my own witness could
+not see either fault, and by my own BAR 2 their verdicts would have been
+worthless. **A witness that cannot see a fault cannot certify that the fault
+was not inert.**
+
+### WHAT THE THREE ESCAPES HAVE IN COMMON — THIS IS THE FINDING, AND IT IS ONE FINDING, NOT THREE
+
+**GATE 5.1 NEVER ONCE DRIVES THE DOORWAY THE WAY THE SHELL DRIVES IT.**
+
+The only real caller on this ship is line 314: `log_trade(*answers)` — **no
+`path`, no `now`.** Every one of the gate's 64 checks either injects both, or
+(check (a)'s first call) injects `path=` and inspects only the first eight
+characters of the return. **The two values the module resolves from its own
+constants on the real path — `TRADES_FILE` and `datetime.now(timezone.utc)` —
+are therefore judged by nothing at all.**
+
+A5 is the boundary and it is why this is a hole and not a slur on the gate:
+**a constant the gate DOES exercise is well defended** — breaking `ASSETS` turns
+six checks red. The gate is not decorative. It is blind in one specific region,
+and that region happens to be the production calling convention.
+
+**THE DRILL CANNOT SEE THIS EITHER, AND IT IS WORTH SAYING WHY.** The drill has
+**T10 — "the stamp written in LOCAL time wearing a UTC zone"** — which is A1's
+exact failure. T10 reports **CAUGHT** on the file carrying A1, because T10
+replaces `_stamp` wholesale and never reaches the edited branch. **The gate owns
+a sabotage for precisely this fault, runs it, passes it, and still cannot see
+the fault.**
+
+---
+
+## 5. **THE FINDING REPORT — FILLED IN BEFORE ANY REPAIR, AS THE PATTERN DEMANDS. NOTHING WAS REPAIRED.**
+
+### >>> THE COMMANDER'S THREE QUESTIONS
+
+**Q1 — WHAT INFORMATION IS THIS CODE FOR?**
+**The rows in `journal/my_trades.csv` — his own record of trades he has closed,
+in his own words.** For this finding specifically: **the `utc_time` column of
+every row**, and **the filename the archive lives under.**
+
+**Q2 — CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING, OR DELETED?**
+
+**NOT TODAY. THE SHIPPED FILE IS CORRECT AND I MEASURED IT, NOT ASSUMED IT:**
+the control's stamp offset from true UTC is **+0.00 hours**, and `TRADES_FILE`
+is `my_trades.csv`. **If he logs a trade this afternoon, the row is right.**
+
+**What I found is a hole in the GATE, not a fault in the file.** So the honest
+answer is **"YES, AFTER ONE MORE MISTAKE"**, and the form demands that the count
+be spelled out step by step:
+
+    STEP 1 (and there is no step 2) — somebody edits the `now is None` default
+           clock inside `_stamp`, or the `TRADES_FILE` line. For any reason at
+           all: the R-074 timestamp reconciliation, a refactor to unfreeze
+           globals (desk item 16), a timezone change.
+           -> from that moment every row is wrong, and NOTHING ANYWHERE SAYS SO.
+
+**I AM SAYING "ONE" AGAINST MY OWN INTEREST AND THE FORM ASKS ME TO SAY SO.**
+Whoever answers this question is also deciding their own workload — and here
+saying "two" would let me build the Mirror, while saying "one" stops the
+session. **It is one.** There is no second guard: not in the gate, not in the
+shell, not on the Brief (the logger is deliberately not on it).
+
+**AND THE THING THAT WEIGHS HEAVIER THAN THE COUNT.** `journal/my_trades.csv`
+is an **ARCHIVE**, and the Mirror will join it to `journal/snapshots_*.csv`
+**ON TIME**. A five-hour error would silently match every trade to the wrong
+market snapshot for the rest of the ship's life. **The form says foundation
+faults are treated harder even when the chain is longer.** And the very next
+piece of work anybody does here — **R-074, reconciling the two files' stamp
+formats — is a session with its hands on this exact line, protected by a gate
+that cannot see it.**
+
+**Q3 — IN REAL BUSINESS TERMS, NO COMPUTER WORDS**
+
+  **(a) What would he SEE on his screen?** For A1, this, and nothing else:
+
+        logged: BTC-USD long 100.50 -> 111.00, size 0.25, feeling calm,
+                at 2026-08-20T16:44:57+00:00
+
+  **It looks completely normal.** The true UTC time was `11:44:57`. Nothing
+  contradicts itself, nothing is visibly broken, and a stranger who knew
+  nothing about this ship would see an ordinary timestamp.
+  **(A6 is the exception and it is worth his knowing: a clock frozen at 2020
+  IS visible on its face — a 2020 date on a trade he closed today. The same
+  hole produces both, and the gate cannot tell them apart.)**
+
+  **(b) What would it COST him?** Every trade he logs from that day on, in all
+  three coins, stamped five hours wrong. When the Mirror finally runs, it joins
+  his trades to the market snapshot five hours away from the one he actually
+  traded — so **the Mirror's arithmetic would be right about the wrong moment**,
+  and it grades him against prices he never saw.
+
+  **(c) Would he EVER find out?** **Not from anything on this ship.** He would
+  have to remember what time he logged a trade weeks earlier and compare.
+
+  **(d) Can it be UNDONE?** **For A1, no** — the rows carry no second clock, so
+  an affected row is indistinguishable from a clean one without knowing when he
+  typed it. **For A2, yes** — rename the file back; every row inside it is
+  perfect. *(That asymmetry is exactly B14's, which was graded SERIOUS.)*
+
+### STEP 0 — IS THE FINDING TRUSTWORTHY?
+
+    0.1  Did the healthy, untouched system pass FIRST?     YES — control
+         64/0, offset +0.00 h; and the shipped file itself passed twice in
+         the arrival check.
+    0.2  Did you PRINT the broken output and show it wrong?  YES — the disk
+         bytes are quoted above.
+    0.3  Are you judging your OWN work?                     NO — I built
+         neither `journal/log_trade.py` nor GATE 5.1.
+
+**AND SAID OUT LOUD RATHER THAN BURIED: my FIRST run of this rig was
+contaminated and produced two false CAUGHT verdicts (section 3).** The finding
+rests only on the second, clean run.
+
+### STEP 1 — THE VETO QUESTION
+
+*Would it change something he would ACT on, or damage a record we keep?*
+**YES — it damages the record.** Continue.
+
+### STEP 2 — THE THREE BIG ONES
+
+    2.1  By accident, or only on purpose?          BY ACCIDENT.  ** BAD **
+         A session refactoring the stamp for R-074 does it with no malice
+         whatever.
+    2.2  Would he SEE it with his own eyes?        NO.           ** BAD **
+         Answered ONLY from what the output shows, in his own wording.
+         The line reads normally; spotting it needs the correct UTC time
+         known in advance.
+    2.3  Could it be UNDONE later?                 NO, for A1.   ** BAD **
+         For rows already written, there is nothing to correct them against.
+
+### STEP 3 — WHAT MAKES IT WORSE
+
+    3.1  Would the system still report "all fine"?   YES — `PASSED — 64
+         checks, 0 red`, exit 0, on a broken file. Three times.
+    3.2  Does it touch records that cannot be re-bought?  YES. Nobody
+         re-types a trade they logged in March.
+    3.3  Does it touch anything that TELLS HIM TO ACT?    No.
+    3.4  One thing once, or everything forever?     EVERYTHING, FOREVER —
+         every row from the edit onward.
+
+### STEP 4 — IN PLAIN WORDS
+
+**4.1** If somebody edits one line of `_stamp` for a perfectly good reason, his
+whole trade archive starts recording the wrong time, his gate keeps printing
+`64 checks, 0 red`, and nobody finds out until the Mirror grades him against
+prices he never traded at.
+
+**4.2 MY RECOMMENDATION: BORDERLINE. THE COMMANDER RULES.**
+
+**Why not SERIOUS:** by his own question — *"can this fault make that
+information wrong when the system is doing real work"* — the answer today is
+**NO**, and I measured it rather than assuming it. The shipped file is correct.
+**Why not SMALL:** it is ONE mistake away, on a foundation, with no second
+guard anywhere, and the form's own routing says a one-mistake-away finding
+reaches him rather than going in the pile. Steps 2.2 and 2.3 both answer badly.
+
+**AND THE HONEST COUNTER-ARGUMENT, PUT WHERE HE CAN SEE IT RATHER THAN LEFT
+OUT:** R-070 and R-071 were also gate holes and were graded SMALL last session.
+If he judges this one the same, **it becomes CATEGORY B, the pile goes to
+forty-four, and the next session builds the Mirror.** That is a completely
+defensible reading of his own form and I will not argue with it.
+
+**UNDER BORDERLINE I DID NOT REPAIR IT, AND I DID NOT BUILD.** I may recommend;
+I may never rule.
+
+**WHAT THE REPAIR WOULD BE, DESCRIBED SO HE CAN JUDGE THE SIZE OF IT** (not
+done, not started): three checks added to GATE 5.1 that drive the doorway with
+**no `path` and no `now`** — necessarily in a CHILD INTERPRETER against a copy
+of the module in a temporary tree, because a no-`path` call writes into the
+real `journal/` folder and that must never happen. The gate already owns that
+machinery in check (i). Then `EXPECTED_CHECKS` goes from 64 to 67.
+
+---
+
+## 6. **R-066 — ATTACKED AT LAST, AFTER THREE GENERATIONS. ITS SECOND DOUBT ASKED FOR THE FOURTH FAULT IN `_get`. THE FOURTH FAULT EXISTS.**
+
+R-066's doubt 2, in its author's own words: *"The three sabotages are the three
+faults I already knew about... The fourth fault in `_get` is the one that
+matters and I am the wrong person to imagine it."*
+
+**`_get` is four lines. The three existing sabotages pin the symbol, pin the
+path, and drop `raise_for_status`. That leaves one parameter nobody has ever
+attacked: `timeout`.**
+
+I stood up a server that **accepts the connection and then never replies** —
+what a wedged venue looks like from outside — and called the module's own `_get`
+against it.
+
+    CONTROL  `_get` keeps its timeout   -> ReadTimeout after   4.03 seconds
+    B1       `_get` loses its timeout   -> STILL HANGING after 25 seconds,
+                                           the call NEVER CAME BACK
+
+    GATE 3.5-R1 on the control : PASSED — 107 checks, 0 red.  exit 0
+    GATE 3.5-R1 on the broken  : PASSED — 107 checks, 0 red.  exit 0
+    >>> ESCAPED
+
+**IT IS THE SAME SHAPE AS THE R-072 FINDING**: the gate's own server answers
+instantly, so a missing timeout changes nothing it can observe, and `cockpit/
+brief.py` would hang forever with no Brief at all.
+
+**AND THE MEASUREMENT THAT ARGUES AGAINST OVERSTATING IT, MADE BECAUSE IT COULD
+HAVE TURNED THIS INTO A LIVE FAULT AND DID NOT:** I checked **every**
+`requests.get` on the ship outside `lab/` and `vendor/` — seventeen of them
+across six files — **and every single one carries a timeout today.** Verified
+line by line including the twelve that wrap onto a second line.
+**So B1 is a gate hole, not a live fault, exactly like the R-072 finding.**
+
+**I DID NOT CLEAR R-066 AND I DID NOT REPAIR IT.** I attacked one of its five
+doubts and answered it: the fourth fault is real and the gate cannot see it.
+Doubts 1, 3, 4 and 5 remain untouched. **R-066 stays OPEN** — and it is no
+longer un-attacked.
+
+---
+
+## 7. WHAT I GOT WRONG, PLAINLY
+
+1. **I contaminated my own rig and it produced two false CAUGHT verdicts.**
+   Section 3. Caught by reading which check went red, not by any check of mine.
+2. **My first witness was too weak to see two of my own faults.** A3 and A4 were
+   byte-identical to the control under it. Fixed by logging two trades and using
+   a mixed-case feeling — but I had already written the verdicts down once.
+3. **My prediction for A1 was that the gate would stay green, and my prediction
+   for A2 was the same — and on the contaminated run I recorded them as CAUGHT
+   and believed it for several minutes.** The notes I wrote in advance are what
+   let me notice the results disagreed with the reasoning.
+4. **I used an anchor that matched twice** on the first attempt at A1. The
+   writer refused rather than replacing both, which is the only reason this is
+   a footnote and not a fifth mistake.
+
+## 8. THE SHIP AFTER THE WORK
+
+**IDENTICAL TO THE SHIP BEFORE IT.** Nothing was built, nothing repaired,
+nothing committed but documents. `git status` clean apart from
+`journal/oi_recorder.log`, which is untracked and is not this session's.
+**`journal/my_trades.csv` still does not exist, and no run of mine created it.**

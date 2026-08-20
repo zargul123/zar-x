@@ -519,3 +519,44 @@ not build.
 | **>>> THE PREFIX-HASH RECIPE IN `SESSION_ORDERS.md` WAS WRONG FOR SIX OF THE SEVEN FILES IN ITS OWN TABLE** | The written recipe — *"the prefix BEFORE the `__main__` line, WITHOUT the anchor line, no trailing separator"* — reproduces **`cockpit/carry.py` only**. Every variant was tried against all seven: **CRLF WITH a trailing separator, excluding the anchor, matches 6 of 7**; the written recipe matches 1 of 7; every LF variant matches 0 of 7. Three of the seven line numbers are off by one as well. **Following the orders literally produces seven "the production half MOVED" alarms on files `git status` says are untouched.** The corrected table, both ways, is in `PROGRESS_LOG.md` 2026-08-20 and in the orders. **A hash whose recipe nobody can reproduce is a number, not a proof.** |
 | **`cockpit/carry.py --gate` runs in ~4 s, not the ~35 s on record** | Same file, same machine, live check (m) present and green with real money in it (BTC +6.18%, ETH +4.85%, SOL +1.50%). Binance latency dominates and moves by a large factor. **This is the fourth time a gate timing on record has turned out to be one unrepresentative reading. A gate timing is a weather report, not a check.** |
 | **The Morning Brief** | **3/3 instruments, exit 0**, whole output kept as the orders demanded. **It did NOT reproduce the 2/3 seen twice before**, so item 11 on his desk (the TwelveData key rotation) remains the first suspect and remains unproven. |
+
+---
+
+# MEASURED FACTS ADDED 2026-08-20 (afternoon) — THE TWENTY-FIFTH GENERATION
+
+**NOTHING SHIPPED THIS SESSION.** No file was built, no file was repaired, and
+no tick moves in the table above. **What follows is measurement only, and two
+of the four measurements argue AGAINST the session's own finding.**
+
+| What was measured | The measurement |
+|---|---|
+| **GATE 5.1 NEVER DRIVES `journal/log_trade.py` THE WAY THE SHELL DRIVES IT, AND THREE REAL FAULTS WALK THROUGH IT.** | Six faults installed as **TEXT EDITS** in copies outside the repo, control first, each proved to change the production path before its verdict counted. **CONTROL: `PASSED — 64 checks, 0 red`, stamp offset from true UTC `+0.00 hours`.** **THREE ESCAPED, all printing `PASSED — 64 checks, 0 red`, exit 0:** the real clock relabelled UTC instead of converted (**every row five hours wrong, wearing a `+00:00` that says it is not** — measured offset `+5.00 h`); the archive moved to another filename (B14's shape); the real clock frozen at 2020. **THREE WERE CAUGHT:** the append rewriting the file (8 red), the feeling left in the typed case (3 red), and — **the boundary that proves the gate is not decorative** — breaking a module constant the gate DOES exercise, `ASSETS` (6 red). **THE HOLE IS ONE HOLE:** the only real caller is `log_trade(*answers)` with **no `path` and no `now`**, and every one of the 64 checks injects both or reads only the first eight characters of the return, so `TRADES_FILE` and `datetime.now(timezone.utc)` are judged by nothing. **THE DRILL OWNS T10 — a sabotage for this exact fault — reports it CAUGHT, and still cannot see it**, because T10 replaces `_stamp` wholesale and never reaches the edited branch. Graded **BORDERLINE**; **not repaired**; the Commander rules. **R-072 OPEN. R-076 filed against this attack by its own author.** |
+| **THE SHIPPED `journal/log_trade.py` IS CORRECT TODAY — MEASURED, NOT ASSUMED, AND IT ARGUES AGAINST THE FINDING.** | The untouched control's stamp offset from true UTC is **`+0.00 hours`** and `TRADES_FILE` resolves to `my_trades.csv`. **If he logs a trade today, the row is right.** The finding above is a hole in the gate, not a fault in the file. Recorded here in the file that answers *"what exists and works"* precisely because a session that finds something is under pressure to overstate it. |
+| **THE FOURTH FAULT IN `cockpit/whales.py`'s `_get` EXISTS AND GATE 3.5-R1 CANNOT SEE IT — R-066's DOUBT 2, ANSWERED AFTER THREE GENERATIONS.** | `_get` is four lines; the three existing sabotages pin the symbol, pin the path and drop `raise_for_status`, leaving one parameter nobody had attacked: `timeout`. Against a server that **accepts the connection and never replies** — what a wedged venue looks like from outside — **the control returns `ReadTimeout` after 4.03 seconds and the broken one NEVER RETURNS (still hanging at 25 s). Both gates print `PASSED — 107 checks, 0 red`, exit 0.** The gate's own server answers instantly, so a missing timeout changes nothing it can observe, and `cockpit/brief.py` would hang forever with no Brief at all. **R-077, CATEGORY B. R-066 stays OPEN with four of five doubts untested, but it is NO LONGER UN-ATTACKED.** |
+| **EVERY NETWORK CALL ON THE SHIP CARRIES A TIMEOUT TODAY — MEASURED, AND IT KEEPS THE FAULT ABOVE FROM BEING OVERSTATED.** | **Seventeen `requests.get` calls across six files** outside `lab/` and `vendor/` (`cockpit/carry.py`, `cockpit/fear_greed.py`, `cockpit/funding.py`, `cockpit/news.py`, `cockpit/whales.py`, `data/open_interest.py`), **verified line by line including the twelve that wrap onto a second line. All seventeen carry a timeout.** So R-077 is a gate hole, not a live fault — the same shape as the R-072 finding. |
+
+## THE ARRIVAL CHECK, MEASURED THIS AFTERNOON
+
+**Fourteen invocations · 1,013 green · ZERO cross ticks · no nonzero exit ·
+vault INTACT 6 of 6 · Brief 3/3.**
+
+    fear_greed 58 · funding 71 · open_interest 88 + 88 · collection_guard OK
+    news 54 · events 69 + 69 · whales 107 + 107 · carry 87 + 87
+    log_trade 64 + 64
+
+**TIMINGS, AND THEY ARE WEATHER REPORTS RATHER THAN CHECKS:** `fear_greed` 63 s
+(against ~40 s on record), `funding` 122 s, `open_interest` 59 s and 56 s,
+`collection_guard` 5 s, `news` 6 s, `events` 0.5 s and 1.4 s, `whales` 8 s and
+7 s, **`carry` 5 s and 3 s against ~35 s on record**, `log_trade` 1.5 s and
+0.5 s. **This is the fifth time a timing on record has turned out to be one
+unrepresentative reading. Never conclude a check was skipped because a gate was
+fast — read its output.**
+
+**THE THREE MACHINE RED-COUNTS AND THE TRAP THAT DID NOT WORK THIS TIME.** The
+cross tick: 0 everywhere. `GATE .* FAILED`: 0 everywhere. A red word as the
+first word of a line: **three hits, all prose, all read by eye** — *"FAILURE,
+never a quiet pass"* inside `fear_greed`'s and `funding`'s own PASS text, and
+**`funding` line 69, the word "escaped" starting a line, which the orders say
+has fooled the counters of three consecutive sessions.** It did not fool this
+one **because the orders named it**, which is the clearest evidence yet that the
+"what you will walk into" section of the orders earns its length.

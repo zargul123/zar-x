@@ -434,6 +434,73 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-08-20 (afternoon): PHASE 5 IS STILL HALF BUILT AND THE MIRROR WAS NOT STARTED. R-072 WAS ATTACKED AND DID NOT SURVIVE — THREE OF SIX REAL FAULTS WALKED THROUGH GATE 5.1 WHILE IT PRINTED `PASSED — 64 checks, 0 red`. GRADED BORDERLINE. NOTHING REPAIRED, NOTHING BUILT, AWAITING THE COMMANDER'S RULING.**
+
+**WHERE THE SHIP IS.** Every gate green, proved before anything was touched.
+**Fourteen invocations, 1,013 green, ZERO cross ticks, no nonzero exit.**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0   58 green   63 s
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0   71 green  122 s
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0   88 green   59 s
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0   88 green   56 s
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0   OK/FAIL     5 s
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0   54 green    6 s
+    cockpit/events.py           GATE 3.4      PASSED  exit 0   69 green    1 s
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0   69 green    1 s
+    cockpit/whales.py           GATE 3.5-R1   PASSED  exit 0  107 green    8 s
+      the same file at TZ=UTC0  GATE 3.5-R1   PASSED  exit 0  107 green    7 s
+    cockpit/carry.py            GATE 4.1      PASSED  exit 0   87 green    5 s
+      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0   87 green    3 s
+    journal/log_trade.py        GATE 5.1      PASSED  exit 0   64 green    2 s
+      the same file at TZ=UTC0  GATE 5.1      PASSED  exit 0   64 green    1 s
+    vault INTACT 6 of 6 · Brief 3/3 · lab/ untouched
+    journal/my_trades.csv DOES NOT EXIST — his first real trade creates it
+
+**>>> WHAT IS BROKEN, STATED AS THE MARKER MUST STATE IT.**
+
+**1. GATE 5.1 NEVER ONCE DRIVES THE DOORWAY THE WAY THE SHELL DRIVES IT.** The
+only real caller is `log_trade(*answers)` — **no `path`, no `now`.** Every one
+of the 64 checks injects both, or inspects only the first eight characters of
+the return. **So `TRADES_FILE` and `datetime.now(timezone.utc)` — the two
+values the production path resolves from the module's own constants — are
+judged by nothing.** Proved by three text-edit faults that each left the gate
+printing `PASSED — 64 checks, 0 red`: the real clock relabelled UTC instead of
+converted (**every row five hours wrong, wearing a `+00:00` that says it is
+not**), the archive moved to another filename (B14's shape), and the real clock
+frozen at 2020. **The drill owns T10, a sabotage for precisely this fault,
+reports it CAUGHT, and still cannot see it — T10 replaces `_stamp` wholesale
+and never reaches the edited branch.**
+
+**THE SHIPPED FILE IS CORRECT TODAY AND THAT WAS MEASURED, NOT ASSUMED:** the
+control's stamp offset from true UTC is **+0.00 hours** and `TRADES_FILE` is
+`my_trades.csv`. **This is a hole in the gate, not a fault in the file — it is
+ONE mistake away from being a fault in the file, and R-074 is a session with
+its hands on that exact line.** Graded **BORDERLINE**; not repaired; his ruling.
+
+**2. `cockpit/whales.py`'s `_get` HANGS FOREVER IF ITS TIMEOUT IS EVER LOST,
+AND GATE 3.5-R1 CANNOT SEE THAT EITHER.** R-077. Against a server that accepts
+and never replies: the control returns `ReadTimeout` in 4.03 s, the broken one
+never returns; **both gates print `PASSED — 107 checks, 0 red`.** **MEASURED:
+all seventeen `requests.get` calls on the ship outside `lab/` and `vendor/`
+carry a timeout today**, so this too is a gate hole and not a live fault.
+
+**3. `journal/mirror.py` DOES NOT EXIST.** Phase 5's second half is unstarted.
+The plan's own sentence for Phase 5 — *"log 2 fake trades, RUN MIRROR, numbers
+check out by hand"* — is still half unmet, and GATE 5.1 says so in its own pass
+text rather than in a footnote.
+
+**4. R-066 IS OPEN WITH FOUR OF ITS FIVE DOUBTS UNTESTED.** It is **no longer
+un-attacked** — doubt 2 was attacked this session and was right. Doubts 1, 3, 4
+and 5 are untouched by anybody.
+
+**5. THE CATEGORY B PILE IS FORTY-FOUR**, cleared before the ship is used for
+real, at the same moment `cockpit/brief.py` gets its gate.
+
+**A NOTE ON THE TIMINGS ABOVE:** `cockpit/carry.py --gate` took 5 s against
+~35 s on record, and `fear_greed` took 63 s against ~40 s. **A gate timing is a
+weather report, not a check. Never conclude a check was skipped because a gate
+was fast — read its output.**
+
 ## **>>> 2026-08-20 (morning): PHASE 5 IS HALF BUILT. `journal/log_trade.py` SHIPPED UNDER GATE 5.1 — 64 CHECKS, 0 RED, TWICE, AND CERTIFIED BY ATTACK. R-067 IS CLEARED BY A SESSION THAT DID NOT BUILD `cockpit/carry.py`.**
 
 **WHERE THE SHIP IS.** Every gate green, proved before anything was touched.

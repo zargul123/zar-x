@@ -4526,3 +4526,118 @@ the sentence; it is not a resolution and it must not fade.**
 
 **One item was cleared this session — R-067 — by a session that did not build
 what it cleared. Nothing else was cleared by anybody, including me.**
+
+---
+
+# 2026-08-20 (afternoon) — THE TWENTY-FIFTH GENERATION
+
+## R-072 — **ATTACKED, AND NOT CLEARED. THREE OF SIX REAL FAULTS WALKED THROUGH GATE 5.1 WHILE IT PRINTED `PASSED — 64 checks, 0 red`.** · **OPEN, AWAITING THE COMMANDER'S RULING**
+
+**I did not build `journal/log_trade.py` or GATE 5.1, so I was entitled to clear
+this. I am not clearing it.**
+
+Six faults installed as **TEXT EDITS** in copies outside the repo, control
+first, every one proved to change the production path before its verdict was
+counted:
+
+    CONTROL                                       PASSED 64/0   offset +0.00 h
+    A1  the REAL CLOCK relabelled UTC             PASSED 64/0   ESCAPED
+    A2  the archive moved to another filename     PASSED 64/0   ESCAPED
+    A3  the append REWRITES the file (mode `w`)   FAILED  8 red CAUGHT
+    A4  the feeling left in the case he typed     FAILED  3 red CAUGHT
+    A5  a constant the gate DOES exercise         FAILED  6 red CAUGHT
+    A6  the real clock FROZEN at 2020             PASSED 64/0   ESCAPED
+
+**THE THREE ESCAPES ARE ONE HOLE, NOT THREE: GATE 5.1 NEVER ONCE DRIVES THE
+DOORWAY THE WAY THE SHELL DRIVES IT** — `log_trade(*answers)`, with no `path`
+and no `now`. Every check injects both, or looks only at the first eight
+characters of the return. **So `TRADES_FILE` and `datetime.now(timezone.utc)`,
+the two values the real path resolves from the module's own constants, are
+judged by nothing.**
+
+**A5 IS THE BOUNDARY AND IT MATTERS: THE GATE IS NOT DECORATIVE.** A constant it
+does exercise is well defended — breaking `ASSETS` turns six checks red. It is
+blind in one region, and that region is the production calling convention.
+
+**THE DRILL OWNS A SABOTAGE FOR THIS EXACT FAULT AND STILL CANNOT SEE IT.** T10
+— *"the stamp written in LOCAL time wearing a UTC zone"* — reports **CAUGHT** on
+the file carrying A1, because T10 replaces `_stamp` wholesale and never reaches
+the edited branch.
+
+**GRADED BORDERLINE**, with the full Finding Report in `PROGRESS_LOG.md`
+2026-08-20 (afternoon). **Not SERIOUS: the shipped file is correct today and I
+MEASURED that (+0.00 h offset), not assumed it. Not SMALL: it is ONE mistake
+away, on a foundation the Mirror will stand on, with no second guard anywhere.**
+**The Commander rules. Nothing was repaired and nothing was built.**
+
+**HIS DEFENSIBLE ALTERNATIVE, STATED SO IT IS NOT HIDDEN:** R-070 and R-071 were
+gate holes too and were graded SMALL. If he grades this one SMALL, it becomes
+CATEGORY B, the pile goes to forty-four, and the next session builds the Mirror.
+
+## R-076 — **AGAINST MY OWN ATTACK. OPEN. I MAY NOT CLEAR IT.** · CATEGORY B
+
+1. **>>> MY FIRST RIG WAS CONTAMINATED AND SCORED TWO LIVE ESCAPES AS `CAUGHT`.**
+   My witness calls the doorway with no `path`, which writes into the copy's own
+   `journal/` folder; I ran it against the same copy I then gated, so the gate's
+   last check went red for a reason of my own making. **I found it by reading
+   WHICH check went red instead of accepting the verdict. Nothing in my rig
+   would have told me.** The fix — two separate copies — is one line and is not
+   itself checked by anything.
+2. **MY FIRST WITNESS COULD NOT SEE TWO OF MY OWN SIX FAULTS.** A3 and A4 came
+   back byte-identical to the control until I logged a second trade and used a
+   mixed-case feeling. **A witness's blindness is invisible from inside the
+   witness**, and I have no way to know whether the strengthened one is blind to
+   a seventh fault I did not think of.
+3. **I ATTACKED ONE FAMILY.** The production calling convention. **A gate is
+   strongest exactly where it has been attacked, which is the same as saying it
+   is weakest everywhere else** — and the author's own five doubts (the seven
+   `input()` calls in order, `_needs_header` on a header deleted by hand, the
+   partial write, the `!r` echo, `_feeling` vs `_why`) are **still unattacked by
+   anybody**, including me.
+4. **MY "ONE MISTAKE AWAY" COUNT IS A JUDGEMENT, NOT A MEASUREMENT.** The form
+   warns that whoever answers it is deciding their own workload. Mine pointed
+   against my interest, which is worth something and is not proof.
+5. **I DID NOT TEST THE `except OSError` / `except Exception` BRANCH OF
+   `log_trade`.** It is the only branch that can return `[not logged: ...]`
+   while bytes are already on the disk. I could not reach it with one edit and
+   I did not manufacture a way. It sits next to R-073 and remains unexamined.
+
+## R-077 — **THE FOURTH FAULT IN `_get` — `cockpit/whales.py` HANGS FOREVER IF ITS TIMEOUT IS EVER LOST, AND GATE 3.5-R1 CANNOT SEE IT** · CATEGORY B · OPEN
+
+**R-066's doubt 2 asked for exactly this and it is now answered.** Against a
+server that accepts the connection and never replies:
+
+    CONTROL  `_get` keeps its timeout  -> ReadTimeout after   4.03 seconds
+    B1       `_get` loses its timeout  -> STILL HANGING after 25 seconds
+
+    GATE 3.5-R1 on both: PASSED — 107 checks, 0 red. exit 0.   ESCAPED
+
+The gate's own server answers instantly, so a missing timeout changes nothing it
+can observe. **`cockpit/brief.py` would hang forever and produce no Brief.**
+
+**MEASURED, AND IT ARGUES AGAINST OVERSTATING THIS:** every `requests.get` on
+the ship outside `lab/` and `vendor/` — **seventeen across six files — carries a
+timeout today**, verified line by line including the twelve that wrap. **This is
+a gate hole, not a live fault.** Filed CATEGORY B rather than raised, because
+unlike the R-072 finding it is not on the foundation the Mirror stands on.
+
+## R-066 — **STILL OPEN. NO LONGER UN-ATTACKED.**
+
+**I attacked doubt 2 and it was right: the fourth fault exists and it escapes**
+(R-077). **I did not build the `_get` repair, but I am not clearing R-066** —
+one of its five doubts was tested and four were not. Doubts 1 (real-venue
+behaviour: redirects, gzip, 429, reset mid-body), 3 (the listening socket under
+a firewall or a real proxy), 4 and 5 are **untouched by anybody.**
+
+**The sentence "R-066 is still un-attacked" may now be retired. "R-066 is still
+OPEN, with four of five doubts untested" replaces it, and must be carried
+forward until somebody does that work.**
+
+## **>>> THE CATEGORY B PILE IS NOW FORTY-FOUR.**
+
+R-076 and R-077 are CATEGORY B. **R-072 is not: it is an open item against a
+build, awaiting the Commander's ruling.**
+
+**NOTHING WAS CLEARED THIS SESSION, BY ANYBODY, INCLUDING ME.** R-070, R-071,
+R-073, R-074 and R-075 are their author's and I may not clear them; R-072 I
+could have cleared and did not, because it did not survive the attack.
