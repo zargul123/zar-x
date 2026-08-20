@@ -4714,3 +4714,74 @@ Unchanged by this evening's work.
 R-078 joins it. **Nothing was cleared this session by anybody, including me:
 R-072 I could not clear because I repaired it, R-076 and R-078 are mine, and
 R-070, R-071, R-073, R-074, R-075 and R-077 belong to their own authors.**
+
+---
+
+# 2026-08-20 (night) — THE SECOND REPAIR, AND THE DOUBTS AGAINST IT
+
+## R-077 — **THE COMMANDER RULED IT SHOULD BE REPAIRED. REPAIRED UNDER GATE 3.5-R2. STILL OPEN — A SESSION MAY NOT CLEAR ITS OWN REPAIR.**
+
+His ruling, in his own words: **"ok so we should repair the whale thing and
+then next session will attack the repairs."**
+
+**REPAIRED.** Four checks, 107 -> 111. A server that accepts the connection and
+never replies, the module's own `_get` proved to come back **on its own** in
+3.03 s, proved to come back as a **timeout** by the words `_why` puts on his
+screen, and — the half that makes the rest mean anything — **the same request
+with no timeout proved NOT to come back**, every run, forever.
+
+**Re-run as a real text edit, control first: `FAILED — 2 red of 111`, exit 1.
+Before tonight the same edit produced `PASSED — 107 checks, 0 red`.**
+
+**R-077 STAYS OPEN.** I found the fault and I wrote the fix.
+
+## R-079 — **AGAINST MY OWN REPAIR. OPEN. I MAY NOT CLEAR IT.** · CATEGORY B
+
+1. **>>> THE FIRST DRAFT DIED IN A TRACEBACK UNDER THE VERY FAULT IT WAS BUILT
+   FOR, AND THE HEALTHY GATE PASSED 111/0 WITH THAT BUG IN IT.** `answer['how']`
+   is set inside the worker thread, and a call that never comes back never gets
+   there. **A guard on a detail line is only ever executed when the check
+   FAILS, so no number of green runs could have found it.** Repaired by seeding
+   the dict before the thread starts. **The lesson is not that I fixed it — it
+   is that only the attack could have found it, and I have no way to know
+   whether S2, S3 and S4 hide the same class of bug in a failure mode I did not
+   trigger.**
+2. **THERE IS A BENIGN RACE IN `_timed` AND I AM NAMING IT RATHER THAN HOPING.**
+   If the worker finishes in the instant after `join()` times out, `stuck` is
+   True while `how` may say `returned`. **The VERDICT is taken from `stuck`, so
+   no grade can move** — but the detail line printed beside it could contradict
+   itself, and a reader would be right to distrust it.
+3. **THE 3-SECOND / 8-SECOND NUMBERS ARE A JUDGEMENT, NOT A MEASUREMENT.** I
+   argued nothing on this ship produces a value between eight seconds and
+   forever. **A venue that is merely very slow — thirty seconds, say — would
+   make S1 go red and it would be the venue, not the code.** No session has run
+   this check on a slow or congested link.
+4. **THIS GATE STILL DOES NOT KNOW HOW MANY CHECKS IT OWES.** I moved it from
+   107 to 111 and **nothing anywhere verified that number.** That is R-070, it
+   is his to rule on, and **it is now demonstrated inside the very file that
+   proves the point.**
+5. **IT DOES NOT PROVE "ONE REQUEST, NO RETRIES".** `_get`'s docstring claims
+   it; this check does not test it. **Said so the new green ticks do not imply
+   more than they earned.**
+6. **THIS GATE NOW BINDS A SECOND LOCAL PORT AND LEAVES A HUNG THREAD BEHIND ON
+   EVERY RUN, ON PURPOSE.** Both are deliberate and both are written into the
+   code beside themselves. **Nobody has run this on a machine with a
+   restrictive firewall or a real proxy configured** — which is R-066's doubt 3,
+   still untested, now doubled.
+
+## R-066 — **STILL OPEN, BUT ITS SECOND DOUBT IS NOW ANSWERED AND REPAIRED.**
+
+Doubt 2 asked for *"the fourth fault in `_get`... I am the wrong person to
+imagine it"*. **It was found, proved, and is now caught by GATE 3.5-R2.**
+Doubts 1 (real-venue behaviour: redirects, gzip, a 429 with `Retry-After`, a
+reset mid-body), 3 (the socket under a firewall or a real proxy — **now with
+two ports and a hung thread to worry about**), 4 and 5 remain untested.
+
+## **>>> THE CATEGORY B PILE IS NOW FORTY-SIX.**
+
+R-079 joins it. **Nothing was cleared this session by anybody, including me.**
+
+**FOUR ITEMS NOW STAND AGAINST THIS SESSION'S OWN WORK — R-072, R-076, R-077,
+R-078 AND R-079 — AND THE SAME MIND FOUND THE FAULT AND WROTE THE FIX IN BOTH
+REPAIRS.** The Commander has already said what happens next, in words:
+**"next session will attack the repairs."**

@@ -434,6 +434,84 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-08-20 (night): BOTH REPAIRS ARE IN. GATE 5.1-R1 PASSED 70/0 AND GATE 3.5-R2 PASSED 111/0, EACH THREE TIMES. EVERY FAULT FOUND TODAY IS NOW CAUGHT. PHASE 5 IS STILL HALF BUILT, BY HIS ORDER: "next session will attack the repairs".**
+
+**WHERE THE SHIP IS.**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red   58 green
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red   71 green
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  (OK/FAIL)
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red   54 green
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red   69 green
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red   69 green
+    cockpit/whales.py           GATE 3.5-R2   PASSED  exit 0  0 red  111 green
+      the same file at TZ=UTC0  GATE 3.5-R2   PASSED  exit 0  0 red  111 green
+    cockpit/carry.py            GATE 4.1      PASSED  exit 0  0 red   87 green
+      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0  0 red   87 green
+    journal/log_trade.py        GATE 5.1-R1   PASSED  exit 0  0 red   70 green
+      the same file at TZ=UTC0  GATE 5.1-R1   PASSED  exit 0  0 red   70 green
+    vault INTACT 6 of 6 · Brief 3/3 (Whale watch 6 of 6) · lab/ untouched
+    journal/my_trades.csv DOES NOT EXIST — his first real trade creates it
+
+**WHAT THE TWO REPAIRS CLOSED.**
+
+**GATE 5.1-R1** — the gate never called the trade logger the way its only real
+caller calls it (`log_trade(*answers)`, no `path`, no `now`), so `TRADES_FILE`
+and `datetime.now(timezone.utc)` were judged by nothing. Check (m), six checks,
+in a child interpreter against a byte copy in a temporary tree. **Three faults
+that printed `PASSED — 64 checks, 0 red` this morning now turn it red.**
+
+**GATE 3.5-R2** — `_get` hangs forever if its timeout is ever lost, and the
+door server answers too fast to notice. Four checks against a server that
+**accepts and never replies**: the honest call proved to return (3.03 s), proved
+to return as a **timeout** through `_why`, and the same call with no timeout
+proved **not** to return (8.00 s) — the positive control that makes the rest
+mean anything. **The same edit printed `PASSED — 107 checks, 0 red` this
+afternoon; it now prints `FAILED — 2 red of 111`.**
+
+**>>> WHAT IS STILL BROKEN OR UNPROVEN.**
+
+**1. FIVE ITEMS STAND AGAINST THIS SESSION'S OWN WORK — R-072, R-076, R-077,
+R-078, R-079 — AND THE SAME MIND FOUND THE FAULT AND WROTE THE FIX IN BOTH
+REPAIRS.** Nobody else has looked at either. **The Commander has already ruled
+what happens next, in words: "next session will attack the repairs."**
+
+**2. THE FIRST DRAFT OF GATE 3.5-R2 DIED IN A TRACEBACK UNDER THE VERY FAULT IT
+WAS BUILT FOR — AND THE HEALTHY GATE PASSED 111/0 WITH THAT BUG IN IT.** A
+guard on a detail line is only executed when the check FAILS, so **no number of
+green runs could have found it; the attack found it on the first try.** Fixed.
+**R-079 doubt 1 records that I cannot know whether S2, S3 and S4 hide the same
+class of bug in a failure mode I did not trigger.**
+
+**3. NEITHER NEW CHECK HAS A PERMANENT DRILL SABOTAGE, BY CONSTRUCTION.** Check
+(m) cannot be reached by a `globals()` swap at all (it runs in a child
+interpreter); GATE 3.5-R2's S3 is itself a permanent every-run proof and needs
+no drill entry. **Both are said out loud in the gates' own text. Both are
+certified by attacks run once, by hand, today.**
+
+**4. `cockpit/whales.py` WENT FROM 107 CHECKS TO 111 AND NOTHING VERIFIED THAT
+NUMBER.** That is **R-070**, it is on his desk, and it is now demonstrated
+inside the very file that proves the point. `journal/log_trade.py` (70) is
+still the only gate on this ship that knows how many checks it owes.
+
+**5. THE TOLERANCES IN BOTH REPAIRS ARE REASONING, NOT MEASUREMENT.** Two
+seconds on the trade logger's clock window; three and eight seconds on the
+whale watch. **A clock drifting by minutes, or a venue merely very slow, would
+move either.** R-078 doubt 2, R-079 doubt 3.
+
+**6. `journal/mirror.py` DOES NOT EXIST.** Phase 5's second half is unstarted,
+**by his order.** R-074 — the two files disagree about what a time looks like —
+is still the first thing whoever builds it will meet.
+
+**7. R-066 IS OPEN WITH FOUR OF FIVE DOUBTS UNTESTED.** Its doubt 2 is now
+answered AND repaired. **Doubt 3 is worse than it was: this gate now binds TWO
+local ports and leaves a hung daemon thread behind on every run, on purpose,
+and nobody has run it behind a firewall or a real proxy.**
+
+**8. THE CATEGORY B PILE IS FORTY-SIX.**
+
 ## **>>> 2026-08-20 (evening): THE COMMANDER RULED R-072 SERIOUS AND IT IS REPAIRED. GATE 5.1-R1 PASSED — 70 CHECKS, 0 RED, THREE TIMES. ALL SIX REAL FAULTS ARE NOW CAUGHT, INCLUDING THE THREE THAT WALKED THROUGH THIS MORNING. PHASE 5 IS STILL HALF BUILT AND THAT IS THE RULE WORKING, NOT A DELAY.**
 
 **WHERE THE SHIP IS.**

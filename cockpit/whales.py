@@ -1249,6 +1249,7 @@ if __name__ == '__main__':
           "\n    ONE REQUEST TO BINANCE IS MADE BY THIS CHECK.**")
 
     import http.server
+    import socket
     import socketserver
     import threading
     import urllib.parse
@@ -1570,6 +1571,133 @@ if __name__ == '__main__':
          and POPULATIONS == (('top accounts', TOP_PATH),
                              ('all accounts', ALL_PATH)),
          "every constant and every function this drill touched is back")
+
+    print("\n>>> GATE 3.5-R2 — THE VENUE THAT ACCEPTS AND NEVER ANSWERS."
+          "\n    Added 2026-08-20 (night) on the Commander's ruling, after a"
+          "\n    session that did not build this file answered R-066's second"
+          "\n    doubt — *the fourth fault in `_get` is the one that matters"
+          "\n    and I am the wrong person to imagine it*. `_get` is four"
+          "\n    lines; the three sabotages above pin the symbol, pin the path"
+          "\n    and drop `raise_for_status`. **THAT LEFT ONE PARAMETER NOBODY"
+          "\n    HAD EVER ATTACKED: `timeout`.** Strip it and the call never"
+          "\n    comes back — no Brief at all, forever — while this gate"
+          "\n    printed `107 checks, 0 red`. **THE DOOR SERVER ABOVE ANSWERS"
+          "\n    INSTANTLY, SO A MISSING TIMEOUT CHANGES NOTHING IT CAN SEE.**"
+          "\n    This server is the opposite: it accepts the connection and"
+          "\n    then says nothing at all, which is what a wedged venue looks"
+          "\n    like from the outside.")
+
+    # THE NUMBERS ARE TYPED OUT HERE AND THE REASON IS WRITTEN DOWN, so that
+    # no later session trims the patience to make this gate feel faster.
+    # An honest `_get` comes back in about three seconds. The fault this
+    # exists to catch is "never returns", which is unbounded — there is no
+    # value between eight seconds and forever that this ship produces.
+    SILENT_TIMEOUT = 3
+    SILENT_PATIENCE = 8
+
+    silent_listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    silent_listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    silent_listener.bind(('127.0.0.1', 0))
+    silent_listener.listen(8)          # more than one call arrives here
+    SILENT_URL = 'http://127.0.0.1:%d' % silent_listener.getsockname()[1]
+    silent_held = []
+
+    def silent_serve():
+        """Accept, and then say NOTHING. Ever.
+
+        **The connection is HELD OPEN on purpose.** A server that accepted
+        and then closed would make `requests` come back with a connection
+        error straight away, and the honest call below would pass for
+        entirely the wrong reason.
+        """
+        while True:
+            try:
+                conn, _ = silent_listener.accept()
+            except OSError:
+                return
+            silent_held.append(conn)       # kept alive; never written to
+
+    threading.Thread(target=silent_serve, daemon=True).start()
+
+    def _timed(call):
+        """Run `call` in a DAEMON thread and report how it ended.
+
+        **A genuinely hung call must not be able to wedge this gate**, so the
+        thread is a daemon and is never joined beyond the patience. The
+        interpreter kills it on the way out.
+        """
+        # **SEEDED BEFORE THE THREAD STARTS, AND THIS IS NOT TIDINESS.** A
+        # call that never comes back never sets these, and the detail lines
+        # below read them whatever the verdict. The first draft of this
+        # check did NOT seed them: under the real fault it died on a
+        # `KeyError` in its own detail line and never printed the reds that
+        # came after it — which is the exact failure rule (k) was written
+        # for, and which GATE 5.1 had already suffered once.
+        answer = {'how': 'DID NOT COME BACK', 'exc': None}
+
+        def body():
+            try:
+                call()
+                answer['how'] = 'returned'
+            except Exception as exc:                        # noqa: BLE001
+                answer['how'] = 'raised'
+                answer['exc'] = exc
+
+        worker = threading.Thread(target=body, daemon=True)
+        started = time.time()
+        worker.start()
+        worker.join(SILENT_PATIENCE)
+        answer['stuck'] = worker.is_alive()
+        answer['seconds'] = time.time() - started
+        return answer
+
+    # ---- the honest call: THE MODULE'S OWN `_get`, unmodified -----------
+    honest_hang = _timed(lambda: _get(SILENT_URL, TOP_PATH,
+                                      {'symbol': 'BTCUSDT', 'period': '5m',
+                                       'limit': 1}, SILENT_TIMEOUT))
+    mark(not honest_hang['stuck'],
+         f"S1 — the module's own `_get` CAME BACK ON ITS OWN from a server "
+         f"that accepted the connection and never replied. Not 'it did not "
+         f"crash' — it came back, inside the {SILENT_PATIENCE}s this gate "
+         f"types out",
+         f"{honest_hang['how']} after {honest_hang['seconds']:.2f}s")
+
+    honest_why = ('' if honest_hang.get('exc') is None
+                  else _why(honest_hang['exc']))
+    mark(honest_why == 'timed out',
+         "S2 — and it came back as a TIMEOUT specifically, proved by handing "
+         "the exception to `_why` and requiring the words THIS GATE TYPES "
+         "OUT — `timed out` — which is the line that actually reaches his "
+         "screen. A check that accepted any exception would pass a `_get` "
+         "that had lost its timeout AND its connection in one edit",
+         f"{type(honest_hang.get('exc')).__name__} -> {honest_why!r}")
+
+    # ---- THE POSITIVE CONTROL, and it is what makes S1 mean anything ----
+    # This call is DELIBERATELY left hanging, on every run, forever. It is
+    # not a leak to be tidied away by a later session — IT IS THE CHECK.
+    naked_hang = _timed(lambda: requests.get(
+        SILENT_URL + TOP_PATH,
+        params={'symbol': 'BTCUSDT', 'period': '5m', 'limit': 1}))
+    mark(naked_hang['stuck'],
+         f"S3 — THE POSITIVE CONTROL: the SAME request, to the SAME server, "
+         f"with NO timeout, DID NOT come back inside {SILENT_PATIENCE}s. "
+         f"**Without this, S1 passing could simply mean the server had "
+         f"answered** — which is exactly how this gate came to certify a "
+         f"`_get` that could hang forever. The hung thread is a daemon and "
+         f"is left behind ON PURPOSE",
+         f"still running: {naked_hang['stuck']}, "
+         f"waited {naked_hang['seconds']:.2f}s")
+
+    silent_listener.close()
+    for _held in silent_held:
+        try:
+            _held.close()
+        except OSError:
+            pass
+    mark(silent_listener.fileno() == -1,
+         "S4 — and the gate's silent server was closed. A test that leaves a "
+         "listener running is a test that changed the machine it ran on",
+         f"socket fileno: {silent_listener.fileno()}")
 
     # The gate owns this server, so the gate closes it. The thread is a
     # daemon as well, so nothing that goes wrong anywhere above can leave a

@@ -14893,3 +14893,129 @@ another would otherwise look like progress.
   next session attacks the repairs. **Phase 5 stays half built.**
 - **I will not clear R-077, R-072, R-076 or R-078.** A new item goes in against
   this repair as well.
+
+---
+
+# 2026-08-20 (night, second part) — **GATE 3.5-R2 PASSED — 111 CHECKS, 0 RED, THREE TIMES. THE FOURTH FAULT IN `_get` IS NOW CAUGHT. AND THE FIRST DRAFT OF THIS REPAIR DIED IN A TRACEBACK UNDER THE VERY FAULT IT WAS BUILT FOR — FOUND ONLY BECAUSE IT WAS CERTIFIED BY ATTACK.**
+
+**The bar was declared and committed ALONE first** — `777b649`, one document,
+131 lines, no `.py`.
+
+---
+
+## WHAT WAS ADDED — FOUR CHECKS, 107 -> 111
+
+`_get` is four lines. The three sabotages already in the drill pin the symbol,
+pin the path and drop `raise_for_status`. **That left one parameter nobody had
+ever attacked: `timeout`.** The gate's door server answers instantly, so a
+missing timeout changes nothing it can observe.
+
+**The new server is the opposite: it accepts the connection and then says
+nothing at all**, which is what a wedged venue looks like from outside.
+
+    S1  the module's own `_get` CAME BACK ON ITS OWN     raised after 3.03s
+    S2  and it came back as a TIMEOUT specifically,
+        proved through `_why`                      ReadTimeout -> 'timed out'
+    S3  THE POSITIVE CONTROL — the same request, same
+        server, NO timeout                    still running, waited 8.00s
+    S4  the silent server closed                        socket fileno: -1
+
+**S3 IS THE HALF THAT MAKES S1 MEAN ANYTHING.** Without it, S1 passing could
+simply mean the server had answered — **which is exactly how this gate came to
+certify a `_get` that could hang forever.**
+
+## THE RESULT
+
+    GATE 3.5-R2 PASSED — 111 checks, 0 red.   exit 0   (run A)
+    GATE 3.5-R2 PASSED — 111 checks, 0 red.   exit 0   (run B)
+    GATE 3.5-R2 PASSED — 111 checks, 0 red.   exit 0   (TZ=UTC0)
+    **TICK SEQUENCES BYTE-IDENTICAL ACROSS ALL THREE, BY MACHINE.**
+    the gate now takes ~18 s, up from ~8 s. **THAT ELEVEN SECONDS IS THE
+    CHECK** — three proving the honest call returns, eight proving the
+    timeout-less one does not.
+
+## THE CERTIFICATION — AND IT IS THE REASON THIS ENTRY EXISTS
+
+**The original fault re-run as a real TEXT EDIT in a copy outside the repo,
+control first:**
+
+    CONTROL   `_get` keeps its timeout   PASSED 111/0  exit 0
+              ReadTimeout after 4.03 s — the call CAME BACK on its own
+    B1        `_get` loses its timeout   FAILED 2 red of 111  exit 1
+              STILL HANGING after 25 s — the call NEVER CAME BACK
+              S1 red: "DID NOT COME BACK after 8.00s"
+              S2 red: "NoneType -> ''"
+              S3 GREEN, correctly — the control still hangs, as it must
+
+**Before this evening that same edit produced `PASSED — 107 checks, 0 red`.**
+
+## **>>> WHAT I GOT WRONG, AND IT IS THE MOST USEFUL THING IN THIS ENTRY**
+
+**THE FIRST DRAFT OF THIS REPAIR DIED IN A TRACEBACK UNDER THE REAL FAULT.**
+
+`_timed` builds its report inside the worker thread. **A call that never comes
+back never gets that far**, so `answer['how']` was never set — and S1's detail
+line read it unconditionally:
+
+    KeyError: 'how'
+    ... line 1656, in <module>
+        f"{honest_hang['how']} after {honest_hang['seconds']:.2f}s")
+
+**THE GATE STILL EXITED 1, SO THE FAULT WAS "CAUGHT" — BUT IT NEVER PRINTED
+S2, S3 OR S4, AND IT NEVER PRINTED ITS OWN FAILED LINE.** Anybody reading that
+output would have seen a crash, not a verdict.
+
+**THIS IS RULE (k) — "A FAILING GATE MUST STILL BE ABLE TO FINISH REPORTING" —
+AND IT IS THE EXACT FAILURE GATE 5.1 ALREADY SUFFERED ONCE, IN A DETAIL LINE,
+UNDER ATTACK.** I wrote rule (k) into this session's own orders this afternoon
+and then broke it the same night.
+
+**AND HERE IS WHY IT MATTERS FAR BEYOND MY MISTAKE:**
+
+> **THE HEALTHY GATE PASSED 111 CHECKS, 0 RED, WITH THAT BUG SITTING IN IT.**
+> **A guard on a detail line is only ever executed when the check FAILS.** No
+> number of green runs could have found it. **It was found by the attack, on
+> the first try, and by nothing else.**
+
+That is the strongest argument this ship has yet produced for rule (g) —
+certify by attack, not by the gate going green — and it argues it from the
+opposite direction to every previous example: **not "the gate missed a real
+fault", but "the gate could not have reported the fault it did catch."**
+
+**THE REPAIR:** `answer` is seeded with `{'how': 'DID NOT COME BACK',
+'exc': None}` **before the thread starts**, with the reason written into the
+code beside it so a later session does not tidy the seeding away. **Re-run
+against the same fault: `FAILED — 2 red of 111`, every check reported, no
+traceback.**
+
+**I rebuilt from a clean `git checkout` rather than editing the installed
+copy**, so the shipped file is the product of one clean run of the installer
+and not of two edits stacked on each other.
+
+## THE CONFINEMENT
+
+- **The production half — lines 1-362 — is BYTE-IDENTICAL**, against the file
+  as it stood and against `git show HEAD:cockpit/whales.py` with CRLF
+  normalised on both sides.
+- **Two diff hunks, both inside `__main__`:** `@@ -1251,0 +1252 @@` (the word
+  `import socket`) and `@@ -1573,0 +1575,127 @@` (the four checks).
+- **`cockpit/whales.py` is the ONLY file on the ship that changed.** All eleven
+  others checked and IDENTICAL to HEAD, CRLF-only.
+- **80,124 -> 86,659 bytes, 1,777 CRLF, ZERO bare LF.**
+- **The Brief still reads 3/3** with `Whale watch · 6 of 6 readings`.
+
+## WHAT I DELIBERATELY DID NOT DO
+
+- **I did not touch the production half.** All seventeen network calls on this
+  ship carry a timeout today — measured this afternoon. **This was a repair to
+  an alarm.**
+- **I did not add an `EXPECTED_CHECKS` to this gate.** It went from 107 to 111
+  and **nothing verified that** — which is R-070 exactly, is on his desk, and
+  he has not ruled on it. **One repair under one ruling.** It is now visible in
+  this very file, which is the best argument for R-070 anybody has made.
+- **I added no drill sabotage for S1-S4.** A `globals()` swap replacing `_get`
+  would work, but the witness would have to wait out the patience on every run
+  — **and S3 already IS a permanent, every-run proof that a timeout-less call
+  hangs.** The break is not in the drill because it does not need to be.
+- **I did not build `journal/mirror.py`.** He ordered a repair and said the
+  next session attacks the repairs.
