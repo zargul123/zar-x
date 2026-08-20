@@ -14473,3 +14473,157 @@ longer un-attacked.
 nothing committed but documents. `git status` clean apart from
 `journal/oi_recorder.log`, which is untracked and is not this session's.
 **`journal/my_trades.csv` still does not exist, and no run of mine created it.**
+
+---
+
+# 2026-08-20 (evening) — **THE COMMANDER RULED R-072 SERIOUS: "OK LETS FIX IT". THE BAR FOR GATE 5.1-R1 IS DECLARED HERE, BEFORE ONE LINE OF THE REPAIR EXISTS, AND THIS COMMIT CONTAINS NO `.py` FILE AT ALL.**
+
+**HIS RULING, IN HIS OWN WORDS, AFTER HE WAS GIVEN BOTH READINGS AND TOLD THE
+CASE FOR "SMALL" WAS DEFENSIBLE:** *"ok lets fix it"*.
+
+**SERIOUS MEANS: FIX IT, AND STOP.** `journal/mirror.py` is not started this
+session and Phase 5 stays half built. **That is the rule, not a preference.**
+
+**AND THE THING THAT MAKES THIS COMMIT WORTH MAKING SEPARATELY:** I am the
+session that found this fault. I am now the session repairing it. **`git show
+--stat` on this commit is the only thing that can prove I did not write the bar
+to fit the repair I had already built.** It must show one document and no code.
+
+---
+
+## WHAT IS BEING REPAIRED, STATED SO IT CANNOT BE QUIETLY NARROWED LATER
+
+**GATE 5.1 never once drives the doorway the way its only real caller drives
+it.** The only real caller is line 314 — `log_trade(*answers)`, with **no
+`path` and no `now`.** All 64 checks either inject both, or inspect only the
+first eight characters of the returned line. **So `TRADES_FILE` and
+`datetime.now(timezone.utc)` are judged by nothing.**
+
+**THE REPAIR IS NOT ALLOWED TO TOUCH THE PRODUCTION HALF.** Lines 1-286 are
+correct — measured, `+0.00 h` offset. **This is a repair to an alarm, and a
+repair that changed the thing being alarmed would be a different session's
+work done under this one's ruling.**
+
+## THE CONDITIONS OF GATE 5.1-R1 — SIX NEW CHECKS, DECLARED NOW
+
+    R1  THE DOORWAY IS CALLED WITH NO `path` AND NO `now`, IN A CHILD
+        INTERPRETER, AGAINST A COPY OF THIS MODULE IN A TEMPORARY TREE.
+        **Not a monkeypatch. Not an injected setting. The production
+        calling convention itself.** The child must come back on its own,
+        return 0, and report the doorway's line beginning `logged: `.
+
+    R2  THE FILE IS LOOKED FOR AT AN ADDRESS THIS GATE TYPES OUT ITSELF —
+        `<copy>/journal/my_trades.csv` — and NEVER at an address read from
+        the module. **B14 moved an archive with every row inside it
+        perfect, and every check that asked the module where to look
+        followed it there and certified it.**
+
+    R3  NO OTHER `.csv` MAY APPEAR IN THAT FOLDER. A renamed archive is
+        reported MISSING, not followed. This is the half R2 cannot do
+        alone: R2 proves the right file exists, R3 proves a wrong one was
+        not made instead of it.
+
+    R4  THE STAMP THE REAL CLOCK PRODUCED MUST LIE INSIDE A WINDOW THIS
+        GATE MEASURES ITSELF — a UTC reading taken BEFORE the child is
+        launched and another taken AFTER it returns, widened by a stated
+        tolerance.
+
+        **THE TOLERANCE IS TWO SECONDS EACH WAY AND HERE IS WHY, BECAUSE A
+        TOLERANCE NOBODY EXPLAINED IS A TOLERANCE SOMEBODY WILL WIDEN.**
+        The stamp truncates to whole seconds, so an honest stamp can land
+        up to one second BEFORE the gate's own opening reading. Two
+        seconds covers that with room to spare. **The faults this must
+        catch are five hours and six years out. There is no value between
+        two seconds and five hours that anything on this ship produces**,
+        so this tolerance is nowhere near tight enough to go red on its
+        own (R-069 is what a zero-tolerance live check costs) and nowhere
+        near loose enough to miss what it is for.
+
+    R5  THE STAMP MUST CARRY `+00:00`.
+
+    R6  **THE WINDOW JUDGE MUST BE PROVED ABLE TO SAY NO, IN THE SAME RUN,
+        AGAINST THREE STAMPS TYPED OUT IN THIS GATE:** it ACCEPTS an
+        honest one, and REJECTS one five hours later and one dated 2020.
+        **A check whose failure path has never been shown to work is a
+        check nobody has tested — R-057 was filed about exactly this and
+        the very next session nearly shipped one anyway.**
+
+    EXPECTED_CHECKS GOES FROM 64 TO 70. **The number is typed out and a
+    deleted check must turn this gate RED rather than quietly shrinking
+    its headline.**
+
+## THE AWKWARD EDGE CASES, NAMED BEFORE THE CODE EXISTS RATHER THAN DISCOVERED IN IT
+
+1. **>>> A CALL WITH NO `path` WRITES INTO WHATEVER `journal/` FOLDER THE
+   MODULE SITS IN. AGAINST THE REAL MODULE THAT IS THE COMMANDER'S OWN
+   ARCHIVE.** This is the entire difficulty of the repair and it is why R1
+   demands a COPY in a temporary tree and a CHILD interpreter. **It is also
+   the exact mistake that contaminated my own attack rig this morning
+   (R-076 doubt 1), so it is not a hypothetical risk — I have already made
+   it once today.** The gate's final check — *"the REAL journal was never
+   created or touched"* — must still be green after this repair, and if it
+   is not, the repair is worse than the hole.
+
+2. **THE DRILL CANNOT REACH THIS CHECK AND THE GATE MUST SAY SO OUT LOUD
+   RATHER THAN LET ANYBODY ASSUME OTHERWISE.** The drill installs breaks
+   with `globals()[attr] = replacement`, which cannot cross into a child
+   interpreter reading a copy from disk. **So no sabotage will be added for
+   R1-R6, and that is not an omission — it is the whole point.** The drill
+   proves a gate can catch a monkeypatch; **this check exists precisely to
+   catch what a monkeypatch cannot show, and it is certified BY ATTACK, by
+   re-running the three real text-edit faults.**
+
+3. **THE COPY MUST BE A BYTE COPY AND THE CHILD MUST IMPORT THE COPY, NOT
+   THE ORIGINAL.** If `sys.path` or the working directory let the child
+   reach the real `journal/` package instead, every one of R1-R6 would pass
+   while testing the wrong file — a green check over nothing, which is
+   B11's shape. **The child must report back the `__file__` it actually
+   imported, and the gate must prove it is inside the temporary tree.**
+
+4. **`journal/` HAS NO `__init__.py`** — it is a namespace package, and
+   check (i) already depends on that. The copy must work the same way.
+   `journal/log_trade.py` imports **only the standard library** (`csv`,
+   `io`, `os`, `sys`, `datetime`, `decimal`), so a lone copy is importable
+   with nothing beside it. **Measured, not assumed.**
+
+5. **A CHILD THAT HANGS IS A FAILURE, NOT A PASS.** It gets a timeout and a
+   timeout is red. **R-077, filed this morning, is a call with no timeout
+   that never came back while its gate printed 107/0.** I am not writing
+   the same shape into the file I am repairing on the same day I found it.
+
+6. **THE STAMP MUST BE PARSED, NOT PATTERN-MATCHED.** A check that only
+   looked for `+00:00` would pass the frozen-2020 fault, which carries
+   `+00:00` perfectly. R4 and R5 are two different questions and are two
+   different checks for that reason.
+
+## HOW THIS REPAIR IS CERTIFIED — AND IT IS NOT BY THE GATE GOING GREEN
+
+**THE THREE ORIGINAL FAULTS ARE RE-RUN AS REAL TEXT EDITS IN COPIES OUTSIDE
+THE REPO, CONTROL FIRST, AND ALL THREE MUST TURN THE GATE RED:**
+
+    in `_stamp`:  datetime.now(timezone.utc)
+                    -> datetime.now().replace(tzinfo=timezone.utc)
+    in `_stamp`:  datetime.now(timezone.utc)
+                    -> datetime(2020, 1, 1, tzinfo=timezone.utc)
+    TRADES_FILE = os.path.join(JOURNAL_DIR, 'my_trades.csv')
+                    -> ...'trades.csv'
+
+**AND THE THREE THAT WERE ALREADY CAUGHT MUST STILL BE CAUGHT** — a repair
+that fixed one hole and opened another would otherwise look like progress.
+
+**>>> THE ANCHOR FOR THE FIRST TWO MATCHES TWICE** — the gate's own T10
+sabotage `_stamp_local` copies the production line character for character.
+**The writer must REFUSE rather than replace both.** It already does, and it
+already earned that refusal once today.
+
+## WHAT I WILL NOT DO, WRITTEN DOWN SO IT CANNOT DRIFT
+
+- **I will not touch lines 1-286.** Proved by comparing the working tree
+  against `git show HEAD:journal/log_trade.py` with CRLF normalised on both
+  sides, not by any hash whose recipe nobody can reproduce.
+- **I will not repair R-077** (the whale watch's missing-timeout hole). It is
+  the same shape and it is CATEGORY B and he did not rule on it. **One repair,
+  under one ruling, and then stop.**
+- **I will not clear R-072 myself, and I will file a new open item against
+  this repair.** I found the fault and I am writing the fix; **that is exactly
+  the situation the rule exists for.**
