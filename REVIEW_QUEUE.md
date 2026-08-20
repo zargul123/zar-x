@@ -4641,3 +4641,76 @@ build, awaiting the Commander's ruling.**
 **NOTHING WAS CLEARED THIS SESSION, BY ANYBODY, INCLUDING ME.** R-070, R-071,
 R-073, R-074 and R-075 are their author's and I may not clear them; R-072 I
 could have cleared and did not, because it did not survive the attack.
+
+---
+
+# 2026-08-20 (evening) — THE REPAIR, AND THE DOUBTS AGAINST IT
+
+## R-072 — **THE COMMANDER RULED SERIOUS. REPAIRED UNDER GATE 5.1-R1. STILL OPEN — A SESSION MAY NOT CLEAR ITS OWN REPAIR.**
+
+His ruling, in his own words, given after he was shown both readings and told
+the case for SMALL was defensible: **"ok lets fix it"**.
+
+**REPAIRED.** Check (m), six new checks, `EXPECTED_CHECKS` 64 -> 70. The
+doorway is now called with **no `path` and no `now`** — the production calling
+convention — in a child interpreter against a byte copy of the module in a
+temporary tree.
+
+**THE THREE FAULTS THAT WALKED THROUGH THIS MORNING NOW TURN THE GATE RED**,
+re-run as real text edits, control first: the real clock relabelled UTC (1 red,
+R4), the real clock frozen at 2020 (1 red, R4), the archive moved to another
+filename (4 red, R2/R3 at the address and the name). **And the three that were
+already caught are still caught.** GATE 5.1-R1 PASSED 70/0 three times, tick
+sequences byte-identical by machine.
+
+**R-072 STAYS OPEN.** I found the fault and I wrote the fix. **Only a session
+that did neither may clear it.**
+
+## R-078 — **AGAINST MY OWN REPAIR. OPEN. I MAY NOT CLEAR IT.** · CATEGORY B
+
+1. **>>> THE DRILL CANNOT REACH CHECK (m) AT ALL, AND I CHOSE TO LEAVE IT THAT
+   WAY.** A `globals()` swap cannot cross into a child interpreter reading a
+   copy off the disk, so any sabotage I added would have been INERT — and an
+   INERT break is a FAIL here. **The consequence is real and I am not hiding
+   it: check (m) is the only part of this gate with NO permanent break testing
+   it. It is certified by an attack I ran once, today, by hand.** The next
+   session should re-run those three text edits rather than trust this
+   paragraph.
+2. **THE TWO-SECOND TOLERANCE IS A JUDGEMENT AND IT IS MINE.** I argued that
+   nothing on this ship produces a clock error between two seconds and five
+   hours. **That is reasoning, not a measurement.** A drift of a few minutes —
+   a laptop with a bad network time sync, a virtual machine resuming from
+   sleep — would pass R4 and I have not tested one.
+3. **R4 AND R6 SHARE ONE FUNCTION, SO A FAULT IN `_inside` IS INVISIBLE
+   TWICE.** R6 exists to prove `_inside` can say no, but R6 calls the same
+   `_inside` it is vouching for. **If `_inside` were wrong in a way that
+   happened to satisfy both, nothing would notice.** This is the same shape as
+   R-066's own doubt 5 and I am filing it against myself for the same reason.
+4. **THE CHILD RUNS ONE HAPPY TRADE AND NOTHING ELSE.** Check (m) never drives
+   a REFUSAL down the production calling convention, so **the eighteen refusal
+   shapes are still only ever exercised with an injected `path` and `now`.** I
+   fixed the hole for the path that writes and left the path that refuses
+   exactly as blind as I found it.
+5. **`shutil.copyfile` COPIES CONTENT, NOT A GUARANTEE.** I assert the child
+   imported the copy by checking the `__file__` it reports starts with the
+   temp tree. **If `sys.path` ever let a child reach a real `journal` package
+   FIRST, that check would catch it — but I proved that by reading, not by
+   planting a competing `journal/log_trade.py` in the child's path and
+   watching the check go red.** A positive control I did not build.
+
+## R-077 — **NOT REPAIRED, AND DELIBERATELY SO.** · CATEGORY B · OPEN
+
+The whale watch hangs forever if `_get`'s timeout is ever lost, and GATE 3.5-R1
+prints 107/0 either way. **The Commander ruled on R-072 and did not rule on
+this.** One repair under one ruling. **It is the same shape as what was just
+fixed and it is the obvious next candidate if he wants it.**
+
+## R-066 — **STILL OPEN. FOUR OF FIVE DOUBTS UNTESTED.**
+
+Unchanged by this evening's work.
+
+## **>>> THE CATEGORY B PILE IS NOW FORTY-FIVE.**
+
+R-078 joins it. **Nothing was cleared this session by anybody, including me:
+R-072 I could not clear because I repaired it, R-076 and R-078 are mine, and
+R-070, R-071, R-073, R-074, R-075 and R-077 belong to their own authors.**

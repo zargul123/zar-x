@@ -987,6 +987,166 @@ if __name__ == '__main__':
          f"typed out here",
          f"{len(BREAKS)} breaks, {len(REFUSALS)} refusal shapes")
 
+    print("\n(m) >>> GATE 5.1-R1 — THE PRODUCTION CALLING CONVENTION, WHICH"
+          "\n    NOTHING IN THIS GATE HAD EVER EXERCISED. Added 2026-08-20"
+          "\n    (evening) on the Commander's ruling, after a session that did"
+          "\n    not build this file installed THREE REAL TEXT EDITS that each"
+          "\n    left the gate printing `PASSED — 64 checks, 0 red`: the real"
+          "\n    clock relabelled UTC instead of converted, the same clock"
+          "\n    frozen at 2020, and the archive moved to another filename."
+          "\n    **THE ONLY REAL CALLER IS `log_trade(*answers)` — NO `path`,"
+          "\n    NO `now`.** Every check above injects both, or reads only the"
+          "\n    first eight characters of the returned line, so `TRADES_FILE`"
+          "\n    and `datetime.now(timezone.utc)` were judged by NOTHING."
+          "\n    **THE DRILL CANNOT REACH THIS CHECK AND THAT IS THE POINT,"
+          "\n    SAID HERE RATHER THAN LEFT AS AN OMISSION:** a `globals()`"
+          "\n    swap cannot cross into a child interpreter reading a copy off"
+          "\n    the disk — which is exactly why this catches what T10, a"
+          "\n    sabotage for this very fault that reports CAUGHT, cannot see."
+          "\n    **A DRILL PROVES A GATE CAN CATCH A MONKEYPATCH. THIS CHECK"
+          "\n    IS CERTIFIED BY ATTACK INSTEAD.**")
+
+    # A COPY, IN A TREE OF ITS OWN. **A call with no `path` writes into
+    # whatever `journal/` folder the module sits in, and against the real
+    # module that is the Commander's own archive.** That is the entire
+    # difficulty of this check, and the mistake was actually made this
+    # morning by the attack rig that found the hole (R-076 doubt 1).
+    R1_TREE = tempfile.mkdtemp(prefix='zarx_g51r1_')
+    R1_JOURNAL = os.path.join(R1_TREE, 'journal')
+    os.makedirs(R1_JOURNAL)
+    shutil.copyfile(os.path.abspath(__file__),
+                    os.path.join(R1_JOURNAL, 'log_trade.py'))
+
+    # THE ADDRESS THIS GATE TYPES OUT ITSELF, never read from the module.
+    # B14 moved an archive with every row inside it perfect, and every check
+    # that asked the module where to look followed it there and certified it.
+    R1_LEAF = 'my_trades.csv'
+    R1_MUST_LAND = os.path.join(R1_JOURNAL, R1_LEAF)
+    R1_SHAPE = '%Y-%m-%dT%H:%M:%S+00:00'      # typed out here, not imported
+
+    def _inside(stamp_text, opened, closed, slack=2):
+        """A stamp -> is it inside the window this gate measured itself?
+
+        **PARSED, NEVER PATTERN-MATCHED.** A clock frozen at 2020 carries a
+        perfect `+00:00` and walks straight past anything that only looks at
+        the shape — which is why the zone is a SEPARATE check below.
+
+        The slack is TWO SECONDS EACH WAY and the reason is written down so
+        nobody widens it later: the stamp truncates to whole seconds, so an
+        honest one can land up to a second before the opening reading. The
+        faults this exists to catch are five hours and six years out, and
+        nothing on this ship produces a value in between.
+        """
+        try:
+            when = datetime.strptime(stamp_text, R1_SHAPE)
+        except (ValueError, TypeError):
+            return False
+        when = when.replace(tzinfo=timezone.utc)
+        return (opened - timedelta(seconds=slack) <= when
+                <= closed + timedelta(seconds=slack))
+
+    r1_probe = os.path.join(R1_TREE, 'said.txt')
+    r1_child = ('import sys\n'
+                'import journal.log_trade as m\n'
+                "said = m.log_trade('BTC', 'long', '100.50', '111.00',\n"
+                "                   '0.25', 'the production calling "
+                "convention', 'calm')\n"
+                "open(sys.argv[1], 'w', encoding='utf-8').write(\n"
+                '    m.__file__ + chr(10) + said)\n')
+    r1_env = dict(os.environ, PYTHONUTF8='1', PYTHONDONTWRITEBYTECODE='1')
+
+    # THE WINDOW IS MEASURED BY THIS GATE, ON BOTH SIDES OF THE CHILD.
+    R1_OPENED = datetime.now(timezone.utc)
+    r1_timed_out, r1_rc = False, None
+    try:
+        r1_done = subprocess.run([sys.executable, '-c', r1_child, r1_probe],
+                                 cwd=R1_TREE, env=r1_env,
+                                 capture_output=True, timeout=90)
+        r1_rc = r1_done.returncode
+    except subprocess.TimeoutExpired:
+        # A child that hangs is a FAILURE, not a pass. R-077 is a call with
+        # no timeout that never came back while its gate printed 107/0, and
+        # that shape is not going into the file it was found beside.
+        r1_timed_out = True
+    R1_CLOSED = datetime.now(timezone.utc)
+
+    try:
+        with open(r1_probe, encoding='utf-8') as handle:
+            r1_seen = handle.read()
+    except OSError:
+        r1_seen = ''
+    r1_parts = r1_seen.split(chr(10))
+    r1_file = r1_parts[0] if r1_parts else ''
+    r1_said = r1_parts[1] if len(r1_parts) > 1 else ''
+
+    r1_imported_the_copy = bool(r1_file) and os.path.abspath(
+        r1_file).startswith(os.path.abspath(R1_TREE))
+    mark(not r1_timed_out and r1_rc == 0 and r1_imported_the_copy
+         and r1_said.startswith('logged: '),
+         "R1 — the doorway was called with NO `path` AND NO `now`, in a "
+         "fresh interpreter, against a COPY of this module in a tree of its "
+         "own — and the child imported THAT COPY, proved by the `__file__` "
+         "it reported back",
+         f"exit {r1_rc}, timed out {r1_timed_out}, "
+         f"said {r1_said[:60]!r}, from {r1_file}")
+
+    r1_raw = disk(R1_MUST_LAND)
+    mark(r1_raw is not None and r1_raw.startswith(HEADER.encode('utf-8'))
+         and r1_raw.count(b'\r\n') == 2,
+         f"R2 — one header and one row landed at the address THIS GATE typed "
+         f"out ({R1_LEAF}, in the copy's own journal folder) — never at an "
+         f"address read back from the module",
+         f"{0 if r1_raw is None else len(r1_raw)} bytes at {R1_MUST_LAND}")
+
+    try:
+        r1_made = sorted(name for name in os.listdir(R1_JOURNAL)
+                         if name.lower().endswith('.csv'))
+    except OSError:
+        r1_made = ['<the folder could not be read>']
+    mark(r1_made == [R1_LEAF],
+         "R3 — and NO OTHER `.csv` was created beside it. B14's shape: an "
+         "archive under another filename is reported MISSING, not followed. "
+         "R2 proves the right file exists; this proves a wrong one was not "
+         "made INSTEAD of it",
+         f"the folder holds {r1_made}")
+
+    if r1_raw is None:
+        r1_stamp = ''
+    else:
+        r1_rows = r1_raw.decode('utf-8').split(NL)
+        r1_stamp = r1_rows[1].split(',')[0] if len(r1_rows) > 1 else ''
+
+    mark(_inside(r1_stamp, R1_OPENED, R1_CLOSED),
+         "R4 — the stamp THE REAL CLOCK PRODUCED lies inside a window this "
+         "gate measured ITSELF, either side of the child, widened by two "
+         "seconds. **This is the check the three escapes needed: a stamp "
+         "five hours out or frozen at 2020 lands nowhere near it**",
+         f"stamp {r1_stamp!r} against "
+         f"{R1_OPENED.strftime(R1_SHAPE)} .. {R1_CLOSED.strftime(R1_SHAPE)}")
+
+    mark(r1_stamp.endswith('+00:00') and len(r1_stamp) == 25,
+         "R5 — and it carries the zone. A SEPARATE check from R4 on purpose: "
+         "the frozen-2020 fault carries a perfect `+00:00`, so a shape check "
+         "alone would have certified it",
+         r1_stamp)
+
+    r1_honest = R1_OPENED.strftime(R1_SHAPE)
+    r1_five_on = (R1_OPENED + timedelta(hours=5)).strftime(R1_SHAPE)
+    r1_frozen = '2020-01-01T00:00:00+00:00'
+    mark(_inside(r1_honest, R1_OPENED, R1_CLOSED)
+         and not _inside(r1_five_on, R1_OPENED, R1_CLOSED)
+         and not _inside(r1_frozen, R1_OPENED, R1_CLOSED)
+         and not _inside('', R1_OPENED, R1_CLOSED),
+         "R6 — THE WINDOW JUDGE IS PROVED ABLE TO SAY NO, IN THIS RUN, "
+         "against three stamps typed out here: it ACCEPTS an honest one and "
+         "REJECTS one five hours later, one dated 2020, and an empty one. "
+         "**A check whose failure path has never been shown to work is a "
+         "check nobody has tested** — R-057 was filed about exactly that",
+         f"honest {r1_honest} accepted · {r1_five_on} rejected · "
+         f"{r1_frozen} rejected")
+
+    shutil.rmtree(R1_TREE, ignore_errors=True)
+
     shutil.rmtree(WORK, ignore_errors=True)
     real_journal_touched = os.path.exists(TRADES_FILE)
     mark(not real_journal_touched,
@@ -996,7 +1156,7 @@ if __name__ == '__main__':
 
     # THE LAST CHECK OF THE RUN, because it is the only one that can only be
     # answered once every other check has had its say.
-    EXPECTED_CHECKS = 64
+    EXPECTED_CHECKS = 70
     mark(len(nonlocal_ok) + 1 == EXPECTED_CHECKS,
          f"and this gate ran all {EXPECTED_CHECKS} of the checks it owes — "
          f"the number is TYPED OUT in this file and is not read from any "

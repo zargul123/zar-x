@@ -14627,3 +14627,138 @@ already earned that refusal once today.
 - **I will not clear R-072 myself, and I will file a new open item against
   this repair.** I found the fault and I am writing the fix; **that is exactly
   the situation the rule exists for.**
+
+---
+
+# 2026-08-20 (evening, second part) — **THE REPAIR. GATE 5.1-R1 PASSED — 70 CHECKS, 0 RED, THREE TIMES. ALL SIX REAL FAULTS ARE NOW CAUGHT, INCLUDING THE THREE THAT WALKED THROUGH THIS MORNING.**
+
+**The bar was declared and committed ALONE first — `git show --stat` on that
+commit shows ONE document, 154 lines, and no `.py` at all.** That matters more
+than usual here, because **I am the session that found this fault and I am the
+session that repaired it.** The separate commit is the only thing that can prove
+I did not write the bar to fit a repair I had already built.
+
+---
+
+## WHAT WAS ADDED — CHECK (m), SIX CHECKS, `EXPECTED_CHECKS` 64 -> 70
+
+**Nothing in GATE 5.1 had ever called the doorway the way its only real caller
+calls it:** `log_trade(*answers)`, with **no `path` and no `now`**. Check (m)
+does exactly that, in a **child interpreter against a byte copy of this module
+in a temporary tree** — because a no-`path` call writes into whatever `journal/`
+folder the module sits in, and against the real module that is the Commander's
+own archive.
+
+    R1  the doorway called with NO `path` and NO `now`, in a fresh
+        interpreter, against a COPY — and the child proved it imported the
+        COPY by reporting back the `__file__` it actually loaded
+    R2  the file looked for at an address THIS GATE TYPES OUT, never one
+        read back from the module
+    R3  and NO other `.csv` beside it — a renamed archive is MISSING, not
+        followed. R2 proves the right file exists; R3 proves a wrong one
+        was not made instead of it
+    R4  the stamp the REAL CLOCK produced, inside a window the gate measured
+        ITSELF either side of the child, widened by two seconds
+    R5  and it carries the zone — a SEPARATE check from R4 on purpose
+    R6  the window judge PROVED ABLE TO SAY NO in the same run, against four
+        stamps typed out here: honest ACCEPTED, five-hours-on REJECTED,
+        2020 REJECTED, empty REJECTED
+
+## THE RESULT
+
+    GATE 5.1-R1 PASSED — 70 checks, 0 red.   exit 0    (run 1)
+    GATE 5.1-R1 PASSED — 70 checks, 0 red.   exit 0    (run 2)
+    GATE 5.1-R1 PASSED — 70 checks, 0 red.   exit 0    (TZ=UTC0)
+    **TICK SEQUENCES BYTE-IDENTICAL ACROSS ALL THREE, COMPARED BY MACHINE.**
+    the REAL journal was never created or touched — still green, still true
+
+## **THE CERTIFICATION THAT COUNTS, AND IT IS NOT THE GATE GOING GREEN**
+
+**ALL SIX FAULTS RE-RUN AS REAL TEXT EDITS IN COPIES OUTSIDE THE REPO, CONTROL
+FIRST. THE THREE THAT ESCAPED THIS MORNING NOW TURN THE GATE RED, AND THE THREE
+THAT WERE ALREADY CAUGHT ARE STILL CAUGHT.**
+
+    CONTROL                                  PASSED 70/0  exit 0
+    A1  real clock relabelled UTC   this morning: PASSED 64/0 ESCAPED
+                                    now: FAILED 1 red of 70   **CAUGHT** (R4)
+    A6  real clock frozen at 2020   this morning: PASSED 64/0 ESCAPED
+                                    now: FAILED 1 red of 70   **CAUGHT** (R4)
+    A2  archive moved (B14's shape) this morning: PASSED 64/0 ESCAPED
+                                    now: FAILED 4 red of 70   **CAUGHT**
+                                    (R2, R3, and R4/R5 because there is no
+                                     file left to read a stamp from)
+    A3  append rewrites (mode `w`)  FAILED 8 red of 70  still CAUGHT
+    A4  feeling left in typed case  FAILED 3 red of 70  still CAUGHT
+    A5  a constant the gate DOES exercise  FAILED 6 red of 70  still CAUGHT
+
+**EVERY RED IS THE CHECK IT SHOULD BE — I READ THEM RATHER THAN COUNTING
+THEM.** A1 and A6 each turn exactly ONE check red, and it is R4, the clock. A2
+turns R2 and R3 red at the address and the filename, which is precisely what
+B14's shape deserves.
+
+**AND RULE (i) HELD UNDER ATTACK: A2 LEAVES NO FILE FOR R4 AND R5 TO READ, AND
+THE GATE PRINTED FOUR HONEST REDS RATHER THAN DYING IN A TRACEBACK.** GATE 5.1
+died on a traceback in a detail line under attack A1 in a previous generation;
+the detail lines here are guarded and the guard was exercised for real.
+
+## THE CONFINEMENT, PROVED BY `git` AND NOT BY A HASH
+
+- **The production half — lines 1-286 — is BYTE-IDENTICAL**, checked two ways:
+  against the file as it stood before the edit, and against
+  `git show HEAD:journal/log_trade.py` with CRLF normalised on both sides.
+- **Every diff hunk is at line 990 or later.** `@@ -989,0 +990,160 @@`
+- **`journal/log_trade.py` is the ONLY file on the ship that changed.** All
+  eleven others checked — the six cockpit instruments, the Brief, both data
+  files and both `.bat` files — are IDENTICAL to HEAD and CRLF-only.
+- **51,279 -> 59,769 bytes, 1,221 CRLF, ZERO bare LF.**
+- The writer refused on an ambiguous anchor, an anchor splitting a CRLF pair, a
+  bare LF in the result, an edit that changed nothing, and **any result whose
+  production half moved.**
+
+## WHAT I DELIBERATELY DID NOT DO
+
+- **I did not touch the production half.** It was correct — measured at `+0.00 h`
+  this morning. **This was a repair to an alarm, and repairing the thing being
+  alarmed would have been a different session's work done under this ruling.**
+- **I added NO sabotage to the drill for R1-R6, and the gate says so in its own
+  text rather than leaving it as a silent omission.** The drill installs breaks
+  with `globals()[attr] = replacement`, which **cannot cross into a child
+  interpreter reading a copy off the disk.** Any sabotage I added would have
+  been INERT, and **an INERT break is a FAIL on this ship.** The honest
+  statement is the one now printed in the gate: a drill proves a gate can catch
+  a monkeypatch; **this check exists to catch what a monkeypatch cannot show,
+  and it is certified by attack.**
+- **I did not repair R-077** (the whale watch hangs forever if `_get`'s timeout
+  is ever lost). Same shape, CATEGORY B, and **he did not rule on it.** One
+  repair, under one ruling, then stop.
+- **I did not build `journal/mirror.py`.** SERIOUS means fix it and stop.
+  **Phase 5 is still half built and that is the rule working, not a delay.**
+- **I did not clear R-072 and I did not clear R-076.** R-078 is filed against
+  this repair and I may never clear that either.
+
+## WHAT I GOT WRONG IN THIS HALF OF THE SESSION
+
+**One thing, and it was mine, not the ship's.** My first tick-sequence
+comparison counted BYTES and reported "278 ticks" for a gate that ran 70 — the
+tick character is three bytes in UTF-8 and the number was not even divisible by
+three. **I noticed because the arithmetic did not work, re-counted by CHARACTER
+in Python, and got 70.** The comparison it was making (are the three runs
+identical?) was correct either way, but **the number I would have written down
+was wrong, and a wrong number in a log is how a later session inherits a false
+fact.** Corrected before it was written anywhere permanent.
+
+**Nothing else. The repair went in on the first attempt, compiled first time,
+and passed on the first run** — which is worth stating plainly rather than
+dressing up, and is mostly because the bar named all six edge cases before any
+code existed.
+
+## THE SHIP AFTER THE WORK
+
+    journal/log_trade.py --gate   GATE 5.1-R1 PASSED  exit 0  0 red  70 checks
+      the same at TZ=UTC0         GATE 5.1-R1 PASSED  exit 0  0 red  70 checks
+      run twice more, tick sequences byte-identical by machine
+    production half lines 1-286   UNCHANGED, proved against HEAD
+    journal/my_trades.csv         STILL DOES NOT EXIST — no run of mine
+                                  created it, and the gate's own final check
+                                  proves it
+    every other file on the ship  IDENTICAL to HEAD

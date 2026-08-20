@@ -434,6 +434,83 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-08-20 (evening): THE COMMANDER RULED R-072 SERIOUS AND IT IS REPAIRED. GATE 5.1-R1 PASSED — 70 CHECKS, 0 RED, THREE TIMES. ALL SIX REAL FAULTS ARE NOW CAUGHT, INCLUDING THE THREE THAT WALKED THROUGH THIS MORNING. PHASE 5 IS STILL HALF BUILT AND THAT IS THE RULE WORKING, NOT A DELAY.**
+
+**WHERE THE SHIP IS.**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red   58 green
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red   71 green
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  (OK/FAIL)
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red   54 green
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red   69 green
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red   69 green
+    cockpit/whales.py           GATE 3.5-R1   PASSED  exit 0  0 red  107 green
+      the same file at TZ=UTC0  GATE 3.5-R1   PASSED  exit 0  0 red  107 green
+    cockpit/carry.py            GATE 4.1      PASSED  exit 0  0 red   87 green
+      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0  0 red   87 green
+    journal/log_trade.py        GATE 5.1-R1   PASSED  exit 0  0 red   70 green
+      the same file at TZ=UTC0  GATE 5.1-R1   PASSED  exit 0  0 red   70 green
+                                run three times, TICK SEQUENCES BYTE-IDENTICAL
+                                BY MACHINE
+    vault INTACT 6 of 6 · Brief 3/3 · lab/ untouched
+    journal/my_trades.csv DOES NOT EXIST — his first real trade creates it
+
+**WHAT WAS REPAIRED.** GATE 5.1 never called the doorway the way its only real
+caller calls it — `log_trade(*answers)`, **no `path`, no `now`** — so
+`TRADES_FILE` and `datetime.now(timezone.utc)` were judged by nothing. **Check
+(m) now does exactly that, in a child interpreter against a byte copy of the
+module in a temporary tree**, because a no-`path` call writes into whatever
+`journal/` folder the module sits in. Six checks: the copy really imported, the
+file at an address the gate types out, no other `.csv` beside it, the stamp
+inside a window the gate measures itself, the zone as a separate question, and
+the window judge proved able to say no in the same run.
+
+**CERTIFIED BY ATTACK, NOT BY THE GATE GOING GREEN.** All six faults re-run as
+real text edits, control first: **the three that escaped now turn the gate red
+(A1 and A6 on R4 alone; A2 on R2, R3, R4 and R5), and the three already caught
+are still caught.** The production half, lines 1-286, is **byte-identical**
+against HEAD with CRLF normalised; every diff hunk is at line 990 or later;
+**`journal/log_trade.py` is the only file on the ship that changed.**
+
+**>>> WHAT IS STILL BROKEN OR UNPROVEN.**
+
+**1. CHECK (m) HAS NO PERMANENT SABOTAGE AND THAT IS BY CONSTRUCTION.** A
+`globals()` swap cannot cross into a child interpreter reading a copy off the
+disk, so any break added would be INERT — and an INERT break is a FAIL here.
+**It is the only part of this gate not covered by a permanent drill, and it is
+certified by an attack run once, by hand, today.** R-078 doubt 1. **The next
+session should re-run those three text edits rather than trust the paragraph
+above.**
+
+**2. THE TWO-SECOND TOLERANCE IN R4 IS REASONING, NOT A MEASUREMENT.** A clock
+drift of a few minutes — a bad time sync, a virtual machine resuming from sleep
+— would pass R4 and nobody has tested one. R-078 doubt 2.
+
+**3. THE REFUSAL PATH IS STILL AS BLIND AS IT WAS.** Check (m) drives one happy
+trade. **The eighteen refusal shapes are still only ever exercised with an
+injected `path` and `now`.** R-078 doubt 4.
+
+**4. `cockpit/whales.py`'s `_get` HANGS FOREVER IF ITS TIMEOUT IS EVER LOST,
+AND GATE 3.5-R1 PRINTS 107/0 EITHER WAY.** R-077, CATEGORY B, **not repaired —
+the Commander ruled on R-072 and did not rule on this.** It is the same shape
+as what was just fixed and is the obvious next candidate. **MEASURED: all
+seventeen network calls on the ship carry a timeout today.**
+
+**5. `journal/mirror.py` DOES NOT EXIST.** Phase 5's second half is unstarted.
+**SERIOUS means fix it and stop, so nothing was built. R-074 — the two files
+disagree about what a time looks like — is still the first thing whoever builds
+it will meet.**
+
+**6. R-066 IS OPEN WITH FOUR OF FIVE DOUBTS UNTESTED.** No longer un-attacked.
+
+**7. THE CATEGORY B PILE IS FORTY-FIVE.**
+
+**AND THE ONE THAT SHOULD NOT BE LOST: I FOUND THIS FAULT AND I REPAIRED IT.**
+R-072 and R-078 are both OPEN and **only a session that did neither may clear
+them.**
+
 ## **>>> 2026-08-20 (afternoon): PHASE 5 IS STILL HALF BUILT AND THE MIRROR WAS NOT STARTED. R-072 WAS ATTACKED AND DID NOT SURVIVE — THREE OF SIX REAL FAULTS WALKED THROUGH GATE 5.1 WHILE IT PRINTED `PASSED — 64 checks, 0 red`. GRADED BORDERLINE. NOTHING REPAIRED, NOTHING BUILT, AWAITING THE COMMANDER'S RULING.**
 
 **WHERE THE SHIP IS.** Every gate green, proved before anything was touched.
