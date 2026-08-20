@@ -63,7 +63,10 @@ costs him an instrument he actually wanted.
 3. **Two escaped, both in the GATE and not the instrument** — R-070 and R-071,
    both graded SMALL with the reasoning shown, both filed CATEGORY B.
 4. **Declared its awkward edge cases in `PROGRESS_LOG.md` and committed them
-   with NO CODE in that commit** (`git show --stat 277b34f` is the proof).
+   with NO CODE in that commit** — `git show --stat fd7e8c3` shows ONE
+   document and no `.py` at all. **That hash was 277b34f until a rebase over
+   the cloud watchman's push rewrote it, which is exactly why the ritual says
+   CHECK YOUR COMMIT HASHES AGAIN AFTER YOU PUSH.**
 5. **Built `journal/log_trade.py` under GATE 5.1** — 64 checks, 0 red, twice.
 6. **CERTIFIED BY ATTACK: three of six real faults escaped the FIRST version of
    its own gate.** The gate was hardened once per escape until all six failed.
