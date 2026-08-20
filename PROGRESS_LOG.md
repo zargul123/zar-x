@@ -14762,3 +14762,134 @@ code existed.
                                   created it, and the gate's own final check
                                   proves it
     every other file on the ship  IDENTICAL to HEAD
+
+---
+
+# 2026-08-20 (night) — **THE COMMANDER RULED ON R-077: "we should repair the whale thing and then next session will attack the repairs". THE BAR FOR GATE 3.5-R2 IS DECLARED HERE, BEFORE ONE LINE OF THE REPAIR EXISTS, AND THIS COMMIT CONTAINS NO `.py` FILE AT ALL.**
+
+**HIS RULING, IN HIS OWN WORDS:** *"ok so we should repair the whale thing and
+then next session will attack the repairs."*
+
+**HE ALSO SETTLED THE LOOP IN THE SAME SENTENCE, AND IT IS WORTH RECORDING
+SEPARATELY: "next session will attack the repairs" — BOTH OF THEM.** GATE
+5.1-R1 and GATE 3.5-R2 are now one session's unattacked work, and **the same
+mind found the fault and wrote the fix in both cases.** That is exactly the
+situation the "never clear your own item" rule exists for, and it is now
+doubled.
+
+---
+
+## WHAT IS BEING REPAIRED
+
+**`cockpit/whales.py`'s `_get` hangs forever if its timeout is ever lost, and
+GATE 3.5-R1 cannot see it.** Measured this afternoon against a server that
+accepts the connection and never replies:
+
+    CONTROL  `_get` keeps its timeout  ->  ReadTimeout after   4.03 seconds
+    B1       `_get` loses its timeout  ->  STILL HANGING after 25 seconds
+    GATE 3.5-R1 on both               ->  PASSED — 107 checks, 0 red, exit 0
+
+**The gate's own door server answers instantly, so a missing timeout changes
+nothing it can observe.** `cockpit/brief.py` would hang forever and produce no
+Brief at all.
+
+**THE SHIPPED FILE IS CORRECT TODAY AND THAT WAS MEASURED:** all seventeen
+`requests.get` calls on this ship outside `lab/` and `vendor/` carry a timeout,
+verified line by line including the twelve that wrap onto a second line. **This
+is a repair to an alarm, and the production half is not to be touched.**
+
+## THE CONDITIONS OF GATE 3.5-R2 — FOUR NEW CHECKS, DECLARED NOW
+
+    S1  THE MODULE'S OWN `_get`, CALLED AGAINST A SERVER THAT ACCEPTS THE
+        CONNECTION AND NEVER REPLIES, COMES BACK ON ITS OWN inside a
+        patience this gate types out. **Not "does not crash" — comes back.**
+
+    S2  AND IT COMES BACK AS A TIMEOUT SPECIFICALLY, proved by handing the
+        exception to the module's own `_why` and requiring the words
+        `timed out` — **which is the line that actually reaches his
+        screen.** A check that accepted any exception would pass a `_get`
+        that had lost its timeout AND its connection in the same edit.
+
+    S3  **THE POSITIVE CONTROL, AND IT IS THE HALF THAT MAKES S1 MEAN
+        ANYTHING.** The SAME request, to the SAME server, with NO timeout,
+        must **NOT** come back inside that same patience. **Without this,
+        S1 passing could simply mean the server answered** — which is
+        precisely how GATE 3.5-R1 came to certify a `_get` that could hang
+        forever.
+
+    S4  THE SILENT SERVER IS SHUT DOWN AND ITS SOCKET CLOSED, checked by
+        `fileno() == -1` — the same bar the door server is already held to.
+        **A test that leaves a listener running is a test that changed the
+        machine it ran on.**
+
+    **THE NUMBERS, TYPED OUT AND EXPLAINED SO NOBODY WIDENS THEM LATER:**
+    the gate hands `_get` a timeout of **3 seconds** and waits **8 seconds**
+    for either call. An honest `_get` returns in about three. **The fault
+    this exists to catch is "never returns", which is unbounded — there is
+    no value between eight seconds and forever that this ship produces**, so
+    the patience is nowhere near tight enough to go red on its own and
+    nowhere near loose enough to miss what it is for.
+
+    **THE GATE GAINS ROUGHLY ELEVEN SECONDS, FOREVER** — three spent proving
+    the honest call returns and eight spent proving the timeout-less one does
+    not. **That cost is the check.** It is stated here so that no later
+    session trims the patience to make the gate feel faster.
+
+## THE AWKWARD EDGE CASES, NAMED BEFORE THE CODE EXISTS
+
+1. **>>> S3 DELIBERATELY LEAVES A HUNG THREAD BEHIND, ON EVERY RUN, FOREVER.**
+   That is not a leak to be tidied away later — **it is the check.** Both
+   calls run in **daemon** threads with a join timeout, so a genuinely stuck
+   call cannot stop the interpreter exiting. **Said out loud here because a
+   future session will find that thread and want to "fix" it.**
+
+2. **THE SILENT SERVER MUST HOLD THE CONNECTION OPEN, NOT CLOSE IT.** A server
+   that accepted and then closed would make `requests` return a connection
+   error immediately — **S1 would pass for entirely the wrong reason.** S3 is
+   what proves the server really does hang a caller, and S1's verdict is
+   worthless without it.
+
+3. **THE LISTENER MUST ACCEPT MORE THAN ONE CONNECTION.** Two calls arrive.
+   A backlog of one, or an accept loop that stops after the first, would let
+   the second call fail at connect and S3 would report "did not come back"
+   for the wrong reason.
+
+4. **`NO_PROXY` MUST STILL BE SET WHEN THIS RUNS.** A proxy configured in the
+   environment would send a request for `127.0.0.1` out to the internet. The
+   existing door test sets it and puts it back; **this check must sit INSIDE
+   that window, before the teardown restores it.**
+
+5. **THIS CHECK BINDS A SECOND LOCAL PORT.** If the machine refuses it, the
+   check goes red and **it is the machine, not the code** — the same standing
+   caveat the door test already carries (R-066 doubt 3, still untested).
+
+6. **IT DOES NOT PROVE "ONE REQUEST, NO RETRIES".** `_get`'s docstring claims
+   that and this check does not test it. **Saying so here rather than letting
+   the new green tick imply more than it earned.**
+
+## HOW THIS REPAIR IS CERTIFIED — NOT BY THE GATE GOING GREEN
+
+**THE ORIGINAL FAULT IS RE-RUN AS A REAL TEXT EDIT IN A COPY OUTSIDE THE REPO,
+CONTROL FIRST, AND IT MUST TURN THE GATE RED:**
+
+    reply = requests.get(f"{base_url}{path}", params=params, timeout=timeout)
+      ->  reply = requests.get(f"{base_url}{path}", params=params)
+
+**AND THE WHOLE GATE MUST STILL PASS ON THE HEALTHY FILE**, with all its
+existing sabotages still caught — a repair that fixed one hole and opened
+another would otherwise look like progress.
+
+## WHAT I WILL NOT DO, WRITTEN DOWN SO IT CANNOT DRIFT
+
+- **I will not touch the production half of `cockpit/whales.py`.** Proved by
+  comparing the working tree against `git show HEAD:cockpit/whales.py` with
+  CRLF normalised on both sides.
+- **I will not add an `EXPECTED_CHECKS` to this gate.** `cockpit/whales.py`
+  does not know how many checks it owes and neither do six others — **that is
+  R-070, it is on his desk, and he has not ruled on it.** One repair under one
+  ruling. **The count will move from 107 to 111 and nothing will verify that,
+  which is R-070's whole point and is now visible in this very file.**
+- **I will not build `journal/mirror.py`.** He ordered a repair and said the
+  next session attacks the repairs. **Phase 5 stays half built.**
+- **I will not clear R-077, R-072, R-076 or R-078.** A new item goes in against
+  this repair as well.
