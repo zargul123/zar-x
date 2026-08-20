@@ -13915,3 +13915,201 @@ housekeeping rule on this ship is "before reaching for a command at all, reach
 for the `.bat`."** A logger he cannot start is a logger he will not use. It is
 one line of untested-by-gate surface, it is run and its output read before it
 ships, and **he may delete it without touching anything else.**
+
+---
+
+# 2026-08-20 (morning, third part) — **PART 2: `journal/log_trade.py` SHIPPED UNDER GATE 5.1. 64 CHECKS, 0 RED, TWICE. PHASE 5 IS HALF BUILT.**
+
+## **>>> WHAT I GOT WRONG, WRITTEN BEFORE ANYTHING I GOT RIGHT**
+
+**SEVEN MISTAKES, AND THREE OF THEM WERE HOLES IN MY OWN GATE THAT ONLY AN
+ATTACK COULD FIND.**
+
+**1. I DROVE THE REAL SHELL AGAINST THE REAL JOURNAL AND CREATED
+`journal/my_trades.csv` WITH A FAKE TRADE IN IT.** Testing that the seven
+questions worked, I piped answers into `python journal/log_trade.py` — the real
+tool, which by design has no test path — and it wrote a real row into the real
+archive. **I read the file, confirmed it held exactly one header and one row
+whose WHY line was `ran the .bat, checking it works`, confirmed nothing of the
+Commander's was in it, and deleted the file so the archive ships EMPTY.** It
+should have been driven inside a copy outside the repo. **The gate never had
+this problem: every one of its 64 checks writes into a temporary directory it
+makes and removes. It was the one thing I did by hand.**
+
+**2, 3 and 4 — THREE REAL FAULTS ESCAPED MY OWN GATE, FOUND BY ATTACKING IT
+AND NOT BY THE DRILL.** Six real faults were installed as byte-level TEXT EDITS
+in copies outside the repo, with the untouched control run first. **Three
+walked straight through a gate reporting 61 checks and 0 red:**
+
+    A4  `_why` gaining a `.strip()`      ESCAPED — my hostile WHY line had no
+                                         whitespace at either end to strip
+    A5  `_needs_header` losing its
+        empty-file test                  ESCAPED — no check ever seeded a
+                                         journal that exists and is empty
+    A6  `_stamp` losing
+        `.astimezone(timezone.utc)`      ESCAPED — every time the gate handed
+                                         over was ALREADY UTC, so a stamp
+                                         merely RELABELLED `+00:00` looked
+                                         identical to one converted
+
+**THE PRODUCTION HALF WAS CORRECT IN ALL THREE CASES. THE GATE COULD NOT SEE
+THE DIFFERENCE, WHICH IS THE SAME THING AS NOT HAVING THE CHECK.** A6 is the
+one that matters: condition 12 exists because these rows will be compared
+against snapshots taken by a machine in another timezone, and my gate could not
+tell a converted stamp from a relabelled one. **This is rule (g) — CERTIFY BY
+ATTACK, NOT BY THE DRILL — earning itself for the second time this morning.**
+Three checks were added, one per escape, and all six faults are now CAUGHT
+against a control that still passes.
+
+**5. MY HAND-TYPED EXPECTED ROW WAS WRONG AND THE FIRST GATE RUN WENT RED FOR
+IT.** I typed out a second fake trade's row without the quotation marks the
+`csv` module correctly puts around a field containing a comma, and asserted in
+the check's own text that it would not be quoted. **The measurement wins: the
+code was right and my expectation was not.** The fixture now uses a WHY line
+with no comma, so the check says what it was meant to say — quoted when it must
+be, bare when it need not be.
+
+**6. FIXING THAT MADE A SABOTAGE INERT, AND THE DRILL CAUGHT ME.** With no
+comma left anywhere in the disk witness, T2 (the WHY line truncated at the
+first comma) changed nothing and was correctly scored `INERT — ITS VERDICT IS
+WORTHLESS`, which this drill treats as a FAIL. The same happened to T6 (a
+duplicate silently swallowed) because my witness logged three DIFFERENT trades
+and so had no duplicate to swallow. **Both were my fixtures being blind, not
+the code, and in both cases the rule "a sabotage must be PROVED to change the
+output before its verdict means anything" is what noticed.**
+
+**7. MY GATE CRASHED MID-REPORT UNDER ATTACK A1.** With append-only turned into
+overwrite, a DETAIL line indexed a row that no longer existed and the gate died
+on a traceback after four reds — exit 1, so it never lied, **but the drill and
+the check count come after that point and their reds were never printed.** A
+failing gate must still be able to finish reporting. Fixed; A1 now reports 8
+red and a clean `GATE 5.1 FAILED` verdict.
+
+## WHAT WAS BUILT
+
+`journal/log_trade.py` — the doorway `log_trade()` taking the seven fields and
+returning one honest line, with the seven questions as a shell over it inside
+`__main__`. Production half **lines 1-286, sha256 `652378043e01b8e4`** (the
+prefix before the `__main__` line, joined by CRLF, no trailing separator).
+
+**GATE 5.1 — 64 checks, 0 red, run TWICE:**
+
+    journal/log_trade.py --gate            exit 0  0 red  64 green
+      the same file at TZ=UTC0             exit 0  0 red  64 green
+      tick sequences compared BY MACHINE: IDENTICAL, 64 marks each
+
+Condition 12 is satisfied and the proof is better than the tick sequence: the
+machine runs **UTC+5**, and the one stamp in the run that comes from the real
+clock read **08:48:49+00:00** on the local run and **08:48:50+00:00** at
+`TZ=UTC0` — one second apart because the clock moved between two runs, both in
+UTC, neither at 13:48. **A stamp that followed the machine's zone would have
+been five hours out and the two runs would have disagreed by five hours, not by
+one second.**
+
+**TWELVE SABOTAGES, ALL CAUGHT, NONE INERT:** a column swapped, the WHY line
+truncated at the first comma, a refused entry written anyway, the append
+rewriting the file, the header written twice, a genuine duplicate swallowed,
+the numbers rounded, JUDGEMENT printed at entry time, the stamp with no zone,
+the stamp in local time wearing a UTC label, the coin stored under a name no
+snapshot row uses, and the feeling left in the case he typed. **T8 is witnessed
+on the RETURNED LINE and not on the disk**, because a judgement can be printed
+while the row that lands is byte-identical — S15 and C8's shape.
+
+**AND THE CHECK THIS SHIP DID NOT HAVE.** GATE 5.1 is told **in its own text**
+that it owes 64 checks and goes RED if it runs a different number. **It is the
+first gate on this ship that can count itself**, and it exists because this
+same session's Part 1 deleted five checks from GATE 4.1 this morning and
+watched it print `PASSED — 82 checks, 0 red`.
+
+## THE CONFINEMENT, PROVED TWO WAYS AND NOT ASSERTED
+
+**NOTHING THE PILOT ALREADY READS CHANGED. `journal/log_trade.py` AND
+`LOG_TRADE.bat` ARE BOTH NEW FILES AND NOT ONE EXISTING FILE WAS EDITED.**
+
+    git status:  ?? LOG_TRADE.bat   ?? journal/log_trade.py
+                 (plus the two the orders say are not mine)
+
+    every production file, working-tree content vs HEAD:  IDENTICAL
+      fear_greed · funding · news · collection_guard · events · whales ·
+      carry · open_interest        — all eight, 0 bare LF in the working tree
+
+**AND A REAL DEFECT IN THE ORDERS I INHERITED, MEASURED RATHER THAN ARGUED.**
+The recipe those orders give — *"sha256 of the prefix BEFORE the `__main__`
+line, WITHOUT the anchor line, no trailing separator"* — **reproduces exactly
+ONE of the seven numbers in its own table.** Following it, I got seven
+"*** MOVED ***" lines on files git says are untouched. Every recipe variant was
+then tried against all seven:
+
+    CRLF / TRAILING separator / excluding the anchor .... 6 of 7 hashes match
+    CRLF / no trailing separator / excluding the anchor . 1 of 7 (carry.py only)
+    every LF variant ................................... 0 of 7
+
+**So the six older numbers were made WITH a trailing CRLF and `cockpit/carry.py`
+was made WITHOUT one, and the written recipe describes only the newest file.**
+Three of the seven line numbers are off by one as well. **The measured table,
+both ways, is carried into the next session's orders so nobody loses another
+half hour to it:**
+
+    file                       __main__  WITH trailing CRLF  WITHOUT
+    cockpit/fear_greed.py        113     bb31626c493a1ac6    d09fba1dde6d9517
+    cockpit/funding.py           160     95069d1bef8316d7    2dab48ecb0d00927
+    cockpit/news.py              272     503663762315b2f2    6f4f69f4377e4158
+    data/collection_guard.py     156     d6518cd7208eb611    c0f41d6044225baf
+    cockpit/events.py            372     6fc5ce7d67aa8f24    481f97bdf59980f3
+    cockpit/whales.py            363     d2cd1b58373d2fcb    7a7926f5badb7f3d
+    cockpit/carry.py             416     540e057ad7a2cd40    ec5455596007b590
+    journal/log_trade.py         287     7d9252b099d38df9    652378043e01b8e4
+
+**THE HONEST CONCLUSION: A HASH WHOSE RECIPE NOBODY CAN REPRODUCE IS NOT A
+PROOF, IT IS A NUMBER.** `git status` and a content comparison against HEAD
+need no recipe at all and cannot drift. The table is kept because it is cheap;
+**the comparison against HEAD is what the confinement actually stands on.**
+
+## THE FIVE DESIGN DECISIONS, AND WHERE EACH IS PROVED
+
+**D1** — the doorway takes values and `input()` appears nowhere but the shell
+inside `__main__`; check (a), and Door 3 in check (i) proves an import plus
+three doorway calls writes nothing at all.
+**D2** — append-only; check (c) seeds two rows the logger has never seen and
+requires every byte at the same offset afterwards, and attack A1 proves a real
+`'a'`-to-`'w'` edit is refused.
+**D3** — **duplicates are legitimate and are NOT refused**; check (h) logs the
+identical trade twice, to the same second, and requires TWO IDENTICAL ROWS.
+**D4** — a hostile WHY line carrying a comma, a double quote, a newline, a
+leading `=`, non-ASCII text **and whitespace at both ends** comes back byte for
+byte; check (g).
+**D5** — `100.50` reaches the disk as `100.50`; the `Decimal` is a doorman that
+is looked at and thrown away.
+
+## WHAT THE BAR ASKED FOR THAT I COULD NOT GIVE IT, SAID OUT LOUD
+
+**Condition 10 absorbs the plan's own sentence: `log 2 fake trades, RUN MIRROR,
+numbers check out by hand`. `journal/mirror.py` does not exist and the same bar
+forbids this session to build it.** The half that can be met is met in full —
+two fake trades, the whole file compared to rows typed out by hand, and then
+every one of the sixteen values read back and compared to values typed out
+separately — and **the check says this in its own text rather than quietly
+counting itself complete.** The Mirror half is owed by whoever builds the
+Mirror. **I did not lower the condition and I did not declare it inapplicable.**
+
+## ADDED BEYOND THE BAR, AND SAID SO
+
+**`LOG_TRADE.bat`** — 358 bytes, CRLF, **ASCII only on purpose**, because
+`run_daily.bat` in this repo already carries `???` where an em-dash used to be.
+It was run for real and its output read. **He may delete it without touching
+anything else.**
+
+## THE SHIP AFTER THE WORK
+
+    cockpit/brief.py                       3/3 instruments · exit 0
+      Carry (7d): 3 of 3 assets · window ends 08:00 UTC
+      BTC +6.18%/yr (earns) · ETH +4.85%/yr (earns) · SOL +1.50%/yr (earns)
+    journal/log_trade.py --gate   GATE 5.1 PASSED  exit 0  0 red  64 checks
+      the same at TZ=UTC0         GATE 5.1 PASSED  exit 0  0 red  64 checks
+    journal/my_trades.csv         DOES NOT EXIST — it is created by his first
+                                  real trade, and that is correct
+
+**THE BRIEF WAS 3/3, NOT 2/3.** The whole output was kept, as the orders
+demanded. **It has now gone 2/3 twice on other days and this session did not
+reproduce it, so item 11 on his desk — the TwelveData key rotation — remains
+the first suspect and remains unproven.**

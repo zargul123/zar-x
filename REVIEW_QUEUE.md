@@ -4343,3 +4343,186 @@ build, of the same kind as R-058, and only a session that did not write
 **R-066 IS STILL OPEN AND STILL UN-ATTACKED.** This session was exempt from
 looking at it and did not look at it. **Nothing was cleared this session, by
 anybody, including me.**
+
+---
+
+# 2026-08-20 (morning) — **THE TWENTY-FOURTH GENERATION. ONE ITEM CLEARED BY SOMEONE WHO DID NOT BUILD IT; SIX FILED, FOUR OF THEM AGAINST THIS SESSION'S OWN WORK.**
+
+## R-067 — **CLEARED. `cockpit/carry.py` WAS ATTACKED BY A SESSION THAT DID NOT BUILD IT, AND THE INSTRUMENT HELD.**
+
+**Cleared 2026-08-20 by the twenty-fourth generation, which wrote not one line
+of `cockpit/carry.py` and had no memory of its being written.**
+
+**WHAT WAS ACTUALLY DONE, so the clearance can be judged rather than trusted.**
+Five faults were installed as byte-level TEXT EDITS in five copies of the file
+outside the repo, with a sixth copy proved byte-identical to the repo file by
+sha256 and run FIRST as the control. The control passed 87/0. Then:
+
+    E3  the BTC row fed ETH's contract — a wrong number under a right
+        label ................................................ CAUGHT, 9 red
+    E4  the window taken from the OLDEST rows, not the newest . CAUGHT, 1 red
+    E5  the staleness limit silently multiplied by ten ........ CAUGHT, 3 red
+
+**THOSE ARE THREE DIFFERENT WAYS OF MAKING THE CARRY LINE LIE AND GATE 4.1
+REFUSED ALL THREE, LOUDLY, BY NAME.** Not one attack this session invented made
+a figure on the Morning Brief wrong while the gate stayed green.
+
+**TWO OF THE AUTHOR'S OWN FIVE DOUBTS WERE TESTED AND BOTH CAME BACK IN HIS
+FAVOUR.** His doubt 2 — the 60,000 ms spacing tolerance defended by one
+morning's measurement — was re-measured today across all three contracts:
+**eight distinct gap values spanning 28,799,995 ms to 28,800,004 ms, a wobble
+of ±5 ms, against a tolerance twelve thousand times larger.** His doubt 4 — the
+gate reading `SYMBOLS` out of the module, R-014's shape — is real in shape and
+harmless in fact, because the gold fixture is keyed by CONTRACT and typed out
+in the gate: E3 is exactly the fault that doubt describes and it turned nine
+checks red.
+
+**WHAT THIS CLEARANCE DOES NOT COVER, so nobody reads more into it than it
+earned:** the instrument was never run across a real settlement boundary
+(R-069 stands); the author's doubts 1, 3 and 5 were reasoned about but not
+attacked; and **two faults DID escape, both in the GATE rather than the
+instrument** — they are R-070 and R-071 below, and neither can make a figure
+wrong today.
+
+## R-070 — **NO GATE ON THIS SHIP KNOWS HOW MANY CHECKS IT SHOULD RUN, AND CARRY'S PASSING BANNER STATES A NUMBER IT NEVER VERIFIED** · CATEGORY B · OPEN
+
+Five entries were deleted from GATE 4.1's `SABOTAGES` list — a one-character
+text edit. C17, C18, C19, C20 and C21 never ran; **C19, C20 and C21 are the
+three REAL-transport checks that R-060 cost a whole session to earn.**
+
+**THE GATE PRINTED `GATE 4.1 PASSED — 82 checks, 0 red` AND EXITED 0.** Worse
+than a missing count, its passing banner then stated two things that were false
+in that run: *"C19, C20 and C21 run forever"* and *"ALL TWENTY-ONE SABOTAGES
+WERE PROVED TO CHANGE WHAT SOMEBODY READS"*. Sixteen ran.
+
+**THIS IS THE 2026-07-26 FAILURE — honest arithmetic over an incomplete set,
+with the headline number making the set look complete — ALIVE IN A NEW FILE.**
+
+**IT IS SHIP-WIDE, NOT A CARRY.PY REGRESSION.** Every gate prints
+`len(nonlocal_ok)` and none asserts it: fear_greed 58, funding 71,
+open_interest 88, news 54, events 69, whales 107, carry 87.
+
+**GRADED SMALL BY THE FORM AND THE REASONING IS GIVEN RATHER THAN THE VERDICT
+ALONE.** Q2 is NO: the gate computes nothing that reaches the Brief, so
+deleting checks removes an alarm without moving a figure. **THE HONEST
+QUALIFIER: the FINDING REPORT grades faults in the INSTRUMENT, and this is a
+fault in the ALARM. Run past Q2, step 3.1 — "would the system still report all
+fine while this happened?" — is an unambiguous YES and would land it
+BORDERLINE. The session followed the form as written and did not stretch it.
+The Commander may overrule that reading; it is his form.**
+
+**THE REPAIR IS ONE LINE PER GATE** and `journal/log_trade.py` shipped with it
+today as a worked example: the expected count is TYPED OUT in the gate and a
+run that produces a different number goes RED. **`journal/log_trade.py` is the
+first gate on this ship that can count itself.**
+
+**FILED BY THE SESSION THAT FOUND IT AND THAT ALSO WROTE THE FIRST REPAIR OF
+IT. I MAY NOT CLEAR IT.**
+
+## R-071 — **`_window_end`'s DELIBERATE PROMISE IS UNREACHABLE BY ANY CHECK IN GATE 4.1** · CATEGORY B · OPEN
+
+`_window_end` returns `min(stamps)` and its docstring says why in as many
+words: *"The OLDEST is used: the newest would flatter it, letting one current
+asset make a stale one look current."* **Changing that one word to `max` turns
+no check red anywhere in 87.**
+
+Proved to change what the Commander reads before the verdict was counted, on a
+fixture handed to both copies with no network at all:
+
+    control          · 3 of 3 assets · window ends 00:00 UTC
+    min -> max       · 3 of 3 assets · window ends 08:00 UTC
+
+**THE REASON NOTHING CATCHES IT IS THAT NO FIXTURE IN THE GATE EVER GIVES TWO
+ASSETS DIFFERENT WINDOW ENDS.** GOLD builds all three from the same `END`;
+MIXED has only one asset answering; and the live check (m) matches the head
+with a regular expression accepting any `\d{2}:\d{2}`.
+
+**IT IS R-068's OWN ARGUMENT — "a promise no check can reach is a promise
+nobody can keep" — WHICH ITS AUTHOR WROTE ABOUT `_order` AND DID NOT APPLY TO
+`_window_end`.**
+
+**GRADED SMALL, AND MEASURED RATHER THAN REASONED.** The shipped file says
+`min`, which is correct, and at 08:33 UTC today all three contracts shared one
+window end to the millisecond (1787212800000), so `min` and `max` agree. It
+becomes wrong only after TWO steps, each named: somebody edits `min` to `max`,
+**and** one contract's newest settled funding lags the others while staying
+inside the 600-minute limit — a venue behaviour never observed.
+
+**THE REPAIR BELONGS IN THE GATE, NOT THE PRODUCTION FILE, WHICH IS ALREADY
+RIGHT:** one fixture in which the three assets' windows end at different
+stamps, asserting the head shows the OLDEST. **I found it; I may not clear it.**
+
+## R-072 — **NOBODY BUT ME HAS LOOKED AT `journal/log_trade.py`. THE NEXT SESSION'S JOB 1 IS TO ATTACK IT.** · NOT CATEGORY B · OPEN
+
+One mind decided the seven fields, wrote the production half, wrote the gate
+that judges it, chose the fixtures, chose the twelve sabotages, and then
+reported that all of them passed. **That is the exact shape this ship has been
+burned by, and it is the same item R-067 was.**
+
+**WHAT IT HAS BEHIND IT, so the risk is neither overstated nor waved away:**
+GATE 5.1 passed 64 checks / 0 red twice with identical tick sequences; twelve
+sabotages caught with none INERT; **six real faults installed as text edits in
+copies outside the repo are all refused while the untouched control passes**;
+and **three of those six ESCAPED the first version of the gate and the gate was
+hardened until they did not** — which is evidence the attack was real, and also
+evidence that a first draft of this gate was blind three times over.
+
+**WHERE I WOULD ATTACK IT IF I WERE NOT ITS AUTHOR — named because a builder
+cannot invent the attack he is blind to, but can say where he did not look:**
+
+1. **THE SEVEN QUESTIONS ARE UNTESTED BY ANYTHING.** D1 says an interactive
+   prompt is beyond a gate's reach and that is true, but it means the ORDER of
+   the seven `input()` calls is checked by nobody. **If two were swapped, his
+   exit price would go in the size field forever and every one of the 64 checks
+   would stay green**, because they all call the doorway directly. I drove the
+   shell once by hand and read its output. That is all the evidence there is.
+2. **`_needs_header` DECIDES ON `os.path.getsize`.** A journal whose header
+   somebody deleted by hand, leaving rows, gets no header back and the file is
+   then one column-name-less archive. Nothing tests that shape.
+3. **A PARTIAL WRITE.** The whole row reaches the disk in ONE `write` call,
+   which is why it is built in memory first — but that is not an atomicity
+   guarantee, and R-073 is the doubt about it.
+4. **THE REFUSAL MESSAGES ECHO HIS OWN TEXT BACK WITH `!r`.** A hostile asset
+   name is printed to his screen. It is never stored, and it goes nowhere but
+   his console — but I have not thought hard about it.
+5. **`_feeling` LOWER-CASES AND `_why` DOES NOT.** That asymmetry is deliberate
+   and written down, but it is one mind's judgement about a file the Mirror
+   will read, and the Mirror does not exist yet to disagree with it.
+
+## R-073 — **A POWER CUT MID-WRITE COULD STILL LEAVE HALF A ROW, AND NO CHECK HERE CAN PROVE OTHERWISE** · CATEGORY B · OPEN
+
+The row is composed in memory and handed to the file in a single `write`, which
+is the best this file does without a temp-file-and-rename dance that would sit
+awkwardly with append-only. **I could not test it — I will not simulate a power
+cut on the Commander's laptop — and I will not ship a claim whose only evidence
+is that it looks right.** Said here rather than left implied.
+
+## R-074 — **THE TRADE LOG'S STAMPS AND THE SNAPSHOT ROWS' STAMPS ARE IN DIFFERENT FORMATS, ON PURPOSE, AND THE MIRROR WILL HAVE TO RECONCILE THEM** · CATEGORY B · OPEN
+
+`my_trades.csv` writes `2026-08-20T09:30:15+00:00` because condition 12 demands
+the zone. **Every row of `journal/snapshots_local.csv` since Phase 2 says
+`2026-07-21 11:35` with no zone at all.** Obeying the bar was right and I did
+not weaken it, **but the two files the Mirror must join now disagree about what
+a time looks like, and whoever builds `journal/mirror.py` meets this on their
+first afternoon.** Filed today so they meet it in writing first.
+
+## R-075 — **`LOG_TRADE.bat` IS SURFACE NO GATE REACHES** · CATEGORY B · OPEN
+
+GATE 5.1 does not ask for it and does not judge it. It was run for real and its
+output read, which is more than an assertion and less than a check. **It is one
+`cd`, one environment variable and one command, and the Commander may delete it
+without touching anything else.**
+
+## **>>> THE CATEGORY B PILE IS NOW FORTY-TWO.**
+
+R-070, R-071, R-073, R-074 and R-075 are CATEGORY B. **R-072 is not: it is an
+open item against a build, of the same kind R-067 was, and only a session that
+did not write `journal/log_trade.py` may clear it.**
+
+**R-066 IS STILL OPEN AND STILL UN-ATTACKED — NOW FOR THREE GENERATIONS.** This
+session held no exemption, chose `cockpit/carry.py` because the orders named it
+Job 1, and did not reach `cockpit/whales.py`. **Saying so is the whole point of
+the sentence; it is not a resolution and it must not fade.**
+
+**One item was cleared this session — R-067 — by a session that did not build
+what it cleared. Nothing else was cleared by anybody, including me.**

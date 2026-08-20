@@ -434,6 +434,70 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-08-20 (morning): PHASE 5 IS HALF BUILT. `journal/log_trade.py` SHIPPED UNDER GATE 5.1 — 64 CHECKS, 0 RED, TWICE, AND CERTIFIED BY ATTACK. R-067 IS CLEARED BY A SESSION THAT DID NOT BUILD `cockpit/carry.py`.**
+
+**WHERE THE SHIP IS.** Every gate green, proved before anything was touched.
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red   ~66 s
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red  ~125 s
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red   ~55 s
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red   ~57 s
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red    ~7 s
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red    ~6 s
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red   ~0.6 s
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red   ~1.3 s
+    cockpit/whales.py           GATE 3.5-R1   PASSED  exit 0  0 red    ~8 s
+      the same file at TZ=UTC0  GATE 3.5-R1   PASSED  exit 0  0 red    ~7 s
+    cockpit/carry.py            GATE 4.1      PASSED  exit 0  0 red    ~4 s
+      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0  0 red    ~3 s
+    journal/log_trade.py        GATE 5.1      PASSED  exit 0  0 red    ~2 s
+      the same file at TZ=UTC0  GATE 5.1      PASSED  exit 0  0 red    ~2 s
+                                64 checks, TWELVE sabotages, none INERT,
+                                tick sequences identical BY MACHINE
+    885 green across the twelve arrival invocations · vault INTACT 6 of 6
+    Brief 3/3 · lab/ untouched · journal/my_trades.csv DOES NOT YET EXIST
+
+**THE GATE TIMINGS ABOVE ARE TODAY'S AND THEY ARE NOT THE ORDERS' FIGURES.**
+`cockpit/carry.py --gate` took 4 s, not the ~35 s on record — the live
+cross-check ran with today's real money in it. **A gate timing is a weather
+report, not a check. Never conclude anything from one.**
+
+**Production half of `journal/log_trade.py`: lines 1-286, sha256
+`652378043e01b8e4`** (prefix before `__main__`, CRLF, NO trailing separator).
+
+**WHAT IS BROKEN OR UNPROVEN, STATED AS THE MARKER MUST STATE IT:**
+
+- **R-072: NOBODY BUT ITS AUTHOR HAS LOOKED AT `journal/log_trade.py`.** The
+  next session's Job 1 is to attack it. **No exemption was held or granted.**
+- **R-066 IS STILL OPEN AND STILL UN-ATTACKED, NOW FOR THREE GENERATIONS.**
+  One mind found R-060, graded it and repaired it. **A deferral is not a
+  resolution and it must not fade.**
+- **R-070: NO GATE ON THIS SHIP KNOWS HOW MANY CHECKS IT SHOULD RUN.** Proved
+  today by deleting five checks from GATE 4.1 and watching it print
+  `PASSED — 82 checks, 0 red` while its banner claimed all twenty-one had run.
+  **`journal/log_trade.py` shipped with the one-line repair; the other seven
+  gates do not have it.**
+- **R-071: `cockpit/carry.py`'s `_window_end` promise is unreachable by any
+  check** in GATE 4.1's 87. The production file is right; the gate is blind.
+- **THE SEVEN INTERACTIVE QUESTIONS IN `journal/log_trade.py` ARE TESTED BY
+  NOBODY.** D1 says a prompt is beyond a gate's reach, which is true and which
+  means **the ORDER of the seven `input()` calls is checked by nothing.** It
+  was driven once by hand and its output read. That is all the evidence there
+  is.
+- **`journal/mirror.py` DOES NOT EXIST.** Phase 5 is half built, and condition
+  10 of GATE 5.1 could only be half met because of it — said out loud in the
+  check's own text, not softened.
+- **THE CATEGORY B PILE IS FORTY-TWO**, cleared before the ship is used for
+  real, at the same moment `cockpit/brief.py` finally gets its gate.
+- **THE PREFIX-HASH RECIPE IN THE ORDERS WAS WRONG FOR SIX OF THE SEVEN FILES
+  IT LISTED.** Measured and corrected today. **A hash whose recipe nobody can
+  reproduce is a number, not a proof** — `git status` and a content comparison
+  against HEAD are what the confinement actually stands on.
+
+---
+
+### THE MARKER THIS REPLACED, KEPT FOR THE RECORD
+
 ## **>>> 2026-08-19 (morning): PHASE 4 IS COMPLETE. `cockpit/carry.py` SHIPPED UNDER GATE 4.1 — 87 CHECKS, 0 RED, TWICE, AND CERTIFIED BY ATTACK. THE EXEMPTION IS SPENT.**
 
 **WHERE THE SHIP IS.** Every gate green. The Morning Brief now carries the five
