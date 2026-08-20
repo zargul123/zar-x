@@ -13626,3 +13626,292 @@ than a refused one.
 - **No grading, no scoring, no judgement of any kind at entry time.**
 - **No new dependency.** `csv` and `decimal` are in the standard library.
 - **It does not touch `journal/snapshots_*.csv`, the grader, or the vault.**
+
+---
+
+# 2026-08-20 (morning) — **THE TWENTY-FOURTH GENERATION. PART 1: `cockpit/carry.py` ATTACKED BY SOMEONE WHO DID NOT BUILD IT. THE INSTRUMENT HELD. THE GATE DID NOT — TWICE.**
+
+*No exemption was held or asked for. R-067 was Job 1 and it is answered below.*
+
+## THE SHIP WAS PROVED ALIVE FIRST — TWELVE INVOCATIONS, RED COUNTED BY MACHINE THREE WAYS
+
+    01 cockpit/fear_greed.py     --gate  exit 0   66.1 s   58 green
+    02 cockpit/funding.py        --gate  exit 0  125.0 s   71 green
+    03 data/open_interest.py     --gate  exit 0   54.9 s   88 green
+    04 the same at TZ=UTC0               exit 0   56.7 s   88 green
+    05 data/collection_guard.py  --gate  exit 0    6.5 s   (prints OK/FAIL, no ticks)
+    06 cockpit/news.py           --gate  exit 0    6.0 s   54 green
+    07 cockpit/events.py         --gate  exit 0    0.6 s   69 green
+    08 the same at TZ=UTC0               exit 0    1.3 s   69 green
+    09 cockpit/whales.py         --gate  exit 0    7.9 s  107 green
+    10 the same at TZ=UTC0               exit 0    6.9 s  107 green
+    11 cockpit/carry.py          --gate  exit 0    4.4 s   87 green
+    12 the same at TZ=UTC0               exit 0    3.1 s   87 green
+
+**TOTALS: 885 green, exit 0 twelve times out of twelve. Counted three ways —
+the tick character (0), the first word of a line (3), the phrase
+"GATE ... FAILED" (0).** All three first-word hits were READ BY EYE and all
+three are the prose traps the orders named: `fear_greed.py` and `funding.py`
+each carry the word *FAILURE* at the start of a line inside their own PASS
+text, and the funding gate carries *escaped* at the start of a line,
+describing sabotages that beat a gate a month ago. **It has now fooled the
+counters of three consecutive sessions. The counter is a flare; the reading is
+the fence.**
+
+**`cockpit/carry.py --gate` ran in 4.4 s, not the ~35 s the orders record.**
+That is not a skipped check: the live cross-check (m) is in the output with
+today's real money in it — BTC +6.18%/yr, ETH +4.85%/yr, SOL +1.50%/yr, each
+equal to the gate's own independent fetch digit for digit. The network was
+simply faster this morning. **The orders' timing figure should be read as
+"about half a minute, and it varies", not as a check that something ran.**
+
+## THE BARS FOR THIS REVIEW WERE WRITTEN BEFORE ANYTHING WAS RUN
+
+Five bars and six named candidate attacks were written to a scratch file
+outside the repo before the first command of the session, so that no attack
+found by accident could be claimed afterwards as one that had been planned.
+The rule they carried, in the session's own words: *"IF THIS PRODUCES NOTHING,
+THAT IS A RESULT AND I SAY SO PLAINLY."*
+
+## THE RIG: SIX COPIES OUTSIDE THE REPO, THE CONTROL RUN FIRST
+
+Six scratch roots were built outside the repo, each holding one copy of
+`cockpit/carry.py` with **the fault installed as a byte-level TEXT EDIT**, not
+as a monkeypatch. The builder refused to write any copy whose anchor matched
+other than exactly once, refused any anchor ending at a `\r`, and refused a
+copy that came back identical to the original. **The control copy was proved
+byte-identical to the repo file by sha256 (`29b148fc7c784f8e`) and it was run
+FIRST.**
+
+    control              exit 0  PASSED  87 checks  0 red   <- the rig is sound
+    E1  _window_end min -> max        exit 0  PASSED  87 checks  >>> ESCAPED
+    E2  five sabotage checks deleted  exit 0  PASSED  82 checks  >>> ESCAPED
+    E3  BTC's row fed ETH's contract  exit 1  FAILED   9 red     CAUGHT
+    E4  the window taken from the
+        OLDEST rows, not the newest   exit 1  FAILED   1 red     CAUGHT
+    E5  the staleness limit silently
+        multiplied by ten            exit 1  FAILED   3 red     CAUGHT
+
+## **>>> WHAT HELD, SAID FIRST, BECAUSE IT IS THE LARGER HALF OF THE RESULT**
+
+**THE PRODUCTION HALF OF `cockpit/carry.py` DEFEATED EVERY ATTACK AIMED AT THE
+NUMBER.** E3, E4 and E5 are three different ways of making the Carry line lie —
+a right label over the wrong instrument's rate, a window taken from the wrong
+end, and a staleness guard quietly widened from ten hours to a hundred — and
+GATE 4.1 refused all three, loudly, by name. **E3 alone turned nine checks red.**
+Not one attack this session invented made a figure on the Morning Brief wrong
+while the gate stayed green. **Both escapes are in the GATE, and neither can
+change a number the Commander reads.**
+
+Two of R-067's own five doubts were also tested and both came back in the
+author's favour. His 60,000 ms spacing tolerance was defended by one morning's
+measurement of 500 settlements; **re-measured today, the real gaps across all
+three contracts span eight distinct values from 28,799,995 ms to 28,800,004 ms
+— a wobble of ±5 ms, and the tolerance is twelve thousand times that.** His
+`SYMBOLS`-out-of-the-module worry (his doubt 4, R-014's shape) is real in
+shape but harmless in fact: the gold fixture is keyed by CONTRACT and typed out
+in the gate, so E3 — the exact fault that worry describes — was caught nine
+times over.
+
+## **FINDING 1 (E2) — THE GATE DOES NOT KNOW HOW MANY CHECKS IT SHOULD RUN, AND ITS PASSING BANNER STATES A NUMBER IT NEVER VERIFIED**
+
+Five entries were deleted from the `SABOTAGES` list — a one-character edit,
+`SABOTAGES` to `SABOTAGES[:16]`. C17 (the plausibility bound), C18 (the
+rounding rule), C19, C20 and C21 (all three REAL-transport checks that R-060
+cost a whole session to earn) never ran.
+
+**The gate printed `GATE 4.1 PASSED — 82 checks, 0 red` and exited 0.**
+
+It is worse than a missing count. The passing banner goes on to state, in the
+Commander's own reading text, two things that were **false in that run**:
+
+    "R-060 cost a whole session; C19, C20 and C21 run forever."
+    "ALL TWENTY-ONE SABOTAGES WERE PROVED TO CHANGE WHAT SOMEBODY READS"
+
+Sixteen ran. **This is the 2026-07-26 failure — honest arithmetic over an
+incomplete set, with the headline number making the set look complete — alive
+in a new file, and this time the prose asserts the count as well.**
+
+**IT IS NOT A CARRY.PY REGRESSION. IT IS SHIP-WIDE.** Every gate on this ship
+prints `len(nonlocal_ok)` and not one of them asserts it:
+`fear_greed.py` 58, `funding.py` 71, `open_interest.py` 88, `news.py` 54,
+`events.py` 69, `whales.py` 107, `carry.py` 87.
+
+## **FINDING 2 (E1) — A DELIBERATE PROMISE ON THE COMMANDER'S SCREEN THAT NO CHECK CAN REACH**
+
+`_window_end` returns `min(stamps)` and its docstring says why in as many
+words: *"The OLDEST is used: the newest would flatter it, letting one current
+asset make a stale one look current."* **Changing that one word to `max` turns
+no check red anywhere in GATE 4.1's 87.**
+
+It was PROVED to change what the Commander reads before the verdict was
+counted, on a fixture handed to both copies with no network at all — two assets
+current, one asset a whole settlement behind but still inside the 600-minute
+limit, which is the only situation in which the two words differ:
+
+    control            Carry (7d) : ... · 3 of 3 assets · window ends 00:00 UTC
+    E1 (min -> max)    Carry (7d) : ... · 3 of 3 assets · window ends 08:00 UTC
+
+**The reason nothing catches it is that no fixture in the gate ever gives two
+assets DIFFERENT window ends.** GOLD builds all three from the same `END`;
+MIXED has only one asset answering; and the live check (m) matches the head
+with a regular expression that accepts any `\d{2}:\d{2}`. **It is R-068's own
+argument — "a promise no check can reach is a promise nobody can keep" — which
+its author wrote about `_order` and did not apply to `_window_end`.**
+
+**AND IT WAS MEASURED, NOT REASONED.** Asked directly at 08:33 UTC today, all
+three contracts share one window end to the millisecond (1787212800000,
+08:00:00 UTC, 21 rows each, oldest 08-13 16:00 UTC). **So the situation in
+which this fault bites has never been observed** — which is exactly why it is
+graded SMALL below and not higher.
+
+## THE FINDING REPORT — BOTH FINDINGS, ANSWERED BEFORE ANY REPAIR
+
+**FINDING 1 — the gate cannot count its own checks.**
+
+    Q1  WHAT INFORMATION IS THIS CODE FOR?
+        The verdict line `GATE 4.1 PASSED — 87 checks, 0 red` — the sentence
+        the Commander and every future session read to decide whether the
+        Carry line can be trusted.
+
+    Q2  CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING OR DELETED?
+        **NO.** The gate computes nothing that reaches the Brief. Deleting
+        checks removes an alarm; it does not move a figure. Every number on
+        the Morning Brief is identical with the checks present or absent.
+        **-> SMALL by the scoring rule, and the rest of the form is not run.**
+
+    Q3  IN REAL BUSINESS TERMS
+        (a) He would see nothing wrong: a green banner and a paragraph saying
+            all twenty-one sabotages ran. He has no memorised count of 87.
+        (b) It costs him no money and no data today. It costs him the ability
+            to notice that a guard has been removed — the thing that voided a
+            48/48 on this ship on 2026-07-26.
+        (c) Would he find out? Only by comparing the check count of two runs
+            by hand, which nothing asks anybody to do.
+        (d) Undone? Yes, completely. One line restores it; nothing is lost.
+
+    **RECOMMENDATION: SMALL. CATEGORY B.** With a named repair of one line per
+    gate: `mark(len(nonlocal_ok) == <N> - 1, "this gate ran all <N> checks")`,
+    the count typed out in the gate, so a deleted check turns the gate red
+    instead of shrinking the headline.
+
+    **AND THE HONEST QUALIFIER, SAID OUT LOUD RATHER THAN BURIED.** The
+    FINDING REPORT is built to grade faults in the INSTRUMENT, and Q2 ends
+    this one at SMALL because it is a fault in the ALARM. If the form were run
+    past Q2, step 3.1 — *"would the system still report all fine while this
+    happened?"* — is an unambiguous YES, which would land it BORDERLINE. **The
+    session followed the form as written and did not stretch it. The Commander
+    may overrule that reading; it is his form.**
+
+**FINDING 2 — `_window_end`'s promise is unreachable by any check.**
+
+    Q1  WHAT INFORMATION IS THIS CODE FOR?
+        The words `window ends 08:00 UTC` on the Carry line of the Brief.
+
+    Q2  CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING OR DELETED?
+        **NOT IN THE SHIPPED FILE TODAY.** The shipped file says `min`, which
+        is the correct and conservative word, and all three contracts were
+        measured today sharing one window end, so `min` and `max` agree.
+        It becomes wrong only after a chain, and each step is NAMED:
+          1. somebody edits `min` to `max`, or rewrites `_window_end` and
+             picks the newest — and no check tells them they broke anything;
+          2. AND one contract's newest settled funding lags the other two
+             while staying inside the 600-minute staleness limit, which has
+             never been observed on this venue.
+        **TWO steps away, and the second is a venue behaviour nobody has
+        seen. -> SMALL. CATEGORY B. KEEP BUILDING.**
+
+    Q3  IN REAL BUSINESS TERMS
+        (a) He would see `window ends 08:00 UTC` — a completely normal line.
+        (b) One of the three figures would cover a window up to eight hours
+            older than the header claims: at most one settlement in
+            twenty-one, a fraction of a percent a year. No money moves and no
+            record is damaged.
+        (c) Would he find out? No.
+        (d) Undone? Yes — nothing is stored; the next run is correct.
+
+    **RECOMMENDATION: SMALL. CATEGORY B.** The repair belongs in the GATE, not
+    in the production file, which is already right: one fixture in which the
+    three assets' windows end at different stamps, asserting the head shows
+    the OLDEST.
+
+## **R-067 IS CLEARED. SAID PLAINLY, BY SOMEONE WHO DID NOT BUILD THE FILE.**
+
+I attacked `cockpit/carry.py` hard and **the instrument held.** Five faults
+installed as text edits, a control run first and passing, every fault proved to
+change what somebody reads before its verdict counted. The three that could
+have made a figure wrong were all refused by name. **R-067 asked whether one
+mind's work could be trusted when nobody else had looked. Somebody else has now
+looked, and the answer on the production half is yes.**
+
+**WHAT I DID NOT DO, so nobody reads more into this than it earned:** I did not
+attack `cockpit/whales.py`'s `_get` repair — **R-066 IS STILL OPEN AND STILL
+UN-ATTACKED, now for THREE generations.** I did not test the instrument across
+a real settlement boundary (R-069). And **I may not clear my own two findings**;
+they are filed against work I did, and a later session rules on the repairs.
+
+---
+
+# 2026-08-20 (morning, second part) — **THE AWKWARD EDGE CASES OF `journal/log_trade.py`, NAMED BEFORE ONE LINE OF IT IS WRITTEN**
+
+*Both Part 1 findings scored SMALL, so THE_PATTERN permits Part 2. This entry
+is committed BEFORE the code exists, so that no decision below can be
+back-fitted to whatever gets built.*
+
+**GATE 5.1 IS NOT MINE AND I HAVE NOT TOUCHED A WORD OF IT.** Twelve conditions
+and five design decisions, declared 2026-08-19 by a session that will not build
+the file. Nothing below lowers one, reinterprets one, or declares one
+inapplicable. Everything below is a decision the bar leaves open.
+
+## THE SEVEN AWKWARD CASES, AND WHAT I DECIDED BEFORE CODING
+
+**1. WHAT NAME IS AN ASSET STORED UNDER?** The Brief says `BTC`; every
+snapshot row ever written says `BTC-USD`; `config.ASSETS` says `BTC-USD`. **The
+Mirror will one day join these trades to those snapshots.** DECISION: accept
+`btc`, `BTC`, `btc-usd`, `BTC-USD` from the pilot, and **store the ship's
+snapshot name `BTC-USD`**, so the Mirror joins on a string that already exists
+in the other file. The three names are declared IN `log_trade.py` (Law 2 — the
+compartment owns its sources) and typed out again in the gate (R-014).
+
+**2. "STORES EXACTLY WHAT HE ENTERED" (D5) VERSUS WHITESPACE.** DECISION: the
+only thing removed is whitespace at the two ends. `100.50` is stored as
+`100.50` and never as `100.5` — a `Decimal` is built to CHECK the value and is
+then thrown away. The gate proves the trailing zero survives.
+
+**3. `Decimal` ACCEPTS `NaN` AND `Infinity`.** Both parse without error and
+neither is a price. DECISION: refused by name, exactly as `cockpit/carry.py`
+does with `is_finite()`.
+
+**4. A PRICE OF ZERO OR LESS.** The bar names six refusals and a non-positive
+price is not among them, but it is not a price. DECISION: refused by name, and
+its boundary tested — `0` refused, `0.00000001` accepted, `-1` refused. **This
+is stricter than the bar, never looser, and it is written here rather than
+discovered in the gate.**
+
+**5. THE FEELING IS ONE WORD — IN WHICH CASE?** The Mirror will group by it,
+and `Nervous` and `nervous` must not become two feelings. DECISION: the feeling
+is stored lower-cased. **The WHY line is NOT touched in any way** — D4 and
+condition 7 demand it come back byte-identical, so nothing may be stripped,
+escaped or neutralised in it, **including a leading `=`.**
+
+**6. THE STAMP DOES NOT MATCH THE SNAPSHOTS, ON PURPOSE.** Condition 12
+requires the zone on every stamp. Snapshot rows are written `2026-07-21 11:35`
+with NO zone at all. DECISION: obey the bar — `2026-08-20T08:40:00+00:00`. **The
+mismatch is real and it is the MIRROR's problem to solve, not this file's, so
+it is filed in `REVIEW_QUEUE.md` today rather than left for whoever meets it.**
+
+**7. LINE ENDINGS, WHICH ON WINDOWS ARE A TRAP THAT CORRUPTS EVERY ROW.** A
+`csv.writer` on a file opened without `newline=''` writes `\r\r\n` on this
+machine. DECISION: opened with `newline=''` and `encoding='utf-8'`, giving
+CRLF, which is what `journal/snapshots_local.csv` already uses (201 CRLF, 0
+bare LF, measured today). **The gate compares the bytes on disk against a copy
+typed out with its CRLFs explicit.**
+
+## WHAT I AM ADDING BEYOND THE BAR, SAID OUT LOUD
+
+**`LOG_TRADE.bat`.** GATE 5.1 does not ask for it. **The Commander is a
+non-programmer whose PowerShell opens at `C:\WINDOWS\system32`, and the
+housekeeping rule on this ship is "before reaching for a command at all, reach
+for the `.bat`."** A logger he cannot start is a logger he will not use. It is
+one line of untested-by-gate surface, it is run and its output read before it
+ships, and **he may delete it without touching anything else.**
