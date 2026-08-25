@@ -1,20 +1,17 @@
-⚠️ TwelveData request failed for SOL-USD: HTTPSConnectionPool(host='api.twelvedata.com', port=443): Read timed out.
-📉 TwelveData failed for SOL-USD. Falling back to Yahoo Finance.
-🔌 DATA INSTRUMENT OFFLINE for SOL-USD (4h).
-🔌 SOL-USD: data offline — its rows skipped this run
 ========================================================
   ZAR X GRADER — trend-claim report card (v2)
 ========================================================
-  Rows in all notebooks: 901 (235 duplicate candle-claims discarded)
-  Unique claims        : 666
-  Not yet gradable     : 18 (younger than 24h of market)
-  No directional claim : 124 (MIXED)
-  GRADED               : 308
-  CORRECT              : 171  (55.5%)
+  Rows in all notebooks: 904 (235 duplicate candle-claims discarded)
+  Unique claims        : 669
+  Not yet gradable     : 21 (younger than 24h of market)
+  No directional claim : 164 (MIXED)
+  GRADED               : 484
+  CORRECT              : 260  (53.7%)
     BTC-USD: 94/176 (53%)
-    ETH-USD: 77/132 (58%)
-  ALWAYS-UP PARROT     : 266/432 (61.6%)  <- the bar to beat
-  Verdict              : system does NOT beat the parrot (55.5% vs 61.6%)
+    ETH-USD: 76/132 (58%)
+    SOL-USD: 90/176 (51%)
+  ALWAYS-UP PARROT     : 397/648 (61.3%)  <- the bar to beat
+  Verdict              : system does NOT beat the parrot (53.7% vs 61.3%)
   (In an up-drifting market the parrot scores high with
    zero skill. Beating the COIN means nothing; beating
    the PARROT is the honest bar. Small samples lie.)
