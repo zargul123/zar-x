@@ -655,3 +655,5 @@ utc_time,asset,timeframe,close,trend,rsi,atr,atr_pct,regime,entropy,adx
 2026-08-27 09:27,BTC-USD,4h,80203.68,UP,65.5,1053.63,1.31,Trending,1.911,38.2
 2026-08-27 09:27,ETH-USD,4h,2550.56,UP,69.2,43.71,1.71,Trending,1.933,34.8
 2026-08-27 09:27,SOL-USD,4h,105.29,UP,73.0,2.64,2.51,Trending,1.893,50.1
+2026-08-27 22:11,BTC-USD,4h,80220.01,UP,64.2,1079.46,1.35,Trending,1.905,38.6
+2026-08-27 22:11,SOL-USD,4h,109.55,UP,78.5,2.72,2.48,Trending,1.881,52.9
