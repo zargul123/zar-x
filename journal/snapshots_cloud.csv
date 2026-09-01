@@ -700,3 +700,4 @@ utc_time,asset,timeframe,close,trend,rsi,atr,atr_pct,regime,entropy,adx
 2026-09-01 13:26,BTC-USD,4h,77831.03,UP,44.0,808.93,1.04,Chaotic,1.970,12.3
 2026-09-01 13:26,ETH-USD,4h,2442.64,UP,45.7,33.06,1.35,Ranging,1.946,17.6
 2026-09-01 13:26,SOL-USD,4h,101.81,UP,44.0,1.93,1.89,Ranging,1.956,17.8
+2026-09-01 19:21,BTC-USD,4h,77227.01,MIXED,38.3,880.41,1.14,Chaotic,1.970,13.5
