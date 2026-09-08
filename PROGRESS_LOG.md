@@ -15019,3 +15019,320 @@ and not of two edits stacked on each other.
   hangs.** The break is not in the drill because it does not need to be.
 - **I did not build `journal/mirror.py`.** He ordered a repair and said the
   next session attacks the repairs.
+
+---
+
+# 2026-09-08 — THE TWENTY-SIXTH GENERATION, PART ONE: THE ATTACK
+
+**I built neither repair. I held no exemption and asked for none.**
+
+## THE SHIP WAS ALIVE BEFORE I TOUCHED ANYTHING
+
+Fourteen invocations, every one to its own file, **all exit 0**. Red counted BY
+MACHINE three ways — the tick character (counted by CHARACTER, not by byte),
+the first word of every line, and `GATE ... FAILED` — then **every one of the
+38 word-hits read by eye.** All 38 are prose inside the gates' own explanatory
+text or the trade logger's deliberate refusal demonstrations. **1,033 green,
+0 red.**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red   58 green   68.7s
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red   71 green  148.9s
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red   88 green   66.8s
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red   88 green   66.6s
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  (no FAIL)    4.5s
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red   54 green    5.6s
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red   69 green    0.6s
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red   69 green    0.3s
+    cockpit/whales.py           GATE 3.5-R2   PASSED  exit 0  0 red  111 green   19.4s
+      the same file at TZ=UTC0  GATE 3.5-R2   PASSED  exit 0  0 red  111 green   19.6s
+    cockpit/carry.py            GATE 4.1      PASSED  exit 0  0 red   87 green    4.0s
+      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0  0 red   87 green    4.2s
+    journal/log_trade.py        GATE 5.1-R1   PASSED  exit 0  0 red   70 green    0.9s
+      the same file at TZ=UTC0  GATE 5.1-R1   PASSED  exit 0  0 red   70 green    0.7s
+    vault INTACT 6 of 6 · Brief 3/3 (Whale watch 6 of 6) · journal/my_trades.csv
+    DOES NOT EXIST, which is correct
+
+**THE TWO COUNTS THE ORDERS NAMED ARE THE COUNTS I MEASURED:** whales 111,
+log_trade 70. Nothing had drifted.
+
+**GATE TIMINGS ARE WEATHER, NOT CHECKS — AND THEY MOVED AGAIN.** `funding` is
+recorded at a fraction of 148.9 s and `carry`, recorded at ~35 s, took 4.0.
+**Sixth time.**
+
+## PART 1a — GATE 3.5-R2 (R-079). I ATTACKED IT HARD AND FOUND NOTHING.
+
+**Control first, 111/0, exit 0, twice.** Every sabotage a REAL TEXT EDIT in a
+byte copy OUTSIDE the repo, one experiment per copy, installed by a writer that
+refuses on a bare LF, a split CRLF pair, an anchor matching other than exactly
+once, and an edit that changes nothing.
+
+    D2  the predecessor's own fault re-run: `_get` loses `timeout=timeout`
+        FAILED - 2 red of 111, exit 1.  S1 and S2 red, S3 STILL GREEN.
+        **THE REPAIR IS NOT DECORATIVE.**
+    W1  MY NEW ONE. The PRODUCTION doorway loses the timeout while `_get`
+        keeps its parameter and the global `TIMEOUT == 10` stays true:
+          section_text: `timeout = TIMEOUT if timeout is None else timeout`
+                     -> `timeout = None    if timeout is None else timeout`
+        **I PREDICTED IT WOULD ESCAPE AND I WAS WRONG. CAUGHT — 1 red.**
+    W2  `_why` widened: `requests.Timeout` -> `requests.RequestException`,
+        so a 503 and a DNS failure would both read `timed out` on his screen.
+        **CAUGHT — 2 red.**
+
+**WHY W1 WAS CAUGHT, AND IT WAS NOT BY THE REPAIR.** GATE 3.5-R2's four new
+checks call `_get` DIRECTLY with an injected 3 and never travel
+`section_text()`, so **they are blind to it exactly as I predicted.** What
+caught it is **check (e)**, Condition 12, written long before: the doorway is
+handed a transport that writes down every request the module really made, and
+the recorded tuple carries the resolved `10`. **The repair did not catch my
+attack. The ship's older defence in depth did, and that is worth writing down
+plainly rather than claiming a win for the new code.**
+
+**RULE (k) DISCHARGED FOR ALL FOUR NEW CHECKS.** S1 (under D2), S2, S3 and S4
+were each made to fail on purpose, one at a time, and **the gate finished its
+report every time** — the failure the first draft of this repair died in
+cannot be hiding in the other three.
+
+## >>> MY OWN MISTAKE, FIRST: MY WHALE RIG'S CONTROL FAILED AND I THREW THE RUN AWAY
+
+My first rig copied `whales.py` one folder too shallow, so check (k)'s child
+could not `import cockpit.whales` and **the untouched control came back
+`108 green, 3 red`.** Step 0.1 says a finding on a rig whose control fails is
+NOT PROVEN. **Nothing from that run was counted.** I rebuilt the rig with the
+file at `<tree>/cockpit/whales.py` and re-ran every case from clean. All the
+numbers above are from the rebuilt rig, whose control passes 111/0 twice.
+
+## PART 1b — GATE 5.1-R1, CHECK (m) (R-078). THE REPAIR HELD. THERE IS A HOLE BESIDE IT.
+
+**Control first, 70/0, exit 0, twice.**
+
+    A1  the real clock relabelled UTC instead of converted ....  1 red (R4)
+    A2  the real clock frozen at 2020 ........................  1 red (R4)
+    A3  the archive moved to another filename ................  4 red (R2,R3,R4,R5)
+    L2  MY NEW ONE: `JOURNAL_DIR` moved one folder UP, so the
+        archive lands beside `cockpit/` with every row inside
+        it perfect - B14's shape at the FOLDER level .........  4 red (R2,R3,R4,R5)
+
+**ALL THREE OF THE PREDECESSOR'S FAULTS STILL GO RED, WITH THE EXACT COUNTS
+THE ORDERS PREDICTED. THE REPAIR IS NOT DECORATIVE.**
+
+**RULE (k) DISCHARGED ON CHECK (m) FOR THE FIRST TIME.** R1, R2, R3, R4, R5 and
+R6 were each forced red ALONE — 69 green, 1 red, `GATE 5.1 FAILED`, exit 1 in
+every case — and the highest-risk path, **the child dying before it writes
+anything at all**, produced 5 red and still finished its report. **R-078's
+doubt about check (m) having no permanent break testing it stands; but every
+one of its six failure paths has now been executed.**
+
+## >>> L1 — THE ONE THAT ESCAPED
+
+    journal/log_trade.py, THE SHELL: the two price questions swapped.
+        input("  price you got IN at  : "),      <- these two lines
+        input("  price you got OUT at : "),      <- exchanged
+
+    GATE 5.1-R1:  PASSED - 70 checks, 0 red.  exit 0.
+
+**THE FILE SAYS, IN ITS OWN WORDS, THAT THIS CANNOT BE TESTED:** *"An
+interactive prompt is something no gate can reach, so everything that can be
+tested lives above this line"*, and the gate's closing banner repeats it —
+*"it does not test the seven interactive questions, which no gate can reach."*
+**THAT IS A CLAIM, NOT A MEASUREMENT, AND IT IS FALSE.** `python -u
+journal/log_trade.py` with a reader on its stdout reaches all seven.
+
+## >>> AND MY SECOND MISTAKE: MY FIRST WITNESS WAS BLIND AND SAW NOTHING
+
+I piped seven lines down a pipe. **A PIPE DOES NOT READ THE PROMPT.** The
+answers went in by POSITION, the archive came back correct, and my witness
+printed *"NO CHANGE. The witness saw nothing and proves nothing."* **That was a
+defect in the witness, not an acquittal of the sabotage** — and under rule (h)
+I was right not to believe it either way.
+
+A person answers the question he is ASKED. The second witness does the same:
+`python -u`, reading each prompt as it arrives and typing the true answer to
+the question actually on screen. **Control first, by the same reader:**
+
+    THE TRUTH: he got IN at 100.50 and OUT at 111.00.
+
+    CONTROL   asked "price you got IN at"  -> he types 100.50
+              asked "price you got OUT at" -> he types 111.00
+              his screen: logged: BTC-USD long 100.50 -> 111.00
+              ARCHIVE     entry=100.50  exit=111.00        CORRECT
+
+    SABOTAGE  asked "price you got OUT at" -> he types 111.00
+              asked "price you got IN at"  -> he types 100.50
+              his screen: logged: BTC-USD long 111.00 -> 100.50
+              ARCHIVE     entry=111.00  exit=100.50        REVERSED
+
+**A WINNING TRADE WRITTEN DOWN AS A LOSS, IN THE ARCHIVE THE MIRROR WILL GRADE
+HIM ON, WHILE THE GATE PRINTS 70 CHECKS AND 0 RED.**
+
+## THE FINDING REPORT — FILLED IN BEFORE ANY REPAIR
+
+**Q1 — WHAT INFORMATION IS THIS CODE FOR?** The rows in
+`journal/my_trades.csv`: his own record of every closed trade, in his own
+words. **It is an archive and nobody re-types a trade they logged in March.**
+
+**Q2 — CAN THIS FAULT MAKE THAT INFORMATION WRONG, MISSING OR DELETED?** Not
+today — the shipped shell is correct and the control witness proves it.
+**ONE mistake away, and the one mistake is NAMED: a session edits the seven
+questions — reorders them, adds an eighth, renames one — and nothing on this
+ship can notice.** Q2 = one mistake away, so steps 1-4 decide and it reaches
+the Commander.
+
+**Q3 — IN REAL BUSINESS TERMS.**
+  (a) **His screen:** `logged: BTC-USD long 111.00 -> 100.50, size 0.25,
+      feeling calm` — internally consistent, and it looks completely normal.
+  (b) **The cost:** every trade logged after the edit carries his entry price
+      in the exit column. Wins recorded as losses. **The Mirror then grades
+      him on the reverse of what he did, month after month.**
+  (c) **Would he find out?** Only by remembering his own numbers. Nothing on
+      the ship tells him.
+  (d) **Undone?** No.
+
+**STEP 0.** 0.1 the untouched system passed FIRST — yes, control 70/0 twice and
+the control witness logged the honest row. 0.2 the broken output printed and
+visibly wrong — yes, `entry=111.00 exit=100.50`. 0.3 judging my own work — no.
+
+**STEP 1 — THE VETO.** YES: it damages a record we keep. Continue.
+
+**STEP 2.** 2.1 by accident — **BAD.** 2.2 he would not see it, judged by his
+own 2026-07-29 wording and not by predicting him — **BAD.** 2.3 cannot be
+undone — **BAD.**
+
+**STEP 3.** 3.1 yes, the gate says all fine. 3.2 yes, a saved record. 3.4 yes,
+everything after the edit, forever.
+
+**STEP 4.1** Every trade he logs after somebody rearranges the seven questions
+is written into his permanent record backwards, and the Mirror grades him on
+it. **4.2 MY RECOMMENDATION: SERIOUS.**
+
+## >>> THE COMMANDER RULED, AND THEN SHARPENED THE RULE
+
+**HIS RULING: SERIOUS.** Then he asked the question that deserved answering
+before a line was written: ***"who will swap those questions other than me? if
+any 3rd party can do it. and if im the one who can change then we can make a
+warning there."***
+
+**HE IS RIGHT THAT NO THIRD PARTY CAN.** No attacker reaches his laptop and
+none is assumed. He would not edit a Python file either. **THE ONE WHO CHANGES
+THOSE SEVEN QUESTIONS IS A FUTURE SESSION** — a fresh mind with no memory,
+doing an ordinary job. This file has been edited by three of them in three
+weeks, and **the next job on the list is the Mirror, which may well want an
+eighth question about what he risked** (his own desk item 12).
+
+**WHY A WARNING IS NOT THE ANSWER, AND THE SHIP PROVED IT LAST WEEK:** the
+previous session wrote rule (k) into the orders in the afternoon and broke that
+exact rule the same night, in its own words. **And this file ALREADY carries a
+sentence about that spot — the wrong one.** *"No gate can reach"* does not warn
+a fresh session off; **it gives them permission.**
+
+**HIS FINAL WORD, AND IT IS NOW THE TEST EVERY FINDING ON THIS SHIP MUST
+PASS:** ***"our actual goal is to make a correct thing in actual real
+environment. so those things which cant be done in actual scenarios at those we
+have to ignore those."***
+
+**APPLIED HONESTLY TO THIS FINDING IT SAYS BUILD IT.** A session editing those
+seven questions is not an invented scenario — it is the most likely change that
+file will ever see, and the next scheduled job is the one most likely to make
+it.
+
+---
+
+# >>> GATE 5.1-R2 — THE BAR, DECLARED BEFORE ANY CODE EXISTS
+
+**COMMITTED ALONE, WITH NO `.py` IN THIS COMMIT.** `git show --stat` is what
+proves the bar came first and that nobody quietly lowered it to match what got
+built.
+
+## WHAT IS BEING MEASURED
+
+**The seven questions themselves — the only surface between the Commander's
+fingers and his archive, and the only part of this file no check has ever
+touched.** Check (m) proved the DOORWAY is called the way the shell calls it.
+**Check (n) proves the SHELL asks the right questions and puts each answer in
+the right column.**
+
+## THE CONDITIONS. ALL SEVEN, OR THE GATE IS RED.
+
+    N1  THE SHELL IS RUN, NOT READ. A child interpreter runs a BYTE COPY of
+        this module as `__main__`, in a tree of its own, with NO `path`
+        injected - the production convention. The child must finish ON ITS
+        OWN. **A timeout is RED, never a quiet pass.**
+
+    N2  ALL SEVEN QUESTIONS WERE ASKED, and each was recognised by WORDS THE
+        GATE TYPES OUT ITSELF - never by position, never by any string
+        imported from the module on trial. **Fewer than seven recognised is
+        RED**, which is what makes a renamed or an added question stop the
+        ship instead of passing quietly.
+
+    N3  THE GATE ANSWERS THE QUESTION IT WAS ASKED, not the third one in a
+        row it counted. Every one of the seven answers is a DIFFERENT value
+        typed out in the gate, so no swap anywhere among them can hide.
+
+    N4  **THE ONE THAT MATTERS.** The answer given to `price you got IN at`
+        is in the `entry` column and the answer given to `price you got OUT
+        at` is in the `exit` column - **the column found by the HEADER NAME
+        THE GATE TYPES OUT, never by an index and never by asking the
+        module.**
+
+    N5  AND EVERY OTHER ANSWER IS IN ITS OWN COLUMN TOO - coin, direction,
+        size, why, feeling. A swap anywhere among the seven is caught, not
+        only the two prices.
+
+    N6  THE SCREEN AND THE NOTEBOOK AGREE. The line printed back to him names
+        the same two prices, in the same order, as the row that reached the
+        disk.
+
+    N7  **THE JUDGE IS PROVED ABLE TO SAY NO, IN THE SAME RUN.** The same
+        column matching is applied to two rows the gate types out itself -
+        one with two answers exchanged, one empty - and it must REJECT both.
+        A check whose failure path has never run is a check nobody has
+        tested; R-057 was filed about exactly that.
+
+**`EXPECTED_CHECKS` MOVES 70 -> 77**, and it is typed out in the file. This is
+still the only gate on this ship that knows how many checks it owes (R-070).
+
+## THE AWKWARD EDGE CASES, NAMED BEFORE THE CODE EXISTS
+
+**Every one of these was met today, by hand, before it was written down.**
+
+    E1  **THE CHILD MUST BE LAUNCHED WITH `-u`.** `input()` writes its prompt
+        with no newline, and down a pipe a buffered child delivers all seven
+        prompts in one lump at the end. **MY FIRST WITNESS SAW EXACTLY THAT**
+        and could not answer a single question by name.
+    E2  A prompt has no newline on the end, so the reader cannot read lines.
+        It reads a character at a time and decides a question has arrived
+        when one of ITS OWN seven key phrases is in what it has received.
+    E3  **THE BANNER BEFORE THE FIRST QUESTION ALSO ENDS IN A COLON.** My
+        first witness answered the banner as though it were question one and
+        got away with it by luck. The gate answers ONLY on its own key
+        phrases and COUNTS how many it has answered.
+    E4  **AN EIGHTH QUESTION MUST BE RED, NOT A HANG.** After the seventh
+        answer the gate CLOSES the child's stdin, so an unrecognised extra
+        question ends the shell at once with nothing written - fast and red -
+        instead of wedging the gate for its whole deadline.
+    E5  The prompts carry non-ASCII. The reader decodes UTF-8 with
+        `errors='replace'` and can never die on a byte.
+    E6  A child that hangs must not wedge the gate: there is a deadline, the
+        child is killed on expiry, and expiry is RED.
+    E7  All seven answers differ from one another. If entry and exit were
+        both `100`, a swap would be invisible.
+    E8  **THE `why` ANSWER CARRIES A COMMA ON PURPOSE**, so the row is really
+        parsed rather than split, and his own words are proved to survive the
+        trip through the seven questions and not only through the doorway.
+    E9  The row reaches disk CRLF-terminated. It is read back in binary and
+        parsed with the standard library, never with the module's own code.
+    E10 The child runs as a SCRIPT, so `JOURNAL_DIR` is the copy's own folder
+        and a no-`path` call writes there. **The gate asserts the row landed
+        at the address IT typed out**, the same discipline as R2.
+    E11 `PYTHONUTF8=1` on the child, as everywhere else on this ship.
+    E12 **A RENAMED QUESTION TURNS THE GATE RED, AND THAT IS THE POINT, NOT A
+        BRITTLENESS TO BE FIXED LATER.** Rewording a question is exactly the
+        edit that must not happen silently. The fix is one deliberate line in
+        the gate, made by somebody who has looked.
+
+## WHAT THIS BAR DOES NOT CLAIM
+
+It does not test `LOG_TRADE.bat` (R-075). It does not prove the child cannot
+reach a real `journal` package by some path nobody has planted (R-078 doubt 5,
+still open). **And it cannot tell whether what he typed is TRUE** — the logger
+is a notebook, it writes down what he says, and it never argues.
+
