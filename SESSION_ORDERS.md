@@ -92,7 +92,7 @@ EXIST.**
    pipe does not read a prompt**, so the archive came back correct and it
    proved nothing. Rebuilt under `-u`, reading each prompt.
 7. **He ruled SERIOUS.** Declared GATE 5.1-R2, committed the bar ALONE
-   (`0c46c5f`, 317 lines, no `.py`), built check (n): **70 -> 77.** The same
+   (`88a183c`, 317 lines, no `.py`), built check (n): **70 -> 77.** The same
    edit that printed `PASSED — 70 checks, 0 red` now prints `FAILED — 1 red
    of 77`.
 8. **FIVE ITEMS CLEARED — R-072, R-076, R-077, R-078, R-079.** **THE CATEGORY

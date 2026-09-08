@@ -15345,7 +15345,7 @@ is a notebook, it writes down what he says, and it never argues.
 FOUR TIMES — three plain and one at `TZ=UTC0` — tick sequences BYTE-IDENTICAL
 by machine across all four.**
 
-**THE BAR WAS DECLARED AND COMMITTED ALONE FIRST:** `0c46c5f`, one document,
+**THE BAR WAS DECLARED AND COMMITTED ALONE FIRST:** `88a183c`, one document,
 317 lines, **no `.py` in that commit.** `git show --stat` proves it.
 
 ## WHAT WAS BUILT — CHECK (n), SEVEN CHECKS, `EXPECTED_CHECKS` 70 -> 77
@@ -15474,4 +15474,34 @@ And it cannot tell whether what he typed is TRUE. It is a notebook.
 **PHASE 5 IS STILL HALF BUILT.** He ruled SERIOUS, and SERIOUS means fix it
 and stop. **This is the third session the Mirror has waited**, and the reason
 is written here so the next session does not have to guess at it.
+
+
+---
+
+# 2026-09-08 — **THE BAR'S COMMIT HASH WAS REWRITTEN BY THE REBASE, EXACTLY AS THE ORDERS WARNED**
+
+**IT HAPPENED AGAIN AND IT IS RECORDED RATHER THAN QUIETLY CORRECTED.** The
+bar for GATE 5.1-R2 was committed alone as **`0c46c5f`** and every document I
+had already written named that number. `git pull --rebase` before the push
+replayed my three commits over six the laptop task and the cloud watchman had
+left behind, and the bar became **`88a183c`**.
+
+    88a183c  bar: GATE 5.1-R2 declared        <- ONE DOCUMENT, NO .py
+    f875eef  ship: GATE 5.1-R2
+    4358eea  snapshots: the LAPTOP TASK's own rows, committed separately
+
+**`git show --stat 88a183c` still shows one file and 317 insertions**, which
+is the thing the hash was written down to let anybody check. **The proof did
+not move; only its address did.**
+
+**PROGRESS_LOG.md, ROADMAP.md AND SESSION_ORDERS.md WERE CORRECTED IN A
+FOLLOW-UP COMMIT** rather than left carrying a number that resolves to nothing.
+**A dead hash in a document is worse than no hash: the next session runs
+`git show` on it, gets an error, and has no way to tell whether the bar was
+faked or the address simply changed.**
+
+**THE ORDERS HAVE CARRIED THIS WARNING FOR THREE GENERATIONS AND IT HAS NOW
+CAUGHT THREE SESSIONS.** Mine is the third. **The instruction that works is not
+"remember to check" — it is CHECK YOUR HASHES AFTER THE PUSH, EVERY TIME, and
+grep the documents for the old one.**
 
