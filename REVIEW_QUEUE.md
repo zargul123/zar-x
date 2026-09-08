@@ -4785,3 +4785,181 @@ R-079 joins it. **Nothing was cleared this session by anybody, including me.**
 R-078 AND R-079 — AND THE SAME MIND FOUND THE FAULT AND WROTE THE FIX IN BOTH
 REPAIRS.** The Commander has already said what happens next, in words:
 **"next session will attack the repairs."**
+
+---
+
+# 2026-09-08 — THE TWENTY-SIXTH GENERATION
+
+**I BUILT NEITHER REPAIR I WAS SENT TO ATTACK. I HELD NO EXEMPTION AND ASKED
+FOR NONE.** The five items below were all mine to clear and I attacked every
+one of them.
+
+## R-072 — **CLEARED. `journal/log_trade.py`'s CHECK (m) WAS ATTACKED BY A SESSION THAT DID NOT BUILD IT, AND IT HELD.**
+
+Control first, **70/0, exit 0, twice.** All three faults the repair was built
+for, re-installed as real text edits in copies outside the repo:
+
+    the real clock relabelled UTC instead of converted ....  1 red (R4)
+    the real clock frozen at 2020 ........................  1 red (R4)
+    the archive moved to another filename ................  4 red (R2,R3,R4,R5)
+
+**Exactly the counts the orders predicted. THE REPAIR IS NOT DECORATIVE.** A
+fourth fault the previous session never named — `JOURNAL_DIR` moved one folder
+UP, so the archive lands beside `cockpit/` with every row inside it perfect,
+B14's shape at the FOLDER level — was also **CAUGHT, 4 red.**
+
+**CLEARED.**
+
+## R-076 — **CLEARED. THE PREVIOUS SESSION'S DOUBT ABOUT ITS OWN CONTAMINATED RIG.**
+
+Its worry was that a witness and a gate sharing one copy had scored two live
+escapes as CAUGHT. **I ran every experiment on its own copy, control first,
+and the three faults it re-graded by hand all turn the gate red on a clean
+rig.** The conclusion it reached the hard way is confirmed independently.
+
+**CLEARED.**
+
+## R-077 — **CLEARED. `cockpit/whales.py` CAME BACK FROM A VENUE THAT NEVER ANSWERS.**
+
+The fault re-run as the same real text edit, control first (**111/0, twice**):
+**`FAILED — 2 red of 111`, exit 1 — S1 and S2 red, S3 STILL GREEN**, which is
+the shape that proves the positive control is doing its job rather than
+turning red along with everything else.
+
+**CLEARED.**
+
+## R-078 — **CLEARED, AND ITS FIVE DOUBTS ANSWERED ONE BY ONE.**
+
+    doubt 1  the drill cannot reach check (m), so it is certified by an
+             attack run once, by hand
+             >>> RE-RUN TODAY BY A DIFFERENT SESSION. All three text edits
+             still turn it red. **The doubt about the DRILL stands and is
+             now equally true of check (n) — carried forward as R-081.**
+    doubt 2  the two-second tolerance is reasoning, not measurement
+             >>> STILL UNMEASURED. Carried into R-081.
+    doubt 3  R4 and R6 share `_inside`, so a fault in it is invisible twice
+             >>> CONFIRMED AS A REAL SHAPE, and I have reproduced it in my
+             own check (n): N4 and N5 both stand on `n_at`, and N7 is what
+             proves `n_at` can say no. **Same trade-off, made knowingly.**
+    doubt 4  the child runs one happy trade; the eighteen refusal shapes are
+             still only exercised with an injected `path` and `now`
+             >>> STILL TRUE. Check (n) drives one happy trade too.
+    doubt 5  the child imports the copy proved by READING, never by planting
+             a competing module on its path
+             >>> STILL TRUE, and now true of N1 as well.
+
+**Every one of check (m)'s six failure paths was executed today for the first
+time** — R1 through R6 forced red ALONE, plus the child-dies path at 5 red —
+and **the gate finished its report every time.** The repair does what it says.
+
+**CLEARED.** The doubts that survive are re-filed as R-081 against MY work,
+where they belong, rather than left attached to a repair that held.
+
+## R-079 — **CLEARED, AND ITS SIX DOUBTS ANSWERED ONE BY ONE.**
+
+    doubt 1  "make each of the four fail, one at a time, and check the gate
+             still finishes its report" — the one its author would attack
+             first
+             >>> DONE. S1 (under the real fault), S2, S3 and S4 each forced
+             red alone. **The gate finished its report every time. The class
+             of bug that killed the first draft is not hiding in the other
+             three.**
+    doubt 2  a benign race where `stuck` and `how` could disagree in the
+             detail line, never in the verdict
+             >>> NOT REPRODUCED IN ANY RUN. Not disproved either; a race
+             that needs a coincidence is not disproved by it not happening.
+    doubt 3  the 3s/8s numbers are a judgement, not a measurement
+             >>> STILL TRUE. Every run today came back at ~3.0s and ~8.0s
+             on this machine and this network. **A merely very slow venue
+             would still turn S1 red and it would be the venue.**
+    doubt 4  this gate does not know how many checks it owes
+             >>> STILL TRUE. That is R-070 and it is his to rule on.
+    doubt 5  it does not prove "one request, no retries"
+             >>> STILL TRUE.
+    doubt 6  two local ports and a hung daemon thread, every run, on purpose
+             >>> BOTH STILL THERE, BOTH DELIBERATE, and both survived
+             fourteen invocations plus nine more under attack today.
+
+**AND THE THING THE ATTACK FOUND THAT MATTERS MOST: THE REPAIR DID NOT CATCH
+MY BEST SABOTAGE — AN OLDER CHECK DID.** I made the PRODUCTION doorway lose
+its timeout (`section_text`: `timeout = TIMEOUT if timeout is None else
+timeout` -> `timeout = None if ...`) while `_get` kept its parameter and the
+global `TIMEOUT == 10` stayed true. **I predicted it would walk straight
+through GATE 3.5-R2's four new checks, and it does — they call `_get`
+DIRECTLY with an injected 3 and never travel the doorway.** What turned the
+gate red was **check (e), Condition 12**, written long before, which hands
+the doorway a transport that writes down every request the module really made
+and finds the resolved `10` in it. **Said plainly rather than claimed as a win
+for the new code.**
+
+**CLEARED.**
+
+## >>> R-080 — **NEW, FOUND AND REPAIRED TODAY: THE SEVEN QUESTIONS WERE SURFACE NO GATE REACHED, AND THE FILE SAID SO AS THOUGH IT WERE A LAW OF NATURE** · **REPAIRED UNDER GATE 5.1-R2. OPEN — I FOUND IT AND I WROTE THE FIX.**
+
+Swapping the two price questions in the shell left GATE 5.1-R1 printing
+`PASSED — 70 checks, 0 red`, exit 0, **while a person answering truthfully had
+his winning trade written into the archive as a loss.**
+
+    control   asked "IN at" -> 100.50    ARCHIVE entry=100.50 exit=111.00
+    sabotage  asked "OUT at" -> 111.00   ARCHIVE entry=111.00 exit=100.50
+
+**THE COMMANDER RULED SERIOUS**, after asking the right question first —
+*"who will swap those questions other than me? if any 3rd party can do it"* —
+and being told the honest answer: **no third party can, and he would not; a
+later session will.** Three have edited this file in three weeks and the next
+job on the list may want an eighth question.
+
+**REPAIRED.** Check (n), seven checks, `EXPECTED_CHECKS` 70 -> 77. **The same
+edit now prints `FAILED — 1 red of 77`, exit 1.**
+
+**R-080 STAYS OPEN. I found the fault and I wrote the fix. Only a session that
+did neither may clear it.**
+
+## >>> R-081 — **AGAINST MY OWN REPAIR. OPEN. I MAY NOT CLEAR IT.** · CATEGORY B
+
+1. **>>> MY OWN BAR WAS SHARPER THAN THE THING I BUILT, AND I FOUND OUT BY
+   RUNNING IT.** Edge case E4 promised that closing the child's stdin after
+   the seventh answer makes an eighth question fail FAST. **It only does that
+   when the extra question comes AFTER all seven.** Mine went before the last
+   one, the reader never reached seven, and **what actually saved the gate was
+   the 60-second deadline.** RED either way and never a hang — but **a healthy
+   gate takes ~1.9 s and one failing on an added or renamed question takes
+   ~78 s**, and the bar did not say that.
+2. **THE DRILL CANNOT REACH CHECK (n) EITHER, AND I LEFT IT THAT WAY** for
+   the same reason check (m) is unreachable: a `globals()` swap cannot cross
+   into a child interpreter reading a copy off the disk, and an INERT break
+   is a FAIL here. **Check (n) is certified by attack and by nothing else.**
+   R-078's doubt 1, inherited knowingly rather than solved.
+3. **N4 AND N5 BOTH STAND ON `n_at`, SO A FAULT IN IT WOULD BE INVISIBLE
+   TWICE.** N7 exists to prove `n_at` can say no, **and N7 calls the same
+   `n_at`.** This is R-078's doubt 3 reproduced deliberately, and I am filing
+   it against myself for the same reason rather than pretending I avoided it.
+4. **CHECK (n) DRIVES ONE HAPPY TRADE AND NOTHING ELSE.** No refusal is ever
+   driven through the seven questions. **If a future edit made a question
+   return something the validator refuses, N4 and N5 would go red and say the
+   column was wrong** — which is true but is not the clearest thing that
+   could be said to him.
+5. **I DID NOT PLANT A COMPETING `journal/log_trade.py` ON THE CHILD'S PATH
+   AND WATCH N1 GO RED.** Same missing positive control as R-078's doubt 5,
+   now in two checks instead of one.
+6. **THE 60-SECOND DEADLINE AND THE 15-SECOND WAIT ARE JUDGEMENTS, NOT
+   MEASUREMENTS.** The healthy child answers all seven in well under two
+   seconds on this machine. **Nobody has run this on a loaded or slow one**,
+   and if a future machine were slow enough, N1 would go red and it would be
+   the machine, not the code — the same shape as R-079's doubt 3.
+7. **CHECK (n) READS THE CHILD ONE BYTE AT A TIME OVER A PIPE ON WINDOWS.**
+   It worked in every one of the twenty-plus runs today. **It has never run
+   on another operating system, behind a different console, or under a
+   different Python.**
+
+## >>> THE CATEGORY B PILE IS NOW FORTY-SEVEN.
+
+R-081 joins it. **Five items were cleared today — R-072, R-076, R-077, R-078
+and R-079 — by a session that built none of them.** Nothing else was cleared
+by anybody, **including R-080, which is mine and which I could not clear.**
+
+**R-066 IS STILL OPEN.** Doubt 2 was answered and repaired last session and
+that repair now survives an independent attack. **Doubts 1, 3, 4 and 5 remain
+untested — and doubt 3, the socket behind a firewall or a real proxy, is now
+doubled by check (n)'s child pipe.**
+

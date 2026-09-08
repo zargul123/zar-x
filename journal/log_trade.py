@@ -287,9 +287,25 @@ def log_trade(asset, direction, entry, exit_price, size, why, feeling,
 if __name__ == '__main__':
     if '--gate' not in sys.argv:
         # THE SHELL. **The only place in this file that calls `input()` or
-        # `print()` outside the gate.** An interactive prompt is something no
-        # gate can reach, so everything that can be tested lives above this
-        # line and this shell does nothing but ask and repeat the answer.
+        # `print()` outside the gate.**
+        #
+        # **>>> THIS BLOCK IS UNDER A CHECK. IT SAID THE OPPOSITE UNTIL
+        # 2026-09-08 AND THE SENTENCE WAS FALSE.** It used to read "an
+        # interactive prompt is something no gate can reach, so everything
+        # that can be tested lives above this line" - which did not warn a
+        # later session off these seven lines, it gave them permission. A
+        # session that did not build this file ran the shell under `-u`,
+        # answered each question by the words on the screen, and swapped
+        # the two price questions: **the archive recorded a winning trade
+        # as a loss while the gate printed `PASSED - 70 checks, 0 red`.**
+        #
+        # **CHECK (n) NOW RUNS THESE SEVEN QUESTIONS ON EVERY GATE RUN AND
+        # PROVES EACH ANSWER REACHES ITS OWN COLUMN.** Reorder them freely -
+        # that is not a fault and the check does not mind. **RENAME one, or
+        # ADD an eighth, and the gate goes RED** - deliberately, so that a
+        # change to the only surface between his fingers and his archive is
+        # made by somebody who has looked. The words are typed out in the
+        # check; teaching it a new question is one line, made on purpose.
         print()
         print("ZAR X — log a trade you have CLOSED. Seven questions.")
         print("Nothing here judges the trade. That is the Mirror's job,")
@@ -336,6 +352,7 @@ if __name__ == '__main__':
     import shutil
     import subprocess
     import tempfile
+    import threading
     from datetime import timedelta
 
     nonlocal_ok = []
@@ -1147,6 +1164,232 @@ if __name__ == '__main__':
 
     shutil.rmtree(R1_TREE, ignore_errors=True)
 
+    print("\n(n) >>> GATE 5.1-R2 — THE SEVEN QUESTIONS, RUN RATHER THAN"
+          "\n    READ. Added 2026-09-08 on the Commander's ruling, after a"
+          "\n    session that did not build this file swapped the two price"
+          "\n    questions in the shell above and GATE 5.1-R1 printed"
+          "\n    `PASSED — 70 checks, 0 red`. **THE SHELL IS THE ONLY SURFACE"
+          "\n    BETWEEN HIS FINGERS AND HIS ARCHIVE, AND NOTHING HAD EVER"
+          "\n    TOUCHED IT.** This file said so itself — *an interactive"
+          "\n    prompt is something no gate can reach* — and that sentence"
+          "\n    was a CLAIM NOBODY HAD RUN. `python -u` and a reader on the"
+          "\n    child's stdout reach all seven."
+          "\n    **HIS OWN TEST, IN HIS OWN WORDS: `our actual goal is to make"
+          "\n    a correct thing in actual real environment`.** No third party"
+          "\n    can edit these seven lines and he would not. **A LATER"
+          "\n    SESSION WILL** — three have edited this file in three weeks,"
+          "\n    and the next job on the list may want an eighth question"
+          "\n    about what he risked. That is the real scenario this exists"
+          "\n    for, and it is why a warning was not enough: the sentence"
+          "\n    that was already there did not warn anybody off, it gave"
+          "\n    them permission.")
+
+    # A COPY, IN A TREE OF ITS OWN — the same reason as check (m). The child
+    # runs the module as a SCRIPT, so `JOURNAL_DIR` is the copy's own folder
+    # and a call with no `path` writes THERE and never into his real archive.
+    N_TREE = tempfile.mkdtemp(prefix='zarx_g51r2_')
+    N_JOURNAL = os.path.join(N_TREE, 'journal')
+    os.makedirs(N_JOURNAL)
+    N_MODULE = os.path.join(N_JOURNAL, 'log_trade.py')
+    shutil.copyfile(os.path.abspath(__file__), N_MODULE)
+    N_LEAF = 'my_trades.csv'
+    N_MUST_LAND = os.path.join(N_JOURNAL, N_LEAF)
+
+    # THE SEVEN QUESTIONS BY THE WORDS THIS GATE TYPES OUT, the answer each
+    # one is given, the column that answer must reach, and what must be in
+    # it. **EVERY ANSWER IS DIFFERENT**, so a swap anywhere among the seven
+    # cannot hide behind two fields that happen to match. The `why` answer
+    # carries a COMMA on purpose: his own words are proved to survive the
+    # whole trip through the shell, not only through the doorway.
+    #
+    # **THE ASSET IS THE ONE THAT CHANGES ON THE WAY IN** — he types `BTC`
+    # and `BTC-USD` is what the Mirror will one day join on.
+    N_ASK = (
+        ('which coin', 'BTC', 'asset', 'BTC-USD'),
+        ('long or short', 'long', 'direction', 'long'),
+        ('price you got IN at', '100.50', 'entry', '100.50'),
+        ('price you got OUT at', '111.00', 'exit', '111.00'),
+        ('how big', '0.25', 'size', '0.25'),
+        ('WHY did you take it', 'seven questions, run rather than read',
+         'why', 'seven questions, run rather than read'),
+        ('how did you feel', 'calm', 'feeling', 'calm'),
+    )
+    # TYPED OUT HERE, NEVER IMPORTED FROM `FIELDS`. A gate that read the
+    # column order out of the file on trial would follow it anywhere.
+    N_HEADER = ('utc_time', 'asset', 'direction', 'entry', 'exit', 'size',
+                'why', 'feeling')
+    N_DEADLINE = 60
+
+    n_env = dict(os.environ, PYTHONUTF8='1', PYTHONDONTWRITEBYTECODE='1')
+    # **`-u` IS NOT DECORATION.** `input()` writes its prompt with no newline
+    # and a buffered child hands over all seven prompts in one lump at the
+    # end, where no reader can answer any of them by name. The first witness
+    # to attack this spot met exactly that and saw nothing.
+    n_child = subprocess.Popen([sys.executable, '-u', N_MODULE],
+                               cwd=N_TREE, env=n_env,
+                               stdin=subprocess.PIPE,
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.STDOUT)
+    n_state = {'asked': [], 'ended': 'DID NOT FINISH', 'error': None}
+
+    def n_drive():
+        """Answer the question that is ASKED, the way a person does.
+
+        **SEEDED ABOVE BEFORE THE THREAD STARTS.** A reader that never
+        finishes never sets these, and the detail lines below read them
+        whatever the verdict — the failure that killed the first draft of
+        GATE 3.5-R2 and that rule (k) exists for.
+        """
+        buffer = ''
+        try:
+            while len(n_state['asked']) < len(N_ASK):
+                byte = n_child.stdout.read(1)
+                if not byte:
+                    n_state['ended'] = 'the child stopped talking'
+                    return
+                buffer += byte.decode('utf-8', errors='replace')
+                for words, answer, _column, _expected in N_ASK:
+                    if words in buffer and words not in n_state['asked']:
+                        n_state['asked'].append(words)
+                        n_child.stdin.write((answer + chr(10)).encode('utf-8'))
+                        n_child.stdin.flush()
+                        buffer = ''
+                        break
+            # **AND THEN NOTHING MORE IS ANSWERED.** An EIGHTH question ends
+            # the shell at once on an empty stdin instead of wedging this
+            # gate for the whole deadline: fast, and RED either way.
+            n_child.stdin.close()
+            n_state['ended'] = 'all seven answered'
+        except Exception as exc:                            # noqa: BLE001
+            n_state['error'] = f'{type(exc).__name__}: {exc}'
+
+    # THE READER IS A DAEMON AND IS NEVER JOINED BEYOND THE DEADLINE. A shell
+    # that stops asking must not be able to hang this gate; a hang is RED.
+    n_reader = threading.Thread(target=n_drive, daemon=True)
+    n_reader.start()
+    n_reader.join(N_DEADLINE)
+    n_stuck = n_reader.is_alive()
+    try:
+        n_rc = n_child.wait(timeout=15)
+    except subprocess.TimeoutExpired:
+        n_child.kill()
+        n_rc, n_stuck = None, True
+    try:
+        n_screen = n_child.stdout.read().decode('utf-8', errors='replace')
+    except (OSError, ValueError):
+        n_screen = ''
+
+    mark(not n_stuck and n_rc == 0 and n_state['error'] is None,
+         "N1 — THE SHELL WAS RUN, NOT READ: a child interpreter ran a COPY "
+         "of this module as `__main__`, under `-u`, with no `path` and no "
+         "`now` — and it finished ON ITS OWN. A hang is RED, never a quiet "
+         "pass",
+         f"exit {n_rc}, reader stuck {n_stuck}, {n_state['ended']}"
+         f"{'' if n_state['error'] is None else ', ' + n_state['error']}")
+
+    n_answers = [answer for _w, answer, _c, _e in N_ASK]
+    mark(len(n_state['asked']) == len(N_ASK)
+         and len(set(n_state['asked'])) == len(N_ASK),
+         f"N2 — all {len(N_ASK)} questions were asked and each was recognised "
+         f"BY WORDS THIS GATE TYPES OUT, never by position and never by a "
+         f"string imported from the file on trial. **A RENAMED OR AN ADDED "
+         f"QUESTION LEAVES THIS RED**, which is the whole point. An "
+         f"unrecognised question is not a fault of ORDER: asking them in a "
+         f"different order is harmless and this check does not mind",
+         f"recognised in this order: {n_state['asked']}")
+
+    mark(len(set(n_answers)) == len(N_ASK)
+         and len(n_state['asked']) == len(set(n_state['asked'])),
+         "N3 — and each answer was sent ONLY after the words of its own "
+         "question had arrived, never by counting to three. All seven "
+         "answers are DIFFERENT values typed out here: if the two prices "
+         "were both `100`, a swap between them would be invisible",
+         f"{len(set(n_answers))} distinct answers, no question answered twice")
+
+    n_raw = disk(N_MUST_LAND)
+    try:
+        n_rows = ([] if n_raw is None else
+                  list(csv.reader(io.StringIO(n_raw.decode('utf-8'),
+                                              newline=''))))
+    except (UnicodeDecodeError, csv.Error):
+        n_rows = []
+
+    def n_at(rows, column):
+        """The value under the column of THIS NAME.
+
+        **THE INDEX COMES FROM `N_HEADER`, TYPED OUT IN THIS GATE** — never
+        from the file's own first line, and never from `FIELDS`. B14 moved
+        an archive with every row inside it perfect, and every check that
+        asked the module where to look followed it there.
+        """
+        if len(rows) < 2 or column not in N_HEADER:
+            return None
+        at = N_HEADER.index(column)
+        row = rows[1]
+        return row[at] if at < len(row) else None
+
+    def n_right(rows):
+        """Is every answer in the column its own question feeds?"""
+        if len(rows) < 2 or tuple(rows[0]) != N_HEADER:
+            return False
+        for _words, _answer, column, expected in N_ASK:
+            if n_at(rows, column) != expected:
+                return False
+        return True
+
+    n_header_ok = bool(n_rows) and tuple(n_rows[0]) == N_HEADER
+    mark(n_header_ok
+         and n_at(n_rows, 'entry') == '100.50'
+         and n_at(n_rows, 'exit') == '111.00',
+         "N4 — **THE ONE THAT MATTERS.** The answer typed at `price you got "
+         "IN at` is in the `entry` column and the answer typed at `price you "
+         "got OUT at` is in the `exit` column — the column found by the "
+         "HEADER NAME THIS GATE TYPES OUT. **This is the check that swapping "
+         "the two questions turns red, and it is the difference between a "
+         "winning trade and a losing one in a record nobody re-types**",
+         f"entry {n_at(n_rows, 'entry')!r}, exit {n_at(n_rows, 'exit')!r}, "
+         f"header matched {n_header_ok}")
+
+    n_others = [(column, expected, n_at(n_rows, column))
+                for _w, _a, column, expected in N_ASK
+                if column not in ('entry', 'exit')]
+    mark(all(got == expected for _c, expected, got in n_others),
+         "N5 — and every OTHER answer is in its own column too: the coin as "
+         "the ship's snapshot name, the direction, the size he typed, HIS "
+         "OWN WORDS WITH A COMMA IN THEM, and the feeling. A swap anywhere "
+         "among the seven is caught, not only between the two prices",
+         '; '.join(f'{c}={g!r}' for c, _e, g in n_others))
+
+    n_pair = f"{n_at(n_rows, 'entry')} -> {n_at(n_rows, 'exit')}"
+    mark(n_header_ok and 'logged: ' in n_screen and n_pair in n_screen,
+         "N6 — THE SCREEN AND THE NOTEBOOK AGREE: the line printed back to "
+         "him names the same two prices, in the same order, as the row that "
+         "reached the disk. A shell that showed him one thing and filed "
+         "another would be worse than one that simply refused",
+         f"looked for {n_pair!r} in what he was shown")
+
+    N_HONEST = [list(N_HEADER),
+                ['2026-09-08T00:00:00+00:00', 'BTC-USD', 'long', '100.50',
+                 '111.00', '0.25', 'seven questions, run rather than read',
+                 'calm']]
+    N_SWAPPED = [list(N_HEADER), list(N_HONEST[1])]
+    N_SWAPPED[1][3], N_SWAPPED[1][4] = N_SWAPPED[1][4], N_SWAPPED[1][3]
+    N_RENAMED = [['utc_time', 'asset', 'direction', 'in', 'out', 'size',
+                  'why', 'feeling'], list(N_HONEST[1])]
+    mark(n_right(N_HONEST) and not n_right(N_SWAPPED)
+         and not n_right(N_RENAMED) and not n_right([list(N_HEADER)])
+         and not n_right([]),
+         "N7 — THE JUDGE IS PROVED ABLE TO SAY NO, IN THIS RUN, against four "
+         "rows typed out here: it ACCEPTS an honest one and REJECTS the same "
+         "row with the two prices exchanged, one whose columns were renamed, "
+         "one with a header and no row, and nothing at all. **A check whose "
+         "failure path has never been shown to work is a check nobody has "
+         "tested** — R-057 was filed about exactly that, and N4 and N5 both "
+         "stand on this same function",
+         "honest accepted · swapped, renamed, header-only and empty rejected")
+
+    shutil.rmtree(N_TREE, ignore_errors=True)
+
     shutil.rmtree(WORK, ignore_errors=True)
     real_journal_touched = os.path.exists(TRADES_FILE)
     mark(not real_journal_touched,
@@ -1156,7 +1399,7 @@ if __name__ == '__main__':
 
     # THE LAST CHECK OF THE RUN, because it is the only one that can only be
     # answered once every other check has had its say.
-    EXPECTED_CHECKS = 70
+    EXPECTED_CHECKS = 77
     mark(len(nonlocal_ok) + 1 == EXPECTED_CHECKS,
          f"and this gate ran all {EXPECTED_CHECKS} of the checks it owes — "
          f"the number is TYPED OUT in this file and is not read from any "
@@ -1211,8 +1454,10 @@ WHAT THIS GATE DOES **NOT** PROVE, said here rather than in a
 footnote. It does not prove `journal/mirror.py`, which does not
 exist: half of the plan's own sentence for Phase 5 names a file this
 bar forbids this session to build, and that half is owed by whoever
-builds it. It does not test the seven interactive questions, which
-no gate can reach — only the doorway underneath them. And it cannot
+builds it. **It DOES now test the seven interactive questions: check
+(n) runs them and proves each answer reaches its own column.** Until
+2026-09-08 this banner said no gate could reach them, and that was a
+claim nobody had run. It still cannot
 tell whether what he typed is TRUE. It is a notebook. It writes down
 what he says, exactly as he says it, and it never argues.""")
     else:

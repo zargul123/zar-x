@@ -15336,3 +15336,142 @@ reach a real `journal` package by some path nobody has planted (R-078 doubt 5,
 still open). **And it cannot tell whether what he typed is TRUE** — the logger
 is a notebook, it writes down what he says, and it never argues.
 
+
+---
+
+# 2026-09-08 — THE TWENTY-SIXTH GENERATION, PART TWO: THE REPAIR
+
+**GATE 5.1-R2 IS IN. `journal/log_trade.py --gate` PASSED 77 checks, 0 red,
+FOUR TIMES — three plain and one at `TZ=UTC0` — tick sequences BYTE-IDENTICAL
+by machine across all four.**
+
+**THE BAR WAS DECLARED AND COMMITTED ALONE FIRST:** `0c46c5f`, one document,
+317 lines, **no `.py` in that commit.** `git show --stat` proves it.
+
+## WHAT WAS BUILT — CHECK (n), SEVEN CHECKS, `EXPECTED_CHECKS` 70 -> 77
+
+The gate now **runs the seven questions** in a child interpreter under `-u`,
+against a byte copy of the module in a tree of its own, reads each prompt as
+it arrives and **answers the question that was asked** — the way a person
+does, not by counting to three.
+
+    N1  the shell was RUN, not read: the child ran the COPY as `__main__`,
+        with no `path` and no `now`, and finished ON ITS OWN. exit 0.
+    N2  all 7 questions asked and recognised BY WORDS THE GATE TYPES OUT
+    N3  7 distinct answers, no question answered twice, none by counting
+    N4  **entry '100.50', exit '111.00', header matched True**
+    N5  asset 'BTC-USD' · direction 'long' · size '0.25' · why with a COMMA
+        in it, byte for byte · feeling 'calm'
+    N6  the screen and the notebook agree: '100.50 -> 111.00' in both
+    N7  the judge PROVED ABLE TO SAY NO against four rows typed out here —
+        honest ACCEPTED; the two prices exchanged REJECTED; the columns
+        renamed REJECTED; a header with no row REJECTED; nothing REJECTED
+
+## >>> CERTIFIED BY ATTACK, NOT BY THE GATE GOING GREEN
+
+Control first — the repaired file untouched, **77/0 twice.** Then the fault
+that escaped this morning, re-installed as the same real text edit:
+
+    ORIGINAL_L1_prompts_swapped   GATE 5.1 FAILED — 1 red of 77.  exit 1.
+      the red is N4, and N4 alone.
+
+**THIS MORNING THE IDENTICAL EDIT PRODUCED `PASSED — 70 checks, 0 red`,
+exit 0.**
+
+**AND N6 STAYED GREEN UNDER IT, WHICH IS CORRECT AND WORTH SAYING OUT LOUD:**
+the screen and the notebook agree — **they are wrong TOGETHER.** That is
+precisely what made the fault invisible to a human, and it is why N4 exists
+separately from N6 rather than being folded into it.
+
+Two more shapes of the same edit, both the kind a real session would make:
+
+    EIGHTH_QUESTION_ADDED  ("what did you RISK?" — the Mirror's own need,
+      his desk item 12)                        FAILED — 5 red of 77
+    QUESTION_RENAMED       ("price you got IN at" -> "entry price")
+                                               FAILED — 5 red of 77
+
+## RULE (k) DISCHARGED ON EVERY NEW CHECK
+
+N1, N2, N3, N4, N5, N6 and N7 were each forced red **ALONE** — `76 green,
+1 red, GATE 5.1 FAILED, exit 1` in every one of the seven. **A green run never
+executes a failure path**, and the first draft of GATE 3.5-R2 died in one.
+
+## >>> WHAT I GOT WRONG IN MY OWN BUILD, AND IT IS IN THE CODE'S OWN WORDS
+
+**E4 IS ONLY HALF TRUE AS I DESIGNED IT, AND I FOUND OUT BY RUNNING IT.** I
+declared in the bar that closing the child's stdin after the seventh answer
+would make an eighth question fail *fast* instead of wedging the gate. **It
+does — but only when the extra question comes AFTER all seven.** I inserted
+mine BEFORE the last one, the reader never reached seven, the child blocked on
+`input()` and the reader blocked on `read(1)`, **and what actually saved the
+gate was the 60-second deadline, not the stdin close.**
+
+**THE CONSEQUENCE, MEASURED:** a healthy `journal/log_trade.py --gate` takes
+**~1.9 s**. One that fails on an added or renamed question takes **~78 s.**
+It is RED either way and it never hangs — **but the claim in my own bar was
+sharper than the thing I built, and that is exactly the shape of the "probably"
+this ship files rather than hopes about.** Filed as **R-081**.
+
+## THE MEASUREMENT WINS — TWO SENTENCES IN THIS FILE WERE FALSE AND ARE GONE
+
+    the shell comment:  "An interactive prompt is something no gate can
+                         reach, so everything that can be tested lives
+                         above this line"
+    the closing banner: "It does not test the seven interactive questions,
+                         which no gate can reach"
+
+**NEITHER WAS A WARNING. THE FIRST ONE GAVE A LATER SESSION PERMISSION.** Both
+now say what is true, name the date they were wrong, and say what turns the
+gate red. **The Commander's own objection is what earned this** — *"if im the
+one who can change then we can make a warning there"* — and the honest answer
+was that the warning already existed and was pointing the wrong way.
+
+## THE CONFINEMENT, PROVED TWO WAYS AND NEVER ASSERTED
+
+**WAY ONE — the proof that needs no recipe.** Every file the pilot reads,
+working-tree bytes against `git show HEAD:<file>` with CRLF normalised on both
+sides. **Eleven of twelve: SAME. `journal/log_trade.py`: CHANGED, and its
+PRODUCTION HALF (lines 1-286) BYTE-IDENTICAL.** Working tree carries **zero
+bare LF** in every CRLF file.
+
+**WAY TWO — `git diff -U0` hunk line numbers.** Five hunks, at **290, 355,
+1167, 1402 and 1457.** **Nothing at or below line 286.** The production half
+cannot have moved because no hunk touches it.
+
+**A MEASUREMENT WORTH RECORDING BECAUSE IT LOOKS LIKE A DISCREPANCY AND IS
+NOT:** the roadmap records the production half as 12,200 bytes and my recipe
+reports **12,198**. The difference is the trailing CRLF that `CRLF.join(...)`
+drops. **Both sides of my comparison used the same recipe, so the comparison
+is sound** — but a later session reading two different numbers for the same
+thing would be right to stop, so the reason is written down here.
+
+**AND TWO FILES ON THIS SHIP ARE LF, NOT CRLF, AND IT IS NOT ME:**
+`cockpit/plan.py` (67 bare LF) and `journal/snapshot.py` (80). Both are
+byte-identical to HEAD. **The orders say "these `.py` files are CRLF"; two of
+them are not, and the measurement wins.**
+
+## THE SHIPPED FILE
+
+    journal/log_trade.py   59,769 -> 73,154 bytes · 1,466 CRLF · ZERO bare LF
+    production half        286 lines, byte-identical to HEAD normalised
+    checks                 70 -> 77, EXPECTED_CHECKS typed out in the file
+    healthy run            ~1.9 s   ·  a failing check (n) run  ~78 s
+    py_compile             OK, before the gate
+    journal/my_trades.csv  STILL DOES NOT EXIST. Nothing I ran touched it.
+
+## WHAT THIS REPAIR DOES NOT CLAIM
+
+It does not test `LOG_TRADE.bat` (**R-075, still open**). It does not plant a
+competing `journal/log_trade.py` on the child's path to watch N1 go red
+(**R-078 doubt 5, still open, and now true of check (n) as well**). The drill
+cannot reach check (n) any more than it can reach check (m) — **a `globals()`
+swap cannot cross into a child interpreter reading a copy off the disk** — so
+check (n), like check (m), is **certified by attack and by nothing else**.
+And it cannot tell whether what he typed is TRUE. It is a notebook.
+
+## I DID NOT BUILD `journal/mirror.py`
+
+**PHASE 5 IS STILL HALF BUILT.** He ruled SERIOUS, and SERIOUS means fix it
+and stop. **This is the third session the Mirror has waited**, and the reason
+is written here so the next session does not have to guess at it.
+

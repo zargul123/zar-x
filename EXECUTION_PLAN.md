@@ -434,6 +434,74 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-09-08: BOTH OF THE TWENTY-FIFTH GENERATION'S REPAIRS WERE ATTACKED BY A SESSION THAT BUILT NEITHER, AND BOTH HELD. FIVE ITEMS CLEARED. A HOLE WAS FOUND BESIDE ONE OF THEM — THE SEVEN QUESTIONS NO GATE HAD EVER REACHED — AND REPAIRED UNDER GATE 5.1-R2. PHASE 5 IS STILL HALF BUILT: THE MIRROR HAS NOW WAITED THREE SESSIONS.**
+
+**WHERE THE SHIP IS.**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red   58 green
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red   71 green
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  (OK/FAIL)
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red   54 green
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red   69 green
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red   69 green
+    cockpit/whales.py           GATE 3.5-R2   PASSED  exit 0  0 red  111 green
+      the same file at TZ=UTC0  GATE 3.5-R2   PASSED  exit 0  0 red  111 green
+    cockpit/carry.py            GATE 4.1      PASSED  exit 0  0 red   87 green
+      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0  0 red   87 green
+    journal/log_trade.py        GATE 5.1-R2   PASSED  exit 0  0 red   77 green
+      the same file at TZ=UTC0  GATE 5.1-R2   PASSED  exit 0  0 red   77 green
+    vault INTACT 6 of 6 · Brief 3/3 (Whale watch 6 of 6) · lab/ untouched
+    journal/my_trades.csv DOES NOT EXIST — his first real trade creates it
+
+**>>> ONE COUNT CHANGED: log_trade 70 -> 77.** Everything else is where the
+previous marker left it.
+
+**WHAT WAS PROVED, AND WHAT WAS NOT.**
+
+**GATE 3.5-R2 HELD.** The fault it was built for still turns it red (2 of 111,
+S1 and S2, S3 still green). Two sabotages it had never seen were both caught.
+**But the one that mattered most was NOT caught by the repair** — the
+production doorway losing its timeout while `_get` keeps its parameter walks
+straight through all four new checks, exactly as predicted, and **check (e),
+Condition 12, is what stops it.** Said here rather than claimed as a win.
+
+**GATE 5.1-R1's CHECK (m) HELD.** All three faults still red at 1, 1 and 4.
+A fourth nobody had named — `JOURNAL_DIR` moved one folder up — caught at 4.
+**And every one of its six failure paths was executed for the first time.**
+
+**WHAT ESCAPED WAS BESIDE IT, NOT INSIDE IT.** `journal/log_trade.py` claimed,
+in its own text, that its seven interactive questions were *"something no gate
+can reach"*. **That was a claim nobody had run, and it was false.** Swapping
+the two price questions left the gate printing `PASSED — 70 checks, 0 red`
+while a person answering truthfully had his winning trade filed as a loss.
+
+**GATE 5.1-R2 CLOSES IT.** Check (n) runs the seven questions in a child
+interpreter under `-u`, answers the question that was ASKED, and proves each
+answer reaches the column its own question feeds — the column found by a
+header name the gate types out. **77 checks, 0 red, four times. The same edit
+now prints `FAILED — 1 red of 77`.** Every one of the seven new checks was
+forced red alone and the gate reported cleanly each time.
+
+**WHAT IS STILL BROKEN OR UNPROVEN, SAID PLAINLY.**
+
+- **`journal/mirror.py` DOES NOT EXIST. PHASE 5 IS HALF BUILT.**
+- **`cockpit/brief.py` HAS NO GATE.** By his ruling, not before going live.
+- **THE CATEGORY B PILE IS FORTY-SEVEN**, cleared before the ship is used for
+  real, at the same moment the Brief gets its gate.
+- **R-080 IS OPEN AGAINST TODAY'S REPAIR** and only a session that neither
+  found the fault nor wrote the fix may clear it. **R-081 is open against my
+  own work with seven doubts, including one where my declared bar was sharper
+  than the thing I built.**
+- **R-070 — no gate but this one knows how many checks it owes.** Untouched,
+  and now demonstrated in a second file.
+- **R-006 — at Phase 6 a second, genuinely independent AI reviews the
+  gauntlet's setup and its verdict. NOT waived by Fable's absence.**
+
+**THE PREVIOUS MARKER IS KEPT BELOW FOR THE RECORD.**
+
+
 ## **>>> 2026-08-20 (night): BOTH REPAIRS ARE IN. GATE 5.1-R1 PASSED 70/0 AND GATE 3.5-R2 PASSED 111/0, EACH THREE TIMES. EVERY FAULT FOUND TODAY IS NOW CAUGHT. PHASE 5 IS STILL HALF BUILT, BY HIS ORDER: "next session will attack the repairs".**
 
 **WHERE THE SHIP IS.**
