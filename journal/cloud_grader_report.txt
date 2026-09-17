@@ -1,22 +1,20 @@
-⚠️ TwelveData request failed for BTC-USD: HTTPSConnectionPool(host='api.twelvedata.com', port=443): Read timed out. (read timeout=10)
-📉 TwelveData failed for BTC-USD. Falling back to Yahoo Finance.
-🔌 DATA INSTRUMENT OFFLINE for BTC-USD (4h).
-🔌 BTC-USD: data offline — its rows skipped this run
-⚠️ TwelveData request failed for ETH-USD: HTTPSConnectionPool(host='api.twelvedata.com', port=443): Read timed out.
-📉 TwelveData failed for ETH-USD. Falling back to Yahoo Finance.
-🔌 DATA INSTRUMENT OFFLINE for ETH-USD (4h).
-🔌 ETH-USD: data offline — its rows skipped this run
-⚠️ TwelveData request failed for SOL-USD: HTTPSConnectionPool(host='api.twelvedata.com', port=443): Read timed out. (read timeout=10)
-📉 TwelveData failed for SOL-USD. Falling back to Yahoo Finance.
-🔌 DATA INSTRUMENT OFFLINE for SOL-USD (4h).
-🔌 SOL-USD: data offline — its rows skipped this run
 ========================================================
   ZAR X GRADER — trend-claim report card (v2)
 ========================================================
-  Rows in all notebooks: 1266 (315 duplicate candle-claims discarded)
-  Unique claims        : 951
-  Not yet gradable     : 10 (younger than 24h of market)
-  No directional claim : 0 (MIXED)
-  GRADED               : 0
-  Verdict: come back after the market has had 24h to answer.
+  Rows in all notebooks: 1269 (315 duplicate candle-claims discarded)
+  Unique claims        : 954
+  Not yet gradable     : 13 (younger than 24h of market)
+  No directional claim : 246 (MIXED)
+  GRADED               : 695
+  CORRECT              : 345  (49.6%)
+    BTC-USD: 121/240 (50%)
+    ETH-USD: 106/208 (51%)
+    SOL-USD: 118/247 (48%)
+  ALWAYS-UP PARROT     : 528/941 (56.1%)  <- the bar to beat
+  Verdict              : system does NOT beat the parrot (49.6% vs 56.1%)
+  (In an up-drifting market the parrot scores high with
+   zero skill. Beating the COIN means nothing; beating
+   the PARROT is the honest bar. Small samples lie.)
+  (Reading law: accuracy alone is not edge — payoff and
+   costs decide money. This grades honesty, not profit.)
 ========================================================
