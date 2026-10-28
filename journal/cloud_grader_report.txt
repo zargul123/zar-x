@@ -1,17 +1,17 @@
 ========================================================
   ZAR X GRADER — trend-claim report card (v2)
 ========================================================
-  Rows in all notebooks: 1698 (318 duplicate candle-claims discarded)
-  Unique claims        : 1380
-  Not yet gradable     : 324 (younger than 24h of market)
-  No directional claim : 203 (MIXED)
-  GRADED               : 853
-  CORRECT              : 453  (53.1%)
-    BTC-USD: 146/275 (53%)
-    ETH-USD: 148/280 (53%)
-    SOL-USD: 159/298 (53%)
-  ALWAYS-UP PARROT     : 575/1056 (54.5%)  <- the bar to beat
-  Verdict              : system does NOT beat the parrot (53.1% vs 54.5%)
+  Rows in all notebooks: 1701 (318 duplicate candle-claims discarded)
+  Unique claims        : 1383
+  Not yet gradable     : 330 (younger than 24h of market)
+  No directional claim : 202 (MIXED)
+  GRADED               : 851
+  CORRECT              : 453  (53.2%)
+    BTC-USD: 146/274 (53%)
+    ETH-USD: 149/279 (53%)
+    SOL-USD: 158/298 (53%)
+  ALWAYS-UP PARROT     : 577/1053 (54.8%)  <- the bar to beat
+  Verdict              : system does NOT beat the parrot (53.2% vs 54.8%)
   (In an up-drifting market the parrot scores high with
    zero skill. Beating the COIN means nothing; beating
    the PARROT is the honest bar. Small samples lie.)
