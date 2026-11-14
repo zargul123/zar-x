@@ -43,6 +43,13 @@ AND R-006 ARE UNCHANGED** — the gauntlet's independent review before and
 after is not waived by anything here, and a Fable that BUILDS in Phase 6
 cannot also be the independent reviewer of it.
 
+**>>> AND IF YOU ARE ABOUT TO THINK "BUT THEN THERE IS NO INDEPENDENT AI
+LEFT" — HE THOUGHT IT TOO, THE SAME DAY, AND THE ANSWER IS IN
+`THE_PATTERN.md`.** The independence is between the BUILDER and the
+REVIEWER, not between two brand names. **If Fable builds the gauntlet, a
+Zar X session reviews it, and that is exactly as independent.** The roles
+swap; they never vanish. **The only forbidden case is one AI doing both.**
+
 ---
 
 # **>>> READ THIS FIRST, IN PLAIN WORDS**

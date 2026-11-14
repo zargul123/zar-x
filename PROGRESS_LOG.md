@@ -15856,3 +15856,57 @@ here, and only for a Fable build.** The first two are exactly where they
 were. **If a Fable build arrives without a bar committed alone before it, or
 without a drill, that is not covered by this ruling and it is still a FAIL.**
 
+
+## >>> 2026-11-14, LATER AGAIN - **HE ASKED THE QUESTION THAT BREAKS THE NEW RULE, AND THE RULE SURVIVED BECAUSE THE ANSWER WAS ALREADY TRUE. THE WORDING WAS NOT CLEAR ENOUGH AND THAT IS WHAT CHANGED.**
+
+**HIS QUESTION, VERBATIM:** *"so if the phase 6 is done by fable then theer
+is no independent ai left so if fable made that then its ok."*
+
+**HE IS READING THE RULE CORRECTLY AND REACHING THE ONE CONCLUSION THAT
+WOULD UNDO IT.** If Fable is the only independent AI, and Fable builds the
+gauntlet, then on the face of it there is nobody left to review it, and
+R-006 looks like it has to bend.
+
+**IT DOES NOT, AND THE REASON IS ONE SENTENCE: THE INDEPENDENCE R-006 ASKS
+FOR IS BETWEEN THE BUILDER AND THE REVIEWER, NOT BETWEEN TWO BRAND NAMES.**
+R-006 says *"a second, genuinely independent AI"*. `EXECUTION_PLAN.md`
+Phase 6 says *"Kimi (or any second AI) reviews the test setup BEFORE running
+and the verdict AFTER"*. **Neither of them says Fable.** So:
+
+    a Zar X session BUILDS the gauntlet -> FABLE reviews it .......... OK
+    FABLE builds the gauntlet -> a ZAR X SESSION reviews it .......... OK
+    FABLE builds it AND FABLE reviews it -> NOBODY reviewed it ....... NO
+
+**The roles swap. They never vanish.** A Zar X session reviewing Fable's
+gauntlet is exactly as independent as Fable reviewing a Zar X session's - a
+different AI that did not build the thing, which is the whole of what the
+requirement asks. **Only the third case fails, and it fails for the same
+reason a session may never clear its own item.**
+
+**THE FAILURE THAT EARNED THIS EDIT IS A FAILURE OF MY OWN WRITING, NOT OF
+THE SHIP.** What I wrote this morning said only *"a Fable that BUILDS in
+Phase 6 cannot also be the independent reviewer of it"* - which is true, and
+which told a reader what is FORBIDDEN without telling them what to DO
+instead. **A rule that names only the forbidden case invites exactly the
+conclusion he reached: that the requirement must therefore bend.** Both
+files now carry the three cases and the swap.
+
+**AND THE SCHEDULING RULE HE CONTROLS, NOW WRITTEN DOWN WHERE IT WILL BE
+READ:** whoever builds Phase 6, **the other one must still be available to
+review it. Do not spend both on the building. If only one is available when
+Phase 6 arrives, PHASE 6 WAITS** - which is what `THE_PATTERN.md` already
+said and which is now said in the place where the question actually comes
+up.
+
+**WHY THIS ONE IS ABSOLUTE AND HIS NEW RULE IS NOT WRONG ELSEWHERE.** Every
+other instrument can be corrected tomorrow. **THE GAUNTLET HAS THREE SEALED
+SLOTS AND THEN THE SIGNALS CHAPTER CLOSES FOREVER.** There is no second test
+to catch the first one's mistake with, and **Law 7 proved the Lab's own
+numbers can never detect a leak** - a strategy that looks profitable because
+of a bug passes every number it produces. The cost of being wrong there is
+not a wrong line on a screen; it is him trading real money on a strategy
+that never worked, **with no way left to find out.**
+
+**NOTHING ELSE CHANGED. No `.py` file was touched. His ruling of this
+morning stands exactly as he worded it for every ordinary build.**
+

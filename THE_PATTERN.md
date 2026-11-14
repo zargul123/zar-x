@@ -122,6 +122,39 @@ thing it proved.** He has weighed that and decided; it is his to decide.
    reviewer of it** — that is the one place this ship has never allowed an
    author to sign off their own work, because THE PROMISE gives three sealed
    slots and no second attempt.
+
+   **>>> AND HERE IS THE ANSWER TO THE OBVIOUS OBJECTION, BECAUSE THE
+   COMMANDER ASKED IT THE DAY THIS WAS WRITTEN: "if Phase 6 is done by
+   Fable then there is no independent AI left."** There is. **THE
+   INDEPENDENCE R-006 ASKS FOR IS BETWEEN THE BUILDER AND THE REVIEWER, NOT
+   BETWEEN TWO BRAND NAMES.** R-006 says "a second, genuinely independent
+   AI", and `EXECUTION_PLAN.md` says "Kimi (or any second AI)". **Neither
+   says Fable.** So there are three cases and only one of them fails:
+
+       a Zar X session BUILDS the gauntlet -> FABLE reviews it .......... OK
+       FABLE builds the gauntlet -> a ZAR X SESSION reviews it .......... OK
+       FABLE builds it AND FABLE reviews it -> NOBODY reviewed it ....... NO
+
+   **The roles swap. They never vanish.** A Zar X session reviewing Fable's
+   gauntlet is exactly as independent as Fable reviewing a Zar X session's
+   — it is a different AI that did not build the thing, which is the whole
+   of what the requirement asks.
+
+   **WHY IT IS ABSOLUTE HERE AND NOWHERE ELSE.** Every other instrument on
+   this ship can be corrected tomorrow: he reads the Brief again, somebody
+   finds the fault, it is repaired. **THE GAUNTLET HAS THREE SEALED SLOTS
+   AND THEN THE SIGNALS CHAPTER CLOSES FOREVER.** There is no second test to
+   catch the first one's mistake with, and **Law 7 proved the Lab's own
+   numbers can never detect a leak** — a strategy that looks profitable
+   because of a bug passes every number it produces, cheerfully. The cost of
+   being wrong there is not a wrong line on a screen. It is him believing a
+   strategy works, trading real money on it, and **no way left to find out
+   that it never did.**
+
+   **SO THE SCHEDULING RULE HE CONTROLS, IN ONE LINE: WHOEVER BUILDS PHASE
+   6, THE OTHER ONE MUST STILL BE AVAILABLE TO REVIEW IT.** Do not spend
+   both on the building. **If only one is available when Phase 6 arrives,
+   PHASE 6 WAITS.**
 2. **A SESSION STILL MAY NEVER CLEAR ITS OWN ITEM**, whoever it is. Fable
    included. A build Fable makes still files its own open doubts in
    `REVIEW_QUEUE.md`, and only somebody else may ever clear them.
