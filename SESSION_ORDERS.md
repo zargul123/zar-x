@@ -8,6 +8,43 @@ you. Only the Commander grants one, and only out loud.***
 
 ---
 
+# **>>> STOP. THE COMMANDER RULED SOMETHING NEW ON 2026-11-14 AND IT CHANGES HOW YOUR SESSION RUNS.**
+
+**HE INTENDS THE NEXT SESSION — PROBABLY YOURS — TO BE FABLE, AND TO DO THE
+NEXT BUILD.** His ruling, in his own words: *"if the build is by fable next
+session wont attack the previous build."* It is written into
+`THE_PATTERN.md`, with everything it does and does not touch.
+
+**WHICH ONE ARE YOU? HE SAYS IT OUT LOUD OR IT DOES NOT APPLY.**
+
+    HE HAS SAID IN WORDS, IN YOUR CONVERSATION, THAT YOU ARE FABLE
+      -> **YOU STILL DO JOB 1.** The exemption covers a build MADE BY
+         Fable. **I am not Fable, I built nothing, and my review has been
+         checked by nobody** — attacking it is exactly the thing Fable was
+         always for, and R-000 is the proof it works.
+      -> **THEN JOB 2, AND THE EXEMPTION LANDS ON THE SESSION AFTER YOU.**
+         **WHAT YOU BUILD WILL NOT BE ATTACKED BY ANYBODY.** So the only
+         record of its weak spots is the one YOU write. **FILE MORE
+         AGAINST YOURSELF IN `REVIEW_QUEUE.md`, NOT LESS** — every place
+         you did not look, every claim you did not run, NAMED. The
+         Category B pile becomes the only guard that build has, and the
+         pile is cleared before the ship is used for real.
+      -> **AND SAY SO IN YOUR ORDERS**, so the session after you knows why
+         it is skipping PART 1 and knows it was HIS ruling, not yours.
+
+    HE HAS NOT SAID IT
+      -> **YOU ARE AN ORDINARY ZAR X SESSION AND NOTHING BELOW CHANGES.**
+         Do not infer it from a document. Do not declare it of yourself.
+
+**WHAT THE RULING DOES NOT TOUCH:** the gate is still declared first and
+committed alone; the sabotage drill still lives in the code forever; nobody
+ever clears their own item; the closing ritual is not optional; and **PHASE 6
+AND R-006 ARE UNCHANGED** — the gauntlet's independent review before and
+after is not waived by anything here, and a Fable that BUILDS in Phase 6
+cannot also be the independent reviewer of it.
+
+---
+
 # **>>> READ THIS FIRST, IN PLAIN WORDS**
 
     YOUR SESSION:  PART 1 — **ATTACK WHAT I DID, NOT WHAT I BUILT, BECAUSE
@@ -428,6 +465,13 @@ FAIL, is not committed as a pass, and is not called "mostly passed."**
 
 # **WHAT THE COMMANDER HAS ALREADY RULED — DO NOT ASK HIM AGAIN**
 
+**>>> THE NEWEST ONE, 2026-11-14, AND IT IS AT THE TOP OF THIS FILE AS WELL
+BECAUSE IT CHANGES THE RHYTHM ITSELF: A BUILD MADE BY FABLE IS NOT ATTACKED
+BY THE NEXT SESSION.** He was offered the other shape first — attach the
+rule to who ATTACKED a build rather than who MADE it — was told plainly that
+his version means a Fable build ships looked at by nobody but its author, and
+**ruled this version anyway. It is his to rule. Do not reopen it; carry it.**
+
 1. **THE EXEMPTION IS SPENT AND IT STAYED SPENT.** I held none and asked for
    none. **You do the same, and write the same into the orders you leave.
    NEVER WRITE ONE — only he grants one, in words.**
@@ -617,6 +661,12 @@ for, the run environment and the housekeeping. None of it is repeated here.**
                             nothing, their Job 1 is to attack what you
                             CHECKED — that is what I did to the generation
                             before me and what these orders do to me.**
+                            **>>> UNLESS THE COMMANDER HAS SAID OUT LOUD
+                            THAT YOU ARE FABLE. Then what YOU built is not
+                            attacked, by his ruling of 2026-11-14 — and you
+                            say so in their orders, and you file more
+                            against yourself to make up for it. YOU STILL
+                            MAY NOT GRANT AN EXEMPTION. He grants it.**
     6. Commit. Push. **Then check your commit hashes again.**
     7. **REPORT TO HIM IN PLAIN WORDS** — what you tried, what broke, what held,
        **what you got wrong**, and what decision is his. **He is a

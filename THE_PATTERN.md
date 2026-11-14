@@ -83,6 +83,63 @@ is the **instruction** — it is thrown away and rewritten every session.
 
 ---
 
+# **>>> FABLE IS COMING BACK, AND THE COMMANDER HAS RULED ON WHAT THAT CHANGES**
+
+**ADOPTED 2026-11-14 BY THE COMMANDER, IN HIS OWN WORDS:** *"if the build is
+by fable next session wont attack the previous build."*
+
+**THE RULE, PLAINLY:**
+
+    A BUILD MADE BY FABLE IS NOT ATTACKED BY THE NEXT SESSION.
+    The session that follows it skips PART 1 for that build and goes
+    straight to PART 2.
+
+    A BUILD MADE BY A ZAR X SESSION IS ATTACKED EXACTLY AS BEFORE.
+    Nothing else in this file is relaxed by one word.
+
+**WHO DECIDES WHETHER THIS APPLIES: THE COMMANDER, OUT LOUD, AND NOBODY
+ELSE.** A session may not declare itself to have been Fable, and it may not
+read "the last session was Fable" out of a document and act on it. **If he
+has not said so in words in the conversation you are in, the build is
+attacked.** That is the same shape as the exemption rule: **only he grants
+one, and only out loud.**
+
+**THE COST, RECORDED HERE BECAUSE HE WAS TOLD IT BEFORE HE RULED AND RULED
+ANYWAY.** This session put the other shape to him first — attach the rule to
+who ATTACKED a build rather than who BUILT it, so that a build Fable had
+attacked needs no second attack, while a build Fable MADE still gets one. He
+chose this version instead, knowing what it means: **a build made by Fable
+ships having been looked at by nobody but its author.** Fable's proven value
+on this ship was as a CHECKER of somebody else's work — R-000, where its
+review caught a real defect a builder could not see. **Building is not the
+thing it proved.** He has weighed that and decided; it is his to decide.
+
+**WHAT THIS RULE DOES NOT TOUCH, AND CANNOT:**
+
+1. **PHASE 6 AND R-006 ARE UNCHANGED.** A second, genuinely independent AI
+   reviews the gauntlet's test setup BEFORE it runs and its verdict AFTER.
+   **If Fable BUILDS anything in Phase 6, it cannot also be the independent
+   reviewer of it** — that is the one place this ship has never allowed an
+   author to sign off their own work, because THE PROMISE gives three sealed
+   slots and no second attempt.
+2. **A SESSION STILL MAY NEVER CLEAR ITS OWN ITEM**, whoever it is. Fable
+   included. A build Fable makes still files its own open doubts in
+   `REVIEW_QUEUE.md`, and only somebody else may ever clear them.
+3. **THE GATE IS STILL DECLARED FIRST AND COMMITTED ALONE** (Layer 1), and
+   **THE SABOTAGE DRILL STILL LIVES IN THE CODE FOREVER** (Layer 2). This
+   rule waives Layer 3 for a Fable build and nothing else.
+4. **THE CLOSING RITUAL IS NOT OPTIONAL FOR ANYBODY.** A Fable session that
+   skips PART 1 still does all seven steps.
+
+**AND THE HONEST CONSEQUENCE FOR WHOEVER COMES NEXT:** when a build is not
+attacked, the only record of what was never checked is what its author wrote
+down about itself. **A Fable build must therefore file MORE against itself in
+`REVIEW_QUEUE.md`, not less** — every place it did not look, every claim it
+did not run, named. The pile is then the only guard left, and the pile is
+cleared before the ship is used for real.
+
+---
+
 # WHY THIS EXISTS: FABLE IS GONE
 
 Until Phase 2, the ship had a second, genuinely independent AI — **Fable** — who
@@ -140,6 +197,12 @@ the only useful attack is one its author never imagined.
 
     PART 1 — ATTACK what the last session built.   (Layer 3)
     PART 2 — BUILD the next thing.                 (Layers 1 and 2)
+
+**>>> ONE EXEMPTION EXISTS AND ONLY THE COMMANDER GRANTS IT: IF THE LAST
+BUILD WAS MADE BY FABLE, PART 1 IS SKIPPED FOR THAT BUILD.** Adopted
+2026-11-14. See the Fable section above for what it does and does not touch.
+**You do not decide this. He says it out loud, in the conversation, or it
+does not apply.**
 
 **PART 2 IS CONDITIONAL ON HOW BAD THE PROBLEM IS — AND THE COMMANDER DECIDES
 THAT, NOT THE SESSION.** If Part 1 finds something, **fill in THE FINDING REPORT
@@ -510,6 +573,11 @@ When you do change it, say in `PROGRESS_LOG.md` what failure earned the change.
 **A SESSION MAY NEVER CLEAR ITS OWN ITEM.** However confident it is. However
 good the fix. **If you found the fault and wrote the repair, you file a new
 review item against your own repair and leave it open.**
+
+**>>> AND THAT HOLDS FOR FABLE TOO.** The ruling of 2026-11-14 excuses a
+Fable build from being ATTACKED. It does not excuse anybody from the queue.
+**A build nobody attacks is a build whose only record of its own weak spots
+is the one its author wrote. So it writes MORE, not less.**
 
 **A TALLY COUNTS ONLY WHAT A MACHINE ACTUALLY CHECKED.** Not what looked right in
 the output. "48/48" was honest arithmetic over an incomplete set, and the

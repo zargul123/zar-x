@@ -15790,3 +15790,69 @@ predictions written down in advance, three of them wrong, and every one of
 them only settled by running it.** The law cuts at the attacker as hard as at
 the builder, which is the best argument for adopting it.
 
+
+## >>> 2026-11-14, LATER THE SAME SESSION - **THE COMMANDER CHANGED THE RHYTHM. `THE_PATTERN.md` WAS EDITED, AND NO FAILURE EARNED IT - A RULING DID.**
+
+**`THE_PATTERN.md` SAYS A SESSION MAY CHANGE IT ONLY ON A GENUINELY NEW
+LESSON, AND SAYS TO RECORD WHAT FAILURE EARNED THE CHANGE. NO FAILURE EARNED
+THIS ONE.** The Commander ruled it directly, and a ruling of his outranks the
+rule about when a session may edit the file. **Recorded here so nobody later
+reads the change and goes looking for the failure behind it.**
+
+**WHAT HE SAID, VERBATIM:** *"ok actually im planning to start next session
+with fable and next build so can you plz add in rules that if the build is by
+fable next session wont atack the previous build."*
+
+**THE RULE AS ADOPTED:** a build made by Fable is NOT attacked by the next
+session. A build made by a Zar X session is attacked exactly as before.
+**Only the Commander grants it, out loud, in the conversation** - a session
+may not declare itself to have been Fable and may not read it out of a
+document.
+
+**HE WAS OFFERED THE OTHER SHAPE FIRST AND REFUSED IT.** I put two versions
+to him:
+
+    (1) attach the rule to who ATTACKED a build, not who MADE it. A build
+        Fable had attacked needs no second attack; a build Fable MADE still
+        gets one. Same speed, nothing ships unlooked-at.
+    (2) exactly as he worded it: anything Fable BUILDS is not attacked.
+
+**I told him plainly what (2) costs: a build made by Fable ships having been
+looked at by nobody but its author, and Fable's proven value on this ship -
+R-000, where its review caught a real defect a builder could not see - was as
+a CHECKER of somebody else's work, not as a builder. He chose (2) knowing
+that.** It is his to rule and I carried it. **This is recorded in the plain
+words he used, not softened, so that a later session can see exactly what was
+traded for the speed.**
+
+**WHAT I WROTE, AND WHERE:**
+
+1. **`THE_PATTERN.md`** - a new section ahead of "WHY THIS EXISTS: FABLE IS
+   GONE" (that section is UNCHANGED and still there; the new one sits above
+   it, so nothing was erased). It carries the rule, who may grant it, the
+   cost, and four things it does NOT touch: **Phase 6 and R-006 are
+   unchanged; nobody ever clears their own item, Fable included; the gate is
+   still declared first and the drill still lives in the code forever - the
+   waiver is Layer 3 only; and the closing ritual is not optional for
+   anybody.**
+2. **`THE_PATTERN.md`, THE RHYTHM** - the exemption named directly under
+   PART 1 / PART 2, where a session actually reads it.
+3. **`THE_PATTERN.md`, THE RULES THAT KEEP IT HONEST** - beside "A SESSION
+   MAY NEVER CLEAR ITS OWN ITEM": **a build nobody attacks must file MORE
+   against itself in `REVIEW_QUEUE.md`, not less**, because the pile becomes
+   the only guard it has.
+4. **`SESSION_ORDERS.md`** - a block ahead of everything else telling the
+   next session which case it is in, and **that if it IS Fable it still does
+   JOB 1** (the exemption covers a build MADE by Fable; I am not Fable, I
+   built nothing, and my review has been checked by nobody), **and that the
+   exemption lands on the session AFTER it.**
+
+**NOTHING ELSE WAS RELAXED BY ONE WORD, AND NO `.py` FILE WAS TOUCHED.**
+
+**>>> AND THE ONE THING I WANT THE NEXT SESSION TO SEE PLAINLY.** This ship's
+whole guard is three layers: the bar declared first, the drill that breaks
+the code forever, and the independent attack. **Only the third is waived
+here, and only for a Fable build.** The first two are exactly where they
+were. **If a Fable build arrives without a bar committed alone before it, or
+without a drill, that is not covered by this ruling and it is still a FAIL.**
+
