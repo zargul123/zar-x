@@ -4963,3 +4963,150 @@ that repair now survives an independent attack. **Doubts 1, 3, 4 and 5 remain
 untested — and doubt 3, the socket behind a firewall or a real proxy, is now
 doubled by check (n)'s child pipe.**
 
+
+## >>> R-080 - **CLEARED 2026-11-14 BY THE TWENTY-SEVENTH GENERATION, WHICH NEITHER FOUND THE FAULT NOR WROTE THE FIX.**
+
+Attacked with **seven sabotages its author never imagined**, plus a re-run of
+every fault on record, control first, in scratch trees outside the repo at
+the same depth as the real file.
+
+    control (untouched copy) ........................ exit 0, 77 green, 0 red
+    FA the two price questions exchanged whole ...... 1 red, N4 ONLY, N6 GREEN
+    FB an eighth question inserted BEFORE the last .. 5 red, 77.8 s
+    FC "price you got IN at" renamed "entry price" .. 5 red, 76.9 s
+    FD TRADES_FILE renamed ......................... 7 red, was 4 under R1
+
+**EVERY RECORDED FAULT STILL GOES RED AT ITS RECORDED COUNT. THE REPAIR IS
+NOT DECORATIVE.** FD's count moved from 4 to 7 and that is EVIDENCE, not a
+discrepancy: the three new reds are N4, N5 and N6 - check (n) catching a
+fault it was never built for.
+
+**THE WITNESS WAS PROVED ABLE TO SEE THE FAULT FIRST**, on copies of its own,
+driven under `-u` answering the words on the screen:
+
+    control  ARCHIVE ...,short,2000.25,1900.75,...   a winning short
+    swapped  ARCHIVE ...,short,1900.75,2000.25,...   the same trade, a loss
+
+**Seven new sabotages found nothing that puts a wrong number in his archive.
+I attacked it hard and found nothing. CLEARED.**
+
+## >>> R-081 - **CLEARED 2026-11-14. TWO OF ITS SEVEN DOUBTS ARE NOW PROVEN RATHER THAN ASSERTED, AND WIDER THAN THEIR AUTHOR WROTE THEM. THE WIDENED FORM IS FILED FORWARD AS R-082.**
+
+Doubt by doubt, by a session that built none of it:
+
+1. **E4 half wrong, ~78 s on a renamed or added question.** CONFIRMED by
+   measurement: FB 77.8 s, FC 76.9 s, and the healthy gate 0.8-2.0 s. **RED
+   either way, never a hang.** Honest, filed by its author, and correct.
+2. **The drill cannot reach check (n).** True, and it is why the check is
+   certified by attack. Seven attacks were run against it today.
+3. **N4 and N5 both stand on `n_at`, and N7 calls the same `n_at`.** I tried
+   to exploit it and could not: every fault I could invent in `n_at` that
+   would blind N4 also makes N7's typed-out SWAPPED row be accepted, which
+   turns N7 red. **The doubt is real in shape and I could not reach it.**
+4. **"Check (n) drives one happy trade; no refusal is ever driven."** PROVEN,
+   and SHARPER than written - see R-082.
+5. **No competing module planted on the child's path.** Still not done; the
+   child runs its copy by absolute path, so `sys.path[0]` is the copy's own
+   folder and the control I would plant has nowhere to sit. **Left open in
+   R-082 as a positive control still missing.**
+6. **The 60 s and 15 s numbers are judgements.** Unchanged. Measured again
+   today: the healthy child answers all seven in well under two seconds.
+7. **One byte at a time over a pipe on Windows, never run behind a different
+   console.** PROVEN to matter, and SHARPER than written - see R-082.
+
+**CLEARED as an item.** Its live residue is R-082.
+
+## >>> R-082 - **NEW, 2026-11-14. CHECK (n) DRIVES EXACTLY ONE SET OF SEVEN WELL-FORMED ANSWERS, SO ANY EDIT THAT IS A NO-OP ON THOSE SEVEN VALUES IS INVISIBLE TO IT.** OPEN - CATEGORY B
+
+**This is R-081's doubts 4 and 7, measured instead of asserted, and widened.
+I did not build check (n), so I may file it; I may not clear it.**
+
+**FIVE SABOTAGES WENT GREEN AT 77/0, AND EVERY ONE WAS PROVED TO CHANGE
+SOMETHING ON ITS OWN CHANNEL BEFORE IT WAS GIVEN ANY WEIGHT.**
+
+1. **A DEFAULT ON AN ANSWER.** `input("  how did you feel? ...") or "flat"`.
+   The gate always sends `calm`, and `"calm" or "flat"` is `"calm"`.
+
+       control, blank answer -> "[not logged: no feeling was given]", NOTHING
+                                WRITTEN - a safe, named refusal
+       sabotage, blank answer -> a row written, feeling "flat"
+
+   **A feeling he never gave, in the archive the Mirror will group by.**
+
+2. **A TRANSFORMATION ON AN ANSWER.** `.strip()` on the WHY line, which this
+   file's own docstring forbids in as many words ("not stripped, not escaped,
+   not made safe ... byte for byte").
+
+       control  '"   range broke, I took it   "'   his bytes, untouched
+       sabotage '"range broke, I took it"'         quietly corrected
+
+3. **A BRANCH THAT ONLY FIRES FOR A HUMAN.** `if sys.stdin.isatty():` with
+   the two prices exchanged inside it. **GREEN.** The same three lines with
+   the condition inverted to `if not sys.stdin.isatty():`, so the swap lands
+   on the pipe the gate drives, go **RED, 1 of 77, N4.** **The only
+   difference between the invisible version and the caught version is the
+   word `not`.** The gate drives a PIPE; the Commander uses a KEYBOARD; **no
+   check on this ship proves those two paths run the same code.**
+
+4. **AN EIGHTH QUESTION PLACED AFTER THE SEVENTH WITH ITS ANSWER DISCARDED.**
+   **GREEN**, and the question is visibly asked on his screen. **The file,
+   the orders and this queue all say in bold that adding an eighth question
+   turns the gate red. That sentence is TOO WIDE.** It should read: *an
+   eighth question whose answer reaches `log_trade` turns the gate red.*
+   **The shape that could actually hurt him IS caught** - desk item 12's risk
+   question, added inside the answers tuple, goes **3 red (N4, N5, N6) in 1.9
+   seconds**, because the reader closes stdin after the seventh answer and
+   the refusal writes nothing.
+
+5. **THE POSITIVE CONTROL R-081's DOUBT 5 NAMES IS STILL MISSING**, and I
+   could not supply it: the child runs its copy by absolute path, so there is
+   nowhere on its path for a competing `log_trade.py` to sit.
+
+**WHAT I AM NOT CLAIMING.** **NONE OF THE FIVE PUTS A WRONG NUMBER IN HIS
+ARCHIVE ON ITS OWN**, and none of them exists in the shipped file today.
+Every one needs a later session to make a specific edit first, and three of
+the five contradict a promise written in the same file a few lines above.
+**By THE FINDING REPORT this is SMALL: Q2 is NO for the shipped file today.
+File it, keep building.** It is written down because the pile is where a
+future session will look when it next edits those seven lines - **and the
+cheapest repair, if he ever wants one, is to drive a SECOND trade through
+check (n) with a blank answer and prove the refusal still refuses.**
+
+## >>> R-083 - **AGAINST MY OWN REVIEW. OPEN. I MAY NOT CLEAR IT.** - CATEGORY B
+
+1. **MY FIRST `isatty` SABOTAGE WAS DEAD CODE** - twelve spaces instead of
+   eight, appended after `sys.exit(0)` inside the `except` block - and the
+   gate was right to stay green. **I found it only because I had built the
+   same sabotage twice with the condition inverted and BOTH went green.** If
+   I had built only one, I would have reported a clean result from a rig that
+   was never running my code. **Nobody checked my rig but me.**
+2. **I RAN NO SABOTAGE AGAINST THE PRODUCTION HALF'S `_asset`, `_direction`
+   OR `_feeling` LOWER-CASING.** The gate's seven answers are already
+   lower-case and already canonical, so removing `.lower()` anywhere would be
+   invisible to check (n). **I assumed checks (a)-(m) cover it and I did not
+   verify that assumption.**
+3. **I DID NOT ATTACK CHECK (m) AT ALL**, nor checks (a)-(l). My orders
+   pointed me at check (n) and I stayed there. **Seventy of the seventy-seven
+   checks went unattacked by me.**
+4. **I NEVER DROVE A REAL KEYBOARD.** R-082 item 3 is proved by complement -
+   the same corruption, condition inverted - not by a terminal. **Nobody has
+   ever run `LOG_TRADE.bat` and answered it by hand under observation**, and
+   on this machine I had no way to.
+5. **MY WITNESS AND THE GATE SHARE ONE HABIT:** both match a question by
+   looking for words in a byte stream. They are separate code with separate
+   fragments and separate answers, but **if that whole technique is blind to
+   something, both of mine are blind to it in the same way.**
+6. **I RAN EVERY SABOTAGE ONCE.** Three of them depend on a 60-second
+   deadline and a thread race. **One run is not a measurement of a race.**
+
+## >>> THE CATEGORY B PILE IS FORTY-EIGHT.
+
+Forty-seven at the last count, **minus R-081, cleared today by a session that
+built none of it, plus R-082 and R-083.** **Two items were cleared today -
+R-080 and R-081.** Nothing else was cleared by anybody.
+
+**R-070, R-071, R-073, R-074 AND R-075 REMAIN OPEN AND ARE NOT MINE TO
+CLEAR.** R-074 - the two files disagree about what a time looks like - **is
+now directly in the Mirror's path and the next session meets it on its first
+afternoon.**
+

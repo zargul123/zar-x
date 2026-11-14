@@ -616,3 +616,25 @@ one **because the orders named it**, which is the clearest evidence yet that the
 | **TWO `.py` FILES ON THIS SHIP ARE LF, NOT CRLF, AND THE ORDERS SAY OTHERWISE.** | `cockpit/plan.py` (67 bare LF, 0 CRLF) and `journal/snapshot.py` (80 bare LF, 0 CRLF). **Both byte-identical to HEAD; neither touched today.** The orders' line *"these `.py` files are CRLF"* is true of ten of twelve. **The measurement wins.** |
 | **A NUMBER THAT LOOKS LIKE A DISCREPANCY AND IS NOT, RECORDED BEFORE IT BECOMES A LATER SESSION'S FALSE FACT.** | The 2026-08-20 roadmap records the production half as **12,200 bytes**; my recipe reports **12,198**. The difference is the trailing CRLF that `CRLF.join(lines[:286])` drops. **Both sides of my comparison used the same recipe, so the confinement proof is sound** — but two different numbers for one thing is exactly what should stop a session, so the reason is written down. |
 
+
+---
+
+# MEASURED FACTS ADDED 2026-11-14 (the twenty-seventh generation - ATTACK ONLY, NOTHING WAS BUILT)
+
+| What was measured | The measurement |
+|---|---|
+| **THE WHOLE SHIP, IN ONE RUN.** | Fourteen invocations: **1,047 green, 0 red, every exit 0.** fear_greed 58 - funding 71 - open_interest 88/88 - collection_guard OK - news 54 - events 69/69 - whales 111/111 - carry 87/87 - **log_trade 77/77**. Red counted three ways by machine (0 crosses by CHARACTER, 0 `GATE ... FAILED`, 5 first-word hits **all read by eye and all innocent prose**). vault **INTACT 6 of 6**, Brief **3/3**, Whale watch **6 of 6**. |
+| **GATE 5.1-R2's CHECK (n) SURVIVED AN INDEPENDENT ATTACK.** | Seven sabotages its author never imagined, plus all four faults on record, control first, in trees outside the repo. **Every recorded fault still goes red.** Five of the seven new ones went green and **not one of the five puts a wrong number in his archive.** |
+| **A RECORDED RED COUNT MOVED, AND IT IS EVIDENCE RATHER THAN DRIFT.** | The `TRADES_FILE` renamed sabotage is recorded at **4 red** under GATE 5.1-R1. It now goes **7**: the same R2, R3, R4, R5 **plus N4, N5 and N6 - check (n) catching a fault it was never built for.** |
+| **THE GATE TIMING ON RECORD IS AGAIN ONE UNREPRESENTATIVE READING - THE SEVENTH TIME.** | `journal/log_trade.py --gate` is recorded at **~1.9 s**. Measured **0.8 s** in the alive run and **2.0 s** in the rig minutes later, on the same machine, same day. **The 77 ticks prove all three child interpreters ran regardless of the clock. Timings here are weather reports, not checks.** |
+| **THE ~78-SECOND FAILURE IS REAL AND REPRODUCED.** | An eighth question before the last: **77.8 s, 5 red.** A renamed question: **76.9 s, 5 red.** A shell that goes silent and stays alive: **77.8 s, 5 red, and the gate still finished reporting cleanly** - rule (k) held under a shape nobody had tried. |
+| **AND THE SHAPE THAT FAILS FAST, WHICH NOBODY HAD MEASURED.** | The **realistic** eighth question - desk item 12's risk figure, added inside the answers tuple - goes **3 red (N4, N5, N6) in 1.9 seconds**, not 78. The reader closes stdin after the seventh answer, the new `input()` raises EOFError, the shell's own handler prints `nothing was written`, and the archive stays empty. |
+| **THE CLAIM "ADD AN EIGHTH QUESTION AND THE GATE GOES RED" IS TOO WIDE.** | An eighth question placed **after** the seventh whose answer is never passed to `log_trade` leaves the gate at **77/0 green**, while the question is visibly asked on his screen. The true statement is: *an eighth question whose answer reaches `log_trade` turns the gate red.* **Measured, not argued.** R-082 item 4. |
+| **CHECK (n) DRIVES A PIPE; THE COMMANDER WOULD USE A KEYBOARD; THE TWO ARE NOT PROVED TO BE THE SAME PATH.** | The two price answers exchanged inside `if sys.stdin.isatty():` -> **77/0 green**. The identical three lines with the condition inverted to `if not sys.stdin.isatty():` -> **RED, 1 of 77, N4**. **The only difference between invisible and caught is the word `not`.** R-082 item 3. |
+| **`LOG_TRADE.bat` WAS READ RATHER THAN ASSUMED, AND IT CLOSES TWO DOUBTS.** | It does `cd /d "C:\Users\hp\Downloads\zargul trader\zar-x"` and `set PYTHONUTF8=1` before running the logger. **So a relative `TRADES_FILE` could not bite him**, and **his console and check (n)'s child agree about encoding**, which means a WHY line with a dash or a curly quote in it is not a hole. **Two suspicions went looking and came back empty.** |
+| **THE MIRROR'S THIRD LEG CANNOT BE COMPUTED FROM WHAT THIS SHIP RECORDS.** | `journal/my_trades.csv` holds utc_time, asset, direction, entry, exit, size, why, feeling. `journal/snapshots_local.csv` holds utc_time, asset, timeframe, close, trend, rsi, atr, atr_pct, regime, entropy, adx (**758 rows, 2026-07-21 11:35 to 2026-11-14 12:05**). **Neither file holds an account balance or a stop price**, and "a disciplined 1%-risk version of the same trades" needs both. **Phase 5 item 2 is undefined, not merely unbuilt.** |
+
+**WHAT SHIPPED TODAY: NOTHING.** No `.py` file on this ship was changed. The
+five documents were updated and that is all. **`journal/mirror.py` still does
+not exist and has now waited four sessions.**
+

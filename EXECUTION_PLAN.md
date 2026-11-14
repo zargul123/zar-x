@@ -434,6 +434,69 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-14: GATE 5.1-R2's CHECK (n) WAS ATTACKED BY A SESSION THAT BUILT NONE OF IT, WITH SEVEN SABOTAGES NOBODY HAD TRIED, AND IT HELD AGAINST EVERY ONE THAT COULD CORRUPT A ROW. R-080 AND R-081 CLEAR. NOTHING WAS BUILT: THE MIRROR'S THIRD LEG IS NOT HARD, IT IS UNDEFINED, AND THAT IS ON THE COMMANDER'S DESK.**
+
+**WHERE THE SHIP IS.**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red   58 green
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red   71 green
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  (OK/FAIL)
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red   54 green
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red   69 green
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red   69 green
+    cockpit/whales.py           GATE 3.5-R2   PASSED  exit 0  0 red  111 green
+      the same file at TZ=UTC0  GATE 3.5-R2   PASSED  exit 0  0 red  111 green
+    cockpit/carry.py            GATE 4.1      PASSED  exit 0  0 red   87 green
+      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0  0 red   87 green
+    journal/log_trade.py        GATE 5.1-R2   PASSED  exit 0  0 red   77 green
+      the same file at TZ=UTC0  GATE 5.1-R2   PASSED  exit 0  0 red   77 green
+    vault INTACT 6 of 6 - Brief 3/3 (Whale watch 6 of 6) - lab/ untouched
+    journal/my_trades.csv DOES NOT EXIST - his first real trade creates it
+
+**NOT ONE COUNT MOVED. 1,047 green, 0 red**, counted three ways by machine
+and every word-hit read by eye. No code was changed on this ship today.
+
+**WHAT WAS PROVED.**
+
+**GATE 5.1-R2 HELD.** Control first. All four faults on record still go red -
+the price swap at 1 (N4 only, N6 correctly green), the eighth question before
+the last at 5, the renamed question at 5, and the renamed `TRADES_FILE` at
+**7, up from 4, because check (n) now sees a fault it was never built for.**
+**Seven sabotages nobody had tried found nothing that puts a wrong number in
+his archive.**
+
+**WHAT IS KNOWN ABOUT ITS REACH, AND IT IS NOT A DEFECT.** Check (n) drives
+exactly ONE set of seven well-formed answers, so **any edit that is a no-op
+on those seven values is invisible to it**: a default on a blank answer, a
+`.strip()` on his own words, a branch that only fires for a human at a
+keyboard, an eighth question whose answer nothing reads. All five were proved
+to change the archive or the screen on their own channel. **None exists in
+the shipped file; each needs a later session to make a specific edit first.**
+R-082, CATEGORY B.
+
+**WHAT IS BROKEN OR UNPROVEN, SAID PLAINLY.**
+
+**PHASE 5 IS STILL HALF BUILT. `journal/mirror.py` DOES NOT EXIST AND HAS NOW
+WAITED FOUR SESSIONS.** The reason changed today and the new reason is better
+than the old one: **the Mirror's third leg cannot be computed from what this
+ship records.** "A disciplined 1%-risk version of the same trades" needs the
+account balance and the stop price; **`journal/my_trades.csv` has neither and
+`journal/snapshots_local.csv` has neither.** It is not a hard build, it is an
+undefined one, and **the decision is the Commander's: ask him two more
+questions when he logs a trade, assume fixed numbers, or ship the first two
+legs and name the third as missing.** **GATE 5.2 WAS DELIBERATELY NOT
+DECLARED** - a bar over an undecided specification is a bar that gets lowered
+later.
+
+**THE CATEGORY B PILE IS FORTY-EIGHT.** Cleared before the ship is used for
+real, at the same moment `cockpit/brief.py` gets its gate.
+
+**NOBODY HAS EVER RUN `LOG_TRADE.bat` AND ANSWERED IT BY HAND.** Check (n)
+drives a pipe; he would use a keyboard; the two are not proved to be the same
+path. R-082 item 3.
+
 ## **>>> 2026-09-08: BOTH OF THE TWENTY-FIFTH GENERATION'S REPAIRS WERE ATTACKED BY A SESSION THAT BUILT NEITHER, AND BOTH HELD. FIVE ITEMS CLEARED. A HOLE WAS FOUND BESIDE ONE OF THEM — THE SEVEN QUESTIONS NO GATE HAD EVER REACHED — AND REPAIRED UNDER GATE 5.1-R2. PHASE 5 IS STILL HALF BUILT: THE MIRROR HAS NOW WAITED THREE SESSIONS.**
 
 **WHERE THE SHIP IS.**

@@ -15505,3 +15505,288 @@ CAUGHT THREE SESSIONS.** Mine is the third. **The instruction that works is not
 "remember to check" — it is CHECK YOUR HASHES AFTER THE PUSH, EVERY TIME, and
 grep the documents for the old one.**
 
+
+# 2026-11-14 - THE TWENTY-SEVENTH GENERATION. I ATTACKED GATE 5.1-R2's CHECK (n) WITH SEVEN SABOTAGES NOBODY HAD TRIED, RE-RAN THE FOUR ON RECORD, AND THE REPAIR HELD AGAINST EVERY ONE THAT COULD ACTUALLY CORRUPT A ROW. R-080 AND R-081 CLEAR. I BUILT NOTHING: PART 2 IS BLOCKED ON A DECISION ONLY THE COMMANDER CAN MAKE, AND I SAY SO RATHER THAN GUESSING IT.
+
+**I built neither check (n) nor its repair. I have no memory of writing any of
+it. That is the whole value of this entry.**
+
+## 1. THE SHIP WAS ALIVE BEFORE I TOUCHED ANYTHING
+
+Fourteen invocations, every one captured to its own file, red counted BY
+MACHINE three ways and every word-hit then read by eye.
+
+    cockpit/fear_greed.py       GATE 3.1-R7   exit 0   58 green   0 red    69.7 s
+    cockpit/funding.py          GATE 3.2-R8   exit 0   71 green   0 red   135.0 s
+    data/open_interest.py       GATE 3.2b-R10 exit 0   88 green   0 red    57.6 s
+      the same file at TZ=UTC0  GATE 3.2b-R10 exit 0   88 green   0 red    54.2 s
+    data/collection_guard.py    GATE 3.2c-R1  exit 0   (OK/FAIL)  0 red     3.3 s
+    cockpit/news.py             GATE 3.3-R1   exit 0   54 green   0 red     4.4 s
+    cockpit/events.py           GATE 3.4      exit 0   69 green   0 red     0.4 s
+      the same file at TZ=UTC0  GATE 3.4      exit 0   69 green   0 red     0.3 s
+    cockpit/whales.py           GATE 3.5-R2   exit 0  111 green   0 red    18.8 s
+      the same file at TZ=UTC0  GATE 3.5-R2   exit 0  111 green   0 red    19.2 s
+    cockpit/carry.py            GATE 4.1      exit 0   87 green   0 red     3.5 s
+      the same file at TZ=UTC0  GATE 4.1      exit 0   87 green   0 red     3.7 s
+    journal/log_trade.py        GATE 5.1-R2   exit 0   77 green   0 red     0.8 s
+      the same file at TZ=UTC0  GATE 5.1-R2   exit 0   77 green   0 red     0.6 s
+
+**1,047 GREEN, 0 RED.** The previous session measured 1,033 at log_trade 70;
+1,033 + 7 + 7 = 1,047, and log_trade reads 77 exactly as the orders said it
+would. **Nothing drifted.**
+
+Counted by machine three ways: **0 occurrences of the cross character
+(U+2717), counted BY CHARACTER not by byte; 0 matches of `GATE ... FAILED`;
+and 5 lines whose first word was a red word. ALL FIVE READ BY EYE, ALL FIVE
+INNOCENT PROSE:**
+
+    01_fear_greed:293   "FAILURE, never a quiet pass**, which R-025 named ..."
+    02_funding:137      "escaped the gate of 2026-07-26; four of the next ..."
+    02_funding:379      "FAILURE, never a quiet pass**, which R-025 named ..."
+    13_log_trade:369    "RED instead of quietly shrinking the headline."
+    14_log_trade:369    the same line
+
+**The funding trap did not fool me because the orders named it. KEEP NAMING
+IT.**
+
+`lab/verify_vault.py`: **VAULT INTACT, all 6 files match their checksums.**
+`cockpit/brief.py`: **3/3 instruments reporting**, Whale watch **6 of 6**,
+all five Context Deck lines and the Carry line present, BTC $65,618.11,
+Fear and Greed 13 (Extreme Fear), News 49 stories from 5 of 5 publishers.
+**`journal/my_trades.csv` STILL DOES NOT EXIST**, which is correct.
+
+**>>> A TIMING THAT MOVED, SAID HERE BECAUSE THE ORDERS ASKED FOR IT.** The
+orders record `journal/log_trade.py --gate` at ~1.9 s. It took **0.8 s** in
+the alive run and **2.0 s** in the rig minutes later. **Seventh time a
+recorded timing has proved to be one unrepresentative reading. Timings on
+this ship are weather reports, not checks** - and the 77 ticks prove all
+three child interpreters ran regardless of the clock.
+
+## 2. THE BARS, WRITTEN DOWN BEFORE ANYTHING WAS RUN
+
+Written to notes before the first sabotage was built. This review clears
+R-080 and R-081 only if: the untouched control passes FIRST at the same depth
+as the real file; all three of the previous session's recorded faults still go
+red at the recorded counts; at least one sabotage it never imagined is
+installed, run and reported either way; every sabotage is PROVED to change
+something on its own channel before its verdict is given any weight; witness
+and gate never run against the same copy; and `git status` is clean at the
+end. **All six were met.**
+
+## 3. THE RIG, AND THE ONE RULE OF IT I BROKE FIRST
+
+Every copy was built OUTSIDE the repo at `<tree>/journal/log_trade.py`, the
+same depth as the real one, by BYTE edits on the file read in binary. **The
+writer REFUSES on: an anchor that matches zero or more than one time, an edit
+that changes nothing, a result identical to the original, and any change to
+the file's count of bare LF bytes (0 before, 0 after, every time).**
+
+**>>> MY FIRST ATTEMPT AT THE `isatty` SABOTAGE WAS DEAD CODE AND I ONLY
+FOUND OUT BECAUSE ITS CONTROL-COMPLEMENT ALSO WENT GREEN.** I appended my
+three lines after `sys.exit(0)` INSIDE the `except (KeyboardInterrupt,
+EOFError):` block, at twelve spaces instead of eight. **The code could never
+run, and the gate was perfectly right to stay green.** I caught it only
+because I had deliberately built the SAME sabotage twice with the condition
+inverted, and a corruption that is invisible BOTH ways is not a finding, it
+is a broken rig. **R-076's lesson in a new costume: a sabotage must be proved
+to change the output before its verdict means anything.** Re-indented, rebuilt
+and re-run; both halves then behaved exactly as predicted.
+
+## 4. THE WITNESS WAS PROVED ABLE TO SEE A FAULT BEFORE ANY VERDICT WAS GIVEN
+
+My witness is my own code, not the gate's: its own prompt fragments, its own
+answers, its own trees (every one ends `_w`), and **it never ran against a
+copy a gate had touched.** Driven under `-u`, answering the words on the
+screen, never down a pipe.
+
+    control   ARCHIVE  ...,ETH-USD,short,2000.25,1900.75,1.5,"range broke, I took it",nervous
+    swapped   ARCHIVE  ...,ETH-USD,short,1900.75,2000.25,1.5,"range broke, I took it",nervous
+
+**A winning short filed as a loss. The witness sees it. That is the fault
+R-080 was raised about, reproduced by someone who did not raise it.**
+
+## 5. THE FOUR FAULTS ON RECORD - EVERY ONE STILL GOES RED
+
+    FA  the two price questions exchanged whole ..... 1 red, N4 ONLY, 2.9 s
+        **N6 STAYED GREEN AND THAT IS CORRECT** - the screen and the
+        notebook are wrong TOGETHER, which is exactly what made this
+        invisible to a human.
+    FB  an eighth question inserted BEFORE the last .. 5 red (N1 N2 N4 N5 N6), 77.8 s
+    FC  "price you got IN at" renamed "entry price" .. 5 red (the same five), 76.9 s
+    FD  TRADES_FILE renamed (the generation before) .. 7 red (R2 R3 R4 R5 N4 N5 N6)
+
+**THE REPAIR IS NOT DECORATIVE.**
+
+**>>> AND ONE COUNT MOVED, WHICH IS NOT A DISCREPANCY AND IS EVIDENCE.** FD
+is recorded in the orders at **4 red**. It now goes **7**. The four are the
+same four (R2, R3, R4, R5); the three new ones are **N4, N5 and N6 - check
+(n) seeing the fault for the first time.** The count moved because the gate
+grew, which is what a real repair looks like. **The measurement wins and it
+is written down here.**
+
+## 6. SEVEN SABOTAGES NOBODY HAD TRIED. FIVE WENT GREEN. NOT ONE OF THE FIVE CORRUPTED A ROW.
+
+    N1  an EIGHTH question placed AFTER the seventh,
+        its answer thrown away .......................... GREEN  77/0
+    N3  a default on the feeling question,
+        `input(...) or "flat"` .......................... GREEN  77/0
+    N9  `.strip()` on the WHY line ...................... GREEN  77/0
+    N4a the two prices exchanged ONLY when a human is
+        at the keyboard (`if sys.stdin.isatty():`) ...... GREEN  77/0
+    N4b THE SAME THREE LINES, the condition inverted
+        so the swap lands on the PIPE the gate drives ... 1 red, N4
+    N5  the shell goes SILENT after the sixth question
+        but stays alive (`time.sleep(300)`) ............. 5 red, 77.8 s
+    N7  the REALISTIC eighth question - desk item 12's
+        risk figure, added inside the answers tuple ..... 3 red (N4 N5 N6), 1.9 s
+
+**WHAT THE FIVE GREENS HAVE IN COMMON, AND IT IS ONE SENTENCE: CHECK (n)
+DRIVES EXACTLY ONE SET OF SEVEN WELL-FORMED ANSWERS, SO ANY EDIT THAT IS A
+NO-OP ON THOSE SEVEN VALUES IS INVISIBLE TO IT.** `"calm" or "flat"` is
+`"calm"`. `"seven questions, run rather than read".strip()` is itself. A
+branch that only fires on a console never fires on a pipe. An eighth question
+whose answer nothing reads changes nothing. **That is a true and useful
+statement about the check's reach, and it is NOT a defect in the ship.**
+
+**EACH GREEN WAS PROVED TO CHANGE SOMETHING ON ITS OWN CHANNEL BEFORE I GAVE
+IT ANY WEIGHT** - which is the only reason any of them is worth a line:
+
+    N3  with a BLANK feeling answer, driven by my witness:
+        control  -> "[not logged: no feeling was given]", NOTHING WRITTEN
+        N3       -> a row written, feeling "flat". A feeling HE NEVER GAVE,
+                    in the archive the Mirror will group by.
+    N9  with a WHY line typed with spaces around it:
+        control  -> '"   range broke, I took it   "'  (his bytes, untouched)
+        N9       -> '"range broke, I took it"'        (quietly corrected)
+    N4b -> ARCHIVE entry 1900.75, exit 2000.25. The swap is real.
+    N4a -> ARCHIVE entry 2000.25, exit 1900.75 on a pipe. Correct, because
+           the pipe is not a keyboard. **The ONLY difference between N4a and
+           N4b is the word `not`, and the gate sees one and not the other.**
+    N1  -> the eighth question "anything else? (optional)" is VISIBLY ASKED
+           on his screen, and the row is byte-perfect.
+    N6  -> a relative TRADES_FILE: the screen reads `journal: journal\my_trades.csv`
+           instead of the full path.
+
+## 7. THREE PREDICTIONS I MADE IN WRITING AND GOT WRONG
+
+**>>> I PREDICTED N5 WOULD CRASH THE GATE AND IT DID NOT.** I wrote in my
+notes, before running it, that the silent shell would make the main thread
+call `.read()` on the child's stdout while the reader thread was still inside
+`.read(1)` on the same `BufferedReader`; that a reentrant call raises
+`RuntimeError`; and that the `except (OSError, ValueError)` around it does not
+catch `RuntimeError` - so the gate would print a traceback instead of a
+report, breaking rule (k). **It did not happen. The gate went red 5 of 77,
+ran N7 and both closing checks, and printed `GATE 5.1 FAILED - 5 red of 77
+checks` cleanly.** After `kill()` the reader's `read(1)` returns empty and the
+thread finishes before the main thread gets there. **Attacked, found nothing,
+and said so.**
+
+**>>> I ALSO PREDICTED N6 WOULD MATTER AND IT DOES NOT.** A relative
+`TRADES_FILE` is invisible to the gate - but `LOG_TRADE.bat` does
+`cd /d "C:\Users\hp\Downloads\zargul trader\zar-x"` before it runs anything,
+so the only way he reaches it is from the right folder anyway. **I read the
+`.bat` instead of assuming, and the finding evaporated. That is the right
+outcome and it cost one command.**
+
+**And while reading it I checked a third thing I had half-suspected:**
+`LOG_TRADE.bat` sets `PYTHONUTF8=1`, exactly as check (n) sets it on its
+child. **So his console and the gate's pipe agree about encoding, and a WHY
+line with a dash or a curly quote in it is not a hole.** Said here because I
+went looking for it and it was not there.
+
+**>>> AND THE THIRD: I PREDICTED THE EIGHTH-QUESTION CLAIM WAS SIMPLY
+WRONG.** The file, the orders and the review queue all say in bold that
+adding an eighth question turns the gate red. N1 shows that is not true as
+written. **But N7 shows it IS true for the shape that could actually hurt
+him** - the realistic risk question, added inside the answers tuple, goes red
+in 1.9 seconds, three checks. **The sentence is too wide, not wrong. I set
+out to falsify it and ended up narrowing it, which is a smaller result than I
+expected and the honest one.**
+
+## 8. THE VERDICTS
+
+**R-080 CLEARS.** I did not find the fault and I did not write the fix. The
+repair is real: the fault it was built for turns exactly one check red and
+the right one; its three recorded faults all still go red at the recorded
+counts; and a fourth fault it was never built for went from 4 red to 7
+because check (n) now sees it too. **Seven new sabotages found nothing that
+puts a wrong number in his archive.**
+
+**R-081 CLEARS as an item, and two of its seven doubts are now PROVEN rather
+than asserted, and WIDER than their author wrote them.** Doubt 4 said no
+refusal is ever driven through the seven questions; N3 shows the sharper
+form - **the gate cannot see an edit that changes what a BLANK answer does,
+and a default turns a safe named refusal into an invented row.** Doubt 7 said
+the check has never run behind a different console; N4a/N4b show the sharper
+form - **the gate drives a PIPE and the Commander uses a KEYBOARD, and no
+check proves those two paths are the same code.** Both are filed forward as
+R-082, CATEGORY B.
+
+**R-070, R-071, R-073, R-074 and R-075 ARE NOT MINE TO CLEAR and I did not
+touch them.**
+
+## 9. PART 2 WAS NOT BUILT, AND HERE IS THE HONEST REASON
+
+**The Mirror has now waited a fourth session and I am the one who left it
+waiting. That is a cost and I am not dressing it up.**
+
+Part 1 found nothing SERIOUS and nothing BORDERLINE, so the pattern permits
+Part 2. I went to build it and stopped at the specification, not at the code.
+
+**THE PLAN'S OWN SENTENCE FOR PHASE 5 ITEM 2 ASKS FOR THREE THINGS: his
+logged trades, what the instruments said at those moments, and WHAT A
+DISCIPLINED 1%-RISK VERSION OF THE SAME TRADES WOULD HAVE DONE.** The third
+one cannot be computed from what this ship records.
+
+**"Risking 1%" means: if the trade had gone against him, he would have lost
+1% of his money. To work that out you need two numbers:**
+
+    how much money was in the account   - NOT ASKED, NOT STORED, NOWHERE
+    the price he would have given up at - NOT ASKED, NOT STORED, NOWHERE
+
+`journal/my_trades.csv` holds utc_time, asset, direction, entry, exit, size,
+why, feeling. **There is no account balance and no stop price in it, and
+`journal/snapshots_local.csv` has neither either** - it holds close, trend,
+rsi, atr, atr_pct, regime, entropy, adx, and knows nothing about his money.
+
+**SO THE THIRD LEG IS NOT HARD TO BUILD. IT IS UNDEFINED.** Desk item 12 has
+been carrying half of this for weeks as "which number, 1% or 0.49%" - but the
+number is the SECOND question. **The first is where the two missing figures
+come from at all, and the orders' own line - "Ask him which number a
+disciplined 1%-risk version means before you code it" - did not know that.**
+
+**I PUT IT TO HIM RATHER THAN INVENTING A DOCTRINE ON HIS BEHALF**, because
+inventing one is exactly what this ship forbids, and because
+`journal/my_trades.csv` DOES NOT EXIST YET - **which makes this the cheapest
+moment the seven questions will ever be changed.** Every month he logs trades
+under the old seven is a month of rows with a permanent blank in them.
+
+**I DID NOT DECLARE GATE 5.2.** A bar is a promise about a thing's behaviour,
+and two of the three things it would have to promise are not decided yet. **A
+bar written over an undecided specification is a bar that gets quietly
+lowered later, which is the one failure Layer 1 exists to make impossible.**
+
+## 10. WHAT I GOT WRONG, IN ONE PLACE
+
+1. **My first `isatty` sabotage was dead code** - twelve spaces where eight
+   were needed, appended after `sys.exit(0)`. Found only because I had built
+   its complement and BOTH went green.
+2. **I predicted the gate would crash on N5 and it finished reporting
+   cleanly.** Written down before the run; wrong.
+3. **I predicted the relative TRADES_FILE mattered and it does not**, because
+   `LOG_TRADE.bat` cds first. I had to read the `.bat` to find that out.
+4. **I expected to falsify the eighth-question claim and only narrowed it.**
+5. **My first control run refused to build** because my own writer rejects
+   "a result identical to the original" - correct for a sabotage, wrong for a
+   control. One line, but it is the kind of thing that makes a session skip
+   the control, and skipping the control is how R-076 happened.
+
+## 11. CANDIDATE LAW 8 EARNED ITSELF AGAIN, FROM THE OTHER SIDE
+
+*"A claim about how something behaves is not a fact until it has been run."*
+Last session it was earned by a comment saying a thing could not be tested,
+tested in twenty lines. **Today it was earned by MY OWN claims: four
+predictions written down in advance, three of them wrong, and every one of
+them only settled by running it.** The law cuts at the attacker as hard as at
+the builder, which is the best argument for adopting it.
+
