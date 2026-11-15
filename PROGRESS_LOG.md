@@ -16596,3 +16596,253 @@ and what each would mean for him.
 **These were R-085 item 1 and R-086 items 1 and 2 - decisions I had made that
 were really his. They are now his.** The items stay in the queue: a ruling on
 a design choice is not a review of the code that carries it out.
+
+
+# 2026-11-15, THE SAME SESSION CONTINUED - **THE COMMANDER ORDERED FABLE TO BUILD PHASE 6 AND RULED THAT NO OTHER MODEL WILL CHECK IT. THAT REMOVES THE ONE GUARD THIS SHIP CALLED ABSOLUTE. IT IS HIS TO REMOVE, HE WAS TOLD THE COST TWICE, AND IT IS RECORDED HERE IN HIS OWN WORDS. THEN: THE BAR FOR GAUNTLET SLOT 1, DECLARED BEFORE ANY CODE EXISTS.**
+
+**This entry is committed ALONE, with no `.py` in the commit.**
+
+## 1. THE RULING, VERBATIM, AND WHAT IT OVERRIDES
+
+He first said: *"as you are fable why dont you just build next step in this
+session. go on and do the remaining project"*.
+
+I put the conflict to him as a plain question - **the AI that builds a
+gauntlet test cannot also be the one that checks it, because each of the
+three slots can only be tested once, ever** - with two options. **He chose
+"Fable builds, Opus checks."** Then, before any work had started, he
+replaced that answer:
+
+> *"ok see as fable is nuilding next steps which ever step fable builds no
+> other model will check so continue"*
+
+**THAT RULING OVERRIDES, FOR A PHASE 6 BUILD MADE BY FABLE:**
+
+  * `EXECUTION_PLAN.md` Phase 6: *"Kimi (or any second AI) reviews the test
+    setup BEFORE running and the verdict AFTER."*
+  * R-006, which says it *"cannot be cleared in-house"*.
+  * `THE_PATTERN.md`: *"FABLE builds it AND FABLE reviews it -> NOBODY
+    reviewed it ... NO"* and *"If only one is available when Phase 6
+    arrives, PHASE 6 WAITS."*
+
+**I DID NOT CLEAR R-006 AND I CANNOT.** It is not cleared. It is WAIVED, by
+the only person who can waive it, for builds made by Fable. **`THE_PATTERN.md`
+is not edited by this commit**; its text stands as the record of what the
+ship believed until today, and this entry is the record of what he ruled
+instead. The session that does the closing ritual adds a pointer there.
+
+**WHAT I TOLD HIM BEFORE CONTINUING, SO IT IS ON THE RECORD THAT HE HEARD
+IT:** that a hidden fault can make a losing strategy look like a winner
+without any number giving it away (Law 7, measured on 2026-07-26: a leaked
+strategy cleared all four bars with the alarm silent); that with nobody else
+checking, nothing will catch my mistake; and that the place he would find
+out is with real money.
+
+**WHAT REPLACES THE REVIEW. IT IS WEAKER AND I SAY SO.**
+
+    1. This bar, committed before the strategy exists.
+    2. The strategy proved on MADE-UP candles whose right answer is
+       worked by hand - never on the vault.
+    3. A drill and an attack by text edit, as for every other part.
+    4. The whole test rehearsed end to end on made-up candles, so the
+       first time the real machinery runs is not the time that counts.
+    5. **ONE STOP BEFORE THE SLOT IS SPENT: the Commander is shown, in
+       plain words, exactly what is about to be tested, and says go.**
+       Spending a slot cannot be undone, and that makes it his.
+    6. Every doubt filed against myself in `REVIEW_QUEUE.md`.
+
+**AND ONE THING I ASK OF HIM THAT COSTS NOTHING:** he may paste the setup
+section below to Kimi, or to any other AI, at any time before he says go.
+The plan names Kimi for exactly this. **It is his choice and I am not
+making it a condition.**
+
+## 2. HIS OTHER ANSWER TODAY
+
+Asked which sizing rule the gauntlet uses - 1% with the 25% cap, or a pure
+1% - **he answered "No preference".** So the gauntlet uses **what the ship's
+own risk engine already does and what the Lab was built around: 1% of
+equity per trade, capped at 25% of equity in one position**
+(`risk/calculator.py`, `config.RISK_CONFIG`). **Decided before any result
+exists, which is the only thing the old desk item ever required.**
+
+---
+
+# >>> GAUNTLET SLOT 1 - THE BAR
+
+## THE SLOT, AS LOCKED IN `EXECUTION_PLAN.md`
+
+*"Slot 1: Turtle/Donchian breakout, daily (+weekly filter),
+regime-filtered."* No substitutions. The five pass bars below it were locked
+on 2026-07-26 and are copied here unchanged.
+
+## WHAT THE LAB'S ENGINE FIXES, WHICH THIS SLOT DOES NOT GET TO CHOOSE
+
+Read from `lab/engine.py` today. **Every one of these is the Lab's, not
+mine, and none is changed:**
+
+  * the strategy is asked for a signal ONLY when no trade is open, at a
+    candle's close; it enters at the NEXT candle's open;
+  * **the exit is the ship's Discipline Engine: a stop 1.5 ATR(14) away and
+    a target 2.0 ATR away. NOT the Turtles' own exit.** The original
+    Turtles left on a 10-day opposite breakout and had no target. This
+    engine has no such exit and I am not adding one: **`lab/` stays
+    untouched.** So what is tested is a Turtle ENTRY managed by this ship's
+    own stop and target - which is what the ship would actually trade.
+    **Said here in bold because it is the biggest way this test differs
+    from the name on the slot.**
+  * costs: 0.1% fee and 0.05% slippage on each side of every trade;
+  * if stop and target are both touched in one candle, the LOSS counts;
+  * one position at a time per coin.
+
+## THE RULES OF THE STRATEGY - EVERY NUMBER, AND WHERE IT COMES FROM
+
+Asked at the close of each daily candle, using only candles up to and
+including that one:
+
+    BREAKOUT  LONG  if today's close is ABOVE the highest high of the
+                    20 days BEFORE today (today itself not included).
+              SHORT if today's close is BELOW the lowest low of those
+                    same 20 days.
+              Strictly above / strictly below. Equal is not a breakout.
+              -> 20 is the Turtles' published System 1 entry.
+
+    WEEKLY    LONG only if today's close is ABOVE the average of the
+    FILTER    last 10 weekly closes; SHORT only if BELOW.
+              A "weekly close" is the daily close today, 7 days ago,
+              14 days ago ... 63 days ago (crypto trades all seven days).
+              -> 10 weeks is the conventional weekly trend line. **It is
+                 NOT from the Turtle rules, which had no weekly filter.
+                 It is my number, chosen without looking at any result,
+                 and filed against me.**
+
+    REGIME    Trade only if ADX(14) is ABOVE 25 on the daily candles.
+    FILTER    -> 14 and 25 are Wilder's published figures, and 25 is
+                 `config.REGIME_CONFIG['adx_trending_threshold']`, the
+                 ship's own line for "Trending".
+              **THE SHIP'S FULL REGIME VANE CANNOT BE USED ON DAILY
+              CANDLES**: its entropy dial is calibrated for 1h and 4h
+              only and reads "Uncalibrated" on 1d. Calibrating it now
+              would be fitting a number to the data. So the regime
+              filter is the half of the vane that needs no calibration.
+
+    WARM-UP   No signal until 150 daily candles exist.
+
+    Otherwise: flat.
+
+**NO PARAMETER IS SEARCHED, TUNED OR TRIED. THERE IS ONE SET OF NUMBERS AND
+IT IS THE ONE ABOVE.** The strategy's name is `turtle-20d-10w-adx25`.
+
+## WHAT IT IS TESTED ON
+
+  * **BTC-USD, ETH-USD and SOL-USD, DAILY candles, from the frozen vault.**
+    1,094 candles each, 2023-07-28 to 2026-07-25.
+  * **The hold-out line is `2025-10-01`, fixed in Phase 2. It does not
+    move.** Trades ENTERED after it are the ones that count: **297 daily
+    candles per coin** (counted from the dates in the files; no price was
+    read to count them).
+  * Capital 10,000 per coin, the engine's nominal figure.
+
+## >>> THE DECISION THAT MATTERS MOST HERE: THE VERDICT IS ON THE THREE COINS TOGETHER
+
+**297 daily candles cannot hold 30 trades of a breakout system on one
+coin.** The locked bar says fewer than 30 hold-out trades is a FAIL, "not
+promising". Judged coin by coin, this slot would fail on arithmetic before
+it started, and a slot would be spent learning nothing.
+
+**SO: the three coins' hold-out trades are put into ONE list, in order of
+entry time, and every bar is measured on that one list.** That is how the
+ship would trade - one account, three coins. **ONE VERDICT FOR THE SLOT. A
+coin cannot pass on its own and a coin cannot be dropped afterwards.**
+
+**WHAT THAT CHOICE COSTS, SAID BEFORE THE RESULT:** the three coins move
+together, so 30 pooled trades are worth less than 30 independent ones; and
+the Lab's walk-forward and Monte Carlo treat the pooled trades as if they
+happened one after another, when some overlap. **Even pooled, 30 trades is
+not certain: I estimate the count on made-up candles before he says go, and
+he is told the estimate.**
+
+## THE FIVE BARS. ALL FIVE, OR THE SLOT FAILS.
+
+    B1  pooled hold-out Profit Factor >= 1.15, AFTER costs
+    B2  pooled hold-out trades >= 30
+    B3  walk-forward on the pooled hold-out trades, six windows cut on
+        the hold-out's own dates: CONSISTENT (profitable in at least 4
+        of 6, and no window more than 50% of the profit) -
+        `lab/walk_forward.py`, unchanged
+    B4  Monte Carlo on the pooled hold-out returns, seed 20260726,
+        10,000 paths: 5th-percentile max drawdown < 30% -
+        `lab/monte_carlo.py`, unchanged
+    B5  the pooled hold-out result beats BUY-AND-HOLD WITH 1% RISK SIZING
+        on the same window
+
+**B5 HAS NEVER BEEN BUILT ON THIS SHIP - `lab/gate_2_5.py` says so - SO IT
+IS DEFINED HERE, BEFORE THE RESULT:** for each coin, buy at the open of the
+first hold-out candle, sized by the SAME risk engine call the Lab makes (1%
+risk, a 1.5-ATR stop distance, the 25% cap), pay the same costs both sides,
+never stop out, sell at the close of the last candle. Each coin's result is
+a fraction of its 10,000. The three are compounded together. **The
+strategy's pooled hold-out result, compounded the same way, must be
+STRICTLY greater.**
+
+## WHAT ELSE IS PRINTED, AND COUNTS FOR NOTHING
+
+Each coin's own card, the training-side numbers, and the regime breakdown.
+**INFORMATION. No bar reads them. "It passed on SOL" is not a result.**
+
+## THE TOO-GOOD ALARM
+
+Pooled hold-out Profit Factor above 2.0 or win rate above 70%: the verdict
+is WITHHELD and the strategy is hunted for a leak first. **A flare, not a
+fence** - Gate 2.5 measured a leak that never set it off.
+
+## LAW 7
+
+`lab/leak_check.py` on the strategy object, AND the strategy's code read
+line by line with the reading written into this log, before the run.
+
+## THE RUN ITSELF
+
+  * **ONCE.** The runner writes a marker file BEFORE it opens the vault,
+    and refuses to run if the marker exists. A second run needs the
+    Commander's ruling written in this log first.
+  * It refuses to run at all without a flag typed on purpose.
+  * Everything it prints is saved as evidence, with every trade.
+  * **IF IT PASSES:** the strategy earns a place in Phase 7's proving
+    voyage - paper, not money - with its parameters frozen.
+  * **IF IT FAILS:** the obituary is written here and Slot 2 is next.
+    **No second try, no "just one change".**
+
+## THE AWKWARD CASES, NAMED BEFORE THE CODE EXISTS
+
+  * **TODAY'S OWN HIGH IS NOT PART OF THE CHANNEL.** If it were, a close
+    could only "break out" by equalling its own high.
+  * **A CLOSE EXACTLY EQUAL TO THE 20-DAY HIGH.** Not a breakout.
+  * **A BREAKOUT UP WHILE BELOW THE WEEKLY AVERAGE** (a bounce in a
+    decline). Flat.
+  * **A BREAKOUT WITH ADX AT 25.0 EXACTLY.** Flat: above 25, not at it.
+  * **BOTH A NEW HIGH AND A NEW LOW IMPOSSIBLE ON ONE CLOSE** - a close
+    cannot be above the highest high and below the lowest low.
+  * **A TRADE STILL OPEN ON THE LAST CANDLE.** The engine closes it at the
+    last close and counts it. So does this test.
+  * **A TRADE ENTERED BEFORE THE LINE AND CLOSED AFTER IT.** Belongs to
+    training, by the engine's own rule. Not counted.
+  * **THE THREE COINS' HOLD-OUT DATES MUST BE THE SAME 297 DAYS.** If they
+    are not, the runner stops BEFORE producing any number.
+  * **A POOLED LIST WITH NO LOSING TRADE.** Profit Factor is infinite; the
+    too-good alarm fires.
+  * **FEWER THAN TWO POOLED TRADES.** The Monte Carlo refuses to run. That
+    is a FAIL of B4, not a crash.
+
+## WHAT THIS BAR DOES NOT CLAIM
+
+**It does not claim to test the Turtles' system** - the exit is this
+ship's. It does not claim a pass means the strategy makes money: 297 days
+of three coins that move together is a small, single stretch of market. It
+does not claim the weekly filter's 10 or the pooling are the only honest
+choices; they are the ones made, in writing, before anything was run.
+**AND IT DOES NOT CLAIM ANYBODY BUT ITS AUTHOR HAS READ IT.**
+
+**ONE THING I LOOKED AT, SAID BECAUSE IT IS VAULT DATA:** the first two
+rows of `BTC-USD_1d.csv` (28 and 29 July 2023) were printed while I checked
+the file's column names. Two candles from the first week of the training
+side. No hold-out price has been seen by me.
