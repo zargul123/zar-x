@@ -5304,3 +5304,12 @@ that ran none of it, plus R-084, R-085, R-086 and R-087.** **R-070, R-071,
 R-073, R-074 and R-075 remain open and are not mine to clear.** R-006 - the
 independent review of the gauntlet - is untouched and no in-house session
 may ever clear it.
+
+
+## >>> 2026-11-15, LATER - **THREE OF THE CHOICES FILED ABOVE ARE NOW THE COMMANDER'S OWN RULINGS.**
+
+**R-085 item 1** (a wrong-side stop is refused), **R-086 item 1** (the 1%
+lines keep his real exit) and **R-086 item 2** (eight hours) were put to him
+in plain words with the alternatives, and he kept all three. **They are no
+longer open as DECISIONS. R-085 and R-086 themselves stay open** - nobody but
+their author has read the code - and the pile is still FIFTY-ONE.

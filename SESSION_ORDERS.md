@@ -366,15 +366,10 @@ a FAIL, is not committed as a pass, and is not called "mostly passed."**
 2. **>>> SLOT 3'S DATA SOURCE** — is there a free on-chain cycle source
    (MVRV or similar)? If not he may re-specify the slot ONCE, before testing
    begins.
-3. **>>> THREE CHOICES I MADE IN THE NEW BUILD THAT ARE REALLY HIS.** Put
-   them to him in plain words:
-   (a) **A stop on the wrong side of the entry is REFUSED.** If he trails a
-       stop into profit he must type where it was when he got in.
-   (b) **The 1% lines keep his real exit.** If he held a loser past its
-       stop, the "1% risk" line shows a loss bigger than 1%. The other
-       reading — "the 1% version would have been out at the stop" — is not
-       shown.
-   (c) **A reading older than 8 hours counts as no reading.**
+3. **THE THREE CHOICES I MADE IN THE NEW BUILD - HE RULED ON ALL THREE,
+   2026-11-15, AND KEPT THEM. DO NOT ASK AGAIN.** A wrong-side stop is
+   refused; the 1% lines keep his real exit; a reading older than 8 hours
+   counts as no reading.
 4. **DOES THE CARRY LINE READ AS INFORMATION, OR AS A SUGGESTION?** Shown to
    him 2026-08-19. **Still not answered — this is the SEVENTH session
    carrying it. I did not ask it today; I spent his attention on the four

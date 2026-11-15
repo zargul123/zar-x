@@ -16575,3 +16575,24 @@ have done. It does not claim a real keyboard behaves like the gate's pipe.
 It does not claim anybody but its author has read either file. **And it does
 not claim the ten questions are a form a tired man fills in after a losing
 trade - only he can find that out.**
+
+
+## >>> 2026-11-15, LATER THE SAME SESSION - **THE COMMANDER RULED ON THE THREE CHOICES I HAD MADE FOR HIM. ALL THREE STAND. NO CODE CHANGED.**
+
+Each was put to him as a plain-words question with the alternatives laid out
+and what each would mean for him.
+
+    1. A stop on the wrong side of the entry is REFUSED by the logger; a
+       stop he trailed into profit is typed as it stood when he got in.
+       HIS ANSWER: "Keep refusing."
+    2. The Mirror's 1% lines keep his REAL exit, so a loser held past its
+       stop shows a loss bigger than 1%. (Offered instead: assume the 1%
+       version got out at the stop; or show both.)
+       HIS ANSWER: "Keep my real exit."
+    3. A reading more than 8 hours old counts as no reading. (Offered
+       instead: 4 hours; 24 hours.)
+       HIS ANSWER: "8 hours."
+
+**These were R-085 item 1 and R-086 items 1 and 2 - decisions I had made that
+were really his. They are now his.** The items stay in the queue: a ruling on
+a design choice is not a review of the code that carries it out.
