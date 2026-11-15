@@ -15910,3 +15910,304 @@ that never worked, **with no way left to find out.**
 **NOTHING ELSE CHANGED. No `.py` file was touched. His ruling of this
 morning stands exactly as he worded it for every ordinary build.**
 
+
+
+# 2026-11-15 - FABLE'S SESSION. **THE COMMANDER ANSWERED THE QUESTION THAT BLOCKED PHASE 5, AND THESE ARE THE TWO BARS, DECLARED BEFORE ANY CODE EXISTS: GATE 5.1-R3 (THE LOGGER GOES FROM SEVEN QUESTIONS TO TEN) AND GATE 5.2 (THE MIRROR).**
+
+**This entry is committed ALONE, with no `.py` and no `.bat` in the commit.
+`git show --stat` on it is the proof the bars came first.** The account of
+the session itself - the alive proof, Job 1, what was built and every mistake
+- is a later entry.
+
+## WHO I AM, AND WHY IT IS SAID HERE
+
+**The Commander said in words, in this conversation, that this session is
+Fable**, and that by his ruling of 2026-11-14 the next session will not
+attack what Fable builds. I did not infer it from a document. **So nobody
+will check these bars or the code that meets them except me. Everything I did
+not look at will be filed against myself in `REVIEW_QUEUE.md`, by name.**
+
+## WHAT HE RULED TODAY - FOUR ANSWERS, EACH TO A QUESTION PUT IN PLAIN WORDS
+
+    1. Where do the account balance and the stop price come from?
+       HIS ANSWER: "Ask me 2 more questions."              (option A)
+    2. Which risk figure does the Mirror show, 1% or the 25%-capped one?
+       HIS ANSWER: "Show both, named."
+    3. When the logger asks "how big? (size)", what will he type?
+       HIS ANSWER: "Dollar amount."   (NOT a number of coins)
+    4. The logger only stamps the moment he TYPES a trade, after it is
+       closed. It never learns when he got IN. How should it learn that?
+       HIS ANSWER: Ask "how many hours ago?"
+
+**QUESTIONS 3 AND 4 WERE NOT ON HIS DESK. I FOUND THEM WHILE WRITING THIS
+BAR.** The orders listed two missing figures. There were four undefined
+things: nobody had ever written down whether `size` is coins or dollars (the
+profit arithmetic is different and neither reading is detectably wrong), and
+the plan's phrase "what the instruments said AT THOSE MOMENTS" has no moment
+to look up, because `utc_time` is when he logged the trade and not when he
+entered it. **Both would have produced a Mirror that printed confident, wrong
+numbers on a screen that looked normal.**
+
+## WHAT IS BEING MEASURED
+
+1. `journal/log_trade.py` - changed. TEN questions, ELEVEN columns.
+2. `journal/mirror.py` - new. Reads, never writes.
+3. `LOG_TRADE.bat` - its two `rem` lines say "Seven"; they will say "Ten".
+4. `MIRROR.bat` - new, ASCII, CRLF. Runs the Mirror and opens the report in
+   Notepad, because the Commander reads reports in Notepad, not a terminal.
+
+**NOTHING ELSE CHANGES.** Not the Brief, not `lab/`, not the vault, not any
+other gate. Proved by `git`, not asserted.
+
+---
+
+# >>> GATE 5.1-R3 - THE LOGGER: TEN QUESTIONS
+
+## THE TEN QUESTIONS, IN THE ORDER HE IS ASKED
+
+    1  which coin?  (BTC / ETH / SOL)
+    2  long or short?
+    3  price you got IN at
+    4  price you got OUT at
+    5  where was your STOP?  (a price, or the word none)
+    6  how big?  (size in DOLLARS)
+    7  account size then?  (DOLLARS)
+    8  how many HOURS ago did you get IN?
+    9  WHY did you take it? (one line)
+    10 how did you feel? (ONE word)
+
+## THE ELEVEN COLUMNS, IN THIS ORDER
+
+    utc_time, asset, direction, entry, exit, stop, size_usd, account_usd,
+    in_hours_ago, why, feeling
+
+**`size` IS RENAMED `size_usd` ON PURPOSE.** A stranger opening the file in a
+year must not have to guess the unit. `journal/my_trades.csv` does not exist,
+so no old row is orphaned by the rename.
+
+## THE CONDITIONS. ALL OF THEM, OR THE GATE IS RED.
+
+    R3-1  EVERYTHING GATE 5.1-R2 PROVED STILL HOLDS, re-proved on the new
+          shape: the doorway never raises and never prints; exact bytes off
+          the disk against copies typed out in the gate; the archive
+          survives; a refusal writes nothing and does not create the file;
+          every refusal named; a duplicate is two rows; his WHY line
+          byte-identical; door 3; the production calling convention with no
+          `path` and no `now`; the real journal never touched; the gate told
+          how many checks it owes.
+    R3-2  THE STOP. A positive number kept exactly as typed, OR the word
+          `none` in any case, stored as `none`. Blank is REFUSED BY NAME and
+          the refusal tells him the word to type if he had no stop.
+          **A stop on the wrong side of the entry is REFUSED BY NAME**: a
+          long is given up BELOW its entry and a short ABOVE it, and a stop
+          EQUAL to the entry is refused too. Tested at the exact value
+          where it turns over and one step either side, for BOTH directions.
+    R3-3  THE ACCOUNT. A positive number kept as typed. Zero, negative,
+          words and blank each refused by name.
+    R3-4  THE HOURS. A number kept as typed. ZERO IS ACCEPTED ("just now");
+          one step below zero is refused; NaN, Infinity, words and blank
+          are refused by name.
+    R3-5  CHECK (n) IS TAUGHT ALL TEN QUESTIONS BY WORDS THE GATE TYPES OUT
+          and proves every one of the ten answers reaches the column of its
+          own name, with ten DIFFERENT answers. The entry/exit check stays
+          a check of its own. The screen line and the row must still agree.
+    R3-6  THE DRILL GROWS. At least these new breaks, permanent, each
+          PROVED to change the disk before its verdict counts: the stop and
+          the account silently exchanged; a wrong-side stop written anyway;
+          `NONE` stored in the case he typed it; the hours rounded behind
+          him.
+    R3-7  THE LINE HE READS BACK NAMES ALL TEN ANSWERS' NUMBERS and still
+          carries NOT ONE WORD of judgement.
+    R3-8  RUN TWICE - normal and `TZ=UTC0` - and the two runs agree.
+    R3-9  CERTIFIED BY ATTACK, NOT BY THE DRILL: real text edits in copies
+          outside the repo, control first. At minimum: the two price
+          questions exchanged; the STOP and OUT questions exchanged; the
+          wrong-side refusal deleted; the size and account questions
+          exchanged. Every one must turn the gate red. **Any that goes
+          green is reported as green.**
+
+    R3-10 **THE SHELL IS DRIVEN THREE TIMES, NOT ONCE.** R-082 proved that
+          check (n) sends ONE set of tidy answers, so any edit that is a
+          no-op on those answers is invisible: a default on a blank answer
+          invented a row, and a `.strip()` on the WHY question quietly
+          corrected him - both at 77/0, both re-run by me today and both
+          still green. So: drive A is the tidy one; drive B answers in
+          MIXED CASE, with a WHY line wrapped in spaces and the stop typed
+          `NONE`, and every value must land as the doorway's own rules say;
+          drive C leaves the LAST answer BLANK and NOTHING may be written.
+    R3-11 **RULE (k) ON CHECK (j), WHICH TODAY'S JOB 1 FOUND BROKEN.** An
+          edit that makes the logger refuse `SHORT` left the gate printing
+          a `FileNotFoundError` traceback and NO VERDICT LINE (exit 1, so
+          never a false green - SMALL, filed as R-084). A failing gate must
+          still finish reporting. Check (j) must survive a journal that was
+          never written, and the attack that found it is re-run.
+
+## THE AWKWARD EDGE CASES, NAMED BEFORE THE CODE EXISTS
+
+  * **HE HAD NO STOP.** A real pilot sometimes trades without one. Refusing
+    the trade would teach him to invent a stop, which is a lie in the
+    archive. `none` is a legitimate answer and the Mirror must then say the
+    1% comparison cannot be worked out for that trade - not guess one.
+  * **THE STOP WAS MOVED DURING THE TRADE.** The question asks for the stop;
+    the wording on screen is where it WAS. A stop trailed into profit sits
+    on the "wrong" side by the end. **DECISION: the question means the stop
+    he had when he got in, and a wrong-side value is refused** - because the
+    far likelier way to produce one is typing the exit and the stop in each
+    other's place, and that silently turns the risk arithmetic upside down.
+    This is a judgement call and it is filed against myself.
+  * **SIZE LARGER THAN THE ACCOUNT.** Leverage exists. NOT refused.
+  * **HOURS HE CANNOT REMEMBER EXACTLY.** The snapshots are four hours
+    apart; a rough figure is enough. `30` and `30.5` are both fine and both
+    kept as typed.
+  * **A TRADE LOGGED DAYS AFTER IT CLOSED.** Fine - the hours count back
+    from the moment he types it, whenever that is.
+  * **`none` TYPED AS `None`, `NONE`, ` none `.** All the same answer.
+  * **A STOP OF `0`.** Refused as not a price - never read as "no stop".
+
+## WHAT THIS BAR DOES NOT CLAIM
+
+It does not prove what he types is true. It does not prove a real keyboard
+behaves like the pipe the gate drives (R-082, still open). **And it does not
+re-open the question of whether a ten-question form is one he will actually
+fill in after a losing trade - only he can find that out, by using it.**
+
+---
+
+# >>> GATE 5.2 - THE MIRROR
+
+## WHAT IT IS FOR (Q1 OF HIS THREE QUESTIONS, ANSWERED IN ADVANCE)
+
+**The report the Commander reads about his own trades**: for each logged
+trade, what he made or lost, what he actually risked, what the ship's
+instruments had recorded just before he got in, and what the SAME trade
+would have made sized to risk 1% of his account - two lines, pure and with
+the 25% position cap. Then totals. **Arithmetic only. Never a signal, never
+advice, never a word about him.**
+
+## THE ARITHMETIC, WRITTEN DOWN BEFORE THE CODE
+
+    move        = (exit - entry) / entry        for a long
+                = (entry - exit) / entry        for a short
+    result $    = size_usd x move                      (BEFORE FEES - said
+                                                        on the report)
+    result %    = result $ / account_usd x 100
+    stop gap    = |entry - stop| / entry
+    risked $    = size_usd x stop gap
+    risked %    = risked $ / account_usd x 100
+    R           = result $ / risked $
+    1% size     = 0.01 x account_usd / stop gap
+    1% result   = 1% size x move
+    capped size = the smaller of (1% size) and (0.25 x account_usd)
+    capped result = capped size x move
+
+**SAME ENTRY, SAME EXIT, SAME STOP. ONLY THE SIZE CHANGES.** The Mirror does
+not pretend he would have exited at the stop, or anywhere other than where
+he says he did.
+
+Money is shown to the cent and percentages and R to two places, rounded HALF
+UP on the exact decimal value - never through a float.
+
+## THE TIME RULE (R-074), DECIDED HERE
+
+  * A trade's stamp carries `+00:00`. A snapshot's `utc_time` carries no
+    zone. **MEASURED TODAY BY READING `journal/snapshot.py`: every snapshot
+    row is written from `datetime.now(timezone.utc)`. They are UTC.** The
+    Mirror reads them as UTC and never as the machine's local time.
+  * `got in at` = the trade's stamp MINUS `in_hours_ago` hours.
+  * THE READING USED IS THE NEWEST SNAPSHOT FOR THAT COIN AT OR BEFORE THE
+    MOMENT HE GOT IN. **NEVER ONE FROM AFTER** - a reading taken after his
+    entry is information he did not have, and using it is a small Law 7
+    leak.
+  * **IF THAT READING IS MORE THAN 8 HOURS OLD, THE MIRROR SAYS THERE IS NO
+    READING** and counts the trade under "no reading". Eight hours is two
+    4h closes: one missed snapshot is tolerated, two are not.
+  * Snapshots from all three notebooks (`snapshots_local.csv`,
+    `snapshots_cloud.csv`, the frozen `snapshots.csv`) are read together.
+
+## THE CONDITIONS. ALL OF THEM, OR THE GATE IS RED.
+
+    M-1   ONE DOORWAY THAT NEVER RAISES AND NEVER PRINTS; it RETURNS the
+          report as text. Settings resolve from `None` in the body.
+    M-2   IT WRITES NOTHING, EVER. sha256 of the journal and of every
+          snapshot file before and after, and the folder's file list before
+          and after. The source holds no call that opens anything for
+          writing.
+    M-3   **THE PLAN'S OWN SENTENCE, MET IN FULL: fake trades are logged
+          THROUGH THE REAL LOGGER, the Mirror is run, AND THE NUMBERS CHECK
+          OUT BY HAND** - against a whole report typed out in the gate,
+          character for character, whose every figure was worked by hand
+          from the arithmetic above and NOT copied from the program's
+          output. The fake trades include a long that won, a short that
+          lost and is CAPPED by the 25% rule, and a trade with no stop.
+    M-4   NO JOURNAL, AN EMPTY JOURNAL, AND A JOURNAL WITH ONLY A HEADER
+          each give one calm plain line. Never a traceback on the day he
+          first tries it.
+    M-5   A HEADER THE MIRROR DOES NOT KNOW STOPS IT, BY NAME. It never
+          reads columns by position from a file whose columns it cannot
+          vouch for.
+    M-6   A ROW IT CANNOT READ IS NAMED AND COUNTED ON THE REPORT, never
+          silently dropped and never silently included. B13 printed a true
+          report about what was left.
+    M-7   THE TIME RULE, AT EVERY TURNOVER: a snapshot exactly at the entry
+          minute is used; one a minute after is not; one exactly 8h00m old
+          is used; one 8h01m old is not; and with two candidates the newer
+          one wins.
+    M-8   LIKE IS COMPARED WITH LIKE. The 1% totals cover only the trades
+          that had a stop, and HIS OWN total over those same trades is
+          printed beside them.
+    M-9   THE TOTALS ADD UP: every total on the report equals the sum of
+          the per-trade lines it summarises, checked by the gate from the
+          printed lines themselves.
+    M-10  **NOT ONE WORD OF ADVICE OR JUDGEMENT.** A list of forbidden
+          words typed out in the gate is absent from everything the Mirror
+          itself says. HIS OWN WHY LINE IS QUOTED BACK UNTOUCHED even if it
+          contains one of them - they are his words, not the Mirror's.
+    M-11  DOOR 3: a fresh interpreter imports it, calls the doorway and
+          shuts down having written nothing to any stream.
+    M-12  THE PRODUCTION CALLING CONVENTION: a copy in a tree of its own,
+          called with NO arguments, finds the journal and the three
+          notebooks at addresses the GATE types out.
+    M-13  THE DRILL, FROM BIRTH AND PERMANENT, every break PROVED to change
+          the report: a short's sign flipped; size read as coins; a
+          snapshot from AFTER the entry used; the 8-hour limit ignored; the
+          hours ignored; the cap ignored; the 1% made 2%; an unreadable row
+          dropped without a word; a no-stop trade slipped into the 1%
+          totals; a total that leaves out a trade; rounding that truncates;
+          snapshot times read as local time; **and a line of advice printed
+          on the report - sabotage F8's shape.**
+    M-14  THE GATE IS TOLD HOW MANY CHECKS IT OWES.
+    M-15  RUN TWICE - normal and `TZ=UTC0` - byte-identical reports.
+    M-16  CERTIFIED BY ATTACK: real text edits in copies outside the repo,
+          control first, reported whatever they show.
+
+## THE AWKWARD EDGE CASES, NAMED BEFORE THE CODE EXISTS
+
+  * **THE JOURNAL DOES NOT EXIST.** Correct on day one. One calm line.
+  * **HE GOT IN BEFORE THE SHIP HAD ANY SNAPSHOT**, or in a gap. "No
+    reading." Never the nearest one from a different day.
+  * **TWO NOTEBOOKS HOLD A ROW FOR THE SAME COIN AT THE SAME MINUTE WITH
+    DIFFERENT VALUES.** The first notebook in the fixed order (local,
+    cloud, frozen) wins. Named here so it is a decision, not an accident.
+  * **A SNAPSHOT ROW WITH A TIME THAT WILL NOT PARSE.** Skipped and
+    COUNTED on the report.
+  * **THE TREND WAS `MIXED`.** Neither with nor against. Its own bucket.
+  * **HIS WHY LINE CONTAINS A NEWLINE.** The logger allows it. The report
+    must not be broken in two by it.
+  * **A LOSS BIGGER THAN THE STOP IMPLIED** (he held past it). R below -1.
+    Printed as it is; nothing said about it.
+  * **AN EXIT EQUAL TO THE ENTRY.** A result of exactly 0.00, counted as
+    flat, not as a win or a loss.
+  * **THE SAME TRADE TWICE.** Two rows, two trades, both counted.
+  * **ACCOUNTS OF DIFFERENT SIZES ACROSS TRADES.** Dollar totals add;
+    percentages are per trade and are never averaged into one false figure.
+
+## WHAT THIS BAR DOES NOT CLAIM
+
+**It does not include fees or funding, and says so on the report.** It does
+not claim the 1% lines are what he "should" have done - they are the same
+trade at another size, nothing more. It cannot know whether the stop, the
+account or the hours he typed are true. **And "what the instruments said" is
+a recorded reading, not a prediction: week 1 of this ship measured those
+readings at 40.0% against a parrot's 49.5%.** The Mirror puts them beside
+his trade because the plan asks for it, and it must not dress them as a
+verdict on him.
