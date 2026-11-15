@@ -5313,3 +5313,90 @@ lines keep his real exit) and **R-086 item 2** (eight hours) were put to him
 in plain words with the alternatives, and he kept all three. **They are no
 longer open as DECISIONS. R-085 and R-086 themselves stay open** - nobody but
 their author has read the code - and the pile is still FIFTY-ONE.
+
+
+---
+
+# 2026-11-15, LATER - PHASE 6 BEGUN BY FABLE, WITH NO SECOND-AI REVIEW, BY THE COMMANDER'S RULING.
+
+## >>> R-006 - **NOT CLEARED. WAIVED BY THE COMMANDER FOR BUILDS MADE BY FABLE.**
+
+His words, 2026-11-15: *"which ever step fable builds no other model will
+check so continue"*. Full account in `PROGRESS_LOG.md` of that date. **No
+in-house session may clear this item and none has. The independent review of
+the gauntlet's setup before it runs, and of its verdict after, has not
+happened for Slot 1 and - unless he rules again - will not.** If a session
+that is NOT Fable builds any part of Phase 6, R-006 applies to it in full.
+
+## >>> R-088 - **AGAINST MY OWN PHASE 6 SETUP: `signals/turtle.py`, `lab/gauntlet.py` AND THE BAR THEY MEET. NOBODY BUT ME HAS READ ANY OF IT, AND THIS IS THE ONE PLACE THE SHIP SAID THAT MUST NEVER HAPPEN.** OPEN - NOT CATEGORY B
+
+**THIS IS NOT A PILE ITEM. A FAULT HERE CANNOT BE REPAIRED TOMORROW: THE
+SLOT IS SPENT WHEN IT RUNS.** If any second mind is ever available before
+the run - Kimi, another AI, a person - **this list is what to hand it.**
+
+**DESIGN CHOICES THAT DECIDE THE VERDICT AND WERE MADE BY ME ALONE:**
+
+1. **THE THREE COINS ARE POOLED INTO ONE VERDICT.** Without it the count
+   bar is unreachable. With it, 30 trades from three coins that move
+   together are counted as 30. **The plan's bar says "30 hold-out trades";
+   it does not say whose.**
+2. **THE EXIT IS THE SHIP'S STOP AND TARGET (1.5 / 2.0 ATR), NOT THE
+   TURTLES'.** A trend-following entry with a fixed target two ranges away
+   cuts its winners. This may be testing a strategy that cannot work for a
+   reason that has nothing to do with the breakout.
+3. **THE WEEKLY FILTER'S 10 WEEKS IS MY NUMBER.** Not from the Turtle
+   rules. Chosen before any result; still chosen by me.
+4. **THE REGIME FILTER IS HALF THE SHIP'S VANE** (ADX above 25) because the
+   other half is uncalibrated on daily candles.
+5. **B5's YARDSTICK DID NOT EXIST AND I DEFINED IT**: buy at the first
+   hold-out open, the same sizing call as the engine, never stop out,
+   compound the three coins. Another honest reading - one position per coin
+   at a third of the account - gives a different yardstick.
+6. **THE WALK-FORWARD AND MONTE CARLO TREAT POOLED TRADES AS ONE AFTER
+   ANOTHER.** Trades on three coins overlap in time. The drawdown bar is
+   therefore measured on a sequence that never happened.
+7. **THE RISK RULE**: he answered "No preference"; I took the ship's own
+   (1% with the 25% cap).
+
+**WHAT THE REHEARSAL SAYS ABOUT THE TEST, AND IT IS ON HIS DESK:**
+
+8. **ON TRENDLESS MADE-UP MARKETS THE POOLED COUNT REACHED 30 IN ONLY 18 OF
+   60 WORLDS** (median 25). The likeliest outcome of the run as declared is
+   a FAIL on the count. **False passes: 0 of 60** - which bounds the rate
+   under about 5% and does not make it zero.
+9. **MY MADE-UP MARKETS ARE INDEPENDENT RANDOM WALKS WITH 3.5% DAILY
+   SWINGS.** Real coins trend and move together. Every figure in item 8 is
+   about markets I invented.
+
+**WHERE I DID NOT LOOK:**
+
+10. **I DID NOT RE-READ `lab/engine.py` FOR FAULTS.** I read it to learn
+    what it does. It was reviewed in July; its four gates passed today.
+    **The runner trusts it completely.**
+11. **THE STRATEGY'S ADX USES ONLY THE LAST 150 CANDLES**; the ship's uses
+    all of them. Largest difference measured on made-up candles: 0.004.
+    Near the line of 25 that can flip a day. On 2,000 made-up days it
+    flipped none.
+12. **THE TRUE RANGE CANCELS OUT OF THE ADX**, so an error in it is
+    invisible to every check - and harmless to every answer. It stays in
+    the code as dead weight.
+13. **`run_slot` WAS REHEARSED ONLY THROUGH A MADE-UP DOOR.** The real
+    `load_vault`, the real validator and the real files meet this runner
+    for the first time on the run that counts. If the validator refuses a
+    daily file, the run dies AFTER the marker is written and the slot is
+    spent on a crash.
+14. **`main()`'s REPORT FILE** is appended in a `finally`. Rehearsed only
+    with a spy.
+15. **THE ENGINE RECORDS A REGIME AT EVERY ENTRY** by calling the ship's
+    indicator library on 300 candles. On daily candles it will say
+    "Uncalibrated". Information only; not read by any bar. Not checked.
+16. **A STRATEGY SIGNAL ON THE LAST CANDLE OF THE FILE** is never entered
+    (there is no next open). Correct, and untested.
+17. **FORTY-FOUR ATTACKS FOUND SIX HOLES IN GATES I HAD JUST CALLED
+    FINISHED.** The honest inference is that a forty-fifth would find a
+    seventh.
+18. **THE GATE'S FINGERPRINT CHECK USES THE ENGINE'S OWN HASH FUNCTION** on
+    values typed out in the gate. If the engine ever stops including a
+    setting in that hash, the check goes blind to it.
+
+## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088 IS NOT IN IT.

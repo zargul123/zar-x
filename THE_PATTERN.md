@@ -118,6 +118,15 @@ thing it proved.** He has weighed that and decided; it is his to decide.
 
 1. **PHASE 6 AND R-006 ARE UNCHANGED.** A second, genuinely independent AI
    reviews the gauntlet's test setup BEFORE it runs and its verdict AFTER.
+
+   **>>> SUPERSEDED FOR BUILDS MADE BY FABLE, 2026-11-15, BY THE COMMANDER
+   HIMSELF:** *"which ever step fable builds no other model will check so
+   continue"*. He was shown this section's own table first. **R-006 is
+   WAIVED for a Phase 6 build made by Fable; it is not cleared, and it
+   applies in full to a Phase 6 build made by anybody else.** The text
+   below is left standing as what the ship held until that day. The record
+   is `PROGRESS_LOG.md`, 2026-11-15.
+
    **If Fable BUILDS anything in Phase 6, it cannot also be the independent
    reviewer of it** — that is the one place this ship has never allowed an
    author to sign off their own work, because THE PROMISE gives three sealed

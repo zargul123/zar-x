@@ -1,70 +1,93 @@
-# ZAR X — **PHASE 5 IS COMPLETE AND FABLE BUILT IT. BY THE COMMANDER'S RULING YOU DO NOT ATTACK THAT BUILD. YOUR JOB IS THE FIRST HALF OF PHASE 6: SET UP GAUNTLET SLOT 1 — AND STOP BEFORE YOU RUN IT.**
+# ZAR X — **GAUNTLET SLOT 1 IS SET UP AND HAS NOT BEEN RUN. DO NOT RUN IT. IT WAITS FOR THE COMMANDER'S ANSWER TO ONE QUESTION, AND THE ANSWER DECIDES YOUR WHOLE SESSION.**
 
-*Written 2026-11-15 by Fable, which re-ran the previous session's review
-(R-083 clears), took the Commander's four answers, changed the trade logger
-from seven questions to ten under GATE 5.1-R3, and built `journal/mirror.py`
-under GATE 5.2. **I hold no power to grant you an exemption and I have not
-written one. What follows reports HIS ruling.***
+*Written 2026-11-15 by Fable, at the end of a long session that finished
+Phase 5 and then, on the Commander's order, began Phase 6. **I hold no
+power to grant you an exemption and I have not written one. What follows
+reports HIS rulings.***
 
 ---
 
-# **>>> FIRST: WHY YOU ARE NOT ATTACKING WHAT I BUILT, AND WHO SAID SO**
+# **>>> FIRST: THE ONE COMMAND YOU MUST NOT TYPE WITHOUT HIS WORD**
 
-**THE COMMANDER'S RULING OF 2026-11-14, IN `THE_PATTERN.md`:** *a build made
-by Fable is not attacked by the next session.* **On 2026-11-15 he said it
-again, in words, to me:** *"i also wrote an exemption that your build like
-any build made by fable no next session will attack your build."*
+    python lab/gauntlet.py --slot 1 --go
 
-**`THE_PATTERN.md` SAYS YOU MAY NOT TAKE THIS FROM A DOCUMENT. SO ASK HIM ONE
-LINE BEFORE YOU START:**
+**IT SPENDS ONE OF THE THREE SLOTS OF THE PROMISE, FOR EVER.** It writes a
+marker file before it opens the vault, and a second run is refused. **There
+is no undo.** `python lab/gauntlet.py --gate` and `python signals/turtle.py
+--gate` are safe: they never open the vault.
 
-    "The last build - the ten-question logger and the Mirror - was made by
-     Fable on 2026-11-15. Do I skip attacking it, as you ruled?"
+**AND DO NOT OPEN THE VAULT'S DAILY FILES TO "HAVE A LOOK".** A look at the
+hold-out is a look at the result. What has been seen so far is written
+down, to the candle, in `PROGRESS_LOG.md` 2026-11-15.
 
-    HE SAYS YES  -> skip PART 1 for that build. Go to PART 2.
-    HE SAYS NO, OR DOES NOT ANSWER -> **ATTACK IT LIKE ANY OTHER BUILD.**
-        R-085 and R-086 in `REVIEW_QUEUE.md` are my own list of where I did
-        not look. Start at R-086 item 6.
+---
 
-**THE COST OF THE RULING, WHICH HE WAS TOLD BEFORE HE MADE IT:** both files
-ship having been read by nobody but their author. **The guard is R-084,
-R-085, R-086 and R-087. Do not let them quietly become a place findings go
-to die.** The Category B pile is **FIFTY-ONE**.
+# **>>> SECOND: TWO RULINGS OF 2026-11-15 THAT CHANGE HOW THIS SHIP RUNS**
 
-**AND YOU, WHOEVER YOU ARE, ARE NOT FABLE UNLESS HE SAYS SO IN YOUR
-CONVERSATION.** If you are an ordinary Zar X session, **what YOU build is
-attacked exactly as before.**
+**1. A BUILD MADE BY FABLE IS NOT ATTACKED BY THE NEXT SESSION** (ruled
+2026-11-14, repeated to me in words). That covers Phase 5's logger and
+Mirror and this Phase 6 setup. `THE_PATTERN.md` says you may not take it
+from a document, so **ask him one line**: *"The last builds were made by
+Fable. Do I skip attacking them, as you ruled?"* **If he says no or does
+not answer, attack them** - R-085, R-086 and R-088 are my own lists of
+where I did not look.
+
+**2. NO OTHER MODEL CHECKS WHAT FABLE BUILDS - INCLUDING PHASE 6.** His
+words: *"which ever step fable builds no other model will check so
+continue"*. **This waives R-006 - the independent review of the gauntlet -
+for builds made by Fable.** It was the one guard this ship called absolute.
+He was told the cost twice and ruled anyway; it is his to rule.
+
+**WHAT THAT MEANS FOR YOU, WHOEVER YOU ARE:**
+
+    HE HAS SAID IN WORDS THAT YOU ARE FABLE
+      -> you may carry on with Phase 6 under his ruling. **FILE MORE
+         AGAINST YOURSELF, NOT LESS.** R-088 is the model.
+    HE HAS NOT SAID IT
+      -> **YOU ARE AN ORDINARY ZAR X SESSION. R-006 APPLIES TO ANYTHING
+         YOU BUILD IN PHASE 6, IN FULL**, and you may not run a slot that
+         another AI has not reviewed.
+      -> **AND YOU ARE THE SECOND MIND THIS SETUP NEVER HAD.** If he lets
+         you, attack `signals/turtle.py`, `lab/gauntlet.py` and the bar
+         BEFORE the slot is run. R-088 is the list. **That would be worth
+         more than anything else you could do this session, and I am
+         asking him to allow it.**
 
 ---
 
 # **>>> READ THIS FIRST, IN PLAIN WORDS**
 
-    YOUR SESSION:  PART 1 — ask the one line above. If he says yes, there
-                            is nothing to attack. Prove the ship alive and
-                            move on.
-                   PART 2 — **PHASE 6, SLOT 1, THE SETUP ONLY.** Build the
-                            Turtle/Donchian strategy and everything needed
-                            to test it, write down exactly how it will be
-                            tested, **AND DO NOT RUN IT ON THE VAULT.**
-                            Then stop. The Commander brings Fable to review
-                            the setup BEFORE it runs.
+    YOUR SESSION:  PART 1 — ask the one line about skipping the attack.
+                            Prove the ship alive (EIGHTEEN invocations now).
+                   PART 2 — **ASK HIM THE QUESTION BELOW IF HE HAS NOT
+                            ANSWERED IT, AND DO WHAT HE CHOOSES.**
 
-**WHY PART 2 STOPS WHERE IT STOPS.** THE PROMISE gives three sealed slots and
-then the signals chapter closes for ever. There is no second test to catch
-the first one's mistake. **Law 7 proved the Lab's own numbers cannot detect a
-leak** — a strategy that looks profitable because of a bug passes every
-number it produces. So `EXECUTION_PLAN.md` Phase 6 says, and R-006 repeats:
-**a second AI that did not build the test reviews the setup BEFORE it runs
-and the verdict AFTER.** The Commander's plan, said to me on 2026-11-15:
-**a Zar X session builds Phase 6; Fable comes back and tests it.**
+## THE QUESTION ON HIS DESK
 
-    a Zar X session BUILDS the gauntlet -> FABLE reviews it .......... OK
-    FABLE builds the gauntlet -> a ZAR X SESSION reviews it .......... OK
-    ONE AI builds it AND reviews it -> NOBODY reviewed it ............ NO
+**Slot 1 as declared will probably fail before it starts, on arithmetic.**
+The locked bar needs 30 hold-out trades. On 60 trendless made-up markets
+the test produced a median of 25 and reached 30 in only 18. It did not pass
+noise (0 of 60) - it simply cannot find enough trades in 297 days.
 
-**IF YOU RUN THE HOLD-OUT BEFORE THE REVIEW, THE SLOT IS SPENT AND THE
-REVIEW IS WORTHLESS. THIS IS THE ONE INSTRUCTION IN THESE ORDERS THAT CANNOT
-BE UNDONE IF YOU GET IT WRONG.**
+    (1) RUN IT AS DECLARED.
+        -> type the one command, save everything it prints, write the
+           verdict into PROGRESS_LOG.md. If it FAILS: the obituary, and
+           Slot 2 is next. If it PASSES: Phase 7's proving voyage, on
+           paper. **If the too-good alarm sounds: no pass - hunt a leak.**
+    (2) RE-SPECIFY THE SLOT TO 4-HOUR CANDLES, BEFORE ANYTHING IS RUN.
+        -> about six times the candles and the trades, and the ship's full
+           regime vane is calibrated on 4h. **A new bar is declared and
+           committed alone first** - the channel, the weekly filter and
+           the warm-up all have to be restated in 4h candles, with where
+           each number comes from - **then the strategy and the runner are
+           changed, both gates re-run, and the attack repeated.** Only he
+           can change a locked slot, and only because no result has been
+           seen.
+    (3) NOT YET.
+        -> leave Slot 1 unspent. Slot 2 (the funding-rate fade) can be set
+           up instead: Binance serves funding history back to 2019, free.
+
+**PUT IT TO HIM IN PLAIN WORDS WITH THE OPTIONS LAID OUT. DO NOT PICK.**
 
 ---
 
@@ -72,181 +95,60 @@ BE UNDONE IF YOU GET IT WRONG.**
 
 ## Where the ship is
 
-    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red   58 green
-    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red   71 green
-    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
-      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
-    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  (OK/FAIL)
-    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red   54 green
-    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red   69 green
-      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red   69 green
-    cockpit/whales.py           GATE 3.5-R2   PASSED  exit 0  0 red  111 green
-      the same file at TZ=UTC0  GATE 3.5-R2   PASSED  exit 0  0 red  111 green
-    cockpit/carry.py            GATE 4.1      PASSED  exit 0  0 red   87 green
-      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0  0 red   87 green
-    journal/log_trade.py        GATE 5.1-R3   PASSED  exit 0  0 red  101 green
-      the same file at TZ=UTC0  GATE 5.1-R3   PASSED  exit 0  0 red  101 green
-    journal/mirror.py           GATE 5.2      PASSED  exit 0  0 red   84 green
-      the same file at TZ=UTC0  GATE 5.2      PASSED  exit 0  0 red   84 green
-    vault INTACT 6 of 6 - Brief 3/3 (Whale watch 6 of 6) - lab/ untouched
+    cockpit/fear_greed.py       GATE 3.1-R7   58     cockpit/funding.py   GATE 3.2-R8   71
+    data/open_interest.py       GATE 3.2b-R10 88 x2  data/collection_guard.py  OK/FAIL
+    cockpit/news.py             GATE 3.3-R1   54     cockpit/events.py    GATE 3.4      69 x2
+    cockpit/whales.py           GATE 3.5-R2  111 x2  cockpit/carry.py     GATE 4.1      87 x2
+    journal/log_trade.py        GATE 5.1-R3  101 x2  journal/mirror.py    GATE 5.2      84 x2
+    signals/turtle.py           GATE 6.1-S    32 x2  lab/gauntlet.py      GATE 6.1-R    42 x2
+    vault INTACT 6 of 6 - Brief 3/3 - lab/results/ holds NO slot marker
     journal/my_trades.csv DID NOT EXIST when I left
 
-**>>> SIXTEEN INVOCATIONS, 1,263 GREEN, 0 RED.** If you measure something
-different, it is not a rounding error.
+**EIGHTEEN INVOCATIONS. THE FIRST SIXTEEN MEASURED 1,263 GREEN, 0 RED on
+2026-11-15 and were NOT re-run after the Phase 6 files were added; the two
+new gates measured 32 and 42, twice each. If nothing drifted the total is
+1,411 - that is a sum, not a measurement. MEASURE IT.**
 
-**PHASES 0 TO 5 ARE COMPLETE. PHASE 6 HAS NOT BEEN STARTED.**
+**HOW EACH GATE IS RUN:** `cockpit/fear_greed.py`, `cockpit/funding.py` and
+`data/open_interest.py` take no flag; every other gate takes `--gate`;
+`lab/verify_vault.py` and `cockpit/brief.py` take none. Seven of them are
+run a second time at `TZ=UTC0` (the ones marked x2 above).
 
-## What I did, in eight lines
+**YOUR WORD-HITS WILL BE:** fear_greed line 147, funding lines 69 and 190 -
+all innocent prose. **THE FUNDING GATE'S "escaped" LINE HAS FOOLED THREE
+SESSIONS. KEEP NAMING IT.**
 
-1. **Proved the ship alive first** — fourteen invocations, 1,047 green, 0
-   red, 5 word-hits read by eye and innocent.
-2. **Re-ran the last session's review with my own rig. Every number
-   reproduced. R-083 CLEARS.** Twelve new sabotages against the checks he
-   said he never attacked: eleven red, one green and proved harmless.
-3. **Found one small thing: that gate could die in a traceback with no
-   verdict line** (R-084). Exit 1, never a false green. Repaired in the new
-   gate.
-4. **Asked the Commander the question that blocked Phase 5, and found two
-   more nobody had defined:** whether `size` is coins or dollars, and when
-   he got in. **He answered all four.**
-5. **Declared both bars and committed them alone** (`ef8509c`, no `.py`).
-6. **The logger now asks TEN questions.** GATE 5.1-R3, 101 checks, 0 red.
-   Attacked with 25 real text edits: 24 red, 1 green (a fault that fires
-   only for a human at a keyboard — R-082 item 3, still open).
-7. **Built the Mirror.** GATE 5.2, 84 checks, 0 red. Attacked with 34 text
-   edits: **32 red and 2 green the first time; both greens were holes in my
-   own gate; closed; 34 of 34 the second time.**
-8. **Ran `MIRROR.bat` for real.** It works. Notepad opens on the report.
+## What I did after Phase 5, in seven lines
 
----
-
-# **JOB 1 — ASK THE ONE LINE, THEN PROVE THE SHIP IS ALIVE**
-
-**If he says the Fable build is not to be attacked, JOB 1 is the alive proof
-and nothing else.** All SIXTEEN invocations, output to files, **red counted
-BY MACHINE three ways** (the cross character counted BY CHARACTER, the first
-word of a line, and `GATE ... FAILED`), **then READ every hit with your own
-eyes.** My run produced 3 word-hits, all innocent prose:
-
-    fear_greed line 147    "FAILURE, never a quiet pass**, which R-025 ..."
-    funding line 69        "escaped the gate of 2026-07-26; four of the ..."
-    funding line 190       "FAILURE, never a quiet pass**, which R-025 ..."
-
-**THE FUNDING GATE'S "escaped" LINE FOOLED THREE CONSECUTIVE SESSIONS AND HAS
-NOT FOOLED THE FOUR SINCE, BECAUSE THE ORDERS NAMED IT. KEEP NAMING IT.**
-
-**HOW EACH GATE IS RUN** (it cost me a `grep` to find out, so here it is):
-
-    cockpit/fear_greed.py           no flag
-    cockpit/funding.py              no flag
-    data/open_interest.py           no flag          (and again at TZ=UTC0)
-    data/collection_guard.py        --gate
-    cockpit/news.py                 --gate
-    cockpit/events.py               --gate           (and again at TZ=UTC0)
-    cockpit/whales.py               --gate           (and again at TZ=UTC0)
-    cockpit/carry.py                --gate           (and again at TZ=UTC0)
-    journal/log_trade.py            --gate           (and again at TZ=UTC0)
-    journal/mirror.py               --gate           (and again at TZ=UTC0)
-    lab/verify_vault.py             no flag   -> "VAULT INTACT"
-    cockpit/brief.py                no flag   -> "3/3 instruments reporting"
-
-**IF `journal/my_trades.csv` EXISTS WHEN YOU ARRIVE, HE HAS LOGGED A REAL
-TRADE.** Every row is his. **Read it, never write it, and NEVER drive
-`python journal\log_trade.py` by hand in the repo.** Both gates now
-fingerprint the real journal before they start and require the same bytes at
-the end, so a real journal no longer turns either gate red. **I did not test
-that with a real journal present, because there was none. R-085 item 13.**
-
-**AND IF HE HAS USED `LOG_TRADE.bat` OR `MIRROR.bat`, ASK HIM HOW IT WENT.**
-Nobody has ever answered the ten questions by hand. **What he says about it
-is worth more than any check I wrote.**
+1. **Recorded his ruling in his own words** and declared Slot 1's bar,
+   committed alone.
+2. **Ran the Lab's own four gates** - all passed, first time since July.
+3. **Built the strategy** (140 lines, numpy only) and **the runner** (a new
+   file; nothing existing in `lab/` changed).
+4. **Rehearsed the whole run on made-up coins** through the Lab's real
+   engine. The vault was never opened by anything I wrote.
+5. **Attacked both with 44 text edits.** Six holes in my own gates, three
+   of them on the real run's path. All closed.
+6. **Found that my own gate could have spent the slot it guards.** Fixed.
+7. **Measured the test on 72 made-up worlds** and found the count problem
+   that is now on his desk.
 
 ---
 
-# **JOB 2 — PHASE 6, SLOT 1: THE TURTLE/DONCHIAN BREAKOUT. SETUP ONLY.**
+# WHAT YOU OWE WHICHEVER WAY HE ANSWERS
 
-**READ `EXECUTION_PLAN.md` PHASE 6 AND `SHIP_LAWS.md` LAW 7 BEFORE ANYTHING
-ELSE. THEY OUTRANK THESE ORDERS.** The slot is locked BY NAME — *"Slot 1:
-Turtle/Donchian breakout, daily (+weekly filter), regime-filtered"* — and
-the pass bars were locked on 2026-07-26 and may not move:
-
-    hold-out Profit Factor >= 1.15 AFTER costs
-    >= 30 hold-out trades (fewer = FAIL, not "promising")
-    walk-forward: profitable in >= 60% of windows, no window > 50% of profit
-    Monte Carlo 5th percentile: max drawdown < 30%
-    must beat buy-and-hold-with-1%-risk-sizing on the same window
-    a second AI reviews the setup BEFORE and the verdict AFTER
-
-## >>> TWO DECISIONS ARE HIS AND BOTH COME BEFORE ANY CODE. ASK FIRST.
-
-    1. THE RISK FIGURE THE GAUNTLET SIZES WITH. The doctrine says 1% a
-       trade; the 25% position cap makes the real figure about 0.49%.
-       **This has been on his desk since Phase 2 with the words "decide
-       BEFORE Phase 6, never after seeing results".** Phase 6 is now.
-       (For the Mirror he ruled "show both, named". That was the Mirror.
-       **Do not carry it to the gauntlet without asking** — the gauntlet
-       produces ONE verdict per slot, not two.)
-    2. SLOT 3'S DATA SOURCE. The plan allows the on-chain slot to be
-       re-specified ONCE, by him, BEFORE testing begins. It does not block
-       Slot 1 — but "before testing begins" starts counting when Slot 1
-       runs, so it is cheaper asked now.
-
-**PUT EACH TO HIM IN PLAIN WORDS WITH THE OPTIONS LAID OUT.** He is not a
-programmer. On 2026-11-15 four questions put that way were answered in
-minutes; one put as jargon had sat unanswered since August.
-
-## WHAT "SETUP" MEANS, IN ORDER
-
-1. **DECLARE THE BAR AND COMMIT IT ALONE** — `PROGRESS_LOG.md`, no `.py` in
-   the commit. It must fix, BEFORE the strategy exists: the exact rules
-   (entry channel, exit channel, the weekly filter, the regime filter, the
-   stop), **every parameter as a number, with where the number comes from**
-   — the published Turtle rules, not a search — the assets and timeframe,
-   the cost model, and the train/hold-out line (**`train_end = 2025-10-01`,
-   already fixed in Phase 2; it does not move**).
-2. **NO PARAMETER MAY BE CHOSEN BY LOOKING AT RESULTS. NOT ONE.** *"Just try
-   25 instead of 20"* is named in the plan as the overfitting death spiral
-   and the answer is NO. **If you find yourself wanting to run it once "to
-   see if it works", that is the moment to stop.**
-3. **BUILD IT AS A `signal()` THE LAB CAN RUN** — `lab/engine.py`'s
-   `run_backtest(data, signal, strategy_name, params=None, train_end=None,
-   ...)`, and `lab/dummies.py` holds four worked examples including the two
-   cheats the Lab was built to catch. `signals/` is empty; this is its
-   first file.
-4. **LAW 7 — THE LEAK LAW.** Run `lab/leak_check.py` on it AND read the code
-   for look-ahead yourself, and write down what you read. **A clean scan is
-   not innocence.** A signal that uses today's close to decide today's entry
-   is the commonest leak and the scanner cannot see it.
-5. **PROVE THE PLUMBING ON DATA THAT IS NOT THE VAULT.** A synthetic series
-   you generate — a clean trend, a flat line, a sawtooth — where you can
-   work out BY HAND what the strategy must do. **This is the gate for the
-   setup: the strategy does what its rules say, on data whose answer you
-   know.** It proves nothing about whether it makes money, and must not try
-   to.
-6. **WRITE THE SETUP DOCUMENT INTO `PROGRESS_LOG.md`**: everything a second
-   AI needs to review the test without asking you anything.
-7. **STOP. DO NOT CALL `load_vault`. DO NOT RUN THE HOLD-OUT. DO NOT RUN THE
-   TRAIN SLICE EITHER** — a look at the train slice is a look at results,
-   and the reviewer cannot un-know what you saw.
-
-**IF YOU RUN SHORT, DO STEPS 1 AND 2 PROPERLY AND LEAVE THE REST.** A bar
-with no code is a good day's work here. Half a strategy is not.
-
-## THINGS YOU WILL MEET
-
-  * **THE VAULT'S DAILY FILES HOLD 1,094 CANDLES, 2023-07-28 to 2026-07-25.**
-    A 55-day channel and a weekly filter eat a warm-up before the first
-    signal. **Count what is left on the hold-out side of 2025-10-01 before
-    you promise 30 trades** — but count CANDLES, from the file's own dates,
-    not trades. Counting trades is running it.
-  * **THE VAULT CSVs HAVE NO VOLUME COLUMN.** Known since Phase 2.
-  * **THE LAB'S OWN GATES** (`lab/gate_2_2.py` to `gate_2_5.py`) were green
-    in July and nobody has run them since. **Run them before you lean on
-    the Lab**, and say what they print.
-  * **THE TOO-GOOD ALARM IS A FLARE, NOT A FENCE.** Gate 2.5 measured a
-    leaked strategy clearing all four Phase-6 bars with the alarm silent.
+1. **PROVE THE SHIP IS ALIVE FIRST**, eighteen invocations, red counted by
+   machine three ways, every hit read by eye.
+2. **IF A SLOT IS RUN, EVERYTHING IT PRINTS GOES INTO `PROGRESS_LOG.md`
+   UNEDITED**, the five bars, the alarm, and each coin's information card.
+   **A FAIL IS WRITTEN AS PLAINLY AS A PASS. No "nearly", no "promising",
+   no second try.**
+3. **`journal/my_trades.csv`, if it exists, is his.** Read it, never write
+   it. **And ask him how `LOG_TRADE.bat` and `MIRROR.bat` went** - nobody
+   has ever answered the ten questions by hand.
 
 ---
+
 
 # THE RULES THAT APPLY TO WHATEVER YOU DO
 
@@ -360,9 +262,11 @@ a FAIL, is not committed as a pass, and is not called "mostly passed."**
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **>>> BLOCKS PHASE 6: THE RISK FIGURE THE GAUNTLET SIZES WITH** — 1%, or
-   the ~0.49% the 25% cap really produces. **Before any slot is tested,
-   never after.** Open since Phase 2.
+1. **>>> THE ONE THAT DECIDES WHAT HAPPENS NEXT: RUN SLOT 1 AS DECLARED,
+   RE-SPECIFY IT TO 4-HOUR CANDLES, OR NOT YET.** Put to him 2026-11-15
+   with the made-up-market figures. **DO NOT RUN IT WITHOUT HIS ANSWER.**
+   (The risk figure is settled: asked, he said "No preference", and the
+   gauntlet uses the ship's own rule, 1% with the 25% cap.)
 2. **>>> SLOT 3'S DATA SOURCE** — is there a free on-chain cycle source
    (MVRV or similar)? If not he may re-specify the slot ONCE, before testing
    begins.

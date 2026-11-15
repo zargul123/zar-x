@@ -16846,3 +16846,226 @@ choices; they are the ones made, in writing, before anything was run.
 rows of `BTC-USD_1d.csv` (28 and 29 July 2023) were printed while I checked
 the file's column names. Two candles from the first week of the training
 side. No hold-out price has been seen by me.
+
+
+# 2026-11-15, STILL THE SAME SESSION - **GAUNTLET SLOT 1 IS SET UP AND HAS NOT BEEN RUN. THE STRATEGY (GATE 6.1-S, 32 CHECKS) AND THE RUNNER (GATE 6.1-R, 42 CHECKS) ARE BUILT, REHEARSED ON MADE-UP CANDLES AND ATTACKED. THE VAULT'S DAILY FILES HAVE NOT BEEN OPENED BY ANYTHING I WROTE. AND THE REHEARSAL FOUND SOMETHING THE COMMANDER MUST DECIDE BEFORE THE SLOT IS SPENT: AS DECLARED, THIS TEST PROBABLY CANNOT REACH 30 TRADES.**
+
+The bar is the entry above (`4586c4d`, one document, 250 lines, no `.py`).
+
+## 1. THE LAB WAS CHECKED BEFORE I LEANED ON IT
+
+`lab/gate_2_2.py` PASSED; `gate_2_3.py` PASSED; `gate_2_4.py` PASSED, 35 of
+35; `gate_2_5.py` PASSED, 37 of 37; `lab/leak_check.py` smoke test PASSED (3
+honest shapes clean, 4 smugglers flagged). **Those four gates read the
+vault's BTC 4h file - that is their job and it is not Slot 1's data.** They
+left eight new evidence files in `lab/results/`, committed with this work.
+
+## 2. WHAT WAS BUILT
+
+**`signals/turtle.py` - the strategy.** The production half is 140 lines and
+imports numpy and nothing else. Three small methods, one per declared rule:
+the 20-day breakout (today's own candle not in the channel, strictly above
+or below), the 10-week average, Wilder's ADX above 25. It keeps nothing
+between calls.
+
+**`lab/gauntlet.py` - the runner.** A NEW file; **every existing file in
+`lab/` is byte-identical to HEAD** (`git diff --stat HEAD -- lab/` prints
+nothing). It refuses without `--go`; refuses if the slot's marker exists;
+writes the marker BEFORE opening any data; runs the three coins through the
+Lab's engine with the engine's own defaults; pools the hold-out trades;
+measures the five bars; sounds the too-good alarm; prints one verdict.
+
+## 3. LAW 7 - THE READING, RECORDED
+
+I read `signals/turtle.py`'s production half line by line, as the law
+requires, and this is what it does and does not touch:
+
+  * **It reads only the frame it is handed**: `df['close']`, `df['high']`,
+    `df['low']`, by position from the END of the frame (`iloc[-1]`,
+    `iloc[-(20+1):-1]`, `closes[-1 - 7k]`, `iloc[-150:]`). **No index is
+    ever counted from the front, and none reaches past the last row** - the
+    one shape of look-ahead a strategy can commit inside its own frame.
+  * **Today's candle is used three ways, all legitimate at its close**: its
+    close as the price being tested, its close as the newest weekly close,
+    and its high/low/close as the last step of the ADX. It is NOT in the
+    20-day channel.
+  * **It opens no file, makes no call out, reads no clock, and writes to no
+    attribute after `__init__`.** The gate proves the last three by parsing
+    the code; I confirm them by eye.
+  * **The engine enters at the NEXT candle's open**, so a signal formed from
+    today's close cannot be filled at today's price.
+  * `lab/leak_check.py`: no findings; the same scan flags the Lab's
+    deliberate leak in the same run.
+
+**WHAT THE READING CANNOT SAY: that somebody other than the author did it.**
+Law 7 was written to put a human or a second mind between a strategy and
+its certificate. This reading is the author's.
+
+## 4. THE TWO GATES
+
+**GATE 6.1-S - `signals/turtle.py --gate`: 32 checks, 0 red, twice (normal
+and `TZ=UTC0`).** Twelve hand-worked cases on made-up candles - the
+breakout at the exact value where it turns over, the channel at exactly 20
+days and not 21, the bounce below the weekly average, the breakout out of a
+wobble, the ADX exactly at the line. **A second writing-out of the rules,
+sharing no code with the first and using the SHIP'S OWN ADX (pandas_ta),
+agreed on every one of 2,000 made-up days** (48 long and 21 short signal
+days among them). Nine drill breaks, none INERT.
+
+**GATE 6.1-R - `lab/gauntlet.py --gate`: 42 checks, 0 red, twice.** Each of
+the five bars forced red ALONE on hand-made trades; the count tested at 29
+and 30; B5 at exact equality; the yardstick equal to arithmetic typed out by
+hand, capped and uncapped. **Then the whole run rehearsed on three made-up
+coins through the Lab's real engine**: the marker was down before the data
+was asked for; the pooled count equals the three evidence files added up;
+the Profit Factor on the report equals the one re-worked from the saved
+file; every evidence row carries the fingerprint of the DECLARED settings;
+every hold-out trade's own row was re-worked for fill, fee, stop, target and
+risk; a second run was refused; a coin one day short stopped the run with no
+verdict. Nine drill breaks, none INERT.
+
+## 5. CERTIFIED BY ATTACK - 44 REAL TEXT EDITS, AND WHAT THEY TAUGHT ME
+
+Copies outside the repo that hold **no vault at all**, control first.
+
+**THE RUNNER, FIRST RUN: 21 RED, 5 GREEN. THREE OF THE GREENS WOULD HAVE
+CORRUPTED THE REAL RUN:**
+
+    GREEN  the engine called with COSTS SET TO ZERO
+    GREEN  the engine called with the RISK DOUBLED
+    GREEN  the strategy built with a 10-day channel instead of 20
+    GREEN  the buy-and-hold yardstick quietly set to zero inside the run
+    GREEN  `>=` in place of `>` on the yardstick
+
+**My rehearsal checked what the run printed and never checked HOW the
+engine had been called.** Closed with four checks: the engine's own
+fingerprint against the declared settings typed out in the gate; every
+trade row re-worked; the yardstick re-worked from the made-up candles; B5
+at equality. **Second run: 26 RED OF 26.**
+
+**AND THE ATTACK FOUND SOMETHING WORSE THAN A HOLE: A CHECK THAT COULD HAVE
+SPENT THE SLOT.** My gate called the real `main()` to prove it refuses
+without `--go`. With that test deleted by one edit, **the gate itself
+started a real run** - in the rig it wrote a marker and knocked on the
+vault's door (which the rig had replaced, so nothing opened). **In the real
+repo, one bad edit to that line plus one gate run would have marked Slot 1
+spent.** The check now puts a spy where the run would be. **While repairing
+it I made the lesser version of the same mistake: the new check wrote a
+two-byte `gauntlet_slot1_report.txt` into the REAL `lab/results/`.** The
+gate's own closing check - "the real results folder is unchanged" - went
+red on it. I read the file (one blank line, mine), deleted it, and `main()`
+now takes the folder to write to. **No marker was ever written in the real
+repo and the vault was never opened. `lab/results/` holds no `gauntlet` or
+`SPENT` file.**
+
+**THE STRATEGY: 17 RED OF 18, AND THE EIGHTEENTH IS INERT BY ALGEBRA.** An
+ADX whose true range forgets the two gap terms went green - twice, even
+after I gave the made-up candles 5% overnight gaps. **It took me two failed
+fixes to see why: the true range cancels out of the ADX entirely** (each
+directional index is a movement divided by the range, and the ADX is built
+from the RATIO of the two). The edit changes no answer on any input. Not a
+hole; a sabotage that cannot do anything. The gaps stay in the fixture.
+
+**FIVE RUNNER EDITS FIRST ENDED IN A TRACEBACK WITH NO VERDICT LINE** - rule
+(k), the same fault as R-084, in a gate I had written hours after repairing
+R-084. Every file read and every risky call in that gate now goes through a
+helper that survives.
+
+## 6. >>> WHAT THE REHEARSAL FOUND ABOUT THE TEST ITSELF - THE COMMANDER'S DECISION
+
+**MEASURED ON MADE-UP MARKETS ONLY** - three independent random-walk coins,
+1,094 days, 3.5% daily swings, run through the whole runner:
+
+    60 TRENDLESS worlds:  pooled hold-out trades 12 to 40, MEDIAN 25.
+                          30 or more in 18 of 60.
+                          Verdicts: FAILED 60, PASSED 0.
+    12 mixed worlds (level, rising, falling): median 28; 30 or more in 5.
+                          One PASSED - a falling market, where a trend
+                          really was there to be followed.
+
+**READ PLAINLY:**
+
+  * **THE TEST DID NOT PASS NOISE: 0 false passes in 60.** With 60 worlds
+    that bounds the false-pass rate under about 5%; it does not prove zero.
+  * **BUT ABOUT SEVEN TIMES IN TEN IT COULD NOT REACH 30 TRADES**, and the
+    locked bar makes that an automatic FAIL. **On these numbers the likeliest
+    outcome of running Slot 1 as declared is a fail on the COUNT - a slot
+    spent, and nothing learned about whether the strategy works.**
+  * **WHY THIS IS NOT CERTAIN:** real coins are not independent random
+    walks. They trend and they move together, and a trending year holds
+    more days with the ADX above 25. The real count could be higher. **I
+    have not looked, and looking is running it.**
+
+**THE BAR'S OWN WORDS SAID THIS WOULD BE MEASURED AND TOLD TO HIM BEFORE HE
+SAYS GO. THE OPTIONS, ALL OF THEM HIS, ALL STILL OPEN BECAUSE NO RESULT HAS
+BEEN SEEN:**
+
+    (1) RUN IT AS DECLARED. Accept that the likeliest result is a fail on
+        the count.
+    (2) RE-SPECIFY THE SLOT TO 4-HOUR CANDLES BEFORE ANYTHING IS RUN. The
+        vault's 4h files hold 5,624 candles from 2024-01-01 - about six
+        times as many hold-out candles, so about six times the trades, and
+        the ship's full regime vane IS calibrated on 4h. **It would be a
+        different test from the one named in the plan** ("daily"), and
+        only he can change a locked slot. It needs a new bar committed
+        first and the rehearsal repeated.
+    (3) DO NOT SPEND SLOT 1 YET.
+
+**I recommend he choose with his eyes open; I do not choose for him.**
+
+## 7. WHAT I GOT WRONG
+
+1. **A gate that could have spent the slot it guards**, and then a repair
+   that wrote into the real results folder. Section 5.
+2. **Five holes in the runner's gate**, three of them on the real run's
+   path. Found by attack, not by me.
+3. **Three hand-arithmetic slips in my own expectations**: the 20-day high
+   of a made-up decline was 80.5 and I typed 82.5; I treated the Lab's
+   walk-forward as adding a window's trades when it compounds them, so two
+   of my "one bar alone" cases were two bars; and a rounding to nine places
+   where I had typed seven. **In all three the code was right and my hand
+   was wrong, and the check going red is what told me.**
+4. **Two failed fixes on the inert ADX edit** before I did the algebra.
+5. **A forbidden-word check that went red on its own description** of what
+   it forbids. It now parses the code.
+6. **I broke my own attack list** with a shell here-document - the third
+   time today that warning has cost me a run.
+7. **I printed two rows of the vault's BTC daily file** (July 2023) while
+   checking column names. Training side, first week. Said in the bar too.
+
+## 8. WHERE THE SHIP IS
+
+    signals/turtle.py      GATE 6.1-S   PASSED  exit 0  0 red   32 green  x2
+    lab/gauntlet.py        GATE 6.1-R   PASSED  exit 0  0 red   42 green  x2
+    vault INTACT 6 of 6
+    lab/results/ holds NO gauntlet file and NO slot marker
+
+**THE SIXTEEN EARLIER INVOCATIONS WERE NOT RE-RUN AFTER THIS WORK** (they
+read 1,263 green, 0 red earlier today). Nothing they test was touched: the
+only new files are `signals/turtle.py` and `lab/gauntlet.py`. **Eighteen
+invocations would read 1,411 if nothing drifted; that sum is arithmetic,
+not a measurement.**
+
+**SLOT 1 HAS NOT BEEN RUN. IT WAITS FOR THE COMMANDER'S WORD.**
+
+## 9. THE PRE-FLIGHT, AND ONE MORE THING I SAW
+
+The real door meets this runner for the first time on the run that counts,
+and a refusal there would spend the slot on a crash. So the Lab's data
+inspector was run on the three daily files - **the inspector only, no
+strategy, no price printed by me**:
+
+    BTC-USD_1d  door verdict PASS   1,094 candles   297 hold-out days
+    ETH-USD_1d  door verdict WARN   1,094 candles   297 hold-out days
+    SOL-USD_1d  door verdict WARN   1,094 candles   297 hold-out days
+    the three cover THE SAME 297 days, 2025-10-02 to 2026-07-25
+
+**WARN IS NOT A REFUSAL** - `load_vault` refuses only FAIL - so the run will
+go through. **I then opened ETH's report to see what the warning was, and it
+printed two candles, one of them in the hold-out: 2025-10-10, low 3,471.22,
+high 4,393.63, a 26.6% day.** That is a single hold-out candle's range, seen
+by me AFTER the bar and both files were finished. It changed nothing and
+could change nothing - every rule and number was already committed - but it
+is hold-out data and this log says what was seen. **I did not open SOL's.**
+The warning itself is "big single-candle swings, flagged for human eyes,
+not deleted": the data is as the market made it.

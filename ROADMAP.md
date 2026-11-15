@@ -661,3 +661,23 @@ not exist and has now waited four sessions.**
 | **THE NEW GATE'S FAILING PATH COSTS ONE DEADLINE, NOT THREE.** | A renamed question, a silent-but-alive shell, and an extra question before the last: **each 76.0 s, 7 red, verdict line printed.** Each measured ONCE. A healthy run is ~0.8 s. **Timings on this ship are weather reports.** |
 | **`MIRROR.bat` RUNS.** | Launched for real from PowerShell by its full path: 129 bytes in `%TEMP%\zarx_mirror.txt`, Notepad opened on "There is no trade journal yet." **`cmd /c MIRROR.bat` from a bash shell does NOT find it - that is the launcher, not the file.** |
 | **"SNAPSHOT TIMES READ AS LOCAL TIME" IS VISIBLE TO A TEXT-EDIT ATTACK ONLY OFF UTC.** | 11 red on this laptop (UTC+5). At `TZ=UTC0` local time IS UTC and the edit changes nothing. |
+
+
+# **>>> BUILT 2026-11-15 (LATER) - GAUNTLET SLOT 1's SETUP. NOT RUN.**
+
+| What | File | State |
+|---|---|---|
+| **Slot 1's strategy: the Turtle/Donchian breakout.** Long when the daily close is above the highest high of the 20 days before it (short below the lowest low), only on the right side of the average of the last 10 weekly closes, only with Wilder's ADX(14) above 25, after 150 candles of warm-up. **Every number declared and committed before the file existed; none searched.** Stateless, imports numpy only. **GATE 6.1-S: 32 checks, 0 red, twice.** Twelve hand-worked cases; a second writing-out of the rules using the ship's own ADX agreed on all 2,000 made-up days; nine drill breaks. **Attacked with 18 text edits: 17 red, 1 proved inert by algebra.** | signals/turtle.py | built, NOT run |
+| **The gauntlet runner.** Refuses without `--go`; refuses a spent slot; **writes the marker before opening any data**; runs the three coins through the Lab's engine unchanged; pools the hold-out trades; measures the five locked bars and the too-good alarm; one verdict. **B5 (beat buy-and-hold with 1% risk sizing) was defined and built here for the first time.** **GATE 6.1-R: 42 checks, 0 red, twice** - each bar forced red alone, and the whole run rehearsed on made-up coins. **Attacked with 26 text edits: 21 red the first time - three of the five greens were on the real run's path (costs zeroed, risk doubled, a different channel) - all closed; 26 red of 26 the second time.** Every existing file in `lab/` is byte-identical to HEAD. | lab/gauntlet.py | built, NOT run |
+
+## MEASURED 2026-11-15 (LATER)
+
+| Fact | Measurement |
+|---|---|
+| **THE LAB'S OWN GATES STILL PASS.** | `gate_2_2` PASSED; `gate_2_3` PASSED; `gate_2_4` PASSED 35/35; `gate_2_5` PASSED 37/37; `leak_check` smoke PASSED. First run since July. |
+| **THE DAILY VAULT, BY DATES ONLY.** | 1,094 candles per coin, 2023-07-28 to 2026-07-25. **297 hold-out days after 2025-10-01, the SAME 297 on all three coins.** Door verdicts: BTC PASS, ETH WARN, SOL WARN (big single-candle swings; WARN is not a refusal). |
+| **SLOT 1's TRADE COUNT ON MADE-UP MARKETS.** | 60 trendless worlds of three random-walk coins: pooled hold-out trades **12 to 40, median 25; 30 or more in 18 of 60.** The count bar is 30. |
+| **SLOT 1's FALSE-PASS RATE ON MADE-UP MARKETS.** | **0 PASSED of 60 trendless worlds.** In 12 mixed worlds, 1 PASSED - a falling market with a real trend in it. |
+| **THE TRUE RANGE CANCELS OUT OF WILDER'S ADX.** | An ADX with the gap terms removed from its true range gives the same answer on every input: each directional index divides by the range and the ADX uses their ratio. Found by an attack that went green twice. |
+| **THE SHIP'S REGIME VANE READS "Uncalibrated" ON DAILY CANDLES.** | `config.REGIME_CONFIG['entropy_chaotic_thresholds']` holds `1h` and `4h` only. |
+| **A GATE CAN SPEND THE THING IT GUARDS.** | The first draft of GATE 6.1-R called the real `main()`; with one line edited, the gate started a real run. It now uses a spy and a temporary folder. |

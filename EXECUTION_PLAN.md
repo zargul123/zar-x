@@ -434,6 +434,44 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-15 (LATER): PHASE 6 HAS BEGUN. GAUNTLET SLOT 1 IS SET UP AND HAS NOT BEEN RUN. FABLE BUILT IT AND, BY THE COMMANDER'S RULING, NO SECOND AI REVIEWS IT. IT WAITS FOR HIS WORD - AND HE HAS A DECISION TO MAKE FIRST.**
+
+**WHERE THE SHIP IS.** Everything in the marker below this one still stands
+(sixteen invocations, 1,263 green, 0 red, measured earlier the same day and
+NOT re-run since), plus:
+
+    signals/turtle.py           GATE 6.1-S    PASSED  exit 0  0 red   32 green
+      the same file at TZ=UTC0  GATE 6.1-S    PASSED  exit 0  0 red   32 green
+    lab/gauntlet.py             GATE 6.1-R    PASSED  exit 0  0 red   42 green
+      the same file at TZ=UTC0  GATE 6.1-R    PASSED  exit 0  0 red   42 green
+    vault INTACT 6 of 6 - lab/results/ holds NO slot marker
+
+**SLOT 1 AS DECLARED:** a 20-day breakout entry, a 10-week trend filter,
+ADX above 25, on BTC, ETH and SOL daily candles; exits by the ship's own
+stop and target; the three coins' hold-out trades POOLED into one verdict
+against the five locked bars. The bar is `PROGRESS_LOG.md`, 2026-11-15.
+
+**THE RULING THAT CHANGED PHASE 6.** The Commander: *"which ever step fable
+builds no other model will check so continue"*. **R-006 is WAIVED for builds
+made by Fable. It is not cleared.**
+
+**WHAT IS BROKEN OR UNPROVEN, SAID PLAINLY.**
+
+**THE TEST AS DECLARED PROBABLY CANNOT REACH 30 TRADES.** On 60 trendless
+made-up markets the pooled count reached 30 in only 18 (median 25). The
+likeliest result of running it is a FAIL on the count - a slot spent and
+nothing learned. **His options, all open because nothing has been run: run
+it as declared; re-specify the slot to 4-hour candles under a new bar; or
+do not spend the slot yet.**
+
+**NOBODY BUT THE AUTHOR HAS READ THE STRATEGY, THE RUNNER OR THE BAR.**
+R-088, which is NOT a Category B item: a fault here cannot be repaired
+tomorrow.
+
+**THE RUN IS ONE COMMAND AND MUST NOT BE TYPED WITHOUT HIS WORD:**
+`python lab/gauntlet.py --slot 1 --go`. It writes a marker first; a second
+run is refused.
+
 ## **>>> 2026-11-15: PHASE 5 IS COMPLETE. THE LOGGER ASKS TEN QUESTIONS (GATE 5.1-R3, 101 CHECKS) AND THE MIRROR EXISTS (GATE 5.2, 84 CHECKS). BUILT BY FABLE, AND BY THE COMMANDER'S RULING THE NEXT SESSION DOES NOT ATTACK IT - SO FOUR ITEMS ARE FILED AGAINST IT INSTEAD. NEXT: PHASE 6, AND PHASE 6 NEEDS TWO DIFFERENT AIs.**
 
 **WHERE THE SHIP IS.**
