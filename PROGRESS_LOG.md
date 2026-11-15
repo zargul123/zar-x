@@ -16211,3 +16211,367 @@ a recorded reading, not a prediction: week 1 of this ship measured those
 readings at 40.0% against a parrot's 49.5%.** The Mirror puts them beside
 his trade because the plan asks for it, and it must not dress them as a
 verdict on him.
+
+
+# 2026-11-15 - FABLE'S SESSION, THE ACCOUNT. **PHASE 5 IS COMPLETE. THE LOGGER ASKS TEN QUESTIONS (GATE 5.1-R3, 101 CHECKS, 0 RED) AND THE MIRROR EXISTS (GATE 5.2, 84 CHECKS, 0 RED). R-083 CLEARS. JOB 1 FOUND ONE SMALL THING AND IT IS REPAIRED. EVERYTHING I DID NOT CHECK IS NAMED IN THE QUEUE, BECAUSE NOBODY WILL ATTACK THIS BUILD.**
+
+**The Commander said in words, in this conversation, that this session is
+Fable and that the next session will not attack what it builds.** The bars
+for both builds are the entry directly above this one, committed alone as
+`ef8509c` - one document, 301 lines, no `.py` and no `.bat` in that commit.
+
+## 1. THE SHIP WAS ALIVE BEFORE I TOUCHED ANYTHING
+
+`git pull` first: three cloud commits arrived. Then fourteen gate
+invocations, the vault and the Brief, every one captured to its own file.
+
+    fear_greed 58 - funding 71 - open_interest 88/88 - collection_guard OK
+    news 54 - events 69/69 - whales 111/111 - carry 87/87 - log_trade 77/77
+
+**1,047 GREEN, 0 RED, EVERY EXIT 0.** Counted three ways by machine: 0 cross
+characters counted BY CHARACTER, 0 `GATE ... FAILED`, and 5 first-word hits
+**all read by eye, all innocent prose** - fear_greed line 147, funding lines
+69 and 190 (the "escaped" trap the orders named, and "FAILURE, never a quiet
+pass"), and log_trade line 185 twice ("RED instead of quietly shrinking").
+Vault **INTACT 6 of 6**. Brief **3/3**, Whale watch **6 of 6**.
+`journal/my_trades.csv` did not exist. **Nothing had drifted.**
+
+## 2. JOB 1 - THE LAST SESSION'S REVIEW (R-083), ATTACKED WITH MY OWN RIG
+
+**THE BARS, WRITTEN BEFORE ANYTHING RAN.** R-083 clears only if: the control
+passes first at the same depth; C1 to C5 reproduce with code I wrote; at
+least one sabotage its author never tried is run and reported either way;
+every green is proved to change something on its own channel; witness and
+gate never share a copy; `git status` is clean afterwards.
+
+**MY PREDICTIONS, WRITTEN BEFORE THE RUN, SO THE RUN COULD DISAGREE:** the
+three lower-casing deletions would go RED through check (j); a stamp that is
+relabelled instead of converted, 1 red; the screen line with its two prices
+reversed, 1 red at N6; the journal opened with no `encoding`, GREEN and
+harmless under `PYTHONUTF8=1`.
+
+**THE RIG.** Byte edits on the file read in binary, one tree per sabotage at
+`<tree>/journal/log_trade.py`, outside the repo. The writer refuses an anchor
+that matches zero or several times, an edit that changes nothing, and any
+bare LF. **It refused once, correctly:** my first anchor for the renamed
+`TRADES_FILE` matched twice. Control first, alone: **77 green, 0 red.**
+
+**HIS SIX CLAIMS:**
+
+    C1  control 77/0 ........................................ REPRODUCED
+    C2  the four faults on record: 1, 5, 5 and 7 red ........ REPRODUCED
+        (prices exchanged 1 red N4; eighth question before the
+        last 5 red, 82.6 s; a renamed question 5 red, 82.6 s;
+        TRADES_FILE renamed 7 red)
+    C3  a default on the feeling question -> GREEN 77/0, and
+        my own witness, sending a BLANK feeling, got a row
+        written with feeling `flat` where the control wrote
+        NOTHING ............................................. REPRODUCED
+        `.strip()` on the WHY question -> GREEN 77/0, and the
+        archive lost the three spaces he typed ............... REPRODUCED
+    C4  the eighth question inside the tuple: 3 red .......... REPRODUCED
+    C5  a silent shell that stays alive: 5 red, 79.5 s, the
+        gate still printed its verdict, no traceback ......... REPRODUCED
+    C6  LOG_TRADE.bat cds and sets PYTHONUTF8=1 .............. READ, TRUE
+
+**Not re-run by me, and said so:** the `isatty` pair and the relative
+`TRADES_FILE` from C3. (The `isatty` pair was re-run later against the NEW
+gate, section 5: it is still green one way and red the other.)
+
+**WHAT HE SAID HE NEVER ATTACKED - CHECKS (a) TO (m) - TWELVE NEW SABOTAGES
+IN THE PRODUCTION HALF:**
+
+    `_feeling` no longer lower-cases ............... 3 red (j, j, T12 INERT)
+    `_direction` returns the case he typed ......... 2 red (j, j)
+    `_asset` no longer upper-cases its key ......... 2 red (j, j)
+    `_needs_header` ignores an empty file .......... 1 red (c)
+    zero accepted as a number ...................... 4 red (d, e, f, f)
+    the stamp relabelled, not converted ............ 1 red (b, the Karachi row)
+    the screen line's two prices reversed .......... 1 red (N6)
+    two-word feeling accepted ...................... 1 red (f)
+    `.strip()` inside `_why` ....................... 2 red (g, g)
+    size and exit exchanged inside `_validate` ..... 10 red
+    the journal opened with no `encoding` .......... GREEN 77/0
+    `typed in directions` (refuses `SHORT`) ........ **A TRACEBACK. NO VERDICT LINE.**
+
+**HIS DOUBT 2 IS ANSWERED: THE LOWER-CASING IS COVERED.** He wrote that he
+had assumed checks (a)-(m) cover it and had not verified it. Check (j)'s two
+fake trades are typed `eth`, `SHORT`, `Nervous`, `ANNOYED`, and all three
+deletions go red. **My predictions were right on these, which is the less
+interesting result; the one I did not predict is below.**
+
+**THE GREEN IS INERT WHERE HE RUNS IT.** With no `encoding` on the `open`,
+my witness wrote a WHY line holding a dash and Arabic letters and the archive
+bytes were IDENTICAL to the control's, because `LOG_TRADE.bat` sets
+`PYTHONUTF8=1`. A sabotage that changes nothing is not a finding.
+
+## >>> THE ONE THING JOB 1 FOUND - R-084, THE FINDING REPORT, FILLED IN BEFORE ANY REPAIR
+
+**An edit that makes the logger refuse `SHORT` left GATE 5.1-R2 printing a
+`FileNotFoundError` traceback at line 802 and NO VERDICT LINE.** Check (j)
+logs two fake trades and then opens the file directly; when the first trade
+is refused there is no file.
+
+    Q1  What information is this code for?
+        The rows in journal/my_trades.csv.
+    Q2  Can this fault make that information wrong, missing or deleted?
+        NO. The gate exits 1 either way. It is a RED gate that ends in a
+        traceback instead of a sentence - never a false green.
+    Q3  (a) He would see a wall of red text instead of "FAILED - n red".
+        (b) It costs him nothing: no row is touched.
+        (c) He would find out at once.  (d) Nothing to undo.
+    STEP 0  the control passed first; the broken output was printed and is
+            visibly broken; and I am NOT judging my own work - I did not
+            write check (j).
+    VERDICT BY THE FORM: Q2 = NO -> **SMALL. CATEGORY B. KEEP BUILDING.**
+
+**It breaks rule (k) - "a failing gate must still be able to finish
+reporting" - which the previous session MEASURED on a different shape and
+found holding. It holds on that shape and not on this one.** I was about to
+re-declare that gate for the ten questions anyway, so the repair went into
+the bar as R3-11 BEFORE the code, and the same attack was re-run afterwards:
+**8 red, a verdict line, no traceback.** I found it and I fixed it, so I may
+not clear it. R-084.
+
+**R-083 CLEARS.** Every number its author gave reproduces under code he did
+not write, and the place he said he had not looked holds.
+
+## 3. PART 2 WAS BLOCKED ON A QUESTION. I ASKED IT, AND FOUND TWO MORE.
+
+The orders left one question on his desk: where do the account balance and
+the stop come from. **Writing the bar turned up two more things nobody had
+defined, and both would have printed confident wrong numbers:**
+
+  * **`size` - coins or dollars?** Never written down anywhere. The profit
+    is `size x (exit - entry)` for coins and `size x (exit - entry) / entry`
+    for dollars. For a $500 BTC position the two differ by a factor of
+    about 65,000 and NEITHER looks wrong on its face.
+  * **WHEN DID HE GET IN?** `utc_time` is the moment he types the trade,
+    after it is closed. "What the instruments said at those moments" had no
+    moment to look up.
+
+**HIS FOUR ANSWERS, EACH TO A PLAIN-WORDS QUESTION WITH THE OPTIONS LAID
+OUT:** ask two more questions; show both risk lines, named; size is DOLLARS;
+and ask how many hours ago he got in. **Recorded in the bar above, which was
+committed before any code.**
+
+## 4. WHAT WAS BUILT - `journal/log_trade.py`, TEN QUESTIONS, GATE 5.1-R3
+
+**TEN QUESTIONS, ELEVEN COLUMNS:** `utc_time, asset, direction, entry, exit,
+stop, size_usd, account_usd, in_hours_ago, why, feeling`. The three new ones
+are the stop (a price, or the word `none`), the account in dollars, and the
+hours since he got in. `size` became `size_usd` so nobody ever has to guess
+the unit again.
+
+**THE ONE RULE THAT IS A JUDGEMENT CALL, SAID HERE AND FILED:** a stop on the
+wrong side of the entry is REFUSED - a long's stop must be below its entry
+and a short's above, and equal is refused. The likeliest way to produce one
+is typing the exit and the stop in each other's place, and the Mirror divides
+by that gap. **The cost: a stop he trailed into profit cannot be logged as
+it stood at the end; the question means where it was when he got in.**
+
+**THE GATE WAS REWRITTEN, NOT PATCHED.** 77 checks became **101**. Every
+earlier condition is carried; the new work is: thirteen new refusal shapes
+(31 in all, each writing nothing, each named); the stop tested AT the entry
+and one cent either side, for both directions; `none` in three spellings;
+zero hours accepted and one hundredth below refused; the three new numbers
+kept exactly as typed; four new drill breaks (16 in all, none INERT); and
+**check (n) now drives the shell THREE TIMES** - tidy answers, awkward
+answers (mixed case, a WHY line wrapped in spaces, the stop typed `NONE`),
+and a blank last answer that must write nothing. **That third drive is the
+repair R-082 recommended in its own last sentence.**
+
+**ONE THING THE OLD GATE WOULD HAVE DONE TO HIM, FOUND WHILE REWRITING IT.**
+Its closing check was `not os.path.exists(TRADES_FILE)`. **ON THE DAY HE
+LOGGED HIS FIRST REAL TRADE, GATE 5.1 WOULD HAVE TURNED RED AND STAYED RED
+FOR EVER** - a false red, never a false green, but every later session would
+have arrived to a broken ship. The check now fingerprints the real journal
+before the first check and requires the same bytes at the end.
+
+**PASSED 101 CHECKS, 0 RED - twice in a scratch tree and twice in the repo
+(normal and `TZ=UTC0`).** `EXPECTED_CHECKS = 101` was counted by reading the
+code section by section (5+4+3+1+21+15+5+2+5+4+18+1+6+9+1+1) and the first
+run agreed.
+
+## 5. CERTIFIED BY ATTACK - TWENTY-ONE REAL TEXT EDITS, CONTROL FIRST
+
+Copies outside the repo, control **101/0**. **TWENTY RED, ONE GREEN** - and
+then four more shell shapes from the 2026-11-14 list, **ALL FOUR RED**:
+
+    a question renamed ("entry price") ................. 7 red, 76.0 s
+    the shell silent after nine answers but alive ...... 7 red, 76.0 s
+    an extra question BEFORE the last, answer dropped .. 7 red, 76.0 s
+    an extra question AFTER the last, answer dropped ... 6 red, 1.2 s
+
+**Every one printed its verdict line and none printed a traceback. The
+failing path costs ONE 60-second deadline, not three**, because the three
+shells wait side by side. The last of the four is my reading of R-082's
+item 4, which is RECORDED green at 77/0 on 2026-11-14. **I do not have that
+session's exact edit - its rig was deleted on purpose - so I cannot say my
+edit is the same one, only that the two shapes I could build both go red.**
+**The first twenty-one:**
+
+    the two price questions exchanged .................. 2 red (N4, N8)
+    STOP and OUT questions exchanged ................... 5 red
+    the wrong-side refusal deleted (long) .............. 5 red, T14 INERT
+    the wrong-side refusal deleted (short) ............. 4 red
+    `>=` made `>` (a stop AT the entry accepted) ....... 3 red
+    the stop judged against the EXIT, not the entry .... 4 red
+    size and account questions exchanged ............... 2 red (N5, N8)
+    hours and account questions exchanged .............. 2 red
+    a default on the feeling question .................. 1 red (N9)  <- 77/0 before
+    `.strip()` on the WHY question ..................... 1 red (N8)  <- 77/0 before
+    `SHORT` refused (the R-084 attack) ................. 8 red, VERDICT LINE PRINTED
+    TRADES_FILE renamed ................................ 8 red
+    an eleventh question ............................... 5 red
+    `none` made case-sensitive ......................... 7 red
+    zero hours refused ................................. 3 red
+    the screen's stop and account exchanged ............ 2 red
+    the real clock frozen at 2020 ...................... 1 red (R4)
+    account written into the size column ............... 15 red
+    a header column renamed ............................ 11 red
+    the prices exchanged ONLY on a pipe ................ 2 red
+    **the prices exchanged ONLY at a real keyboard ..... GREEN 101/0**
+
+**THE ONE GREEN IS R-082's ITEM 3 AND I DID NOT CLOSE IT.** The gate drives
+a pipe; he uses a keyboard; a branch that fires only for a human is still
+invisible. Filed again, in my own item.
+
+## 6. WHAT WAS BUILT - `journal/mirror.py`, GATE 5.2
+
+For every logged trade: the result in dollars and as a percent of that
+trade's own account; what he risked and the result in R; the same trade
+sized to risk 1%, and the same with the 25% position cap (which is
+`config.py`'s `max_position_fraction`, 0.25 - read, not assumed); the moment
+he got in; and the newest snapshot reading for that coin at or before that
+moment, if it is no more than eight hours old. Then totals: his result, the
+like-for-like comparison over the trades that had a stop, what he risked,
+with / against / mixed / no reading, by feeling, by month.
+
+**IT READS AND NEVER WRITES.** Two `open(` calls in the production half,
+both read-only. **Not one word of advice** - a forbidden list of 36 words is
+checked against everything the Mirror itself says.
+
+**THE PLAN'S OWN SENTENCE - "log 2 fake trades, run mirror, numbers check
+out by hand" - IS MET IN FULL.** Three fake trades go in THROUGH THE REAL
+LOGGER (a long that won; a short that lost, held past its stop, and is
+CAPPED; a trade with no stop), a fourth row is broken by hand the way a
+spreadsheet breaks one, and **the whole 69-line report must equal one typed
+out in the gate, character for character.** Every figure in it was worked by
+hand in a comment above it, from the arithmetic declared in the bar.
+
+**>>> IT MATCHED ON THE FIRST RUN, AND THAT DESERVES SUSPICION RATHER THAN
+APPLAUSE.** I typed the expectation and I wrote the formatter. A match
+between the two proves they agree with each other; it does not prove either
+is right. **What argues that it is right:** the arithmetic was written in
+the bar before the code; the 34 text-edit attacks in section 7 each change
+one piece of it and each is caught; and a trade I made up afterwards on the
+REAL notebooks was re-worked by hand and agreed to the cent (short 66000 ->
+65216, $1,500 on $6,000, stop 67000: +$17.82, risked $22.73, +0.78 R, 1%
+size $3,960.00 -> +$47.04, capped at $1,500.00). **What it cannot argue:
+that somebody else worked the numbers. Nobody did.** R-086.
+
+**PASSED 84 CHECKS, 0 RED - twice in a scratch tree and twice in the repo
+(normal and `TZ=UTC0`), the two runs' output identical once temporary folder
+names and hashes are masked.** Nineteen drill breaks, none INERT.
+
+**AND IT WAS RUN THE WAY HE WILL RUN IT.** `MIRROR.bat` was launched for
+real: it wrote 129 bytes to `%TEMP%\zarx_mirror.txt` and opened Notepad on
+"There is no trade journal yet. Nothing has been logged." **A Notepad window
+was left open on his screen by that test; I did not close it, because he
+keeps his own notes in Notepad and I will not kill a process by name.**
+
+**ON THE REAL NOTEBOOKS, IN A SCRATCH COPY:** 2,301 snapshot rows read from
+3 of 3 notebooks, 0 unreadable. A fake BTC short "20 hours ago" found the
+reading of 2026-11-14 12:05 UTC, 2h 04m before, trend DOWN - WITH the
+recorded trend. A fake SOL trade "3000 hours ago" correctly found none.
+
+## 7. THE MIRROR, CERTIFIED BY ATTACK - 34 REAL TEXT EDITS, AND WHAT THE ATTACK TAUGHT THE GATE
+
+**FIRST RUN: 32 RED, 2 GREEN. THE TWO GREENS WERE REAL HOLES IN MY GATE AND
+BOTH ARE NOW CLOSED.**
+
+    GREEN  a fault that only fires on a journal of more than 50 trades.
+           Every fixture I had written held six trades or fewer.
+           -> a sixty-trade check, worked by hand (60 x $400 = $24,000).
+    GREEN  `.strip()` on his WHY line as the Mirror quotes it.
+           -> the quoted-back check now carries three spaces at each end.
+
+**AND THREE HOLES I FOUND BY WRITING THE ATTACKS, BEFORE RUNNING THEM** -
+each a text edit I could see my gate would not catch: a reading taken at the
+very instant he got in (`>` against `>=`); fractional hours truncated to
+whole ones (every fixture used whole hours); and banker's rounding instead
+of half up (no fixture sat on an exact half with an even digit before it).
+**Three checks were added, 80 became 83, then 84.**
+
+**SECOND RUN: 34 RED OF 34.** Among them: a short's sign, size read as
+coins, the 8-hour limit at 12, the cap at 50%, the risk at 2%, **snapshot
+times read as LOCAL time (11 red)**, the journal renamed, the cloud notebook
+dropped, the header check removed, unreadable rows dropped in silence,
+with/against exchanged, the month filter ignored, a line of advice (7 red),
+exactly-1% counted as above 1%, the hours ADDED instead of subtracted (17
+red), the tie rule reversed, the gap divided by the stop, the percent taken
+of the size, the shell printing LF, won/lost exchanged, regime and RSI
+exchanged, another coin's reading borrowed, **the journal written to (6
+red)**, a wrong-side stop accepted, totals over exact instead of rounded
+figures, and the comparison silently cut to the first trade.
+
+**ONE OF THOSE IS CAUGHT ONLY ON A MACHINE THAT IS NOT IN UTC.** "Snapshot
+times read as local time" changes nothing when local time IS UTC. On his
+laptop (UTC+5) it is 11 red; at `TZ=UTC0` that same edit would be green. The
+drill's M12 covers the same fault by monkeypatch in any zone. Filed.
+
+## 8. THE CONFINEMENT, BY `git`
+
+    M  LOG_TRADE.bat          two `rem` lines: "Seven" -> "Ten"
+    M  journal/log_trade.py   the ten-question shape and GATE 5.1-R3
+    ?? MIRROR.bat             new
+    ?? journal/mirror.py      new
+
+**Nothing else on the ship changed.** `journal/log_trade.py`'s production
+half is NOT byte-identical to HEAD and is not meant to be: it is lines 1-349
+now, and the diff is the three new questions. Both `.py` files and both
+`.bat` files are CRLF with zero bare LF, written by a script that refuses
+anything else, and the installed bytes were asserted equal to the staged
+copies that had been gated and attacked.
+
+## 9. THE SHIP AFTER THE BUILD
+
+Sixteen invocations, every exit 0:
+
+    fear_greed 58 - funding 71 - open_interest 88/88 - collection_guard OK
+    news 54 - events 69/69 - whales 111/111 - carry 87/87
+    log_trade 101/101 - mirror 84/84
+
+**1,263 GREEN, 0 RED** (1,047 - 77 - 77 + 101 + 101 + 84 + 84). 0 cross
+characters by CHARACTER, 0 `GATE ... FAILED`, 3 first-word hits read by eye
+and innocent (fear_greed 147, funding 69 and 190; the log_trade line that
+used to be a fourth and fifth is gone with the text that held it). Vault
+**INTACT 6 of 6**. Brief **3/3**, Whale watch **6 of 6**.
+`journal/my_trades.csv` STILL DOES NOT EXIST - neither gate created it.
+
+## 10. WHAT I GOT WRONG
+
+1. **A here-document with quotes in it broke my shell**, exactly as the
+   orders warned in bold. I had read the warning. The work was redone by
+   writing the files with the editor tool.
+2. **I typed the forbidden-word count as 37; it is 36.** The gate's own
+   count check caught it on its first run - check (n) doing its job on me.
+3. **My first rig anchor matched twice** and the rig refused. Correct
+   behaviour, my mistake.
+4. **`cmd /c MIRROR.bat` from the bash tool failed** ("not recognized") and
+   I nearly reported the `.bat` unverified. Run from PowerShell by its full
+   path it works. The first failure was my launcher, not the file.
+5. **I wrote "36 attacks" in my notes; the list holds 34.** Counted again.
+6. **Five holes in my own first gate** - two found by the attack, three
+   while writing it. A builder cannot see what a builder cannot see; I saw
+   five, and the honest inference is that there are more.
+
+## 11. WHAT THIS BUILD DOES NOT CLAIM
+
+It does not claim fees or funding are in the Mirror's numbers - they are not,
+and the report says so. It does not claim the 1% lines are what he should
+have done. It does not claim a real keyboard behaves like the gate's pipe.
+It does not claim anybody but its author has read either file. **And it does
+not claim the ten questions are a form a tired man fills in after a losing
+trade - only he can find that out.**

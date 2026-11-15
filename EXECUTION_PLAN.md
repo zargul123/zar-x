@@ -434,6 +434,66 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-15: PHASE 5 IS COMPLETE. THE LOGGER ASKS TEN QUESTIONS (GATE 5.1-R3, 101 CHECKS) AND THE MIRROR EXISTS (GATE 5.2, 84 CHECKS). BUILT BY FABLE, AND BY THE COMMANDER'S RULING THE NEXT SESSION DOES NOT ATTACK IT - SO FOUR ITEMS ARE FILED AGAINST IT INSTEAD. NEXT: PHASE 6, AND PHASE 6 NEEDS TWO DIFFERENT AIs.**
+
+**WHERE THE SHIP IS.**
+
+    cockpit/fear_greed.py       GATE 3.1-R7   PASSED  exit 0  0 red   58 green
+    cockpit/funding.py          GATE 3.2-R8   PASSED  exit 0  0 red   71 green
+    data/open_interest.py       GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
+      the same file at TZ=UTC0  GATE 3.2b-R10 PASSED  exit 0  0 red   88 green
+    data/collection_guard.py    GATE 3.2c-R1  PASSED  exit 0  0 red  (OK/FAIL)
+    cockpit/news.py             GATE 3.3-R1   PASSED  exit 0  0 red   54 green
+    cockpit/events.py           GATE 3.4      PASSED  exit 0  0 red   69 green
+      the same file at TZ=UTC0  GATE 3.4      PASSED  exit 0  0 red   69 green
+    cockpit/whales.py           GATE 3.5-R2   PASSED  exit 0  0 red  111 green
+      the same file at TZ=UTC0  GATE 3.5-R2   PASSED  exit 0  0 red  111 green
+    cockpit/carry.py            GATE 4.1      PASSED  exit 0  0 red   87 green
+      the same file at TZ=UTC0  GATE 4.1      PASSED  exit 0  0 red   87 green
+    journal/log_trade.py        GATE 5.1-R3   PASSED  exit 0  0 red  101 green
+      the same file at TZ=UTC0  GATE 5.1-R3   PASSED  exit 0  0 red  101 green
+    journal/mirror.py           GATE 5.2      PASSED  exit 0  0 red   84 green
+      the same file at TZ=UTC0  GATE 5.2      PASSED  exit 0  0 red   84 green
+    vault INTACT 6 of 6 - Brief 3/3 - lab/ untouched
+    journal/my_trades.csv DOES NOT EXIST - his first real trade creates it
+
+**SIXTEEN INVOCATIONS, 1,263 GREEN, 0 RED** (1,047 - 77 - 77 + 101 + 101 +
+84 + 84).
+
+**WHAT CHANGED.** `LOG_TRADE.bat` now asks TEN questions - the old seven,
+plus his stop (a price, or the word `none`), his account in dollars, and how
+many hours ago he got in. `size` is DOLLARS and its column is `size_usd`.
+`MIRROR.bat` is new: it opens a report in Notepad with each trade's result,
+what he risked, the instruments' reading from just before he got in, and the
+same trade sized to risk 1% - pure, and with the 25% cap. **Arithmetic only.
+It reads his journal and never writes to it.**
+
+**WHAT IS BROKEN OR UNPROVEN, SAID PLAINLY.**
+
+**NOBODY BUT THEIR AUTHOR HAS READ EITHER FILE, AND NOBODY IS ORDERED TO.**
+That is his ruling and it is his to make. The guard is R-084, R-085, R-086
+and R-087 in `REVIEW_QUEUE.md`. **The one that matters most: the Mirror's
+expected report and its formatter were written by the same mind and agreed
+on the first run. Nobody else has worked one figure by hand.**
+
+**NOBODY HAS EVER RUN `LOG_TRADE.bat` AND ANSWERED IT BY HAND** - not at
+seven questions, not at ten. The first person to do it will be the
+Commander, on a real trade. The gate drives a pipe; he uses a keyboard; a
+fault that fires only for a keyboard is still green (R-082 item 3).
+
+**THE MIRROR LEAVES OUT FEES AND FUNDING**, and says so on every report.
+
+**THE CATEGORY B PILE IS FIFTY-ONE.** Cleared before the ship is used for
+real, at the same moment `cockpit/brief.py` gets its gate.
+
+**PHASE 6 IS NEXT AND IT IS NOT LIKE ANYTHING BEFORE IT.** Three sealed
+slots, then the signals chapter closes. **A second AI that did not build the
+test reviews its setup BEFORE it runs and its verdict AFTER (R-006).** The
+Commander's plan, said on 2026-11-15: **a Zar X session builds, Fable
+reviews.** Two things are on his desk that must be decided BEFORE any slot
+is tested and never after: **the risk figure the gauntlet sizes with**, and
+**Slot 3's data source.**
+
 ## **>>> 2026-11-14: GATE 5.1-R2's CHECK (n) WAS ATTACKED BY A SESSION THAT BUILT NONE OF IT, WITH SEVEN SABOTAGES NOBODY HAD TRIED, AND IT HELD AGAINST EVERY ONE THAT COULD CORRUPT A ROW. R-080 AND R-081 CLEAR. NOTHING WAS BUILT: THE MIRROR'S THIRD LEG IS NOT HARD, IT IS UNDEFINED, AND THAT IS ON THE COMMANDER'S DESK.**
 
 **WHERE THE SHIP IS.**
