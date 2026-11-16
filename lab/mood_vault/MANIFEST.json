@@ -1,0 +1,15 @@
+{
+  "files": {
+    "fear_greed.csv": {
+      "bytes": 26372,
+      "carried": 1,
+      "rows": 1094,
+      "sha256": "b3a256d6c2945a834750938f93c60bbda8d6f7535ff45c0ea9eabf4d56d78782"
+    }
+  },
+  "first_day": "2023-07-28",
+  "last_day": "2026-07-25",
+  "law": "This file is evidence. It is never modified, never refreshed, only verified.",
+  "note": "frozen 2026-11-16T14:52:26Z",
+  "what": "the Fear & Greed index (alternative.me), one value a day"
+}
