@@ -17548,3 +17548,34 @@ the Lab's own exam strategies, as the bar says.**
 
 **SLOT 1 HAS NOT BEEN RUN. `lab/results/` HOLDS NO SLOT MARKER. IT WAITS
 FOR THE COMMANDER'S WORD.**
+
+## >>> 2026-11-16, LATER THE SAME SESSION - **THE COMMANDER RULED: "NOT YET - DO IDEA 2". SLOT 1 STAYS UNSPENT. NO CODE CHANGED.**
+
+Part-way through he asked, in his own words, to have it explained "in easy
+words" - "im not a technical persona noob i just know some trading". It
+was explained without gate numbers: what the test is, why it runs only
+once, what had been done, what comes next, and the two things he had not
+been told when he chose 4-hour candles (fees bite harder; "20" now means
+about three days).
+
+Then the question was put to him with four options and no recommendation,
+opening with the made-up-market result - plenty of trades, 0 passes of 72,
+not even with a real trend, so the real test will most likely fail:
+
+    GO - run it now
+    Use a 20-DAY high instead
+    Go back to daily candles
+    Not yet - do idea 2
+
+**HE CHOSE: "Not yet - do idea 2".** The option he was shown read: *"Leave
+this test unspent for now. Next session I set up idea 2 (the funding-rate
+fade) instead. Nothing is lost; you can come back to Slot 1 any time."*
+
+**SO:** Slot 1 on 4-hour candles stays set up, gated and UNRUN.
+`lab/results/` holds no slot marker. All three slots of THE PROMISE are
+still unspent. **The next session sets up Slot 2 - bar first, alone - and
+runs nothing without his word.** Nothing was run after his answer; this
+entry and the orders are the only things changed.
+
+**ONE THING I DID NOT DO AND SAY SO:** the carry-line question (is it
+information or a suggestion?) was not asked again. Eighth session.

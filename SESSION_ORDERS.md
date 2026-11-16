@@ -1,4 +1,4 @@
-# ZAR X — **GAUNTLET SLOT 1 IS NOW A 4-HOUR TEST. IT IS SET UP AND HAS NOT BEEN RUN. DO NOT RUN IT. IT WAITS FOR THE COMMANDER'S "GO", AND HE HAS BEEN TOLD IT WILL MOST LIKELY FAIL.**
+# ZAR X — **YOUR JOB: SET UP GAUNTLET SLOT 2, THE FUNDING-RATE FADE. BAR FIRST, ALONE. RUN NOTHING. SLOT 1 (NOW A 4-HOUR TEST) IS SET UP AND UNSPENT, BY THE COMMANDER'S CHOICE - DO NOT RUN IT.**
 
 *Written 2026-11-16 by Fable. He opened the session with "zarx and this
 session is for fable", so his rulings about Fable applied to it. **I hold
@@ -63,10 +63,60 @@ was never run and is withdrawn.
 
     YOUR SESSION:  PART 1 — ask the one line about skipping the attack.
                             Prove the ship alive (TWENTY invocations).
-                   PART 2 — **ASK HIM THE QUESTION BELOW IF HE HAS NOT
-                            ANSWERED IT, AND DO WHAT HE CHOOSES.**
+                   PART 2 — **SET UP SLOT 2. BAR FIRST, ALONE. RUN NOTHING.**
 
-## THE QUESTION ON HIS DESK
+## >>> HE ANSWERED IT, 2026-11-16: "NOT YET - DO IDEA 2"
+
+**THE QUESTION BELOW IS ANSWERED. DO NOT ASK IT AGAIN.** Shown the four
+options with no recommendation, he chose to leave Slot 1 unspent and have
+Slot 2 set up. He can come back to Slot 1 whenever he likes; its 4-hour
+setup stays in the repo, gated.
+
+## YOUR PART 2: SET UP SLOT 2 - THE FUNDING-RATE EXTREME FADE
+
+**THE SLOT'S LOCKED WORDS** (`EXECUTION_PLAN.md`): *"Slot 2: Funding-rate
+extreme fade."* The idea in trader's words: when the funding rate on the
+perpetual is extremely positive, longs are crowded and paying heavily -
+fade them (short); extremely negative, the reverse.
+
+**DO IT THE WAY SLOT 1 WAS DONE - `PROGRESS_LOG.md` 2026-11-15 and
+2026-11-16 are the model:**
+
+    1. THE BAR, COMMITTED ALONE, BEFORE ANY CODE. Every number and where
+       it comes from. The five locked bars and the alarm are copied, not
+       rewritten.
+    2. THE DATA QUESTION COMES FIRST AND IT IS NOT SETTLED. The vault
+       holds candles only. Funding history is on Binance, free, back to
+       2019 (`/fapi/v1/fundingRate`, measured - see ROADMAP). **The Lab
+       tests on FROZEN evidence only.** So funding history must be
+       fetched ONCE, frozen beside the vault with checksums, and never
+       refreshed - and how that is done is part of the bar. **Fetching it
+       means the hold-out's funding rates arrive on the disk. DO NOT
+       PRINT, PLOT OR SUMMARISE THEM. Count rows and dates only.**
+    3. WHAT "EXTREME" MEANS MUST BE A NUMBER CHOSEN WITHOUT LOOKING AT THE
+       HOLD-OUT: a published figure, or a percentile worked ONLY on
+       candles up to 2025-10-01. **This is the easiest place on the whole
+       ship to fit a number to the exam paper. Say in the bar exactly
+       which rows the number was worked from.**
+    4. LAW 7: a strategy must carry no data. Funding rates are data. How
+       they reach the strategy without a leak - only rates SETTLED before
+       the candle closes - is the heart of this build. `lab/leak_check.py`
+       and a line-by-line reading, recorded.
+    5. WRITE DOWN THE COST ARITHMETIC BEFORE BUILDING (rule (n)). Slot 1
+       taught it the hard way: on 4-hour candles the engine's stop and
+       target make a trade of about 20 hours, and 0.3% of costs ate it.
+       **Work out, on paper, what win rate Slot 2 needs to clear a Profit
+       Factor of 1.15 on the candle size you choose, and tell him BEFORE
+       he is asked for a go.**
+    6. Two gates, the permanent drill, the attack by text edits with
+       predictions written first, the made-up worlds, the closing ritual.
+    7. **ONE STOP BEFORE ANY SLOT IS SPENT: HE SAYS GO.**
+
+**WHO MAY BUILD IT:** if he has said in words that you are Fable, his
+ruling covers you. **If he has not, R-006 applies in full: you may build
+the setup, but another AI must review it before it runs.**
+
+## THE QUESTION THAT WAS ON HIS DESK (ANSWERED - KEPT FOR THE RECORD)
 
 **The trade-count problem is solved. A different one took its place.** On
 made-up 4-hour markets the test found a median of 147 trades (never fewer
@@ -92,7 +142,7 @@ the fee and slippage are a big slice of a small move.
         -> leave Slot 1 unspent. Slot 2 (the funding-rate fade) can be set
            up instead: Binance serves funding history back to 2019, free.
 
-**PUT IT TO HIM IN PLAIN WORDS WITH THE OPTIONS LAID OUT. DO NOT PICK.**
+**IT WAS PUT TO HIM IN PLAIN WORDS WITH THE OPTIONS LAID OUT. HE CHOSE (4).**
 **He asked this session, in his own words, to have things explained "in
 easy words" because he is "not a technical person". WRITE TO HIM THAT WAY:
 what the test is, what the choice is, what each choice costs. No gate
@@ -289,10 +339,9 @@ the channel / back to daily / not yet.
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **>>> THE ONE THAT DECIDES WHAT HAPPENS NEXT: GO ON THE 4-HOUR SLOT 1,
-   CHANGE ITS CHANNEL TO TWENTY DAYS FIRST, GO BACK TO DAILY, OR NOT YET.**
-   Put to him 2026-11-16 with the made-up-market figures. **DO NOT RUN IT
-   WITHOUT HIS ANSWER.** (The risk figure: asked on 2026-11-15 he said "No
+1. **SLOT 1: ANSWERED 2026-11-16 - "NOT YET - DO IDEA 2".** It stays set up
+   and unspent. The other three options (go; a twenty-day channel; back to
+   daily) remain open to him whenever he raises it. **DO NOT RUN IT.** (The risk figure: asked on 2026-11-15 he said "No
    preference", and the gauntlet uses the ship's own rule, 1% with the 25%
    cap. **ON 4-HOUR CANDLES THE CAP BINDS ON EVERY TRADE, so it is in
    practice a 25%-position rule. He has been told.**)

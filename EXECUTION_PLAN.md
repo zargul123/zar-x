@@ -440,6 +440,10 @@ answer, built into this plan:
 # CURRENT POSITION MARKER (update this line each session)
 ## **>>> 2026-11-16: THE COMMANDER RE-SPECIFIED SLOT 1 TO 4-HOUR CANDLES. IT IS REBUILT, REHEARSED, ATTACKED - AND NOT RUN. THE COUNT PROBLEM IS GONE; THE LIKELIEST RESULT IS NOW A FAIL ON PROFIT AFTER COSTS. IT WAITS FOR HIS WORD.**
 
+**>>> AND THEN HE RULED, THE SAME DAY: "NOT YET - DO IDEA 2".** Slot 1 stays
+set up and UNSPENT. **NEXT: SLOT 2, THE FUNDING-RATE FADE - ITS BAR FIRST,
+ALONE.** All three slots are still unspent.
+
 **WHERE THE SHIP IS.** Twenty invocations, every exit 0, **1,429 green, 0
 red - MEASURED today, not summed**:
 
