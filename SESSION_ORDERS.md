@@ -128,6 +128,15 @@ READ `PROGRESS_LOG.md`'s LAST ENTRY BEFORE ANYTHING ELSE. IN SHORT:**
     CHOICE  90-day rank, two coins; (C) re-specify Slot 3, once, to
             a different idea, to be found and put to him.
 
+**>>> AND THEN (STILL 2026-11-16) HE STEERED: "think like a pro and tell
+whats best for the sytem", and "ok go ahead" to MEASURING a replacement:
+FADING THE CROWD'S MOOD with the Fear & Greed index. Measured, training
+side only: `PROGRESS_LOG.md`'s last entry. MY RECOMMENDATION WAS RULE C -
+buy when the index is below at least 81 of its last 90 days AND the day
+is labelled Fear or Extreme Fear; sell the mirror with Greed - about 50
+to 60 trades. HE HAS NOT YET SAID YES TO IT AS IDEA 3. THAT YES WOULD BE
+HIS ONE RE-SPECIFICATION OF SLOT 3.**
+
 **IF HIS ANSWER IS NOT IN `PROGRESS_LOG.md` BELOW THAT ENTRY, HE HAS NOT
 ANSWERED: ASK HIM, IN EASY WORDS, AND WRITE NO BAR UNTIL HE DOES.** The
 four steps below are how the finding-out was meant to go, kept so you

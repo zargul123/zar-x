@@ -18778,3 +18778,77 @@ PLAN ALLOWS, BEFORE ANYTHING IS RUN:**
         Greed index, faded at its extremes. NOT MEASURED; a suggestion.)
 
 **NO BAR FOR SLOT 3 EXISTS AND NONE IS TO BE WRITTEN UNTIL HE ANSWERS.**
+
+## >>> 2026-11-16 (NIGHT) - **IDEA 3: THE COMMANDER'S STEER, AND A CANDIDATE MEASURED. NOTHING BUILT, NO BAR WRITTEN, NO RE-SPECIFICATION MADE YET.**
+
+The three choices for idea 3 were put to him (keep the true thermometer
+and leave the slot unspent; the 90-day MVRV rank; swap in a different
+idea) with my call, the third. **HIS WORDS:** *"ok listen we own thins
+thing theer are no life lines. our main goal is to atleast make a working
+system which help. so think like a pro and tell whats best for the
+sytem."* I answered: three ideas that each look at something different -
+price momentum, leverage crowding, and for idea 3 the crowd's MOOD, faded
+at its extremes, using the Fear & Greed index the Brief already reads -
+measured first, then put to him for a yes or no. **HIS ANSWER: "ok go
+ahead".**
+
+**MY READING, LABELLED AS MINE: "go ahead" IS A GO FOR THE MEASURING, WHICH
+IS ALL I SAID THAT STEP WAS. IT IS NOT YET HIS RE-SPECIFICATION OF SLOT 3.**
+The plan allows that once, before testing begins; it must be his plain yes
+to a named idea.
+
+**WHAT WAS MEASURED - TRAINING SIDE ONLY.** alternative.me's Fear & Greed
+history has no end-date parameter, so the whole history arrives; **every
+row dated 2025-10-01 or later was thrown away on the first line that
+touched the data, before anything was counted or printed, and nothing was
+saved.** Kept: 2,795 daily rows, 2018-02-01 to 2025-09-30, every one
+stamped 00:00 UTC, four days missing in seven years, 795 of the vault's
+796 training days covered. The publisher's own labels: Extreme Fear
+(seen 5-25), Fear (26-46), Neutral (47-54), Greed (55-75), Extreme Greed
+(76-95).
+
+**THREE RULES. A AND B WERE WRITTEN BEFORE ANY COUNT. C WAS WRITTEN AFTER
+SEEING A AND B, AND I SAY SO.**
+
+    A  buy on a day labelled Extreme Fear; sell on Extreme Greed.
+       -> buy on 3.3% of days, sell on 13.6%. With three made-up coins
+          sharing the one real index: 33 to 41 trades in the last 297
+          training days, 54 to 70 in the 297 before. **THE MEANING IS
+          CLEANEST, BUT THE COUNT LEANS ON HOW EXTREME THE STRETCH WAS -
+          AND 33 IS CLOSE TO 30.** A calm hold-out would fail on counting.
+    B  buy when today's index is strictly below at least 81 of the last
+       90 days; sell when strictly above at least 81.
+       -> buy 15.3%, sell 13.5%; 57 to 79 and 44 to 66 trades. Steady.
+          **BUT IT WILL "BUY" A READING OF 60 - GREED - IF THE LAST THREE
+          MONTHS WERE GREEDIER STILL. That is not fading fear.**
+    C  B, AND the day must carry the label on that side: buy only on a
+       Fear or Extreme Fear day, sell only on a Greed or Extreme Greed
+       day. (Slot 2's shape exactly: a rank, plus the sign.)
+       -> buy 8.5%, sell 13.5%; 50 to 71 and 38 to 61 trades; 30 or more
+          in 40 of 40 made-up worlds.
+
+**MY RECOMMENDATION TO HIM: C.** It keeps the meaning (it only ever buys
+fear and sells greed), its count does not depend on the stretch being
+wild, and it is the same shape as Slot 2, so the same machinery and the
+same kind of gate fit it.
+
+**WHAT HE MUST BE TOLD WITH IT:**
+
+  * **ONE INDEX FOR THE WHOLE MARKET.** All three coins get the same
+    signal on the same days, so the pooled trades are three copies of
+    nearly one bet - worse than Slot 2's overlap.
+  * **THE INDEX IS BUILT PARTLY FROM PRICE** (volatility and momentum are
+    two of its ingredients). It is not independent of the candles.
+  * **IT IS A PUBLISHER'S NUMBER.** The recipe is theirs and has changed
+    over the years; history can only be had from them.
+  * **THE CLOCK.** A value stamped day D at 00:00 UTC is published just
+    after that midnight, so it is known for the whole of candle D and is
+    joined to candle D. To be proved against the Brief's own instrument
+    before any bar.
+  * **C WAS CHOSEN AFTER SEEING A AND B COUNTED.** Three rules counted is
+    a fork. No price result of any of them exists.
+  * **THE TEST STILL NEEDS ABOUT 48 WINS IN 100** on daily candles.
+
+**NO BAR FOR SLOT 3 EXISTS. IF HE SAYS YES TO "IDEA 3 BECOMES THE MOOD
+FADE, RULE C", THAT IS HIS ONE RE-SPECIFICATION AND IS RECORDED VERBATIM
+BEFORE THE BAR IS WRITTEN.**
