@@ -19638,3 +19638,200 @@ fault in the shared runner showed itself** - which is what running this
 slot first was for.
 
 **SLOT 1 AND SLOT 3 ARE STILL SET UP AND UNSPENT.**
+
+# 2026-11-16 (AFTER THE RUN) - **THE COMMANDER PAUSED SLOTS 1 AND 3 AND ORDERED THE THREE IDEAS COMBINED AND TRIED ON UNSEEN DATA. THE TRAINING SIDE WAS ASKED FIRST - AND IT SAYS THE OPPOSITE OF WHAT WE BOTH EXPECTED. NOTHING BUILT, NOTHING RUN ON UNSEEN DATA. THE CANDIDATE IS WRITTEN DOWN HERE BEFORE ANY UNSEEN DATA IS FETCHED.**
+
+## 1. WHAT HE SAID, IN ORDER
+
+Shown Slot 2's result, he asked for it in plain money terms. It was given:
+1,000 dollars at 1% risk a trade becomes about 1,040 over the ten months
+(981, 994, 928, 996, 1,069, 1,040 at the end of each stretch), against
+about 730 for holding; 22 wins of about 13 dollars and 24 losses of about
+10; the gain made in one spring.
+
+Then: *"why it only gain 40usd like our we closing trades in hurry ... we
+have some tweeking in code like close this trade after this"* - answered:
+not closed in a hurry; the stop and target are fixed at entry and a trade
+lasted about 8 days; the gain is small because 1% is risked and it won
+about half. A different exit might do better and **cannot be tried fairly
+on the ten months we have now seen.**
+
+Then: *"we have to settle this like how the losses came and we neeed
+better exit rules then too. and one more thing like that these 3
+categories which we testing ... we need these 3 things for good trade
+like we cant only trade on 1 because all 3 things used for trades."*
+Answered: 19 of the 24 losses were BUYS in a falling market; yes, a
+trader wants trend, crowding and mood to agree; but a combination is a
+NEW idea, the promise allows three slots, and anything designed now is
+shaped by having seen Slot 2. **AND THERE IS UNSEEN DATA:** the vault was
+frozen on 2026-07-26 and it is now mid-November.
+
+**HIS ORDER, VERBATIM:** *"ok yes see research this and before etsting
+other 2 we need to get this one better combine 3 and also we have the
+data with this test use this data too and test it on the unseeb data.
+plz work it out you are the trader of the century use your knowledge and
+other good knowledge do it"*.
+
+**WHAT THAT ORDER IS, SAID PLAINLY:**
+
+  * **SLOTS 1 AND 3 ARE PAUSED BY HIM. NEITHER IS TO BE RUN** until he
+    says so. Both stay set up, gated and unspent.
+  * **THE COMBINED IDEA IS NOT A GAUNTLET SLOT.** There is no fourth
+    slot. It lives under his ruling of this evening: a changed version of
+    a failed idea goes FORWARD, on data nobody has seen, and is never
+    tested on the old data as a result.
+  * **"use this data too": I READ THAT AS THE TRAINING SIDE** (before
+    2025-10-01), which exists to design on. **THE HOLD-OUT - October 2025
+    to July 2026 - IS STILL THE EXAM PAPER OF SLOTS 1 AND 3. I HAVE NOT
+    USED IT TO DESIGN ANYTHING AND WILL NOT.** If he meant the hold-out
+    too, the answer is that using it would spoil the two slots he has
+    paused.
+
+## 2. THE RESEARCH
+
+Four searches in all today. No rigorous study combines the three. What
+turned up, all practitioner writing:
+
+  * A trend filter is widely reported to stop mean-reversion strategies
+    from "catching the knife" - but one write-up found its momentum
+    filter blocked every entry after a drop, "which killed the strategy's
+    entire reason for existing". Fear comes right after falls.
+  * On the Fear & Greed index the contrarian reading is CONTESTED: one
+    analysis (Ecoinometrics) argues the profitable use is riding momentum
+    in Extreme Greed and being patient in Fear; a 2026 backtest of
+    funding found extreme readings acting as MOMENTUM signals in some
+    regimes - "funding mean-reverts, but price doesn't necessarily
+    follow".
+  * Negative funding "can persist for weeks or even months"; several
+    sources say to use sentiment "to filter, not trigger".
+
+Sources: luxalgo.com/blog/testing-directional-dependence-in-trading-strategies-2 ;
+ayratmurtazin.beehiiv.com (RSI with trend filters) ;
+ecoinometrics.substack.com/p/bitcoin-fear-and-greed-where-is-the ;
+askrubyai.github.io/blog/posts/2026-02-14-funding-rate-contrarian ;
+baksuls.pages.dev/blog/owl-contrarian-en ;
+dextools.io/tutorials/what-is-fear-and-greed-index-crypto-guide-2026 .
+**Search summaries of blogs and vendor pages. Not evidence; a list of
+what people report.**
+
+## 3. >>> WHAT THE TRAINING SIDE SAYS - FOUR WAYS TO COMBINE, LISTED BEFORE ANY WAS RUN, EVERY ONE REPORTED
+
+**TRAINING SIDE ONLY**: daily candles, funding and mood all cut before
+2025-10-01 as they were read; 796 days a coin, about 696 judged. The
+trend is "close above the average of the last 100 closes" (up) or below
+(down). "The crowd" is Slot 2's rule or Slot 3's, either one. Through the
+Lab's engine, his real costs, stop 1.5 ATR, two targets. Pooled, three
+coins:
+
+    H1  WITH THE TREND, AGAINST THE CROWD  (the design I proposed to him:
+        buy fear in an up-trend, sell greed in a down-trend)
+            target 2.0:  36 trades, won 31%, Profit Factor 0.55, -11.5%
+            target 3.0:  32 trades, won 22%, Profit Factor 0.46, -13.7%
+    H2  AGAINST THE CROWD, ANY TREND  (Slots 2 and 3 together, as built)
+            target 2.0: 196 trades, won 37%, Profit Factor 0.76, -30.4%
+            target 3.0: 153 trades, won 27%, Profit Factor 0.71, -33.1%
+    H3  WITH THE TREND AND WITH THE CROWD  (the momentum reading: buy in
+        an up-trend when the crowd is greedy/long; sell in a down-trend
+        when it is scared/short)
+            target 2.0: 158 trades, won 50%, Profit Factor 1.29, +23.4%
+            target 3.0: 123 trades, won 41%, Profit Factor 1.39, +28.0%
+    H4  THE TREND ALONE  (the yardstick: trade with the 100-day trend
+        whenever flat)
+            target 2.0: 265 trades, won 47%, Profit Factor 1.15, +21.0%
+            target 3.0: 182 trades, won 42%, Profit Factor 1.41, +43.0%
+
+H3 held in both halves of the training side (Profit Factor 1.27 and 1.51
+at target 3.0) and on all three coins (BTC 1.43, ETH 1.59, SOL 1.17).
+
+**READ PLAINLY, AND IT IS NOT WHAT I TOLD HIM TO EXPECT:**
+
+  * **THE DESIGN I PROPOSED - BUY FEAR ONLY IN AN UP-TREND - LOST BADLY ON
+    THE TRAINING SIDE AND HARDLY EVER TRADED** (32 trades in two years;
+    about 5 in a window the size of the unseen one). **I RECOMMENDED IT
+    AN HOUR AGO AS "MORE SENSIBLE". THE DATA DISAGREES.**
+  * **FADING THE CROWD LOST ON THE TRAINING SIDE, WITH OR WITHOUT A TREND
+    FILTER.** Slots 2 and 3 together, the two ideas as built: Profit
+    Factor 0.7 over about 150 to 200 trades. **THIS IS NEW AND IT
+    MATTERS: SLOT 2's SMALL PROFIT ON THE HOLD-OUT SITS BESIDE A CLEAR
+    LOSS ON THE TWO YEARS BEFORE IT.** It strengthens the autopsy's
+    reading - luck, in a market that happened to fall - and it is a bad
+    omen for Slot 3, which is the same kind of bet.
+    (I did not run this before Slot 2 was spent, on purpose: the bar
+    said the real funding and the real candles would first meet at the
+    run. Whether that was right is a fair question. Had I looked, he
+    would have been told the fade lost in training before he said run.)
+  * **GOING WITH THE CROWD IN THE DIRECTION OF THE TREND MADE MONEY - BUT
+    NO MORE THAN THE TREND ALONE.** H3 and H4 are level (1.39 against
+    1.41 at target 3.0). **SO ON THIS EVIDENCE THE MONEY IS IN THE TREND.
+    THE FUNDING AND MOOD READINGS ADD LITTLE OR NOTHING ON TOP OF IT.**
+    What they do is cut the number of trades by a third for about the
+    same result per trade.
+  * **THE TRAINING SIDE WAS A BULL MARKET** (2023-07 to 2025-09) and the
+    hold-out fell. A rule that follows the 100-day trend was always going
+    to look good there. **TWO YEARS, THREE COINS THAT MOVE TOGETHER, AND
+    I HAVE NOW LOOKED AT EIGHT VARIANTS OF IT. WHAT IS LEFT STANDING IS
+    PARTLY THE SURVIVOR OF A SEARCH.**
+
+## 4. THE CANDIDATE, WRITTEN DOWN NOW - BEFORE ONE CANDLE OF UNSEEN DATA IS FETCHED
+
+**IF HE SAYS GO, THIS IS WHAT IS TRIED ON THE UNSEEN MONTHS, AND NOTHING
+ELSE:**
+
+    NAME     the confluence rule (H3)
+    CANDLE   daily; BTC, ETH, SOL
+    TREND    UP if today's close is above the average of the last 100
+             closes; DOWN if below
+    CROWD    GREEDY/LONG if Slot 2's rule says short (funding above zero
+             and above at least 81 of 90) OR Slot 3's says short (a Greed
+             day above at least 81 of 90); SCARED/SHORT is the mirror
+    TRADE    BUY when the trend is UP and the crowd is GREEDY/LONG;
+             SELL when the trend is DOWN and the crowd is SCARED/SHORT;
+             otherwise flat. Entry at the next day's open.
+    EXIT     stop 1.5 ATR, target 3.0 ATR (the 14-candle range); costs
+             `config.GAUNTLET_COSTS`; 1% risk with the 25% cap
+    BESIDE   THE TREND ALONE (H4), same exit - the yardstick it must beat
+    IT       to show the crowd readings are worth having at all
+
+**WHY TARGET 3.0 AND NOT 2.0:** reasoned before the table existed - a
+trade with the trend can be given more room - and written into my working
+notes then. The table agrees mildly (1.39 against 1.29). **I had both
+numbers in front of me when I wrote this line, so it is not blind.**
+
+**THE UNSEEN WINDOW: 2026-07-26 TO 2026-11-15, ABOUT 113 DAYS.** At the
+training side's rate that is roughly TWENTY trades for H3 on three coins.
+**TWENTY TRADES PROVE NOTHING. THE GAUNTLET's OWN BAR IS THIRTY, AND IT
+WAS SET FOR A REASON.** So this is not a pass-or-fail verdict and no
+gauntlet bar is claimed for it. It is a first honest look forward, to be
+followed by live paper-watching, and it is reported with its trade count
+beside every figure.
+
+**WHAT WILL BE REPORTED, DECIDED NOW:** for H3 and for H4 on the unseen
+window - trades, wins, Profit Factor, the money on 1,000 dollars, the
+worst dip, and buy-and-hold beside them. Both, whichever looks better.
+
+## 5. WHAT THIS NEEDS, AND IT IS A BUILD
+
+The Lab's engine accepts candles from the frozen vault only, and the
+vault ends 2026-07-25. Trying anything on later months means: candles,
+funding and mood for 2026-07-26 onward fetched once and frozen with
+checksums (a second, "forward" store - the vault itself is never
+touched); the rule as a strategy with its own gate; a runner that shows
+ONLY trades entered after 2026-07-25, because the rule has to walk
+through the hold-out of Slots 1 and 3 to warm up and those months must
+not be printed. Bar first, gates, attack - the same road as the slots.
+
+## 6. WHAT I GOT WRONG
+
+1. **I TOLD HIM "TREND DECIDES DIRECTION, FUNDING AND MOOD DECIDE TIMING"
+   WAS THE SENSIBLE DESIGN, AS A TRADER'S JUDGMENT, BEFORE ASKING THE
+   DATA.** It lost on the training side. He trusts my judgment because he
+   has said he cannot check it. That is exactly when it must be checked
+   first and stated second.
+2. **I NEVER RAN THE FADE ON THE TRAINING SIDE BEFORE SLOT 2 WAS SPENT**
+   (section 3). Defensible, and it cost him a slot that the training
+   side would have warned him about.
+3. **SLOT 3 IS THE SAME KIND OF BET AS SLOT 2 AND IS STILL SEALED.** On
+   today's evidence I would not expect it to pass. He paused it; that is
+   the right call for now, and whether to run it at all is his.
+
+**NO SLOT WAS RUN AFTER SLOT 2. NO UNSEEN DATA HAS BEEN FETCHED.**

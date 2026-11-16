@@ -1,4 +1,4 @@
-# ZAR X — **SLOT 2 WAS RUN ON 2026-11-16 AND FAILED (4 BARS OF 5). IT IS SPENT. YOUR JOB: SLOTS 1 AND 3 ARE SET UP AND UNSPENT. THE NEXT MOVE IS THE COMMANDER'S: WHICH TO RUN, AND WHEN. PROVE THE SHIP ALIVE, TELL HIM WHERE THINGS STAND IN EASY WORDS, AND DO WHAT HE SAYS. RUN NOTHING WITHOUT HIS WORD. IF A SLOT IS RUN AND FAILS, HE HAS RULED WHAT HAPPENS NEXT - READ "AFTER A FAIL" BELOW.**
+# ZAR X — **SLOT 2 WAS RUN ON 2026-11-16 AND FAILED (4 BARS OF 5). IT IS SPENT. THE COMMANDER THEN PAUSED SLOTS 1 AND 3 AND ORDERED THE THREE IDEAS COMBINED AND TRIED ON UNSEEN DATA. A CANDIDATE IS WRITTEN DOWN AND NOT BUILT. READ "THE COMBINED IDEA" BELOW BEFORE ANYTHING ELSE. YOUR JOB IS WHAT HE SAYS NEXT. PROVE THE SHIP ALIVE, TELL HIM WHERE THINGS STAND IN EASY WORDS, AND DO WHAT HE SAYS. RUN NOTHING WITHOUT HIS WORD. IF A SLOT IS RUN AND FAILS, HE HAS RULED WHAT HAPPENS NEXT - READ "AFTER A FAIL" BELOW.**
 
 *Written 2026-11-16 (late night) by Fable. He opened the session with
 "zarx.. fable set up idea 2 and do it smartly". **I read that as his word
@@ -28,6 +28,42 @@ under a gate.**
 
 **`lab/results/` NOW HOLDS SLOT 2's EVIDENCE** (marker, report, four trade
 files). It is evidence: never edit or delete it.
+
+---
+
+# **>>> THE COMBINED IDEA - HIS ORDER OF 2026-11-16, AND WHERE IT STANDS**
+
+After Slot 2 failed he said the three things - trend, crowding, mood -
+belong together, and ordered: *"before etsting other 2 we need to get
+this one better combine 3 ... and test it on the unseeb data"*. **SO SLOTS
+1 AND 3 ARE PAUSED BY HIM. DO NOT RUN EITHER.**
+
+**READ `PROGRESS_LOG.md`'s LAST ENTRY. IN SHORT:**
+
+    The training side (before 2025-10-01) was asked four ways:
+      buy fear in an up-trend (what I had proposed) ... LOST, PF 0.5
+      fade the crowd, any trend (Slots 2+3 as built) .. LOST, PF 0.7
+      go WITH the crowd in the trend's direction ...... made, PF 1.4
+      the trend alone ................................. made, PF 1.4
+    **THE MONEY WAS IN THE TREND. THE FUNDING AND MOOD READINGS ADDED
+    LITTLE OR NOTHING. FADING THE CROWD LOST - A BAD OMEN FOR SLOT 3.**
+
+**THE CANDIDATE IS WRITTEN DOWN IN THAT ENTRY, SECTION 4, AND MUST NOT BE
+CHANGED:** daily; BUY when price is above its 100-day average AND the
+crowd is greedy/long (Slot 2's or Slot 3's rule says short); SELL the
+mirror; stop 1.5 ATR, target 3.0 ATR; reported BESIDE the trend alone.
+**THE UNSEEN WINDOW IS 2026-07-26 ONWARD. IT IS NOT FETCHED. DO NOT LOOK
+AT IT BEFORE THE BUILD IS DONE: IT CAN ONLY BE UNSEEN ONCE.**
+
+**IT IS NOT A GAUNTLET SLOT AND NO GAUNTLET BAR IS CLAIMED FOR IT.** About
+113 days is roughly twenty trades: a first honest look, then live
+paper-watching. **HE HAS BEEN SHOWN THE TABLE AND ASKED FOR A GO. IF HIS
+ANSWER IS NOT IN THE LOG BELOW THAT ENTRY, ASK HIM.** On a go it is a
+build like the slots: bar alone; a forward store for candles, funding
+and mood after 2026-07-25 (frozen, checksummed; the vault untouched);
+the strategy; a runner that prints ONLY trades entered after 2026-07-25
+(the rule walks the hold-out of Slots 1 and 3 to warm up - those months
+must not be printed or saved); gates; attack.
 
 ---
 
