@@ -18345,3 +18345,10 @@ entry and the orders are the only things changed.
 
 **SLOT 1 AND SLOT 2 ARE BOTH SET UP, GATED AND UNRUN. ALL THREE SLOTS OF
 THE PROMISE ARE UNSPENT. `lab/results/` HOLDS NO SLOT MARKER.**
+
+**>>> AND THE ONE LINE WAS ASKED, THE SAME EVENING.** Asked whether the next
+session should look for a free data source for idea 3, **HIS ANSWER,
+VERBATIM: "No, just wait".** So my reading above (option 4, idea 3 next)
+was WRONG and is corrected here: **nothing is to be run and nothing new is
+to be started on the signals side until he says so.** Slot 3 is not
+started and its data question stays on his desk, unasked. No code changed.

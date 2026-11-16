@@ -1,4 +1,4 @@
-# ZAR X — **YOUR JOB: TWO TESTS ARE SET UP AND NEITHER HAS BEEN RUN, BY THE COMMANDER'S CHOICE ("NOT YET"). CONFIRM IN ONE LINE THAT HE WANTS IDEA 3 NEXT, THEN FIND OUT WHETHER SLOT 3 HAS A FREE DATA SOURCE. RUN NOTHING WITHOUT HIS WORD.**
+# ZAR X — **YOUR JOB: TWO TESTS ARE SET UP AND NEITHER HAS BEEN RUN, BY THE COMMANDER'S CHOICE ("NOT YET"). AND HE HAS SAID "NO, JUST WAIT" ABOUT IDEA 3. PHASE 6 IS PARKED UNTIL HE SPEAKS. PROVE THE SHIP ALIVE, ASK HIM WHAT HE WANTS, AND RUN NOTHING WITHOUT HIS WORD.**
 
 *Written 2026-11-16 (evening) by Fable. He opened the session with "zarx..
 fable set up idea 2 and do it smartly". **I read that as his word that the
@@ -108,22 +108,25 @@ continue"*. **R-006 is WAIVED for builds made by Fable, not cleared.**
 
 **THE QUESTION BELOW WAS PUT TO HIM AND IS ANSWERED. DO NOT ASK IT AGAIN
 UNLESS HE RAISES IT.** Shown the four options with no recommendation, his
-whole answer was *"Not yet"*. Neither slot is run. **My reading: option
-(4). But he did not repeat the words "idea 3", so ASK ONE LINE FIRST:**
-*"You said not yet. Shall I look for a free data source for idea 3, the
-on-chain cycle thermometer?"*
+whole answer was *"Not yet"*. Neither slot is run.
 
-**IF YES, YOUR PART 2 IS A FINDING-OUT JOB, NOT A BUILD:** is there a free,
-keyless (or free-key) source of an on-chain cycle measure - MVRV or
-similar - with DAILY HISTORY back to at least 2023-07-28 for BTC (and say
-plainly whether ETH and SOL have one at all)? **MEASURE IT, do not assume
-it**: the plan once said funding history was not served deep, and that
-was wrong. Report what exists, how far back, and what it costs. **IF NO
-FREE SOURCE EXISTS, HE MAY RE-SPECIFY SLOT 3 ONCE, BEFORE ANY TESTING -
-that is his decision, put to him in easy words. DO NOT WRITE A BAR FOR
-SLOT 3 UNTIL THE DATA QUESTION IS SETTLED WITH HIM.** And remember the
-lesson of both slots so far: say what candle, what count of trades and
-what cost wall BEFORE he is asked for a go.
+**THEN HE WAS ASKED THE ONE LINE - should the next session look for a free
+data source for idea 3? - AND ANSWERED: *"No, just wait"*.** So:
+
+    DO NOT RUN SLOT 1 OR SLOT 2.
+    DO NOT START SLOT 3, AND DO NOT ASK HIM ABOUT IT AGAIN UNLESS HE
+    RAISES IT.
+    PHASE 6 WAITS FOR HIS WORD. He can come back to any of it whenever
+    he likes; both setups stay in the repo, gated.
+
+**THIS IS THE ONE CASE WHERE ASKING HIM WHAT HE WANTS IS RIGHT**: he has
+parked the only job these orders had. Prove the ship alive, tell him in
+two easy lines where things stand, and ask. **THINGS HE MIGHT WANT THAT
+NEED NO SLOT** (offer, do not push): being walked through logging ONE
+made-up trade with `LOG_TRADE.bat` and reading it in `MIRROR.bat` - he
+said he does not know how; the small items on his desk below; or, if
+he lets you and you are not Fable, repeating R-090 item 1 and attacking
+the two setups before either is ever run.
 
 ## THE QUESTION THAT WAS ON HIS DESK (ANSWERED - KEPT FOR THE RECORD)
 

@@ -442,8 +442,8 @@ answer, built into this plan:
 ## **>>> 2026-11-16 (EVENING): GAUNTLET SLOT 2, THE FUNDING-RATE FADE, IS SET UP AND NOT RUN. BOTH SLOT 1 AND SLOT 2 NOW WAIT FOR THE COMMANDER'S WORD. ALL THREE SLOTS ARE UNSPENT.**
 
 **>>> AND THEN HE RULED, THE SAME EVENING: "NOT YET".** Neither slot is
-run. **NEXT: confirm he wants idea 3 looked at, then settle whether Slot 3
-has a free data source.**
+run. Asked whether idea 3 should be looked at next, he said **"No, just
+wait"**. **PHASE 6 IS PARKED UNTIL HE SPEAKS. SLOT 3 IS NOT STARTED.**
 
 **WHERE THE SHIP IS.** Twenty-six invocations, every exit 0, **1,699 green,
 0 red - MEASURED after the last change**:
