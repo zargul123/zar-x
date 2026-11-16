@@ -17619,3 +17619,420 @@ p(2A - 0.3) >= 1.15 (1 - p)(1.5A + 0.3):
 
 **THE "ROUGHLY" IS GENERAL KNOWLEDGE, NOT A MEASUREMENT** - the real ATR
 is price data in the vault and I did not look.
+
+
+# 2026-11-16 (EVENING) - FABLE'S SESSION. **GAUNTLET SLOT 2, THE FUNDING-RATE EXTREME FADE: THIS IS THE BAR, DECLARED BEFORE ANY CODE EXISTS AND BEFORE ONE FUNDING RATE IS FROZEN ON THE DISK. NOTHING IS RUN.**
+
+**This entry is committed ALONE, with no `.py` and no data file in the commit.**
+
+## 1. THE RULING, VERBATIM
+
+He opened the session with: *"zarx.. fable set up idea 2 and do it
+smartly"*. **MY READING, LABELLED AS MINE: that is him saying, in words, in
+this conversation, that this session is Fable** - the same shape as
+yesterday's *"zarx and this session is for fable"*. So his rulings of
+2026-11-14 and 2026-11-15 apply: the last builds (Fable's) are not attacked,
+and no other model checks what this session builds. **R-006 stays WAIVED for
+this build, not cleared. I file more against myself, not less.** If a later
+session doubts the reading, ask him once.
+
+"Idea 2" is the slot he chose on 2026-11-16 (*"Not yet - do idea 2"*).
+**Slot 1 stays set up, unspent and untouched: not one byte of
+`signals/turtle.py` or `lab/gauntlet.py` is changed by this build, and I
+will prove it with `git diff`.**
+
+**THE SHIP WAS PROVED ALIVE FIRST, MEASURED, NOT SUMMED.** Twenty
+invocations, 11:59 to 12:07 UTC, every one exit 0:
+
+    fear_greed 58 - funding 71 - open_interest 88 x2 - news 54
+    events 69 x2 - whales 111 x2 - carry 87 x2 - log_trade 101 x2
+    mirror 84 x2 - turtle 39 x2 - gauntlet 44 x2      = 1,429 green, 0 red
+    collection_guard 25 OK - vault INTACT 6 of 6 - Brief 3/3
+    lab/results/ holds no slot marker - journal/my_trades.csv does not exist
+
+Red was counted three ways (the tick marks, each gate's own verdict line,
+and a word search read by eye): the word-hits are the funding gate's prose
+about old escapes (`[old gate: ESCAPED] -> CAUGHT` is a PASS line), the
+drill headings, and the gauntlet's hand cases that are SUPPOSED to print
+FAILED. **The orders' 1,429 is measured again: 1,429.**
+
+## 2. WHAT I MEASURED BEFORE WRITING THIS BAR, AND ON WHICH ROWS
+
+**EVERY ROW NAMED, BECAUSE THIS IS THE EASIEST PLACE ON THE SHIP TO FIT A
+NUMBER TO THE EXAM PAPER.** All of it in a scratch folder outside the repo.
+
+1. **FUNDING SETTLED BEFORE THE HOLD-OUT LINE, AND ONLY THAT.** Binance
+   `/fapi/v1/fundingRate` for BTCUSDT, ETHUSDT, SOLUSDT, asked with
+   `endTime` = one millisecond before 2025-10-01 00:00 UTC, so **no
+   hold-out rate was sent to this machine**; the script also refuses if
+   one arrives. 3,012 settlements a coin, 2023-01-01 00:00 to 2025-09-30
+   16:00, **exactly three in every one of the 1,004 days** (00:00, 08:00,
+   16:00 UTC), never more than 29 milliseconds after the mark. 34% of them
+   are exactly +0.0100% (Binance's resting rate); negative ones are 9.9%
+   (BTC), 9.4% (ETH), 24.4% (SOL).
+2. **THE VAULT'S CLOCK, ON TRAINING ROWS OF JANUARY-MARCH 2024 ONLY -
+   DIFFERENCES PRINTED, NEVER A PRICE.** The vault's BTC 4-hour closes
+   against Binance spot 4-hour closes: median difference 0.000% when the
+   labels are read as the same UTC opening time, about 0.5% when shifted
+   one candle either way. And the vault's daily close of day D sits on the
+   4-hour candle that opens at D 20:00 (0.014%), not the one before or
+   after (0.55%, 0.44%). **SO: A VAULT CANDLE IS LABELLED BY ITS OPENING
+   TIME, IN UTC, AND A DAILY CANDLE IS THE UTC DAY 00:00 TO 24:00.** This
+   is the fact the whole no-leak rule below stands on, and it is now a
+   measurement, not an assumption. (TwelveData was never told a timezone;
+   nobody had checked.)
+3. **THE DAILY VAULT'S DATE COLUMN** (no price): 1,094 candles a coin,
+   2023-07-28 to 2026-07-25. By the engine's rule (`index > train_end`)
+   797 are training (the 2025-10-01 candle included) and **297 are
+   hold-out, 2025-10-02 to 2026-07-25.**
+4. **THE TRAINING SIDE'S DAILY RANGE, FOR THE COST ARITHMETIC** (rows
+   before 2025-10-01 only; one figure a coin): the median 14-day average
+   true range is **3.3% of price on BTC, 4.6% on ETH, 6.3% on SOL.**
+5. **THE RULE BELOW WAS WRITTEN DOWN FIRST - 90 DAYS, 81 OF THEM - AND THEN
+   COUNTED ONCE ON THE TRAINING FUNDING. IT WAS NOT CHANGED AFTER THE
+   COUNT. NO OTHER RULE AND NO OTHER NUMBER WAS TRIED.** The count, on 706
+   judged training days a coin: SHORT signals on 12.7% (BTC), 14.2% (ETH),
+   15.6% (SOL) of days; LONG on 5.2%, 5.1%, 8.9%. Then the real training
+   funding was paired with MADE-UP prices (random walks, 3.5% a day) and
+   put through the Lab's real engine, 20 worlds, on two stretches of 297
+   training days: **pooled trades 44 to 68, median 53 and 58; 30 or more
+   in 40 of 40; a trade lasted a median of 5 days.**
+
+**NO PRICE-BASED RESULT OF THIS STRATEGY EXISTS. I have not paired the real
+funding with the real candles anywhere, training side included, and I will
+not: the first time they meet is the run.**
+
+---
+
+# >>> GAUNTLET SLOT 2 - THE BAR
+
+**THE SLOT'S LOCKED WORDS** (`EXECUTION_PLAN.md`): *"Slot 2: Funding-rate
+extreme fade."* In trader's words: when the funding rate on the perpetual
+is extremely positive, longs are crowded and paying heavily - fade them
+(short). Extremely negative - the reverse.
+
+## THE CANDLE: DAILY. AND WHY, BEFORE ANY RESULT
+
+  * **COSTS.** Under the ship's exit (stop 1.5 ATR, target 2.0 ATR, 0.3%
+    of the position there and back) a coin-flip entry wins 42.9%. To
+    clear a Profit Factor of 1.15 the win rate p must satisfy
+    p(2A - 0.3) >= 1.15 (1 - p)(1.5A + 0.3), A being the ATR as a
+    percentage of price. With the training side's measured daily figures:
+
+        BTC  A = 3.3%  ...  p >= 48.9%
+        ETH  A = 4.6%  ...  p >= 48.2%
+        SOL  A = 6.3%  ...  p >= 47.7%
+        (a 4-hour candle, A about 1%: p >= 54.9% - Slot 1's wall)
+
+    **ON DAILY CANDLES THE FADE MUST BE RIGHT ABOUT 48 OR 49 TIMES IN 100,
+    AGAINST 43 BY CHANCE. THAT IS FIVE OR SIX POINTS BETTER THAN A COIN,
+    AFTER COSTS. HE IS TOLD THIS BEFORE HE IS ASKED FOR A GO.**
+  * **THE COUNT.** Slot 1 on daily candles could not reach 30 trades. This
+    one can: 44 to 68 on training funding (section 2, item 5).
+  * **THE IDEA ITSELF IS A DAYS-LONG ONE.** Funding is paid three times a
+    day; crowding builds and unwinds over days.
+
+## THE RULES OF THE STRATEGY - EVERY NUMBER, AND WHERE IT COMES FROM
+
+Asked at the close of each daily candle, using only what is known then:
+
+    THE DAY'S     The three funding rates Binance SETTLED inside that UTC
+    FUNDING       day - at 00:00, 08:00 and 16:00 - added up. Kept as a
+                  whole number of hundred-millionths (Binance prints eight
+                  decimals), so that "equal" means exactly equal.
+                  **THE LAST RATE USED SETTLED AT 16:00, EIGHT HOURS BEFORE
+                  THE CANDLE CLOSES. THE RATE THAT SETTLES AT THE CLOSE
+                  ITSELF (24:00) IS NOT USED: IT BELONGS TO THE NEXT DAY.**
+
+    EXTREMELY     Today's funding is ABOVE ZERO, and strictly above AT
+    POSITIVE      LEAST 81 OF THE PREVIOUS 90 DAYS' (today not included).
+                  -> SHORT.
+
+    EXTREMELY     Today's funding is BELOW ZERO, and strictly below AT
+    NEGATIVE      LEAST 81 OF THE PREVIOUS 90 DAYS'.
+                  -> LONG.
+
+    WARM-UP       No signal until 91 daily candles exist (today + 90).
+                  NOT A CHOICE: the fewest that can answer the rule.
+
+    Otherwise: flat. A day equal to another counts as neither above nor
+    below it.
+
+**WHERE THE NUMBERS COME FROM, SAID STRAIGHT:**
+
+  * **"EXTREME" IS NOT A FUNDING RATE TYPED INTO THE CODE. IT IS A RANK:
+    the top tenth (or bottom tenth) of the coin's own last 90 days.** So
+    there is no threshold that could have been fitted to the hold-out, or
+    to anything - the rule carries no number worked from any data. What
+    counts as extreme moves with the market's own recent history.
+  * **90 DAYS (A QUARTER) AND 81 OF 90 (NINE IN TEN) ARE MY NUMBERS, CHOSEN
+    ALONE, BEFORE ANY COUNT, AND FILED AGAINST ME.** They are round,
+    conventional figures - a quarter, a tenth. They are not published
+    constants the way the Turtles' 20 was.
+  * **"ABOVE ZERO" / "BELOW ZERO" IS THE SLOT'S OWN WORDS** - extremely
+    POSITIVE, extremely NEGATIVE. A low reading that is still positive
+    means longs are still the ones paying; it is not a crowd of shorts,
+    and the rule does not buy it.
+  * The exit is NOT this strategy's. The Lab's engine manages every trade
+    with the ship's stop (1.5 ATR) and target (2.0 ATR), enters at the
+    NEXT day's open, and asks the strategy only when no trade is open.
+
+**NO PARAMETER IS SEARCHED, TUNED OR TRIED. ONE SET OF NUMBERS: 90, 81,
+91.** The strategy's name is `funding-fade-1d-90d-top10`. Every number
+goes into the engine's fingerprint.
+
+## >>> THE FUNDING DATA: FETCHED ONCE, FROZEN, CHECKSUMMED, NEVER REFRESHED
+
+**THE LAB TESTS ON FROZEN EVIDENCE ONLY, AND THE VAULT HOLDS CANDLES ONLY.**
+So:
+
+  * **`lab/funding_vault/`** - a new folder BESIDE the vault, not inside it
+    (the vault is 6 files of 6 and stays so). One file a coin,
+    `BTCUSDT_funding.csv`, `ETHUSDT_funding.csv`, `SOLUSDT_funding.csv`:
+    two columns, the settlement time in milliseconds and the rate EXACTLY
+    AS BINANCE'S TEXT SERVED IT. Plus `MANIFEST.json` with each file's row
+    count, first and last time, byte count and SHA-256. Git is told not to
+    touch a byte of it (`* -text`), as for the vault.
+  * **WHAT IS FETCHED:** every settlement from 2023-07-28 00:00 UTC up to
+    but not including 2026-07-26 00:00 UTC - the 1,094 days the daily
+    vault covers and not a day more. **BY ARITHMETIC THAT IS 1,094 x 3 =
+    3,282 ROWS A COIN. THE BUILD REFUSES TO FREEZE ANYTHING ELSE:** exactly
+    3,282 rows, exactly three in every UTC day, each within one second
+    after 00:00 / 08:00 / 16:00, every rate a number of at most eight
+    decimals and no larger than 5% either way (the ship's own
+    `MAX_PLAUSIBLE_RATE`). A day with two settlements or four is a
+    refusal, not a guess.
+  * **ONCE.** The builder refuses to run if the manifest exists. It is
+    never refreshed. Funding history does not change after it is settled,
+    and I will prove the freeze against what I already hold: **the frozen
+    files' rows before 2025-10-01 must equal, rate for rate, the training
+    rows fetched for section 2.**
+  * **>>> THE HOLD-OUT'S FUNDING RATES ARRIVE ON THE DISK THE MOMENT THE
+    FREEZE IS BUILT. NOTHING I WRITE PRINTS, PLOTS OR SUMMARISES A RATE.**
+    The builder and the verifier print row counts, dates and checksums.
+    **A rate is a result here: how often the hold-out was "extreme" is the
+    trade count.** No gate opens the frozen folder; every gate works on
+    funding it makes up.
+  * **HOW THE RATES REACH THE STRATEGY (LAW 7 - THE HEART OF THIS BUILD).**
+    A strategy must carry no data, and the engine's contract hands it one
+    thing: the candles up to now. **So the day's funding rides INSIDE the
+    frame, as one more column of the candle it belongs to.** The runner
+    joins it on BEFORE the engine starts; the engine then hands the
+    strategy `df.iloc[:i+1]` exactly as it always has - **THE ENGINE'S OWN
+    WALL, UNCHANGED, IS WHAT KEEPS TOMORROW'S FUNDING OUT, the same wall
+    that keeps tomorrow's price out.** The strategy object holds three
+    integers and a name. `lab/engine.py` is not touched.
+    **THE JOIN'S RULE:** a settlement belongs to the candle whose day
+    contains it: candle opening time <= settlement time < opening time +
+    24 hours. A settlement stamped exactly at a candle's opening belongs
+    to THAT candle (it is 24 hours before that candle closes); one stamped
+    exactly at its close belongs to the NEXT.
+
+## WHAT IT IS TESTED ON
+
+  * **BTC-USD, ETH-USD and SOL-USD, DAILY candles, from the frozen vault**
+    (1,094 each), with the frozen funding of BTCUSDT, ETHUSDT, SOLUSDT.
+  * The hold-out line `2025-10-01`, unmoved: **297 hold-out candles a
+    coin, 2025-10-02 to 2026-07-25.** Trades ENTERED after the line count.
+  * Capital 10,000 a coin; the three coins' hold-out trades POOLED into
+    one list in order of entry; **ONE VERDICT FOR THE SLOT.**
+
+## THE FIVE BARS AND THE ALARM - COPIED, NOT REWRITTEN
+
+    B1  pooled hold-out Profit Factor >= 1.15, AFTER costs
+    B2  pooled hold-out trades >= 30
+    B3  walk-forward on the pooled hold-out trades, six windows cut on
+        the hold-out's own 297 candles: CONSISTENT
+    B4  Monte Carlo, seed 20260726, 10,000 paths: 5th-pct drawdown < 30%
+    B5  STRICTLY beats buy-and-hold with 1% risk sizing, same window,
+        defined exactly as on 2026-11-15
+    ALARM  Profit Factor above 2.0 or win rate above 70%: WITHHELD.
+
+**THEY ARE NOT ONLY COPIED IN WORDS: THE SLOT 2 RUNNER IMPORTS THE SAME
+`battery`, `pool`, `buy_and_hold` AND `compound` FROM `lab/gauntlet.py` THAT
+SLOT 1 USES, AND ITS GATE PROVES THEY ARE THE SAME OBJECTS.** Costs, the
+risk rule (1% with the 25% cap), the engine, the yardstick: unchanged.
+
+## >>> WHAT THIS TEST DOES NOT MODEL, SAID BEFORE ANY RESULT
+
+1. **THE FUNDING PAYMENTS THEMSELVES ARE NOT COUNTED.** A short opened
+   when funding is extremely positive is PAID funding while it is held; a
+   long opened when it is negative likewise. The engine knows nothing of
+   that. **THIS UNDERSTATES THE FADE, SLIGHTLY, AND IN THE HONEST
+   DIRECTION** - at an extreme of 0.1% a day over a 5-day trade it is
+   worth about 0.5% of the position, against a target of 6% or more. I
+   leave it out rather than change the engine.
+2. **THE CANDLES ARE SPOT PRICES (TwelveData BTC/USD); THE FUNDING IS THE
+   BINANCE PERPETUAL'S.** A real fade is traded on the perpetual, whose
+   price sits a little off spot - by the very premium the funding
+   measures. Not modelled.
+3. **THE THREE COINS' FUNDING EXTREMES COME TOGETHER** - leverage builds
+   across the whole market at once. So the pooled trades overlap even
+   more than Slot 1's would, and 30 of them are worth fewer than 30
+   independent ones. R-088's point about pooling, sharper here.
+4. **THE EXIT IS THE SHIP'S, NOT A FADER'S.** A stop 1.5 ATR away is close
+   for a trade that leans against a crowd: crowds stay crowded. If the
+   idea needs room to be wrong for a week, this test will not give it.
+   That is what the ship would trade, and it is the test.
+5. **SHORT SIGNALS WILL OUTNUMBER LONG ONES** - about 13-16% of training
+   days against 5-9% - because funding is positive most of the time.
+   The hold-out may differ; I have not looked.
+6. **297 DAYS OF ONE STRETCH OF MARKET.** A pass is a place in Phase 7's
+   proving voyage, on paper. It is not proof the strategy makes money.
+
+## THE THREE GATES THAT MUST PASS BEFORE HE IS ASKED FOR "GO"
+
+**GATE 6.3-D - `lab/funding_vault.py --gate`.** On made-up settlements;
+never the network, never the frozen folder, never the vault:
+
+  * the page-by-page fetch, on a fake server: 1,000 rows a page, the next
+    page asked from one millisecond after the last, stopping at the end;
+    the same rows whatever order a page arrives in; a repeated row is a
+    refusal;
+  * every refusal of the freeze, each forced alone: a row short, a row
+    over, two settlements in a day, four in a day, a settlement off the
+    clock, a rate that is not a number, more than eight decimals, a rate
+    over 5%;
+  * the builder refuses to overwrite an existing freeze;
+  * the verifier: INTACT on an untouched freeze; one changed byte, a
+    missing file, a file not in the manifest - each caught;
+  * THE JOIN, by hand: a settlement exactly at a candle's opening is IN
+    that candle; exactly at its close is in the NEXT; the three add up in
+    whole hundred-millionths; a day short of three settlements is empty,
+    not a partial sum; candles that are not one day apart are refused;
+    **AND THE POISON TEST: every settlement after a chosen day changed,
+    and not one earlier candle's funding moves;**
+  * the permanent drill, at least eight breaks, none INERT, all restored;
+    the gate knows its own count.
+
+**GATE 6.3-S - `signals/funding_fade.py --gate`.** On made-up frames:
+
+  * every declared number typed out in the gate and inside `params`;
+  * the rank at the exact value where it turns over, ON BOTH SIDES (rule
+    (o)): above exactly 80 of 90 is FLAT and above 81 is SHORT; below 80
+    FLAT, below 81 LONG; a day EQUAL to others is not above them;
+  * the sign: the highest reading in 90 days that is negative or zero is
+    FLAT; the lowest that is positive or zero is FLAT; zero exactly is
+    FLAT on both sides;
+  * today is not in its own window; the window is exactly 90 and not 89
+    or 91;
+  * 90 candles FLAT, 91 judged; a frame shorter than that FLAT without
+    raising; an empty day anywhere in the 91 FLAT;
+  * **a frame with NO funding column RAISES - it must never quietly
+    answer "flat" 1,094 times and hand back a false obituary;**
+  * the price columns do not matter: the same funding on different
+    candles gives the same answer;
+  * a second writing-out of the rule, sharing no code, agreeing on every
+    judged candle of at least 4,000 made-up days, both directions
+    signalled;
+  * Law 7: leak scan clean and proved awake; the frame untouched; no
+    memory between calls; numpy the only import; no file, no clock;
+  * the permanent drill, at least ten breaks, none INERT, all restored;
+    the vault and the frozen funding never opened; the gate knows its
+    count.
+
+**GATE 6.3-R - `lab/gauntlet_slot2.py --gate`.** The whole run rehearsed on
+three made-up coins wearing the daily vault's own shape (1,094 candles,
+797 training, 297 hold-out, the first hold-out candle 2025-10-02) with
+made-up funding, through the Lab's real engine:
+
+  * **THE PRE-FLIGHT REFUSES BEFORE THE MARKER, AND A REFUSAL SPENDS
+    NOTHING:** a frozen folder that fails its checksums stops the run with
+    no marker written and the vault never asked for;
+  * the marker down before the candles are asked for; the door knocked on
+    three times FOR `1d`;
+  * the funding joined to the right coin's candles (three coins given
+    three different made-up fundings, each trade checked against its own);
+  * the pooled count equal to the evidence files added up; the Profit
+    Factor re-worked from the saved file; every evidence row carrying the
+    fingerprint of the DECLARED settings typed out in the gate; every
+    hold-out trade's row re-worked; the yardstick re-worked from the
+    candles by plain arithmetic;
+  * **EVERY TRADE RE-DERIVED FROM THE FUNDING BY HAND: its entry is the
+    candle after a day whose funding, by the gate's own second writing of
+    the rule, was extreme on that side;**
+  * **THE POISON TEST THROUGH THE WHOLE RUN: with every settlement after a
+    chosen day replaced, every trade entered up to the day after it is
+    identical;**
+  * a second run refused; a coin one candle short stops the run with no
+    verdict; a candle with no funding stops it with no verdict;
+  * the spy where the run would be; the real results folder unchanged;
+    the frozen funding and the vault never opened;
+  * the five bars are Slot 1's own objects, and three hand cases still
+    read PASSED / FAILED / WITHHELD through this runner;
+  * every locked number typed out, the timeframe `1d` among them;
+  * the permanent drill; the gate knows its count.
+
+**ALL THREE ARE THEN ATTACKED BY REAL TEXT EDITS in copies outside the repo
+that hold no vault and no frozen funding, control first, the attack list
+and my predictions written before it is run.** And all twenty other
+invocations are re-run.
+
+## THE AWKWARD CASES, NAMED BEFORE THE CODE EXISTS
+
+  * **A SETTLEMENT STAMPED A FEW MILLISECONDS AFTER MIDNIGHT** (measured:
+    up to 29 ms). It belongs to the day that has just begun. One stamped
+    a millisecond BEFORE midnight would belong to the day ending - none
+    has been seen, and the freeze refuses any settlement more than one
+    second off its mark.
+  * **THE 2025-10-01 CANDLE IS TRAINING** by the engine's rule; a signal at
+    its close is entered at the 2025-10-02 open and counts.
+  * **MANY DAYS EXACTLY EQUAL** (a third of all settlements are exactly
+    +0.0100%). "Strictly above" with whole numbers settles every tie the
+    same way on every machine.
+  * **THE HIGHEST FUNDING IN 90 DAYS IS STILL NEGATIVE**, or the lowest is
+    still positive. Flat.
+  * **A SIGNAL WHILE A TRADE IS OPEN** is never asked for. A run of ten
+    extreme days is one trade, then another if it is still extreme when
+    the first has closed.
+  * **A SIGNAL AT THE LAST CANDLE** has no next open and is never entered.
+  * **THE RUN DIES AFTER THE MARKER.** The slot is spent. That is why the
+    pre-flight exists, why a missing column raises at the first candle
+    rather than the last, and why the whole run is rehearsed first.
+  * **THE REGIME READING AT ENTRY** (information only) is worked by the
+    ship's indicator library on a frame that now has a sixth column. If
+    it cannot cope, the engine already records "Offline" and carries on.
+    The rehearsal will show which.
+  * Everything on Slot 1's list about the pooled bars still applies.
+
+## MY PREDICTIONS, WRITTEN BEFORE ANYTHING IS BUILT (rule (m))
+
+On made-up worlds - three coins, 1,094 daily candles, made-up prices
+(trendless random walks) and made-up funding that wanders and clusters:
+
+    pooled hold-out trades ....... median between 35 and 75; 30 or more
+                                   in at least 54 of 60 worlds
+    false passes on noise ........ at most 3 of 60
+    each of the three gates ...... under a minute
+    the regime reading ........... copes with the extra column
+
+**If the count prediction is wrong on the low side, he is told before he
+is asked for a go.**
+
+## THE RUN ITSELF
+
+    python lab/gauntlet_slot2.py --go
+
+**ONCE.** Pre-flight, then the marker, then the vault; everything printed
+saved; no second try. **AND THE ONE STOP STANDS: he is shown in plain words
+exactly what is about to be tested, and says go. I do not type that
+command without his word, in this session or any other.**
+
+## WHAT THIS BAR DOES NOT CLAIM
+
+It does not claim 90 and 81 are the only honest numbers; they are the ones
+written down, before any count. It does not claim a pass means money. It
+does not claim the fade has been tested with its funding income, on the
+perpetual's own price, or with a fader's exit. **AND IT DOES NOT CLAIM
+ANYBODY BUT ITS AUTHOR HAS READ IT.**
+
+## WHAT I HAVE LOOKED AT, IN BOLD AS THE RITUAL ASKS
+
+**FUNDING: every settlement of the three contracts from 2023-01-01 to
+2025-09-30 16:00 UTC - TRAINING SIDE ONLY, and of those only counts,
+dates, signs and the signal counts above. NOT ONE RATE SETTLED ON OR AFTER
+2025-10-01. VAULT: the date column of the daily files; the BTC 4-hour and
+daily CLOSES AND OPENS of January-March 2024 as differences against Binance
+and against each other (no price printed); and the training side's daily
+high, low and close of all three coins, reduced to one median range figure
+a coin. NO HOLD-OUT PRICE, OF ANY COIN, ON ANY CANDLE.**
