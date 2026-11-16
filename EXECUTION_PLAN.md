@@ -300,7 +300,8 @@ THE THREE SEALED SLOTS (from README/THE PROMISE — no substitutions):
   BEFORE ANYTHING HAD BEEN RUN** - the daily test could not reach 30 trades
   on made-up markets. The struck word is left visible. The bar is
   PROGRESS_LOG.md, 2026-11-16.
-- Slot 2: Funding-rate extreme fade. ~~(needs funding history collected since
+- Slot 2: Funding-rate extreme fade. **SET UP 2026-11-16 (evening), NOT RUN:
+  daily candles; the bar is PROGRESS_LOG.md of that date.** ~~(needs funding history collected since
   Phase 3/4 — start recording funding to CSV the day Phase 3.2 ships)~~
   **CORRECTED 2026-07-26 — the struck text was never true and was written from
   assumption:** Binance serves settled funding history back to contract
@@ -438,6 +439,55 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-16 (EVENING): GAUNTLET SLOT 2, THE FUNDING-RATE FADE, IS SET UP AND NOT RUN. BOTH SLOT 1 AND SLOT 2 NOW WAIT FOR THE COMMANDER'S WORD. ALL THREE SLOTS ARE UNSPENT.**
+
+**WHERE THE SHIP IS.** Twenty-six invocations, every exit 0, **1,699 green,
+0 red - MEASURED after the last change**:
+
+    cockpit/fear_greed.py   58     cockpit/funding.py      71
+    data/open_interest.py   88 x2  data/collection_guard.py  25 OK
+    cockpit/news.py         54     cockpit/events.py       69 x2
+    cockpit/whales.py      111 x2  cockpit/carry.py        87 x2
+    journal/log_trade.py   101 x2  journal/mirror.py       84 x2
+    signals/turtle.py       GATE 6.2-S   39 x2
+    lab/gauntlet.py         GATE 6.2-R   44 x2
+    lab/funding_vault.py    GATE 6.3-D   52 x2   (new)
+    signals/funding_fade.py GATE 6.3-S   44 x2   (new)
+    lab/gauntlet_slot2.py   GATE 6.3-R   39 x2   (new)
+    vault INTACT 6 of 6 - frozen funding INTACT 3 of 3 - Brief 3/3
+    lab/results/ holds NO slot marker
+
+**SLOT 2 AS DECLARED** (`PROGRESS_LOG.md` 2026-11-16 evening, commit
+`b1e7fe5`): on BTC, ETH and SOL **daily** candles, each day's funding is
+the three rates Binance settled inside that UTC day, added up. SHORT when
+it is above zero and strictly above at least 81 of the previous 90 days';
+LONG when below zero and strictly below at least 81. Warm-up 91 candles.
+Exits by the ship's own stop and target; the three coins' hold-out trades
+(297 candles each) POOLED into one verdict against the five locked bars,
+which are Slot 1's own code, imported. The funding history is frozen in
+`lab/funding_vault/`, 3,282 rows a coin, checksummed.
+
+**WHAT IS BROKEN OR UNPROVEN, SAID PLAINLY.**
+
+**NOBODY BUT THE AUTHOR HAS READ THE BAR, THE FREEZE, THE STRATEGY OR THE
+RUNNER.** R-090, twenty items, not a Category B item. **Its first item is
+the one the no-leak rule stands on: the vault's clock, measured by the
+author for all three coins on two training-side quarters, by nobody
+else.**
+
+**ON MADE-UP MARKETS** the test found plenty of trades (median 67), passed
+noise 2 times in 60, and cleared the profit bar in 24 of 24 worlds where
+the fade was really true. A subtle edge was not tried.
+
+**THE TWO COMMANDS THAT EACH SPEND A SLOT FOR EVER, AND MUST NOT BE TYPED
+WITHOUT HIS WORD:**
+
+    python lab/gauntlet.py --slot 1 --go
+    python lab/gauntlet_slot2.py --go
+
+**SLOT 3 (the on-chain cycle thermometer) IS NOT STARTED** and its data
+source is still an open question on his desk.
+
 ## **>>> 2026-11-16: THE COMMANDER RE-SPECIFIED SLOT 1 TO 4-HOUR CANDLES. IT IS REBUILT, REHEARSED, ATTACKED - AND NOT RUN. THE COUNT PROBLEM IS GONE; THE LIKELIEST RESULT IS NOW A FAIL ON PROFIT AFTER COSTS. IT WAITS FOR HIS WORD.**
 
 **>>> AND THEN HE RULED, THE SAME DAY: "NOT YET - DO IDEA 2".** Slot 1 stays

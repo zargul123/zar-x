@@ -695,3 +695,28 @@ not exist and has now waited four sessions.**
 | **A TRADE UNDER THE SHIP'S EXIT LASTS ABOUT FIVE 4-HOUR CANDLES.** | Median of 72 made-up worlds: 5.0 candles, 20 hours. Win rate about 43%, which is what a 1.5 stop against a 2.0 target gives a coin flip. |
 | **THE REHEARSAL GATE TAKES 48 SECONDS**, the strategy gate 5. | Six times the candles of the daily rehearsal (11 s). |
 | **THE VANE'S 4h ENTROPY LINE OVERLAPS THE HOLD-OUT.** | `config.py` calls 1.96 "p70 pre-2026"; the hold-out begins 2025-10-01. Not used by Slot 1 for that reason. |
+
+
+# **>>> BUILT 2026-11-16 (EVENING) - GAUNTLET SLOT 2's SETUP, THE FUNDING-RATE FADE. NOT RUN.**
+
+| Part | What it is |
+|---|---|
+| **The frozen funding, `lab/funding_vault/`.** | Every funding settlement of BTCUSDT, ETHUSDT and SOLUSDT for the daily vault's 1,094 days: **3,282 rows a coin**, 2023-07-28 00:00 to 2026-07-25 16:00 UTC, with a manifest of SHA-256 checksums. Fetched once on 2026-11-16 and never refreshed. `python lab/funding_vault.py` says INTACT or not. **GATE 6.3-D, 52 checks, 0 red, twice.** |
+| **`lab/build_funding_vault.py`.** | The one fetch. Refuses to run a second time. The only network code in Slot 2's machinery; nothing the gauntlet runs imports it. |
+| **Slot 2's strategy, `signals/funding_fade.py`.** | Short when the day's funding is above zero and strictly above at least 81 of the previous 90 days'; long when below zero and strictly below at least 81. No rate is typed in: "extreme" is a rank. `funding-fade-1d-90d-top10`. **GATE 6.3-S, 44 checks, 0 red, twice**; its drill is fifteen real text edits to its own code, every run. |
+| **The Slot 2 runner, `lab/gauntlet_slot2.py`.** | Pre-flight (checksums, the vault's shape) BEFORE the marker, so a refusal spends nothing; then the marker; then the vault; the day's funding joined to its candle as one more column; the Lab's engine unchanged; Slot 1's five bars imported, not copied. **GATE 6.3-R, 39 checks, 0 red, twice.** The run is `python lab/gauntlet_slot2.py --go` and **has not been typed.** |
+
+## MEASURED 2026-11-16 (EVENING)
+
+| Fact | Measurement |
+|---|---|
+| **A VAULT CANDLE IS LABELLED BY ITS OPENING TIME, IN UTC.** | BTC, ETH and SOL 4-hour closes, January-March 2024 and April-June 2025, against Binance spot: median difference 0.000% at the same label, 0.4% to 1.2% one candle either side. The daily close of day D sits on the 4-hour candle opening D 20:00 (0.000% to 0.030%). **Training side only; measured by the build's author.** |
+| **BINANCE SETTLES FUNDING THREE TIMES IN EVERY DAY, ON THE CLOCK.** | 3,282 of 3,282 rows a coin: 00:00, 08:00, 16:00 UTC, never more than 29 ms late (training side) and never more than one second late (the whole freeze, or it would have been refused). |
+| **A THIRD OF ALL SETTLEMENTS ARE EXACTLY +0.0100%.** | 34% on each of the three contracts, 2023-01-01 to 2025-09-30. Negative: 9.9% BTC, 9.4% ETH, 24.4% SOL. |
+| **THE DAILY RANGE, TRAINING SIDE.** | Median 14-day ATR as a share of price, rows before 2025-10-01: BTC 3.3%, ETH 4.6%, SOL 6.3%. So under the ship's exit a strategy needs about 48-49 wins in 100 to clear a Profit Factor of 1.15 (a coin flip wins 42.9; a 4-hour candle needs 55). |
+| **SLOT 2's SIGNALS ON THE TRAINING FUNDING.** | 706 judged days a coin: SHORT on 12.7% (BTC), 14.2% (ETH), 15.6% (SOL); LONG on 5.2%, 5.1%, 8.9%. With made-up prices: 44 to 68 pooled trades in 297 days. |
+| **SLOT 2's TRADE COUNT ON MADE-UP WORLDS.** | 60 worlds: pooled hold-out trades 52 to 91, median 67; 30 or more in 60 of 60. A trade lasts a median of 5 days. |
+| **SLOT 2's PASS RATE ON MADE-UP WORLDS.** | Noise: **2 PASSED of 60.** A fade that is really true (0.3% a day against the crowd for 5 days): profit bar cleared 12 of 12; 3 PASSED, 6 WITHHELD by the alarm, 3 FAILED. Strongly true: 12 of 12 WITHHELD. |
+| **ON DAILY CANDLES THE 25% CAP NEVER BINDS.** | 0 of 5,755 made-up trades. Each trade risks exactly 1%. (On 4-hour candles every trade was capped.) |
+| **THE SLOT 2 REHEARSAL GATE TAKES TWO TO THREE MINUTES.** | It makes twelve whole runs for its drill. The other two new gates take seconds. |
+| **THE SHIP IS NOW TWENTY-SIX INVOCATIONS, 1,699 GREEN.** | The twenty of this morning (1,429) plus 52, 44 and 39, each twice. |

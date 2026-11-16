@@ -5483,4 +5483,98 @@ the run - Kimi, another AI, a person - **this list is what to hand it.**
 17. **I DID NOT ATTACK YESTERDAY'S PHASE 5 BUILD OR RE-READ `lab/engine.py`.**
     His ruling excused the first; R-088 item 10 still stands on the second.
 
-## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088 AND R-089 ARE NOT IN IT.
+
+## >>> R-090 - **AGAINST MY OWN SETUP OF GAUNTLET SLOT 2 (2026-11-16, EVENING): `lab/funding_vault.py`, `lab/build_funding_vault.py`, THE FREEZE IN `lab/funding_vault/`, `signals/funding_fade.py`, `lab/gauntlet_slot2.py` AND THE BAR OF `b1e7fe5`. NOBODY BUT ME HAS READ ANY OF IT.** OPEN - NOT CATEGORY B
+
+**Filed by Fable, the author. By the Commander's rulings of 2026-11-14 and
+2026-11-15 no session attacks this build and no other model reviews it, so
+this list is the only guard. R-006 is WAIVED for it, not cleared.**
+**A FAULT HERE CANNOT BE REPAIRED TOMORROW: THE SLOT IS SPENT WHEN IT RUNS.**
+R-088's items on pooling, the exit, the yardstick and the unread engine
+apply to this build word for word.
+
+**THE ONE THE WHOLE NO-LEAK ARGUMENT STANDS ON:**
+
+1. **THE VAULT'S CLOCK WAS MEASURED BY THE AUTHOR, ON TWO QUARTERS OF THE
+   TRAINING SIDE.** That a daily candle labelled D is the UTC day D was
+   checked for BTC, ETH and SOL on January-March 2024 and April-June 2025
+   (4-hour closes against Binance spot: 0.000% at the same label, 0.4% to
+   1.2% one candle either side; the daily close on the 20:00 4-hour
+   candle). **Every other stretch, the hold-out included, is assumed to be
+   on the same clock.** If a daily candle really closed some hours EARLIER
+   than 24:00 UTC, the day's 16:00 settlement could be later than the
+   close it is joined to - a leak of a few hours of funding. The table is
+   in `PROGRESS_LOG.md`, the Slot 2 account, section 9. A session that did
+   not build this could repeat it in five minutes.
+
+**DESIGN CHOICES THAT DECIDE THE VERDICT AND WERE MADE BY ME ALONE:**
+
+2. **90 DAYS AND 81 OF THEM.** Round figures, mine, written before any
+   count and not changed after it - but not published constants.
+3. **"EXTREME" IS A RANK IN THE COIN'S OWN LAST 90 DAYS, NOT A RATE.** In
+   a quiet quarter a small funding rate ranks as extreme. Another honest
+   reading of the slot's words is a fixed high rate. I chose the rank
+   because no number then has to come from data.
+4. **THE SIGN RULE** (short only above zero, long only below) is my
+   reading of "extremely positive / extremely negative".
+5. **DAILY CANDLES**, chosen for costs and count. **THE DAY'S FUNDING IS
+   THE SUM OF THREE SETTLEMENTS**, not the latest one, not an average of
+   more days.
+6. **ONE COUNT WAS MADE ON THE TRAINING FUNDING BEFORE THE BAR WAS
+   COMMITTED** (signals 13-16% short, 5-9% long; 44-68 trades with made-up
+   prices). The rule was written first and not changed after. **Had the
+   count come out too low I would have changed the candle - so the count
+   was a fork I did not take, not no fork at all.**
+7. **POOLING IS WORSE HERE THAN IN SLOT 1.** The three coins' funding
+   extremes come together, so pooled trades overlap heavily and 30 of
+   them are far fewer than 30 independent ones. The walk-forward and
+   Monte Carlo treat them as one after another.
+8. **THE FADE'S OWN FUNDING INCOME IS NOT COUNTED**, the candles are spot
+   while the funding is the perpetual's, and the exit is the ship's close
+   stop. All three are in the bar. The first two understate or blur the
+   fade; the third may simply be the wrong exit for a fade.
+
+**WHAT I DID NOT CHECK:**
+
+9. **THE FROZEN RATES ARE WHAT BINANCE SERVED ON 2026-11-16, ONCE.** The
+   training side matched an earlier fetch of the same day. Nothing checks
+   them against a second source, and the hold-out side was fetched once.
+10. **`MAX_RATE` OF 5% IS FAR LOOSER THAN ANY REAL FUNDING RATE**
+    (desk item 15 says the same of `cockpit/funding.py`). A wrong but
+    plausible rate would be frozen.
+11. **THE MADE-UP FUNDING IS NOT LIKE THE REAL THING**: negative far more
+    often, and independent across coins. The world counts (52-91 trades,
+    2 false passes of 60) are for that made-up funding.
+12. **NO WORLD WITH A SUBTLE EDGE WAS TRIED.** The "mild" true-fade world
+    had a Profit Factor of 2.35. I do not know how often the test passes
+    an edge that is real but small.
+13. **A FALSE PASS ON NOISE ABOUT ONE TIME IN THIRTY** (2 of 60).
+14. **THE REGIME READING AT ENTRY SAYS "Uncalibrated" ON DAILY CANDLES.**
+    Information only; no bar reads it. But the cards the run prints will
+    carry no regime.
+15. **THE NINE ATTACK EDITS THAT STAYED GREEN** (D10, D20, B5, B6, B7, R4,
+    R19, R22, R27) are judged harmless BY ME. D20 in particular: nothing
+    made-up ever lacks the frozen file's header, so `read_rows`'s header
+    test is unproven.
+16. **SIXTY-EIGHT ATTACKS FOUND FOUR HOLES AND FIVE CRASHES IN GATES THAT
+    HAD JUST PASSED - ONE OF THE HOLES MADE BY MY OWN REPAIR.** A
+    sixty-ninth would find another.
+17. **THE 6.3-S DRILL RE-MAKES THE STRATEGY FROM ITS OWN TEXT WITH `exec`.**
+    If the file's layout changes so that an edit matches twice or not at
+    all, the gate goes red ("THE EDIT DID NOT APPLY") rather than green -
+    I judged that the safe side; nobody else has.
+18. **`lab/gauntlet.py --slot 2 --go` STILL EXISTS AS A COMMAND.** It
+    refuses before any marker (there is no Slot 2 strategy inside that
+    file), but by reading only: I was stopped from running it and should
+    never have tried. Its `main` would leave an empty
+    `gauntlet_slot2_report.txt` in `lab/results/`. The real Slot 2 command
+    is `lab/gauntlet_slot2.py --go`.
+19. **THE PRE-FLIGHT TRUSTS THE VAULT'S MANIFEST FOR THE CANDLES' SHAPE.**
+    If the manifest and the files disagree, the run dies after the marker
+    ("candles with no funding") and the slot is spent on a crash.
+    `lab/verify_vault.py` says INTACT 6 of 6 today.
+20. **I SKIPPED THE ATTACK ON THE LAST BUILDS AND DID NOT ASK THE ONE
+    LINE**, reading "fable set up idea 2" as his word that this session
+    is Fable. If that reading is wrong, R-006 applies here in full.
+
+## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088, R-089 AND R-090 ARE NOT IN IT.
