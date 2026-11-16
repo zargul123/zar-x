@@ -18352,3 +18352,229 @@ VERBATIM: "No, just wait".** So my reading above (option 4, idea 3 next)
 was WRONG and is corrected here: **nothing is to be run and nothing new is
 to be started on the signals side until he says so.** Slot 3 is not
 started and its data question stays on his desk, unasked. No code changed.
+
+
+# 2026-11-16 (NIGHT) - FABLE'S SESSION, CONTINUED. **THE COMMANDER RULED TWO CHANGES BEFORE ANY SLOT IS RUN: THE GAUNTLET'S COSTS BECOME HIS REAL BINANCE FUTURES FEE, AND SLOT 1's STOP AND TARGET BECOME DAY-SIZED. THIS IS THE BAR FOR BOTH, DECLARED BEFORE ANY CODE IS CHANGED. NOTHING IS RUN.**
+
+**This entry is committed ALONE, with no `.py` in the commit.**
+
+## 1. THE RULINGS, VERBATIM, IN THE ORDER HE GAVE THEM
+
+After "Not yet" and "No, just wait" he said *"now we are only talking"* and
+asked to have the Slot 1 problem explained "like im a noob". It was: daily
+candles could not reach 30 trades; 4-hour candles reached them but each
+trade aimed at a move so small that the fee took a large slice. Three ways
+out were put to him: day-sized stops on 4-hour entries ("solution 1"); his
+real fee, if it is lower than the test's; or leave it.
+
+  * On the fee: *"i use binanace futures"*, and then, from his own fee
+    page: *"Maker Fee: 0.02% ... Taker Fee: 0.05%"*, and *"we have to
+    correct it like pro so we test accordingly. first resolve this"*.
+  * On both: *"so its decided we will change biannace fee and also your
+    solutiuon1 too. right?"* - answered yes, with the details below.
+  * On who chooses the details: *"its your solution your call"*.
+  * *"so this step is done idea 1. locked it."*
+  * And the order to build: *"ok build step 1 corrections and thenw e have
+    to build step 3"*.
+
+**I STARTED ON THE FEE ONCE BEFORE HE HAD FINISHED TALKING AND HE STOPPED
+ME** (*"listen man we are discussing"*). I had only read files; nothing was
+changed. This build begins from his later order, quoted last above.
+
+**"STEP 3" IS IDEA 3, AND IT IS NOT BUILT BY THIS ENTRY.** He was told
+before he gave the order that idea 3 needs its data source found and will
+probably need its one re-specification (a months-long signal cannot make
+30 trades in a 297-day hold-out). That finding-out comes next and goes to
+him before any bar for Slot 3 is written.
+
+## 2. >>> SAID FIRST, BECAUSE IT IS THE WEAK POINT: THESE CHANGES COME AFTER THE PRACTICE RUNS
+
+**BOTH CHANGES MAKE A PASS EASIER, AND BOTH WERE DECIDED AFTER I HAD SEEN
+SLOT 1 FAIL 72 TIMES OUT OF 72 ON MADE-UP MARKETS.** What keeps this from
+being the thing Law 4 forbids:
+
+  * **NO REAL RESULT EXISTS.** No slot has been run; `lab/results/` holds
+    no marker; the real funding and the real candles have never met. What
+    was seen is made-up markets, which were built to be seen.
+  * **THE FEE IS A FACT ABOUT HIS EXCHANGE, NOT A DIAL.** 0.05% is what
+    Binance charges him, read by him from his own fee page. The test had
+    been charging double.
+  * **THE EXIT CHANGE IS A CHANGE TO THE STRATEGY UNDER TEST, MADE BY THE
+    ONLY PERSON WHO MAY MAKE IT, BEFORE THE SLOT IS OPENED** - the same
+    standing as his re-specification to 4-hour candles on 2026-11-16.
+  * **THE FIVE BARS AND THE ALARM DO NOT MOVE BY ONE DIGIT.**
+
+**WHAT IS STILL TRUE AND FILED:** a test re-shaped until its practice runs
+look fair has been through a fork. This is the second time Slot 1 has
+been re-specified. **A THIRD WOULD BE THE DEATH SPIRAL THE PLAN WARNS OF,
+AND I WILL SAY SO TO HIM IF IT IS ASKED FOR.**
+
+## 3. CHANGE ONE - THE GAUNTLET'S COSTS
+
+    WAS   fee 0.10% a side + slippage 0.05% a side = 0.30% there and back
+    NOW   fee 0.05% a side + slippage 0.05% a side = 0.20% there and back
+
+  * **0.05% IS BINANCE USD-M FUTURES' TAKER FEE**, the one he quoted.
+    Every order is charged as a taker: entries at the open and stops
+    really are market orders, and assuming the cheaper maker fee (0.02%)
+    on targets would flatter the test.
+  * **THE SLIPPAGE STAYS AT 0.05% A SIDE.** That is generous for these
+    three coins at small size, and it is left generous on purpose: stops
+    fill badly in fast markets, and **A FUTURES POSITION HELD FOR DAYS
+    PAYS OR RECEIVES FUNDING, WHICH THE ENGINE DOES NOT COUNT.** At the
+    resting rate of 0.01% three times a day a long pays about 0.03% a
+    day - about 0.15% over a five-day trade. **THAT IS NOT MODELLED, IT
+    CUTS AGAINST LONGS, AND THE LEFT-OVER SLIPPAGE ONLY PARTLY COVERS IT.**
+  * **IT APPLIES TO THE GAUNTLET - ALL THREE SLOTS - AND TO NOTHING ELSE.**
+    A new entry in `config.py`, `GAUNTLET_COSTS`. **`config.LAB_COSTS` IS
+    NOT CHANGED:** the Lab's own exams (Gates 2.3 to 2.5) have results
+    typed into them that were worked at 0.30% (`gate_2_4.py`: "37 trades,
+    PF 0.63, net -4.88%"), and those exams are how the Lab was proved
+    honest. So the Lab keeps its old harsher figure for its own exams and
+    the gauntlet charges his real one. `lab/engine.py` is not touched: it
+    already takes the costs as an argument.
+  * The buy-and-hold yardstick (B5) pays the same new costs.
+
+## 4. CHANGE TWO - SLOT 1's STOP AND TARGET BECOME DAY-SIZED
+
+**THE ENTRY DOES NOT CHANGE BY ONE CHARACTER.** `signals/turtle.py` is not
+touched: the 20-candle breakout, the 10-week filter, ADX(14) above 25, the
+379-candle warm-up, on 4-hour candles.
+
+    WAS   stop 1.5 x and target 2.0 x the average range of the last
+          14 FOUR-HOUR candles
+    NOW   stop 3.75 x and target 5.0 x the average range of the last
+          84 FOUR-HOUR candles (14 days)
+
+**WHERE THE NUMBERS COME FROM:**
+
+  * **THE SHIP's TWO MULTIPLES ARE KEPT - 1.5 AND 2.0 - AND APPLIED TO A
+    DAY's TYPICAL MOVE INSTEAD OF A 4-HOUR ONE.**
+  * **A DAY's RANGE IS 2.5 TIMES A 4-HOUR CANDLE's.** By arithmetic it is
+    the square root of 6 (six candles a day), 2.45. **MEASURED ON THE
+    TRAINING SIDE ONLY** (2024-02-01 to 2025-09-30; the daily 14-day ATR
+    over the 4-hour 84-candle ATR, both as a share of price): **BTC 2.65,
+    ETH 2.50, SOL 2.51.** One round figure, 2.5, between the arithmetic
+    and the three measurements. 1.5 x 2.5 = 3.75; 2.0 x 2.5 = 5.0.
+  * **84 CANDLES IS 14 DAYS**, the same 14 the ship's risk instrument
+    uses, counted in the candles being traded. Not a choice.
+  * **WHY MULTIPLES OF THE 4-HOUR RANGE AND NOT THE DAILY CANDLES
+    THEMSELVES:** the engine sizes a stop from the candles it is walking,
+    and takes the multiple and the period as arguments. Reading a second
+    file inside the run would mean changing the engine. This way
+    `lab/engine.py` is untouched.
+  * The measured 4-hour range, for the record, since earlier entries
+    guessed "about 1%": **BTC 1.3%, ETH 1.9-2.0%, SOL 2.5%** of price.
+  * **THE YARDSTICK (B5) IS SIZED BY THE SAME CALL**, so for Slot 1 its
+    stop distance becomes 3.75 x the 84-candle range. For Slot 2 nothing
+    about the yardstick changes but the costs.
+
+**SLOT 2's RULES DO NOT CHANGE.** Only its costs.
+
+**THE NAMES.** The strategy keeps `turtle-4h-20c-10w-adx25`; the exit and
+the costs are stamped into the engine's fingerprint beside it, so the
+fingerprint changes and says what was run.
+
+## 5. THE COST ARITHMETIC, BEFORE ANYTHING IS BUILT (rule (n))
+
+Win rate p needed for a Profit Factor of 1.15, with the stop S and the
+target T as a percentage of price and 0.2% of costs:
+p (T - 0.2) >= 1.15 (1 - p)(S + 0.2). A coin flip wins S / (S + T) = 42.9%
+in every row.
+
+                     stop    target    needs     (was)
+    Slot 1  BTC      5.0%    6.6%      48.1%     (52.8%)
+            ETH      7.3%    9.8%      47.5%     (50.7%)
+            SOL      9.4%   12.6%      47.2%     (49.7%)
+    Slot 2  BTC      4.9%    6.6%      48.1%     (48.9%)
+            ETH      6.9%    9.2%      47.6%     (48.2%)
+            SOL      9.5%   12.7%      47.2%     (47.7%)
+
+**BOTH TESTS NOW ASK THE SAME THING: BE RIGHT ABOUT 48 TIMES IN 100,
+AGAINST 43 BY CHANCE.** Slot 1's wall drops by two and a half to nearly
+five points; Slot 2's by under one. For BTC on its own: the fee alone
+takes Slot 1 from 52.8% to 50.7%, the exit alone to 48.9%, both to 48.1%.
+
+**>>> A CORRECTION TO WHAT I TOLD HIM AN HOUR AGO.** In the conversation I
+gave him "55, then 52 with the fee, about 49 with the exit, 48 with both".
+Those were worked from a GUESSED 4-hour range of 1% of price. Measured,
+it is 1.3% (BTC) to 2.5% (SOL), so Slot 1's old wall was 50 to 53, not
+55. The direction and the ranking of the two fixes were right; the size
+was overstated. He is told in the report.
+
+## 6. THE GATES THAT MUST PASS
+
+**GATE 6.4-R - `lab/gauntlet.py --gate`** replaces GATE 6.2-R. Everything
+6.2-R proved, and:
+
+  * `GAUNTLET_COSTS` typed out (0.0005, 0.0005) and **`LAB_COSTS` typed out
+    too, unchanged (0.001, 0.0005)** - so neither can drift into the other;
+  * Slot 1's exit typed out (3.75, 5.0, 84) and inside the fingerprint of
+    every evidence row, with the new costs;
+  * every hold-out trade's row re-worked with a fee of 0.05%, the stop
+    3.75 and the target 5.0 ATR away;
+  * the yardstick by hand, with the new costs, capped and not, **and a
+    case sized on the 84-candle range that would differ on the 14-candle
+    one**; the yardstick the run used re-worked from the candles;
+  * the yardstick called WITHOUT the new arguments still gives the old
+    sizing (Slot 2 depends on that);
+  * the drill, with breaks for the old fee, the old stop, the old period.
+
+**GATE 6.3-R1 - `lab/gauntlet_slot2.py --gate`** replaces 6.3-R: the same
+39 checks with the new costs typed out, in the fingerprint and in every
+re-worked row; **and the exit typed out as the ship's own 1.5, 2.0 and
+14, so Slot 1's change cannot leak into Slot 2.**
+
+`signals/turtle.py` (6.2-S), `signals/funding_fade.py` (6.3-S) and
+`lab/funding_vault.py` (6.3-D): **not touched; must stay green.**
+`lab/engine.py`, `lab/walk_forward.py`, `lab/monte_carlo.py`,
+`lab/trade_stats.py`, `signals/turtle.py`, `signals/funding_fade.py`,
+`lab/funding_vault.py`, `lab/build_funding_vault.py`, `lab/funding_vault/`:
+I will prove with `git diff` that none changed.
+
+**THEN THE ATTACK BY TEXT EDITS**, control first, list and predictions
+written first; the made-up markets again for both slots; all twenty-six
+invocations.
+
+## 7. THE AWKWARD CASES, NAMED FIRST
+
+  * **A TRADE NOW LASTS DAYS, AND ONLY ONE IS OPEN AT A TIME, SO THERE ARE
+    FEWER TRADES.** Slot 1's count was a median of 147. It will fall, and
+    30 is the bar. **THIS IS THE THING MOST LIKELY TO GO WRONG, AND IT IS
+    MEASURED ON MADE-UP MARKETS BEFORE HE IS ASKED FOR A GO.**
+  * **THE FIRST 84 CANDLES HAVE NO 84-CANDLE RANGE.** The engine enters
+    nothing while the range is zero, and the strategy's warm-up is 379,
+    so no signal exists that early. The rehearsal must show no crash.
+  * **THE 25% CAP.** On 4-hour candles every trade was capped. With a
+    stop 3.75 ranges away, 1% risk asks for a position near 20-27% of
+    the account on BTC, less on ETH and SOL: some trades capped, most
+    not. The gate's row check must hold for both kinds.
+  * **A STOP AND TARGET BOTH INSIDE ONE 4-HOUR CANDLE** is now rare; the
+    engine still counts the loss.
+  * **SLOT 2 CALLS THE YARDSTICK WITH NO EXIT ARGUMENTS.** The default
+    must stay the ship's.
+
+## 8. MY PREDICTIONS (rule (m))
+
+On made-up 4-hour markets, three coins, 5,624 candles, the new Slot 1:
+
+    pooled hold-out trades ....... median between 30 and 70; 30 or more in
+                                   at least 45 of 60 trendless worlds
+    false passes on noise ........ at most 3 of 60
+    worlds with a real trend
+    (0.2% a day) ................. at least 2 of 8 PASSED or WITHHELD
+    a trade lasts ................ a median of 20 to 40 candles (3-7 days)
+
+Slot 2 on its made-up worlds with the new costs: noise passes at most 4
+of 60; the count unchanged (52 to 91).
+
+**IF SLOT 1's COUNT COMES OUT UNDER 30 IN MORE THAN A FEW WORLDS, HE IS
+TOLD THAT IN PLAIN WORDS BEFORE ANY GO, AND I DO NOT RE-SHAPE IT AGAIN ON
+MY OWN.**
+
+## 9. WHAT I LOOKED AT FOR THIS BAR
+
+**THE TRAINING SIDE OF THE VAULT ONLY: the daily and 4-hour high, low and
+close of the three coins from 2024-02-01 to 2025-09-30, reduced to three
+median range figures a coin. NO HOLD-OUT PRICE AND NO HOLD-OUT FUNDING
+RATE.**
