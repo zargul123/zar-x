@@ -295,7 +295,11 @@ GATE: log 2 fake trades, run mirror, numbers check out by hand.
 snapshots+grades exist. The gauntlet uses the Lab; the Lab must be trusted.*
 
 THE THREE SEALED SLOTS (from README/THE PROMISE — no substitutions):
-- Slot 1: Turtle/Donchian breakout, daily(+weekly filter), regime-filtered.
+- Slot 1: Turtle/Donchian breakout, ~~daily~~ **4-HOUR** (+weekly filter), regime-filtered.
+  **RE-SPECIFIED 2026-11-16 BY THE COMMANDER, from daily to 4-hour candles,
+  BEFORE ANYTHING HAD BEEN RUN** - the daily test could not reach 30 trades
+  on made-up markets. The struck word is left visible. The bar is
+  PROGRESS_LOG.md, 2026-11-16.
 - Slot 2: Funding-rate extreme fade. ~~(needs funding history collected since
   Phase 3/4 — start recording funding to CSV the day Phase 3.2 ships)~~
   **CORRECTED 2026-07-26 — the struck text was never true and was written from
@@ -434,6 +438,41 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-16: THE COMMANDER RE-SPECIFIED SLOT 1 TO 4-HOUR CANDLES. IT IS REBUILT, REHEARSED, ATTACKED - AND NOT RUN. THE COUNT PROBLEM IS GONE; THE LIKELIEST RESULT IS NOW A FAIL ON PROFIT AFTER COSTS. IT WAITS FOR HIS WORD.**
+
+**WHERE THE SHIP IS.** Twenty invocations, every exit 0, **1,429 green, 0
+red - MEASURED today, not summed**:
+
+    cockpit/fear_greed.py   58     cockpit/funding.py      71
+    data/open_interest.py   88 x2  data/collection_guard.py  25 OK
+    cockpit/news.py         54     cockpit/events.py       69 x2
+    cockpit/whales.py      111 x2  cockpit/carry.py        87 x2
+    journal/log_trade.py   101 x2  journal/mirror.py       84 x2
+    signals/turtle.py       GATE 6.2-S   39 x2
+    lab/gauntlet.py         GATE 6.2-R   44 x2
+    vault INTACT 6 of 6 - Brief 3/3 - lab/results/ holds NO slot marker
+
+**SLOT 1 AS NOW DECLARED** (`PROGRESS_LOG.md` 2026-11-16, commit `023ff51`):
+a breakout over the 20 four-hour candles before, a 10-week trend filter
+(weekly closes 42 candles apart), ADX(14) above 25, warm-up 379 candles, on
+BTC, ETH and SOL **4-hour** candles; exits by the ship's own stop and
+target; the three coins' hold-out trades (1,789 candles each) POOLED into
+one verdict against the five locked bars, unchanged.
+
+**WHAT IS BROKEN OR UNPROVEN, SAID PLAINLY.**
+
+**ON MADE-UP MARKETS THE TEST FOUND PLENTY OF TRADES (median 147, never
+under 115) AND PASSED NOTHING - NOT NOISE (0 of 64) AND NOT A REAL TREND
+(0 of 8).** Costs against a small target. He has four options, all open
+because nothing has been run: go; change the channel to twenty days first;
+go back to daily; not yet.
+
+**NOBODY BUT THE AUTHOR HAS READ THE STRATEGY, THE RUNNER OR THE BAR.**
+R-088 and R-089, neither a Category B item.
+
+**THE RUN IS ONE COMMAND AND MUST NOT BE TYPED WITHOUT HIS WORD:**
+`python lab/gauntlet.py --slot 1 --go`.
+
 ## **>>> 2026-11-15 (LATER): PHASE 6 HAS BEGUN. GAUNTLET SLOT 1 IS SET UP AND HAS NOT BEEN RUN. FABLE BUILT IT AND, BY THE COMMANDER'S RULING, NO SECOND AI REVIEWS IT. IT WAITS FOR HIS WORD - AND HE HAS A DECISION TO MAKE FIRST.**
 
 **WHERE THE SHIP IS.** Everything in the marker below this one still stands

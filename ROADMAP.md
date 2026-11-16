@@ -681,3 +681,17 @@ not exist and has now waited four sessions.**
 | **THE TRUE RANGE CANCELS OUT OF WILDER'S ADX.** | An ADX with the gap terms removed from its true range gives the same answer on every input: each directional index divides by the range and the ADX uses their ratio. Found by an attack that went green twice. |
 | **THE SHIP'S REGIME VANE READS "Uncalibrated" ON DAILY CANDLES.** | `config.REGIME_CONFIG['entropy_chaotic_thresholds']` holds `1h` and `4h` only. |
 | **A GATE CAN SPEND THE THING IT GUARDS.** | The first draft of GATE 6.1-R called the real `main()`; with one line edited, the gate started a real run. It now uses a spy and a temporary folder. |
+
+## MEASURED 2026-11-16
+
+| Fact | Measurement |
+|---|---|
+| **SLOT 1 IS NOW A 4-HOUR TEST.** | Re-specified by the Commander before anything was run. `signals/turtle.py` (`turtle-4h-20c-10w-adx25`, GATE 6.2-S, 39 checks) and `lab/gauntlet.py` (`TIMEFRAME = '4h'`, GATE 6.2-R, 44 checks). **The two rows above that describe the daily strategy and runner are history: that build was never run.** |
+| **THE WHOLE SHIP, MEASURED.** | Twenty invocations: **1,411 green, 0 red before the change; 1,429 green, 0 red after it.** Yesterday's 1,411 was a sum; it is now a measurement. |
+| **THE 4-HOUR VAULT, BY DATES ONLY.** | 5,624 candles per coin, 2024-01-01 00:00 to 2026-07-26 04:00, **not one step other than 4 hours in any of the three.** 3,835 training candles; **1,789 hold-out candles from 04:00 on 2025-10-01, the SAME 1,789 on all three coins.** Door verdicts: BTC PASS, ETH WARN, SOL WARN. |
+| **SLOT 1's TRADE COUNT ON MADE-UP 4-HOUR MARKETS.** | 60 trendless worlds: pooled hold-out trades **115 to 188, median 147.5; 30 or more in 60 of 60.** The count bar is 30. |
+| **SLOT 1's PASS RATE ON MADE-UP 4-HOUR MARKETS.** | **0 PASSED of 72** - 64 without a trend and **8 with a steady drift of 0.2% a day.** Profit Factors in the 12 mixed worlds: 0.64 to 1.16. |
+| **ON 4-HOUR CANDLES EVERY TRADE HITS THE 25% POSITION CAP.** | 10,856 of 10,858 made-up trades. The 1% risk rule never binds; each trade risks well under 1%. |
+| **A TRADE UNDER THE SHIP'S EXIT LASTS ABOUT FIVE 4-HOUR CANDLES.** | Median of 72 made-up worlds: 5.0 candles, 20 hours. Win rate about 43%, which is what a 1.5 stop against a 2.0 target gives a coin flip. |
+| **THE REHEARSAL GATE TAKES 48 SECONDS**, the strategy gate 5. | Six times the candles of the daily rehearsal (11 s). |
+| **THE VANE'S 4h ENTROPY LINE OVERLAPS THE HOLD-OUT.** | `config.py` calls 1.96 "p70 pre-2026"; the hold-out begins 2025-10-01. Not used by Slot 1 for that reason. |

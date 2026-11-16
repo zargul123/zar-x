@@ -5400,3 +5400,87 @@ the run - Kimi, another AI, a person - **this list is what to hand it.**
     setting in that hash, the check goes blind to it.
 
 ## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088 IS NOT IN IT.
+
+## >>> R-089 - **AGAINST MY OWN 4-HOUR RE-BUILD OF SLOT 1 (2026-11-16): `signals/turtle.py`, `lab/gauntlet.py` AND THE BAR OF `023ff51`. AGAIN NOBODY BUT ME HAS READ ANY OF IT.** OPEN - NOT CATEGORY B
+
+**R-088 IS NOT CLEARED AND NOT REPLACED. Its items 1, 2, 5, 6, 7, 10, 12,
+13, 14, 16, 17 and 18 apply to this build word for word.** Its items 3, 4,
+8, 9, 11 and 15 described the daily test and are restated below for 4h.
+**A FAULT HERE CANNOT BE REPAIRED TOMORROW: THE SLOT IS SPENT WHEN IT RUNS.**
+
+**THE THING THAT MATTERS MOST, AND IT IS NOT A BUG:**
+
+1. **ON MADE-UP MARKETS WITH A REAL TREND IN THEM THIS TEST PASSED 0 OF 8**
+   (and 0 of 64 without one). Costs of 0.3% a round trip against a target
+   two 4-hour ranges away. **The likeliest result of the run is a FAIL on
+   profit after costs.** He was not told this when he chose 4-hour candles;
+   he has been told before any go.
+
+**DESIGN CHOICES THAT DECIDE THE VERDICT AND WERE MADE BY ME ALONE, TODAY:**
+
+2. **"20" IS TWENTY CANDLES - 80 HOURS - NOT TWENTY DAYS.** The other honest
+   reading is 120 candles. I chose the one that keeps the test's proportions
+   and matches what was put to him ("about six times the trades").
+3. **THE WEEKLY FILTER STAYS WEEKLY** (ten closes 42 candles apart), so it
+   is now 19 times slower than the channel where it was 3 times slower.
+   The 10 is still my number from 2026-11-15.
+4. **THE REGIME FILTER IS STILL THE ADX ALONE, THOUGH THE SHIP'S FULL VANE
+   IS CALIBRATED ON 4h.** I left the vane out because its entropy line
+   (1.96, "p70 pre-2026") was worked from candles that include the first
+   three months of the hold-out. **A reviewer may think the ship's own
+   regime instrument is the more faithful reading of "regime-filtered".**
+5. **THE WARM-UP IS EXACTLY THE FEWEST CANDLES THE WEEKLY FILTER NEEDS
+   (379), WITH NO MARGIN.** One candle fewer and the strategy raises
+   inside the run, after the marker is down. The gate tests 378 and 379
+   and the drill breaks it; nothing else stands behind it.
+6. **THE ADX IS STILL WORKED ON THE LAST 150 CANDLES**, carried over from
+   the daily build. Largest difference from the ship's own on made-up
+   candles today: 0.004077. On 4,400 made-up candles it flipped no answer.
+
+**WHAT THE REHEARSAL SHOWED ABOUT THE TEST ITSELF:**
+
+7. **EVERY TRADE IS CAPPED AT 25% OF THE ACCOUNT** (10,856 of 10,858 on
+   made-up markets). The "1% risk" rule never binds on 4h. Each trade risks
+   well under 1%. The drawdown bar (B4) is therefore much easier to clear
+   than on daily candles, and the uncapped branch of the sizing code is
+   NEVER EXERCISED by the rehearsal - only by the two hand cases of the
+   yardstick.
+8. **A TRADE LASTS A MEDIAN OF FIVE CANDLES.** A strategy sold as trend-
+   following is in practice a 20-hour trade. That is the engine's exit.
+9. **MY MADE-UP MARKETS HAVE A 3.5% DAILY SWING AND NO MEMORY.** I did not
+   measure the real coins' 4-hour range (it is price data). If the real
+   range is smaller than my made-up one, costs bite HARDER than item 1
+   shows.
+
+**WHERE THE GROUND IS NOT CLEAN:**
+
+10. **THE BTC 4-HOUR FILE HAS BEEN WALKED BEFORE**, hold-out included, by the
+    Lab's exam strategies (`ma-cross-20-50` among them) in July and on
+    2026-11-15; their scorecards are in `PROGRESS_LOG.md` and
+    `lab/results/`. I did not open them today and no number was picked from
+    them - **but a session that had read them could not un-read them, and
+    yesterday's session ran those gates.** ETH and SOL 4h are untouched.
+11. **THE HOLD-OUT NOW BEGINS 20 HOURS EARLIER** than the daily one did
+    (04:00 on 2025-10-01), by the engine's own rule.
+
+**WHERE I DID NOT LOOK, OR COULD NOT:**
+
+12. **THE REAL DOOR HAS NEVER HANDED THIS RUNNER A 4-HOUR ETH OR SOL FILE.**
+    I asked the inspector for its verdict word (WARN, WARN - not a refusal)
+    and did not open the reports. If `load_vault` behaves differently on
+    them than its verdict word suggests, the run dies after the marker.
+13. **A WALK-FORWARD CUT ON THE TRADES' OWN TIMES INSTEAD OF THE HOLD-OUT'S
+    CANDLES IS CAUGHT ONLY BY THE NO-TRADES CASE** (attack R23). On an
+    ordinary list of trades the gate would not see it.
+14. **THE TWO B4 FIGURES TYPED INTO THE GATE (29.07%, 35.64%) CAME FROM THE
+    LAB'S OWN MONTE CARLO.** They pin the comparison in the runner; they do
+    not check the Monte Carlo, which I did not re-read.
+15. **THE EIGHTEEN OTHER INVOCATIONS WERE MEASURED BEFORE THE GATES' FINAL
+    REPAIR, NOT AFTER.** Nothing they read changed.
+16. **FIFTY-THREE ATTACKS FOUND FIVE HOLES IN GATES THAT HAD JUST PASSED,
+    TWO OF THEM A DAY OLD.** The honest inference is the same as
+    yesterday's: a fifty-fourth would find a sixth.
+17. **I DID NOT ATTACK YESTERDAY'S PHASE 5 BUILD OR RE-READ `lab/engine.py`.**
+    His ruling excused the first; R-088 item 10 still stands on the second.
+
+## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088 AND R-089 ARE NOT IN IT.

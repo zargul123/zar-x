@@ -17336,3 +17336,215 @@ command without his word, in this session or any other.**
 
 The date column of the three 4-hour files, and the inspector's one-word
 verdicts. **No price, of any candle, in any file.**
+
+
+# 2026-11-16, THE SAME SESSION - THE ACCOUNT. **GAUNTLET SLOT 1 ON 4-HOUR CANDLES IS SET UP AND HAS NOT BEEN RUN. THE STRATEGY (GATE 6.2-S, 39 CHECKS) AND THE RUNNER (GATE 6.2-R, 44 CHECKS) ARE REBUILT, REHEARSED ON MADE-UP CANDLES AND ATTACKED. THE COUNT PROBLEM IS GONE. A DIFFERENT PROBLEM HAS TAKEN ITS PLACE AND THE COMMANDER MUST HEAR IT BEFORE HE SAYS GO: ON MADE-UP MARKETS THAT REALLY DID TREND, THIS TEST FAILED EIGHT TIMES OUT OF EIGHT.**
+
+The bar is the entry above (`023ff51`, one document, 267 lines, no `.py`).
+The code is `0bae62e` (two files: `signals/turtle.py`, `lab/gauntlet.py`).
+
+## 1. WHAT WAS CHANGED
+
+**`signals/turtle.py`.** The production half is the same shape as yesterday's
+with the declared 4-hour numbers: channel 20 candles, weekly closes 42
+candles apart, ten of them, ADX(14) above 25 worked on the last 150 candles,
+warm-up 379. **The 42 and the 150 are now constructor arguments and are in
+`params`, so the engine's fingerprint covers them** - yesterday the 7 was a
+module constant outside the fingerprint. Name `turtle-4h-20c-10w-adx25`.
+
+**`lab/gauntlet.py`.** One production line changed: `TIMEFRAME = '4h'`. Plus
+the docstring. Everything else in the production half is byte-for-byte
+yesterday's.
+
+**NOTHING ELSE IN `lab/` CHANGED**: `git diff --stat HEAD` before the commit
+listed those two files and no other; `lab/engine.py`, `walk_forward.py`,
+`monte_carlo.py` and `trade_stats.py` printed nothing.
+
+## 2. LAW 7 - THE READING, RECORDED AGAIN FOR THE CHANGED FILE
+
+I read the production half of `signals/turtle.py` line by line after the
+change:
+
+  * It still reads only the frame it is handed, by position from the END:
+    `iloc[-1]`, `iloc[-(20+1):-1]`, `closes[-1 - 42k]` for k = 0..9,
+    `iloc[-150:]`. **The furthest reach is 378 candles back, and the warm-up
+    of 379 is what keeps that inside the frame.** No index is counted from
+    the front; none reaches past the last row.
+  * It opens no file, makes no call out, reads no clock, writes to no
+    attribute after `__init__`, **and never looks at the frame's dates** -
+    the gate now forbids the word `index` in its code.
+  * The engine enters at the NEXT candle's open.
+  * `lab/leak_check.py`: no findings; the same scan flags the Lab's
+    deliberate leak in the same run.
+
+**WHAT THE READING CANNOT SAY: that somebody other than the author did it.**
+
+## 3. THE TWO GATES
+
+**GATE 6.2-S - `signals/turtle.py --gate`: 39 checks, 0 red, twice (normal
+and `TZ=UTC0`).** Eighteen hand-worked cases. The weekly filter is pinned
+from both sides by arithmetic: after a decline the nine older weekly closes
+add up to 5,580, so a bounce is above the average only above 620 - a bounce
+to 615 is FLAT, to 625 LONG, to 620 exactly FLAT; with a week of 41 candles
+the first would be long and with 43 the second would be flat. A second
+writing-out of the rules with the ship's own ADX agreed on **4,400 of 4,400
+made-up candles** (79 long, 43 short among them). Thirteen drill breaks,
+none INERT - **the thirteenth, the daily build's warm-up of 150 left in,
+RAISES on a 378-candle frame, which in the real run would be a slot spent
+on a crash.**
+
+**GATE 6.2-R - `lab/gauntlet.py --gate`: 44 checks, 0 red, twice.** All of
+yesterday's, on the vault's own 4-hour shape typed out (5,624 candles, 3,835
+training, 1,789 hold-out, first hold-out candle 04:00 on 2025-10-01). The
+rehearsal's three made-up coins produced 165 pooled hold-out trades; the
+door was knocked on three times for `4h` with the marker already down.
+
+**THE WHOLE SHIP AFTER THE CHANGE: TWENTY INVOCATIONS, EVERY EXIT 0.** Run
+06:04 to 06:11 UTC on the first version of the two gates (1,423 green, 0
+red), then the two gates again in their final form at 06:41, both
+timezones:
+
+    fear_greed 58 · funding 71 · open_interest 88 x2 · news 54
+    events 69 x2 · whales 111 x2 · carry 87 x2 · log_trade 101 x2
+    mirror 84 x2 · turtle 39 x2 · gauntlet 44 x2      = 1,429 green, 0 red
+    collection_guard 25 OK · vault INTACT 6 of 6 · Brief 3/3
+
+**The eighteen that are not the two new gates were measured at 06:04, not
+after 06:41. Nothing they read was touched in between.**
+
+## 4. CERTIFIED BY ATTACK - 53 REAL TEXT EDITS, PREDICTIONS WRITTEN FIRST
+
+Rigs outside the repo holding **no vault**, a fresh copy per edit, control
+first (39/0 and 44/0). 25 edits to the strategy, 28 to the runner.
+
+**AGAINST THE FIRST VERSION OF THE GATES (37 and 43 checks): 44 RED, 9
+GREEN. FIVE OF THE NINE WERE HOLES.**
+
+    GREEN  `<=` in place of `<` on the SHORT breakout        (T24)
+    GREEN  `<=` on the SHORT side of the weekly filter       (T25)
+    GREEN  the yardstick's ATR taking in the first hold-out
+           candle                                            (R18)
+    GREEN  the drawdown bar tripled, 30% -> 90%              (R27)
+    GREEN  the Monte Carlo fed only five of the trades       (R28)
+
+  * **T24, T25: every hand case at a turning point was on the long side.**
+    Mine, written today. Closed with four short-side cases worked by hand
+    (a close equal to the lowest low; a drop exactly at the weekly average
+    of 582.0).
+  * **R18: the made-up "calm coin" had the same range on every candle, so
+    an ATR that peeked one candle past the line saw nothing new.** Its ten
+    hold-out candles now swing from 50 to 150.
+  * **R27 AND R28 WERE IN YESTERDAY'S GATE TOO.** The only B4 case was
+    ruinous, far past any line, so nothing tested the drawdown bar NEAR 30%.
+    Yesterday's 44 edits never tried it. Closed with two seeded cases typed
+    out: 29.07% clears, 35.64% does not.
+
+**THE OTHER FOUR GREENS CANNOT CHANGE A RESULT:** the true range cancelling
+out of the ADX (T19, R-088 item 12); the marker opened `'w'` instead of
+`'x'` (R24 - the existence test above it refuses first); the timeframe typed
+in place of the constant (R25); the regime reading at entry switched off
+(R26 - information, no bar reads it).
+
+**AFTER THE REPAIR, ALL 53 AGAIN: 49 RED, 4 GREEN - THOSE FOUR.** No edit
+ended in a traceback without a verdict line (rule (k)).
+
+**MY PREDICTIONS: 48 RIGHT OF 53.** Three I expected to escape were caught
+(T13, T22 by the 4,400-candle reference; R23 only by the no-trades case -
+**a walk-forward cut on the trades' own times instead of the hold-out's
+candles would NOT be seen on a normal list**, filed). Two I expected to be
+caught escaped (R27, R28).
+
+## 5. >>> WHAT THE MADE-UP MARKETS SAY - THE COMMANDER'S DECISION
+
+Three INDEPENDENT random-walk coins per world, 5,624 four-hour candles, a
+3.5% daily swing, through the real runner and the Lab's real engine:
+
+    60 TRENDLESS worlds:  pooled hold-out trades 115 to 188, MEDIAN 147.5.
+                          30 or more in 60 of 60.
+                          Verdicts: FAILED 60, PASSED 0.
+                          Profit Factor bar cleared in 1 of 60.
+    12 MIXED worlds (4 level, 4 rising 0.2% a day, 4 falling 0.2% a day):
+                          trades 139 to 186. FAILED 12, PASSED 0.
+                          Profit Factors 0.64 to 1.16.
+    all 72:               10,856 of 10,858 trades were CAPPED at 25%.
+                          a trade lasted a median of 5 candles - 20 hours.
+                          win rate about 43%.
+
+**READ PLAINLY:**
+
+  * **THE COUNT PROBLEM IS GONE.** The reason he chose 4-hour candles held:
+    my prediction (median 100 to 250, 30+ in at least 58 of 60) was met.
+  * **THE TEST DID NOT PASS NOISE: 0 of 72.**
+  * **BUT IT ALSO DID NOT PASS A REAL TREND. EIGHT MADE-UP WORLDS HAD A
+    STEADY DRIFT OF 0.2% A DAY - ABOUT DOUBLE IN A YEAR - AND NOT ONE
+    PASSED.** Yesterday's daily version passed one of its trending worlds.
+    **THE REASON IS COSTS AGAINST A SMALL TARGET.** A trade here lasts
+    about 20 hours and aims two 4-hour ranges away. The fee and slippage,
+    0.3% of the position there and back, are a large slice of a move that
+    small. By arithmetic on the engine's own stop and target: a coin whose
+    4-hour range is about 1% of its price has a target near 2% and a stop
+    near 1.5%, so after costs a win is about 1.7 and a loss about 1.8, and
+    clearing the Profit Factor bar of 1.15 takes roughly 55 wins in 100.
+    **Coin-flip entries win about 43 in 100.** The entry has to be right
+    far more often than chance to climb that.
+  * **SO THE LIKELIEST RESULT OF RUNNING IT IS STILL A FAIL - NOW ON PROFIT
+    AFTER COSTS, WHICH IS AT LEAST A REAL ANSWER ABOUT THE STRATEGY, WHERE
+    YESTERDAY'S WOULD HAVE BEEN A FAIL ON COUNTING.**
+  * **WHY IT IS NOT CERTAIN:** real coins are not random walks with a
+    steady drift. Breakouts in real markets may run further than my
+    made-up ones. **I have not looked, and looking is running it.** And I
+    have NOT measured the real coins' 4-hour range - that is price data in
+    the vault - so the "about 1%" is general knowledge, not a measurement.
+  * **THE 1% RISK RULE IS IN PRACTICE A 25% POSITION RULE ON 4h.** The stop
+    is so close that risking 1% would need a position far above the cap,
+    so every trade is capped, and what each trade actually risks is well
+    under 1% of the account. That makes the drawdown bar easier and applies
+    equally to the buy-and-hold yardstick. He ruled "No preference" on the
+    risk rule yesterday; he should know what it turned into.
+
+**HIS OPTIONS, ALL OPEN BECAUSE NOTHING HAS BEEN RUN:**
+
+    (1) GO. Run Slot 1 on 4-hour candles as now declared.
+    (2) CHANGE THE CHANNEL TO TWENTY DAYS (120 candles) FIRST, under a new
+        bar. Fewer, slower signals; the exit is still the engine's 4-hour
+        stop and target, so the cost problem stays.
+    (3) GO BACK TO DAILY CANDLES. The count problem returns.
+    (4) NOT YET. Leave Slot 1 unspent and set up Slot 2.
+
+**AND ONE THING NO OPTION CAN FIX, BECAUSE IT IS THE ENGINE AND NOT THE
+SLOT:** the ship's exit - stop 1.5 ATR, target 2.0 ATR - cuts a trend-
+follower's winners short on any candle size. R-088 item 2 said so
+yesterday. The slot is a Turtle ENTRY under the ship's own exit, because
+that is what the ship would trade.
+
+## 6. WHAT I GOT WRONG
+
+1. **I PUT THE 4-HOUR OPTION TO HIM WITHOUT ITS BIGGEST COST.** The option
+   text said the count problem "mostly goes away" and did not say that
+   costs bite harder on small candles. He chose on an incomplete picture.
+   It is in the bar, in this account and in my report to him, and he has
+   not yet said go.
+2. **FIVE HOLES IN GATES I HAD CALLED PASSED**, three of them mine from
+   today and two inherited from yesterday's gate, which I had not
+   attacked because his ruling excused me from it. Found by attack.
+3. **THREE OF MY 53 ATTACK EDITS DID NOT APPLY** on the first run (two
+   matched twice, one matched nothing). The harness reported it instead of
+   scoring them; I repaired the list and ran them.
+4. **TWO PREDICTIONS WRONG IN THE COMFORTABLE DIRECTION** (R27, R28: "the
+   gate will catch that").
+5. **MY PREDICTION OF THE REHEARSAL'S TIME WAS WRONG**: over a minute; it
+   takes 48 seconds.
+6. **BOTH GATES WENT GREEN ON THEIR FIRST RUN, AND I DISTRUSTED IT LESS
+   THAN I SHOULD HAVE** - the attack is what showed the first green was
+   five holes wide.
+
+## 7. WHAT I LOOKED AT IN THE VAULT
+
+The date column of the three 4-hour files and the inspector's one-word
+verdicts (BTC PASS, ETH WARN, SOL WARN). **No price of any candle. The
+inspector's reports were not opened. No strategy has been run on the
+vault's 4-hour ETH or SOL files by anybody, ever; BTC's has been walked by
+the Lab's own exam strategies, as the bar says.**
+
+**SLOT 1 HAS NOT BEEN RUN. `lab/results/` HOLDS NO SLOT MARKER. IT WAITS
+FOR THE COMMANDER'S WORD.**
