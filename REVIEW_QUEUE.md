@@ -5636,4 +5636,60 @@ not replaced; where they describe Slot 1's old 14-candle exit or the old
     what an attack looks like when its author only thought of the faults
     the gate was built for.
 
-## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088, R-089, R-090 AND R-091 ARE NOT IN IT.
+## >>> R-092 - **AGAINST MY OWN SETUP OF GAUNTLET SLOT 3 (2026-11-16, LATE NIGHT): THE RE-SPECIFICATION ITSELF, `lab/mood_vault.py`, `lab/build_mood_vault.py`, THE FREEZE IN `lab/mood_vault/`, `signals/mood_fade.py`, `lab/gauntlet_slot3.py` AND ITS BAR. NOBODY BUT ME HAS READ ANY OF IT.** OPEN - NOT CATEGORY B
+
+**Filed by Fable, the author. R-006 is WAIVED for this build, not cleared.
+R-088's items on pooling, the exit and the yardstick, and R-091's on the
+costs, apply here word for word.**
+
+**THE RE-SPECIFICATION:**
+
+1. **HE USED HIS ONE CHANGE OF SLOT 3 ON AN IDEA I PROPOSED, MEASURED AND
+   RECOMMENDED, IN ONE EVENING.** He asked for "what is best for the
+   system"; the mood fade was my answer. He was told what it costs. **But
+   the alternatives were found and weighed by the same session that built
+   the result, and nobody else looked for a better third idea.**
+2. **RULE C WAS CHOSEN AFTER RULES A AND B HAD BEEN COUNTED.** Counts
+   only, training side only - but three rules counted is a fork.
+3. **THE COUNT HE WAS GIVEN WAS AN UNDER-COUNT** (one silent day blanked
+   90 days of signals). Corrected in the log; the true training-side
+   figure is buy 60, sell 123 of 706 days.
+
+**WHAT THE TEST CANNOT SEE:**
+
+4. **ONE INDEX, THREE COINS. THE POOLED TRADES ARE NEARLY ONE BET, THREE
+   TIMES**, and the walk-forward and Monte Carlo do not know it. Noise
+   passed 3 times in 60 on made-up worlds - the worst of the three slots.
+5. **THE INDEX IS PARTLY MADE FROM PRICE, AND MY MADE-UP MOOD IS NOT.** No
+   world modelled a mood that follows price, which is the real case.
+6. **THE PUBLISHER CAN REVISE HISTORY AND I CANNOT TELL.** The freeze holds
+   what alternative.me served on 2026-11-16 for each past day.
+7. **THE CLOCK WAS MEASURED ONCE, LIVE, ON 2026-11-16.** That a value dated
+   D in 2023-2026 was out at the start of day D is assumed. If it came out
+   LATER in the day it is still before the candle closes; if the publisher
+   ever dated a value to the day BEFORE it was computed from, that is a
+   leak I cannot see.
+8. **THE INDEX IS BITCOIN's**, applied to ETH and SOL.
+9. **NO WORLD WITH A SMALL REAL EDGE** - true of all three slots.
+
+**WHAT I DID NOT CHECK:**
+
+10. **SIXTY-TWO ATTACKS, SIXTY-TWO AS PREDICTED, NO HOLE FOUND.** I do not
+    read that as proof. The gates and the attack list have one author and
+    were written in one sitting.
+11. **THE RUNNER's PRODUCTION HALF IS SLOT 2's WITH SIXTEEN REPLACEMENTS.**
+    A fault in Slot 2's runner is now in two places.
+12. **THE FREEZE WAS MADE WHILE ITS GATE WAS RED ON ITS OWN COUNT.**
+13. **`or np.isnan(side)` IN THE STRATEGY CANNOT CHANGE AN ANSWER.** Dead in
+    effect; left in.
+14. **THE SIX GREEN ATTACK EDITS** (M18, N4, N5, Q4, Q18, Q23) are judged
+    harmless by me.
+15. **THE CARRIED DAY IS ON THE TRAINING SIDE AND I KNOW IT; WHETHER THE
+    HOLD-OUT HAS ANY, I DO NOT** - the builder printed "1 carried" for the
+    whole file and the one I found is before the line, so the hold-out
+    has none. That is a fact about the hold-out's ROWS, not its values.
+16. **A `sed -i` OF MINE REWROTE A REPO FILE's LINE ENDINGS**; restored
+    before any commit. `git diff` is the witness that nothing else was
+    touched.
+
+## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088 TO R-092 ARE NOT IN IT.

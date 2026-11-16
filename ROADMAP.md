@@ -744,3 +744,26 @@ not exist and has now waited four sessions.**
 | **FREE ON-CHAIN DATA FOR SLOT 3 EXISTS FOR BTC AND ETH, NOT SOL.** | Coin Metrics community API, `CapMVRVCur`, daily, no key: BTC from 2010-07-18, ETH from 2015-08-08. SOL: "not supported". Measured with requests ending 2025-09-30. |
 | **THE CLASSIC CYCLE THERMOMETER CANNOT MAKE 30 TRADES IN 297 DAYS.** | Training side, 3.8 years: BTC's MVRV went below 1 on 5 occasions and never above 3.5; ETH's below 1 on 18 and never above 2.4. |
 | **RANKED IN ITS OWN LAST 90 DAYS, MVRV FIRES OFTEN ENOUGH - AND IS NEARLY A PRICE RULE.** | Coldest tenth on 16-18% of days, hottest on 19-20%; roughly 32 trades a coin in 297 days. Over 90 days MVRV moves almost as price does, so this is close to "buy near the 90-day low". The closeness itself was NOT measured. |
+
+
+# **>>> BUILT 2026-11-16 (LATE NIGHT) - GAUNTLET SLOT 3's SETUP, THE CROWD-MOOD FADE. NOT RUN. ALL THREE SLOTS ARE NOW SET UP.**
+
+| Part | What it is |
+|---|---|
+| **Slot 3, re-specified ONCE by the Commander.** | From the on-chain cycle thermometer (free data for two coins of three; five signals in 3.8 years) to **the crowd-mood fade**, before any slot was run. |
+| **The frozen mood, `lab/mood_vault/`.** | The Fear & Greed index (alternative.me), one row for each of the daily vault's 1,094 days, with a checksum; one day carried. `python lab/mood_vault.py` says INTACT or not. **GATE 6.5-D, 42 checks, 0 red, twice.** |
+| **`lab/build_mood_vault.py`.** | The one fetch. Refuses a second run. |
+| **Slot 3's strategy, `signals/mood_fade.py`.** | Long on a day the publisher labels Fear whose value is strictly below at least 81 of the previous 90 days'; short on a Greed day strictly above at least 81. `mood-fade-1d-90d-top10`. **GATE 6.5-S, 45 checks.** |
+| **The Slot 3 runner, `lab/gauntlet_slot3.py`.** | Slot 2's runner with the mood in place of the funding; one index for all three coins. **GATE 6.5-R, 39 checks.** The run is `python lab/gauntlet_slot3.py --go` and **has not been typed.** |
+
+## MEASURED 2026-11-16 (LATE NIGHT)
+
+| Fact | Measurement |
+|---|---|
+| **THE FEAR & GREED INDEX IS PUBLISHED AT 00:00 UTC, DATED THAT DAY.** | Live, 14:48 UTC on 2026-11-16: newest row dated that day at 00:00, next update 33,100 seconds away. One reading. |
+| **ITS HISTORY IS DAILY FROM 2018-02-01, WITH RARE SILENT DAYS.** | 2,795 rows to 2025-09-30, every one stamped 00:00 UTC; 4 days missing in 7 years; 1 of the vault's 1,094 days. The publisher has no end-date parameter: the whole history always arrives. |
+| **THE PUBLISHER's LABELS, AS SEEN.** | Extreme Fear to 25, Fear 26-46, Neutral 47-54, Greed 55-75, Extreme Greed 76 up (training side). |
+| **SLOT 3's SIGNALS ON THE TRAINING SIDE.** | 706 judged days: BUY on 60, SELL on 123. (An earlier count said 95 sell days: one silent day had blanked 90 days of signals.) |
+| **SLOT 3's TRADE COUNT ON MADE-UP WORLDS.** | 60 worlds: pooled hold-out trades 37 to 86, median 61; 30 or more in 60 of 60. |
+| **SLOT 3's PASS RATE ON MADE-UP WORLDS.** | Noise: **3 PASSED of 60** - the highest of the three slots (one index, three coins). A true fade: profit bar cleared 24 of 24. |
+| **THE SHIP IS THIRTY-TWO INVOCATIONS, 1,963 GREEN.** | 1,711 plus 42, 45 and 39, each twice. `lab/gauntlet_slot2.py --gate` and `lab/gauntlet_slot3.py --gate` take two to three minutes each. |

@@ -313,7 +313,11 @@ THE THREE SEALED SLOTS (from README/THE PROMISE — no substitutions):
   slot can be tested whenever we choose.** The struck words are left visible
   rather than deleted so nobody re-derives the same wrong plan from a clean
   page. Measured probe and full account in PROGRESS_LOG.md, 2026-07-26.
-- Slot 3: On-chain cycle thermometer (MVRV or similar free source; if no
+- Slot 3: **THE CROWD-MOOD FADE (the Fear & Greed index, faded at its
+  extremes). RE-SPECIFIED ONCE BY THE COMMANDER, 2026-11-16, BEFORE ANY SLOT
+  WAS RUN - "Yes, build it". THE ONE CHANGE THIS LINE ALLOWED IS SPENT.
+  The bar is PROGRESS_LOG.md of that date.** What it replaced, left visible:
+  ~~On-chain cycle thermometer~~ (MVRV or similar free source; if no
   free source exists at build time, the slot may be re-specified ONCE by the
   Commander BEFORE testing begins, never after seeing any results).
 
@@ -336,6 +340,13 @@ PROCEDURE per slot: implement signal() → Lab full pipeline → verdict.
   parameters (fingerprint stamped); any change = back to the gauntlet
   (costs nothing, it's code — but the track record resets).
 - IF FAIL → write the honest obituary in PROGRESS_LOG.md, move to next slot.
+  **ADDED BY THE COMMANDER'S RULING OF 2026-11-16, BEFORE ANY SLOT WAS RUN:**
+  after the obituary, (1) a plain-words AUTOPSY - which bars failed, by how
+  much, "no edge" or "a near miss for a reason we chose"; (2) a RESEARCH
+  pass outside the ship on what is known about that kind of idea, sources
+  named, as information for him; (3) the idea, or a changed version, MAY BE
+  WATCHED ON PAPER with no money on data not yet seen. **None of the three
+  is a re-test and none can turn a fail into a pass.**
   No parameter-tweaking resurrection ("just try 25 instead of 20" = the
   overfitting death spiral; the answer is NO, the slot is spent).
 - IF ALL THREE FAIL → THE PROMISE executes: the signals chapter closes
@@ -444,6 +455,41 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-16 (LATE NIGHT): ALL THREE GAUNTLET SLOTS ARE SET UP AND NONE HAS BEEN RUN. SLOT 3 WAS RE-SPECIFIED ONCE BY THE COMMANDER - THE CROWD-MOOD FADE - AND IS BUILT. EVERYTHING NOW WAITS FOR HIS WORD.**
+
+**WHERE THE SHIP IS.** Thirty-two invocations, every exit 0, **1,963
+green, 0 red - MEASURED after the last change.** The twenty-six of the
+marker below, plus `lab/mood_vault.py` GATE 6.5-D (42 x2),
+`signals/mood_fade.py` GATE 6.5-S (45 x2), `lab/gauntlet_slot3.py` GATE
+6.5-R (39 x2). Vault INTACT 6 of 6, frozen funding 3 of 3, frozen mood 1
+of 1, Brief 3/3, **no slot marker.**
+
+**THE THREE SLOTS AS THEY NOW STAND:**
+
+    1  the breakout       4-hour candles; day-sized stop and target
+    2  the funding fade   daily; funding ranked in its own last 90 days
+    3  the mood fade      daily; the Fear & Greed index below at least 81
+                          of its last 90 days on a day the publisher
+                          labels Fear -> buy; the mirror on Greed -> sell
+
+All three: the five locked bars unchanged, the gauntlet's costs 0.20%
+there and back, about 48 wins in 100 needed against 43 by chance.
+
+**WHAT IS BROKEN OR UNPROVEN.** **NOBODY BUT THE AUTHOR HAS READ ANY OF THE
+THREE SETUPS** (R-088 to R-092). Slot 3's pooled trades are nearly one bet
+three times, and on made-up markets noise passed it 3 times in 60 - the
+weakest of the three. No slot has been tried against a small real edge.
+
+**THE THREE COMMANDS THAT EACH SPEND A SLOT FOR EVER, AND MUST NOT BE
+TYPED WITHOUT HIS WORD:**
+
+    python lab/gauntlet.py --slot 1 --go
+    python lab/gauntlet_slot2.py --go
+    python lab/gauntlet_slot3.py --go
+
+**NEXT: HIS DECISION, AND NOTHING ELSE.** The order he was told: one at a
+time - idea 2, then idea 1, then idea 3 - each on his word at the time.
+
 ## **>>> 2026-11-16 (NIGHT): THE COMMANDER RULED HIS REAL BINANCE FEE AND A DAY-SIZED EXIT FOR SLOT 1, BEFORE ANY SLOT WAS RUN. BOTH ARE BUILT. SLOTS 1 AND 2 ARE SET UP AND UNSPENT. NEXT, BY HIS ORDER: IDEA 3.**
 
 **WHERE THE SHIP IS.** Twenty-six invocations, every exit 0, **1,711

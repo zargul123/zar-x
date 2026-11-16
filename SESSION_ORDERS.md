@@ -1,42 +1,48 @@
-# ZAR X — **YOUR JOB: IDEA 3. FIND OUT WHETHER SLOT 3 (THE ON-CHAIN CYCLE THERMOMETER) HAS A FREE DATA SOURCE AND WHETHER ANY HONEST FORM OF IT CAN MAKE 30 TRADES; BRING THE COMMANDER A PROPOSAL IN EASY WORDS; BUILD ONLY WHAT HE APPROVES. SLOTS 1 AND 2 ARE SET UP AND UNSPENT - RUN NOTHING WITHOUT HIS WORD.**
+# ZAR X — **YOUR JOB: ALL THREE TESTS ARE SET UP AND NONE HAS BEEN RUN. THE NEXT MOVE IS THE COMMANDER'S: WHICH TO RUN, AND WHEN. PROVE THE SHIP ALIVE, TELL HIM WHERE THINGS STAND IN EASY WORDS, AND DO WHAT HE SAYS. RUN NOTHING WITHOUT HIS WORD. IF A SLOT IS RUN AND FAILS, HE HAS RULED WHAT HAPPENS NEXT - READ "AFTER A FAIL" BELOW.**
 
-*Written 2026-11-16 (night) by Fable. He opened the session with "zarx..
-fable set up idea 2 and do it smartly". **I read that as his word that the
-session was Fable and did not ask. I hold no power to grant you an
-exemption and I have not written one. What follows reports HIS rulings.***
+*Written 2026-11-16 (late night) by Fable. He opened the session with
+"zarx.. fable set up idea 2 and do it smartly". **I read that as his word
+that the session was Fable and did not ask. I hold no power to grant you
+an exemption and I have not written one. What follows reports HIS
+rulings.***
 
 ---
 
-# **>>> FIRST: THE TWO COMMANDS YOU MUST NOT TYPE WITHOUT HIS WORD**
+# **>>> FIRST: THE THREE COMMANDS YOU MUST NOT TYPE WITHOUT HIS WORD**
 
     python lab/gauntlet.py --slot 1 --go        (Slot 1, the breakout)
     python lab/gauntlet_slot2.py --go           (Slot 2, the funding fade)
+    python lab/gauntlet_slot3.py --go           (Slot 3, the mood fade)
 
 **EACH SPENDS ONE OF THE THREE SLOTS OF THE PROMISE, FOR EVER.** Each
 writes a marker file before it opens the vault, and a second run is
 refused. **There is no undo.**
 
-**>>> AND DO NOT TYPE `--go` AT EITHER FILE FOR ANY OTHER REASON - NOT TO
+**>>> AND DO NOT TYPE `--go` AT ANY OF THEM FOR ANY OTHER REASON - NOT TO
 "WATCH IT REFUSE", NOT WITH THE WRONG SLOT NUMBER, NOT INSIDE A LONGER
 COMMAND.** I did exactly that on 2026-11-16 and the harness blocked it
-before it ran. The refusals are already proved by the gates, with a spy
-standing where the run would be. `--gate` on any of the five Phase 6
-files is safe: no gate opens the vault or the frozen funding.
+before it ran. The refusals are proved by the gates, with a spy standing
+where the run would be. `--gate` on any of the eight Phase 6 files is
+safe: no gate opens the vault or a frozen folder.
 
-**AND DO NOT OPEN THE VAULT'S FILES OR `lab/funding_vault/*.csv` TO "HAVE A
-LOOK".** A look at the hold-out is a look at the result - **and for Slot 2
-a funding RATE is a result.** `python lab/funding_vault.py` (no flag) is
-safe: it prints checksums, row counts and dates only.
+**AND DO NOT OPEN THE VAULT'S FILES, `lab/funding_vault/*.csv` OR
+`lab/mood_vault/fear_greed.csv` TO "HAVE A LOOK".** A look at the hold-out
+is a look at the result - **and for Slots 2 and 3 a funding rate or a mood
+value is a result: how often the hold-out was extreme is the trade
+count.** `python lab/funding_vault.py` and `python lab/mood_vault.py` (no
+flag) are safe: checksums, row counts and dates only.
 
 **WHAT HAS BEEN LOOKED AT, IN BOLD AS THE RITUAL ASKS:**
-**FUNDING - THE TRAINING SIDE ONLY (settled before 2025-10-01), as counts,
-dates, signs and signal counts. NOT ONE RATE ON OR AFTER THE LINE, THOUGH
-ALL 894 A COIN ARE ON THE DISK. VAULT - THE DATE COLUMNS; THE TRAINING
-SIDE'S DAILY AND 4-HOUR HIGHS, LOWS AND CLOSES OF THE THREE COINS, AS
-DIFFERENCES AGAINST BINANCE AND AS MEDIAN RANGE FIGURES; EARLIER, TWO ROWS
-OF BTC DAILY FROM JULY 2023 AND ONE ETH DAILY CANDLE OF 2025-10-10. THE
-BTC 4-HOUR FILE HAS BEEN WALKED, HOLD-OUT INCLUDED, BY THE LAB'S OWN EXAM
-STRATEGIES. THE REAL FUNDING AND THE REAL CANDLES HAVE NEVER MET.**
+**FUNDING AND THE MOOD INDEX - THE TRAINING SIDE ONLY (before 2025-10-01),
+as counts, dates, signs, labels and signal counts. NOT ONE FUNDING RATE OR
+INDEX VALUE ON OR AFTER THE LINE, THOUGH ALL OF THEM ARE ON THE DISK.
+ON-CHAIN MVRV - TRAINING SIDE ONLY, COUNTS (it is not used). VAULT - THE
+DATE COLUMNS; THE TRAINING SIDE'S DAILY AND 4-HOUR HIGHS, LOWS AND CLOSES
+OF THE THREE COINS, AS DIFFERENCES AGAINST BINANCE AND AS MEDIAN RANGE
+FIGURES; EARLIER, TWO ROWS OF BTC DAILY FROM JULY 2023 AND ONE ETH DAILY
+CANDLE OF 2025-10-10. THE BTC 4-HOUR FILE HAS BEEN WALKED, HOLD-OUT
+INCLUDED, BY THE LAB'S OWN EXAM STRATEGIES. NO SLOT's STRATEGY HAS MET THE
+REAL CANDLES.**
 
 ---
 
@@ -46,7 +52,7 @@ STRATEGIES. THE REAL FUNDING AND THE REAL CANDLES HAVE NEVER MET.**
 2026-11-14). `THE_PATTERN.md` says you may not take it from a document, so
 **ask him one line**: *"The last builds were made by Fable. Do I skip
 attacking them, as you ruled?"* **If he says no or does not answer, attack
-them** - R-085, R-086 and R-088 to R-091 are my own lists of where I did
+them** - R-085, R-086 and R-088 to R-092 are my own lists of where I did
 not look. **I DID NOT ASK THAT LINE MYSELF, AND IT IS FILED (R-090 item
 20).**
 
@@ -57,29 +63,25 @@ not look. **I DID NOT ASK THAT LINE MYSELF, AND IT IS FILED (R-090 item
 verbatim):
 
     morning   SLOT 1 IS A 4-HOUR TEST. Then: "Not yet - do idea 2".
-    evening   Slot 2 set up. Asked which to run: "Not yet". Asked whether
-              idea 3 is next: "No, just wait".
-    night     Talking it through, he ruled TWO CHANGES, both before any
-              slot was run:
-                (a) THE GAUNTLET CHARGES HIS REAL FEE. "i use binanace
-                    futures"; taker fee 0.05%. Now 0.05% fee + 0.05%
-                    slippage a side = 0.20% there and back
-                    (`config.GAUNTLET_COSTS`; the Lab's own exams keep
-                    `LAB_COSTS`).
-                (b) SLOT 1 KEEPS ITS 4-HOUR ENTRY AND GETS A DAY-SIZED
-                    STOP AND TARGET: 3.75 and 5.0 times the 84-candle
-                    range. "its your solution your call"; "so this step
-                    is done idea 1. locked it."
-              And then the order: **"ok build step 1 corrections and
-              thenw e have to build step 3".** Step 1 is built. **STEP 3
-              IS IDEA 3, AND IT IS YOUR JOB.** That order replaces "No,
-              just wait".
+    evening   Slot 2 set up. "Not yet". "No, just wait".
+    night     THE GAUNTLET CHARGES HIS REAL FEE (Binance futures taker,
+              0.05%; 0.20% there and back). SLOT 1 GETS A DAY-SIZED STOP
+              AND TARGET. "ok build step 1 corrections and thenw e have to
+              build step 3".
+    late      Idea 3: the thermometer cannot make 30 trades. "think like a
+              pro and tell whats best for the sytem" / "ok go ahead" (to
+              measuring a replacement) / **"Yes, build it"** - SLOT 3
+              RE-SPECIFIED ONCE, AS THE CROWD-MOOD FADE. That change is
+              now used and cannot be made again.
+    last      **AFTER A FAIL** - see the next section. His ruling.
 
 **HE HAS LEFT THE DETAILS TO THE SESSION** ("im a noob ... we have to
 correct it like pro"). **THAT IS NOT A LICENCE TO DECIDE QUIETLY: every
-number chosen for him is written in the bar before it is built and told
-to him in easy words, and anything that changes WHAT a slot is goes to
-him as a yes or no.**
+number chosen for him is written in a bar before it is built and told to
+him in easy words, and anything that changes WHAT a slot is goes to him
+as a yes or no.** **SLOT 1 HAS BEEN RE-SHAPED TWICE AND SLOT 3 ONCE. NONE
+OF THE THREE MAY BE RE-SHAPED AGAIN BEFORE IT IS RUN: THAT WOULD BE TUNING
+A TEST UNTIL IT PASSES. IF HE ASKS FOR IT, TELL HIM SO.**
 
 **WHAT THAT MEANS FOR YOU, WHOEVER YOU ARE:**
 
@@ -88,118 +90,109 @@ him as a yes or no.**
          AGAINST YOURSELF, NOT LESS.**
     HE HAS NOT SAID IT
       -> **YOU ARE AN ORDINARY ZAR X SESSION. R-006 APPLIES TO ANYTHING
-         YOU BUILD IN PHASE 6, IN FULL**: you may build Slot 3's setup,
-         but another AI must review it before it runs.
-      -> **AND YOU ARE THE SECOND MIND THESE SETUPS NEVER HAD.** If he
-         lets you, attack them BEFORE any is run. R-088 to R-091.
+         YOU BUILD IN PHASE 6, IN FULL.**
+      -> **AND YOU ARE THE SECOND MIND THESE THREE SETUPS NEVER HAD.** If
+         he lets you, attack them BEFORE any is run. R-088 to R-092.
+         **My last attack found no hole in Slot 3's gates. I do not
+         believe that. Start there.**
+
+---
+
+# **>>> AFTER A FAIL - HIS RULING OF 2026-11-16, IN HIS WORDS**
+
+He asked, before any slot was run: *"suppose we run the test and due to
+some reasons because ours its failed or our terms are so strick on it
+because of that its fail then who will se that mayb a little tweaking can
+make it better. as im not a technical person and dont have knowledge of
+that. thats the serioys concern"*. Two points were put to him. **HIS
+ANSWER: "i think both points are logical and once autopsy came then a
+system research through internet and anyother place to give the
+understanding that it is good or bad".**
+
+**SO, DECIDED BEFORE ANY RESULT EXISTS:**
+
+    1. EVERY FAIL GETS A PLAIN-WORDS AUTOPSY. Which of the five bars
+       failed and by how much, and whether it reads as "no edge" (it lost
+       money after fees) or "a near miss for a reason we chose" (for
+       instance: profitable, but did not beat buy-and-hold in a rising
+       market). Written for a man who is not a programmer. **THE AUTOPSY
+       EXPLAINS A RESULT. IT NEVER CHANGES ONE.**
+    2. THEN A RESEARCH PASS - his addition. The session looks outside the
+       ship (the internet, published work, what practitioners report) for
+       what is known about that kind of idea, and tells him in easy words
+       whether the fail fits what is known or looks like the test's
+       fault. **INFORMATION FOR HIM. IT IS NOT A RE-TEST AND CANNOT TURN A
+       FAIL INTO A PASS.** Name the sources; say what could not be found.
+    3. A FAILED IDEA MAY STILL BE WATCHED ON PAPER, WITH NO MONEY. It can
+       keep giving daily signals and be scored honestly on NEW data that
+       nobody has seen. Months of that is real evidence either way. **A
+       tweaked version goes the same road: NEVER re-tested on the old
+       data, only watched forward.**
+
+**WHAT DOES NOT CHANGE, AND I SAID SO TO HIM:** no slot is ever run twice
+on the past; the five bars do not move; a failed slot is spent; there is
+no fourth slot in the gauntlet. **Point 3 softens the founding promise** -
+`README.md` and `SHIP_LAWS.md` Law 6 say a failed idea is finished,
+"no re-tests, information-only cockpit". **THOSE TWO FILES ARE HIS ALONE
+TO CHANGE AND I HAVE NOT TOUCHED THEM.** His ruling is recorded in
+`PROGRESS_LOG.md` and in `EXECUTION_PLAN.md`'s Phase 6 procedure. **IT IS
+ON HIS DESK TO SAY WHETHER LAW 6 AND THE README SHOULD BE AMENDED TO
+MATCH; proposed words are in the log. UNTIL HE DOES, WHERE THEY DISAGREE
+WITH THIS RULING, ASK HIM - DO NOT PICK.**
+
+**THE PAPER-WATCH IS NOT BUILT.** Phase 7's signal journal does not exist
+yet. If a slot fails and he wants it watched, that is a build, under a
+gate, like anything else.
 
 ---
 
 # **>>> READ THIS FIRST, IN PLAIN WORDS**
 
     YOUR SESSION:  PART 1 — ask the one line about skipping the attack.
-                            Prove the ship alive (TWENTY-SIX invocations).
-                   PART 2 — IDEA 3: find out, propose, and build only
-                            what he approves. **RUN NOTHING WITHOUT HIS
+                            Prove the ship alive (THIRTY-TWO invocations).
+                   PART 2 — tell him where things stand; ask which test
+                            to run, if any. **RUN NOTHING WITHOUT HIS
                             WORD.**
 
-## YOUR PART 2: IDEA 3, THE ON-CHAIN CYCLE THERMOMETER
-
-**THE SLOT'S LOCKED WORDS** (`EXECUTION_PLAN.md`): *"Slot 3: On-chain cycle
-thermometer (MVRV or similar free source; if no free source exists at
-build time, the slot may be re-specified ONCE by the Commander BEFORE
-testing begins, never after seeing any results)."* In a trader's words:
-the blockchain shows what holders paid for their coins; when the market
-is worth far more than that, it is "hot"; when it is worth less, "cold".
-Buy cold, step aside hot.
-
-**>>> THE FINDING-OUT IS DONE (2026-11-16, NIGHT) AND HAS BEEN PUT TO HIM.
-READ `PROGRESS_LOG.md`'s LAST ENTRY BEFORE ANYTHING ELSE. IN SHORT:**
-
-    DATA    free, daily, no key (Coin Metrics community, `CapMVRVCur`):
-            BTC and ETH. **SOL: none.**
-    COUNT   the true thermometer (buy below 1, step aside when very
-            high) fired 5 times in 3.8 years on BTC. **IT CANNOT MAKE
-            30 TRADES IN 297 DAYS.**
-    BUT     ranked in its own last 90 days it makes about 64 pooled
-            trades on two coins - **and is then nearly a price
-            dip-buying rule, not an on-chain idea.**
-    HIS     (A) keep it true and leave the slot unspent; (B) the
-    CHOICE  90-day rank, two coins; (C) re-specify Slot 3, once, to
-            a different idea, to be found and put to him.
-
-**>>> AND THEN (STILL 2026-11-16) HE STEERED: "think like a pro and tell
-whats best for the sytem", and "ok go ahead" to MEASURING a replacement:
-FADING THE CROWD'S MOOD with the Fear & Greed index. Measured, training
-side only: `PROGRESS_LOG.md`'s last entry. MY RECOMMENDATION WAS RULE C -
-buy when the index is below at least 81 of its last 90 days AND the day
-is labelled Fear or Extreme Fear; sell the mirror with Greed - about 50
-to 60 trades. HE HAS NOT YET SAID YES TO IT AS IDEA 3. THAT YES WOULD BE
-HIS ONE RE-SPECIFICATION OF SLOT 3.**
-
-**IF HIS ANSWER IS NOT IN `PROGRESS_LOG.md` BELOW THAT ENTRY, HE HAS NOT
-ANSWERED: ASK HIM, IN EASY WORDS, AND WRITE NO BAR UNTIL HE DOES.** The
-four steps below are how the finding-out was meant to go, kept so you
-can check it or redo it.
-
-**IT IS A FINDING-OUT JOB FIRST. DO NOT WRITE A BAR UNTIL HE HAS ANSWERED.**
-
-    1. THE DATA. Is there a free source (no key, or a free key) of MVRV
-       or a like measure, DAILY, back to at least 2023-07-28, for BTC -
-       and say plainly whether ETH and SOL have one at all. **MEASURE IT:
-       fetch it, count rows and dates.** The plan once said funding
-       history was not served deep; that was wrong and cost months.
-       **WHEN YOU FETCH IT, THE HOLD-OUT'S VALUES ARRIVE. LOOK ONLY AT
-       ROWS BEFORE 2025-10-01.** Ask with an end date where the source
-       allows it.
-    2. THE COUNT - THE REAL PROBLEM. The hold-out is 297 days and the bar
-       is 30 trades. A thermometer that turns a few times a year cannot
-       make 30 trades, pooled or not. **AS WRITTEN, SLOT 3 FAILS ON
-       COUNTING BEFORE IT STARTS** - the trap Slot 1 fell into on daily
-       candles. So work out, on the TRAINING side only and on made-up
-       data, whether any honest reading of "cycle thermometer" reaches
-       30: for instance a rank of the measure in its own recent history,
-       as Slot 2 does with funding. If none does, say so.
-    3. THE PROPOSAL, TO HIM, IN EASY WORDS: what data exists; what the
-       idea would be; how many trades it would likely make; what it has
-       to beat. **IF THE HONEST ANSWER IS "THIS IDEA CANNOT BE TESTED
-       FAIRLY IN THIS WINDOW", THAT IS THE ANSWER, and he may use his ONE
-       re-specification - his choice, before anything is run on any
-       slot.** Do not hand him a re-specification dressed as a detail.
-    4. ONLY THEN: the bar, alone; the freeze (as `lab/funding_vault/` was
-       done); the strategy; a runner that IMPORTS Slot 1's five bars as
-       `lab/gauntlet_slot2.py` does; three gates; the attack; the made-up
-       worlds - INCLUDING WORLDS WHERE THE IDEA IS TRUE, mildly and
-       strongly. The costs are `config.GAUNTLET_COSTS`.
-
-## WHAT EXISTS NOW - TWO TESTS, BOTH READY, NEITHER RUN
+## WHAT EXISTS NOW - THREE TESTS, ALL READY, NONE RUN
 
   * **SLOT 1 - THE BREAKOUT.** 4-hour candles: buy when price closes
-    above its last 20 candles in an up-trend; sell the mirror. **Each
-    trade now has a day-sized stop and target (about 5% and 6.6% on BTC)
-    and lasts about four days.** On made-up markets: about 81 trades
-    where 30 are needed; noise passed 1 time in 60; and where breakouts
-    really follow through, the profit bar was cleared 24 times in 24.
-    **A market that only creeps one way still fails it, 12 of 12 - and
-    a working breakout can still fail the slot by not beating
-    buy-and-hold.**
-  * **SLOT 2 - THE FUNDING FADE.** Daily candles: sell when the day's
-    funding is positive and higher than at least 81 of the last 90 days;
-    buy the mirror. About 67 trades; noise passed 3 times in 60; a true
-    fade cleared the profit bar 24 times in 24.
-  * **BOTH NOW HAVE TO BE RIGHT ABOUT 48 TIMES IN 100 AFTER FEES; A COIN
-    FLIP IS RIGHT 43.** Whether either real idea works, nobody knows.
+    above its last 20 candles in an up-trend; sell the mirror. A
+    day-sized stop and target; a trade lasts about four days. Made-up
+    markets: about 81 trades; noise passed 1 time in 60; where breakouts
+    really follow through, the profit bar was cleared 24 of 24.
+  * **SLOT 2 - THE FUNDING FADE.** Daily: sell when the day's funding is
+    positive and higher than at least 81 of the last 90 days; buy the
+    mirror. About 67 trades; noise passed 3 in 60; a true fade 24 of 24.
+  * **SLOT 3 - THE MOOD FADE.** Daily: buy when the Fear & Greed index is
+    lower than at least 81 of its last 90 days on a day labelled Fear;
+    sell the mirror on Greed. About 61 trades; noise passed 3 in 60; a
+    true fade 24 of 24. **ONE INDEX FOR ALL THREE COINS, SO ITS TRADES ARE
+    NEARLY ONE BET THREE TIMES: THE WEAKEST PASS OF THE THREE.**
+  * **ALL THREE HAVE TO BE RIGHT ABOUT 48 TIMES IN 100 AFTER FEES; A COIN
+    FLIP IS RIGHT 43.** Whether any real idea works, nobody knows. **A
+    working idea can still fail by not beating buy-and-hold.**
 
-**THE ORDER HE WAS TOLD AND DID NOT OBJECT TO:** settle idea 3 while all
-three are sealed; then test ONE AT A TIME - idea 2, then idea 1, then
-idea 3 - so that a fault in the shared machinery is found before the
-other two are spent. **EACH RUN STILL NEEDS HIS WORD, AT THE TIME.**
+## >>> THE QUESTION FOR HIM - EASY WORDS, NO GATE NUMBERS, NO RECOMMENDATION UNLESS HE ASKS
 
-**BEFORE ANY RUN:** `python lab/funding_vault.py` INTACT 3 of 3;
-`python lab/verify_vault.py` INTACT 6 of 6; every gate green; `git status`
-clean; no `GAUNTLET_SLOT_*_SPENT.txt` in `lab/results/`. Then the one
-command, ONCE, from the `zar-x` folder with the full interpreter path, and
-everything it prints into `PROGRESS_LOG.md` UNEDITED.
+    Which test do you want run, if any?  One at a time.
+
+**THE ORDER HE WAS TOLD AND DID NOT OBJECT TO: idea 2, then idea 1, then
+idea 3** - one at a time, so a fault in the shared machinery is found
+before the other two are spent. **EACH RUN NEEDS HIS WORD AT THE TIME. "Run
+them all" is three separate goes, with the result of each put to him
+before the next.**
+
+**BEFORE ANY RUN:** `python lab/verify_vault.py` INTACT 6 of 6;
+`python lab/funding_vault.py` INTACT 3 of 3; `python lab/mood_vault.py`
+INTACT 1 of 1; every gate green; `git status` clean; no
+`GAUNTLET_SLOT_*_SPENT.txt` in `lab/results/`. Then the one command, ONCE,
+from the `zar-x` folder with the full interpreter path.
+
+**AFTER ANY RUN:** everything it printed into `PROGRESS_LOG.md` UNEDITED.
+A PASS: Phase 7, the proving voyage, on paper. **WITHHELD (the too-good
+alarm): no pass - hunt a leak first.** A FAIL: the obituary, then the
+autopsy and the research pass above.
 
 ## R-090 ITEM 1, SPELLED OUT - IF YOU DID NOT BUILD THIS, REPEAT IT
 
@@ -229,18 +222,20 @@ is in `PROGRESS_LOG.md`, the Slot 2 bar, section 2.
     journal/log_trade.py        GATE 5.1-R3  101 x2  journal/mirror.py    GATE 5.2      84 x2
     signals/turtle.py           GATE 6.2-S    39 x2  lab/gauntlet.py      GATE 6.4-R    49 x2
     lab/funding_vault.py        GATE 6.3-D    52 x2  signals/funding_fade.py GATE 6.3-S 44 x2
-    lab/gauntlet_slot2.py       GATE 6.3-R1   40 x2
-    vault INTACT 6 of 6 - frozen funding INTACT 3 of 3 - Brief 3/3
+    lab/gauntlet_slot2.py       GATE 6.3-R1   40 x2  lab/mood_vault.py    GATE 6.5-D    42 x2
+    signals/mood_fade.py        GATE 6.5-S    45 x2  lab/gauntlet_slot3.py GATE 6.5-R   39 x2
+    vault INTACT 6 of 6 - frozen funding INTACT 3 of 3 - frozen mood INTACT 1 of 1 - Brief 3/3
     lab/results/ holds NO slot marker - journal/my_trades.csv DID NOT EXIST when I left
 
-**TWENTY-SIX INVOCATIONS, 1,711 GREEN, 0 RED, MEASURED 2026-11-16 AFTER THE
+**THIRTY-TWO INVOCATIONS, 1,963 GREEN, 0 RED, MEASURED 2026-11-16 AFTER THE
 LAST CHANGE. MEASURE IT AGAIN.**
 
 **HOW EACH GATE IS RUN:** `cockpit/fear_greed.py`, `cockpit/funding.py` and
 `data/open_interest.py` take no flag; every other gate takes `--gate`;
-`lab/verify_vault.py`, `cockpit/brief.py` and `lab/funding_vault.py` (the
-verifier) take none. **`lab/gauntlet.py --gate` takes about 50 seconds and
-`lab/gauntlet_slot2.py --gate` TWO TO THREE MINUTES** (twelve whole
+`lab/verify_vault.py`, `cockpit/brief.py`, `lab/funding_vault.py` and
+`lab/mood_vault.py` (the verifiers) take none. **`lab/gauntlet.py --gate` takes about 50 seconds and
+`lab/gauntlet_slot2.py --gate` AND `lab/gauntlet_slot3.py --gate` TWO TO
+THREE MINUTES EACH** (twelve whole
 rehearsals for its drill). It is not hung.
 
 **YOUR WORD-HITS WILL BE:** the fear_greed and funding gates' own prose
@@ -250,7 +245,7 @@ and rehearsals, which are SUPPOSED to print `FAILED` and `REFUSED`. **THE
 FUNDING GATE'S "escaped" LINES HAVE FOOLED THREE SESSIONS. KEEP NAMING
 THEM.**
 
-## What I did, in ten lines
+## What I did, in eleven lines
 
 1. **Measured the ship alive**: 1,429 green, 0 red.
 2. **Measured, on training rows only**: funding settles three times a day
@@ -277,12 +272,20 @@ THEM.**
     result; the made-up markets again for both slots. **I told him
     numbers in conversation that were too dramatic (55 wins in 100
     needed; measured, 53) and corrected them.**
+11. **THEN, LATE AT NIGHT, ON HIS "Yes, build it": SLOT 3, RE-SPECIFIED
+    ONCE, AS THE CROWD-MOOD FADE.** The finding-out (the thermometer
+    cannot make 30 trades), a candidate measured, his yes, the bar
+    alone, the freeze, three gates, 62 attack edits (56 red, 6 that
+    cannot change a result, no hole found - which I do not trust),
+    84 made-up worlds. **TWO THINGS NOT TO REPEAT: `sed -i` on a repo
+    file (it rewrote every line ending), and freezing while a gate
+    was red.**
 
 ---
 
 # WHAT YOU OWE WHICHEVER WAY HE ANSWERS
 
-1. **PROVE THE SHIP IS ALIVE FIRST**, twenty-six invocations, red counted
+1. **PROVE THE SHIP IS ALIVE FIRST**, thirty-two invocations, red counted
    by machine three ways, every hit read by eye.
 2. **IF A SLOT IS RUN, EVERYTHING IT PRINTS GOES INTO `PROGRESS_LOG.md`
    UNEDITED**, the five bars, the alarm, and each coin's information card.
@@ -381,7 +384,7 @@ a FAIL, is not committed as a pass, and is not called "mostly passed."**
   your commit hashes again after you push.
 - **THE WEEKLY OPEN-INTEREST TASK COMMITS LOCALLY WITHOUT PUSHING.** Pull,
   and push whatever it left behind.
-- **`lab/funding_vault/` IS CHECKSUMMED EVIDENCE.** Never edit, re-save,
+- **`lab/funding_vault/` AND `lab/mood_vault/` ARE CHECKSUMMED EVIDENCE.** Never edit, re-save,
   re-fetch or "tidy" it. Git is told not to touch a byte (`* -text`).
   `lab/build_funding_vault.py --freeze` REFUSES a second run; leave it
   refused.
@@ -446,9 +449,9 @@ the channel / back to daily / not yet.
    (Risk: the ship's rule, 1% with the 25% cap. With Slot 1's new stop
    and on Slot 2's daily candles the cap does not bind on made-up
    markets: each trade risks exactly 1%.)
-2. **>>> SLOT 3'S DATA SOURCE - NOW YOUR JOB, NOT ONLY HIS QUESTION** — is there a free on-chain cycle source
-   (MVRV or similar)? If not he may re-specify the slot ONCE, before testing
-   begins.
+2. **SLOT 3: SETTLED 2026-11-16.** Re-specified once, by him, as the
+   crowd-mood fade; built; unspent. **THE ONE CHANGE IS USED. SLOT 3
+   CANNOT BE CHANGED AGAIN.**
 3. **THE THREE CHOICES I MADE IN THE NEW BUILD - HE RULED ON ALL THREE,
    2026-11-15, AND KEPT THEM. DO NOT ASK AGAIN.** A wrong-side stop is
    refused; the 1% lines keep his real exit; a reading older than 8 hours
@@ -499,8 +502,9 @@ the channel / back to daily / not yet.
 
 1. **`EXECUTION_PLAN.md` PHASE 6** and the CURRENT POSITION MARKER.
 2. **`SHIP_LAWS.md`, Law 7**, and `README.md` — THE PROMISE.
-3. **`PROGRESS_LOG.md`, the SIX entries of 2026-11-16 (the last two are the
-   costs-and-exit bar and its account)** — Slot 1's 4-hour
+3. **`PROGRESS_LOG.md`, the entries of 2026-11-16 - ten of them. The last
+   four are the idea 3 finding-out, the candidate, Slot 3's bar and its
+   account** — Slot 1's 4-hour
    bar and account, then Slot 2's bar and account (the last two in the
    file) — and the Phase 6 entries of 2026-11-15 they stand on.
    **The file is ~1 MB; do not read it all.**
@@ -509,7 +513,7 @@ the channel / back to daily / not yet.
 5. **`lab/engine.py`, `lab/dummies.py`, `lab/leak_check.py`**, and the
    production halves of `signals/funding_fade.py` (25 lines),
    `lab/funding_vault.py` and `lab/gauntlet_slot2.py`.
-6. **`REVIEW_QUEUE.md`: R-006, then R-084 to R-091.**
+6. **`REVIEW_QUEUE.md`: R-006, then R-084 to R-092.**
 
 # HOUSEKEEPING THAT HAS ALREADY BITTEN THIS SHIP
 
@@ -521,6 +525,10 @@ the channel / back to daily / not yet.
   scratch file and install it with a script that converts and REFUSES a
   bare LF. Judge line endings in the WORKING TREE, never against
   `git show HEAD:<file>`, which hands back LF.
+- **>>> NEVER EDIT A REPO FILE WITH `sed -i`.** It rewrote all 807 line
+  endings of a file to LF and did not make the change it was asked
+  for (2026-11-16). Edit a source copy and install it through a script
+  that refuses a bare LF.
 - **>>> NEVER PASS A SCRIPT TO THE SHELL AS A HERE-DOCUMENT - LONG OR
   SHORT.** One broke a shell on 2026-11-16 (morning); one silently ate
   the backslashes out of a gate repair that evening and left a check
@@ -550,7 +558,7 @@ the channel / back to daily / not yet.
     1. PROGRESS_LOG.md .... what happened, the real numbers, and EVERY
                             mistake as plainly as every success. Append only.
     2. REVIEW_QUEUE.md .... one OPEN item against your own work. **You may
-                            NOT clear R-084 to R-091 unless you attacked
+                            NOT clear R-084 to R-092 unless you attacked
                             them; you may never clear R-006.**
     3. EXECUTION_PLAN.md .. the CURRENT POSITION MARKER, rewritten to the
                             truth. Keep the old markers below it.
