@@ -1,4 +1,4 @@
-# ZAR X — **WHERE THINGS STAND: SLOT 2 FAILED AND IS SPENT. THE COMMANDER THEN HAD THE THREE IDEAS COMBINED; THE COMBINED RULE WAS TRIED ONCE ON 113 UNSEEN DAYS AND MADE MONEY (1,000 TO 1,107, 25 TRADES - NOT A VERDICT). SLOTS 1 AND 3 ARE SET UP, UNSPENT AND PAUSED BY HIM. YOUR JOB: PROVE THE SHIP ALIVE (36 INVOCATIONS, NOT MEASURED WHOLE SINCE THE LAST BUILD), TELL HIM WHERE THINGS STAND IN EASY WORDS, AND ASK WHAT HE WANTS. RUN NOTHING WITHOUT HIS WORD.**
+# ZAR X — **YOUR JOB, IN THE ORDER THE COMMANDER SET: (1) PROVE THE SHIP ALIVE - 36 INVOCATIONS, NOT MEASURED WHOLE SINCE THE LAST BUILD. (2) RUN SLOT 1, THE BREAKOUT, ONCE - ON HIS WORD, GIVEN IN YOUR CONVERSATION. (3) RUN SLOT 3, THE MOOD FADE, ONCE - THE SAME. (4) FIX WITH HIM THE SHORT LIST OF RULES TO PAPER-TRACK. (5) BUILD THE LIVE PAPER-WATCH. SLOT 2 FAILED AND IS SPENT. THE COMBINED RULE HAD ONE LOOK AT 113 UNSEEN DAYS: 1,000 TO 1,107 ON 25 TRADES - NOT PROOF.**
 
 *Written 2026-11-16 (night's end) by Fable, at the end of a very long
 session. He opened it with "zarx.. fable set up idea 2 and do it smartly".
@@ -44,7 +44,44 @@ refuses (do not type it to check). **THE WINDOW 2026-07-26 TO 2026-11-15
 HAS BEEN SEEN: no other rule may be tried on it as if it were unseen.**
 Every day from 2026-11-16 on is new.
 
-**>>> ON HIS DESK - THE NEXT REAL DECISION:**
+**>>> HE HAS SET THE ORDER (2026-11-16, his last words of the session):**
+*"ok write the update we will test idea1 and 3 next and then paper
+trading but do it in next session"*.
+
+    1. PROVE THE SHIP ALIVE.
+    2. SLOT 1, THEN SLOT 3 - ONE AT A TIME. **THAT SENTENCE IS HIS PLAN,
+       NOT A GO TYPED INTO YOUR CONVERSATION. BEFORE EACH RUN ASK HIM
+       ONE LINE** - *"Run idea 1 now?"* - **AND WAIT FOR THE YES.** The
+       pre-flight and what to do after a run are further down.
+       I TOLD HIM I EXPECT SLOT 3 TO FAIL (the same kind of bet as Slot
+       2, and that bet lost on the training side) AND THAT SLOT 1 IS
+       UNKNOWN. A FAIL: the obituary, the plain-words autopsy, the
+       research pass. **NO RE-TEST AND NO TWEAK ON THE OLD DATA,
+       WHATEVER THE AUTOPSY SUGGESTS.**
+    3. THE LIST OF RULES TO PAPER-TRACK, FIXED WITH HIM BEFORE THE
+       TRACKER IS BUILT AND KEPT SHORT: the combined rule; the trend
+       alone, its yardstick; whichever of Slots 1 and 3 pass; AT MOST
+       ONE changed version of a failed idea, and only if its autopsy
+       gives a clear reason. **Ten versions on paper and the best
+       picked afterwards is the retest problem again, slower.**
+    4. THE LIVE PAPER-WATCH - Phase 7's signal journal. EACH RULE
+       TRACKED SEPARATELY, SIDE BY SIDE. What he was told it is: a
+       daily signal writer (after the daily close: fresh prices,
+       funding and mood; each rule's signal with entry, stop, target
+       and size for a nominal 1,000 dollars), a scorer (each written
+       signal followed to its stop or target, a running paper
+       result), a line on his Brief, and the laptop's daily task
+       running it. **A SIGNAL ONCE WRITTEN IS NEVER EDITED; A MISSED
+       DAY IS SAID PLAINLY, NOT FILLED IN.** He was told: about one
+       session for the writer and the scorer, a second for the Brief
+       and the daily task; then months, not weeks, before it means
+       much (about 6 to 8 trades a month). **NO MONEY.** Bar first,
+       gates, attack - like everything else. It touches
+       `cockpit/brief.py` and the daily task, which he uses every
+       day: prove with `git` that nothing he reads changes except
+       what the orders call for.
+
+**THE OTHER THINGS STILL ON HIS DESK FROM THIS SESSION:**
 
     (1) BUILD THE LIVE PAPER-WATCH. Phase 7's signal journal, which does
         not exist: each day the combined rule's signal (entry, stop,

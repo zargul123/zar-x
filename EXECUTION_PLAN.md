@@ -475,9 +475,11 @@ bad, shorts carrying it, a rule picked from a search; real candles reach
 the engine through a door I made; a leak-shaped hole was in the gate
 until the attack found it. **Nobody but the author has read any of it.**
 
-**NEXT, AND IT IS HIS CALL:** whether to build the live paper-watch
-(Phase 7's signal journal) so the combined rule is scored every day on
-new data with no money. And what becomes of Slots 1 and 3.
+**NEXT, BY HIS ORDER (2026-11-16, "we will test idea1 and 3 next and then
+paper trading but do it in next session"):** prove the ship alive; run
+Slot 1, then Slot 3, one at a time, each on his word at the time; fix
+the short list of rules to track; build the live paper-watch (Phase 7's
+signal journal), each rule tracked separately, no money.
 
 ## **>>> 2026-11-16 (LATE NIGHT): SLOT 2, THE FUNDING-RATE FADE, WAS RUN ONCE ON THE COMMANDER'S WORD AND FAILED - FOUR BARS OF FIVE. IT IS SPENT. SLOTS 1 AND 3 ARE SET UP AND UNSPENT.**
 

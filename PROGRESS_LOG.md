@@ -20170,3 +20170,70 @@ trade files. I did not open the forward candles, funding or mood by eye.
 THE HOLD-OUT OF SLOTS 1 AND 3 (October 2025 to July 2026) WAS WALKED BY
 THESE TWO RULES TO WARM UP AND NOT ONE TRADE FROM IT WAS SAVED, PRINTED OR
 LOOKED AT.**
+
+## >>> 2026-11-16, THE END OF THE SESSION - **THE COMMANDER SET THE ORDER FOR WHAT COMES NEXT: TEST IDEA 1 AND IDEA 3, THEN PAPER TRADING - IN THE NEXT SESSION. NO CODE CHANGED. NOTHING RUN.**
+
+Shown Forward Check 1's result he asked what should come next. I advised
+building the live paper-watch first (unseen days are passing; the two
+sealed tests keep). He asked what the ORIGINAL plan was - it was: test the
+three ideas, then paper trading for those that pass - and pressed the
+point twice: *"dont you think after testing we will go to paer trading"*.
+**HE WAS RIGHT AND I SAID SO**: the tests cost minutes, the tracker is then
+built once for exactly the rules worth watching, and it keeps the plan's
+own order. My paper-first advice bought a few days of data at the price
+of doing things out of order.
+
+He also asked whether in real trading the three ideas are not needed
+together, and whether one idea can be believed. Answered: one idea alone
+is blind to the other two (Slot 2 bought fear in a down-trend); the
+combined rule IS the three together; the solo tests of 1 and 3 are for
+information - which ingredient does the work - and nothing is to be
+believed until it has a long live record.
+
+How the paper trading would work was put to him and not objected to:
+**EACH RULE TRACKED SEPARATELY, SIDE BY SIDE, its own signals and its own
+running record; the list of rules FIXED BEFORE TRACKING STARTS and kept
+short** - the combined rule; the trend alone as its yardstick; whichever
+of Slots 1 and 3 pass; at most ONE changed version of a failed idea, and
+only if its autopsy gives a clear reason. Ten versions on paper and the
+best one picked afterwards is the retest problem again, slower.
+
+**HIS ORDER, VERBATIM: "ok write the update we will test idea1 and 3 next
+and then paper trading but do it in next session".**
+
+**SO, FOR THE NEXT SESSION, IN THIS ORDER:**
+
+    1. Prove the ship alive (36 invocations; not measured whole since the
+       forward-check build).
+    2. SLOT 1 (the breakout) - run once, on his word AT THE TIME.
+    3. SLOT 3 (the mood fade) - run once, on his word AT THE TIME.
+       Each result into this log unedited. A fail: the obituary, the
+       plain-words autopsy, the research pass. NO RE-TEST, NO TWEAK ON THE
+       OLD DATA.
+    4. Fix the list of rules to be paper-tracked, with him.
+    5. Build the live paper-watch (Phase 7's signal journal) for that
+       list. No money.
+
+**"we will test idea 1 and 3 next" IS HIS PLAN FOR THE NEXT SESSION, NOT A
+GO TYPED INTO IT.** `THE_PATTERN.md`: a go is given in the conversation it
+is acted in. The next session confirms in one line before each run.
+
+**WHERE EVERYTHING STANDS AS THIS SESSION CLOSES:**
+
+    Slot 1  the breakout ........ set up, unspent
+    Slot 2  the funding fade .... RUN, FAILED (4 bars of 5), SPENT
+    Slot 3  the mood fade ....... set up, unspent
+    the combined rule ........... frozen; ONE look at 113 unseen days:
+                                  1,000 -> 1,107 on 25 trades. Not proof.
+    the paper-watch ............. not built
+
+**THE SESSION, IN ONE PARAGRAPH, FOR WHOEVER READS THIS COLD.** It began as
+"set up idea 2". It set up Slot 2, then - on his rulings, each recorded
+above - corrected the gauntlet's costs to his real Binance fee, gave Slot
+1 a day-sized exit, found that the on-chain thermometer could not be
+tested and re-specified Slot 3 as the mood fade, ran Slot 2 (failed),
+combined the three on his order, and looked once at four unseen months.
+**THAT IS A GREAT DEAL OF RE-SHAPING IN ONE DAY BY ONE BUILDER WHOM NOBODY
+REVIEWED. R-088 TO R-093 ARE THE LIST OF WHERE I DID NOT LOOK. THE TWO
+THINGS THAT KEEP IT HONEST ARE: NOTHING IS EVER RE-TESTED ON DATA ALREADY
+SEEN, AND NO MONEY MOVES WITHOUT A LONG LIVE RECORD.**
