@@ -9,6 +9,17 @@ FROM DAILY TO 4-HOUR CANDLES, BEFORE ANYTHING HAD BEEN RUN**; the new bar
 was committed alone that day, before this file was changed. The five bars,
 the pooling, the yardstick and the hold-out line did not change.
 
+**ON 2026-11-16 (NIGHT) HE RULED TWO MORE CHANGES, AGAIN BEFORE ANYTHING HAD
+BEEN RUN**, and their bar was committed alone before this file was changed:
+
+  * THE GAUNTLET CHARGES HIS REAL EXCHANGE'S FEE: Binance futures taker,
+    0.05% a side, with 0.05% slippage a side - `config.GAUNTLET_COSTS`,
+    0.20% there and back. (The Lab's own exams keep `LAB_COSTS`.)
+  * SLOT 1's STOP AND TARGET ARE DAY-SIZED: 3.75 and 5.0 times the average
+    range of the last 84 four-hour candles (14 days) - the ship's 1.5 and
+    2.0 applied to a day's move, a day being 2.5 four-hour ranges. The
+    ENTRY (`signals/turtle.py`) did not change.
+
 WHAT IT DOES, in order:
 
   1. Refuses to run without `--go`, typed on purpose.
@@ -58,7 +69,7 @@ sys.path.insert(0, ROOT_DIR)
 sys.path.insert(0, LAB_DIR)
 
 import engine                                              # noqa: E402
-from config import LAB_COSTS, RISK_CONFIG                  # noqa: E402
+from config import GAUNTLET_COSTS, LAB_COSTS, RISK_CONFIG  # noqa: E402
 from monte_carlo import monte_carlo                        # noqa: E402
 from risk.calculator import RiskCalculator                 # noqa: E402
 from trade_stats import summarise                          # noqa: E402
@@ -75,6 +86,13 @@ BAR_WALK_FORWARD = 'CONSISTENT'
 BAR_MAX_MC_DRAWDOWN = 30.0
 TOO_GOOD_PF = 2.0
 TOO_GOOD_WIN_PCT = 70.0
+
+# SLOT 1's EXIT, ruled 2026-11-16 (night): the ship's 1.5 and 2.0, applied to
+# a DAY's typical move. A day is 2.5 four-hour ranges, and 14 days is 84
+# four-hour candles.
+SLOT1_SL_ATR = 3.75
+SLOT1_TP_ATR = 5.0
+SLOT1_ATR_PERIOD = 84
 
 
 def slot_strategy(slot):
@@ -95,27 +113,35 @@ def holdout_index(df, train_end=TRAIN_END):
 
 
 def buy_and_hold(df, train_end=TRAIN_END, capital=engine.INITIAL_CAPITAL,
-                 costs=None):
+                 costs=None, sl_atr_mult=None, tp_atr_mult=None,
+                 atr_period=None):
     """B5's yardstick for one coin -> its result as a fraction of capital.
 
     Bought at the first hold-out candle's open, sized by the same
     `plan_trade` call the engine makes, held to the last close, never
-    stopped, costs paid on both sides.
+    stopped, the gauntlet's costs paid on both sides. The stop distance
+    that sizes it is the slot's own: with no exit arguments it is the
+    ship's default (1.5 x the 14-candle range), which is what Slot 2 uses.
     """
-    costs = dict(costs or LAB_COSTS)
+    costs = dict(costs or GAUNTLET_COSTS)
+    sl_atr_mult = (RISK_CONFIG['default_sl_atr'] if sl_atr_mult is None
+                   else sl_atr_mult)
+    tp_atr_mult = (RISK_CONFIG['default_tp_atr'] if tp_atr_mult is None
+                   else tp_atr_mult)
+    atr_period = engine.ATR_PERIOD if atr_period is None else atr_period
     fee, slip = float(costs['fee_pct']), float(costs['slippage_pct'])
     after = holdout_index(df, train_end)
     if len(after) == 0:
         raise ValueError('no hold-out candles to hold through')
     first = df.index.get_loc(after[0])
     calc = RiskCalculator()
-    atr = calc.atr(df.iloc[:first], engine.ATR_PERIOD)
+    atr = calc.atr(df.iloc[:first], atr_period)
     fill = float(df['open'].iloc[first]) * (1 + slip)
     plan = calc.plan_trade(capital=capital, entry_price=fill,
                            direction='long', atr=atr,
                            risk_pct=RISK_CONFIG['risk_per_trade'],
-                           sl_atr_mult=RISK_CONFIG['default_sl_atr'],
-                           tp_atr_mult=RISK_CONFIG['default_tp_atr'])
+                           sl_atr_mult=sl_atr_mult,
+                           tp_atr_mult=tp_atr_mult)
     if not plan:
         raise ValueError('the risk engine could not size the yardstick')
     size = plan['size_units']
@@ -282,12 +308,16 @@ def run_slot(slot, loader=None, results_dir=None, out=print):
         data = loader(asset, TIMEFRAME)
         result = engine.run_backtest(
             data, strategy, strategy_name=strategy.name,
-            params=strategy.params, train_end=TRAIN_END, verbose=False)
+            params=strategy.params, train_end=TRAIN_END, verbose=False,
+            costs=GAUNTLET_COSTS, sl_atr_mult=SLOT1_SL_ATR,
+            tp_atr_mult=SLOT1_TP_ATR, atr_period=SLOT1_ATR_PERIOD)
         saved.append(result.save_csv(results_dir))
         held = result.window_trades('holdout')
         per_asset.append((asset, held))
         indexes.append(holdout_index(data.df))
-        yardsticks.append(buy_and_hold(data.df))
+        yardsticks.append(buy_and_hold(
+            data.df, sl_atr_mult=SLOT1_SL_ATR, tp_atr_mult=SLOT1_TP_ATR,
+            atr_period=SLOT1_ATR_PERIOD))
         card = result.card('holdout')
         out('')
         out(f'  --- {asset}: INFORMATION ONLY. No bar reads this. ---')
@@ -371,9 +401,10 @@ if __name__ == '__main__':
         sys.exit(main(sys.argv[1:]))
 
     # =====================================================================
-    # GATE 6.2-R — THE RUNNER'S REHEARSAL, ON 4-HOUR CANDLES. Declared in
-    # PROGRESS_LOG.md on 2026-11-16 and committed with no `.py`, before this
-    # file was changed. It replaces GATE 6.1-R (the daily build, never run).
+    # GATE 6.4-R — THE RUNNER'S REHEARSAL, ON 4-HOUR CANDLES, WITH THE
+    # COMMANDER'S REAL FEE AND SLOT 1's DAY-SIZED EXIT. Declared in
+    # PROGRESS_LOG.md on 2026-11-16 (night) and committed with no `.py`,
+    # before this file was changed. It replaces GATE 6.2-R (never run).
     #
     # **IT NEVER OPENS THE VAULT.** The Lab's door is replaced by one that
     # raises. Every candle below is made up, and every result is written
@@ -455,7 +486,7 @@ if __name__ == '__main__':
     GOOD = [[W, L] * 3] * 6             # 36 trades, PF 0.216/0.180 = 1.20
 
     print("=" * 70)
-    print("GATE 6.2-R — THE GAUNTLET RUNNER ON 4-HOUR CANDLES, REHEARSED.")
+    print("GATE 6.4-R — THE GAUNTLET RUNNER ON 4-HOUR CANDLES, REHEARSED.")
     print("Made-up trades and made-up candles. The vault is never opened.")
     print("=" * 70)
 
@@ -607,23 +638,70 @@ if __name__ == '__main__':
     # Range 99-101: true range 2, ATR 2, stop distance 1.5 x 2 = 3. Fill
     # 100 x 1.0005 = 100.05. Risking 1% of 10,000 = 100 over 3 would buy
     # 33.33 coins = 3,335 - over the 25% cap of 2,500, so the size is
-    # 2,500 / 100.05. Sold at 110 x 0.9995 = 109.945. Fees 0.1% each side.
+    # 2,500 / 100.05. Sold at 110 x 0.9995 = 109.945. Fees 0.05% each
+    # side - the Commander's Binance futures taker fee.
     CAPPED = ((2500 / 100.05) * ((109.945 - 100.05)
-                                 - 0.001 * (100.05 + 109.945)) / 10000)
+                                 - 0.0005 * (100.05 + 109.945)) / 10000)
     got = held_or(float('nan'), buy_and_hold, calm(101.0, 99.0, 110.0))
-    mark(abs(got - CAPPED) < 1e-12 and abs(CAPPED - 0.0242004) < 1e-7,
+    mark(abs(got - CAPPED) < 1e-12 and abs(CAPPED - 0.0244628) < 1e-7,
          "a calm coin, range 2: the 25% CAP binds, 2,500 is bought, and "
-         "+10% on the coin is +2.42004% on the account — equal to "
-         "arithmetic typed out here", f"{got:.9f} against {CAPPED:.9f}")
+         "+10% on the coin is +2.44628% on the account at a fee of "
+         "0.05% a side — equal to arithmetic typed out here",
+         f"{got:.9f} against {CAPPED:.9f}")
     # Range 90-110: ATR 20, stop distance 30, 100 / 30 = 3.333 coins =
     # 333.50: under the cap.
     UNCAPPED = ((100 / 30) * ((109.945 - 100.05)
-                              - 0.001 * (100.05 + 109.945)) / 10000)
+                              - 0.0005 * (100.05 + 109.945)) / 10000)
     got = held_or(float('nan'), buy_and_hold, calm(110.0, 90.0, 110.0))
-    mark(abs(got - UNCAPPED) < 1e-12 and abs(UNCAPPED - 0.0032283) < 1e-7,
+    mark(abs(got - UNCAPPED) < 1e-12 and abs(UNCAPPED - 0.0032633) < 1e-7,
          "a wild coin, range 20: the cap does NOT bind, 3.333 coins are "
-         "bought, and the same +10% is +0.32283% on the account",
+         "bought, and the same +10% is +0.32633% on the account",
          f"{got:.9f} against {UNCAPPED:.9f}")
+    OLD_FEE = ((2500 / 100.05) * ((109.945 - 100.05)
+                                  - 0.001 * (100.05 + 109.945)) / 10000)
+    got_lab = held_or(float('nan'), buy_and_hold, calm(101.0, 99.0, 110.0),
+                      costs={'fee_pct': 0.001, 'slippage_pct': 0.0005})
+    mark(abs(got_lab - OLD_FEE) < 1e-12 and abs(OLD_FEE - 0.0242004) < 1e-7
+         and abs(OLD_FEE - CAPPED) > 1e-4,
+         "and the fee really is what moves it: the same coin charged the "
+         "Lab's old 0.1% a side gives +2.42004%, the figure this gate "
+         "carried until 2026-11-16 — a different number",
+         f"{got_lab:.9f} against {OLD_FEE:.9f}")
+
+    def two_moods(last_close=110.0):
+        """100 training candles - 70 wild ones (range 20) and then 30
+        calm ones (range 2) - and 10 hold-out candles. The 14-candle range
+        is 2; the 84-candle range is (54 x 20 + 30 x 2) / 84 = 13.5714."""
+        index = pd.date_range(pd.Timestamp('2025-10-01')
+                              - 99 * FOUR_HOURS, periods=110,
+                              freq=FOUR_HOURS)
+        return pd.DataFrame(
+            {'open': [100.0] * 110,
+             'high': [110.0] * 70 + [101.0] * 30 + [150.0] * 10,
+             'low': [90.0] * 70 + [99.0] * 30 + [50.0] * 10,
+             'close': [100.0] * 109 + [float(last_close)]}, index=index)
+
+    # SLOT 1's SIZING: stop distance 3.75 x 13.5714 = 50.893. Risking 100
+    # over that buys 1.96491 coins (196.59: under the cap).
+    DAY_SIZED = ((100 / (3.75 * (54 * 20 + 30 * 2) / 84))
+                 * ((109.945 - 100.05) - 0.0005 * (100.05 + 109.945))
+                 / 10000)
+    got = held_or(float('nan'), buy_and_hold, two_moods(), sl_atr_mult=3.75,
+                  tp_atr_mult=5.0, atr_period=84)
+    plain = held_or(float('nan'), buy_and_hold, two_moods())
+    short_range = held_or(float('nan'), buy_and_hold, two_moods(),
+                          sl_atr_mult=3.75, tp_atr_mult=5.0)
+    mark(abs(got - DAY_SIZED) < 1e-12 and abs(DAY_SIZED - 0.0019236) < 1e-7
+         and abs(plain - CAPPED) < 1e-12
+         and abs(short_range - got) > 1e-4 and abs(short_range - plain) > 1e-4,
+         "SLOT 1's DAY-SIZED YARDSTICK, BY HAND: on a coin wild for 70 "
+         "candles and calm for the last 30, a stop 3.75 x the 84-CANDLE "
+         "range buys 1.965 coins and +10% is +0.19236% — while the same "
+         "coin with NO exit arguments is sized the ship's old way (capped, "
+         "+2.44628%), which is what Slot 2 gets; and 3.75 x the "
+         "14-candle range is a third figure again",
+         f"day-sized {got:.9f} against {DAY_SIZED:.9f}; default "
+         f"{plain:.9f}; 14-candle {short_range:.9f}")
     mark(abs(compound([0.10, -0.10, 0.50]) - (1.1 * 0.9 * 1.5 - 1)) < 1e-12
          and compound([]) == 0.0,
          "and three results COMPOUND: +10%, -10%, +50% is +48.5%, not +50%")
@@ -785,9 +863,9 @@ if __name__ == '__main__':
     DECLARED = {'entry_candles': 20, 'weeks': 10, 'week_candles': 42,
                 'adx_min': 25.0, 'adx_period': 14, 'adx_tail': 150,
                 'warmup': 379, 'kind': 'donchian_breakout',
-                '_costs': {'fee_pct': 0.001, 'slippage_pct': 0.0005},
-                '_risk_pct': 0.01, '_sl_atr': 1.5, '_tp_atr': 2.0,
-                '_atr_period': 14, '_capital': 10000.0,
+                '_costs': {'fee_pct': 0.0005, 'slippage_pct': 0.0005},
+                '_risk_pct': 0.01, '_sl_atr': 3.75, '_tp_atr': 5.0,
+                '_atr_period': 84, '_capital': 10000.0,
                 '_train_end': '2025-10-01 00:00:00'}
     WANT_PRINT = engine.fingerprint('turtle-4h-20c-10w-adx25', DECLARED)
     # Rule (k): only files that ARE per-coin evidence are read as such. With
@@ -807,9 +885,9 @@ if __name__ == '__main__':
          "EVERY EVIDENCE ROW OF ALL THREE COINS carries one fingerprint, "
          "and it equals the hash of the DECLARED settings typed out in this "
          "gate: the 4-hour strategy — channel 20, 10 weeks of 42 candles, "
-         "ADX(14) above 25 on 150 candles, warm-up 379 — fee 0.1%, slippage "
-         "0.05%, risk 1%, stop 1.5 ATR, target 2.0 ATR, capital 10,000, "
-         "line 2025-10-01",
+         "ADX(14) above 25 on 150 candles, warm-up 379 — fee 0.05%, "
+         "slippage 0.05%, risk 1%, stop 3.75 and target 5.0 times the "
+         "84-candle range, capital 10,000, line 2025-10-01",
          f"declared {WANT_PRINT}, on the evidence {prints}")
     # AND THE SAME THINGS RE-WORKED FROM THE ROWS THEMSELVES, by this
     # gate's own arithmetic, for every hold-out trade of every coin.
@@ -820,7 +898,7 @@ if __name__ == '__main__':
             long = t['direction'] == 'long'
             fill = t['entry_price_raw'] * (1.0005 if long else 0.9995)
             out_fill = t['exit_price_raw'] * (0.9995 if long else 1.0005)
-            fees = 0.001 * t['size_units'] * (fill + out_fill)
+            fees = 0.0005 * t['size_units'] * (fill + out_fill)
             stop_gap = abs(t['entry_price_fill'] - t['stop_loss'])
             target_gap = abs(t['take_profit'] - t['entry_price_fill'])
             risked = t['size_units'] * stop_gap
@@ -830,8 +908,8 @@ if __name__ == '__main__':
             fine = (abs(t['entry_price_fill'] - fill) < 1e-9 * fill
                     and abs(t['exit_price_fill'] - out_fill) < 1e-9 * out_fill
                     and abs(t['fees_paid'] - fees) < 1e-9 * max(fees, 1)
-                    and abs(stop_gap - 1.5 * t['atr_at_entry']) < 1e-9 * fill
-                    and abs(target_gap - 2.0 * t['atr_at_entry']) < 1e-9 * fill
+                    and abs(stop_gap - 3.75 * t['atr_at_entry']) < 1e-9 * fill
+                    and abs(target_gap - 5.0 * t['atr_at_entry']) < 1e-9 * fill
                     and t['position_value'] <= 0.25 * equity + 1e-6
                     and (abs(risked - 0.01 * equity) < 1e-6
                          or (is_capped and risked < 0.01 * equity)))
@@ -840,9 +918,9 @@ if __name__ == '__main__':
     mark(seen_rows == recount and seen_rows > 0 and not bad,
          "and EVERY HOLD-OUT TRADE'S OWN ROW says the same, re-worked here: "
          "filled 0.05% worse than the printed price on both sides, a fee of "
-         "0.1% on both sides, the stop 1.5 ATR away and the target 2.0, and "
-         "the money at risk EXACTLY 1% of equity unless the 25% cap bound "
-         "it lower",
+         "0.05% on both sides, the stop 3.75 ranges away and the target "
+         "5.0, and the money at risk EXACTLY 1% of equity unless the 25% "
+         "cap bound it lower",
          f"{seen_rows} trades re-worked, {capped_rows} of them capped, "
          f"{len(bad)} wrong {bad[:5]}")
 
@@ -854,13 +932,13 @@ if __name__ == '__main__':
         h, lo, c = (df['high'].values, df['low'].values, df['close'].values)
         ranges = [max(h[i] - lo[i], abs(h[i] - c[i - 1]),
                       abs(lo[i] - c[i - 1]))
-                  for i in range(first - 14, first)]
-        atr = sum(ranges) / 14
+                  for i in range(first - 84, first)]
+        atr = sum(ranges) / 84
         fill = df['open'].values[first] * 1.0005
-        size = min(100.0 / (1.5 * atr), 2500.0 / fill)
+        size = min(100.0 / (3.75 * atr), 2500.0 / fill)
         out_fill = c[-1] * 0.9995
         return (size * (out_fill - fill)
-                - 0.001 * size * (fill + out_fill)) / 10000.0
+                - 0.0005 * size * (fill + out_fill)) / 10000.0
 
     whole = 1.0
     for asset in ('BTC-USD', 'ETH-USD', 'SOL-USD'):
@@ -871,7 +949,8 @@ if __name__ == '__main__':
                  for line in said) == 3,
          "THE YARDSTICK THE RUN ACTUALLY USED is the buy-and-hold of the "
          "three made-up coins, worked a second time here from their candles "
-         "with plain arithmetic. (A yardstick quietly set to zero inside "
+         "with plain arithmetic — sized on the 84-candle range with a stop "
+         "3.75 of them away, at a fee of 0.05%. (A yardstick quietly set to zero inside "
          "the run went green at 37/0 in this gate's own attack.)",
          f"by hand {WANT_YARD}, on the report "
          f"{rehearsal['rows'][4][2] if rehearsal is not None else '-'}")
@@ -945,7 +1024,11 @@ if __name__ == '__main__':
                 judge([[0.03, L] * 3] * 6, MILD),
                 round(held_or(float('nan'), buy_and_hold,
                               calm(101.0, 99.0, 110.0)), 7),
-                len(pool([('BTC-USD', A), ('ETH-USD', B), ('SOL-USD', A)])))
+                len(pool([('BTC-USD', A), ('ETH-USD', B), ('SOL-USD', A)])),
+                round(held_or(float('nan'), buy_and_hold, two_moods(),
+                              sl_atr_mult=SLOT1_SL_ATR,
+                              tp_atr_mult=SLOT1_TP_ATR,
+                              atr_period=SLOT1_ATR_PERIOD), 7))
 
     HONEST = witness()
     EXPECTED = (('PASSED', (True,) * 5),
@@ -955,12 +1038,13 @@ if __name__ == '__main__':
                 ('FAILED', (True, True, True, False, True)),
                 ('FAILED', (True, True, True, True, False)),
                 ('FAILED', (True, True, False, False, False)),
-                ('WITHHELD', (True,) * 5), 0.0242004, 6)
+                ('WITHHELD', (True,) * 5), 0.0244628, 6, 0.0019236)
     G = globals()
     _keep = {name: G[name] for name in
              ('BAR_MIN_PROFIT_FACTOR', 'BAR_MIN_TRADES', 'TOO_GOOD_PF',
               'walk_forward_trades', 'monte_carlo', 'compound', 'pool',
-              'buy_and_hold', 'BAR_MAX_MC_DRAWDOWN')}
+              'buy_and_hold', 'BAR_MAX_MC_DRAWDOWN', 'GAUNTLET_COSTS',
+              'SLOT1_SL_ATR', 'SLOT1_ATR_PERIOD')}
 
     class _AlwaysConsistent:
         verdict = 'CONSISTENT'
@@ -982,6 +1066,11 @@ if __name__ == '__main__':
          'buy_and_hold', lambda df, **k: _keep['buy_and_hold'](df) * 1.334),
         ('G9', 'the drawdown bar loosened to 99%', 'BAR_MAX_MC_DRAWDOWN',
          99.0),
+        ('G10', "the Lab's old fee, 0.1% a side, charged again",
+         'GAUNTLET_COSTS', {'fee_pct': 0.001, 'slippage_pct': 0.0005}),
+        ('G11', "Slot 1's stop back to 1.5 ranges", 'SLOT1_SL_ATR', 1.5),
+        ('G12', "Slot 1's range worked on 14 candles again",
+         'SLOT1_ATR_PERIOD', 14),
     ]
     print()
     for tag, words, name, replacement in BREAKS:
@@ -1001,8 +1090,8 @@ if __name__ == '__main__':
         mark(good, f"{tag} {words:<52} -> {verdict}")
     mark(all(G[name] is original for name, original in _keep.items())
          and witness() == HONEST == EXPECTED,
-         "and after nine breaks everything is what it started as, and the "
-         "ten witnessed answers equal the ten typed out here")
+         "and after twelve breaks everything is what it started as, and "
+         "the eleven witnessed answers equal the eleven typed out here")
 
     print("\n(h) THE VAULT WAS NEVER OPENED, AND THE GATE COUNTS ITSELF.")
     engine.load_vault = _real_door
@@ -1013,15 +1102,26 @@ if __name__ == '__main__':
               BAR_MIN_TRADES, BAR_WALK_FORWARD, BAR_MAX_MC_DRAWDOWN,
               TOO_GOOD_PF, TOO_GOOD_WIN_PCT)
          == ('2025-10-01', ('BTC-USD', 'ETH-USD', 'SOL-USD'), '4h', 1.15,
-             30, 'CONSISTENT', 30.0, 2.0, 70.0),
+             30, 'CONSISTENT', 30.0, 2.0, 70.0)
+         and GAUNTLET_COSTS == {'fee_pct': 0.0005, 'slippage_pct': 0.0005}
+         and LAB_COSTS == {'fee_pct': 0.001, 'slippage_pct': 0.0005}
+         and engine.LAB_COSTS is LAB_COSTS
+         and (SLOT1_SL_ATR, SLOT1_TP_ATR, SLOT1_ATR_PERIOD) == (3.75, 5.0, 84)
+         and (RISK_CONFIG['default_sl_atr'], RISK_CONFIG['default_tp_atr'],
+              engine.ATR_PERIOD) == (1.5, 2.0, 14)
+         and SLOT1_SL_ATR == 1.5 * 2.5 and SLOT1_TP_ATR == 2.0 * 2.5
+         and SLOT1_ATR_PERIOD == 14 * 6,
          "the Lab's real door was never knocked on, the real results "
          "folder is unchanged, AND EVERY LOCKED NUMBER — the line, the "
-         "coins, the timeframe, the five bars, the alarm — equals a number "
-         "typed out in this gate",
+         "coins, the timeframe, the five bars, the alarm, THE GAUNTLET's "
+         "COSTS (0.05% + 0.05%), the Lab's own unchanged costs (0.1% + "
+         "0.05%), Slot 1's exit (3.75, 5.0, 84 = the ship's 1.5, 2.0 and 14 "
+         "times 2.5, 2.5 and 6) and the ship's own default exit — equals a "
+         "number typed out in this gate",
          f"vault calls: {len(VAULT_OPENED)}")
-    mark(len(BREAKS) == 9, "nine breaks, counted against a number typed "
-                           "out here")
-    EXPECTED_CHECKS = 44
+    mark(len(BREAKS) == 12, "twelve breaks, counted against a number "
+                            "typed out here")
+    EXPECTED_CHECKS = 49
     mark(len(nonlocal_ok) + 1 == EXPECTED_CHECKS,
          f"and this gate ran all {EXPECTED_CHECKS} of the checks it owes",
          f"it ran {len(nonlocal_ok) + 1}")
@@ -1030,14 +1130,18 @@ if __name__ == '__main__':
     reds = sum(1 for good in nonlocal_ok if not good)
     print("\n" + "=" * 70)
     if ok:
-        print(f"""GATE 6.2-R PASSED — {len(nonlocal_ok)} checks, 0 red.
+        print(f"""GATE 6.4-R PASSED — {len(nonlocal_ok)} checks, 0 red.
 
 EACH OF THE FIVE BARS WAS FORCED RED ALONE on hand-made trades, with
 the other four green, so no bar can hide behind another; the trade
 count was tested at 29 and at 30.
 
-B5's YARDSTICK, WHICH THIS SHIP HAD NEVER BUILT, EQUALS ARITHMETIC
-TYPED OUT BY HAND, with the 25% cap binding and with it not binding.
+B5's YARDSTICK EQUALS ARITHMETIC TYPED OUT BY HAND, with the 25% cap
+binding and with it not binding, at the Commander's real fee (0.05% a
+side) - and, for Slot 1, sized on the 84-candle range.
+
+EVERY EVIDENCE ROW CARRIES THE FINGERPRINT OF THE DECLARED COSTS AND
+SLOT 1's DAY-SIZED EXIT (stop 3.75, target 5.0, range over 84 candles).
 
 THE WHOLE RUN WAS REHEARSED on three made-up coins of 5,624 four-hour
 candles, the vault's own shape, through the Lab's real engine: the
@@ -1054,6 +1158,6 @@ that move together, the yardstick's definition, twenty candles rather
 than twenty days and the 10-week filter are choices made by the same
 author, and no second AI has read them.""")
     else:
-        print(f"GATE 6.2-R FAILED — {reds} red of {len(nonlocal_ok)} checks.")
+        print(f"GATE 6.4-R FAILED — {reds} red of {len(nonlocal_ok)} checks.")
     print("=" * 70)
     sys.exit(0 if ok else 1)

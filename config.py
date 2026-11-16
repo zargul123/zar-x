@@ -48,6 +48,19 @@ LAB_COSTS = {
     'slippage_pct': 0.0005,  # 0.05% slippage, charged per side (fill is worse)
 }
 
+# --- Gauntlet trading costs (Phase 6: the three sealed slots) ---
+# Ruled by the Commander on 2026-11-16, before any slot was run: the gauntlet
+# charges what HIS exchange charges. Binance USD-M futures taker fee, 0.05% a
+# side, read by him from his own fee page; every order is charged as a taker.
+# Slippage is left at 0.05% a side on purpose (stops fill badly, and funding
+# paid while a position is held is not modelled). 0.20% there and back.
+# LAB_COSTS above is NOT changed: the Lab's own exams (Gates 2.3-2.5) have
+# results typed into them that were worked at that harsher figure.
+GAUNTLET_COSTS = {
+    'fee_pct': 0.0005,       # 0.05% Binance USD-M futures taker fee, per side
+    'slippage_pct': 0.0005,  # 0.05% slippage, per side
+}
+
 # --- Regime vane (Layer 2: context instrument, NOT proven alpha) ---
 # Entropy thresholds are PER-TIMEFRAME (Zargul 2.0 lesson: a 1h-tuned dial
 # saturates on 4h and stamps everything Chaotic). 4h value = p70 of the

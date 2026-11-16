@@ -40,6 +40,11 @@ receive (left out: it understates the fade, in the honest direction); the
 perpetual's own price (the candles are spot); a fader's wider exit (the exit
 is the ship's stop and target). All said in the bar, before any result.
 
+**THE COSTS ARE THE COMMANDER'S REAL ONES** (ruled 2026-11-16, night, before
+anything was run): Binance futures taker fee 0.05% a side and slippage 0.05%
+a side, `config.GAUNTLET_COSTS`. **THE EXIT IS THE SHIP'S OWN DEFAULT** - 1.5
+and 2.0 times the 14-candle range. Slot 1's day-sized exit is Slot 1's alone.
+
 **WHAT A PASS MEANS AND DOES NOT MEAN.** A place in Phase 7's proving voyage,
 on paper. Not proof it makes money. The Lab's numbers catch overfitting and
 CANNOT catch a leak (Law 7).
@@ -60,6 +65,7 @@ sys.path.insert(0, LAB_DIR)
 
 import engine                                              # noqa: E402
 import funding_vault                                       # noqa: E402
+from config import GAUNTLET_COSTS, LAB_COSTS, RISK_CONFIG  # noqa: E402
 import gauntlet as slot1                                   # noqa: E402
 from funding_vault import attach, preflight                # noqa: E402
 from gauntlet import (battery, buy_and_hold, holdout_index,  # noqa: E402
@@ -163,7 +169,8 @@ def run_slot2(loader=None, results_dir=None, funding_dir=None,
     for asset, data in loaded:
         result = engine.run_backtest(
             data, strategy, strategy_name=strategy.name,
-            params=strategy.params, train_end=TRAIN_END, verbose=False)
+            params=strategy.params, train_end=TRAIN_END, verbose=False,
+            costs=GAUNTLET_COSTS)
         saved.append(result.save_csv(results_dir))
         held = result.window_trades('holdout')
         per_asset.append((asset, held))
@@ -241,9 +248,9 @@ if __name__ == '__main__':
         sys.exit(main(sys.argv[1:]))
 
     # =====================================================================
-    # GATE 6.3-R — THE SLOT 2 RUNNER'S REHEARSAL. Declared in
-    # PROGRESS_LOG.md on 2026-11-16 (evening) and committed with no code,
-    # before this file existed.
+    # GATE 6.3-R1 — THE SLOT 2 RUNNER'S REHEARSAL, AT THE COMMANDER'S REAL
+    # FEE. Declared in PROGRESS_LOG.md on 2026-11-16 (night) and committed
+    # with no code, before this file was changed. It replaces GATE 6.3-R.
     #
     # **IT NEVER OPENS THE VAULT OR THE REAL FROZEN FUNDING.** The Lab's
     # door is replaced by one that raises; every candle and every funding
@@ -315,7 +322,7 @@ if __name__ == '__main__':
     DAY_MS, MARK_MS = 86400000, 28800000
 
     print("=" * 70)
-    print("GATE 6.3-R — THE SLOT 2 RUNNER, REHEARSED. Made-up candles and")
+    print("GATE 6.3-R1 — THE SLOT 2 RUNNER, REHEARSED. Made-up candles and")
     print("made-up funding. The vault and the frozen funding are never opened.")
     print("=" * 70)
 
@@ -327,11 +334,21 @@ if __name__ == '__main__':
               slot1.TOO_GOOD_PF, slot1.TOO_GOOD_WIN_PCT)
          == (1.15, 30, 'CONSISTENT', 30.0, 2.0, 70.0)
          and tuple(funding_vault.CONTRACTS) == ASSETS
-         and marker_path(2, 'x').endswith('GAUNTLET_SLOT_2_SPENT.txt'),
+         and marker_path(2, 'x').endswith('GAUNTLET_SLOT_2_SPENT.txt')
+         and GAUNTLET_COSTS == {'fee_pct': 0.0005, 'slippage_pct': 0.0005}
+         and GAUNTLET_COSTS is slot1.GAUNTLET_COSTS
+         and LAB_COSTS == {'fee_pct': 0.001, 'slippage_pct': 0.0005}
+         and (RISK_CONFIG['default_sl_atr'], RISK_CONFIG['default_tp_atr'],
+              engine.ATR_PERIOD) == (1.5, 2.0, 14)
+         and (slot1.SLOT1_SL_ATR, slot1.SLOT1_TP_ATR,
+              slot1.SLOT1_ATR_PERIOD) == (3.75, 5.0, 84),
          "slot 2, the line 2025-10-01, three coins, DAILY candles; Profit "
          "Factor 1.15, 30 trades, CONSISTENT, drawdown under 30%, the alarm "
-         "at 2.0 and 70% — every one equal to a number typed out here; and "
-         "the frozen funding names the same three coins in the same order")
+         "at 2.0 and 70%; THE GAUNTLET's COSTS, 0.05% + 0.05% a side, the "
+         "same object Slot 1 holds; the ship's own exit, 1.5 and 2.0 times "
+         "the 14-candle range, which is NOT Slot 1's 3.75, 5.0 and 84 — "
+         "every one equal to a number typed out here; and the frozen "
+         "funding names the same three coins in the same order")
     mark(battery is slot1.battery and pool is slot1.pool
          and buy_and_hold is slot1.buy_and_hold
          and holdout_index is slot1.holdout_index
@@ -641,7 +658,7 @@ if __name__ == '__main__':
           "\n    WAS GIVEN.")
     DECLARED = {'window': 90, 'need': 81, 'warmup': 91, 'column': 'funding',
                 'kind': 'funding_extreme_fade',
-                '_costs': {'fee_pct': 0.001, 'slippage_pct': 0.0005},
+                '_costs': {'fee_pct': 0.0005, 'slippage_pct': 0.0005},
                 '_risk_pct': 0.01, '_sl_atr': 1.5, '_tp_atr': 2.0,
                 '_atr_period': 14, '_capital': 10000.0,
                 '_train_end': '2025-10-01 00:00:00'}
@@ -652,9 +669,9 @@ if __name__ == '__main__':
          and prints == [WANT_PRINT],
          "EVERY EVIDENCE ROW OF ALL THREE COINS carries one fingerprint, "
          "and it equals the hash of the DECLARED settings typed out here: "
-         "the fade — 90 days, 81 of them, warm-up 91 — fee 0.1%, slippage "
-         "0.05%, risk 1%, stop 1.5 ATR, target 2.0 ATR, capital 10,000, "
-         "line 2025-10-01",
+         "the fade — 90 days, 81 of them, warm-up 91 — fee 0.05%, "
+         "slippage 0.05%, risk 1%, stop 1.5 ATR, target 2.0 ATR over 14 "
+         "candles, capital 10,000, line 2025-10-01",
          f"declared {WANT_PRINT}, on the evidence {prints}")
     bad, seen_rows, capped_rows = [], 0, 0
     for rows in evidence:
@@ -663,7 +680,7 @@ if __name__ == '__main__':
             long = t['direction'] == 'long'
             fill = t['entry_price_raw'] * (1.0005 if long else 0.9995)
             out_fill = t['exit_price_raw'] * (0.9995 if long else 1.0005)
-            fees = 0.001 * t['size_units'] * (fill + out_fill)
+            fees = 0.0005 * t['size_units'] * (fill + out_fill)
             stop_gap = abs(t['entry_price_fill'] - t['stop_loss'])
             target_gap = abs(t['take_profit'] - t['entry_price_fill'])
             risked = t['size_units'] * stop_gap
@@ -685,7 +702,7 @@ if __name__ == '__main__':
                 bad.append(int(t['trade_no']))
     mark(seen_rows == recount and seen_rows > 0 and not bad,
          "and EVERY HOLD-OUT TRADE'S OWN ROW says the same, re-worked here: "
-         "filled 0.05% worse on both sides, a fee of 0.1% on both sides, "
+         "filled 0.05% worse on both sides, a fee of 0.05% on both sides, "
          "the stop 1.5 ATR away ON THE LOSING SIDE and the target 2.0 on "
          "the winning one, and the money at risk EXACTLY 1% of equity "
          "unless the 25% cap bound it lower",
@@ -780,7 +797,7 @@ if __name__ == '__main__':
         size = min(100.0 / (1.5 * atr), 2500.0 / fill)
         out_fill = c[-1] * 0.9995
         return (size * (out_fill - fill)
-                - 0.001 * size * (fill + out_fill)) / 10000.0
+                - 0.0005 * size * (fill + out_fill)) / 10000.0
 
     whole = 1.0
     for asset in ASSETS:
@@ -893,7 +910,7 @@ if __name__ == '__main__':
     _keep = {name: G[name] for name in
              ('TIMEFRAME', 'TRAIN_END', 'slot_strategy', 'preflight',
               'attach', 'battery', 'all_funded', 'vault_shape', 'pool',
-              'buy_and_hold')}
+              'buy_and_hold', 'GAUNTLET_COSTS')}
     GOOD_FUNDING = funding_vault.preflight(FREEZE)
 
     def _wrong_coin(df, times, units):
@@ -934,6 +951,8 @@ if __name__ == '__main__':
          lambda coins: _keep['pool'](list(coins)[:2])),
         ('R10', 'the yardstick set to nothing', 'buy_and_hold',
          lambda df, train_end=None: 0.0),
+        ('R11', "the Lab's old fee, 0.1% a side, charged again",
+         'GAUNTLET_COSTS', {'fee_pct': 0.001, 'slippage_pct': 0.0005}),
     ]
     print()
     for tag, words, name, replacement in BREAKS:
@@ -954,7 +973,7 @@ if __name__ == '__main__':
     mark(all(G[name] is original for name, original in _keep.items())
          and witness() == HONEST
          and HONEST == (WANT_FIRST, True, True),
-         "and after ten breaks everything is what it started as; the "
+         "and after eleven breaks everything is what it started as; the "
          "witness's run is the rehearsal of (d) again — same verdict, same "
          "count, the declared fingerprint, the same first trades, three "
          "knocks for `1d`, the hand-worked yardstick — the damaged freeze "
@@ -981,9 +1000,9 @@ if __name__ == '__main__':
          "the runner names no network library, not the funding builder and "
          "not the live candle source: there is no path from the run to "
          "anything that is not frozen")
-    mark(len(BREAKS) == 10, "ten breaks, counted against a number typed "
-                            "out here")
-    EXPECTED_CHECKS = 39
+    mark(len(BREAKS) == 11, "eleven breaks, counted against a number "
+                            "typed out here")
+    EXPECTED_CHECKS = 40
     mark(len(nonlocal_ok) + 1 == EXPECTED_CHECKS,
          f"and this gate ran all {EXPECTED_CHECKS} of the checks it owes",
          f"it ran {len(nonlocal_ok) + 1}")
@@ -992,7 +1011,7 @@ if __name__ == '__main__':
     reds = sum(1 for good in nonlocal_ok if not good)
     print("\n" + "=" * 70)
     if ok:
-        print(f"""GATE 6.3-R PASSED — {len(nonlocal_ok)} checks, 0 red.
+        print(f"""GATE 6.3-R1 PASSED — {len(nonlocal_ok)} checks, 0 red.
 
 THE FIVE BARS ARE SLOT 1's OWN OBJECTS, imported and not copied.
 
@@ -1014,6 +1033,6 @@ It rehearses the machinery; it does not review the DESIGN - the rank of
 moves together, the ship's exit on a fade - which are choices made by
 the same author, and no second AI has read them.""")
     else:
-        print(f"GATE 6.3-R FAILED — {reds} red of {len(nonlocal_ok)} checks.")
+        print(f"GATE 6.3-R1 FAILED — {reds} red of {len(nonlocal_ok)} checks.")
     print("=" * 70)
     sys.exit(0 if ok else 1)
