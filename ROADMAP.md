@@ -775,3 +775,19 @@ not exist and has now waited four sessions.**
 | **SLOT 2's VERDICT.** | **FAILED, 4 bars of 5.** Profit Factor 1.17 (needs 1.15), 46 trades (30), walk-forward INCONSISTENT (3 of 6 stretches profitable; needs 4), Monte Carlo drawdown 9.64% (under 30%), +4.00% against buy-and-hold -26.98%. Alarm silent. |
 | **THE TWO HALVES OF THE FADE, ON THE HOLD-OUT.** | Sells (extreme positive funding): 17 trades, 71% won, +10.3%. Buys (extreme negative): 29 trades, 34% won, -6.1%. The market fell over the window. Information only. |
 | **THE RUNNER, ON REAL DATA FOR THE FIRST TIME.** | Ran clean: marker first, 1,725 strategy calls, 0 look-ahead violations, report equal to the saved trades re-worked by hand. |
+
+
+# **>>> RUN 2026-11-16 (NIGHT'S END) - FORWARD CHECK 1, ON 113 UNSEEN DAYS. NOT A GAUNTLET SLOT.**
+
+| Part | What it is |
+|---|---|
+| **`signals/confluence.py`.** | The confluence rule (with the 100-day trend AND with the crowd, by Slot 2's and Slot 3's own rules) and its yardstick, the trend alone. GATE 6.6-S, 30 checks. |
+| **`lab/forward_check.py`, `lab/build_forward_vault.py`, `lab/forward_vault/`.** | One look at 2026-07-26 to 2026-11-15; only trades entered after 2026-07-25 are saved or shown. GATE 6.6-F, 34 checks. Run once; refuses a second run. |
+
+| Fact | Measurement |
+|---|---|
+| **THE TRAINING SIDE, FOUR WAYS TO COMBINE (before 2025-10-01).** | Against the crowd with the trend: Profit Factor 0.5. Against the crowd, any trend (Slots 2+3 as built): 0.7. With the crowd and the trend: 1.4. The trend alone: 1.4. |
+| **FORWARD CHECK 1, 113 UNSEEN DAYS.** | Confluence: 25 trades, 13 won, Profit Factor 1.85, 1,000 dollars to 1,107, worst dip 6.9%. Trend alone: 32 trades, 13 won, 1.21, 1,036, dip 12.5%. Buy-and-hold: 993. **Fewer than 30 trades: not a verdict.** |
+| **BY MONTH, CONFLUENCE.** | August +9.3% (11 trades), September -4.1% (4), October -2.1% (2), November +7.3% (8). Shorts 6 of 7 won; longs 7 of 18. |
+| **THE VAULT's SOURCE IS STABLE AT THE SEAM.** | TwelveData's daily candles for 2026-07-01 to 2026-07-25, fetched 2026-11-16, equal the vault's on 25 of 25 days for all three coins. |
+| **THE SHIP IS THIRTY-SIX INVOCATIONS.** | Not measured whole since the forward-check build. `lab/forward_check.py --gate` takes about five minutes. |

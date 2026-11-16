@@ -456,6 +456,29 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-16 (NIGHT'S END): FORWARD CHECK 1 WAS RUN ONCE ON 113 UNSEEN DAYS. THE COMBINED RULE: 1,000 DOLLARS TO 1,107 ON 25 TRADES; THE TREND ALONE: 1,036; HOLDING: 993. NOT A VERDICT. SLOT 2 IS SPENT (FAILED). SLOTS 1 AND 3 ARE SET UP, UNSPENT AND PAUSED BY THE COMMANDER.**
+
+**WHERE THE SHIP IS.** Thirty-six invocations now exist (the thirty-two
+measured at 1,963 green, plus `signals/confluence.py` GATE 6.6-S, 30, and
+`lab/forward_check.py` GATE 6.6-F, 34, each twice). **THE WHOLE SHIP HAS
+NOT BEEN MEASURED SINCE THE LAST BUILD.** Vault 6 of 6, frozen funding 3
+of 3, frozen mood 1 of 1, forward store 3 of 3. `lab/results/` holds
+Slot 2's marker and evidence and Forward Check 1's.
+
+**THE COMBINED RULE (`confluence-1d-t100`), NOW FROZEN:** daily; buy when
+the close is above its 100-day average and the crowd is greedy/long by
+funding or mood; sell the mirror; stop 1.5 ATR, target 3.0 ATR. **It is
+not a gauntlet slot.** It lives on the forward road he ruled for.
+
+**WHAT IS BROKEN OR UNPROVEN.** R-093: 25 trades, two good months and two
+bad, shorts carrying it, a rule picked from a search; real candles reach
+the engine through a door I made; a leak-shaped hole was in the gate
+until the attack found it. **Nobody but the author has read any of it.**
+
+**NEXT, AND IT IS HIS CALL:** whether to build the live paper-watch
+(Phase 7's signal journal) so the combined rule is scored every day on
+new data with no money. And what becomes of Slots 1 and 3.
+
 ## **>>> 2026-11-16 (LATE NIGHT): SLOT 2, THE FUNDING-RATE FADE, WAS RUN ONCE ON THE COMMANDER'S WORD AND FAILED - FOUR BARS OF FIVE. IT IS SPENT. SLOTS 1 AND 3 ARE SET UP AND UNSPENT.**
 
 **THE RESULT** (`PROGRESS_LOG.md`, the run entry, the output unedited):

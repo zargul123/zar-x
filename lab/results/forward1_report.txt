@@ -1,0 +1,21 @@
+FORWARD CHECK 1 — the confluence rule and the trend alone
+  marker written: C:\Users\hp\Downloads\zargul trader\zar-x\lab\results\FORWARD_CHECK_1_DONE.txt
+  unseen window 2026-07-26 to 2026-11-15 (113 days); only trades entered after 2026-07-25 are shown
+
+  --- confluence-1d-t100 ---
+    trades entered after 2026-07-25 : 25  (18 long / 7 short; BTC-USD 6, ETH-USD 11, SOL-USD 8)
+    won                          : 13 of 25
+    profit factor after costs    : 1.85
+    1,000 dollars became         : 1,107
+    worst dip on the way         : 6.9%
+
+  --- trend-only-1d-t100 ---
+    trades entered after 2026-07-25 : 32  (24 long / 8 short; BTC-USD 9, ETH-USD 12, SOL-USD 11)
+    won                          : 13 of 32
+    profit factor after costs    : 1.21
+    1,000 dollars became         : 1,036
+    worst dip on the way         : 12.5%
+
+  buy-and-hold, 1% risk sizing, same days: 1,000 dollars became 993
+
+  !! 25 TRADES AT THE FEWEST. FEWER THAN 30 IS NOT A VERDICT. THIS IS A FIRST LOOK, NOT A PASS AND NOT A FAIL.

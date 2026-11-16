@@ -1,69 +1,78 @@
-# ZAR X — **SLOT 2 WAS RUN ON 2026-11-16 AND FAILED (4 BARS OF 5). IT IS SPENT. THE COMMANDER THEN PAUSED SLOTS 1 AND 3 AND ORDERED THE THREE IDEAS COMBINED AND TRIED ON UNSEEN DATA. A CANDIDATE IS WRITTEN DOWN AND NOT BUILT. READ "THE COMBINED IDEA" BELOW BEFORE ANYTHING ELSE. YOUR JOB IS WHAT HE SAYS NEXT. PROVE THE SHIP ALIVE, TELL HIM WHERE THINGS STAND IN EASY WORDS, AND DO WHAT HE SAYS. RUN NOTHING WITHOUT HIS WORD. IF A SLOT IS RUN AND FAILS, HE HAS RULED WHAT HAPPENS NEXT - READ "AFTER A FAIL" BELOW.**
+# ZAR X — **WHERE THINGS STAND: SLOT 2 FAILED AND IS SPENT. THE COMMANDER THEN HAD THE THREE IDEAS COMBINED; THE COMBINED RULE WAS TRIED ONCE ON 113 UNSEEN DAYS AND MADE MONEY (1,000 TO 1,107, 25 TRADES - NOT A VERDICT). SLOTS 1 AND 3 ARE SET UP, UNSPENT AND PAUSED BY HIM. YOUR JOB: PROVE THE SHIP ALIVE (36 INVOCATIONS, NOT MEASURED WHOLE SINCE THE LAST BUILD), TELL HIM WHERE THINGS STAND IN EASY WORDS, AND ASK WHAT HE WANTS. RUN NOTHING WITHOUT HIS WORD.**
 
-*Written 2026-11-16 (late night) by Fable. He opened the session with
-"zarx.. fable set up idea 2 and do it smartly". **I read that as his word
-that the session was Fable and did not ask. I hold no power to grant you
-an exemption and I have not written one. What follows reports HIS
-rulings.***
+*Written 2026-11-16 (night's end) by Fable, at the end of a very long
+session. He opened it with "zarx.. fable set up idea 2 and do it smartly".
+**I read that as his word that the session was Fable and did not ask. I
+hold no power to grant you an exemption and I have not written one. What
+follows reports HIS rulings.***
 
----
-
-# **>>> SLOT 2: RUN ONCE, 2026-11-16, ON HIS WORD ("Run idea 2"). FAILED.**
-
-Profit Factor 1.17 PASS; 46 trades PASS; **walk-forward INCONSISTENT, FAIL**
-(money made in 3 of 6 stretches, 4 needed, and two stretches carried all
-of it); drawdown 9.64% PASS; +4.00% against buy-and-hold -26.98% PASS.
-**THE OUTPUT, UNEDITED, THE OBITUARY, THE AUTOPSY AND THE RESEARCH PASS ARE
-IN `PROGRESS_LOG.md`'s LAST ENTRY. READ IT.** In one line: a small profit
-that cannot be told from luck; selling on extreme positive funding won
-(17 trades, 71%) and buying on extreme negative lost (29 trades, 34%),
-in a market that fell 27%.
-
-**>>> DO NOT RE-RUN IT, AND DO NOT BUILD "SELLS ONLY" AS A GAUNTLET IDEA.**
-That rule was seen in the result. By his ruling the only road open to
-it is forward, on paper, on new data - and that paper-watch is not
-built. **ON HIS DESK: does he want the failed fade (or its selling half)
-watched on paper? If yes, that is Phase 7's signal journal: a build,
-under a gate.**
-
-**`lab/results/` NOW HOLDS SLOT 2's EVIDENCE** (marker, report, four trade
-files). It is evidence: never edit or delete it.
+**READ `PROGRESS_LOG.md`'s LAST ENTRY FIRST** (Forward Check 1), then the
+Slot 2 run entry above it. **HE IS NOT A PROGRAMMER AND HAS SAID SO MANY
+TIMES: EASY WORDS, MONEY ON 1,000 DOLLARS, NO GATE NUMBERS.**
 
 ---
 
-# **>>> THE COMBINED IDEA - HIS ORDER OF 2026-11-16, AND WHERE IT STANDS**
+# **>>> THE COMBINED RULE AND FORWARD CHECK 1 - DONE ONCE, 2026-11-16**
 
-After Slot 2 failed he said the three things - trend, crowding, mood -
-belong together, and ordered: *"before etsting other 2 we need to get
-this one better combine 3 ... and test it on the unseeb data"*. **SO SLOTS
-1 AND 3 ARE PAUSED BY HIM. DO NOT RUN EITHER.**
+After Slot 2 failed he said trend, crowding and mood belong together and
+ordered them combined and tried on unseen data. **WHAT HAPPENED:**
 
-**READ `PROGRESS_LOG.md`'s LAST ENTRY. IN SHORT:**
+    THE TRAINING SIDE (before 2025-10-01), four ways:
+      bet against the crowd, with the trend ........ LOST (PF 0.5)
+      bet against the crowd, any trend (Slots 2+3) . LOST (PF 0.7)
+      go WITH the crowd, with the trend ............ made (PF 1.4)
+      the trend alone .............................. made (PF 1.4)
+    THE UNSEEN 113 DAYS (2026-07-26 to 2026-11-15), run ONCE:
+      the combined rule ... 1,000 -> 1,107   25 trades, 13 won, PF 1.85
+      the trend alone ..... 1,000 -> 1,036   32 trades, 13 won, PF 1.21
+      buying and holding .. 1,000 ->   993
 
-    The training side (before 2025-10-01) was asked four ways:
-      buy fear in an up-trend (what I had proposed) ... LOST, PF 0.5
-      fade the crowd, any trend (Slots 2+3 as built) .. LOST, PF 0.7
-      go WITH the crowd in the trend's direction ...... made, PF 1.4
-      the trend alone ................................. made, PF 1.4
-    **THE MONEY WAS IN THE TREND. THE FUNDING AND MOOD READINGS ADDED
-    LITTLE OR NOTHING. FADING THE CROWD LOST - A BAD OMEN FOR SLOT 3.**
+**THE RULE, NOW FROZEN (`signals/confluence.py`, `confluence-1d-t100`):**
+daily; BUY when the close is above its 100-day average AND the crowd is
+greedy/long (Slot 2's rule or Slot 3's says short); SELL the mirror; stop
+1.5 ATR, target 3.0 ATR. **DO NOT CHANGE IT. A change is a different rule
+and starts from zero.**
 
-**THE CANDIDATE IS WRITTEN DOWN IN THAT ENTRY, SECTION 4, AND MUST NOT BE
-CHANGED:** daily; BUY when price is above its 100-day average AND the
-crowd is greedy/long (Slot 2's or Slot 3's rule says short); SELL the
-mirror; stop 1.5 ATR, target 3.0 ATR; reported BESIDE the trend alone.
-**THE UNSEEN WINDOW IS 2026-07-26 ONWARD. IT IS NOT FETCHED. DO NOT LOOK
-AT IT BEFORE THE BUILD IS DONE: IT CAN ONLY BE UNSEEN ONCE.**
+**>>> WHAT YOU MUST KEEP SAYING TO HIM: 25 TRADES IS NOT PROOF.** Two good
+months (August, November) and two bad (September, October); the shorts
+carried it (6 of 7 won; longs 7 of 18); the rule was picked from eight
+variants; three coins that move together. **IT EARNS BEING WATCHED LIVE ON
+PAPER. NOTHING MORE. NO REAL MONEY.**
 
-**IT IS NOT A GAUNTLET SLOT AND NO GAUNTLET BAR IS CLAIMED FOR IT.** About
-113 days is roughly twenty trades: a first honest look, then live
-paper-watching. **HE HAS BEEN SHOWN THE TABLE AND ASKED FOR A GO. IF HIS
-ANSWER IS NOT IN THE LOG BELOW THAT ENTRY, ASK HIM.** On a go it is a
-build like the slots: bar alone; a forward store for candles, funding
-and mood after 2026-07-25 (frozen, checksummed; the vault untouched);
-the strategy; a runner that prints ONLY trades entered after 2026-07-25
-(the rule walks the hold-out of Slots 1 and 3 to warm up - those months
-must not be printed or saved); gates; attack.
+**IT IS NOT A GAUNTLET SLOT.** `lab/forward_check.py --go` is SPENT and
+refuses (do not type it to check). **THE WINDOW 2026-07-26 TO 2026-11-15
+HAS BEEN SEEN: no other rule may be tried on it as if it were unseen.**
+Every day from 2026-11-16 on is new.
+
+**>>> ON HIS DESK - THE NEXT REAL DECISION:**
+
+    (1) BUILD THE LIVE PAPER-WATCH. Phase 7's signal journal, which does
+        not exist: each day the combined rule's signal (entry, stop,
+        target, size for a nominal 1,000 dollars) written down at the
+        daily close, shown on his Brief, and scored honestly as it plays
+        out. No money. **This is the step the result earns, and a build
+        under a gate like any other.** His failed Slot 2 idea (or its
+        selling half) may be watched the same way - his ruling.
+    (2) WHAT BECOMES OF SLOTS 1 AND 3. Both are set up and unspent. Slot 3
+        (the mood fade) is the same kind of bet that failed as Slot 2,
+        and on the training side that bet lost; I told him I would not
+        expect it to pass. Slot 1 (the breakout) has not been compared
+        with anything. **HE PAUSED THEM. DO NOT RUN EITHER UNLESS HE SAYS
+        SO, AND IF HE DOES, ONE AT A TIME.**
+    (3) THE EXITS. He asked for better ones ("close when the reason is
+        gone", a time limit, a trailing stop). The Lab's engine has only
+        a fixed stop and target. Changing that means extending the engine
+        - the heart of the Lab, under its own gate - and any new exit is
+        judged FORWARD only, never on months already seen.
+    (4) LAW 6 AND THE README still say a failed idea is finished. His
+        ruling (autopsy, research, paper-watch) is in the log and the
+        plan; those two files are his to amend. Proposed words are in
+        `PROGRESS_LOG.md` (the "after a fail" entry).
+
+**R-093 IS MY LIST AGAINST THIS BUILD.** A leak-shaped hole was in its gate
+until my own attack found it. **If you are not Fable and he lets you,
+attack `lab/forward_check.py` and `signals/confluence.py` before anything
+is built on them.**
 
 ---
 
@@ -214,7 +223,7 @@ gate, like anything else.
                             to run, if any. **RUN NOTHING WITHOUT HIS
                             WORD.**
 
-## WHAT EXISTS NOW - TWO TESTS READY, ONE SPENT
+## THE THREE SLOTS - ONE SPENT, TWO READY AND PAUSED
 
   * **SLOT 1 - THE BREAKOUT.** 4-hour candles: buy when price closes
     above its last 20 candles in an up-trend; sell the mirror. A
@@ -345,7 +354,10 @@ THEM.**
 
 # WHAT YOU OWE WHICHEVER WAY HE ANSWERS
 
-1. **PROVE THE SHIP IS ALIVE FIRST**, thirty-two invocations, red counted
+1. **PROVE THE SHIP IS ALIVE FIRST**, thirty-six invocations (the
+   thirty-two below plus `signals/confluence.py --gate` and
+   `lab/forward_check.py --gate`, each twice; the last takes about
+   five minutes), red counted
    by machine three ways, every hit read by eye.
 2. **IF A SLOT IS RUN, EVERYTHING IT PRINTS GOES INTO `PROGRESS_LOG.md`
    UNEDITED**, the five bars, the alarm, and each coin's information card.
@@ -573,7 +585,7 @@ the channel / back to daily / not yet.
 5. **`lab/engine.py`, `lab/dummies.py`, `lab/leak_check.py`**, and the
    production halves of `signals/funding_fade.py` (25 lines),
    `lab/funding_vault.py` and `lab/gauntlet_slot2.py`.
-6. **`REVIEW_QUEUE.md`: R-006, then R-084 to R-092.**
+6. **`REVIEW_QUEUE.md`: R-006, then R-084 to R-093.**
 
 # HOUSEKEEPING THAT HAS ALREADY BITTEN THIS SHIP
 
@@ -618,7 +630,7 @@ the channel / back to daily / not yet.
     1. PROGRESS_LOG.md .... what happened, the real numbers, and EVERY
                             mistake as plainly as every success. Append only.
     2. REVIEW_QUEUE.md .... one OPEN item against your own work. **You may
-                            NOT clear R-084 to R-092 unless you attacked
+                            NOT clear R-084 to R-093 unless you attacked
                             them; you may never clear R-006.**
     3. EXECUTION_PLAN.md .. the CURRENT POSITION MARKER, rewritten to the
                             truth. Keep the old markers below it.

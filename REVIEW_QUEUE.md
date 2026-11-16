@@ -5692,4 +5692,48 @@ costs, apply here word for word.**
     before any commit. `git diff` is the witness that nothing else was
     touched.
 
-## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088 TO R-092 ARE NOT IN IT.
+## >>> R-093 - **AGAINST MY OWN "FORWARD CHECK 1" (2026-11-16): `signals/confluence.py`, `lab/forward_check.py`, `lab/build_forward_vault.py`, THE FREEZE IN `lab/forward_vault/`, ITS BAR - AND THE RESULT.** OPEN - NOT CATEGORY B
+
+**Filed by Fable, the author. Nobody else has read any of it.**
+
+1. **THE RESULT IS 25 TRADES AND I REPORTED IT AS "ENCOURAGING".** 1,000
+   dollars to 1,107 against 1,036 for the trend alone. Three coins that
+   move together, one four-month stretch, two good months and two bad.
+   **It can be luck. Anyone reading it as proof has read it wrong, and the
+   report must keep saying so.**
+2. **THE RULE WAS PICKED FROM EIGHT VARIANTS ON THE TRAINING SIDE, AFTER
+   SLOT 2's RESULT WAS KNOWN.** Slot 2's hold-out showed selling winning
+   and buying losing; the confluence rule sells in down-trends. The
+   design is not blind to that.
+3. **REAL CANDLES REACH THE ENGINE WITHOUT `load_vault`.** `as_vault`
+   builds the engine's vault object by hand from the vault's files plus
+   the forward files. They are frozen and checksummed and each forward
+   file passes the inspector - but this is the wall the Lab was built
+   around, and I put a door in it.
+4. **THE RULES WALKED THE HOLD-OUT OF SLOTS 1 AND 3 TO WARM UP.** Nothing
+   from it was saved or printed (the gate proves that on made-up data;
+   attack P1 turns it red). **But the forward trades themselves depend on
+   those months** (the first forward trade waits for any position opened
+   before the line to close), so a little is revealed by when the first
+   trades start: 14 and 20 August.
+5. **A LEAK-SHAPED HOLE WAS IN THE GATE UNTIL THE ATTACK FOUND IT (P12).**
+   Closed and re-attacked. The honest inference: there is another.
+6. **THE WHOLE SHIP WAS NOT RE-MEASURED AFTER THIS BUILD**, and
+   `lab/forward_check.py --gate` was not run at `TZ=UTC0` in its final
+   form. Thirty-six invocations now; the next session measures them.
+7. **THE FORWARD CANDLES ARE WHAT TWELVEDATA SERVED ON 2026-11-16.** The
+   seam matched the vault on 25 of 25 days, which is good evidence the
+   source is stable - for July. The 113 new days were fetched once.
+8. **THE 2026-11-15 CANDLE** had closed 17 hours before the fetch. I did
+   not check whether the source revises a daily candle after its close.
+9. **THE EXIT WAS NOT CHOSEN BLIND** (both training figures were in front
+   of me), and it is still the engine's fixed stop and target - not the
+   "exit when the reason is gone" he asked about, which the engine cannot
+   do.
+10. **`forward_check.py` IMPORTS `pool`, `compound` AND `buy_and_hold` FROM
+    `lab/gauntlet.py`** and its `summarise` is its own, not the Lab's
+    `trade_stats`. The gate re-works the money and the Profit Factor by
+    hand; the worst-dip figure is not re-worked by anything.
+11. **THE TWO GREEN ATTACK EDITS (B2, B4)** are judged harmless by me.
+
+## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088 TO R-093 ARE NOT IN IT.

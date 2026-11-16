@@ -20005,3 +20005,168 @@ first; and every invocation on the ship.
 
 **THE TRAINING SIDE ONLY, for the four-way table. SLOT 2's HOLD-OUT RESULT,
 which is public record now. NOTHING DATED AFTER 2026-07-25, OF ANY KIND.**
+
+# 2026-11-16 (NIGHT'S END) - **FORWARD CHECK 1 WAS BUILT, ATTACKED, AND RUN ONCE ON THE COMMANDER'S WORD, ON 113 DAYS NOBODY HAD SEEN. THE COMBINED RULE MADE MONEY AND BEAT THE TREND ALONE. IT IS 25 TRADES. IT IS NOT A VERDICT.**
+
+The bar is two entries above, committed alone before any code or unseen
+data existed.
+
+## 1. WHAT WAS BUILT
+
+    signals/confluence.py        the confluence rule and its yardstick, the
+                                 trend alone. GATE 6.6-S, 30 checks, 0 red,
+                                 twice.
+    lab/forward_check.py         the one look. GATE 6.6-F, 34 checks, 0 red.
+    lab/build_forward_vault.py   the one fetch.
+    lab/forward_vault/           candles, funding and mood for 2026-07-26
+                                 to 2026-11-15.
+
+No file of any slot, of the Lab, of the vault or of the two frozen stores
+was changed (`git status` showed only the new paths).
+
+## 2. THE ATTACK - 29 TEXT EDITS, PREDICTIONS FIRST - AND IT FOUND A LEAK-SHAPED HOLE
+
+Control first (30/0 and 30/0). **FIRST RUN: 22 RED, 7 GREEN.** Two of the
+greens I had NOT predicted, and one of them is the worst kind:
+
+    GREEN  EACH CANDLE HANDED TOMORROW's FUNDING INSIDE THE RUN      (P12)
+    GREEN  buy-and-hold bought at the gauntlet's old line            (P16)
+    GREEN  the Lab's data inspector skipped                (P11, predicted)
+    GREEN  a candle with no funding waved through          (P13, predicted)
+    GREEN  the PRINTED Profit Factor half as big again     (P14, predicted)
+    GREEN  the builder's shape check / refusal dropped   (B2, B4, harmless)
+
+**P12: A LEAK OF THE FUTURE WENT THROUGH A GATE THAT SAID 30 OF 30.** The
+rehearsal checked that nothing changed BEFORE a poisoned day; it never
+re-derived a single trade, so a rule fed tomorrow's funding looked the
+same as an honest one. Slots 2 and 3 had that re-derivation; I left it
+out of this gate. **Closed:** every trade the rehearsal shows, of both
+rules, is now walked against signals worked a second time in plain Python
+from the made-up closes, funding and mood. P16 closed with buy-and-hold
+by hand; P11 with a made-up file the inspector fails; P13 with a past one
+day short of funding; P14 by reading the printed line.
+
+**AFTER THE REPAIR: 27 RED, 2 GREEN (B2, B4 - each repeated by the write
+it calls).** The five were re-run and all turned red. The gate is 34
+checks.
+
+**NOT RE-RUN AFTER THIS BUILD: THE WHOLE SHIP.** The thirty-two
+invocations were last measured at 1,963 green, before these three files
+existed; nothing they read was touched since. The two new gates were run
+after their last change (6.6-S twice; 6.6-F once at the normal clock and
+once more as the attack's control). **`lab/forward_check.py --gate` at
+`TZ=UTC0` was run on its first version only, not its last.** Filed.
+
+## 3. THE FREEZE - ONCE, 16:57 UTC. EVERYTHING THE BUILDER PRINTED ABOUT THE DATA:
+
+    candles BTC-USD: 113 days, 2026-07-26 to 2026-11-15; seam 25 of 25 days equal the vault
+    candles ETH-USD: 113 days, 2026-07-26 to 2026-11-15; seam 25 of 25 days equal the vault
+    candles SOL-USD: 113 days, 2026-07-26 to 2026-11-15; seam 25 of 25 days equal the vault
+    funding BTCUSDT / ETHUSDT / SOLUSDT: 339 settlements each
+    mood: 113 days, 0 carried
+
+**THE SEAM MATCHED ON ALL 25 OVERLAPPING DAYS FOR ALL THREE COINS**: the
+vault's source still serves, for July 2026, exactly what it served when
+the vault was frozen. `FORWARD STORE INTACT - 3 of 3`; the vault 6 of 6,
+frozen funding 3 of 3, frozen mood 1 of 1. The freeze was committed
+(`3ef40d7`) before the look.
+
+## 4. THE LOOK - `python lab/forward_check.py --go`, ONCE, 16:58 UTC. EXIT CODE 0. EVERYTHING IT PRINTED, UNEDITED:
+
+    FORWARD CHECK 1 — the confluence rule and the trend alone
+      marker written: C:\Users\hp\Downloads\zargul trader\zar-x\lab\results\FORWARD_CHECK_1_DONE.txt
+      unseen window 2026-07-26 to 2026-11-15 (113 days); only trades entered after 2026-07-25 are shown
+
+      --- confluence-1d-t100 ---
+        trades entered after 2026-07-25 : 25  (18 long / 7 short; BTC-USD 6, ETH-USD 11, SOL-USD 8)
+        won                          : 13 of 25
+        profit factor after costs    : 1.85
+        1,000 dollars became         : 1,107
+        worst dip on the way         : 6.9%
+
+      --- trend-only-1d-t100 ---
+        trades entered after 2026-07-25 : 32  (24 long / 8 short; BTC-USD 9, ETH-USD 12, SOL-USD 11)
+        won                          : 13 of 32
+        profit factor after costs    : 1.21
+        1,000 dollars became         : 1,036
+        worst dip on the way         : 12.5%
+
+      buy-and-hold, 1% risk sizing, same days: 1,000 dollars became 993
+
+      !! 25 TRADES AT THE FEWEST. FEWER THAN 30 IS NOT A VERDICT. THIS IS A FIRST LOOK, NOT A PASS AND NOT A FAIL.
+
+## 5. WHAT IT SAYS, IN PLAIN WORDS
+
+    1,000 dollars over the 113 unseen days:
+        the combined rule ............ 1,107   (25 trades, 13 won)
+        the trend alone .............. 1,036   (32 trades, 13 won)
+        buying and holding ...........   993
+
+**THE COMBINED RULE MADE 10.7%, THE TREND ALONE 3.6%, HOLDING LOST 0.7%.**
+On the training side the two rules were level; here the funding and mood
+readings appear to have helped - mostly by keeping the rule OUT of losing
+trend trades in October (trend alone: 10 trades, -7.1% that month;
+combined: 2 trades, -2.1%).
+
+**AND WHAT IT DOES NOT SAY. EVERY ONE OF THESE MATTERS:**
+
+  * **TWENTY-FIVE TRADES.** The gauntlet's own bar is thirty, and thirty is
+    a low bar. A Profit Factor of 1.85 on 25 trades of three coins that
+    move together can be luck. On made-up noise, Slot 2's test cleared a
+    Profit Factor of 1.15 one time in three.
+  * **IT IS LUMPY IN THE SAME WAY SLOT 2 WAS.** By month: August +9.3%
+    (11 trades), September -4.1% (4), October -2.1% (2), November +7.3%
+    (8). **TWO GOOD MONTHS AND TWO BAD ONES. THE GAUNTLET's CONSISTENCY BAR
+    WOULD HAVE HAD HARD QUESTIONS FOR THIS TOO.**
+  * **THE SHORTS CARRIED IT AGAIN:** 7 short trades, 6 won, +8.3%; 18
+    long trades, 7 won, +2.2%. The same picture as Slot 2's hold-out.
+    Whether that is the rule or simply that selling paid in 2025-26, I
+    cannot tell.
+  * **THE RULE WAS CHOSEN FROM EIGHT VARIANTS ON THE TRAINING SIDE.** That
+    it then held up on unseen data is the good news in this entry. It is
+    one hold-up, on one four-month stretch.
+  * **THE EXIT (stop 1.5, target 3.0) WAS CHOSEN WITH BOTH TRAINING
+    FIGURES IN FRONT OF ME.**
+  * Funding paid while a trade is held is not counted; the candles are
+    spot prices.
+
+**MY READING: ENCOURAGING, NOT PROVEN. IT EARNS THE NEXT STEP - BEING
+WATCHED LIVE, ON PAPER, WITH NO MONEY - AND NOTHING MORE.** It is not a
+gauntlet pass; there is no such thing for it.
+
+## 6. WHAT IS SPENT AND WHAT IS NOT
+
+  * **FORWARD CHECK 1 IS DONE AND REFUSES A SECOND RUN** (the marker
+    `lab/results/FORWARD_CHECK_1_DONE.txt`). **THE WINDOW 2026-07-26 TO
+    2026-11-15 HAS NOW BEEN SEEN** - by these two rules. Any other rule
+    tried on it from here is chosen knowing how these did.
+  * **THE RULE IS NOW FROZEN: `confluence-1d-t100`, stop 1.5, target 3.0.**
+    A change is a different rule and starts its own record from zero.
+  * **SLOTS 1 AND 3 ARE STILL SET UP, UNSPENT, AND PAUSED BY HIM.**
+  * **WHAT COMES NEXT IS HIS:** the live paper-watch is Phase 7's signal
+    journal, which does not exist. Every day from 2026-11-16 on is new
+    unseen data.
+
+## 7. WHAT I GOT WRONG
+
+1. **THE LEAK-SHAPED HOLE (P12).** I had built the re-derivation twice
+   already today and did not carry it into this gate. Found by the attack,
+   before any real data was touched.
+2. **MY PREDICTION OF THE ATTACK WAS HALF RIGHT**: three holes predicted,
+   two not.
+3. **THREE TYPED EXPECTATIONS WRONG IN GATE 6.6-S AND THREE CHECKS RED IN
+   6.6-F ON FIRST RUNS** - a count of stored attributes, a text edit that
+   matched twice, a frame compared digit-for-digit after a trip through
+   a CSV, and a drill break that changed nothing (a 50-day trend gave the
+   same trades as a 100-day one on the made-up coins; replaced with 5).
+4. **THE WHOLE SHIP WAS NOT RE-MEASURED AFTER THIS BUILD** (section 2).
+5. **I TOLD HIM ABOUT 20 TRADES; IT WAS 25 AND 32.** Inside my written
+   prediction (10 to 30; 20 to 45).
+
+## 8. WHAT I LOOKED AT
+
+**The forward window's result, as printed above and in the six saved
+trade files. I did not open the forward candles, funding or mood by eye.
+THE HOLD-OUT OF SLOTS 1 AND 3 (October 2025 to July 2026) WAS WALKED BY
+THESE TWO RULES TO WARM UP AND NOT ONE TRADE FROM IT WAS SAVED, PRINTED OR
+LOOKED AT.**

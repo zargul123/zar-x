@@ -1,0 +1,6 @@
+FORWARD CHECK 1 — DONE
+rules     : ['confluence-1d-t100', 'trend-only-1d-t100']
+commit    : 3ef40d7
+started   : 2026-11-16T21:58:20
+window    : 2026-07-26 to 2026-11-15
+finished  : 2026-11-16T21:58:32
