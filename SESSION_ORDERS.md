@@ -107,14 +107,24 @@ fade them (short); extremely negative, the reverse.
        target make a trade of about 20 hours, and 0.3% of costs ate it.
        **Work out, on paper, what win rate Slot 2 needs to clear a Profit
        Factor of 1.15 on the candle size you choose, and tell him BEFORE
-       he is asked for a go.**
+       he is asked for a go.** THE ARITHMETIC IS DONE FOR YOU in
+       `PROGRESS_LOG.md`, the last entry of 2026-11-16: a coin flip wins
+       42.9%; a 4-hour candle needs about 55% and a daily candle about
+       49%. **So daily candles are the kinder choice for costs - and
+       funding extremes are rare, so COUNT THE SIGNALS ON MADE-UP DATA
+       BEFORE YOU COMMIT TO A CANDLE.** Slot 1 fell between exactly these
+       two stools.
     6. Two gates, the permanent drill, the attack by text edits with
        predictions written first, the made-up worlds, the closing ritual.
     7. **ONE STOP BEFORE ANY SLOT IS SPENT: HE SAYS GO.**
 
 **WHO MAY BUILD IT:** if he has said in words that you are Fable, his
 ruling covers you. **If he has not, R-006 applies in full: you may build
-the setup, but another AI must review it before it runs.**
+the setup, but another AI must review it before it runs.** **HE WAS TOLD
+THIS PLAN ON 2026-11-16 AND DID NOT OBJECT: OPUS BUILDS THE SLOT 2 SETUP
+AND RUNS NOTHING; FABLE REVIEWS IT IN ONE SHORT SESSION; THEN HE SAYS
+GO.** His Fable usage was nearly spent that day. If you are the builder,
+end by writing orders for a reviewer who did not build it.
 
 ## THE QUESTION THAT WAS ON HIS DESK (ANSWERED - KEPT FOR THE RECORD)
 
@@ -208,8 +218,10 @@ THEM.**
    **A FAIL IS WRITTEN AS PLAINLY AS A PASS. No "nearly", no "promising",
    no second try.**
 3. **`journal/my_trades.csv`, if it exists, is his.** Read it, never write
-   it. **And ask him how `LOG_TRADE.bat` and `MIRROR.bat` went** - nobody
-   has ever answered the ten questions by hand. I did not ask today.
+   it. **HE SAID ON 2026-11-16 THAT HE DOES NOT KNOW HOW TO USE
+   `LOG_TRADE.bat` AND `MIRROR.bat`.** He was told in two lines. **If you
+   have room, walk him through logging ONE made-up trade, step by step, in
+   easy words** - nobody has ever answered the ten questions by hand.
 
 ---
 
@@ -352,10 +364,10 @@ the channel / back to daily / not yet.
    2026-11-15, AND KEPT THEM. DO NOT ASK AGAIN.** A wrong-side stop is
    refused; the 1% lines keep his real exit; a reading older than 8 hours
    counts as no reading.
-4. **DOES THE CARRY LINE READ AS INFORMATION, OR AS A SUGGESTION?** Shown to
-   him 2026-08-19. **Still not answered — this is the EIGHTH session
-   carrying it. I did not ask it today either; his attention went to the
-   slot.** ASK.
+4. **THE CARRY LINE: ANSWERED 2026-11-16.** His words: *"carry line i think
+   daily brief"*. **Fable's reading, labelled as a reading: information,
+   part of the Brief, not a suggestion.** Off his desk unless you doubt
+   the reading - then ask once, in plain words.
 5. **AND BESIDE IT:** the carry figure is the yield on the PERP NOTIONAL;
    running the trade needs money on both legs, so the return on capital
    deployed is lower than the number on the line. His call.

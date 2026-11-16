@@ -17579,3 +17579,43 @@ entry and the orders are the only things changed.
 
 **ONE THING I DID NOT DO AND SAY SO:** the carry-line question (is it
 information or a suggestion?) was not asked again. Eighth session.
+
+## >>> 2026-11-16, THE END OF THE SESSION - **TWO ANSWERS FROM THE COMMANDER, AND A PLAN FOR WHO BUILDS SLOT 2. NO CODE CHANGED.**
+
+**1. THE CARRY LINE - ANSWERED AFTER EIGHT SESSIONS.** Asked whether the
+carry line on his Brief reads as information or as a suggestion to trade,
+his words were: *"carry line i think daily brief"*. **MY READING, LABELLED
+AS MINE: he takes it as part of the daily Brief - information - and not
+as a suggestion.** He did not say the word "information"; if a later
+session doubts the reading, ask him once in plain words. The companion
+point (the figure is the yield on the perp notional, not on the capital
+both legs need) was not put to him.
+
+**2. `LOG_TRADE.bat` AND `MIRROR.bat`: "i dont know how use".** So nobody
+has used the journal, and the reason is not that it failed - he was never
+shown. He was told in plain words in the reply. **A session with room
+should walk him through one made-up trade.**
+
+**3. WHO BUILDS SLOT 2.** He said his Fable usage is nearly spent and
+asked whether Opus can build it. Told: yes - and by his own ruling of
+2026-11-14 a Phase 6 build NOT made by Fable must be reviewed by a second
+AI before it runs, so the shape is **Opus builds the setup and runs
+nothing; Fable reviews it in one short session; then he says go.** He
+then asked this session to build it with about a tenth of his usage left.
+**I DID NOT START IT.** The 4-hour rebuild of a strategy that already
+existed took a whole session; Slot 2 needs funding history fetched and
+frozen first. `THE_PATTERN.md`: a half-built part is worse than no part.
+What I left instead is the cost arithmetic below, in the orders.
+
+**THE COST ARITHMETIC FOR ANY STRATEGY UNDER THE SHIP'S EXIT (stop 1.5
+ATR, target 2.0 ATR, 0.3% of the position there and back).** With A the
+candle's ATR as a percentage of price, a win nets 2A - 0.3 and a loss
+costs 1.5A + 0.3. A coin-flip entry wins 1.5 / 3.5 = 42.9%. To clear a
+Profit Factor of 1.15 the win rate p must satisfy
+p(2A - 0.3) >= 1.15 (1 - p)(1.5A + 0.3):
+
+    A = 1%  (roughly a 4-hour candle) ... p >= 54.9%
+    A = 3%  (roughly a daily candle) .... p >= 49.2%
+
+**THE "ROUGHLY" IS GENERAL KNOWLEDGE, NOT A MEASUREMENT** - the real ATR
+is price data in the vault and I did not look.
