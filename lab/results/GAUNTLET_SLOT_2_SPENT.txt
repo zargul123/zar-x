@@ -1,0 +1,8 @@
+GAUNTLET SLOT 2 — SPENT
+strategy  : funding-fade-1d-90d-top10
+params    : {'window': 90, 'need': 81, 'warmup': 91, 'column': 'funding', 'kind': 'funding_extreme_fade'}
+commit    : 461a9c7
+started   : 2026-11-16T20:42:03
+train_end : 2025-10-01
+finished  : 2026-11-16T20:42:08
+verdict   : FAILED

@@ -19358,3 +19358,283 @@ I would propose for Law 6, for him to accept, change or refuse:
 **THE PAPER-WATCH DOES NOT EXIST YET.** It is Phase 7's signal journal,
 unbuilt. And the research pass is only as good as what can be found: for
 a rule this specific there may be nothing published at all.
+
+# 2026-11-16 (LATE NIGHT) - **GAUNTLET SLOT 2, THE FUNDING-RATE FADE, WAS RUN. ONCE. ON THE COMMANDER'S WORD. VERDICT: FAILED - FOUR BARS OF FIVE. THE SLOT IS SPENT.**
+
+## 1. THE ORDER
+
+All three slots set up, he was asked which test to run, if any. **HIS WORDS:
+"Run idea 2".** That is the slot he chose on 2026-11-16 and the first in
+the order he had been told.
+
+## 2. THE PRE-FLIGHT, 15:41 UTC, IMMEDIATELY BEFORE
+
+    git status ................. clean (only the untracked recorder log)
+    HEAD ....................... 461a9c7
+    lab/verify_vault.py ........ VAULT INTACT - all 6 files
+    lab/funding_vault.py ....... FROZEN FUNDING INTACT - 3 of 3
+    GATE 6.3-D 52/0 - GATE 6.3-S 44/0 - GATE 6.3-R1 40/0 - GATE 6.4-R 49/0
+    lab/results/ ............... no slot marker, no slot report
+
+## 3. THE RUN - `python lab/gauntlet_slot2.py --go`, ONCE. EXIT CODE 1 (not PASSED). EVERYTHING IT PRINTED, UNEDITED:
+
+    GAUNTLET SLOT 2 — funding-fade-1d-90d-top10
+      marker written: C:\Users\hp\Downloads\zargul trader\zar-x\lab\results\GAUNTLET_SLOT_2_SPENT.txt
+      coins BTC-USD, ETH-USD, SOL-USD  timeframe 1d  hold-out line 2025-10-01
+
+      --- BTC-USD: INFORMATION ONLY. No bar reads this. ---
+      STAT CARD — HOLDOUT (2025-10-02 00:00:00 -> 2026-07-25 00:00:00)
+        strategy      : funding-fade-1d-90d-top10  [fingerprint 7b516709aab4  commit 461a9c7]
+        market        : BTC-USD 1d   candles in window: 297
+        trades        : 19   (13 long / 6 short)
+        wins / losses : 10 / 9   win rate 52.6%
+        profit factor : 1.43   (gross wins / gross losses, AFTER costs)
+        avg win       : +1.30% of equity
+        avg loss      : -1.01% of equity   (win/loss size ratio 1.29)
+        max drawdown  : 3.02%
+        NET RETURN    : +3.87%   (after every fee and every slippage)
+        gross return  : +4.56%   (the fantasy version, costs switched off)
+        COST DRAG     : 0.68 percentage points   ($60.77 paid in fees+slippage on $10,000)
+        time in market: 69.7%
+        exits         : target=10, stop=9
+        look-ahead audit: 673 strategy calls, 0 violations
+        buy-and-hold yardstick for this coin: -11.46%
+
+      --- ETH-USD: INFORMATION ONLY. No bar reads this. ---
+      STAT CARD — HOLDOUT (2025-10-02 00:00:00 -> 2026-07-25 00:00:00)
+        strategy      : funding-fade-1d-90d-top10  [fingerprint 7b516709aab4  commit 461a9c7]
+        market        : ETH-USD 1d   candles in window: 297
+        trades        : 14   (6 long / 8 short)
+        wins / losses : 8 / 6   win rate 57.1%
+        profit factor : 1.72   (gross wins / gross losses, AFTER costs)
+        avg win       : +1.31% of equity
+        avg loss      : -1.02% of equity   (win/loss size ratio 1.29)
+        max drawdown  : 2.03%
+        NET RETURN    : +4.40%   (after every fee and every slippage)
+        gross return  : +4.77%   (the fantasy version, costs switched off)
+        COST DRAG     : 0.37 percentage points   ($33.27 paid in fees+slippage on $10,000)
+        time in market: 81.8%
+        exits         : target=8, stop=6
+        look-ahead audit: 584 strategy calls, 0 violations
+        buy-and-hold yardstick for this coin: -10.19%
+
+      --- SOL-USD: INFORMATION ONLY. No bar reads this. ---
+      STAT CARD — HOLDOUT (2025-10-02 00:00:00 -> 2026-07-25 00:00:00)
+        strategy      : funding-fade-1d-90d-top10  [fingerprint 7b516709aab4  commit 461a9c7]
+        market        : SOL-USD 1d   candles in window: 297
+        trades        : 13   (10 long / 3 short)
+        wins / losses : 4 / 9   win rate 30.8%
+        profit factor : 0.55   (gross wins / gross losses, AFTER costs)
+        avg win       : +1.25% of equity
+        avg loss      : -1.01% of equity   (win/loss size ratio 1.24)
+        max drawdown  : 5.64%
+        NET RETURN    : -4.09%   (after every fee and every slippage)
+        gross return  : -3.87%   (the fantasy version, costs switched off)
+        COST DRAG     : 0.22 percentage points   ($20.38 paid in fees+slippage on $10,000)
+        time in market: 90.6%
+        exits         : stop=9, target=3, end of data (forced close)=1
+        look-ahead audit: 468 strategy calls, 0 violations
+        buy-and-hold yardstick for this coin: -8.16%
+
+      pooled hold-out trades: 46  (BTC-USD 19, ETH-USD 14, SOL-USD 13)
+    ==============================================================================
+    WALK-FORWARD — pooled hold-out
+    ==============================================================================
+      (trades supplied directly)
+      The hold-out is cut into 6 consecutive windows. Each is scored alone.
+
+      #  from         to           candles  trades  win%     PF     SUM%     NET%   maxDD%   share of profit
+      --------------------------------------------------------------------------
+      1  2025-10-02   2025-11-19       49      11   36.4    0.74    -1.83    -1.88    5.67      -43.2% 
+      2  2025-11-20   2026-01-08       50       1  100.0    inf     +1.31    +1.31    0.00       31.0% 
+      3  2026-01-09   2026-02-26       49       9   11.1    0.16    -6.79    -6.61    6.61     -160.3% 
+      4  2026-02-27   2026-04-17       50       9   77.8    4.48    +7.12    +7.31    1.02      168.3% 
+      5  2026-04-18   2026-06-05       49       9   77.8    4.72    +7.15    +7.34    1.02      169.0% 
+      6  2026-06-06   2026-07-25       50       7   28.6    0.46    -2.74    -2.75    5.01      -64.8% 
+      --------------------------------------------------------------------------
+      TOTAL (arithmetic sum of every trade's percent result): +4.23%
+
+      TEST 1 — CONSISTENCY: profitable in 3 of 6 windows (50%), needs 60%.
+               -> FAIL   (6 of 6 windows contained any trades at all; a window that
+                  made no money is not counted as profitable, whatever the reason.)
+
+      TEST 2 — CONCENTRATION: the biggest single contributor is window 5 (2026-04-18 -> 2026-06-05),
+               which supplied 169.0% of the total profit. The limit is 50%.
+               -> FAIL — LUCKY-WINDOW FLAG RAISED
+               One stretch of time is carrying this strategy. Remove that window and
+               the rest of the hold-out made -2.92%. That is the strategy without its lucky
+               month — treat THAT as the honest expectation.
+
+      VERDICT: INCONSISTENT
+        - profitable in only 3 of 6 windows (needs 4).
+        - window 5 alone supplied 169.0% of the profit — more than half. This is the lucky-window pattern the detector exists to catch.
+    ==============================================================================
+
+    ==============================================================================
+    GAUNTLET SLOT 2 — funding-fade-1d-90d-top10 — THE FIVE LOCKED BARS, ON THE THREE COINS POOLED
+    ==============================================================================
+        bar                                           measured      required   verdict
+        --------------------------------------------------------------------------
+        B1 pooled Profit Factor after costs               1.17       >= 1.15   PASS
+        B2 pooled hold-out trades                           46         >= 30   PASS
+        B3 walk-forward verdict                   INCONSISTENT    CONSISTENT   FAIL
+        B4 Monte Carlo 5th-pct drawdown                  9.64%         < 30%   PASS
+        B5 beats buy-and-hold, 1% sizing                +4.00%     > -26.98%   PASS
+        --------------------------------------------------------------------------
+        bars cleared: 4 of 5
+
+        VERDICT: SLOT 2 FAILED. A strategy must clear EVERY bar.
+        Clearing some of them is not a partial pass. The slot is spent.
+        No second try and no "just one change".
+    ==============================================================================
+
+The marker file, whole:
+
+    GAUNTLET SLOT 2 — SPENT
+    strategy  : funding-fade-1d-90d-top10
+    params    : {'window': 90, 'need': 81, 'warmup': 91, 'column': 'funding', 'kind': 'funding_extreme_fade'}
+    commit    : 461a9c7
+    started   : 2026-11-16T20:42:03
+    train_end : 2025-10-01
+    finished  : 2026-11-16T20:42:08
+    verdict   : FAILED
+
+The evidence is in `lab/results/` and committed with this entry: the
+marker, the report, the three per-coin trade files and the pooled file.
+
+## 4. THE OBITUARY
+
+**SLOT 2 FAILED. IT CLEARED FOUR BARS AND FAILED THE FIFTH, AND A STRATEGY
+MUST CLEAR EVERY ONE.**
+
+    B1  Profit Factor after costs   1.17   (needs 1.15)        PASS
+    B2  trades                      46     (needs 30)          PASS
+    B3  walk-forward                INCONSISTENT               FAIL
+    B4  Monte Carlo drawdown        9.64%  (needs under 30%)   PASS
+    B5  beats buy-and-hold          +4.00% against -26.98%     PASS
+    the too-good alarm              silent (PF 1.17, win 47.8%)
+
+**NO "NEARLY". NO SECOND TRY. THE SLOT IS SPENT.** It will not be run again
+on this data, with these numbers or any others.
+
+## 5. THE AUTOPSY - HIS RULING OF THIS EVENING, STEP 1. IN PLAIN WORDS.
+
+**WHAT IT DID.** Over ten months, on three coins, it took 46 trades and
+ended 4% up after fees, in a market where simply holding the coins lost
+27%. It won 22 trades and lost 24.
+
+**WHY IT FAILED.** The test cuts the ten months into six stretches and
+asks that at least four of them make money on their own, and that no
+single stretch carry more than half the profit. **IT MADE MONEY IN THREE
+OF SIX**, and they were not even:
+
+    Oct-Nov 2025    11 trades    -1.9%
+    Nov-Jan          1 trade     +1.3%
+    Jan-Feb 2026     9 trades    -6.6%
+    Feb-Apr          9 trades    +7.3%
+    Apr-Jun          9 trades    +7.3%
+    Jun-Jul          7 trades    -2.75%
+
+Two good stretches in a row (late February to early June) made all the
+profit and more; the other four together LOST 10%. **THAT IS THE PATTERN
+THE BAR EXISTS TO CATCH: A STRATEGY THAT IS RIGHT FOR ONE SEASON.**
+
+**"NO EDGE", OR "A NEAR MISS FOR A REASON WE CHOSE"? MY HONEST READING: NOT
+A NEAR MISS CAUSED BY OUR STRICTNESS. A SMALL PROFIT THAT I CANNOT TELL
+FROM LUCK.**
+
+  * **IT MISSED THE CONSISTENCY BAR BY ONE STRETCH (3 where 4 are
+    needed)** - and one of the three it "won" held a single trade. On
+    that count alone it looks close.
+  * **BUT THE PROFIT FACTOR, 1.17, IS WHAT NOISE LOOKS LIKE ON A GOOD
+    DAY.** On made-up markets where the prices knew nothing about
+    funding, 18 worlds of 60 cleared that same bar. One in three.
+  * **AND THE TWO HALVES OF THE IDEA DID OPPOSITE THINGS:**
+
+        SELLING when funding was extremely positive:  17 trades, 12 won
+            (71%), +10.3%, Profit Factor 3.0
+        BUYING when funding was extremely negative:   29 trades, 10 won
+            (34%), -6.1%, Profit Factor 0.68
+
+    **THE MARKET FELL OVER THESE TEN MONTHS** (the yardstick: -27%). In a
+    falling market, selling wins and buying loses whatever the reason for
+    the trade. **SO THE GOOD HALF MAY BE THE FADE WORKING, OR MAY BE
+    NOTHING BUT "IT WAS SHORT WHILE PRICES FELL". THIS TEST CANNOT TELL
+    THOSE APART, AND NEITHER CAN I.**
+  * By coin: BTC 19 trades, Profit Factor 1.43; ETH 14, 1.72; SOL 13,
+    0.55. (Information; no bar reads it. SOL's 10 buys won twice.)
+  * **THERE WERE MORE BUY SIGNALS THAN SELL SIGNALS (29 to 17)** - the
+    opposite of the training side, where sells outnumbered buys three to
+    one. Funding went negative often in a falling market. The bar had
+    said the hold-out might differ.
+  * **THE COINS DID NOT ALL TRADE TOGETHER** as much as I feared: 40
+    distinct entry days for 46 trades.
+  * A trade lasted a median of 8.5 days, not the 5 of the made-up worlds.
+
+**WAS THE TEST UNFAIR TO IT? I LOOKED FOR THAT AND DO NOT THINK SO.**
+The count was fine (46). The costs were his real ones and were small
+(0.2 to 0.7 points of drag a coin). It beat buy-and-hold easily. The bar
+it failed is the one bar that asks "does this work in more than one kind
+of month", and the honest answer on this evidence is no.
+
+**>>> THE TEMPTING TWEAK, NAMED SO THAT NOBODY MAKES IT QUIETLY: "KEEP THE
+SELLS, DROP THE BUYS".** It would have shown a Profit Factor of 3.0. **IT
+IS THE DEATH SPIRAL IN ONE LINE** - a rule chosen by looking at the result,
+on the only data there is, in a market that happened to fall. It is not
+run, not tested and not proposed for the gauntlet. **By his ruling the
+only road open to it is forward: watched on paper, on data nobody has
+seen.**
+
+## 6. THE RESEARCH PASS - HIS RULING, STEP 2. WHAT IS KNOWN OUTSIDE THE SHIP.
+
+Two web searches, 2026-11-16. **I found no peer-reviewed study that
+funding rates reliably predict price.** What exists is practitioner
+writing, small samples, mixed:
+
+  * A direct test (Brave New Coin) called the link between funding and
+    the next period's return "mixed" and loose.
+  * BitMEX's own research found a large positive funding reading tends
+    to come before a negative return over the next 8 hours - support for
+    the SELL half, at a much shorter horizon than ours.
+  * A February 2026 backtest of Binance BTC and ETH perpetuals, 2022 to
+    2026, concluded the plain contrarian trade "is decaying", weaker on
+    ETH than BTC; a companion post found that in some regimes extreme
+    funding marks momentum, not a turn - "funding mean-reverts, but
+    price doesn't necessarily follow".
+  * The BUY half (negative funding) is thinly documented. K33 reports
+    large average gains in the 90 days after funding turns negative, on
+    a handful of episodes with no costs or controls - a far longer
+    holding period than our 8 days.
+  * The one academic paper found (He, Manela, Ross, von Wachter) is
+    about how perpetuals are priced, not about predicting returns.
+
+**READ TOGETHER: THE FAIL FITS WHAT IS KNOWN.** Outside work also finds
+the sell side better supported than the buy side, the whole effect weak
+and regime-dependent, and no solid proof. **Nothing found suggests this
+test was unfair to a real edge. Nothing found proves there is none.**
+What I could NOT find: any rigorous out-of-sample study of a
+rank-in-90-days rule like ours, in either direction.
+
+Sources: bravenewcoin.com/insights/testing-theory-is-perpetual-swap-funding-rate-predictive ;
+bitmex.com/blog/xbtusd-funding-mean-reversion-strategy ;
+askrubyai.github.io/blog/posts/2026-02-26-funding-regime-filter ;
+askrubyai.github.io/blog/posts/2026-02-14-funding-rate-contrarian ;
+theblock.co/post/315831/perp-signal-bitcoin-bottom-bullish-year-end-k33 ;
+arxiv.org/pdf/2212.06888v3 . **These are blogs and vendor notes as much
+as research; I read search summaries, not every page in full.**
+
+## 7. STEP 3 OF HIS RULING - THE PAPER-WATCH - IS HIS TO CALL, AND IS NOT BUILT
+
+A failed idea may be watched forward on paper with no money. That needs
+Phase 7's signal journal, which does not exist. **On his desk.**
+
+## 8. WHAT THE RUN SHOWED ABOUT THE MACHINERY
+
+It ran clean: the marker went down first, three coins loaded, 0 look-ahead
+violations in 1,725 strategy calls, the pooled count is the three coins'
+added up, and the report's figures match the saved trade file re-worked
+by hand afterwards (46 trades, Profit Factor 1.17, +4.23% summed). **No
+fault in the shared runner showed itself** - which is what running this
+slot first was for.
+
+**SLOT 1 AND SLOT 3 ARE STILL SET UP AND UNSPENT.**

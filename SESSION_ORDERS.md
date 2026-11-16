@@ -1,4 +1,4 @@
-# ZAR X — **YOUR JOB: ALL THREE TESTS ARE SET UP AND NONE HAS BEEN RUN. THE NEXT MOVE IS THE COMMANDER'S: WHICH TO RUN, AND WHEN. PROVE THE SHIP ALIVE, TELL HIM WHERE THINGS STAND IN EASY WORDS, AND DO WHAT HE SAYS. RUN NOTHING WITHOUT HIS WORD. IF A SLOT IS RUN AND FAILS, HE HAS RULED WHAT HAPPENS NEXT - READ "AFTER A FAIL" BELOW.**
+# ZAR X — **SLOT 2 WAS RUN ON 2026-11-16 AND FAILED (4 BARS OF 5). IT IS SPENT. YOUR JOB: SLOTS 1 AND 3 ARE SET UP AND UNSPENT. THE NEXT MOVE IS THE COMMANDER'S: WHICH TO RUN, AND WHEN. PROVE THE SHIP ALIVE, TELL HIM WHERE THINGS STAND IN EASY WORDS, AND DO WHAT HE SAYS. RUN NOTHING WITHOUT HIS WORD. IF A SLOT IS RUN AND FAILS, HE HAS RULED WHAT HAPPENS NEXT - READ "AFTER A FAIL" BELOW.**
 
 *Written 2026-11-16 (late night) by Fable. He opened the session with
 "zarx.. fable set up idea 2 and do it smartly". **I read that as his word
@@ -8,11 +8,35 @@ rulings.***
 
 ---
 
-# **>>> FIRST: THE THREE COMMANDS YOU MUST NOT TYPE WITHOUT HIS WORD**
+# **>>> SLOT 2: RUN ONCE, 2026-11-16, ON HIS WORD ("Run idea 2"). FAILED.**
+
+Profit Factor 1.17 PASS; 46 trades PASS; **walk-forward INCONSISTENT, FAIL**
+(money made in 3 of 6 stretches, 4 needed, and two stretches carried all
+of it); drawdown 9.64% PASS; +4.00% against buy-and-hold -26.98% PASS.
+**THE OUTPUT, UNEDITED, THE OBITUARY, THE AUTOPSY AND THE RESEARCH PASS ARE
+IN `PROGRESS_LOG.md`'s LAST ENTRY. READ IT.** In one line: a small profit
+that cannot be told from luck; selling on extreme positive funding won
+(17 trades, 71%) and buying on extreme negative lost (29 trades, 34%),
+in a market that fell 27%.
+
+**>>> DO NOT RE-RUN IT, AND DO NOT BUILD "SELLS ONLY" AS A GAUNTLET IDEA.**
+That rule was seen in the result. By his ruling the only road open to
+it is forward, on paper, on new data - and that paper-watch is not
+built. **ON HIS DESK: does he want the failed fade (or its selling half)
+watched on paper? If yes, that is Phase 7's signal journal: a build,
+under a gate.**
+
+**`lab/results/` NOW HOLDS SLOT 2's EVIDENCE** (marker, report, four trade
+files). It is evidence: never edit or delete it.
+
+---
+
+# **>>> FIRST: THE COMMANDS YOU MUST NOT TYPE WITHOUT HIS WORD**
 
     python lab/gauntlet.py --slot 1 --go        (Slot 1, the breakout)
-    python lab/gauntlet_slot2.py --go           (Slot 2, the funding fade)
     python lab/gauntlet_slot3.py --go           (Slot 3, the mood fade)
+    (python lab/gauntlet_slot2.py --go is SPENT and refuses. Do not type
+    it to check.)
 
 **EACH SPENDS ONE OF THE THREE SLOTS OF THE PROMISE, FOR EVER.** Each
 writes a marker file before it opens the vault, and a second run is
@@ -154,14 +178,14 @@ gate, like anything else.
                             to run, if any. **RUN NOTHING WITHOUT HIS
                             WORD.**
 
-## WHAT EXISTS NOW - THREE TESTS, ALL READY, NONE RUN
+## WHAT EXISTS NOW - TWO TESTS READY, ONE SPENT
 
   * **SLOT 1 - THE BREAKOUT.** 4-hour candles: buy when price closes
     above its last 20 candles in an up-trend; sell the mirror. A
     day-sized stop and target; a trade lasts about four days. Made-up
     markets: about 81 trades; noise passed 1 time in 60; where breakouts
     really follow through, the profit bar was cleared 24 of 24.
-  * **SLOT 2 - THE FUNDING FADE.** Daily: sell when the day's funding is
+  * **SLOT 2 - THE FUNDING FADE. RUN, FAILED, SPENT.** It was: daily: sell when the day's funding is
     positive and higher than at least 81 of the last 90 days; buy the
     mirror. About 67 trades; noise passed 3 in 60; a true fade 24 of 24.
   * **SLOT 3 - THE MOOD FADE.** Daily: buy when the Fear & Greed index is
@@ -177,8 +201,8 @@ gate, like anything else.
 
     Which test do you want run, if any?  One at a time.
 
-**THE ORDER HE WAS TOLD AND DID NOT OBJECT TO: idea 2, then idea 1, then
-idea 3** - one at a time, so a fault in the shared machinery is found
+**THE ORDER HE WAS TOLD AND DID NOT OBJECT TO: idea 2 (done), then idea 1,
+then idea 3** - one at a time, so a fault in the shared machinery is found
 before the other two are spent. **EACH RUN NEEDS HIS WORD AT THE TIME. "Run
 them all" is three separate goes, with the result of each put to him
 before the next.**
@@ -186,7 +210,7 @@ before the next.**
 **BEFORE ANY RUN:** `python lab/verify_vault.py` INTACT 6 of 6;
 `python lab/funding_vault.py` INTACT 3 of 3; `python lab/mood_vault.py`
 INTACT 1 of 1; every gate green; `git status` clean; no
-`GAUNTLET_SLOT_*_SPENT.txt` in `lab/results/`. Then the one command, ONCE,
+marker in `lab/results/` FOR THE SLOT BEING RUN (Slot 2's is there). Then the one command, ONCE,
 from the `zar-x` folder with the full interpreter path.
 
 **AFTER ANY RUN:** everything it printed into `PROGRESS_LOG.md` UNEDITED.

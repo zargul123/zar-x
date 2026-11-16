@@ -767,3 +767,11 @@ not exist and has now waited four sessions.**
 | **SLOT 3's TRADE COUNT ON MADE-UP WORLDS.** | 60 worlds: pooled hold-out trades 37 to 86, median 61; 30 or more in 60 of 60. |
 | **SLOT 3's PASS RATE ON MADE-UP WORLDS.** | Noise: **3 PASSED of 60** - the highest of the three slots (one index, three coins). A true fade: profit bar cleared 24 of 24. |
 | **THE SHIP IS THIRTY-TWO INVOCATIONS, 1,963 GREEN.** | 1,711 plus 42, 45 and 39, each twice. `lab/gauntlet_slot2.py --gate` and `lab/gauntlet_slot3.py --gate` take two to three minutes each. |
+
+# **>>> RUN 2026-11-16 (LATE NIGHT) - GAUNTLET SLOT 2: FAILED. SPENT.**
+
+| Fact | Measurement |
+|---|---|
+| **SLOT 2's VERDICT.** | **FAILED, 4 bars of 5.** Profit Factor 1.17 (needs 1.15), 46 trades (30), walk-forward INCONSISTENT (3 of 6 stretches profitable; needs 4), Monte Carlo drawdown 9.64% (under 30%), +4.00% against buy-and-hold -26.98%. Alarm silent. |
+| **THE TWO HALVES OF THE FADE, ON THE HOLD-OUT.** | Sells (extreme positive funding): 17 trades, 71% won, +10.3%. Buys (extreme negative): 29 trades, 34% won, -6.1%. The market fell over the window. Information only. |
+| **THE RUNNER, ON REAL DATA FOR THE FIRST TIME.** | Ran clean: marker first, 1,725 strategy calls, 0 look-ahead violations, report equal to the saved trades re-worked by hand. |

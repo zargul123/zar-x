@@ -303,7 +303,8 @@ THE THREE SEALED SLOTS (from README/THE PROMISE — no substitutions):
   BEFORE ANYTHING HAD BEEN RUN** - the daily test could not reach 30 trades
   on made-up markets. The struck word is left visible. The bar is
   PROGRESS_LOG.md, 2026-11-16.
-- Slot 2: Funding-rate extreme fade. **SET UP 2026-11-16 (evening), NOT RUN:
+- Slot 2: Funding-rate extreme fade. **RUN ONCE 2026-11-16: FAILED (4 bars of
+  5; walk-forward INCONSISTENT). SPENT.** Set up 2026-11-16 (evening):
   daily candles; the bar is PROGRESS_LOG.md of that date.** ~~(needs funding history collected since
   Phase 3/4 — start recording funding to CSV the day Phase 3.2 ships)~~
   **CORRECTED 2026-07-26 — the struck text was never true and was written from
@@ -455,6 +456,21 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-16 (LATE NIGHT): SLOT 2, THE FUNDING-RATE FADE, WAS RUN ONCE ON THE COMMANDER'S WORD AND FAILED - FOUR BARS OF FIVE. IT IS SPENT. SLOTS 1 AND 3 ARE SET UP AND UNSPENT.**
+
+**THE RESULT** (`PROGRESS_LOG.md`, the run entry, the output unedited):
+Profit Factor 1.17 (PASS), 46 trades (PASS), walk-forward INCONSISTENT -
+profitable in 3 of 6 stretches where 4 are needed (**FAIL**), Monte Carlo
+drawdown 9.64% (PASS), +4.00% against buy-and-hold's -26.98% (PASS). The
+alarm was silent. **The autopsy and the research pass he ruled for are in
+that entry: a small profit that cannot be told from luck; the selling
+half won and the buying half lost, in a market that fell.**
+
+**TWO SLOTS REMAIN. THE COMMANDS THAT SPEND THEM, NOT TO BE TYPED WITHOUT
+HIS WORD:** `python lab/gauntlet.py --slot 1 --go` and
+`python lab/gauntlet_slot3.py --go`. `lab/gauntlet_slot2.py --go` now
+refuses: the marker `lab/results/GAUNTLET_SLOT_2_SPENT.txt` exists.
+
 ## **>>> 2026-11-16 (LATE NIGHT): ALL THREE GAUNTLET SLOTS ARE SET UP AND NONE HAS BEEN RUN. SLOT 3 WAS RE-SPECIFIED ONCE BY THE COMMANDER - THE CROWD-MOOD FADE - AND IS BUILT. EVERYTHING NOW WAITS FOR HIS WORD.**
 
 **WHERE THE SHIP IS.** Thirty-two invocations, every exit 0, **1,963
