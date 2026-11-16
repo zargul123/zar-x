@@ -1,4 +1,4 @@
-# ZAR X — **YOUR JOB: TWO TESTS ARE SET UP AND NEITHER HAS BEEN RUN. PUT THE CHOICE TO THE COMMANDER IN EASY WORDS, AND DO WHAT HE SAYS. RUN NOTHING WITHOUT HIS WORD.**
+# ZAR X — **YOUR JOB: TWO TESTS ARE SET UP AND NEITHER HAS BEEN RUN, BY THE COMMANDER'S CHOICE ("NOT YET"). CONFIRM IN ONE LINE THAT HE WANTS IDEA 3 NEXT, THEN FIND OUT WHETHER SLOT 3 HAS A FREE DATA SOURCE. RUN NOTHING WITHOUT HIS WORD.**
 
 *Written 2026-11-16 (evening) by Fable. He opened the session with "zarx..
 fable set up idea 2 and do it smartly". **I read that as his word that the
@@ -104,7 +104,28 @@ continue"*. **R-006 is WAIVED for builds made by Fable, not cleared.**
     prices have never been put together.** It has to be right about 48 or
     49 times in 100 after fees; a coin flip is right 43.
 
-## >>> THE QUESTION FOR HIM - ASK IT IN EASY WORDS, NO GATE NUMBERS, NO RECOMMENDATION UNLESS HE ASKS
+## >>> HE ANSWERED IT, 2026-11-16 (EVENING): "NOT YET"
+
+**THE QUESTION BELOW WAS PUT TO HIM AND IS ANSWERED. DO NOT ASK IT AGAIN
+UNLESS HE RAISES IT.** Shown the four options with no recommendation, his
+whole answer was *"Not yet"*. Neither slot is run. **My reading: option
+(4). But he did not repeat the words "idea 3", so ASK ONE LINE FIRST:**
+*"You said not yet. Shall I look for a free data source for idea 3, the
+on-chain cycle thermometer?"*
+
+**IF YES, YOUR PART 2 IS A FINDING-OUT JOB, NOT A BUILD:** is there a free,
+keyless (or free-key) source of an on-chain cycle measure - MVRV or
+similar - with DAILY HISTORY back to at least 2023-07-28 for BTC (and say
+plainly whether ETH and SOL have one at all)? **MEASURE IT, do not assume
+it**: the plan once said funding history was not served deep, and that
+was wrong. Report what exists, how far back, and what it costs. **IF NO
+FREE SOURCE EXISTS, HE MAY RE-SPECIFY SLOT 3 ONCE, BEFORE ANY TESTING -
+that is his decision, put to him in easy words. DO NOT WRITE A BAR FOR
+SLOT 3 UNTIL THE DATA QUESTION IS SETTLED WITH HIM.** And remember the
+lesson of both slots so far: say what candle, what count of trades and
+what cost wall BEFORE he is asked for a go.
+
+## THE QUESTION THAT WAS ON HIS DESK (ANSWERED - KEPT FOR THE RECORD)
 
     (1) RUN IDEA 2 NOW (the funding fade).
         -> type the one command, save everything it prints, and write the verdict
@@ -359,9 +380,9 @@ the channel / back to daily / not yet.
 
 # ON THE COMMANDER'S DESK (do not let these drop)
 
-1. **>>> WHICH TEST TO RUN, IF ANY.** Slot 1 (4-hour breakout) and Slot 2
-   (daily funding fade) are both set up and unspent. The four options
-   are at the top of these orders. **DO NOT RUN EITHER WITHOUT HIS
+1. **WHICH TEST TO RUN: ANSWERED 2026-11-16 (EVENING) - "NOT YET".** Slot 1
+   (4-hour breakout) and Slot 2 (daily funding fade) are both set up and
+   unspent, and he may come back to either whenever he likes. **DO NOT RUN EITHER WITHOUT HIS
    WORD.** (The risk figure: he said "No preference" on 2026-11-15, so
    both use the ship's rule, 1% with the 25% cap. **ON 4-HOUR CANDLES
    THE CAP BINDS ON EVERY TRADE; ON DAILY CANDLES IT NEVER DOES AND

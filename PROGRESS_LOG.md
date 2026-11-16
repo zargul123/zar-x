@@ -18325,3 +18325,23 @@ Red counted three ways, the word-hits read by eye: the funding gate's old
 escapes, the drill headings, the gauntlet gates' hand cases and rehearsals
 that are supposed to say FAILED, and the collection guard's "a FAILED
 recorder" line, which is an OK line.
+
+## >>> 2026-11-16 (EVENING), THE END OF THE SESSION - **THE COMMANDER RULED: "NOT YET". NEITHER SLOT IS RUN. NO CODE CHANGED.**
+
+The choice was put to him in easy words with four options and no
+recommendation - run idea 2; run idea 1; run both; not yet (set up idea 3
+first, which needs a free on-chain data source nobody has found). He was
+told what I got wrong, that nobody but me has read the build, and that 90,
+81 and the daily candle were my choices and not his.
+
+**HIS ANSWER, VERBATIM: "Not yet".**
+
+**MY READING, LABELLED AS MINE:** neither test is to be run now. The
+option he was shown under those words said idea 3 is set up first; he
+answered with the two words and did not repeat that part, so **the next
+session should confirm in one line that he wants idea 3 looked at next**
+before spending a session on it. Nothing was run after his answer; this
+entry and the orders are the only things changed.
+
+**SLOT 1 AND SLOT 2 ARE BOTH SET UP, GATED AND UNRUN. ALL THREE SLOTS OF
+THE PROMISE ARE UNSPENT. `lab/results/` HOLDS NO SLOT MARKER.**

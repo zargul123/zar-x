@@ -441,6 +441,10 @@ answer, built into this plan:
 # CURRENT POSITION MARKER (update this line each session)
 ## **>>> 2026-11-16 (EVENING): GAUNTLET SLOT 2, THE FUNDING-RATE FADE, IS SET UP AND NOT RUN. BOTH SLOT 1 AND SLOT 2 NOW WAIT FOR THE COMMANDER'S WORD. ALL THREE SLOTS ARE UNSPENT.**
 
+**>>> AND THEN HE RULED, THE SAME EVENING: "NOT YET".** Neither slot is
+run. **NEXT: confirm he wants idea 3 looked at, then settle whether Slot 3
+has a free data source.**
+
 **WHERE THE SHIP IS.** Twenty-six invocations, every exit 0, **1,699 green,
 0 red - MEASURED after the last change**:
 
