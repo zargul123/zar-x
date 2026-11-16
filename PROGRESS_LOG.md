@@ -19835,3 +19835,173 @@ not be printed. Bar first, gates, attack - the same road as the slots.
    the right call for now, and whether to run it at all is his.
 
 **NO SLOT WAS RUN AFTER SLOT 2. NO UNSEEN DATA HAS BEEN FETCHED.**
+
+
+# 2026-11-16 (AFTER THE RUN, CONTINUED) - **THE COMMANDER SAID GO: THE COMBINED RULE IS TO BE BUILT AND TRIED ONCE ON THE UNSEEN MONTHS. THIS IS THE BAR FOR "FORWARD CHECK 1", DECLARED BEFORE ANY CODE EXISTS AND BEFORE ONE UNSEEN CANDLE, FUNDING RATE OR MOOD VALUE IS FETCHED. NOTHING IS RUN.**
+
+**This entry is committed ALONE, with no `.py` and no data file in the commit.**
+
+## 1. THE RULING, VERBATIM
+
+Shown the four-way table he chose to talk first (*"Let's discuss first"*),
+then said he had not followed it (*"didnt understand the dime ... explain
+in simple terms like what did you do different and in money terms"*). It
+was put again in money: on 1,000 dollars over the two training years,
+against the crowd with the trend about 860, against the crowd in any
+trend about 670, with the crowd and the trend about 1,280, the trend
+alone about 1,430; with the two cautions (a rising market; winners picked
+from a search). **HIS ANSWER: "ok go ahead with your findings".**
+
+**MY READING, LABELLED AS MINE:** a go for what I had asked - *"Build the
+combined rule and try it on the unseen July-November data?"* - with the
+candidate exactly as written in the entry above, section 4.
+
+## 2. WHAT THIS IS AND IS NOT
+
+  * **IT IS NOT A GAUNTLET SLOT.** There are three; one is spent, two are
+    paused by him. No gauntlet bar is claimed for this and the word
+    PASSED will not be printed by it.
+  * **IT IS THE "FORWARD" ROAD OF HIS RULING OF THIS EVENING**: a changed
+    idea, tried on data nobody has seen, never on the old data as a
+    result.
+  * **IT IS ONE LOOK.** The unseen months can be unseen once. The runner
+    writes a marker and refuses a second run, exactly as a slot does.
+  * **ABOUT 113 DAYS IS ABOUT TWENTY TRADES. IT CANNOT PROVE AN EDGE.** It
+    can show a rule falling on its face, and it starts a record that
+    live paper-watching then lengthens.
+
+## 3. THE RULES - UNCHANGED FROM THE ENTRY ABOVE, SECTION 4
+
+    THE CONFLUENCE RULE (H3), daily candles, BTC, ETH, SOL:
+      TREND   UP if today's close is strictly above the plain average of
+              the last 100 closes (today's included); DOWN if strictly
+              below.
+      CROWD   GREEDY/LONG if `signals/funding_fade.py`'s rule answers
+              "short" OR `signals/mood_fade.py`'s answers "short";
+              SCARED/SHORT if either answers "long".
+      TRADE   LONG when UP and GREEDY/LONG; SHORT when DOWN and
+              SCARED/SHORT; otherwise flat. If the two crowd rules
+              disagree (one says long, one short) the day is BOTH, and
+              the trend alone decides which side, if any.
+      WARM-UP flat until 100 candles exist. (The two crowd rules need 91.)
+    THE YARDSTICK (H4), THE TREND ALONE: LONG when UP, SHORT when DOWN.
+    BOTH: stop 1.5 and target 3.0 times the 14-candle range; entry at the
+    next open; `config.GAUNTLET_COSTS`; 1% risk with the 25% cap.
+
+**THE TWO CROWD RULES ARE USED AS BUILT, BY CALLING THEM** - the same
+objects Slots 2 and 3 use, not copies. 100, 1.5 and 3.0 are in the
+fingerprint. Names: `confluence-1d-t100` and `trend-only-1d-t100`.
+
+## 4. THE UNSEEN DATA: FETCHED ONCE, FROZEN, CHECKSUMMED
+
+**THE WINDOW: 2026-07-26 TO 2026-11-15, 113 DAYS** - the day after the
+vault's last candle to the last day that had fully closed when this was
+written.
+
+  * **`lab/forward_vault/`**, a new folder. THE VAULT, THE FROZEN FUNDING
+    AND THE FROZEN MOOD ARE NOT TOUCHED BY ONE BYTE. Inside it:
+    `candles/` - `BTC-USD_1d.csv`, `ETH-USD_1d.csv`, `SOL-USD_1d.csv`, in
+    the vault's own format, **from the vault's own source** (TwelveData,
+    through the ship's `data/market_data.py`), with a manifest of
+    checksums; `funding/` - a freeze written by `lab/funding_vault.py`'s
+    own `write_freeze`, 113 x 3 = 339 settlements a coin; `mood/` - one
+    written by `lab/mood_vault.py`'s own, 113 rows.
+  * **THE SEAM.** The candle fetch also brings back days the vault
+    already holds. **Those must equal the vault's rows, value for value,
+    for 2026-07-01 to 2026-07-25, or nothing is frozen** - that is the
+    proof the new candles continue the old ones. Compared in code;
+    nothing printed but a count.
+  * **EXACTLY 113 CANDLES A COIN, ONE A DAY, NO GAP; each file must pass
+    the Lab's own data inspector (not FAIL).** The funding and mood
+    freezes keep every rule their gates already prove, for 113 days
+    starting 2026-07-26.
+  * **ONCE.** The builder refuses if the folder holds anything.
+  * **NOTHING PRINTS A PRICE, A RATE OR A VALUE.** Counts, dates,
+    checksums.
+
+## 5. THE RUN, AND WHAT IT MAY SHOW
+
+  * The rule has to WALK the whole history to warm up - through the
+    hold-out of Slots 1 and 3. **SO THE RUNNER SHOWS AND SAVES ONLY TRADES
+    ENTERED AFTER 2026-07-25. A trade entered on or before that day is
+    never printed, never saved, never counted** - the engine's hold-out
+    line is set to 2026-07-25 and only its "hold-out" window is read.
+    The gate proves it on made-up data, with a marked trade planted
+    before the line.
+  * The engine takes candles only through its vault class. The runner
+    builds that object itself, from the vault's files plus the forward
+    files, **after the Lab's inspector has passed each forward file** -
+    the same door the gates use for made-up candles. **THIS IS THE ONE
+    PLACE REAL CANDLES REACH THE ENGINE WITHOUT `load_vault`, AND IT IS
+    FILED.** They are frozen and checksummed, not live.
+  * Pre-flight before the marker: the vault, the frozen funding, the
+    frozen mood and all three forward freezes verified. A refusal spends
+    nothing.
+  * **WHAT IS PRINTED, FOR BOTH RULES, WHICHEVER LOOKS BETTER:** trades
+    (long and short), wins, Profit Factor, the three coins' trades pooled
+    and compounded as money on 1,000 dollars, the worst dip, and
+    buy-and-hold over the same days. **AND THIS LINE, ALWAYS: how many
+    trades it is, and that fewer than 30 is not a verdict.**
+  * **NO PASS, NO FAIL.** The question it answers is narrow: on months
+    nobody had seen, did the combined rule make or lose money, and did
+    the funding and mood readings add anything to the trend alone?
+
+## 6. THE GATES
+
+**GATE 6.6-S - `signals/confluence.py --gate`.** Made-up frames: every
+number typed and in `params`; the trend AT its line (a close equal to the
+average is neither up nor down) on both sides; the average over exactly
+100 closes, not 99 or 101; all eight cases of trend x crowd by hand,
+including the crowd rules disagreeing; **the two crowd rules are the very
+objects Slots 2 and 3 use**; the yardstick ignores the crowd entirely;
+99 candles flat, 100 judged; a frame without the funding or mood columns
+raises; a second writing-out agreeing on at least 3,000 made-up days;
+Law 7 (leak scan, numpy and the two strategy files the only imports, no
+file, no clock, nothing stored after it is made); the drill as text
+edits to its own code; its own count.
+
+**GATE 6.6-F - `lab/forward_check.py --gate`** (it also gates
+`lab/build_forward_vault.py` against fake sources). Made-up data, nothing
+real opened: the forward store's shape and every refusal (a candle
+short, a gap, a seam that does not match, a failed inspection); written
+once; the verifier against damage; the frames stitched by hand - the
+last vault day followed by the first forward day, no day twice, no gap -
+and funding and mood on their own days across the seam; **a trade
+planted BEFORE the line never printed, saved or counted; one after it
+is**; the pre-flight refusing before the marker; the whole run rehearsed
+through the real engine for both rules; the money figure re-worked by
+hand from the saved trades; the declared fingerprints; a second run
+refused; the poison test (everything after a chosen forward day changed,
+every earlier forward trade identical); the spy where the run would be;
+a drill; its own count.
+
+**THEN THE ATTACK BY TEXT EDITS**, control first, list and predictions
+first; and every invocation on the ship.
+
+## 7. THE AWKWARD CASES, NAMED FIRST
+
+  * **A TRADE OPENED BEFORE THE LINE AND STILL OPEN AFTER IT** belongs to
+    the past and is not shown; while it is open the rule cannot enter a
+    new one, so the first forward trade may come late. That is the
+    engine's rule and it costs trades, not honesty.
+  * **A TRADE STILL OPEN ON THE LAST DAY** is closed at the last close
+    and counted, as in every slot.
+  * **BOTH CROWD RULES FIRING OPPOSITE WAYS ON ONE DAY.** Named in
+    section 3.
+  * **TODAY's CANDLE (2026-11-16) IS NOT CLOSED** and is not in the
+    window.
+  * **THE TWELVEDATA KEY.** The fetch uses the ship's own data part and
+    its key from `.env`; the key is never printed or written.
+
+## 8. MY PREDICTIONS (rule (m))
+
+    trades on the unseen window ..... confluence 10 to 30; trend alone
+                                      20 to 45
+    the result ...................... I do not predict it. On the
+                                      training side the two were level.
+    the attack ...................... at least one hole in my own gates
+
+## 9. WHAT I HAVE LOOKED AT
+
+**THE TRAINING SIDE ONLY, for the four-way table. SLOT 2's HOLD-OUT RESULT,
+which is public record now. NOTHING DATED AFTER 2026-07-25, OF ANY KIND.**
