@@ -720,3 +720,27 @@ not exist and has now waited four sessions.**
 | **ON DAILY CANDLES THE 25% CAP NEVER BINDS.** | 0 of 5,755 made-up trades. Each trade risks exactly 1%. (On 4-hour candles every trade was capped.) |
 | **THE SLOT 2 REHEARSAL GATE TAKES TWO TO THREE MINUTES.** | It makes twelve whole runs for its drill. The other two new gates take seconds. |
 | **THE SHIP IS NOW TWENTY-SIX INVOCATIONS, 1,699 GREEN.** | The twenty of this morning (1,429) plus 52, 44 and 39, each twice. |
+
+
+# **>>> CHANGED 2026-11-16 (NIGHT) - THE GAUNTLET's COSTS AND SLOT 1's EXIT. NOTHING RUN.**
+
+| Part | What changed |
+|---|---|
+| **`config.GAUNTLET_COSTS`.** | Fee 0.05% a side (Binance USD-M futures taker, the Commander's own exchange) + slippage 0.05% a side = **0.20% there and back**, for all three slots. `LAB_COSTS` (0.30%) is unchanged and still used by the Lab's own exams. |
+| **Slot 1's exit.** | Stop 3.75 and target 5.0 times the average range of the last 84 four-hour candles: the ship's 1.5 and 2.0 applied to a day's move. The entry (`signals/turtle.py`, GATE 6.2-S, 39) is untouched. **`lab/gauntlet.py` is now GATE 6.4-R, 49 checks.** |
+| **Slot 2.** | Rules unchanged; the new costs. **`lab/gauntlet_slot2.py` is now GATE 6.3-R1, 40 checks.** |
+
+## MEASURED 2026-11-16 (NIGHT)
+
+| Fact | Measurement |
+|---|---|
+| **A DAY's RANGE IS 2.5 FOUR-HOUR RANGES.** | Daily 14-day ATR over the 4-hour 84-candle ATR, training side (2024-02-01 to 2025-09-30): BTC 2.65, ETH 2.50, SOL 2.51. Arithmetic: 2.45. |
+| **THE 4-HOUR RANGE IS 1.3% TO 2.5% OF PRICE**, not "about 1%". | Median 84-candle ATR, training side: BTC 1.3%, ETH 2.0%, SOL 2.5%. Earlier entries guessed 1%. |
+| **WINS NEEDED IN 100 TO CLEAR PROFIT FACTOR 1.15.** | Slot 1: BTC 48.1 (was 52.8), ETH 47.5 (50.7), SOL 47.2 (49.7). Slot 2: 48.1 / 47.6 / 47.2 (was 48.9 / 48.2 / 47.7). A coin flip: 42.9. |
+| **SLOT 1's TRADE COUNT, NEW EXIT.** | 60 trendless worlds: pooled hold-out trades 63 to 102, median 81; 30 or more in 60 of 60. A trade lasts a median of 23 candles. No trade capped at 25%. |
+| **SLOT 1's PASS RATE, NEW EXIT AND FEE.** | Noise: 1 PASSED of 60. A steady drift of 0.2% a day: 0 of 12. **Breakouts that really follow through: profit bar cleared 24 of 24** (mild: 4 PASSED, 2 WITHHELD, 6 FAILED; strong: 7 WITHHELD, 5 FAILED on buy-and-hold alone). |
+| **SLOT 2's PASS RATE AT THE NEW FEE.** | Noise: 3 PASSED of 60 (was 2). True fade: unchanged - profit bar cleared 24 of 24. |
+| **THE SHIP IS TWENTY-SIX INVOCATIONS, 1,711 GREEN.** | 1,699 plus five more checks in `lab/gauntlet.py` and one more in `lab/gauntlet_slot2.py`, each twice. |
+| **FREE ON-CHAIN DATA FOR SLOT 3 EXISTS FOR BTC AND ETH, NOT SOL.** | Coin Metrics community API, `CapMVRVCur`, daily, no key: BTC from 2010-07-18, ETH from 2015-08-08. SOL: "not supported". Measured with requests ending 2025-09-30. |
+| **THE CLASSIC CYCLE THERMOMETER CANNOT MAKE 30 TRADES IN 297 DAYS.** | Training side, 3.8 years: BTC's MVRV went below 1 on 5 occasions and never above 3.5; ETH's below 1 on 18 and never above 2.4. |
+| **RANKED IN ITS OWN LAST 90 DAYS, MVRV FIRES OFTEN ENOUGH - AND IS NEARLY A PRICE RULE.** | Coldest tenth on 16-18% of days, hottest on 19-20%; roughly 32 trades a coin in 297 days. Over 90 days MVRV moves almost as price does, so this is close to "buy near the 90-day low". The closeness itself was NOT measured. |

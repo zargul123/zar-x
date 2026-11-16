@@ -18578,3 +18578,203 @@ MY OWN.**
 close of the three coins from 2024-02-01 to 2025-09-30, reduced to three
 median range figures a coin. NO HOLD-OUT PRICE AND NO HOLD-OUT FUNDING
 RATE.**
+
+
+# 2026-11-16 (NIGHT), THE SAME SESSION - THE ACCOUNT. **THE TWO RULED CHANGES ARE BUILT: THE GAUNTLET CHARGES THE COMMANDER'S REAL BINANCE FEE (0.20% THERE AND BACK), AND SLOT 1 HAS A DAY-SIZED STOP AND TARGET. GATE 6.4-R (49 CHECKS) AND GATE 6.3-R1 (40 CHECKS) PASSED. NEITHER SLOT HAS BEEN RUN. ALL THREE ARE UNSPENT.**
+
+The bar is the entry above, committed alone before any code changed.
+
+## 1. WHAT WAS CHANGED - THREE FILES
+
+    config.py              + GAUNTLET_COSTS (fee 0.0005, slippage 0.0005).
+                           LAB_COSTS is unchanged.
+    lab/gauntlet.py        the run passes GAUNTLET_COSTS and Slot 1's exit
+                           (SLOT1_SL_ATR 3.75, SLOT1_TP_ATR 5.0,
+                           SLOT1_ATR_PERIOD 84) to the engine; the
+                           yardstick takes the same exit as arguments and
+                           defaults to the ship's own; the gate.
+    lab/gauntlet_slot2.py  the run passes GAUNTLET_COSTS; the gate.
+
+**NOT TOUCHED, AND `git diff --stat HEAD` ON THEM PRINTED NOTHING:**
+`lab/engine.py`, `lab/walk_forward.py`, `lab/monte_carlo.py`,
+`lab/trade_stats.py`, everything in `signals/` (so the ENTRY of both
+strategies), `lab/funding_vault.py`, `lab/build_funding_vault.py`, and the
+frozen funding (INTACT 3 of 3).
+
+## 2. THE TWO GATES
+
+**GATE 6.4-R - `lab/gauntlet.py --gate`: 49 checks, 0 red.** All of 6.2-R,
+and: both sets of costs typed out (the gauntlet's 0.05% + 0.05%, the Lab's
+unchanged 0.1% + 0.05%); Slot 1's exit typed out and equal to the ship's
+1.5, 2.0 and 14 times 2.5, 2.5 and 6; the yardstick by hand at the new fee
+(+2.44628% capped, +0.32633% not), **and the same coin at the old fee
+giving the old figure, +2.42004%, so the fee is seen to be what moves it**;
+a day-sized yardstick by hand on a coin wild for 70 candles and calm for
+30 (+0.19236%), which differs from both the default sizing and the
+14-candle one; the fingerprint of the declared costs and exit on every
+evidence row; every hold-out trade's row re-worked at 0.05%, stop 3.75
+and target 5.0 ranges; twelve breaks. The rehearsal made 84 pooled
+hold-out trades.
+
+**GATE 6.3-R1 - `lab/gauntlet_slot2.py --gate`: 40 checks, 0 red.** The 39
+of 6.3-R at the new costs, the gauntlet's costs proved to be the SAME
+OBJECT Slot 1 holds, **the ship's own exit typed out as 1.5, 2.0 and 14
+and Slot 1's as 3.75, 5.0 and 84, so one cannot leak into the other**,
+and an eleventh break (the old fee).
+
+## 3. CERTIFIED BY ATTACK - 20 TEXT EDITS, PREDICTIONS WRITTEN FIRST
+
+Rigs outside the repo with no vault and no frozen funding, control first
+(49/0, 40/0). **18 RED, 2 GREEN, NO CRASH - AND ALL 20 AS PREDICTED.** Red:
+the old costs at the run or the yardstick, in either slot; the old stop,
+the old target, the 14-candle range; the yardstick sized the old way;
+Slot 1's stop leaking into the yardstick's default; the target constant
+changed; the cheaper maker fee (0.02%) slipped into `config.py`, seen by
+BOTH gates; the Lab's own costs changed, seen by both; Slot 1's stop or
+range period used in Slot 2. **The two greens cannot change a result:** the
+yardstick's target dropped (a target does not size a position), at the
+function and at the call.
+
+## 4. >>> WHAT THE MADE-UP MARKETS SAY NOW
+
+**SLOT 1, new exit and new fee.** Three independent random-walk coins,
+5,624 four-hour candles, a 3.5% daily swing:
+
+    60 TRENDLESS worlds:   pooled hold-out trades 63 to 102, MEDIAN 81.
+                           30 or more in 60 of 60.
+                           Verdicts: FAILED 59, PASSED 1.
+                           a trade lasts a median of 23 candles (4 days);
+                           not one of 4,883 trades hit the 25% cap.
+    12 worlds with a STEADY DRIFT of 0.2% a day (6 up, 6 down):
+                           FAILED 12. Profit Factor 0.60 to 1.48.
+    12 worlds where BREAKOUTS REALLY FOLLOW THROUGH, mildly (after a
+    breakout the price drifts 0.1% a candle that way for 30 candles):
+                           profit bar cleared 12 of 12 (1.28 to 2.40);
+                           PASSED 4, WITHHELD 2, FAILED 6.
+    12 where they follow through STRONGLY (0.25% a candle):
+                           profit bar cleared 12 of 12; WITHHELD 7,
+                           FAILED 5 - every one of the five on B5 alone,
+                           not beating buy-and-hold.
+
+**READ PLAINLY:**
+
+  * **THE COUNT HELD - BETTER THAN I PREDICTED** (30 to 70; it is 81). The
+    thing I named as most likely to go wrong did not.
+  * **THE TEST NOW SEES A REAL BREAKOUT EDGE: THE PROFIT BAR WAS CLEARED IN
+    24 OF 24 WORLDS WHERE BREAKOUTS FOLLOW THROUGH.** Before the change it
+    passed nothing at all.
+  * **IT STILL FAILS A STEADY DRIFT, 12 OF 12 - AND MY PREDICTION ("at
+    least 2 of 8") WAS WRONG.** I now think the drift world was the wrong
+    question all along: a market that creeps 0.2% a day inside a 3.5%
+    daily swing gives a breakout nothing to hold on to (four days of
+    drift is 0.8% against a 6.6% target), and when it creeps UP,
+    buy-and-hold makes about 80% and no strategy beats that. **The honest
+    test of a breakout rule is a world where breakouts follow through,
+    and I had not built one until today.** Yesterday's "0 of 8 with a real
+    trend" was therefore partly the costs and partly the wrong world.
+  * **B5 - BEAT BUY-AND-HOLD - IS A HARD BAR FOR A STRATEGY THAT REALLY
+    WORKS.** Five strongly-true worlds failed on it alone. It is one of
+    the five locked bars and does not move. He should know that a
+    working breakout rule can still fail the slot in a market where
+    simply holding did better.
+  * **NOISE PASSES 1 TIME IN 60.**
+
+**SLOT 2 at the new fee** (the same 84 worlds as this evening): the count
+is unchanged (52 to 91, median 67); noise PASSED 3 of 60 (it was 2); the
+true-fade worlds as before - profit bar cleared 24 of 24; mild: PASSED 3,
+WITHHELD 6, FAILED 3; strong: WITHHELD 12.
+
+## 5. WHAT I GOT WRONG
+
+1. **THE NUMBERS I GAVE HIM IN CONVERSATION WERE OVERSTATED.** "55 wins in
+   100, 52 with the fee, 49 with the exit" came from a guessed 4-hour
+   range of 1%. Measured it is 1.3% to 2.5%, and Slot 1's old wall was 50
+   to 53. The ranking of the two fixes was right; the size was not. In
+   the bar, and in my report to him.
+2. **I BEGAN CHANGING THE FEE BEFORE HE HAD FINISHED TALKING.** He stopped
+   me. Only files had been read.
+3. **A CHECK I ADDED DEMANDED BOTH CAPPED AND UNCAPPED TRADES IN THE
+   REHEARSAL**, on my own prediction that some would be capped. None is,
+   on the made-up coins. The gate went red on its first run and the
+   demand was removed. **So the capped branch of the row check is not
+   exercised by 6.4-R's rehearsal any more.** Filed.
+4. **MY PREDICTION ABOUT DRIFTING WORLDS WAS WRONG** (above), and both
+   gates' own counts were typed wrong on first runs (49 for 44, 40 for 39).
+
+## 6. WHAT I LOOKED AT
+
+**The training side only: daily and 4-hour highs, lows and closes of the
+three coins up to 2025-09-30, reduced to median range figures. NO HOLD-OUT
+PRICE, NO HOLD-OUT FUNDING RATE. NO SLOT HAS BEEN RUN; `lab/results/` HOLDS
+NO SLOT MARKER.**
+
+## 7. THE WHOLE SHIP AFTER THE LAST CHANGE - MEASURED
+
+**TWENTY-SIX INVOCATIONS, EVERY ONE EXIT 0**, run after the last change to
+any gate:
+
+    fear_greed 58 - funding 71 - open_interest 88 x2 - news 54
+    events 69 x2 - whales 111 x2 - carry 87 x2 - log_trade 101 x2
+    mirror 84 x2 - turtle 39 x2 - gauntlet 49 x2
+    funding_vault 52 x2 - funding_fade 44 x2 - gauntlet_slot2 40 x2
+                                                  = 1,711 green, 0 red
+    collection_guard 25 OK - vault INTACT 6 of 6
+    frozen funding INTACT 3 of 3 - Brief 3/3
+    lab/results/ holds no slot marker and no slot report
+
+## >>> 2026-11-16 (NIGHT) - **IDEA 3, THE FINDING-OUT. NOTHING BUILT, NO BAR WRITTEN. THE FACTS, MEASURED, FOR THE COMMANDER'S DECISION.**
+
+His order was "build step 1 corrections and then we have to build step
+3". Step 1 is built (above). For step 3 I did the finding-out he was told
+would come first. **EVERY REQUEST ENDED AT 2025-09-30: NO HOLD-OUT VALUE OF
+ANY ON-CHAIN MEASURE WAS SENT TO THIS MACHINE.**
+
+**1. THE DATA EXISTS - FOR TWO COINS OF THREE.** Coin Metrics' community
+API (free, no key), metric `CapMVRVCur`, daily:
+
+    BTC   from 2010-07-18, daily, to yesterday        FREE
+    ETH   from 2015-08-08, daily, to yesterday        FREE
+    SOL   NOT SERVED AT ALL ("metrics aren't supported for asset 'sol'")
+    asked for 2023-07-28 to 2025-09-30: 796 rows each, BTC and ETH
+
+MVRV is what the market is worth divided by what holders paid. Above 1,
+the average holder is in profit; below 1, at a loss.
+
+**2. THE IDEA AS EVERYBODY MEANS IT CANNOT BE TESTED IN THIS WINDOW.** The
+cycle thermometer is "buy when MVRV is below 1, step aside when it is very
+high". On the training side, 2022-01-01 to 2025-09-30:
+
+    BTC went below 1 on FIVE occasions in 3.8 years; never above 3.5.
+    ETH went below 1 on EIGHTEEN occasions; never above 2.4.
+
+**THE BAR IS 30 TRADES IN 297 DAYS. A SIGNAL THAT FIRES ONCE OR FIVE TIMES A
+YEAR CANNOT REACH IT, ON TWO COINS OR ON TWENTY.** It would fail on
+counting, having told him nothing - Slot 1's first trap again.
+
+**3. A FORM THAT DOES REACH THE COUNT - AND WHAT IT REALLY IS.** Ranked in
+its own last 90 days, as Slot 2 ranks funding (coldest tenth buy, hottest
+tenth sell): cold on 16-18% of days, hot on 19-20%; a rough count of 26 to
+41 trades a coin in 297 days, median 32 - about 64 pooled on two coins.
+**BUT I MUST SAY WHAT THAT RULE IS.** What holders paid moves very slowly,
+so over 90 days MVRV goes up and down almost exactly as the PRICE does.
+"MVRV in its coldest tenth of 90 days" is very nearly "price near its
+90-day low". **THAT IS NOT AN ON-CHAIN IDEA. IT IS "BUY THE DIP, SELL THE
+RIP" ON PRICE, WEARING ON-CHAIN CLOTHES - AND IT IS THE EXACT OPPOSITE OF
+SLOT 1, WHICH BUYS NEW HIGHS.** I did not measure how close the two are
+(that needs MVRV beside prices); it follows from what MVRV is. (Ranked in
+its last 365 days the buy side almost never fires: 0 to 4 trades.)
+
+**4. SO THE HONEST CHOICE IS HIS, AND IT IS THE ONE RE-SPECIFICATION THE
+PLAN ALLOWS, BEFORE ANYTHING IS RUN:**
+
+    (A) KEEP IDEA 3 AS THE TRUE CYCLE THERMOMETER and accept that it
+        cannot be tested fairly here. The slot is then best left unspent
+        rather than burned on a counting fail.
+    (B) THE 90-DAY RANK OF MVRV, BTC AND ETH ONLY. Testable. But it is a
+        price dip-buying rule in disguise, and it uses two coins.
+    (C) RE-SPECIFY SLOT 3 TO A DIFFERENT IDEA that brings information the
+        other two do not have and fires often enough - to be found and
+        put to him. (One candidate the ship already reads: the Fear &
+        Greed index, faded at its extremes. NOT MEASURED; a suggestion.)
+
+**NO BAR FOR SLOT 3 EXISTS AND NONE IS TO BE WRITTEN UNTIL HE ANSWERS.**

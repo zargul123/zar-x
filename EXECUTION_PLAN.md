@@ -296,6 +296,9 @@ snapshots+grades exist. The gauntlet uses the Lab; the Lab must be trusted.*
 
 THE THREE SEALED SLOTS (from README/THE PROMISE — no substitutions):
 - Slot 1: Turtle/Donchian breakout, ~~daily~~ **4-HOUR** (+weekly filter), regime-filtered.
+  **EXIT RE-SPECIFIED 2026-11-16 (NIGHT) BY THE COMMANDER, BEFORE ANYTHING HAD
+  BEEN RUN: a day-sized stop and target (3.75 and 5.0 x the 84-candle
+  range). THIS IS ITS SECOND RE-SPECIFICATION AND THE LAST.**
   **RE-SPECIFIED 2026-11-16 BY THE COMMANDER, from daily to 4-hour candles,
   BEFORE ANYTHING HAD BEEN RUN** - the daily test could not reach 30 trades
   on made-up markets. The struck word is left visible. The bar is
@@ -317,6 +320,8 @@ THE THREE SEALED SLOTS (from README/THE PROMISE — no substitutions):
 GATES — LOCKED NOW, BEFORE ANY TEST (changing them after seeing results =
 cheating, forbidden):
 - Hold-out (vault, after train_end): Profit Factor ≥ 1.15 AFTER costs
+  (**the costs, ruled 2026-11-16 before any test: the Commander's own
+  exchange - Binance futures taker fee 0.05% + slippage 0.05% a side**)
 - ≥ 30 hold-out trades (fewer = sample too small = FAIL, not "promising")
 - Walk-forward: profitable in ≥ 60% of windows, no window > 50% of profit
 - Monte Carlo 5th percentile: max drawdown < 30%
@@ -439,6 +444,38 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-16 (NIGHT): THE COMMANDER RULED HIS REAL BINANCE FEE AND A DAY-SIZED EXIT FOR SLOT 1, BEFORE ANY SLOT WAS RUN. BOTH ARE BUILT. SLOTS 1 AND 2 ARE SET UP AND UNSPENT. NEXT, BY HIS ORDER: IDEA 3.**
+
+**WHERE THE SHIP IS.** Twenty-six invocations, every exit 0, **1,711
+green, 0 red - MEASURED after the last change**: as the marker below,
+with `lab/gauntlet.py` now GATE 6.4-R (49) and `lab/gauntlet_slot2.py`
+GATE 6.3-R1 (40). Vault INTACT 6 of 6, frozen funding INTACT 3 of 3,
+Brief 3/3, no slot marker.
+
+**THE GAUNTLET's COSTS** (`config.GAUNTLET_COSTS`): fee 0.05% a side - the
+Binance futures taker fee he read from his own fee page - and slippage
+0.05% a side; 0.20% there and back. All three slots. The Lab's own exams
+keep `LAB_COSTS` (0.30%).
+
+**SLOT 1 AS NOW DECLARED:** the same 4-hour entry (20-candle breakout,
+10-week filter, ADX above 25); **stop 3.75 and target 5.0 times the
+average range of the last 84 four-hour candles** - the ship's 1.5 and 2.0
+applied to a day's move. **SLOT 2: its rules unchanged; the new costs.**
+Both now need about 48 wins in 100 to clear the profit bar; chance is 43.
+
+**WHAT IS BROKEN OR UNPROVEN.** R-091 (thirteen items): both changes ease
+a pass and came after Slot 1's practice runs failed; this is Slot 1's
+second re-specification and there must not be a third; funding paid while
+a trade is held is not modelled; nobody but the author has read any of it.
+**On made-up markets Slot 1 now makes about 81 trades, passes noise 1 time
+in 60, clears the profit bar 24 of 24 where breakouts really follow
+through, and still fails a market that only creeps one way, 12 of 12.**
+
+**NEXT:** his order was *"build step 1 corrections and then we have to
+build step 3"*. Step 3 is idea 3: first whether a free on-chain source
+exists and whether any honest form of it can make 30 trades in 297 days;
+then a proposal to him; then, only on his yes, the build.
+
 ## **>>> 2026-11-16 (EVENING): GAUNTLET SLOT 2, THE FUNDING-RATE FADE, IS SET UP AND NOT RUN. BOTH SLOT 1 AND SLOT 2 NOW WAIT FOR THE COMMANDER'S WORD. ALL THREE SLOTS ARE UNSPENT.**
 
 **>>> AND THEN HE RULED, THE SAME EVENING: "NOT YET".** Neither slot is
