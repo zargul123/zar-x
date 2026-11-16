@@ -4,7 +4,10 @@ Zar X Lab — THE GAUNTLET RUNNER (Phase 6). The one run per slot that counts.
 **THE PROMISE: exactly three sealed slots, then the signals chapter closes.**
 This file runs one slot, ONCE, and prints one verdict. Its rules were
 declared in PROGRESS_LOG.md on 2026-11-15 and committed with no code,
-before this file existed.
+before this file existed. **ON 2026-11-16 THE COMMANDER RE-SPECIFIED SLOT 1
+FROM DAILY TO 4-HOUR CANDLES, BEFORE ANYTHING HAD BEEN RUN**; the new bar
+was committed alone that day, before this file was changed. The five bars,
+the pooling, the yardstick and the hold-out line did not change.
 
 WHAT IT DOES, in order:
 
@@ -14,7 +17,7 @@ WHAT IT DOES, in order:
      half-way has still spent the slot; a second run needs the Commander's
      ruling written in PROGRESS_LOG.md first.
   4. Runs the strategy through the Lab's own engine (`lab/engine.py`,
-     unchanged) on each coin's DAILY vault file, hold-out line 2025-10-01.
+     unchanged) on each coin's 4-HOUR vault file, hold-out line 2025-10-01.
   5. POOLS the three coins' hold-out trades into one list, in order of
      entry time. **ONE VERDICT FOR THE SLOT. A coin cannot pass alone.**
   6. Measures the five locked bars on that one list:
@@ -63,7 +66,7 @@ from walk_forward import walk_forward_trades               # noqa: E402
 
 TRAIN_END = '2025-10-01'        # the hold-out line, fixed in Phase 2
 ASSETS = ('BTC-USD', 'ETH-USD', 'SOL-USD')
-TIMEFRAME = '1d'
+TIMEFRAME = '4h'                # re-specified from '1d' on 2026-11-16
 
 # THE FIVE BARS, copied from EXECUTION_PLAN.md so they cannot drift.
 BAR_MIN_PROFIT_FACTOR = 1.15
@@ -368,8 +371,9 @@ if __name__ == '__main__':
         sys.exit(main(sys.argv[1:]))
 
     # =====================================================================
-    # GATE 6.1-R — THE RUNNER'S REHEARSAL. Declared in PROGRESS_LOG.md on
-    # 2026-11-15 and committed with no `.py`, before this file existed.
+    # GATE 6.2-R — THE RUNNER'S REHEARSAL, ON 4-HOUR CANDLES. Declared in
+    # PROGRESS_LOG.md on 2026-11-16 and committed with no `.py`, before this
+    # file was changed. It replaces GATE 6.1-R (the daily build, never run).
     #
     # **IT NEVER OPENS THE VAULT.** The Lab's door is replaced by one that
     # raises. Every candle below is made up, and every result is written
@@ -417,13 +421,18 @@ if __name__ == '__main__':
     REAL_RESULTS_BEFORE = sorted(os.listdir(engine.RESULTS_DIR))
     WORK = tempfile.mkdtemp(prefix='zarx_gauntlet_')
 
-    HOLD = pd.date_range('2025-10-02', periods=297, freq='D')
-    STARTS = [(k * 297) // 6 for k in range(6)]      # 0 49 99 148 198 247
+    # THE VAULT'S OWN HOLD-OUT, TYPED OUT: 1,789 four-hour candles, the
+    # first opening at 04:00 on 2025-10-01 (the 00:00 candle is training,
+    # by the engine's rule `index > train_end`). Measured on 2026-11-16
+    # from the date column of the three vault files, and from nothing else.
+    FOUR_HOURS = pd.Timedelta(hours=4)
+    HOLD = pd.date_range('2025-10-01 04:00', periods=1789, freq=FOUR_HOURS)
+    STARTS = [(k * 1789) // 6 for k in range(6)]  # 0 298 596 894 1192 1490
 
     def trades(per_window):
         """Six lists of results -> hold-out trades, each list spread inside
-        its own walk-forward window (six windows of 49 or 50 candles, cut
-        the way lab/walk_forward.py cuts them: typed out above)."""
+        its own walk-forward window (six windows of 298 or 299 candles,
+        cut the way lab/walk_forward.py cuts them: typed out above)."""
         rows = []
         for window, results in enumerate(per_window):
             for n, value in enumerate(results):
@@ -446,8 +455,8 @@ if __name__ == '__main__':
     GOOD = [[W, L] * 3] * 6             # 36 trades, PF 0.216/0.180 = 1.20
 
     print("=" * 70)
-    print("GATE 6.1-R — THE GAUNTLET RUNNER, REHEARSED. Made-up trades and")
-    print("made-up candles. The vault is never opened.")
+    print("GATE 6.2-R — THE GAUNTLET RUNNER ON 4-HOUR CANDLES, REHEARSED.")
+    print("Made-up trades and made-up candles. The vault is never opened.")
     print("=" * 70)
 
     print("\n(a) THE FIVE BARS ON HAND-MADE TRADES. Each bar is forced red"
@@ -501,6 +510,31 @@ if __name__ == '__main__':
          "every window profitable, and the shuffled drawdown ruinous -> "
          "FAILED",
          str(judge(WILD, ABYSS)))
+    # B4 NEAR ITS OWN LINE. (A drawdown bar tripled to 90% went GREEN at
+    # 43/0 in this gate's own attack: the only B4 case was ruinous, far
+    # past any line.) The Monte Carlo is seeded, so these two are fixed
+    # figures: wins of 5% and losses of 4% reshuffle to a worst-twentieth
+    # drawdown of 29.07%, just inside 30%; wins of 6% and losses of 5% to
+    # 35.64%, just outside. Both measured on 2026-11-16 and typed here.
+    INSIDE = [[0.05, -0.04] * 3] * 6
+    OUTSIDE = [[0.06, -0.05] * 3] * 6
+
+    def drawdown_of(per_window):
+        try:
+            return battery(trades(per_window), HOLD, ABYSS)['rows'][3][1]
+        except Exception as exc:                           # noqa: BLE001
+            return f'<{type(exc).__name__}>'
+
+    mark(judge(INSIDE, ABYSS) == ('PASSED', (True,) * 5)
+         and judge(OUTSIDE, ABYSS)
+         == ('FAILED', (True, True, True, False, True))
+         and drawdown_of(INSIDE) == '29.07%'
+         and drawdown_of(OUTSIDE) == '35.64%',
+         "B4 NEAR ITS LINE: a reshuffled drawdown of 29.07% clears the 30% "
+         "bar -> PASSED; one of 35.64% does not -> FAILED on the drawdown "
+         "and nothing else",
+         f"inside {drawdown_of(INSIDE)} {judge(INSIDE, ABYSS)[0]}, outside "
+         f"{drawdown_of(OUTSIDE)} {judge(OUTSIDE, ABYSS)[0]}")
     RICH = (0.05, 0.05, 0.05)           # buy-and-hold made +15.8%
     mark(judge(GOOD, RICH) == ('FAILED', (True, True, True, True, False)),
          "B5 ALONE: the good trades (+3.4%) against a buy-and-hold that "
@@ -554,13 +588,21 @@ if __name__ == '__main__':
     print("\n(c) B5's YARDSTICK, WORKED BY HAND.")
 
     def calm(high, low, last_close):
-        """30 level days at 100 with a fixed daily range, then 10 hold-out
-        days ending at `last_close`. The range sets the ATR exactly."""
-        index = pd.date_range('2025-09-02', periods=40, freq='D')
+        """30 level candles at 100 with a fixed range, then 10 hold-out
+        candles ending at `last_close`. The range sets the ATR exactly.
+        The 30th candle opens at 00:00 on 2025-10-01 - the last one that
+        is training - and the 31st at 04:00, the first of the hold-out."""
+        index = pd.date_range('2025-09-26 04:00', periods=40,
+                              freq=FOUR_HOURS)
         closes = [100.0] * 39 + [float(last_close)]
-        return pd.DataFrame({'open': [100.0] * 40, 'high': [high] * 40,
-                             'low': [low] * 40, 'close': closes},
-                            index=index)
+        # THE TEN HOLD-OUT CANDLES SWING FROM 50 TO 150. The yardstick is
+        # sized from the candles BEFORE the line and must not feel them: an
+        # ATR that took in the first hold-out candle went GREEN at 43/0 in
+        # this gate's own attack, because every candle had the same range.
+        return pd.DataFrame({'open': [100.0] * 40,
+                             'high': [high] * 30 + [150.0] * 10,
+                             'low': [low] * 30 + [50.0] * 10,
+                             'close': closes}, index=index)
 
     # Range 99-101: true range 2, ATR 2, stop distance 1.5 x 2 = 3. Fill
     # 100 x 1.0005 = 100.05. Risking 1% of 10,000 = 100 over 3 would buy
@@ -602,22 +644,44 @@ if __name__ == '__main__':
          f"{list(pooled['return_pct'])} {list(pooled['asset'])}")
 
     print("\n(e) >>> THE WHOLE RUN, REHEARSED ON MADE-UP CANDLES, THROUGH"
-          "\n    THE LAB'S REAL ENGINE. Three made-up coins of 1,094 days on"
-          "\n    the vault's own dates, so the first time this machinery"
-          "\n    runs is not the time that counts.")
+          "\n    THE LAB'S REAL ENGINE. Three made-up coins of 5,624 four-"
+          "\n    hour candles on the vault's own dates, so the first time"
+          "\n    this machinery runs is not the time that counts.")
 
-    def made_up(seed, days=1094, drift=0.0005):
+    def made_up(seed, candles=5624, drift=0.0005):
+        """A made-up coin in 4-hour candles: the same 3.5% daily swing and
+        the same daily drift as the daily rehearsal used, cut into six
+        candles a day, each candle built from eight smaller steps so that
+        its high and low are real ranges."""
         rng = np.random.default_rng(seed)
         price, rows = 100.0, []
-        for _ in range(days):
+        for _ in range(candles):
             steps = price * np.exp(np.cumsum(
-                rng.normal(drift / 24, 0.035 / np.sqrt(24), 24)))
+                rng.normal(drift / 48, 0.035 / np.sqrt(48), 8)))
             rows.append((price, max(price, steps.max()),
                          min(price, steps.min()), float(steps[-1])))
             price = float(steps[-1])
-        index = pd.date_range('2023-07-28', periods=days, freq='D')
+        index = pd.date_range('2024-01-01', periods=candles, freq=FOUR_HOURS)
         return pd.DataFrame(rows, columns=['open', 'high', 'low', 'close'],
                             index=index)
+
+    # THE MADE-UP COINS WEAR THE VAULT'S OWN SHAPE, typed out: 5,624
+    # candles, 3,835 of them training, 1,789 hold-out, first hold-out
+    # candle 04:00 on 2025-10-01, last candle 04:00 on 2026-07-26.
+    shape = made_up(11)
+    shape_hold = holdout_index(shape)
+    mark(len(shape) == 5624 and len(shape_hold) == 1789
+         and len(shape) - len(shape_hold) == 3835
+         and shape_hold[0] == pd.Timestamp('2025-10-01 04:00')
+         and shape.index[-1] == pd.Timestamp('2026-07-26 04:00')
+         and shape_hold.equals(HOLD)
+         and set(shape.index.to_series().diff().dropna()) == {FOUR_HOURS},
+         "the made-up coins have THE VAULT'S OWN SHAPE: 5,624 four-hour "
+         "candles, 3,835 training and 1,789 hold-out, the hold-out opening "
+         "at 04:00 on 2025-10-01 — the 00:00 candle of that day is training "
+         "— and every step exactly four hours",
+         f"{len(shape)} candles, {len(shape_hold)} hold-out, first "
+         f"{shape_hold[0]}, last {shape.index[-1]}")
 
     def fake_door(seeds, log, folder, short=None):
         """A loader that hands the engine made-up candles wearing the
@@ -630,8 +694,8 @@ if __name__ == '__main__':
             data.asset, data.timeframe = asset, timeframe
             data.path = f'<made up: {asset}>'
             data.report, data.verdict = None, 'PASS'
-            days = 1093 if asset == short else 1094
-            data.df = made_up(seeds[asset], days=days)
+            candles = 5623 if asset == short else 5624
+            data.df = made_up(seeds[asset], candles=candles)
             return data
         return door
 
@@ -650,12 +714,12 @@ if __name__ == '__main__':
          "verdict",
          died or f"verdict on made-up candles: {rehearsal['verdict']} "
                  f"(it means NOTHING about the real coins)")
-    mark([k[:2] for k in knocks] == [('BTC-USD', '1d'), ('ETH-USD', '1d'),
-                                     ('SOL-USD', '1d')]
+    mark([k[:2] for k in knocks] == [('BTC-USD', '4h'), ('ETH-USD', '4h'),
+                                     ('SOL-USD', '4h')]
          and all(k[2] for k in knocks),
          "THE MARKER WAS ALREADY DOWN WHEN THE DATA WAS FIRST ASKED FOR: "
-         "three knocks, in the coins' fixed order, daily candles, and the "
-         "slot was marked spent before the first of them",
+         "three knocks, in the coins' fixed order, FOR THE 4-HOUR FILES, "
+         "and the slot was marked spent before the first of them",
          f"{knocks}")
 
     said_text = '\n'.join(str(line) for line in said)
@@ -704,7 +768,7 @@ if __name__ == '__main__':
               or 'VERDICT: WITHHELD' in said_text),
          "and the verdict printed is the one its own five rows imply")
     marker_text = text_of(marker_path(1, folder))
-    mark('turtle-20d-10w-adx25' in marker_text and 'verdict   : ' in
+    mark('turtle-4h-20c-10w-adx25' in marker_text and 'verdict   : ' in
          marker_text and 'train_end : 2025-10-01' in marker_text,
          "the marker file names the strategy, the hold-out line and the "
          "verdict")
@@ -718,14 +782,14 @@ if __name__ == '__main__':
     # and target multiples, the ATR period, the capital and the hold-out
     # line. Every value below is TYPED OUT HERE. One hash, and any of them
     # moving turns this red.
-    DECLARED = {'entry_days': 20, 'weeks': 10, 'adx_min': 25.0,
-                'adx_period': 14, 'warmup': 150,
-                'kind': 'donchian_breakout',
+    DECLARED = {'entry_candles': 20, 'weeks': 10, 'week_candles': 42,
+                'adx_min': 25.0, 'adx_period': 14, 'adx_tail': 150,
+                'warmup': 379, 'kind': 'donchian_breakout',
                 '_costs': {'fee_pct': 0.001, 'slippage_pct': 0.0005},
                 '_risk_pct': 0.01, '_sl_atr': 1.5, '_tp_atr': 2.0,
                 '_atr_period': 14, '_capital': 10000.0,
                 '_train_end': '2025-10-01 00:00:00'}
-    WANT_PRINT = engine.fingerprint('turtle-20d-10w-adx25', DECLARED)
+    WANT_PRINT = engine.fingerprint('turtle-4h-20c-10w-adx25', DECLARED)
     # Rule (k): only files that ARE per-coin evidence are read as such. With
     # a coin dropped, the list is one file shorter and its third entry is
     # the pooled file - which has no fingerprint column, and the first
@@ -742,9 +806,10 @@ if __name__ == '__main__':
          and prints == [WANT_PRINT],
          "EVERY EVIDENCE ROW OF ALL THREE COINS carries one fingerprint, "
          "and it equals the hash of the DECLARED settings typed out in this "
-         "gate: the 20/10/25/14/150 strategy, fee 0.1%, slippage 0.05%, "
-         "risk 1%, stop 1.5 ATR, target 2.0 ATR, capital 10,000, line "
-         "2025-10-01",
+         "gate: the 4-hour strategy — channel 20, 10 weeks of 42 candles, "
+         "ADX(14) above 25 on 150 candles, warm-up 379 — fee 0.1%, slippage "
+         "0.05%, risk 1%, stop 1.5 ATR, target 2.0 ATR, capital 10,000, "
+         "line 2025-10-01",
          f"declared {WANT_PRINT}, on the evidence {prints}")
     # AND THE SAME THINGS RE-WORKED FROM THE ROWS THEMSELVES, by this
     # gate's own arithmetic, for every hold-out trade of every coin.
@@ -836,7 +901,7 @@ if __name__ == '__main__':
     mark('do not cover the same hold-out days' in third
          and not any('VERDICT' in str(line) for line in said3)
          and 'SPENT' in marker3 and 'verdict' not in marker3,
-         "a coin one day short stops the run with NO VERDICT printed and "
+         "a coin ONE CANDLE short stops the run with NO VERDICT printed and "
          "none written — and the slot is still marked spent, because the "
          "marker goes down first", third[:90])
     # **A SPY STANDS WHERE THE RUN WOULD BE.** The first draft of this
@@ -947,7 +1012,7 @@ if __name__ == '__main__':
          and (TRAIN_END, ASSETS, TIMEFRAME, BAR_MIN_PROFIT_FACTOR,
               BAR_MIN_TRADES, BAR_WALK_FORWARD, BAR_MAX_MC_DRAWDOWN,
               TOO_GOOD_PF, TOO_GOOD_WIN_PCT)
-         == ('2025-10-01', ('BTC-USD', 'ETH-USD', 'SOL-USD'), '1d', 1.15,
+         == ('2025-10-01', ('BTC-USD', 'ETH-USD', 'SOL-USD'), '4h', 1.15,
              30, 'CONSISTENT', 30.0, 2.0, 70.0),
          "the Lab's real door was never knocked on, the real results "
          "folder is unchanged, AND EVERY LOCKED NUMBER — the line, the "
@@ -956,7 +1021,7 @@ if __name__ == '__main__':
          f"vault calls: {len(VAULT_OPENED)}")
     mark(len(BREAKS) == 9, "nine breaks, counted against a number typed "
                            "out here")
-    EXPECTED_CHECKS = 42
+    EXPECTED_CHECKS = 44
     mark(len(nonlocal_ok) + 1 == EXPECTED_CHECKS,
          f"and this gate ran all {EXPECTED_CHECKS} of the checks it owes",
          f"it ran {len(nonlocal_ok) + 1}")
@@ -965,7 +1030,7 @@ if __name__ == '__main__':
     reds = sum(1 for good in nonlocal_ok if not good)
     print("\n" + "=" * 70)
     if ok:
-        print(f"""GATE 6.1-R PASSED — {len(nonlocal_ok)} checks, 0 red.
+        print(f"""GATE 6.2-R PASSED — {len(nonlocal_ok)} checks, 0 red.
 
 EACH OF THE FIVE BARS WAS FORCED RED ALONE on hand-made trades, with
 the other four green, so no bar can hide behind another; the trade
@@ -974,19 +1039,21 @@ count was tested at 29 and at 30.
 B5's YARDSTICK, WHICH THIS SHIP HAD NEVER BUILT, EQUALS ARITHMETIC
 TYPED OUT BY HAND, with the 25% cap binding and with it not binding.
 
-THE WHOLE RUN WAS REHEARSED on three made-up coins through the Lab's
-real engine: the marker went down before the data was asked for, the
+THE WHOLE RUN WAS REHEARSED on three made-up coins of 5,624 four-hour
+candles, the vault's own shape, through the Lab's real engine: the
+marker went down before the 4-hour files were asked for, the
 pooled count equals the three coins' evidence files added up, the
 Profit Factor on the report equals the one re-worked from the saved
 file, a second run was refused, and a coin on different days stopped
-the run with no verdict.
+the run with no verdict - here a coin ONE CANDLE short.
 
 WHAT THIS GATE DOES **NOT** PROVE. It has never seen a real candle and
 says NOTHING about what the real run will find. It rehearses the
 machinery; it does not review the DESIGN - the pooling of three coins
-that move together, the yardstick's definition and the 10-week filter
-are choices made by the same author, and no second AI has read them.""")
+that move together, the yardstick's definition, twenty candles rather
+than twenty days and the 10-week filter are choices made by the same
+author, and no second AI has read them.""")
     else:
-        print(f"GATE 6.1-R FAILED — {reds} red of {len(nonlocal_ok)} checks.")
+        print(f"GATE 6.2-R FAILED — {reds} red of {len(nonlocal_ok)} checks.")
     print("=" * 70)
     sys.exit(0 if ok else 1)
