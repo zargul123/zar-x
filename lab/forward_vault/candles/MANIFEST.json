@@ -1,0 +1,21 @@
+{
+  "files": {
+    "BTC-USD_1d.csv": {
+      "bytes": 5193,
+      "rows": 113,
+      "sha256": "6e1a8bb96a6b69cf3e219234ed45eb6ac8db9f40ef8cb54ae2eac6477910c22a"
+    },
+    "ETH-USD_1d.csv": {
+      "bytes": 4803,
+      "rows": 113,
+      "sha256": "bc98569681f7cde6e8616225a35ae976c411392487c9c0d1cd4d7128bc64e052"
+    },
+    "SOL-USD_1d.csv": {
+      "bytes": 4166,
+      "rows": 113,
+      "sha256": "90f062c9a424ea890228bc78713429fc5e15f701ce2311f20163dde0137ab8e3"
+    }
+  },
+  "law": "Evidence. Never modified, never refreshed.",
+  "what": "forward daily candles, after the vault"
+}
