@@ -18852,3 +18852,246 @@ same kind of gate fit it.
 **NO BAR FOR SLOT 3 EXISTS. IF HE SAYS YES TO "IDEA 3 BECOMES THE MOOD
 FADE, RULE C", THAT IS HIS ONE RE-SPECIFICATION AND IS RECORDED VERBATIM
 BEFORE THE BAR IS WRITTEN.**
+
+
+# 2026-11-16 (LATE NIGHT) - FABLE'S SESSION, CONTINUED. **THE COMMANDER RE-SPECIFIED GAUNTLET SLOT 3 - ONCE, AS THE PLAN ALLOWS, BEFORE ANY SLOT HAS BEEN RUN - FROM THE ON-CHAIN CYCLE THERMOMETER TO THE CROWD-MOOD FADE. THIS IS THE BAR, DECLARED BEFORE ANY CODE EXISTS AND BEFORE ONE VALUE IS FROZEN. NOTHING IS RUN.**
+
+**This entry is committed ALONE, with no `.py` and no data file in the commit.**
+
+## 1. THE RULING, VERBATIM
+
+The measured candidate (the entry above) was put to him in easy words: the
+rule, why this version, that it uses one index for the whole market, that
+the index is partly made from price, that I picked the combined version
+after seeing two others counted, that it must be right about 48 times in
+100, **and that saying yes uses his one allowed swap for idea 3, for
+good.** The question: *"Make the mood fade idea 3 and build it?"*
+
+**HIS ANSWER, VERBATIM: "Yes, build it".**
+
+**THAT IS THE ONE RE-SPECIFICATION `EXECUTION_PLAN.md` ALLOWS FOR SLOT 3** -
+*"the slot may be re-specified ONCE by the Commander BEFORE testing begins,
+never after seeing any results"*. No slot has been run; `lab/results/`
+holds no marker. **SLOT 3 IS NOW THE CROWD-MOOD FADE AND CANNOT BE CHANGED
+AGAIN.** Why the thermometer was set aside is measured two entries above:
+free data for two coins of three, and five signals in 3.8 years where the
+bar asks 30 trades in 297 days.
+
+Fable builds it; by his rulings of 2026-11-14 and 2026-11-15 no other model
+reviews it. **R-006 is WAIVED for this build, not cleared.**
+
+## 2. WHAT I MEASURED, AND ON WHICH ROWS
+
+1. **THE INDEX's HISTORY, TRAINING SIDE ONLY** (the entry above): 2,795
+   daily rows to 2025-09-30, every one stamped 00:00 UTC; the three rules
+   counted; rule C chosen. Hold-out rows thrown away unread.
+2. **THE INDEX's CLOCK, LIVE, TODAY.** At 14:48 UTC on 2026-11-16 the
+   newest row was stamped 2026-11-16 00:00 UTC and the publisher said the
+   next update was 33,100 seconds away - that is, at 00:00 UTC. **SO THE
+   VALUE STAMPED DAY D IS PUBLISHED AT THE START OF DAY D AND STANDS ALL
+   DAY. IT IS KNOWN FOR THE WHOLE OF THE DAILY CANDLE D, ABOUT 24 HOURS
+   BEFORE THAT CANDLE CLOSES.** One live reading; not proof of how it
+   behaved in 2023.
+3. The vault's clock (UTC, labelled by opening time): the Slot 2 account,
+   section 9, all three coins.
+
+## 3. THE RULES - EVERY NUMBER, AND WHERE IT COMES FROM
+
+Asked at the close of each DAILY candle, using only what is known then.
+Each candle carries the index value published that day (0 to 100) and
+which side the PUBLISHER's own label puts it on.
+
+    FEAR,       today's label is "Fear" or "Extreme Fear", AND today's
+    EXTREME     value is strictly BELOW at least 81 of the previous 90
+                days' (today not included).          -> BUY (long)
+
+    GREED,      today's label is "Greed" or "Extreme Greed", AND today's
+    EXTREME     value is strictly ABOVE at least 81 of the previous 90
+                days'.                               -> SELL (short)
+
+    WARM-UP     flat until 91 candles exist (today + 90).
+
+    Otherwise flat. A "Neutral" day is flat whatever its rank. A day
+    equal to another is neither above nor below it.
+
+  * **90 AND 81 ARE SLOT 2's NUMBERS, CARRIED OVER, NOT RE-CHOSEN** - a
+    quarter, nine in ten. Still mine, still filed.
+  * **THE SIDE COMES FROM THE PUBLISHER's LABEL TEXT, NOT FROM A NUMBER OF
+    MINE.** I type no boundary into the code. (Their bands, as seen on the
+    training side: Extreme Fear to 25, Fear 26-46, Neutral 47-54, Greed
+    55-75, Extreme Greed 76 up.)
+  * **RULE C WAS CHOSEN AFTER RULES A AND B HAD BEEN COUNTED.** Said in
+    the entry above, said to him, said here. Counts only; no price result
+    of any rule exists.
+  * The exit is the ship's own: stop 1.5 and target 2.0 times the
+    14-candle range, entry at the next day's open. Costs:
+    `config.GAUNTLET_COSTS`, 0.20% there and back.
+
+**NO PARAMETER IS SEARCHED, TUNED OR TRIED FROM HERE. ONE SET: 90, 81, 91.**
+The strategy's name is `mood-fade-1d-90d-top10`.
+
+**THE COST WALL** is Slot 2's, since the candle, the exit and the costs
+are the same: about 48 wins in 100 (BTC 48.1, ETH 47.6, SOL 47.2) against
+42.9 by chance.
+
+## 4. THE DATA: FETCHED ONCE, FROZEN, CHECKSUMMED, NEVER REFRESHED
+
+  * **`lab/mood_vault/`**, beside the vault and the frozen funding: one
+    file, `fear_greed.csv` - the day, the value, the publisher's label,
+    and whether that day's row was carried - plus `MANIFEST.json` with its
+    SHA-256, and the line that tells git not to touch a byte.
+  * **EXACTLY 1,094 ROWS, ONE FOR EACH DAY OF THE DAILY VAULT** (2023-07-28
+    to 2026-07-25), in order, no day twice. Every value a whole number
+    from 0 to 100; every label one of the publisher's five, spelt exactly.
+    Anything else is a refusal.
+  * **A DAY THE PUBLISHER NEVER PUBLISHED.** It happens (4 days in 7
+    years; 1 of the vault's 796 training days). **THAT DAY CARRIES THE
+    LAST VALUE PUBLISHED BEFORE IT** - which is what a person reading the
+    index that day would have had - and is marked `carried`. It uses the
+    past only. **THE FREEZE REFUSES if more than 3 days in a row are
+    missing, or more than 11 in all (1% of 1,094), or if the first day
+    has nothing published on or before it.** The builder prints HOW MANY
+    days were carried and nothing about which.
+  * **EVERY SOURCE ROW MUST BE STAMPED EXACTLY 00:00 UTC.** One that is
+    not is a refusal: the clock rule below stands on it.
+  * **ONCE.** The builder refuses if the folder holds anything. And the
+    freeze is proved against what I already measured: its training side
+    must show the same day-by-day signals as the count in the entry above
+    (buy on 60 days, sell on 95, of 706 judged).
+  * **>>> THE HOLD-OUT's VALUES ARRIVE THE MOMENT THE FREEZE IS BUILT** (the
+    publisher has no end-date). **NOTHING I WRITE PRINTS, PLOTS OR
+    SUMMARISES ONE.** Row counts, dates, the carried count, a checksum.
+    How often the hold-out was fearful or greedy is the trade count, and
+    that is a result. (He sees the index on his Brief every day; that is
+    his to see. The test must not be shaped by it.)
+  * **HOW IT REACHES THE STRATEGY (LAW 7).** As in Slot 2: the day's
+    value and side ride INSIDE the frame, two more columns (`mood`,
+    `mood_side`) of the candle of the same date, joined on by the runner
+    before the engine starts. The engine's own wall, `df.iloc[:i+1]`,
+    keeps tomorrow's out. The strategy holds three whole numbers and a
+    name. `lab/engine.py` is not touched.
+    **THE JOIN's RULE: THE VALUE STAMPED DAY D GOES ON THE CANDLE THAT
+    OPENS ON DAY D. NOT D-1, NOT D+1.** Published at D 00:00, candle D
+    closes at D+1 00:00, the trade is entered at that open.
+
+## 5. WHAT IT IS TESTED ON, AND THE FIVE BARS
+
+BTC-USD, ETH-USD, SOL-USD daily candles from the frozen vault; the line
+2025-10-01; 297 hold-out candles a coin; pooled; one verdict. **THE FIVE
+BARS AND THE ALARM ARE SLOT 1's OWN CODE, IMPORTED, AS IN SLOT 2:**
+
+    B1 Profit Factor >= 1.15 after costs    B2 at least 30 trades
+    B3 walk-forward CONSISTENT              B4 Monte Carlo drawdown < 30%
+    B5 strictly beats buy-and-hold, 1% sizing
+    ALARM  Profit Factor above 2.0 or win rate above 70%: WITHHELD
+
+## 6. >>> WHAT THIS TEST CANNOT SAY, SAID BEFORE ANY RESULT
+
+1. **ONE INDEX, THREE COINS: THE POOLED TRADES ARE NEARLY ONE BET, THREE
+   TIMES.** Every coin gets the same signal on the same day. Their exits
+   differ, so they drift apart, but 60 pooled trades here are closer to
+   20 independent ones. The walk-forward and the Monte Carlo do not know
+   that. **This is the worst pooling of the three slots.**
+2. **THE INDEX IS PARTLY MADE FROM PRICE** (the publisher says volatility
+   and momentum are ingredients, with social media, surveys, dominance
+   and trends). So it is not independent of the candles, and "fade
+   extreme fear" is partly "buy after a sharp fall".
+3. **A PUBLISHER's NUMBER.** Their recipe, changed over the years, and
+   the history can only be had from them. I cannot check that what they
+   serve for a past day is what they published on that day. **IF THEY
+   REVISE HISTORY, THE FREEZE HOLDS A NUMBER NOBODY COULD HAVE SEEN.**
+4. **THE CLOCK WAS MEASURED ONCE, LIVE, TODAY.** That the 2023-2026 values
+   were also published at the start of their day is assumed.
+5. **THE INDEX IS BITCOIN's.** It is applied to ETH and SOL because they
+   move with it.
+6. Funding paid while a trade is held, and the perpetual's price: not
+   modelled, as in Slot 2. The exit is the ship's close stop, which may
+   be the wrong exit for buying fear.
+7. **297 DAYS OF ONE STRETCH OF MARKET.** A pass is a place in the
+   proving voyage, on paper.
+
+## 7. THE THREE GATES
+
+**GATE 6.5-D - `lab/mood_vault.py --gate`** (it also gates
+`lab/build_mood_vault.py` against a fake server). Made-up values only; no
+network, no real freeze, no vault: the freeze's one shape and each
+refusal forced alone (a row short, a day twice, a day out of order, a
+value of 101 or -1 or 50.5, a label misspelt, a stamp not at midnight);
+the carry rule by hand - one missing day carried and marked, three in a
+row accepted, four refused, eleven in all accepted, twelve refused,
+nothing before the first day refused, **and a carried day never takes a
+LATER day's value**; the builder whole, printing no value; refuses a
+second run; the verifier against a changed digit, a missing file, an
+unlisted file, a missing manifest; the join by hand - day D on candle D,
+the publisher's labels turned into sides, a misspelt label refused,
+candles not one day apart refused, a candle the freeze does not cover
+left empty; **the poison test**; a permanent drill; its own count.
+
+**GATE 6.5-S - `signals/mood_fade.py --gate`.** Made-up frames: the
+numbers typed and in `params`, and `params` carrying what the object
+actually uses; the rank at 80 and 81 ON BOTH SIDES; equal is not beyond;
+**the label side: the lowest reading in 90 days on a Neutral or a Greed
+day is FLAT, the highest on a Neutral or a Fear day is FLAT**; the window
+exactly 90; 90 candles flat and 91 judged; an empty day in the 91 flat; a
+frame missing either column RAISES at the first candle; prices do not
+matter; a second writing-out agreeing on at least 4,000 made-up days,
+both directions seen; Law 7 (leak scan clean and awake, imports numpy
+only, names no price column - **the word search proved able to see one**
+- stores nothing after it is made); the engine's wall walked; **the
+drill as real text edits to its own code, every run**; nothing real
+opened; its own count.
+
+**GATE 6.5-R - `lab/gauntlet_slot3.py --gate`.** As 6.3-R1: the locked
+numbers and both sets of costs typed; the five bars Slot 1's own objects
+and still judging as declared; the made-up world in the vault's daily
+shape; **the pre-flight refusing before the marker and spending nothing**
+(a damaged freeze, none, wrong vault manifests); the whole run in that
+same folder; the marker before the candles; knocks for `1d`; the pooled
+count from the evidence files; the bars handed every trade, three
+yardsticks and the hold-out's own 297 candles; the declared fingerprint
+on every row; every hold-out row re-worked; **every trade of every coin
+re-derived by hand from the made-up index**; the yardstick by hand; **the
+poison test through the whole run**; a second run refused; a coin a day
+short, and a candle with no mood, each stopping the run with no verdict;
+the spy; a drill; nothing real opened; its own count.
+
+**THEN THE ATTACK BY TEXT EDITS** (no vault, no freezes in the rigs,
+control first, list and predictions first), **THE MADE-UP WORLDS -
+INCLUDING WORLDS WHERE THE MOOD FADE IS TRUE, MILDLY AND STRONGLY** - and
+every invocation on the ship.
+
+## 8. THE AWKWARD CASES, NAMED FIRST
+
+  * **THREE COINS, ONE SIGNAL.** In the rehearsal the three made-up coins
+    share one made-up index, as the real ones will; so their trades START
+    on the same days and the "three coins trade on different days" check
+    Slot 2 had does not apply. The by-hand re-derivation is per coin.
+  * **A CARRIED DAY** has yesterday's value and label; it can signal.
+  * **A NEUTRAL DAY THAT IS ALSO THE LOWEST IN 90.** Flat.
+  * **A VALUE OF 0 OR 100.** Legal.
+  * **THE 2025-10-01 CANDLE IS TRAINING**; a signal at its close is
+    entered on 2025-10-02 and counts.
+  * **THE RUN DIES AFTER THE MARKER.** The pre-flight, the raise on a
+    missing column at the first candle, and the rehearsal are for that.
+
+## 9. MY PREDICTIONS (rule (m))
+
+Made-up worlds, three coins sharing one made-up index, 1,094 daily
+candles:
+
+    pooled hold-out trades ....... median 40 to 75; 30 or more in at least
+                                   54 of 60
+    false passes on noise ........ at most 4 of 60
+    where the fade is true ....... the profit bar cleared in at least 20
+                                   of 24
+    the attack ................... at least one hole in my own gates
+
+**THE RUN, WHEN HE SAYS SO, AND ONLY THEN:** `python lab/gauntlet_slot3.py
+--go`. ONCE. I do not type it without his word.
+
+## 10. WHAT I HAVE LOOKED AT
+
+**THE INDEX: training-side rows only, as counts, dates, label bands and
+signal counts; and today's live row (2026-11-16), which is outside every
+window. NO INDEX VALUE FROM 2025-10-01 TO 2026-07-25. NO HOLD-OUT PRICE OR
+FUNDING RATE.**
