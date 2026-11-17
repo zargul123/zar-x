@@ -791,3 +791,20 @@ not exist and has now waited four sessions.**
 | **BY MONTH, CONFLUENCE.** | August +9.3% (11 trades), September -4.1% (4), October -2.1% (2), November +7.3% (8). Shorts 6 of 7 won; longs 7 of 18. |
 | **THE VAULT's SOURCE IS STABLE AT THE SEAM.** | TwelveData's daily candles for 2026-07-01 to 2026-07-25, fetched 2026-11-16, equal the vault's on 25 of 25 days for all three coins. |
 | **THE SHIP IS THIRTY-SIX INVOCATIONS.** | Not measured whole since the forward-check build. `lab/forward_check.py --gate` takes about five minutes. |
+
+# **>>> 2026-11-17 - THE GAUNTLET IS FINISHED (ALL THREE SLOTS FAILED) AND THE PAPER-WATCH IS BUILT AND RUNNING. NO MONEY.**
+
+| Part | What it is |
+|---|---|
+| **Slot 1, the breakout - RUN ONCE, FAILED.** | 3 bars of 5. 72 trades, 30 won, Profit Factor 0.92; 1,000 dollars to about 961. Lost even with costs switched off. Evidence in `lab/results/`. |
+| **Slot 3, the mood fade - RUN ONCE, FAILED.** | 3 bars of 5. 33 trades on 18 days, 15 won, Profit Factor 1.11; 1,000 to about 1,017. Eleven buys in a row lost in October-November 2025. |
+| **`journal/paper_watch.py` - THE PAPER-WATCH.** | Thirteen coins, the two frozen rules of `signals/confluence.py` called, every signal written once and followed with two exits (fixed 1.5/3.0; trailing 3.0 ranges behind the best close). Append-only store and chained ledger in `journal/paper/`; every run works the whole record out again and refuses to write if a written row does not come out identical. **GATE 7.1, 106 checks, 0 red, twice** (`journal/paper_watch_gate.py`; its drill is 24 real text edits). Attacked with 30 more: 28 red, 1 that cannot change a figure, 1 never run. |
+| **`PAPER_WATCH.bat`, `PAPER_WEEK.bat`.** | A run and the report in Notepad; the week's numbers in Notepad. `run_daily.bat` runs the tracker after the grader. |
+
+| Fact | Measurement |
+|---|---|
+| **THE SHIP's CANDLES ARE BINANCE SPOT.** | The forward store (113 days, 2026-07-26 to 2026-11-15) equals `data-api.binance.vision` daily USDT candles value for value: BTC 113 of 113 days, ETH 113 of 113, SOL 112 of 113 (one low, 0.077%). The vault's BTC and SOL equal Binance on 200 of 200 training days; **its ETH does not** (47 of 200 within 0.05%). |
+| **THE LAPTOP's DAILY TASK RAN ON 8 DAYS IN SIX WEEKS** (2026-10-08 to 2026-11-17). | Read from the stamps in `journal/daily_runs.log`. A tracker that needs the laptop every day would miss most days. |
+| **THE THIRTEEN COINS, BINANCE USDT PERPETUALS, 2026-11-17.** | Dollars traded a day (90-day average, millions) / years listed / correlation of daily moves with BTC over a year: BTC 11,887 / 7.2 / 1.00; ETH 8,831 / 7.0 / 0.91; SOL 1,928 / 6.2 / 0.87; XRP 1,065 / 6.9 / 0.86; NEAR 531 / 6.1 / 0.55; DOGE 456 / 6.4 / 0.81; BNB 385 / 6.8 / 0.82; UNI 287 / 6.2 / 0.63; ADA 186 / 6.8 / 0.80; LINK 168 / 6.8 / 0.82; AVAX 149 / 6.2 / 0.73; AAVE 124 / 6.1 / 0.71; BCH 115 / 6.9 / 0.63. Funding settles every 8 hours on all thirteen over the last 333 days. |
+| **THE FIRST PAPER RUN, 2026-11-17 16:04 UTC.** | 26 signals (13 coins x 2 rules), every one a SELL entered at the 17th's open, every one 16 hours late. The mood rule answered "long" (extreme fear) on all thirteen; every coin closed the 16th under its 100-day average. |
+| **THE SHIP IS THIRTY-EIGHT INVOCATIONS.** | 36 measured 2026-11-17 08:47 UTC: 2,091 green, 0 red. Gate 7.1 (twice) added after; the whole not re-measured. Gate 7.1 takes about 75 seconds. |

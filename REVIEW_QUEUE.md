@@ -5737,3 +5737,110 @@ costs, apply here word for word.**
 11. **THE TWO GREEN ATTACK EDITS (B2, B4)** are judged harmless by me.
 
 ## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088 TO R-093 ARE NOT IN IT.
+
+## >>> R-094 - **AGAINST MY OWN PAPER-WATCH (2026-11-17): `journal/paper_watch.py`, `journal/paper_watch_gate.py`, THE STORE AND LEDGER IN `journal/paper/`, ITS BAR - AND THE TWO SLOT RUNS OF THE SAME DAY.** OPEN - NOT CATEGORY B
+
+**FILED BY FABLE AGAINST ITSELF. BY THE COMMANDER's RULING THE NEXT SESSION
+DOES NOT ATTACK A FABLE BUILD, SO THIS LIST IS THE ONLY GUARD. IT IS LONG
+ON PURPOSE. NO SESSION THAT BUILT ANY OF THIS MAY CLEAR IT.**
+
+1. **THE TRAILING EXIT HAS NO WITNESS BUT MY OWN HAND CASES.** The fixed
+   exit is checked against `lab/engine.py` trade for trade. Nothing
+   independent works a trailing trade. Twelve hand cases, long and short,
+   on one made-up shape (entry at 100, range 6). A fault that needs
+   another shape would pass.
+2. **THE TRAILING NUMBER (3.0 RANGES) IS MINE**, a round figure. So are
+   the 4% limit, the 6 hours of "on time", the 400 days of history and
+   the start day. He was told each; he ruled on none but "we can tweek
+   the risk factor later".
+3. **"A LATE DAY IS WORKED OUT AND LABELLED" REPLACED "A MISSED DAY IS NOT
+   FILLED IN"**, which is what he had been told the day before. He was
+   told of the change in plain words and did not object. **HE DID NOT SAY
+   YES TO IT IN WORDS EITHER.**
+4. **A ROW REMOVED FROM THE END OF THE LEDGER IS NOT NOTICED.** The chain
+   catches a row edited, removed from the middle or slipped in; the
+   working-out catches a row that is wrong. A row cut off the END is
+   simply written again at the next run, with a new time on it - so a
+   signal's ON TIME / LATE label can be changed by cutting and re-running.
+   Likewise a row removed from the middle WITH the chain rebuilt after it.
+   `git` history is the only guard.
+5. **THE STORE CAN BE EDITED WITH THE LEDGER.** Every run trusts the
+   store: change a stored candle AND delete the ledger, and a different
+   record is written with no alarm. The store has no checksum. `git` is
+   the guard again.
+6. **TWO WRITERS WOULD CORRUPT IT.** `run_daily.bat` now runs the tracker
+   on the laptop. He has agreed the cloud should become the writer. **THE
+   DAY THE CLOUD JOB WRITES, THE LAPTOP's LINE MUST BECOME `--report`, IN
+   THE SAME CHANGE.** Until then nothing stops two machines appending
+   different stamps to the same file and colliding in `git`.
+7. **NOBODY COMMITS `journal/paper/` BUT A SESSION.** The laptop task
+   writes it and does not commit. A run on a checkout that is behind
+   `origin` and then pulled is a merge conflict in an append-only file.
+8. **THE COMBINED RULE ON THIRTEEN COINS IS A NEW EXPERIMENT.** Its one
+   look was three coins. Ten of the thirteen were chosen today, by
+   liquidity, age and correlation - from the survivors of 2026.
+9. **THIRTEEN SIGNALS ON DAY ONE ARE ONE BET.** Both rules sold every
+   coin (the mood rule answered "long" - extreme fear - on all thirteen,
+   and every coin is under its 100-day average). The record will look
+   like 26 trades and is one market move. The report shows distinct days
+   beside trades; **the reader must use it.**
+10. **THE TREND-ALONE RULE NEVER RESTS**, so its trailing trades pile up
+    on one coin. Deliberate (the bar, 3 (ii)); the portfolio line calls
+    most of them "not taken". Its trailing record is therefore many
+    overlapping copies of nearly the same position.
+11. **ONE EMPTY READING SILENCES A CROWD RULE FOR 91 DAYS** on that coin
+    (the frozen rules answer "flat" while an empty day is in their
+    window). The report says so; nothing repairs it. Binance funding with
+    a day of two or four settlements would do it.
+12. **THE CANDLES ARE BINANCE SPOT (USDT), FETCHED BY THIS FILE**, not
+    through `data/market_data.py`. Measured equal to the ship's forward
+    store on 113 of 113 days for BTC and ETH and 112 of 113 for SOL (one
+    low, 0.077%). **THE VAULT's ETH DIFFERS FROM BINANCE ON THE TRAINING
+    SIDE** (median 0.01% to 0.07%, 47 of 200 days within 0.05%): the
+    vault's source was not always Binance for ETH. I did not chase it.
+13. **NOT COUNTED: FUNDING PAID OR RECEIVED WHILE A POSITION IS HELD, AND
+    THE DIFFERENCE BETWEEN SPOT AND FUTURES PRICES.** He was told. A short
+    held for weeks in a market that pays shorts, or charges them, is
+    scored as if it cost nothing.
+14. **THE FIRST-SEEN OPENING PRICE IS THE ENTRY** when the tracker runs
+    during the entry day, and the finished candle's open when it catches
+    up later. They should be the same number; if the source differs, a
+    signal's entry depends on WHEN the tracker ran.
+15. **FLOATS IN A LEDGER.** Rows are compared to one part in a thousand
+    million. A different pandas or numpy on another machine (the cloud
+    runs Python 3.11; the laptop 3.10) could work a range out differently
+    in the last places. Within the tolerance: fine. Outside it: INTEGRITY
+    ALARM on an honest ledger. **NOT MEASURED ON THE CLOUD's MACHINE.**
+16. **THE GATE HAD EIGHT FAULTS OF ITS OWN** found between its first run
+    and its last (the log, sections 2 and 3). The honest inference is the
+    one R-093 drew: there is a ninth.
+17. **A9 OF THE ATTACK WAS NEVER RUN** (its text matched twice).
+18. **THE WEEK's REPORT AND THE PORTFOLIO LINE's MONEY ARE THINLY
+    CHECKED.** The gate re-works the record's figures from the ledger; of
+    the portfolio line it re-works the counts and, on hand cases, the
+    money - not the money printed on a real report. The week's "market"
+    lines are not re-worked at all.
+19. **THE WHOLE SHIP WAS MEASURED BEFORE THIS BUILD, NOT AFTER.** Thirty-
+    six invocations at 08:47 UTC; then Gate 7.1 alone. Nothing the other
+    gates read was changed (`git` shows new files and one line in
+    `run_daily.bat`), but it was not re-measured. **THE SHIP IS NOW
+    THIRTY-EIGHT INVOCATIONS.**
+20. **THE SLOT 3 RUN STOOD ON A READING OF HIS SENTENCE** ("first do you
+    last idea test"). He did not object when shown the result and asked
+    for its autopsy. It is still a slot spent on a reading.
+21. **I RAN THE MORNING's 36 GATES IN TWO STREAMS AT ONCE.**
+22. **THE HINDSIGHT BREAKDOWN OF SLOT 1's TRADES** ("it chased", "the
+    trend was already old") is in his document and in this log as a hint.
+    It is 72 trades looked at after the fact. **IF A LATER SESSION BUILDS
+    "THE IMPROVED BREAKOUT" FROM IT, THAT RULE WAS DESIGNED ON THE
+    HOLD-OUT AND MAY ONLY EVER BE JUDGED FORWARD.**
+
+## >>> THE CATEGORY B PILE IS STILL FIFTY-ONE. R-088 TO R-094 ARE NOT IN IT.
+
+**R-094, ITEM 23 (added the same night, before the commit).** THE TRACKER
+DOES NOT NOTICE ITS STORE's BYTES CHANGING IF THE CELLS STILL READ THE
+SAME. My own `git stash` turned every LF of the five files into CRLF an
+hour after they were written, and `--report` said nothing - the chain is
+over cells, not bytes. Put back byte for byte (`PROGRESS_LOG.md`, the
+entry "MY OWN `git stash`..."), and `journal/paper/.gitattributes` now
+forbids git to touch that folder. **THE HOLE ITSELF IS OPEN.**

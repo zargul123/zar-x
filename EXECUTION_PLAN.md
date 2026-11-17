@@ -456,6 +456,45 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-17 (NIGHT): ALL THREE GAUNTLET SLOTS ARE SPENT AND ALL THREE FAILED. THE SIGNALS CHAPTER OF THE PROMISE IS CLOSED. WHAT REMAINS IS THE PAPER-WATCH (PHASE 7), BUILT TODAY AND RUNNING: THIRTEEN COINS, TWO FROZEN RULES, TWO EXITS FROM EVERY ENTRY, NO MONEY. 26 PAPER SIGNALS OPEN, NOTHING ENDED YET.**
+
+**WHERE THE SHIP IS.** Thirty-eight invocations: the thirty-six measured
+this morning at 2,091 green, 0 red, plus `journal/paper_watch.py --gate`
+(GATE 7.1, 106 checks, 0 red, twice). **NOT MEASURED WHOLE SINCE THE
+PAPER-WATCH WAS BUILT.** Vault 6 of 6, frozen funding 3 of 3, frozen mood
+1 of 1, forward store 3 of 3. `lab/results/` holds the markers and
+evidence of all three slots and of Forward Check 1.
+
+**THE THREE SLOTS, ON 1,000 DOLLARS, OCTOBER 2025 TO JULY 2026:**
+
+    Slot 1  the breakout (4-hour) ...... FAILED 3 of 5 bars ...   961
+    Slot 2  the funding fade (daily) ... FAILED 4 of 5 bars ... 1,040
+    Slot 3  the mood fade (daily) ...... FAILED 3 of 5 bars ... 1,017
+    holding the coins ............................... about 730 to 745
+
+**NO SLOT IS LEFT. THE HOLD-OUT IS A SEEN PERIOD FOR EVERY RULE.** By his
+ruling of 2026-11-16 a failed idea, or a changed one, may be watched
+forward on paper and nowhere else.
+
+**THE PAPER-WATCH** (`journal/paper_watch.py`, store and ledger in
+`journal/paper/`): the combined rule and the trend alone, on BTC ETH SOL
+XRP BNB DOGE NEAR UNI LINK AVAX ADA AAVE BCH, from 2026-11-16. Every
+signal is written once and followed twice - fixed stop and target, and a
+trailing stop. The main score is every signal at the same 1%; a second
+"portfolio" line applies a 4% limit on total open risk (way B; the 4% is
+not final). Late rows say LATE. `PAPER_WATCH.bat`, `PAPER_WEEK.bat`.
+
+**UNPROVEN OR UNFINISHED, PLAINLY:** the laptop is the writer and is off
+most days; he has agreed the cloud job should write instead, and whether
+Binance answers GitHub's machines is NOT MEASURED. He is not yet told of
+signals unless he opens the report (Telegram recommended, unanswered).
+The Brief has no paper line. Funding paid while holding is not counted.
+R-088 to R-094 are open and nobody but their author has read the builds
+they are about. The Category B pile is fifty-one.
+
+**NEXT:** the cloud move (one test run by hand), then how he is told,
+then a paper line on the Brief, then the first weekly autopsy.
+
 ## **>>> 2026-11-16 (NIGHT'S END): FORWARD CHECK 1 WAS RUN ONCE ON 113 UNSEEN DAYS. THE COMBINED RULE: 1,000 DOLLARS TO 1,107 ON 25 TRADES; THE TREND ALONE: 1,036; HOLDING: 993. NOT A VERDICT. SLOT 2 IS SPENT (FAILED). SLOTS 1 AND 3 ARE SET UP, UNSPENT AND PAUSED BY THE COMMANDER.**
 
 **WHERE THE SHIP IS.** Thirty-six invocations now exist (the thirty-two
