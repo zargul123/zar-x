@@ -20881,3 +20881,187 @@ FOR OCTOBER AND NOVEMBER 2025. THE FROZEN FILES THEMSELVES WERE NOT
 OPENED. EVERY SLOT IS SPENT, SO NOTHING IS LEFT FOR THIS TO SPOIL - BUT
 THE HOLD-OUT (2025-10-01 TO 2026-07-25) IS NOW A SEEN PERIOD FOR EVERY
 RULE THIS SHIP WILL EVER WRITE.**
+
+# 2026-11-17 (EVENING) - THE SAME SESSION. **THE DISCUSSION AFTER THE THREE FAILS: WHAT THE COMMANDER DECIDED FOR THE PAPER-WATCH, WHAT HE HAS NOT DECIDED, AND THE LIST OF THINGS TO SETTLE BEFORE REAL MONEY. NO CODE CHANGED. NOTHING RUN.**
+
+He asked that everything important from the talk be written where the
+ship can read it. This is that entry. **HE IS NOT A PROGRAMMER AND SAID SO
+AGAIN: "im a noob dont understand that much maths". EASY WORDS, MONEY ON
+1,000 DOLLARS.**
+
+## 1. WHAT HE DECIDED TODAY, IN HIS WORDS
+
+    (a) THIRTEEN COINS FOR THE PAPER-WATCH. **"ok add 13 coins its done."**
+        BTC, ETH, SOL (the original three) and ten more: XRP, BNB, DOGE,
+        NEAR, UNI, LINK, AVAX, ADA, AAVE, BCH.
+    (b) THE PURPOSE OF PAPER TRADING, AS HE PUT IT: **"our main goal is
+        through paer trading that is the system is doing the job and we
+        can tweek the risk factor later"**. So: the paper-watch exists to
+        find out whether the rules work. Risk settings are NOT final and
+        are to be revisited before real money.
+    (c) THE TRAILING STOP IS PARKED. **"right now im not talking about
+        trailing stop we will get it laters."**
+    (d) WHEN MANY COINS SIGNAL ON ONE DAY: he asked which of three ways is
+        better and left it to me. **MY ANSWER, GIVEN TO HIM: WAY B** (below).
+        **HE HAS NOT SAID YES TO IT IN WORDS. ASK BEFORE THE BAR IS
+        WRITTEN.**
+
+## 2. HOW THE THIRTEEN WERE CHOSEN (MEASURED, 2026-11-17, BINANCE'S PUBLIC FUTURES DATA)
+
+Four tests, set before looking: at least 100 million dollars traded a day
+(90-day average, USDT perpetual); at least 3 years on Binance futures with
+funding history throughout; no special danger (new hype coin, meme of the
+month, delisting cloud); and, as a preference, not a copy of Bitcoin.
+"Follows BTC" is the correlation of daily moves over the last year.
+
+    coin   $M a day   years   follows BTC   funding from
+    BTC     11,887     7.2      1.00        2019-09-10
+    ETH      8,831     7.0      0.91        2019-11-27
+    SOL      1,928     6.2      0.87        2020-09-13
+    XRP      1,065     6.9      0.86        2020-01-06
+    NEAR       531     6.1      0.55        2020-10-14
+    DOGE       456     6.4      0.81        2020-07-10
+    BNB        385     6.8      0.82        2020-02-10
+    UNI        287     6.2      0.63        2020-09-17
+    ADA        186     6.8      0.80        2020-01-19
+    LINK       168     6.8      0.82        2020-01-17
+    AVAX       149     6.2      0.73        2020-09-22
+    AAVE       124     6.1      0.71        2020-10-16
+    BCH        115     6.9      0.63        2019-12-19
+
+LEFT OUT, AND WHY: ZEC (third most traded, 1,943, but in a mania, swings
+three times as hard as Bitcoin, and Binance has put it through a delisting
+vote and a warning tag); HYPE (750, only 1.5 years old); PEPE, TRUMP, PUMP
+(meme coins); AKE, BTW, JCT, EVAA and the like (brand-new); PAXG (a gold
+token); TRX (hardly moves); LTC (97, just under the bar); SUI and ARB
+(about 3.5 years, kept as reserves); FIL (long decline); WLD (regulators).
+**DOGE IS LABELLED A MEME COIN BY BINANCE; kept for its age and depth, and
+he was told.**
+
+**WHAT I DID NOT DO: I DID NOT RUN ANY RULE ON ANY OF THESE COINS.** Only
+volume, age, funding start and correlation were measured. The choice is
+not based on results.
+
+**WHAT THE SEARCH FOUND:** altcoins move closer to Bitcoin exactly in
+sell-offs (CoinMetrics, Kaiko, as reported), so thirteen coins are not
+thirteen independent bets - perhaps twice the evidence of three, not four
+times. The one serious trend study used up to 20 coins picked by
+liquidity. Picking today's survivors flatters tests on the past; it does
+not touch a forward paper record.
+
+## 3. WHEN MANY COINS SIGNAL ON THE SAME DAY - AND THIS WILL BE COMMON
+
+One of the crowd readings is the mood index, and there is ONE mood number
+for the whole market: on a day of extreme greed every coin in an up-trend
+gets a buy at once. Three ways were put to him, on 1,000 dollars with 8
+signals in one morning:
+
+    A  take the "best" four, 10 dollars each ..... someone must define
+                                                   "best"; four signals
+                                                   are thrown away
+    B  take all eight, share the risk (5 each) ... each trade smaller
+    C  take all eight at 10 each ................. 80 dollars at risk in
+                                                   one day
+
+**MY RECOMMENDATION, WAY B, IN TWO PARTS:**
+
+    1. THE PAPER-WATCH RECORDS EVERY SIGNAL ON EVERY COIN, each scored on
+       its own at the standard 1% risk. Nothing is thrown away. THIS is
+       the evidence about whether a rule works.
+    2. BESIDE IT, ONE "PORTFOLIO" LINE: what a real 1,000-dollar account
+       would have done with a limit on total open risk (I proposed 4%),
+       the day's new signals sharing whatever room is left equally.
+       Trades already open count against the limit.
+
+**THE 4% IS MY NUMBER, NOT HIS, AND BY (b) ABOVE IT IS NOT FINAL.** It
+must be written into the bar before the tracker is built and may be
+revisited before real money - by him.
+
+## 4. THE REST OF THE ADVICE, SO IT IS NOT LOST
+
+  * THE PAPER LIST I PROPOSED (not ruled): the combined rule, frozen; the
+    trend alone, its yardstick; and ONE changed breakout (with the big
+    trend only, no chasing, a trailing stop) on daily and on 4-hour as
+    two records - which waits on the parked trailing-stop talk.
+  * THE COMBINED RULE ON THIRTEEN COINS IS A NEW EXPERIMENT. Its one look
+    was on three coins. The 3-coin record and the 13-coin record are kept
+    apart and never mixed.
+  * DAILY IS THE MAIN TIMEFRAME. The combined rule cannot sensibly run on
+    4-hour: its mood reading exists once a day.
+  * ABOUT 6 TRADES A MONTH ON THREE COINS. He called that low and he is
+    right about the cost: thirty trades takes five months. More coins is
+    the honest way to more trades; faster candles and looser thresholds
+    are not.
+  * A RANKING OF SIGNALS ("the best ones") IS A NEW UNTESTED RULE. Because
+    every signal is recorded, it can be studied from the paper record
+    later, for nothing.
+  * THE LIST IS FIXED BEFORE TRACKING STARTS. No coin added because it is
+    rising, none dropped because it is losing; no rule changed while it
+    is tracked.
+
+## 5. >>> BEFORE REAL MONEY - THE LIST HE ASKED TO HAVE WRITTEN DOWN
+
+**NONE OF THIS IS NEEDED FOR PAPER TRADING. ALL OF IT IS NEEDED BEFORE A
+DOLLAR MOVES.**
+
+    1.  THE RISK SETTINGS: 1% a trade and the limit on total open risk
+        (4% proposed). His to set. "we can tweek the risk factor later."
+    2.  HOW TO CHOOSE WHEN MORE COINS SIGNAL THAN THE LIMIT ALLOWS - share
+        the risk, or rank. Decide from the paper record, not before it.
+    3.  BINANCE's MINIMUM ORDER SIZE (about 5 dollars of coin for most,
+        more for Bitcoin). Shared risk on a small account can fall under
+        it. Check each coin's minimum then.
+    4.  THE TESTS USE SPOT PRICES; HE WOULD TRADE FUTURES. And the funding
+        fee paid or received while a futures trade is held is not counted
+        anywhere yet. Both belong in the paper score.
+    5.  A RECORD OF AT LEAST 30 TRADES PER RULE, AND SOME OF IT IN A
+        RISING MARKET. Everything so far was tested while prices fell,
+        and in all of it selling beat buying.
+    6.  THE CATEGORY B PILE (51 small doubts) CLEARED, AND
+        `cockpit/brief.py` GIVEN ITS OWN GATE - both long promised for
+        "before the ship is used for real".
+    7.  YESTERDAY's BUILDS HAVE BEEN READ BY NOBODY BUT THEIR AUTHOR
+        (R-088 to R-093), by his ruling. Before real money somebody else
+        should attack the combined rule and whatever tracker is built.
+    8.  LAW 6 AND THE README still say a failed idea is finished; his
+        ruling says it may be watched on paper. His to amend.
+    9.  THE EXITS: fixed stop and target only. The trailing stop is parked,
+        needs the Lab's engine extended, and can only be judged forward.
+    10. HE HAS NEVER USED `LOG_TRADE.bat` AND `MIRROR.bat`. Explained to
+        him today in words; a walk-through with one made-up trade was
+        offered and is still owed (a practice row would have to be
+        removed after - the notebook is for real trades only).
+
+## 6. WHAT ELSE I TOLD HIM THE SHIP NEEDS
+
+The paper tracker does not exist and is the first thing to build; the
+records are too heavy for him to read (this log is over 20,000 lines) and
+a one-page plain "where we are" was suggested - **A TENTH FILE, SO IT
+NEEDS HIS WORD AND HAS NOT GOT IT**; and the two uncounted costs in 4
+above.
+
+## 7. WHAT I GOT WRONG TODAY, AFTER THE LAST ENTRY
+
+1. **"THREE TRADES ON ONE DAY MADE THE WHOLE PROFIT" (the Slot 3 entry
+   above, section 5) WAS TOO NEAT, AND I CORRECTED IT TO HIM.** The three
+   sells of 2026-01-16 made +39 dollars. The three buys of 2026-02-06 made
+   +40. The honest picture is two good days of about 39 each against
+   eleven straight losing buys in October and November. The figures in
+   that entry are right; the sentence drawn from them was not. **THE OLD
+   ENTRY IS LEFT AS WRITTEN; THIS IS THE CORRECTION.**
+2. **I EXPLAINED THE TRAILING STOP AT LENGTH WHEN HE HAD ASKED ABOUT THE
+   IDEA 3 TEST.** "This last thing" meant the test just run. He said so
+   and I explained the test.
+3. **I FIRST TOLD HIM SEVEN COINS AND CALLED ADA A RESERVE TO KEEP A ROUND
+   TEN.** A round number is not a reason. He asked why not ADA; the list
+   became every coin over six years old that passed: thirteen.
+4. **MY SCREEN OF COINS STARTED FROM THE 45 MOST TRADED IN THE LAST 24
+   HOURS**, which let brand-new pumps in and left older coins out; I then
+   measured twenty established names by hand. A coin that is neither in
+   the day's top 45 nor on my hand list was never looked at.
+
+**LOOKED AT TODAY, BESIDES THE TWO SLOT RESULTS: one year of Binance
+futures daily closes and volumes for about sixty coins, as correlations,
+averages and counts - never a price by eye, and no rule run on any of
+them. That year includes the forward days since 2026-11-16 for BTC, ETH
+and SOL only as part of a correlation.**
