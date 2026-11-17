@@ -21065,3 +21065,33 @@ futures daily closes and volumes for about sixty coins, as correlations,
 averages and counts - never a price by eye, and no rule run on any of
 them. That year includes the forward days since 2026-11-16 for BTC, ETH
 and SOL only as part of a correlation.**
+
+## >>> 2026-11-17 (EVENING, LATER) - **THE COMMANDER SAID YES TO WAY B AND CONFIRMED THE THIRTEEN COINS. NO CODE CHANGED. NOTHING RUN.**
+
+He asked which way is better "for testing and giving fair advantage to
+system testing". Answered: way B, and its first half is the fair test -
+every signal on every coin written down and scored at the same size; the
+limit on total risk appears only on a second, "portfolio" line and is not
+used to judge a rule. **HIS WORDS: "ok option b is done and add 13 coins.
+then we will discuss about trailing stop thing."**
+
+**SO, RULED, FOR THE PAPER-WATCH's BAR WHEN IT IS WRITTEN:**
+
+    1. THIRTEEN COINS: BTC, ETH, SOL, XRP, BNB, DOGE, NEAR, UNI, LINK,
+       AVAX, ADA, AAVE, BCH. The 3-coin record is kept beside the 13-coin
+       record and the two are never mixed.
+    2. THE MAIN SCORE: every signal, every coin, the same 1% risk each.
+       This is what a rule is judged by.
+    3. THE PORTFOLIO LINE: the same trades under a limit on total open
+       risk, the day's new signals sharing the room left equally. **THE
+       LIMIT's NUMBER (4% PROPOSED) IS MINE AND IS NOT FINAL** - his
+       words earlier today: "we can tweek the risk factor later".
+    4. I PROMISED HIM THE TRACKER WILL SHOW THE NUMBER OF DISTINCT DAYS
+       BESIDE THE NUMBER OF TRADES, because ten coins signalling on one
+       day is one market move counted ten times. **THAT IS NOW OWED IN THE
+       BAR.**
+
+**STILL OPEN: the list of RULES to track (the combined rule and the trend
+alone are ready; the changed breakout waits on the trailing-stop talk,
+which is next), and where the ten new coins' daily candles come from -
+not measured yet.**
