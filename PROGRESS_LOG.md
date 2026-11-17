@@ -21619,3 +21619,59 @@ changing without a word.
 FOLDER:** commit what a run wrote BEFORE any git command that moves the
 working tree, and give a folder of evidence its `* -text` the moment it
 is created, not at the end.
+
+## >>> 2026-11-17 (NIGHT) - **THE CLOUD PROBE, ON HIS ORDER ("first only test cloud test run. and tell me first can it work?"). MEASURED: THE CLOUD CAN WORK THE LEDGER AND PASS THE GATE, AND CAN READ PRICES AND MOOD. BINANCE REFUSES IT THE FUNDING. THE PAPER-WATCH WAS NOT MOVED. NOTHING IN `journal/paper/` CHANGED.**
+
+Two files added and pushed (`e2a0ba0`): `journal/cloud_probe.py` and
+`.github/workflows/paper_cloud_test.yml`. The job runs only when one of
+those two files is pushed, or by hand - never on a clock. It reads,
+works the existing ledger out again, runs Gate 7.1, and commits one
+text file. Tried on the laptop first (all three sources 200; ledger
+identical; gate 106, 0 red). **THE CLOUD's ANSWER, 2026-11-17 16:27 UTC,
+UNEDITED (`journal/cloud_probe_report.txt`, committed by the runner):**
+
+    python 3.11.18 on Linux
+    numpy 1.26.4  pandas 2.2.2
+
+    1. WHAT THE PAPER-WATCH NEEDS
+    candles  data-api.binance.vision   status 200  rows 5
+    funding  fapi.binance.com          status 451  rows message: Service unavailable from a restricted location according to 'b. Eligib
+    mood     alternative.me            status 200  rows 5
+
+    2. OTHER DOORS, IN CASE ONE IS SHUT (status only)
+    funding  fapi1.binance.com         status 202  rows -
+    funding  fapi2.binance.com         status 202  rows -
+    funding  fapi3.binance.com         status 202  rows -
+    candles  api.binance.com           status 451  rows message: Service unavailable from a restricted location according to 'b. Eligib
+    funding  bybit                     status 403  rows -
+    funding  okx                       status 200  rows 5
+
+    3. DOES THIS MACHINE WORK THE LEDGER OUT IDENTICAL?
+    YES - every written row comes out identical
+       OPEN NOW - 26 trade(s) with at least one ending still open
+
+    4. GATE 7.1 ON THIS MACHINE
+    exit 0  GATE 7.1 PASSED — 106 checks, 0 red.
+
+**WHAT IT SETTLES:**
+
+  * **R-094 ITEM 15 IS ANSWERED FOR THIS LEDGER:** Python 3.11 on Linux
+    with numpy 1.26.4 works all 26 written rows out identical (the laptop
+    is Python 3.10 with numpy 1.24.3). And Gate 7.1 passes there. **THE
+    CODE CAN LIVE IN THE CLOUD.** (Not cleared by me; measured.)
+  * Prices and mood are served to GitHub's machines.
+  * **BINANCE FUTURES REFUSES THEM: HTTP 451, "Service unavailable from a
+    restricted location".** The combined rule cannot be worked without
+    funding - it is one of its two crowd readings - so **THE TRACKER
+    CANNOT SIMPLY BE MOVED.** The trend-alone rule could; it reads prices
+    only.
+  * `fapi1/2/3` answer 202 with no rows: not a door. Bybit refuses (403).
+    **OKX ANSWERS** - but OKX's funding is not Binance's: using it would
+    change what the frozen rule is fed, which is a different record.
+
+**THE CHOICES, PUT TO HIM, NONE TAKEN:** (a) probe two more Binance doors
+first (its public file archive and its website's own funding endpoint);
+(b) OKX funding in the cloud, as a NEW record declared in a bar;
+(c) the cloud for prices, mood and the trend rule, the laptop for
+funding; (d) a small rented machine outside the United States; (e) stay
+on the laptop with catch-up, as built.
