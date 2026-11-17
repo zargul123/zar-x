@@ -21732,3 +21732,114 @@ The frozen rules would be fed exactly what they are fed on the laptop.
 **NOT DONE, AND WAITING FOR HIS WORD:** moving the tracker. When it is
 done it is a build - a bar first - with the one-writer rule in the same
 change (R-094 item 6).
+
+# 2026-11-17 (LATE NIGHT) - FABLE'S SESSION, CONTINUED. **THE PAPER-WATCH GETS A SECOND, SEPARATE RECORD KEPT BY THE CLOUD. THIS IS THE BAR, DECLARED BEFORE ANY CODE IS CHANGED. NOTHING IS BUILT.**
+
+**HIS ORDER, VERBATIM: "ok setup teh clod thing and made a separe record
+file for clod only and one for laptop record holder. and also tell me how
+i read briefs and see report and laptop and git".** Given after both
+probes were put to him, with the point that the funding door the cloud
+would use is Binance's website host and not its documented address, that
+Binance can shut it any day, and that going round the block on GitHub's
+machines by another host is his decision. He asked how sure we are; was
+told: sure of the machine, NOT sure the funding door stays open. He then
+gave the order above. **I READ IT AS HIS YES TO THAT DOOR. A READING.**
+
+## 1. WHAT IS TO BE BUILT
+
+    TWO RECORDS, NEVER ONE FILE WITH TWO WRITERS (R-094 item 6):
+      journal/paper/         THE LAPTOP's. As it is. Not one byte moved.
+                             Written when his daily task or
+                             `PAPER_WATCH.bat` runs. Funding from
+                             `fapi.binance.com`, as now.
+      journal/paper_cloud/   THE CLOUD's. New, begun empty by the cloud's
+                             first run: its own 400 days of history, its
+                             own ledger from the same start day,
+                             2026-11-16. Funding from
+                             `www.binance.com/fapi/v1/fundingRate`.
+    THE SAME FILE WORKS BOTH: `python journal/paper_watch.py` for the
+    laptop's, `python journal/paper_watch.py --cloud` for the cloud's.
+    **NOT ONE RULE, NUMBER OR LINE OF THE WORKING-OUT CHANGES**, so the
+    settings stamp does not change and the laptop's 26 written rows must
+    still come out identical.
+    A NEW WORKFLOW, `.github/workflows/paper_cloud.yml`: at 00:07, 01:07
+    and 03:07 UTC every day (05:07, 06:07 and 08:07 in Pakistan) it runs
+    the cloud record, writes the report to `journal/paper_cloud_report.txt`
+    and the week's numbers to `journal/paper_cloud_week.txt`, and commits
+    the folder and the two reports. The second and third runs are there
+    in case the first is late or a source is down; a run with nothing new
+    writes nothing. It shares the snapshot job's queue so two cloud jobs
+    never push at once.
+    THE TWO RECORDS CHECK EACH OTHER. Each report says, under HEALTH,
+    whether every row of the two ledgers up to the last day BOTH have
+    stored is the same - signal, entry, stop, target, ending, result -
+    or names the rows that are not. **THEY ARE FED FUNDING THROUGH TWO
+    DIFFERENT DOORS, SO THIS IS ALSO A STANDING CHECK THAT THE WEBSITE
+    DOOR STILL SERVES WHAT THE DOCUMENTED ONE DOES.** Lateness is NOT
+    compared: the cloud's rows will be on time and the laptop's late.
+    THE CLOUD RUN FAILS LOUDLY - the job ends red, which GitHub mails to
+    the repository's owner - on INTEGRITY ALARM, on OFFLINE, and when the
+    two records disagree. The report is committed first either way.
+    `PAPER_CLOUD.bat` on the laptop: fetch, and show the cloud's report
+    in Notepad. `PAPER_WATCH.bat` fetches the cloud's record first (a
+    fast-forward only; if that cannot be done it is skipped in silence
+    and the comparison is simply older).
+
+## 2. WHAT CHANGES IN WHAT HE READS
+
+`PAPER_WATCH.bat` (two lines added before the run). The report gains one
+line at its head saying WHICH record it is and one or more lines under
+HEALTH comparing the two. `run_daily.bat` and the Brief: nothing.
+
+## 3. THE GATE - GATE 7.1 GROWS; EVERY NEW CHECK ON MADE-UP DATA
+
+    (o) THE TWO DOORS ARE THE TWO TYPED HERE, each with its own record:
+        the laptop's folder with `fapi.binance.com`, the cloud's with
+        `www.binance.com`, and never crossed.
+    (o) TWO RECORDS MADE DIFFERENT WAYS AGREE: five daily runs against
+        one late run - the comparison says AGREE and counts the rows.
+    (o) ONE FIGURE CHANGED IN ONE OF THEM: it says DISAGREE and names
+        the row.
+    (o) A ROW IN ONE AND NOT THE OTHER, inside the days both have: the
+        same.
+    (o) ONE RECORD AHEAD OF THE OTHER: only the days both have are
+        compared; being ahead is not a disagreement.
+    (o) THE OTHER RECORD NOT THERE YET: said in one line, not an alarm.
+    (o) THE REPORT SAYS WHICH RECORD IT IS, and the cloud run's exit
+        code is 1 on ALARM, OFFLINE or DISAGREE and 0 otherwise.
+    THE DRILL grows by the doors crossed, and by a comparison that
+    always says AGREE.
+
+**PASS = EVERY CHECK GREEN, TWICE, AND THE LAPTOP's REAL RECORD BYTE FOR
+BYTE WHAT IT WAS.** Then the first cloud run is read: its ledger must
+hold the same 26 signals as the laptop's, or that is the session.
+
+## 4. THE AWKWARD CASES, NAMED FIRST
+
+  * the cloud's first run seeds 400 days for thirteen coins through a
+    door measured with five rows of one coin: a page of a thousand may
+    not be served, or may be refused part-way. One coin's funding
+    failing is named and the others go on (already gated).
+  * GitHub's clock is late by minutes to an hour and sometimes skips:
+    three chances a morning.
+  * both cloud jobs wanting to push at once: one queue.
+  * the laptop's record is only committed when a session commits it, so
+    the cloud compares against an OLD laptop record - it says up to
+    which day it compared, and that is the honest limit.
+  * a `git` checkout turning the cloud record's line endings: the folder
+    is given its `* -text` BEFORE its first file exists - the lesson of
+    this same night.
+  * the website door shut one day: funding not updated, named; the
+    combined rule's reading goes empty for that coin and that day; the
+    laptop's record, by the documented door, still has it - and the two
+    reports will DISAGREE from then on, which is the alarm working.
+
+## 5. MY PREDICTIONS
+
+  * The first cloud run's funding fetch will fail for at least one coin.
+  * Its 26 signals will equal the laptop's.
+
+## 6. WHAT I HAVE LOOKED AT
+
+**Nothing new. The two probes' statuses and row counts; 12,870 funding
+rows compared between the two doors as equal-or-not, never printed.**
