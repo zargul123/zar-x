@@ -21095,3 +21095,252 @@ then we will discuss about trailing stop thing."**
 alone are ready; the changed breakout waits on the trailing-stop talk,
 which is next), and where the ten new coins' daily candles come from -
 not measured yet.**
+
+# 2026-11-17 (NIGHT) - FABLE'S SESSION, CONTINUED. **THE PAPER-WATCH (PHASE 7's SIGNAL JOURNAL): THIS IS THE BAR, DECLARED BEFORE ANY CODE EXISTS. NOTHING IS BUILT. NOTHING IS RUN.**
+
+**HIS ORDER, VERBATIM: "ok first do all teh changes like adding coins then
+you b point of distribution and now this last step. add those in the
+system then we will talk".** The three things: the thirteen coins; way B;
+and "this last step", which was his own idea of an hour before - *"on fix
+stop trade stop at this and theer is a section which also worke on the
+trailing stop so in 6 months we have complete report and yes also very
+week i want system to give me acomplte autospy"* - both exits side by
+side from the same entry, and a weekly autopsy. He was asked why the
+changed breakout should be left out, heard both sides, and then gave the
+order above without asking for it. **I READ THAT AS: THE CHANGED BREAKOUT
+IS NOT IN THIS BUILD. A READING; ASK HIM IF IN DOUBT.**
+
+## 1. WHAT IS TO BE BUILT, IN PLAIN WORDS
+
+One new part, `journal/paper_watch.py`, with its own folder
+`journal/paper/`. Each time it runs it:
+
+    1. fetches daily candles, funding and the mood for thirteen coins;
+    2. adds what is new to its own store, and never changes what is
+       already there;
+    3. asks the two frozen rules for each coin at the close of each day
+       since the start;
+    4. writes every signal down once - entry, stop, target, size for a
+       pretend 1,000 dollars - and never edits it;
+    5. follows every written signal TWICE from the same entry: once with
+       the fixed stop and target, once with a trailing stop;
+    6. prints the record: each rule, each exit, thirteen coins and the
+       original three apart, and one "portfolio" line under way B.
+
+A second command prints the week's numbers for the weekly autopsy.
+**NO MONEY. NO ORDER IS EVER SENT ANYWHERE. IT READS PUBLIC PRICES AND
+WRITES TEXT FILES.**
+
+## 2. EVERY NUMBER I HAVE CHOSEN FOR HIM, SAID BEFORE IT IS BUILT
+
+    THE COINS (his)        BTC ETH SOL XRP BNB DOGE NEAR UNI LINK AVAX ADA
+                           AAVE BCH - thirteen. "The original three" are
+                           BTC ETH SOL.
+    THE RULES (frozen)     `confluence-1d-t100` and `trend-only-1d-t100`,
+                           the very classes in `signals/confluence.py`,
+                           called, not copied. Not one number in them is
+                           touched.
+    THE FIXED EXIT         stop 1.5 and target 3.0 times the 14-day range
+    (frozen)               - what Forward Check 1 used.
+    THE COSTS (his)        the gauntlet's: 0.05% fee and 0.05% slippage a
+                           side.
+    THE SIZE               1% of a pretend 1,000 dollars at risk on every
+                           signal, with the ship's 25% position cap - the
+                           ship's own calculator, called.
+    THE TRAILING EXIT      **MINE.** The same entry and the same first
+                           stop. No target. After each daily close the
+                           stop moves to (best close so far minus 3.0
+                           times the range at entry) if that is BETTER
+                           than where it stands; it never moves back.
+                           Mirror for a short. 3.0 is twice the first
+                           stop's distance: a round figure, chosen before
+                           any result and filed against me.
+    THE LIMIT ON TOTAL     **MINE, AND NOT FINAL** ("we can tweek the
+    OPEN RISK              risk factor later"): 4% of the account, used
+                           only on the portfolio line.
+    THE START              the first day asked is 2026-11-16 - the first
+                           day after Forward Check 1's window. Its close
+                           was at 00:00 UTC on the 17th; its row will be
+                           written late and SAY SO.
+    ON TIME                a signal written within 6 hours of the entry
+                           candle's opening is ON TIME; any later is
+                           LATE, with the hours. **MINE.**
+    THE CANDLES            Binance spot, USDT pairs, daily, 00:00 UTC.
+                           **MEASURED TODAY: THE SHIP's OWN FORWARD STORE
+                           (113 days, three coins) EQUALS BINANCE SPOT ON
+                           EVERY DAY, value for value, except one low on
+                           one SOL day (0.077%).** The vault's source IS
+                           Binance. Funding: Binance futures, as before.
+                           Mood: alternative.me, as before.
+    THE HISTORY BEHIND     400 days before the start, fetched once into
+    THE START              the store, so the 100-day average and the
+                           90-day ranks can answer from the first day.
+
+## 3. >>> THREE THINGS IN THIS BAR THAT CHANGE WHAT HE WAS TOLD - IN BOLD, AS THE PATTERN ASKS
+
+**(i) "A MISSED DAY IS SAID PLAINLY, NOT FILLED IN" BECOMES "A LATE DAY IS
+WORKED OUT AND LABELLED LATE".** Measured today: the laptop's daily task
+ran on EIGHT days in the last six weeks. A tracker that drops every day
+the laptop was off would drop most days and prove nothing. The rules are
+arithmetic on public figures: worked on Friday for Tuesday's close they
+give the same answer, the same entry (Wednesday's opening price), the
+same stop and target as on the night. **SO THE TRACKER CATCHES UP, AND
+EVERY ROW IT WRITES LATE CARRIES THE WORD AND THE HOURS.** What a late
+row cannot show is whether HE could have acted on it; the report counts
+on-time and late rows apart for that reason. **THIS IS MY CHANGE TO WHAT
+YESTERDAY's ORDERS PROMISED HIM. HE WILL BE TOLD AND MAY OVERRULE IT.**
+
+**(ii) THE TWO EXITS SHARE EVERY ENTRY.** The rule is asked only when its
+FIXED-exit trade on that coin is closed (the Lab's engine does exactly
+this). Each signal it gives opens one trade with two endings. A trailing
+ending can outlast the fixed one, so trailing trades on one coin may
+overlap. That is deliberate: it keeps the comparison like for like -
+same signals, same entries, only the exit differs.
+
+**(iii) THE SHIP's OWN RISK CALCULATOR CARRIES THIS LINE, WRITTEN LONG
+BEFORE ME: "Deliberately NOT ported: trailing stop (our own 2026 data
+showed it cut winners and kept losers)".** That was Zargul 2.0, another
+strategy, intraday. It is still the only evidence this project has ever
+had about a trailing stop, and it is against. **HE WILL BE TOLD. IT IS
+ONE MORE REASON THE TRAILING EXIT IS A SECOND RECORD AND NEVER REPLACES
+THE FIXED ONE.**
+
+## 4. WHAT A RUN WRITES, AND THE RULE THAT KEEPS IT HONEST
+
+    journal/paper/candles.csv   one row a coin a COMPLETED day
+    journal/paper/opens.csv     the opening price of the day in progress
+    journal/paper/funding.csv   one row a settlement
+    journal/paper/mood.csv      one row a day
+    journal/paper/ledger.csv    OPEN and CLOSE rows - the record
+
+**EVERY FILE IS APPEND-ONLY.** And the ledger is never trusted on its
+own: every run works the whole record out again from the store, from the
+start day, and **EVERY ROW ALREADY IN THE LEDGER MUST COME OUT IDENTICAL**
+- else the run writes nothing and says INTEGRITY ALARM, naming the row.
+New rows are what the working-out gives that the ledger does not yet
+hold. So a row cannot be edited, dropped or invented without the next
+run saying so.
+
+If the source later serves a different figure for a day already stored,
+the stored figure stands, and the difference is counted in the report.
+
+## 5. THE ARITHMETIC, WRITTEN BEFORE THE CODE (rule (n): every unit named)
+
+    signal      asked at the close of day D, on candles up to and
+                including D, funding and mood joined by the Lab's own
+                two join functions, called
+    entry       day D+1's opening price, made worse by 0.05%
+    range       the ship's 14-day average true range on days up to D
+    stop        entry -/+ 1.5 x range;  target  entry +/- 3.0 x range
+    size        coins = (1% of 1,000 dollars) / |entry - stop|, capped
+                so the position is at most 250 dollars
+    exits       checked on each COMPLETED day from the entry day on,
+                against that day's high and low; stop and target in one
+                day counts the LOSS; a gap through the stop fills at the
+                open
+    result      coins x (exit - entry) for a long, mirror for a short,
+                both prices made worse by 0.05%, less 0.05% fee on each
+                side's value; as a fraction of the 1,000
+    trailing    stop before day i = max(first stop, best CLOSE of the
+                days before i since entry - 3.0 x range) for a long;
+                hit when day i's low is at or under it; fills at the
+                lower of the stop and day i's open
+    main score  every trade's fraction, compounded in the order the
+                trades closed, on 1,000 dollars
+    portfolio   new trades entered on one day share (4% - risk already
+                open) equally, never more than 1% each; nothing left ->
+                not taken, and counted as not taken
+
+## 6. THE GATE - GATE 7.1 - EVERY CHECK ON MADE-UP DATA, NO NETWORK
+
+    (a) THE NUMBERS ARE TYPED INTO THE GATE, not read from the file on
+        trial: thirteen coins by name, both rule names, 1.5 / 3.0 / 3.0,
+        the costs, 4%, 6 hours, the start day.
+    (b) **THE LAB's OWN ENGINE IS THE WITNESS FOR THE FIXED EXIT.** On
+        made-up coins the fixed-exit trades of BOTH rules equal
+        `lab/engine.py`'s trade for trade - day in, side, fill, stop,
+        target, day out, price out, reason, result. The comparison must
+        hold at least 20 trades a rule, both sides, both endings, or it
+        is RED for being empty.
+    (c) **EVERY SIGNAL IS WORKED A SECOND TIME IN PLAIN PYTHON** from the
+        made-up closes, funding and mood - the check Forward Check 1's
+        gate lacked until its attack found the hole (P12). And a rule fed
+        tomorrow's funding or tomorrow's mood must go RED.
+    (d) THE TRAILING EXIT BY HAND, LONG AND SHORT (rule (o)): the stop
+        that never moves back; hit at exactly the stop and not one cent
+        above it; a gap through it; the entry day; a close that moves
+        the stop only from the NEXT day.
+    (e) EVERY OPEN HAS ITS TWO ENDINGS AND THEY SHARE THE ENTRY.
+    (f) THE PORTFOLIO LINE BY HAND: eight signals in one morning; two
+        open and six new; no room left; exactly at the limit.
+    (g) THE LEDGER: a second run writes nothing; one digit changed in a
+        written row -> INTEGRITY ALARM and nothing written; a row
+        deleted -> the same; a row invented -> the same.
+    (h) CATCHING UP: five days worked in one go equal five daily runs,
+        row for row; the late ones say LATE with the hours; 6h00m00s is
+        on time and one second more is late.
+    (i) THE STORE: append-only; a gap, a day twice, a candle not at
+        00:00 UTC or a price that is not a positive number is refused;
+        today's unfinished candle is never stored as finished; a
+        changed figure from the source is counted and not applied.
+    (j) THE FETCH, through stand-ins: one coin's source failing leaves
+        the other twelve working and is named; the mood's carried-day
+        rule; nothing raises to the caller.
+    (k) THE REPORT: every figure it prints worked again by the gate from
+        the ledger; the three original coins apart; distinct entry days
+        beside the trade count (owed to him); late and on-time counted
+        apart; the words NO MONEY on it.
+    (l) THE WEEKLY NUMBERS: the week's opens and closes, the two exits
+        compared on the same trades, the health lines.
+    (m) THE DRILL, PERMANENT: at least fifteen real text edits to a copy
+        of the file, each one RED, each proved to have changed the file,
+        the original verified untouched after.
+    (n) THE GATE KNOWS HOW MANY CHECKS IT OWES.
+
+**PASS = EVERY CHECK GREEN INCLUDING EVERY SABOTAGE CAUGHT, TWICE (normal
+and `TZ=UTC0`).** Then an attack by text edit, list written first.
+
+## 7. WHAT THE PILOT ALREADY READS - AND WHAT CHANGES IN IT
+
+**ONE LINE IS ADDED TO `run_daily.bat`**, after the three it has, so the
+tracker runs whenever his daily task does. **THE BRIEF IS NOT TOUCHED IN
+THIS BUILD.** A new `PAPER_WATCH.bat` and `PAPER_WEEK.bat` open the two
+reports in Notepad. `git` will show exactly that.
+
+## 8. THE AWKWARD CASES, NAMED FIRST
+
+  * the laptop off for a week -> six late days worked in one run;
+  * run twice in one morning -> the second writes nothing;
+  * run at 23:59 and again at 00:01 UTC -> a new day in between;
+  * one coin's candles missing for a day -> that coin waits, the rest go
+    on, the report says which and since when;
+  * a day with two or four funding settlements, or the mood not yet
+    published -> that reading is empty and the crowd rule answers
+    "flat" for as long as the empty day is inside its 91-day window -
+    **A COIN CAN GO QUIET FOR THREE MONTHS BECAUSE OF ONE BAD DAY, AND
+    THE REPORT MUST SAY SO**; the mood, when late, is carried from the
+    day before as the frozen store does, at most three days;
+  * the trend-alone rule is in a trade on every coin nearly always, so
+    its trailing trades will pile up on one coin - the portfolio line
+    will show most of them "not taken";
+  * a trade whose stop and target both sit inside one day's candle;
+  * a coin delisted or renamed -> its source fails and is named; its
+    open trades stay open and are listed.
+
+## 9. MY PREDICTIONS (rule (m))
+
+  * The engine-equivalence check will be red on my first run - an
+    off-by-one on the entry day or the range is the likeliest.
+  * The first real run will write between 13 and 30 OPEN rows (the
+    trend-alone rule signals on every coin on day one), all LATE.
+  * My attack will find at least one hole in the gate.
+
+## 10. WHAT I HAVE LOOKED AT
+
+**Today: Binance spot daily candles for BTC, ETH and SOL against the
+ship's forward store (2026-07-26 to 2026-11-15) and against 200 training
+days of the vault, AS DIFFERENCES ONLY (the vault's ETH differs from
+Binance on the training side by a median 0.01-0.07%; BTC and SOL are
+identical; all three identical in the forward store). For the thirteen:
+that 420 daily candles and 8-hourly funding exist. No rule has been run
+on any day after 2026-11-15 by anybody.**
