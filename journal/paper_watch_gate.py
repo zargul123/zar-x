@@ -37,8 +37,8 @@ COINS13 = ('BTC', 'ETH', 'SOL', 'XRP', 'BNB', 'DOGE', 'NEAR', 'UNI', 'LINK',
 THREE = ('BTC', 'ETH', 'SOL')
 RULE_NAMES = ('confluence-1d-t100', 'trend-only-1d-t100')
 DAY = 86_400_000
-OWED = 106                   # the checks this gate owes, drill included
-DRILL_OWED = 24              # of which, sabotages
+OWED = 116                   # the checks this gate owes, drill included
+DRILL_OWED = 27              # of which, sabotages
 
 
 def ms(text):
@@ -354,6 +354,17 @@ class Suite:
                 snaps.append(file_bytes(directory))
             self._cache['daily'] = (directory, texts, snaps)
         return self._cache['daily']
+
+    def late_run(self):
+        """The same five mornings worked in ONE run, on 2026-11-21."""
+        if 'late' not in self._cache:
+            directory = self.folder('late')
+            now = at('2026-11-21')
+            self._cache['late_text'] = self.pw.run(
+                now=now, sources=self.world.sources(now),
+                directory=directory)
+            self._cache['late'] = directory
+        return self._cache['late']
 
     def engine_events(self):
         """Both rules on three made-up coins, by the file on trial and by
@@ -970,10 +981,7 @@ class Suite:
     def g_catchup(self):
         def same_rows():
             daily, _texts, _snaps = self.daily_runs()
-            late = self.folder('late')
-            now = at('2026-11-21')
-            self._cache['late_text'] = self.pw.run(
-                now=now, sources=self.world.sources(now), directory=late)
+            late = self.late_run()
             skip = ('written_utc', 'late_hours', 'chain')
             strip = lambda rows: sorted(
                 tuple((k, v) for k, v in row.items() if k not in skip
@@ -986,7 +994,6 @@ class Suite:
                                   'result_frac'))
                 for row in rows)
             a, b = self.ledger(daily), self.ledger(late)
-            self._cache['late'] = late
             return len(a) >= 13 and strip(a) == strip(b)
         self.mark('(h) FIVE MORNINGS WORKED IN ONE GO give the same rows as '
                   'five daily runs - every signal, entry, stop, target and '
@@ -994,7 +1001,7 @@ class Suite:
 
         def labels():
             daily, texts, _snaps = self.daily_runs()
-            late = self._cache.get('late') or self.folder('late')
+            late = self.late_run()
             a = [r for r in self.ledger(daily) if r['kind'] == 'OPEN']
             b = [r for r in self.ledger(late) if r['kind'] == 'OPEN']
             report = self.pw.report(late)
@@ -1429,8 +1436,138 @@ class Suite:
                   'whose endings have happened, and the two totals are what '
                   'the gate adds up', two_exits)
 
+    # -- (o) two records, two doors, each checking the other --
+    def g_two(self):
+        pw = self.pw
+        self.mark('(o) THE TWO DOORS ARE THE TWO TYPED HERE, each with its '
+                  'own record: the laptop\'s folder `paper` asks '
+                  'fapi.binance.com, the cloud\'s folder `paper_cloud` asks '
+                  'www.binance.com - and neither is crossed',
+                  lambda: pw.FUNDING_DOORS == {
+                      'laptop': 'https://fapi.binance.com/fapi/v1/fundingRate',
+                      'cloud': 'https://www.binance.com/fapi/v1/fundingRate'}
+                  and {k: os.path.basename(v) for k, v in pw.RECORDS.items()}
+                  == {'laptop': 'paper', 'cloud': 'paper_cloud'}
+                  and pw.real_sources('laptop')['funding'].url
+                  == 'https://fapi.binance.com/fapi/v1/fundingRate'
+                  and pw.real_sources('cloud')['funding'].url
+                  == 'https://www.binance.com/fapi/v1/fundingRate'
+                  and pw.real_sources('cloud')['candles']
+                  is pw.real_sources('laptop')['candles'])
+
+        def dated(rows, upto):
+            return [r for r in rows if (r['entry_day'] if r['kind'] == 'OPEN'
+                                        else r['exit_day']) <= upto]
+
+        def agree():
+            daily, _t, _s = self.daily_runs()
+            lines = pw.compare(daily, self.late_run(), 'laptop', 'cloud')
+            count = len(dated(self.ledger(daily), '2026-11-20'))
+            return (count >= 13 and len(lines) == 1 and lines[0] == (
+                f"  THE TWO RECORDS AGREE: all {count} rows dated up to "
+                f"2026-11-20 are the same in the laptop's record and the "
+                f"cloud's"))
+        self.mark('(o) TWO RECORDS MADE DIFFERENT WAYS AGREE: five daily '
+                  'runs against one late run - it says AGREE, up to the '
+                  'last day both hold, and counts the rows', agree)
+
+        def broken_copy(name, change):
+            daily, _t, _s = self.daily_runs()
+            target = os.path.join(self.tmp, name)
+            shutil.copytree(self.late_run(), target)
+            path = os.path.join(target, 'ledger.csv')
+            rows = read_csv(path)
+            touched = change(rows)
+            write_csv(path, rows)
+            return daily, target, touched
+
+        def one_figure():
+            def change(rows):
+                at_ = rows[0].index('stop')
+                row = next(r for r in rows[1:] if r[0] == 'OPEN')
+                row[at_] = repr(float(row[at_]) * 1.001)
+                return row[1]
+            daily, target, touched = broken_copy('two_figure', change)
+            lines = pw.compare(daily, target, 'laptop', 'cloud')
+            text = '\n'.join(lines)
+            return ('THE TWO RECORDS DISAGREE up to 2026-11-20: 1 row(s) '
+                    'differ, 0 only in' in text
+                    and f'differs: {touched}' in text
+                    and pw.verdict_code(text) == 1)
+        self.mark('(o) ONE FIGURE changed in one of them (a stop moved by a '
+                  'tenth of a percent): it says DISAGREE and names the row',
+                  one_figure)
+
+        def one_missing():
+            def change(rows):
+                spot = next(i for i, r in enumerate(rows) if r[0] == 'OPEN')
+                return rows.pop(spot)[1]
+            daily, target, gone = broken_copy('two_missing', change)
+            text = '\n'.join(pw.compare(daily, target, 'laptop', 'cloud'))
+            return ("0 row(s) differ, 1 only in the laptop's, 0 only in "
+                    "the cloud's" in text
+                    and f"only in the laptop's: {gone}" in text)
+        self.mark('(o) A ROW IN ONE AND NOT THE OTHER, inside the days both '
+                  'hold: DISAGREE, and it says which record has it',
+                  one_missing)
+
+        def one_ahead():
+            _d, _t, snaps = self.daily_runs()
+            early = self.folder('two_early')
+            for name, data in snaps[2].items():
+                with open(os.path.join(early, name), 'wb') as handle:
+                    handle.write(data)
+            lines = pw.compare(early, self.late_run(), 'laptop', 'cloud')
+            count = len(dated(self.ledger(early), '2026-11-18'))
+            later = len(self.ledger(self.late_run())) > len(
+                self.ledger(early))
+            return (later and 0 < count < len(self.ledger(early))
+                    and lines == [
+                        f"  THE TWO RECORDS AGREE: all {count} rows dated "
+                        f"up to 2026-11-18 are the same in the laptop's "
+                        f"record and the cloud's"])
+        self.mark('(o) ONE RECORD AHEAD OF THE OTHER is not a disagreement: '
+                  'only the days BOTH hold are compared, and the newer '
+                  'rows of either are left alone', one_ahead)
+
+        def not_there():
+            daily, _t, _s = self.daily_runs()
+            missing = pw.compare(daily, os.path.join(self.tmp, 'no_such'),
+                                 'laptop', 'cloud')
+            empty = pw.compare(daily, self.folder('two_empty'), 'laptop',
+                               'cloud')
+            return (missing == ["  the cloud's record does not exist yet - "
+                                "nothing to compare"]
+                    and empty == ["  the cloud's record holds no finished "
+                                  "day yet - nothing to compare"]
+                    and pw.verdict_code('\n'.join(missing + empty)) == 0)
+        self.mark('(o) THE OTHER RECORD NOT THERE YET, or there and empty: '
+                  'said in one line, and not an alarm', not_there)
+
+        def which_record():
+            daily, _t, _s = self.daily_runs()
+            late = self.late_run()
+            mine = pw.report(directory=daily, record='laptop', other=late)
+            theirs = pw.week(directory=late, record='cloud', other=daily)
+            return ("THIS IS THE LAPTOP's RECORD (journal/paper/)" in mine
+                    and "THIS IS THE CLOUD's RECORD (journal/paper_cloud/)"
+                    in theirs
+                    and "are the same in the laptop's record and the "
+                        "cloud's" in mine
+                    and "are the same in the cloud's record and the "
+                        "laptop's" in theirs
+                    and pw.verdict_code(mine) == 0
+                    and pw.verdict_code(theirs) == 0
+                    and pw.verdict_code('x INTEGRITY ALARM x') == 1
+                    and pw.verdict_code('PAPER-WATCH OFFLINE - y') == 1
+                    and pw.verdict_code('THE TWO RECORDS DISAGREE') == 1
+                    and "RECORD (journal" not in pw.report(directory=daily))
+        self.mark('(o) THE REPORT SAYS WHICH RECORD IT IS and carries the '
+                  'comparison; and a run ends 1 on ALARM, OFFLINE or '
+                  'DISAGREE and 0 otherwise', which_record)
+
     GROUPS = ('const', 'engine', 'signals', 'hand', 'twins', 'portfolio',
-              'ledger', 'catchup', 'store', 'fetch', 'report', 'week')
+              'ledger', 'catchup', 'store', 'fetch', 'report', 'week', 'two')
 
     def run(self, groups=None):
         for name in (self.GROUPS if groups is None else groups):
@@ -1523,6 +1660,16 @@ SABOTAGES = [
      "'days': len(trades),", ('report',)),
     ('the mood carried for a month', "MAX_CARRIED_RUN = 3 ",
      "MAX_CARRIED_RUN = 30 ", ('const', 'fetch')),
+    ('THE CLOUD SENT TO THE DOOR THAT REFUSES IT (the doors crossed)',
+     "    'cloud': 'https://www.binance.com/fapi/v1/fundingRate',",
+     "    'cloud': 'https://fapi.binance.com/fapi/v1/fundingRate',",
+     ('two',)),
+    ('A COMPARISON THAT ALWAYS SAYS "AGREE"',
+     "    if differ or only_mine or only_other:\n", "    if False:\n",
+     ('two',)),
+    ('the comparison reaching past the days both records hold',
+     "upto = min(newest_day(mine), newest_day(other))",
+     "upto = max(newest_day(mine), newest_day(other))", ('two',)),
 ]
 
 

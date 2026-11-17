@@ -77,7 +77,18 @@ from fractions import Fraction
 JOURNAL_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(JOURNAL_DIR)
 LAB_DIR = os.path.join(ROOT_DIR, 'lab')
-PAPER_DIR = os.path.join(JOURNAL_DIR, 'paper')
+PAPER_DIR = os.path.join(JOURNAL_DIR, 'paper')              # the laptop's
+CLOUD_DIR = os.path.join(JOURNAL_DIR, 'paper_cloud')        # the cloud's
+
+# TWO RECORDS, TWO WRITERS, NEVER ONE FILE WITH TWO. Each has its own
+# folder and its own door to Binance's funding: the documented address
+# refuses GitHub's machines (HTTP 451, measured 2026-11-17), the website's
+# host serves them the same rows (12,870 of 12,870 identical, the same day).
+RECORDS = {'laptop': PAPER_DIR, 'cloud': CLOUD_DIR}
+FUNDING_DOORS = {
+    'laptop': 'https://fapi.binance.com/fapi/v1/fundingRate',
+    'cloud': 'https://www.binance.com/fapi/v1/fundingRate',
+}
 
 COINS = ('BTC', 'ETH', 'SOL', 'XRP', 'BNB', 'DOGE', 'NEAR', 'UNI', 'LINK',
          'AVAX', 'ADA', 'AAVE', 'BCH')
@@ -686,6 +697,67 @@ def append_ledger(rows, now, directory=None):
             writer.writerow([cells[name] for name in LEDGER])
 
 
+def newest_day(directory):
+    """The last completed day any coin has in a record's store, or ''."""
+    store = Store(directory)
+    return max((store.last_day(asset_of(coin)) or '' for coin in COINS),
+               default='')
+
+
+def compare(mine, other, mine_name='laptop', other_name='cloud'):
+    """THE TWO RECORDS CHECK EACH OTHER. Every row dated on or before the
+    last day BOTH stores hold must be the same in both ledgers - signal,
+    entry, stop, target, ending, result. When a row was WRITTEN is not
+    compared: one record is on time and the other catches up.
+    -> lines for the HEALTH section. Never raises."""
+    try:
+        theirs = read_ledger(other)
+        if not theirs and not os.path.isdir(other):
+            return [f"  the {other_name}'s record does not exist yet - "
+                    f"nothing to compare"]
+        ours = read_ledger(mine)
+        upto = min(newest_day(mine), newest_day(other))
+    except Exception as exc:
+        return [f"  the {other_name}'s record could not be read "
+                f"({type(exc).__name__}: {str(exc)[:80]}) - not compared"]
+    if not upto:
+        return [f"  the {other_name}'s record holds no finished day yet - "
+                f"nothing to compare"]
+
+    def dated(rows):
+        return {row['id']: row for row in rows
+                if (row['entry_day'] if row['kind'] == 'OPEN'
+                    else row['exit_day']) <= upto}
+
+    a, b = dated(ours), dated(theirs)
+    differ = sorted(key for key in a.keys() & b.keys()
+                    if any(not same_cell(name, a[key][name], b[key][name])
+                           for name in LEDGER if name not in STAMPED))
+    only_mine = sorted(a.keys() - b.keys())
+    only_other = sorted(b.keys() - a.keys())
+    if differ or only_mine or only_other:
+        lines = [f'  !! THE TWO RECORDS DISAGREE up to {upto}: '
+                 f'{len(differ)} row(s) differ, {len(only_mine)} only in '
+                 f"the {mine_name}'s, {len(only_other)} only in the "
+                 f"{other_name}'s"]
+        lines += [f'     differs: {key}' for key in differ[:5]]
+        lines += [f"     only in the {mine_name}'s: {key}"
+                  for key in only_mine[:5]]
+        lines += [f"     only in the {other_name}'s: {key}"
+                  for key in only_other[:5]]
+        return lines
+    return [f"  THE TWO RECORDS AGREE: all {len(a)} rows dated up to "
+            f"{upto} are the same in the {mine_name}'s record and the "
+            f"{other_name}'s"]
+
+
+def verdict_code(text):
+    """What a run's report means for whoever started it: 1 if it holds an
+    alarm, says OFFLINE, or the two records disagree; else 0."""
+    return int('INTEGRITY ALARM' in text or 'PAPER-WATCH OFFLINE' in text
+               or 'THE TWO RECORDS DISAGREE' in text)
+
+
 def late_hours(entry_day, now):
     """Hours from the entry day's opening (00:00 UTC) to the writing."""
     opened = datetime.fromtimestamp(day_ms(entry_day) / 1000, tz=timezone.utc)
@@ -709,12 +781,25 @@ def binance_spot(symbol, start_ms):
     return reply.json()
 
 
-def real_sources():
+def funding_door(url):
+    """One record's door to Binance's funding. The address it asks is
+    carried on the function, so a gate can read which door a record has."""
+    def ask(params):
+        import requests
+        reply = requests.get(url, params=params, timeout=TIMEOUT,
+                             headers={'User-Agent': 'python'})
+        reply.raise_for_status()
+        return reply.json()
+    ask.url = url
+    return ask
+
+
+def real_sources(record='laptop'):
     if LAB_DIR not in sys.path:
         sys.path.insert(0, LAB_DIR)
-    import build_funding_vault
     import build_mood_vault
-    return {'candles': binance_spot, 'funding': build_funding_vault.binance,
+    return {'candles': binance_spot,
+            'funding': funding_door(FUNDING_DOORS[record]),
             'mood': build_mood_vault.alternative_me}
 
 
@@ -950,12 +1035,19 @@ def health_lines(store, rows, frames, notes):
     return lines
 
 
+def record_line(record):
+    return (f"  THIS IS THE {record.upper()}'s RECORD "
+            f"(journal/{os.path.basename(RECORDS[record])}/)")
+
+
 def render(store, rows, still_open, frames, notes, new_ids=(), now=None,
-           alarms=()):
+           alarms=(), record=None, versus=()):
     """The report, as text."""
     newest = max((store.last_day(asset_of(coin)) or '' for coin in COINS),
                  default='')
     lines = ['=' * 78, 'ZAR X - THE PAPER-WATCH', NO_MONEY, '=' * 78]
+    if record:
+        lines.append(record_line(record))
     lines.append(f'  followed since {START_DAY}; last completed day in the '
                  f'store: {newest or "none"}')
     if now is not None:
@@ -1008,9 +1100,24 @@ def render(store, rows, still_open, frames, notes, new_ids=(), now=None,
     lines += _portfolio_lines(rows)
     lines += ['', 'HEALTH']
     lines += health_lines(store, rows, frames, notes)
+    lines += list(versus)
     lines += ['', 'Not counted: funding paid or received while a position is '
               'held. Prices are spot.', NO_MONEY, '=' * 78]
     return '\n'.join(lines)
+
+
+def _where(record, directory, other):
+    """A record's own folder and the other record's, unless told."""
+    if record is None:
+        return directory, other, ()
+    mine = RECORDS[record] if directory is None else directory
+    twin = 'cloud' if record == 'laptop' else 'laptop'
+    theirs = RECORDS[twin] if other is None else other
+    return mine, theirs, (twin,)
+
+
+def _versus(record, mine, theirs, twin):
+    return compare(mine, theirs, record, twin[0]) if twin else ()
 
 
 def _prepare(directory, now, sources):
@@ -1031,42 +1138,51 @@ def _prepare(directory, now, sources):
     return store, frames, worked, still_open, written, alarms, new, notes
 
 
-def run(now=None, sources=None, directory=None):
+def run(now=None, sources=None, directory=None, record=None, other=None):
     """A RUN: fetch, add, work out, check, append. Returns the report.
-    Never raises."""
+    Never raises. `record` ('laptop' or 'cloud') picks the folder and the
+    funding door, and the report then compares the two records."""
     now = datetime.now(timezone.utc) if now is None else now
     try:
-        sources = real_sources() if sources is None else sources
+        directory, other, twin = _where(record, directory, other)
+        sources = (real_sources(record or 'laptop') if sources is None
+                   else sources)
         (store, frames, _worked, still_open, written, alarms, new,
          notes) = _prepare(directory, now, sources)
         if alarms:
             return render(store, written, still_open, frames, notes,
-                          now=now, alarms=alarms)
+                          now=now, alarms=alarms, record=record,
+                          versus=_versus(record, directory, other, twin))
         append_ledger(new, now, directory)
         rows = read_ledger(directory)
         return render(store, rows, still_open, frames, notes,
-                      new_ids=[row['id'] for row in new], now=now)
+                      new_ids=[row['id'] for row in new], now=now,
+                      record=record,
+                      versus=_versus(record, directory, other, twin))
     except Exception as exc:
         return (f'PAPER-WATCH OFFLINE - {type(exc).__name__}: {exc}\n'
                 f'Nothing is assumed. {NO_MONEY}')
 
 
-def report(directory=None):
+def report(directory=None, record=None, other=None):
     """The report from what is stored. No network, nothing written."""
     try:
+        directory, other, twin = _where(record, directory, other)
         (store, frames, _worked, still_open, written, alarms, _new,
          notes) = _prepare(directory, None, None)
         return render(store, written, still_open, frames, notes,
-                      alarms=alarms)
+                      alarms=alarms, record=record,
+                      versus=_versus(record, directory, other, twin))
     except Exception as exc:
         return (f'PAPER-WATCH OFFLINE - {type(exc).__name__}: {exc}\n'
                 f'Nothing is assumed. {NO_MONEY}')
 
 
-def week(directory=None, ending=None):
+def week(directory=None, ending=None, record=None, other=None):
     """THE WEEK'S NUMBERS for the weekly autopsy: the seven completed days
     ending at the last one in the store. Numbers only. No network."""
     try:
+        directory, other, twin = _where(record, directory, other)
         (store, frames, _worked, still_open, rows, alarms, _new,
          notes) = _prepare(directory, None, None)
         last = ending or max((store.last_day(asset_of(coin)) or ''
@@ -1165,7 +1281,10 @@ def week(directory=None, ending=None):
         lines += _portfolio_lines(rows)
         lines += ['', f'OPEN NOW - {len(still_open)}', '', 'HEALTH']
         lines += health_lines(store, rows, frames, notes)
+        lines += list(_versus(record, directory, other, twin))
         lines += ['', NO_MONEY, '=' * 78]
+        if record:
+            lines.insert(3, record_line(record))
         return '\n'.join(lines)
     except Exception as exc:
         return (f'PAPER-WATCH OFFLINE - {type(exc).__name__}: {exc}\n'
@@ -1173,13 +1292,16 @@ def week(directory=None, ending=None):
 
 
 def main(argv):
+    """`--cloud` is the cloud's record; without it, the laptop's."""
+    record = 'cloud' if '--cloud' in argv else 'laptop'
     if '--report' in argv:
-        print(report())
+        text = report(record=record)
     elif '--week' in argv:
-        print(week())
+        text = week(record=record)
     else:
-        print(run())
-    return 0
+        text = run(record=record)
+    print(text)
+    return verdict_code(text)
 
 
 if __name__ == '__main__':
