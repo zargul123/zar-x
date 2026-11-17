@@ -5844,3 +5844,41 @@ hour after they were written, and `--report` said nothing - the chain is
 over cells, not bytes. Put back byte for byte (`PROGRESS_LOG.md`, the
 entry "MY OWN `git stash`..."), and `journal/paper/.gitattributes` now
 forbids git to touch that folder. **THE HOLE ITSELF IS OPEN.**
+
+**R-094, ITEMS 24 TO 31 (added late the same night, against the cloud's
+record and the comparison).**
+
+24. **THE CLOUD's FUNDING DOOR IS NOT A DOCUMENTED ONE.**
+    `www.binance.com/fapi/v1/fundingRate` answers a machine that
+    `fapi.binance.com` refuses with 451. Measured the same: 12,870 of
+    12,870 rows, then a whole `funding.csv` byte for byte. Binance can
+    shut it without a word. He was told and ordered it; **THE DECISION TO
+    GO ROUND A BLOCK BY ANOTHER HOST IS HIS AND I READ HIS ORDER AS THAT
+    DECISION WITHOUT ASKING IT AS A YES-OR-NO.**
+25. **IF THAT DOOR SHUTS, THE CLOUD's COMBINED RULE GOES QUIET** coin by
+    coin (item 11) and the two records DISAGREE from that day - which is
+    the alarm working, and also an e-mail every morning until someone
+    acts. Nothing fills the cloud's store from the laptop's.
+26. **THE COMPARISON SAID "AGREE: ALL 0 ROWS" ON ITS FIRST REAL REPORT.**
+    Repaired and gated the same night. The rule it now follows is wider
+    than the bar's and is mine. **A COMPARISON I REPAIRED ONCE IN AN HOUR
+    HAS NOT BEEN ATTACKED BY ANYBODY.**
+27. **THE LAPTOP's RECORD REACHES THE CLOUD ONLY WHEN A SESSION COMMITS
+    IT**, so the cloud compares against an old laptop record. It says up
+    to which day. A disagreement can therefore sit unseen for as long as
+    nobody commits `journal/paper/`.
+28. **`PAPER_WATCH.bat` NOW RUNS `git merge --ff-only`** on his working
+    folder before the laptop's run. If the folder is behind and clean
+    enough it moves forward; if not, it is skipped in silence. A `.bat`
+    that moves his checkout is a new kind of thing on this ship.
+29. **THE CLOUD COMMITS THREE TIMES A MORNING EVEN WHEN NOTHING IS NEW**
+    (the report's "this run" time changes). Noise in the history, and
+    three more chances a day for two cloud jobs to meet; they share one
+    queue.
+30. **GITHUB's CLOCK.** Scheduled runs are late by minutes to an hour and
+    are sometimes dropped; GitHub also stops schedules in a repository it
+    judges idle. Three tries a morning; **NOT MEASURED: ONE REAL
+    SCHEDULED RUN.** The first is due 2026-11-18 00:07 UTC.
+31. **A RED CLOUD RUN E-MAILS THE REPOSITORY's OWNER.** That is the only
+    way he is told anything today, and it tells him only that something
+    is wrong, never that a signal came.

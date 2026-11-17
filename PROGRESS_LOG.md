@@ -21843,3 +21843,124 @@ hold the same 26 signals as the laptop's, or that is the session.
 
 **Nothing new. The two probes' statuses and row counts; 12,870 funding
 rows compared between the two doors as equal-or-not, never printed.**
+
+# 2026-11-17 (LATE NIGHT), THE SAME SESSION - THE ACCOUNT. **THE CLOUD KEEPS ITS OWN PAPER RECORD. ITS FIRST RUN, 17:00 UTC, WROTE THE SAME 26 SIGNALS AS THE LAPTOP's: THE TWO RECORDS AGREE ON 26 OF 26 ROWS. GATE 7.1 IS NOW 118 CHECKS, 0 RED, TWICE. THE LAPTOP's RECORD WAS NOT TOUCHED. NO MONEY.**
+
+The bar is the entry above, committed alone first (`30858a2`).
+
+## 1. WHAT WAS BUILT
+
+    journal/paper_watch.py           `--cloud` works the cloud's record;
+                                     without it, the laptop's. Two
+                                     folders, two funding doors,
+                                     `compare()`, the record's name on
+                                     every report, an exit code of 1 on
+                                     ALARM, OFFLINE or DISAGREE.
+    journal/paper_cloud/             the cloud's store and ledger, begun
+                                     by the cloud itself. `* -text` was
+                                     committed into the folder BEFORE its
+                                     first file existed.
+    .github/workflows/paper_cloud.yml   00:07, 01:07, 03:07 UTC daily;
+                                     also by hand. Shares the snapshot
+                                     job's queue.
+    journal/paper_cloud_report.txt   the cloud's report, committed by it
+    journal/paper_cloud_week.txt     the cloud's week
+    PAPER_CLOUD.bat                  fetch, and the cloud's report in
+                                     Notepad. Changes nothing here.
+    PAPER_WATCH.bat                  two lines added: fetch, and a
+                                     fast-forward to pick up the cloud's
+                                     record before the laptop's run.
+
+**NOT ONE RULE, NUMBER OR LINE OF THE WORKING-OUT CHANGED.** The settings
+stamp is the same; the laptop's 26 rows come out identical after every
+change of tonight (`--report`, no alarm; the five files 458,958 /
+528,235 / 7,553 / 18,142 / 693 bytes, as at the first run).
+`run_daily.bat` and the Brief: not touched.
+
+## 2. THE CLOUD's FIRST RUN - 2026-11-17 17:00:47 UTC
+
+Started by pushing the workflow. It seeded 400 days for thirteen coins
+and wrote 26 OPEN rows, each "LATE by 17 hours". **EVERY SOURCE ANSWERED
+FOR EVERY COIN - I HAD PREDICTED AT LEAST ONE FUNDING FETCH WOULD FAIL.
+NONE DID.**
+
+    the cloud's five files .... 458,958 / 528,235 / 7,553 / 18,142 / 693
+                                bytes - THE SAME FIVE SIZES AS THE
+                                LAPTOP's
+    funding.csv ............... **BYTE FOR BYTE THE LAPTOP's** (the same
+                                sha256): 15,678 settlements fetched
+                                through the website's host on a machine
+                                in the United States equal the 15,678
+                                fetched from the documented address on
+                                his laptop.
+    candles, mood, opens ...... the same figures; they differ only in
+                                the "first seen" time each row carries
+    ledger .................... 26 rows; the same in every cell that is
+                                worked out (below)
+
+## 3. >>> THE CLOUD's FIRST REPORT SAID "THE TWO RECORDS AGREE: ALL 0 ROWS" - A GREEN ON NOTHING. I HAD BUILT IT AN HOUR BEFORE. REPAIRED.
+
+As built to the bar, the comparison took only rows dated on or before the
+last day BOTH stores hold. All 26 signals are entered on the 17th - the
+day in progress - and the last finished day is the 16th. **SO IT COMPARED
+NOTHING AND PRINTED "AGREE".** That is this ship's oldest fault in a new
+coat: a tally over an empty set.
+
+**THE REPAIR, AND IT CHANGES WHAT THE BAR SAID, SO IN BOLD: A ROW THAT
+BOTH RECORDS HOLD MUST BE THE SAME ROW WHATEVER ITS DATE. A ROW ONLY ONE
+HOLDS IS A DISAGREEMENT ONLY IF IT IS DATED INSIDE THE DAYS BOTH STORES
+COVER** (beyond them one record is simply ahead). And two records with no
+row in common are told "nothing to compare", never "agree".
+
+Two checks added for it - a signal of the day in progress changed in one
+record must say DISAGREE; and it never says AGREE of nothing. **THEN BOTH
+REAL REPORTS, FROM THE LAPTOP:**
+
+    laptop:  THE TWO RECORDS AGREE: all 26 rows both hold are the same
+             in the laptop's record and the cloud's, and neither lacks a
+             row dated up to 2026-11-16
+    cloud:   the same sentence, the other way round
+
+**26 OF 26: SIGNAL DAY, ENTRY, RANGE, STOP, TARGET, SIZE - WORKED ON TWO
+MACHINES, TWO PYTHONS, TWO NUMPYS, THROUGH TWO FUNDING DOORS.** (The
+cloud's own committed report still carries the "all 0 rows" line until
+its next run at 00:07 UTC.)
+
+## 4. THE GATE - 106 TO 118
+
+Nine new checks under (o): the two doors typed and never crossed; two
+records made different ways agree, with the count; one figure changed;
+a row missing from one; one record ahead; the other not there, or empty;
+a newer row both hold; never AGREE of nothing; the record's name on the
+report and the exit code. Three new drill breaks: the doors crossed, a
+comparison that always agrees, a comparison reaching past the days both
+hold. **118 CHECKS, 0 RED, normal clock and `TZ=UTC0`.** First run of the
+first version: 116, 0 red.
+
+**NOT ATTACKED BEYOND ITS OWN DRILL.** The thirty-edit attack of the
+evening was on the version before `compare()` existed. Filed.
+
+## 5. WHAT I GOT WRONG
+
+1. **THE EMPTY "AGREE"** (section 3). Found by reading the cloud's first
+   report, not by any check - the gate's made-up records always had
+   finished days behind their rows, so the case never arose there.
+2. **MY PREDICTION OF A FAILED FUNDING FETCH WAS WRONG.** My prediction
+   that the 26 signals would match was right.
+3. **A HERE-DOCUMENT AGAIN**, to set two counts in my scratch copy of the
+   gate. It worked; the orders say never; that is three today.
+4. **THE CLOUD's RECORD BEGAN LATE BY 17 HOURS**, like the laptop's. Its
+   first on-time row can come at 00:07 UTC on the 18th.
+
+## 6. WHAT I TOLD HIM, AND WHAT HE HAS NOT BEEN ASKED
+
+Told, before his order: the cloud's funding door is Binance's website
+host, not its documented address; Binance can shut it any day; using it
+is his decision. **NOT YET TOLD IN WORDS HE HAS ANSWERED: THAT A RED
+CLOUD RUN SENDS AN E-MAIL FROM GITHUB TO THE REPOSITORY's OWNER.** It is
+in the reply this entry is written beside.
+
+## 7. WHAT I LOOKED AT
+
+**The cloud's first report (the same 26 signals already seen) and five
+file sizes and checksums. Nothing else.**

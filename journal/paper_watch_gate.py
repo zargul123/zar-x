@@ -37,7 +37,7 @@ COINS13 = ('BTC', 'ETH', 'SOL', 'XRP', 'BNB', 'DOGE', 'NEAR', 'UNI', 'LINK',
 THREE = ('BTC', 'ETH', 'SOL')
 RULE_NAMES = ('confluence-1d-t100', 'trend-only-1d-t100')
 DAY = 86_400_000
-OWED = 116                   # the checks this gate owes, drill included
+OWED = 118                  # the checks this gate owes, drill included
 DRILL_OWED = 27              # of which, sabotages
 
 
@@ -1462,11 +1462,14 @@ class Suite:
         def agree():
             daily, _t, _s = self.daily_runs()
             lines = pw.compare(daily, self.late_run(), 'laptop', 'cloud')
-            count = len(dated(self.ledger(daily), '2026-11-20'))
-            return (count >= 13 and len(lines) == 1 and lines[0] == (
-                f"  THE TWO RECORDS AGREE: all {count} rows dated up to "
-                f"2026-11-20 are the same in the laptop's record and the "
-                f"cloud's"))
+            count = len(self.ledger(daily))
+            inside = len(dated(self.ledger(daily), '2026-11-20'))
+            return (13 <= inside < count and len(lines) == 1
+                    and lines[0] == (
+                        f"  THE TWO RECORDS AGREE: all {count} rows both "
+                        f"hold are the same in the laptop's record and the "
+                        f"cloud's, and neither lacks a row dated up to "
+                        f"2026-11-20"))
         self.mark('(o) TWO RECORDS MADE DIFFERENT WAYS AGREE: five daily '
                   'runs against one late run - it says AGREE, up to the '
                   'last day both hold, and counts the rows', agree)
@@ -1518,14 +1521,13 @@ class Suite:
                 with open(os.path.join(early, name), 'wb') as handle:
                     handle.write(data)
             lines = pw.compare(early, self.late_run(), 'laptop', 'cloud')
-            count = len(dated(self.ledger(early), '2026-11-18'))
-            later = len(self.ledger(self.late_run())) > len(
-                self.ledger(early))
-            return (later and 0 < count < len(self.ledger(early))
-                    and lines == [
-                        f"  THE TWO RECORDS AGREE: all {count} rows dated "
-                        f"up to 2026-11-18 are the same in the laptop's "
-                        f"record and the cloud's"])
+            count = len(self.ledger(early))
+            later = len(dated(self.ledger(self.late_run()), '2026-11-20')
+                        ) > len(dated(self.ledger(early), '2026-11-20'))
+            return (later and count > 0 and lines == [
+                f"  THE TWO RECORDS AGREE: all {count} rows both hold are "
+                f"the same in the laptop's record and the cloud's, and "
+                f"neither lacks a row dated up to 2026-11-18"])
         self.mark('(o) ONE RECORD AHEAD OF THE OTHER is not a disagreement: '
                   'only the days BOTH hold are compared, and the newer '
                   'rows of either are left alone', one_ahead)
@@ -1544,6 +1546,39 @@ class Suite:
         self.mark('(o) THE OTHER RECORD NOT THERE YET, or there and empty: '
                   'said in one line, and not an alarm', not_there)
 
+        def a_newer_row_both_hold():
+            def change(rows):
+                at_, day_ = rows[0].index('stop'), rows[0].index('entry_day')
+                row = next(r for r in rows[1:] if r[0] == 'OPEN'
+                           and r[day_] == '2026-11-21')
+                row[at_] = repr(float(row[at_]) * 1.001)
+                return row[1]
+            daily, target, touched = broken_copy('two_newer', change)
+            text = '\n'.join(pw.compare(daily, target, 'laptop', 'cloud'))
+            return ('1 row(s) differ' in text
+                    and f'differs: {touched}' in text)
+        self.mark('(o) A ROW BOTH HOLD MUST BE THE SAME ROW WHATEVER ITS '
+                  'DATE: a signal of the day in progress, newer than the '
+                  'last day both stores hold, changed in one - DISAGREE. '
+                  '(The cloud\'s first real report said "all 0 rows agree" '
+                  'of 26 rows it had never compared.)', a_newer_row_both_hold)
+
+        def nothing_in_common():
+            daily, _t, _s = self.daily_runs()
+            bare = os.path.join(self.tmp, 'two_bare')
+            shutil.copytree(self.late_run(), bare)
+            write_csv(os.path.join(bare, 'ledger.csv'),
+                      read_csv(os.path.join(bare, 'ledger.csv'))[:1])
+            mine = os.path.join(self.tmp, 'two_bare_mine')
+            shutil.copytree(bare, mine)
+            lines = pw.compare(mine, bare, 'laptop', 'cloud')
+            return lines == ['  the two records hold no row in common yet '
+                             '(last day both hold: 2026-11-20) - nothing '
+                             'to compare']
+        self.mark('(o) AND IT NEVER SAYS "AGREE" OF NOTHING: two records '
+                  'with no row in common are told so, in those words',
+                  nothing_in_common)
+
         def which_record():
             daily, _t, _s = self.daily_runs()
             late = self.late_run()
@@ -1552,10 +1587,10 @@ class Suite:
             return ("THIS IS THE LAPTOP's RECORD (journal/paper/)" in mine
                     and "THIS IS THE CLOUD's RECORD (journal/paper_cloud/)"
                     in theirs
-                    and "are the same in the laptop's record and the "
-                        "cloud's" in mine
-                    and "are the same in the cloud's record and the "
-                        "laptop's" in theirs
+                    and "rows both hold are the same in the laptop's record "
+                        "and the cloud's" in mine
+                    and "rows both hold are the same in the cloud's record "
+                        "and the laptop's" in theirs
                     and pw.verdict_code(mine) == 0
                     and pw.verdict_code(theirs) == 0
                     and pw.verdict_code('x INTEGRITY ALARM x') == 1

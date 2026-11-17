@@ -808,3 +808,20 @@ not exist and has now waited four sessions.**
 | **THE THIRTEEN COINS, BINANCE USDT PERPETUALS, 2026-11-17.** | Dollars traded a day (90-day average, millions) / years listed / correlation of daily moves with BTC over a year: BTC 11,887 / 7.2 / 1.00; ETH 8,831 / 7.0 / 0.91; SOL 1,928 / 6.2 / 0.87; XRP 1,065 / 6.9 / 0.86; NEAR 531 / 6.1 / 0.55; DOGE 456 / 6.4 / 0.81; BNB 385 / 6.8 / 0.82; UNI 287 / 6.2 / 0.63; ADA 186 / 6.8 / 0.80; LINK 168 / 6.8 / 0.82; AVAX 149 / 6.2 / 0.73; AAVE 124 / 6.1 / 0.71; BCH 115 / 6.9 / 0.63. Funding settles every 8 hours on all thirteen over the last 333 days. |
 | **THE FIRST PAPER RUN, 2026-11-17 16:04 UTC.** | 26 signals (13 coins x 2 rules), every one a SELL entered at the 17th's open, every one 16 hours late. The mood rule answered "long" (extreme fear) on all thirteen; every coin closed the 16th under its 100-day average. |
 | **THE SHIP IS THIRTY-EIGHT INVOCATIONS.** | 36 measured 2026-11-17 08:47 UTC: 2,091 green, 0 red. Gate 7.1 (twice) added after; the whole not re-measured. Gate 7.1 takes about 75 seconds. |
+
+# **>>> 2026-11-17 (LATE NIGHT) - THE CLOUD KEEPS ITS OWN PAPER RECORD.**
+
+| Part | What it is |
+|---|---|
+| **Two records.** | `journal/paper/` is the laptop's; `journal/paper_cloud/` is the cloud's. Never one file with two writers. `python journal/paper_watch.py` works the laptop's, `--cloud` the cloud's. Each report names its record and says whether the two agree. **GATE 7.1 is now 118 checks, 0 red, twice.** |
+| **`.github/workflows/paper_cloud.yml`.** | Works the cloud's record at 00:07, 01:07 and 03:07 UTC, commits it with `journal/paper_cloud_report.txt` and `journal/paper_cloud_week.txt`, and ends red on INTEGRITY ALARM, OFFLINE or DISAGREE. |
+| **`PAPER_CLOUD.bat`.** | Fetch, and the cloud's report in Notepad. |
+| **`journal/cloud_probe.py`, `.github/workflows/paper_cloud_test.yml`.** | The read-only probe that measured all this. Runs only when pushed or by hand. |
+
+| Fact | Measurement |
+|---|---|
+| **WHAT GITHUB's MACHINES ARE SERVED, 2026-11-17.** | `data-api.binance.vision` candles: 200. alternative.me: 200. **`fapi.binance.com` funding: 451, "Service unavailable from a restricted location".** `api.binance.com`: 451. `fapi1/2/3.binance.com`: 202, no rows. Bybit: 403. OKX: 200. **`www.binance.com/fapi/v1/fundingRate`: 200, with the day's rows.** |
+| **THE WEBSITE HOST's FUNDING IS THE DOCUMENTED ADDRESS's.** | From the laptop: thirteen coins, 990 settlements each, 12,870 of 12,870 identical in time and rate text. Then the cloud's whole `funding.csv` (15,678 rows, fetched in the United States through the website host) equals the laptop's byte for byte. |
+| **BINANCE's FILE ARCHIVE HAS NO DAILY FUNDING.** | `data.binance.vision` serves funding one file a month, after the month ends (October 2026: 93 rows; November: 404). Its daily folders hold nine other kinds. |
+| **THE CLOUD WORKS THE LEDGER OUT IDENTICAL.** | Python 3.11.18, numpy 1.26.4, pandas 2.2.2 on Linux against the laptop's Python 3.10.18, numpy 1.24.3, pandas 2.2.2 on Windows: all 26 rows the same; Gate 7.1 passes there. |
+| **THE LAPTOP, FOR WAKING BY ITSELF.** | Modern standby (S0, network connected), hibernate available. Wake timers: allowed on mains, blocked on battery. All seven Zar X tasks are set NOT to wake the computer. The daily Brief task is at 09:05 Pakistan time; a snapshot task is at 05:05. |

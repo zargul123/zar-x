@@ -456,6 +456,23 @@ answer, built into this plan:
 | Anything contradicts THE PROMISE | THE PROMISE wins. 3 slots. Then the chapter closes. |
 
 # CURRENT POSITION MARKER (update this line each session)
+## **>>> 2026-11-17 (LATE NIGHT): THE PAPER-WATCH NOW KEEPS TWO SEPARATE RECORDS - THE LAPTOP's (`journal/paper/`) AND THE CLOUD's (`journal/paper_cloud/`) - AND THEY AGREE ON 26 OF 26 ROWS. THE CLOUD WORKS ITS OWN EVERY MORNING AT 00:07, 01:07 AND 03:07 UTC. GATE 7.1 IS 118 CHECKS. NO MONEY.**
+
+**WHAT CHANGED SINCE THE MARKER BELOW:** he asked for the cloud. Two
+probes measured it: GitHub's machine works the ledger out identical and
+passes the gate; Binance's documented funding address refuses it (451);
+Binance's website host serves it the same rows. He ordered a separate
+record for each. Built under its own bar; the cloud's first run wrote
+the same 26 signals. Each report now says whether the two records agree.
+
+**UNPROVEN, PLAINLY:** not one scheduled cloud run has happened yet (the
+first is due 2026-11-18 00:07 UTC). The funding door is not a documented
+one and can be shut. He is told of nothing unless he opens a report -
+except that a red cloud run e-mails him. R-094 has thirty-one items.
+
+**NEXT:** read the first scheduled run; how he is told (Telegram
+recommended, unanswered); a paper line on the Brief; the weekly autopsy.
+
 ## **>>> 2026-11-17 (NIGHT): ALL THREE GAUNTLET SLOTS ARE SPENT AND ALL THREE FAILED. THE SIGNALS CHAPTER OF THE PROMISE IS CLOSED. WHAT REMAINS IS THE PAPER-WATCH (PHASE 7), BUILT TODAY AND RUNNING: THIRTEEN COINS, TWO FROZEN RULES, TWO EXITS FROM EVERY ENTRY, NO MONEY. 26 PAPER SIGNALS OPEN, NOTHING ENDED YET.**
 
 **WHERE THE SHIP IS.** Thirty-eight invocations: the thirty-six measured

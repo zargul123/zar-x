@@ -724,17 +724,24 @@ def compare(mine, other, mine_name='laptop', other_name='cloud'):
         return [f"  the {other_name}'s record holds no finished day yet - "
                 f"nothing to compare"]
 
-    def dated(rows):
-        return {row['id']: row for row in rows
-                if (row['entry_day'] if row['kind'] == 'OPEN'
-                    else row['exit_day']) <= upto}
+    def dated(row):
+        return (row['entry_day'] if row['kind'] == 'OPEN'
+                else row['exit_day']) <= upto
 
-    a, b = dated(ours), dated(theirs)
-    differ = sorted(key for key in a.keys() & b.keys()
+    # A ROW BOTH HOLD MUST BE THE SAME ROW, whatever its date. A row only
+    # ONE holds is a disagreement only if it is dated inside the days both
+    # stores cover: beyond them one record is simply ahead of the other.
+    a = {row['id']: row for row in ours}
+    b = {row['id']: row for row in theirs}
+    both = a.keys() & b.keys()
+    differ = sorted(key for key in both
                     if any(not same_cell(name, a[key][name], b[key][name])
                            for name in LEDGER if name not in STAMPED))
-    only_mine = sorted(a.keys() - b.keys())
-    only_other = sorted(b.keys() - a.keys())
+    only_mine = sorted(key for key in a.keys() - b.keys() if dated(a[key]))
+    only_other = sorted(key for key in b.keys() - a.keys() if dated(b[key]))
+    if not both and not only_mine and not only_other:
+        return [f'  the two records hold no row in common yet (last day '
+                f'both hold: {upto}) - nothing to compare']
     if differ or only_mine or only_other:
         lines = [f'  !! THE TWO RECORDS DISAGREE up to {upto}: '
                  f'{len(differ)} row(s) differ, {len(only_mine)} only in '
@@ -746,9 +753,9 @@ def compare(mine, other, mine_name='laptop', other_name='cloud'):
         lines += [f"     only in the {other_name}'s: {key}"
                   for key in only_other[:5]]
         return lines
-    return [f"  THE TWO RECORDS AGREE: all {len(a)} rows dated up to "
-            f"{upto} are the same in the {mine_name}'s record and the "
-            f"{other_name}'s"]
+    return [f"  THE TWO RECORDS AGREE: all {len(both)} rows both hold are "
+            f"the same in the {mine_name}'s record and the {other_name}'s, "
+            f"and neither lacks a row dated up to {upto}"]
 
 
 def verdict_code(text):

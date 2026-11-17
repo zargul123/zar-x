@@ -1,4 +1,4 @@
-# ZAR X — **ALL THREE GAUNTLET SLOTS ARE SPENT AND ALL THREE FAILED (SLOT 1 AND SLOT 3 WERE RUN ON 2026-11-17; SLOT 2 THE DAY BEFORE). THE PAPER-WATCH IS BUILT AND RUNNING: 13 COINS, 2 RULES, 2 EXITS, NO MONEY. YOUR JOB: (1) PROVE THE SHIP ALIVE - 38 INVOCATIONS. (2) MOVE THE PAPER-WATCH TO THE CLOUD JOB, WITH ONE TEST FIRST - HE HAS SAID YES. (3) SETTLE HOW HE IS TOLD OF SIGNALS. (4) A PAPER LINE ON HIS BRIEF. (5) THE WEEKLY AUTOPSY WHEN HE ASKS FOR IT.**
+# ZAR X — **ALL THREE GAUNTLET SLOTS ARE SPENT AND ALL THREE FAILED (SLOT 1 AND SLOT 3 WERE RUN ON 2026-11-17; SLOT 2 THE DAY BEFORE). THE PAPER-WATCH IS BUILT AND RUNNING: 13 COINS, 2 RULES, 2 EXITS, NO MONEY. YOUR JOB: (1) PROVE THE SHIP ALIVE - 38 INVOCATIONS. (2) THE CLOUD NOW KEEPS ITS OWN SEPARATE RECORD (BUILT THE SAME NIGHT; THE TWO RECORDS AGREE 26 OF 26) - READ ITS FIRST SCHEDULED RUNS. (3) SETTLE HOW HE IS TOLD OF SIGNALS. (4) A PAPER LINE ON HIS BRIEF. (5) THE WEEKLY AUTOPSY WHEN HE ASKS FOR IT.**
 
 *Written 2026-11-17 (night) by Fable at the end of a very long session.
 He opened it with "zarx fable here". Asked "The last builds were made by
@@ -68,6 +68,8 @@ STAMP), IT IS A NEW RECORD FROM A NEW START DAY, DECLARED IN A BAR FIRST.**
 
 ## >>> YOUR FIRST JOBS, IN ORDER
 
+**(GATE 7.1 IS NOW 118 CHECKS, NOT 106: THE CLOUD's RECORD AND THE COMPARISON WERE ADDED LATE THE SAME NIGHT. WHERE THIS FILE SAYS 106, READ 118.)**
+
 **1. PROVE THE SHIP ALIVE - THIRTY-EIGHT INVOCATIONS.** The thirty-six of
 the table below plus `journal/paper_watch.py --gate` twice (normal and
 `TZ=UTC0`; about 75 seconds each). Then `python journal/paper_watch.py
@@ -82,31 +84,51 @@ their own, labelled, and push. **NEVER RUN THE TRACKER ON A CHECKOUT THAT
 IS BEHIND `origin`**: it appends, and two different appends to one file
 is a conflict in a record that must never be edited by hand.
 
-**3. THE CLOUD MOVE - HE SAID YES ("see my laptop is not on 24/7 if we
-can also do it on cloud it will be great").** The laptop's task ran on 8
-days in six weeks. The cloud watchman (`.github/workflows/
-cloud_snapshot.yml`) runs every four hours.
+**3. THE CLOUD - DONE THE SAME NIGHT, ON HIS ORDER ("ok setup teh clod
+thing and made a separe record file for clod only and one for laptop
+record holder"). READ ITS FIRST SCHEDULED RUNS.**
 
-    WHAT IS NOT KNOWN: whether Binance answers GitHub's machines (they
-    are in the United States). The candles come from
-    `data-api.binance.vision` and should be served. **THE FUNDING COMES
-    FROM `fapi.binance.com` AND MAY BE REFUSED.** It cannot be measured
-    from his laptop.
-    THE TEST FIRST: a step in the workflow (or a manual run) that fetches
-    one candle page and one funding page for one coin and prints only
-    the status and the row count. Read the result before changing
-    anything else.
-    IF BOTH ANSWER: the cloud becomes THE ONE WRITER - a run a few
-    minutes after 00:00 UTC, committing `journal/paper/` - **AND IN THE
-    SAME CHANGE THE LAPTOP's LINE IN `run_daily.bat` AND `PAPER_WATCH.bat`
-    BECOME "pull, then `--report`".** Two writers corrupt the ledger
-    (R-094 item 6).
-    ALSO MEASURE THERE: that the cloud's Python (3.11) works the existing
-    ledger out identical. A different pandas could move a last decimal;
-    outside one part in a thousand million that is an alarm on an honest
-    ledger (R-094 item 15).
-    IF FUNDING IS REFUSED: tell him plainly. The choices are another
-    funding source for the cloud, or the laptop stays the writer. HIS.
+    TWO RECORDS, NEVER ONE FILE WITH TWO WRITERS:
+      journal/paper/         THE LAPTOP's. `python journal/paper_watch.py`
+                             (his daily task, `PAPER_WATCH.bat`). Funding
+                             from `fapi.binance.com`.
+      journal/paper_cloud/   THE CLOUD's. `python journal/paper_watch.py
+                             --cloud`, run ONLY by
+                             `.github/workflows/paper_cloud.yml` at 00:07,
+                             01:07 and 03:07 UTC. Funding from
+                             `www.binance.com/fapi/v1/fundingRate`.
+    **NEVER RUN `--cloud` ON THE LAPTOP AND NEVER LET THE CLOUD JOB WRITE
+    `journal/paper/`.** Either makes two writers of one record.
+
+    WHY TWO DOORS: `fapi.binance.com` refuses GitHub's machines (HTTP
+    451, measured). Binance's website host serves them the same rows
+    (12,870 of 12,870, then a whole file byte for byte). **IT IS NOT A
+    DOCUMENTED DOOR AND BINANCE CAN SHUT IT.** He was told and ordered
+    it. If it shuts: funding "not updated" in the cloud's report, then
+    the two records DISAGREE - tell him plainly; the choices are another
+    funding source for the cloud (OKX answers; it is NOT Binance's data,
+    so that is a NEW record) or a small machine outside the United
+    States. HIS.
+
+    EACH REPORT SAYS WHETHER THE TWO RECORDS AGREE (under HEALTH). At the
+    end of the session: 26 of 26 rows. **THE CLOUD SEES THE LAPTOP's
+    RECORD ONLY AS LAST COMMITTED, SO COMMIT `journal/paper/` WHEN YOU
+    ARRIVE (job 2) OR THE COMPARISON IS OLD.**
+
+    THE CLOUD JOB ENDS RED - GitHub e-mails him - on INTEGRITY ALARM,
+    OFFLINE or DISAGREE. The report is committed first:
+    `journal/paper_cloud_report.txt`, `journal/paper_cloud_week.txt`.
+    `PAPER_CLOUD.bat` shows it on the laptop.
+
+    **NOT ONE SCHEDULED RUN HAD HAPPENED WHEN I LEFT** (the first was due
+    2026-11-18 00:07 UTC). `git log --oneline -- journal/paper_cloud/`
+    tells you whether they came, and when. The cloud's first rows were
+    17 hours late; its first ON TIME row can only come from a scheduled
+    run. **IF THERE ARE NO COMMITS BY "zarx-cloud-watchman" WITH "paper-
+    watch" IN THEM AFTER 2026-11-17, THAT IS YOUR SESSION.**
+
+    `journal/cloud_probe.py` and `paper_cloud_test.yml` are the read-only
+    probe that measured all this. It runs only when pushed or by hand.
 
 **4. HOW HE IS TOLD.** He asked: "ok but how i will know about briefs and
 signals?" Four ways were put to him; I recommended a Telegram message
