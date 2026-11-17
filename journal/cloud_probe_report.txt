@@ -1,0 +1,26 @@
+ZAR X - THE CLOUD PROBE (statuses and counts only; no price, no rate)
+python 3.11.18 on Linux
+numpy 1.26.4  pandas 2.2.2
+
+1. WHAT THE PAPER-WATCH NEEDS
+candles  data-api.binance.vision   status 200  rows 5
+funding  fapi.binance.com          status 451  rows message: Service unavailable from a restricted location according to 'b. Eligib
+mood     alternative.me            status 200  rows 5
+
+2. OTHER DOORS, IN CASE ONE IS SHUT (status only)
+funding  fapi1.binance.com         status 202  rows -
+funding  fapi2.binance.com         status 202  rows -
+funding  fapi3.binance.com         status 202  rows -
+candles  api.binance.com           status 451  rows message: Service unavailable from a restricted location according to 'b. Eligib
+funding  bybit                     status 403  rows -
+funding  okx                       status 200  rows 5
+
+3. DOES THIS MACHINE WORK THE LEDGER OUT IDENTICAL?
+YES - every written row comes out identical
+   OPEN NOW - 26 trade(s) with at least one ending still open
+   signals written ON TIME (within 6 hours of the entry day opening): 0
+   signals written LATE (worked out afterwards): 26
+
+4. GATE 7.1 ON THIS MACHINE
+exit 0  GATE 7.1 PASSED — 106 checks, 0 red.
+probed 2026-11-17 16:27 UTC on a GitHub runner
