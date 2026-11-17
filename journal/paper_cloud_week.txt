@@ -1,0 +1,70 @@
+==============================================================================
+ZAR X - THE PAPER-WATCH - THE WEEK 2026-11-10 to 2026-11-16
+PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
+  THIS IS THE CLOUD's RECORD (journal/paper_cloud/)
+NUMBERS ONLY. The reading of them is done in a session: say "weekly autopsy".
+==============================================================================
+
+SIGNALS THIS WEEK - 0
+
+ENDINGS THIS WEEK - 0
+
+THIS WEEK, BY RECORD (dollars on the pretend 1,000, every signal at 1% risk)
+  combined rule / fixed exit       0 ended,   0 won,     +0.00 dollars
+  combined rule / trailing exit    0 ended,   0 won,     +0.00 dollars
+  trend alone   / fixed exit       0 ended,   0 won,     +0.00 dollars
+  trend alone   / trailing exit    0 ended,   0 won,     +0.00 dollars
+
+THE TWO EXITS ON THE SAME TRADES (every trade both of whose endings have happened, since the start)
+  combined rule    0 trades: fixed     +0.00, trailing     +0.00 dollars; trailing did better on 0, worse on 0, the same on 0
+  trend alone      0 trades: fixed     +0.00, trailing     +0.00 dollars; trailing did better on 0, worse on 0, the same on 0
+
+THE MARKET THIS WEEK
+  BTC    -13.91% over the week; below its 100-day average
+  ETH    -14.73% over the week; below its 100-day average
+  SOL    -17.48% over the week; below its 100-day average
+  XRP    -13.07% over the week; below its 100-day average
+  BNB    -14.49% over the week; below its 100-day average
+  DOGE   -15.90% over the week; below its 100-day average
+  NEAR   -12.95% over the week; below its 100-day average
+  UNI    -26.01% over the week; below its 100-day average
+  LINK   -14.26% over the week; below its 100-day average
+  AVAX   -17.74% over the week; below its 100-day average
+  ADA    -13.64% over the week; below its 100-day average
+  AAVE   -17.56% over the week; below its 100-day average
+  BCH    -12.61% over the week; below its 100-day average
+  above their 100-day average: 0; below: 13
+  mood index this week: from 10 to 32 (last: 10, Extreme Fear)
+
+THE RECORD SINCE THE START
+  record                                        trades  days   won     PF   1,000 became   worst dip
+  combined rule / fixed exit / 13 coins              0     0     0      -       1,000.00        0.0%
+  combined rule / fixed exit / original 3            0     0     0      -       1,000.00        0.0%
+  combined rule / trailing exit / 13 coins           0     0     0      -       1,000.00        0.0%
+  combined rule / trailing exit / original 3         0     0     0      -       1,000.00        0.0%
+  trend alone / fixed exit / 13 coins                0     0     0      -       1,000.00        0.0%
+  trend alone / fixed exit / original 3              0     0     0      -       1,000.00        0.0%
+  trend alone / trailing exit / 13 coins             0     0     0      -       1,000.00        0.0%
+  trend alone / trailing exit / original 3           0     0     0      -       1,000.00        0.0%
+
+THE PORTFOLIO LINE (way B)
+  limit on total open risk: 4% of the account (not final - his to change)
+  record                                         1,000 became   full  reduced  not taken
+  combined rule / fixed exit / 13 coins              1,000.00      0       13          0
+  combined rule / fixed exit / original 3            1,000.00      3        0          0
+  combined rule / trailing exit / 13 coins           1,000.00      0       13          0
+  combined rule / trailing exit / original 3         1,000.00      3        0          0
+  trend alone / fixed exit / 13 coins                1,000.00      0       13          0
+  trend alone / fixed exit / original 3              1,000.00      3        0          0
+  trend alone / trailing exit / 13 coins             1,000.00      0       13          0
+  trend alone / trailing exit / original 3           1,000.00      3        0          0
+
+OPEN NOW - 26
+
+HEALTH
+  signals written ON TIME (within 6 hours of the entry day opening): 0
+  signals written LATE (worked out afterwards): 26
+  THE TWO RECORDS AGREE: all 0 rows dated up to 2026-11-16 are the same in the cloud's record and the laptop's
+
+PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
+==============================================================================

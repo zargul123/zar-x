@@ -1,0 +1,96 @@
+==============================================================================
+ZAR X - THE PAPER-WATCH
+PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
+==============================================================================
+  THIS IS THE CLOUD's RECORD (journal/paper_cloud/)
+  followed since 2026-11-16; last completed day in the store: 2026-11-16
+  this run: 2026-11-17 17:00:47 UTC
+
+NEW THIS RUN - 26 signal(s), 0 ending(s)
+  SIGNAL  combined rule BTC   SHORT entry 2026-11-17 at 64,882.88  stop 69,350.53  target 55,850.25  size 144.11 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule ETH   SHORT entry 2026-11-17 at 1,820.68  stop 2,000.41  target 1,458.49  size 100.74 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule SOL   SHORT entry 2026-11-17 at 71.5800  stop 78.9606  target 56.7114  size 96.47 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule XRP   SHORT entry 2026-11-17 at 0.9553  stop 1.0539  target 0.7566  size 96.35 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule BNB   SHORT entry 2026-11-17 at 591.24  stop 630.32  target 512.19  size 150.08 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule DOGE  SHORT entry 2026-11-17 at 0.0589  stop 0.0650  target 0.0467  size 96.51 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule NEAR  SHORT entry 2026-11-17 at 3.1610  stop 3.6338  target 2.2106  size 66.59 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule UNI   SHORT entry 2026-11-17 at 5.1690  stop 6.0629  target 3.3735  size 57.63 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule LINK  SHORT entry 2026-11-17 at 9.1420  stop 10.1305  target 7.1512  size 92.01 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule AVAX  SHORT entry 2026-11-17 at 7.1200  stop 8.0465  target 5.2562  size 76.51 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule ADA   SHORT entry 2026-11-17 at 0.1532  stop 0.1711  target 0.1172  size 85.22 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule AAVE  SHORT entry 2026-11-17 at 108.55  stop 122.06  target 81.3736  size 80.01 dollars  [LATE by 17 hours]
+  SIGNAL  combined rule BCH   SHORT entry 2026-11-17 at 208.60  stop 230.95  target 163.58  size 92.84 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   BTC   SHORT entry 2026-11-17 at 64,882.88  stop 69,350.53  target 55,850.25  size 144.11 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   ETH   SHORT entry 2026-11-17 at 1,820.68  stop 2,000.41  target 1,458.49  size 100.74 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   SOL   SHORT entry 2026-11-17 at 71.5800  stop 78.9606  target 56.7114  size 96.47 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   XRP   SHORT entry 2026-11-17 at 0.9553  stop 1.0539  target 0.7566  size 96.35 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   BNB   SHORT entry 2026-11-17 at 591.24  stop 630.32  target 512.19  size 150.08 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   DOGE  SHORT entry 2026-11-17 at 0.0589  stop 0.0650  target 0.0467  size 96.51 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   NEAR  SHORT entry 2026-11-17 at 3.1610  stop 3.6338  target 2.2106  size 66.59 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   UNI   SHORT entry 2026-11-17 at 5.1690  stop 6.0629  target 3.3735  size 57.63 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   LINK  SHORT entry 2026-11-17 at 9.1420  stop 10.1305  target 7.1512  size 92.01 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   AVAX  SHORT entry 2026-11-17 at 7.1200  stop 8.0465  target 5.2562  size 76.51 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   ADA   SHORT entry 2026-11-17 at 0.1532  stop 0.1711  target 0.1172  size 85.22 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   AAVE  SHORT entry 2026-11-17 at 108.55  stop 122.06  target 81.3736  size 80.01 dollars  [LATE by 17 hours]
+  SIGNAL  trend alone   BCH   SHORT entry 2026-11-17 at 208.60  stop 230.95  target 163.58  size 92.84 dollars  [LATE by 17 hours]
+
+OPEN NOW - 26 trade(s) with at least one ending still open
+  combined rule BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: stop 69,350.53 target 55,850.25 | trailing: stop now 69,350.53
+  combined rule ETH   SHORT since 2026-11-17 at 1,820.68 | fixed: stop 2,000.41 target 1,458.49 | trailing: stop now 2,000.41
+  combined rule SOL   SHORT since 2026-11-17 at 71.5800 | fixed: stop 78.9606 target 56.7114 | trailing: stop now 78.9606
+  combined rule XRP   SHORT since 2026-11-17 at 0.9553 | fixed: stop 1.0539 target 0.7566 | trailing: stop now 1.0539
+  combined rule BNB   SHORT since 2026-11-17 at 591.24 | fixed: stop 630.32 target 512.19 | trailing: stop now 630.32
+  combined rule DOGE  SHORT since 2026-11-17 at 0.0589 | fixed: stop 0.0650 target 0.0467 | trailing: stop now 0.0650
+  combined rule NEAR  SHORT since 2026-11-17 at 3.1610 | fixed: stop 3.6338 target 2.2106 | trailing: stop now 3.6338
+  combined rule UNI   SHORT since 2026-11-17 at 5.1690 | fixed: stop 6.0629 target 3.3735 | trailing: stop now 6.0629
+  combined rule LINK  SHORT since 2026-11-17 at 9.1420 | fixed: stop 10.1305 target 7.1512 | trailing: stop now 10.1305
+  combined rule AVAX  SHORT since 2026-11-17 at 7.1200 | fixed: stop 8.0465 target 5.2562 | trailing: stop now 8.0465
+  combined rule ADA   SHORT since 2026-11-17 at 0.1532 | fixed: stop 0.1711 target 0.1172 | trailing: stop now 0.1711
+  combined rule AAVE  SHORT since 2026-11-17 at 108.55 | fixed: stop 122.06 target 81.3736 | trailing: stop now 122.06
+  combined rule BCH   SHORT since 2026-11-17 at 208.60 | fixed: stop 230.95 target 163.58 | trailing: stop now 230.95
+  trend alone   BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: stop 69,350.53 target 55,850.25 | trailing: stop now 69,350.53
+  trend alone   ETH   SHORT since 2026-11-17 at 1,820.68 | fixed: stop 2,000.41 target 1,458.49 | trailing: stop now 2,000.41
+  trend alone   SOL   SHORT since 2026-11-17 at 71.5800 | fixed: stop 78.9606 target 56.7114 | trailing: stop now 78.9606
+  trend alone   XRP   SHORT since 2026-11-17 at 0.9553 | fixed: stop 1.0539 target 0.7566 | trailing: stop now 1.0539
+  trend alone   BNB   SHORT since 2026-11-17 at 591.24 | fixed: stop 630.32 target 512.19 | trailing: stop now 630.32
+  trend alone   DOGE  SHORT since 2026-11-17 at 0.0589 | fixed: stop 0.0650 target 0.0467 | trailing: stop now 0.0650
+  trend alone   NEAR  SHORT since 2026-11-17 at 3.1610 | fixed: stop 3.6338 target 2.2106 | trailing: stop now 3.6338
+  trend alone   UNI   SHORT since 2026-11-17 at 5.1690 | fixed: stop 6.0629 target 3.3735 | trailing: stop now 6.0629
+  trend alone   LINK  SHORT since 2026-11-17 at 9.1420 | fixed: stop 10.1305 target 7.1512 | trailing: stop now 10.1305
+  trend alone   AVAX  SHORT since 2026-11-17 at 7.1200 | fixed: stop 8.0465 target 5.2562 | trailing: stop now 8.0465
+  trend alone   ADA   SHORT since 2026-11-17 at 0.1532 | fixed: stop 0.1711 target 0.1172 | trailing: stop now 0.1711
+  trend alone   AAVE  SHORT since 2026-11-17 at 108.55 | fixed: stop 122.06 target 81.3736 | trailing: stop now 122.06
+  trend alone   BCH   SHORT since 2026-11-17 at 208.60 | fixed: stop 230.95 target 163.58 | trailing: stop now 230.95
+
+THE RECORD - every signal, the same 1% at risk each, on a pretend 1,000 dollars
+  ("days" = different entry days: ten coins signalling on one day is one market move)
+  record                                        trades  days   won     PF   1,000 became   worst dip
+  combined rule / fixed exit / 13 coins              0     0     0      -       1,000.00        0.0%
+  combined rule / fixed exit / original 3            0     0     0      -       1,000.00        0.0%
+  combined rule / trailing exit / 13 coins           0     0     0      -       1,000.00        0.0%
+  combined rule / trailing exit / original 3         0     0     0      -       1,000.00        0.0%
+  trend alone / fixed exit / 13 coins                0     0     0      -       1,000.00        0.0%
+  trend alone / fixed exit / original 3              0     0     0      -       1,000.00        0.0%
+  trend alone / trailing exit / 13 coins             0     0     0      -       1,000.00        0.0%
+  trend alone / trailing exit / original 3           0     0     0      -       1,000.00        0.0%
+
+THE PORTFOLIO LINE - the same trades under a limit (way B). Not used to judge a rule.
+  limit on total open risk: 4% of the account (not final - his to change)
+  record                                         1,000 became   full  reduced  not taken
+  combined rule / fixed exit / 13 coins              1,000.00      0       13          0
+  combined rule / fixed exit / original 3            1,000.00      3        0          0
+  combined rule / trailing exit / 13 coins           1,000.00      0       13          0
+  combined rule / trailing exit / original 3         1,000.00      3        0          0
+  trend alone / fixed exit / 13 coins                1,000.00      0       13          0
+  trend alone / fixed exit / original 3              1,000.00      3        0          0
+  trend alone / trailing exit / 13 coins             1,000.00      0       13          0
+  trend alone / trailing exit / original 3           1,000.00      3        0          0
+
+HEALTH
+  signals written ON TIME (within 6 hours of the entry day opening): 0
+  signals written LATE (worked out afterwards): 26
+  THE TWO RECORDS AGREE: all 0 rows dated up to 2026-11-16 are the same in the cloud's record and the laptop's
+
+Not counted: funding paid or received while a position is held. Prices are spot.
+PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
+==============================================================================
