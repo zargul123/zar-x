@@ -20589,3 +20589,295 @@ the saved trade file, which carries entry and exit prices of 72 trades
 on the three coins' 4-hour candles between 2025-10-01 and 2026-07-26.
 THE VAULT's OWN FILES WERE NOT OPENED. NOT ONE HOLD-OUT MOOD VALUE HAS
 BEEN LOOKED AT. SLOT 3 IS SET UP AND UNSPENT.**
+
+# 2026-11-17 (LATER) - THE SAME SESSION. **GAUNTLET SLOT 3, THE CROWD-MOOD FADE, WAS RUN. ONCE. ON THE COMMANDER'S WORD. VERDICT: FAILED - THREE BARS OF FIVE. THE SLOT IS SPENT. ALL THREE SLOTS OF THE PROMISE ARE NOW SPENT AND ALL THREE FAILED.**
+
+## 1. WHAT CAME BETWEEN THE TWO RUNS
+
+Shown Slot 1's result and asked "run idea 3 now?", **HIS WORDS: "ok now
+lets discuss first then we move fwd".** Nothing was run. He asked for the
+autopsy of idea 1 in money terms, then for what the research says would
+make the system better and what really made the winners and the losers.
+
+**I THEN BROKE SLOT 1's 72 SAVED TRADES DOWN BY WHAT THEY HAD IN COMMON.
+THIS IS HINDSIGHT ON A RESULT ALREADY SEEN, AND EVERYTHING IN IT IS A HINT
+FOR THE PAPER-WATCH, NOT A FINDING.** On 1,000 dollars:
+
+    the third of trades with the WIDEST stops (entered after
+      a big wild move) ........... 24 trades,  5 won, -127
+    the other two thirds ......... 48 trades, 25 won,  +92
+    trend strength (ADX) 25-30 ... 23 trades, 11 won,  +21
+    trend strength over 45 ....... 14 trades,  5 won,  -27
+    a loser lasted a median of 30 candles (5 days); a winner 26.5
+
+**AND A CORRECTION OF MY OWN WORDS TO HIM:** I had said the losing
+breakouts "turned straight back". The file says they took five days to
+fail. I told him so.
+
+Four more web searches (trend-following in crypto, buying-only against
+buying-and-selling, trailing stops against fixed targets, the 2025-26
+market). What they gave is in the document below; the plainest item is
+Bloomberg, 2026-02-27: choppy markets punished crypto trend funds through
+2025 and relief came in the February sell-off - which is the shape of
+Slot 1's months.
+
+**HE ASKED FOR A DOCUMENT OF THE ADVICE. IT IS NOT IN THIS REPO AND IS NOT
+A TENTH FILE:** "Zar X - Advice After Idea 1", a Claude document of his
+own (claude.ai/artifact/614EeTFYFNCRfgcuC3enFF). What it recommends, so
+that the record is here: daily as the main timeframe; a paper list of
+FOUR rules - the combined rule (frozen), the trend alone, and ONE changed
+breakout (with the big trend only, no chasing, a trailing stop) tracked
+twice, on daily and on 4-hour, as he proposed; a trailing stop of the
+simple distance kind. **NONE OF IT IS RULED. HE HAS SAID THE TRAILING STOP
+IS TO BE DISCUSSED NEXT.**
+
+**THEN HIS WORDS: "we will discuss trailing stop next first do you last
+idea test".** I had told him in the message before that "idea 3" could
+mean the mood-fade test or the third rule on my list, and that the test
+runs only on his word. **I READ "your last idea test" AS THE ONE TEST
+LEFT, SLOT 3, AND RAN IT. THAT IS A READING OF HIS WORDS, NOT A BUTTON HE
+PRESSED, AND IT IS FILED.**
+
+## 2. THE PRE-FLIGHT, 14:31 TO 14:33 UTC, IMMEDIATELY BEFORE
+
+    lab/verify_vault.py ........ VAULT INTACT - all 6 files
+    lab/funding_vault.py ....... FROZEN FUNDING INTACT - 3 of 3
+    lab/mood_vault.py .......... FROZEN MOOD INTACT - 1 of 1
+    GATE 6.5-D 42/0 - GATE 6.5-S 45/0 - GATE 6.4-R 49/0 - GATE 6.5-R 39/0
+    (the whole ship: 36 invocations, 0 red, this morning; no code has
+    changed since - only documents and Slot 1's evidence)
+    git status ................. clean (only the untracked recorder log),
+                                 after the laptop task's snapshot rows
+                                 were committed on their own (075f1ed)
+    lab/results/ ............... Slot 1's and Slot 2's markers and Forward
+                                 Check 1's; NO marker for Slot 3
+
+## 3. THE RUN - `python lab/gauntlet_slot3.py --go`, ONCE, 14:33:48 UTC. EXIT CODE 1 (not PASSED). EVERYTHING IT PRINTED, UNEDITED:
+
+    GAUNTLET SLOT 3 — mood-fade-1d-90d-top10
+      marker written: C:\Users\hp\Downloads\zargul trader\zar-x\lab\results\GAUNTLET_SLOT_3_SPENT.txt
+      coins BTC-USD, ETH-USD, SOL-USD  timeframe 1d  hold-out line 2025-10-01
+
+      --- BTC-USD: INFORMATION ONLY. No bar reads this. ---
+      STAT CARD — HOLDOUT (2025-10-02 00:00:00 -> 2026-07-25 00:00:00)
+        strategy      : mood-fade-1d-90d-top10  [fingerprint c3d207594152  commit 075f1ed]
+        market        : BTC-USD 1d   candles in window: 297
+        trades        : 11   (10 long / 1 short)
+        wins / losses : 5 / 6   win rate 45.5%
+        profit factor : 1.06   (gross wins / gross losses, AFTER costs)
+        avg win       : +1.30% of equity
+        avg loss      : -1.02% of equity   (win/loss size ratio 1.27)
+        max drawdown  : 4.02%
+        NET RETURN    : +0.29%   (after every fee and every slippage)
+        gross return  : +0.62%   (the fantasy version, costs switched off)
+        COST DRAG     : 0.33 percentage points   ($28.10 paid in fees+slippage on $10,000)
+        time in market: 71.7%
+        exits         : stop=6, target=5
+        look-ahead audit: 538 strategy calls, 0 violations
+        buy-and-hold yardstick for this coin: -11.46%
+
+      --- ETH-USD: INFORMATION ONLY. No bar reads this. ---
+      STAT CARD — HOLDOUT (2025-10-02 00:00:00 -> 2026-07-25 00:00:00)
+        strategy      : mood-fade-1d-90d-top10  [fingerprint c3d207594152  commit 075f1ed]
+        market        : ETH-USD 1d   candles in window: 297
+        trades        : 12   (11 long / 1 short)
+        wins / losses : 6 / 6   win rate 50.0%
+        profit factor : 1.30   (gross wins / gross losses, AFTER costs)
+        avg win       : +1.31% of equity
+        avg loss      : -1.01% of equity   (win/loss size ratio 1.30)
+        max drawdown  : 3.99%
+        NET RETURN    : +1.74%   (after every fee and every slippage)
+        gross return  : +2.00%   (the fantasy version, costs switched off)
+        COST DRAG     : 0.26 percentage points   ($22.76 paid in fees+slippage on $10,000)
+        time in market: 47.8%
+        exits         : target=6, stop=6
+        look-ahead audit: 613 strategy calls, 0 violations
+        buy-and-hold yardstick for this coin: -10.19%
+
+      --- SOL-USD: INFORMATION ONLY. No bar reads this. ---
+      STAT CARD — HOLDOUT (2025-10-02 00:00:00 -> 2026-07-25 00:00:00)
+        strategy      : mood-fade-1d-90d-top10  [fingerprint c3d207594152  commit 075f1ed]
+        market        : SOL-USD 1d   candles in window: 297
+        trades        : 10   (9 long / 1 short)
+        wins / losses : 4 / 6   win rate 40.0%
+        profit factor : 0.96   (gross wins / gross losses, AFTER costs)
+        avg win       : +1.32% of equity
+        avg loss      : -0.92% of equity   (win/loss size ratio 1.43)
+        max drawdown  : 3.98%
+        NET RETURN    : -0.30%   (after every fee and every slippage)
+        gross return  : -0.12%   (the fantasy version, costs switched off)
+        COST DRAG     : 0.18 percentage points   ($14.70 paid in fees+slippage on $10,000)
+        time in market: 49.2%
+        exits         : stop=5, target=4, end of data (forced close)=1
+        look-ahead audit: 619 strategy calls, 0 violations
+        buy-and-hold yardstick for this coin: -8.16%
+
+      pooled hold-out trades: 33  (BTC-USD 11, ETH-USD 12, SOL-USD 10)
+    ==============================================================================
+    WALK-FORWARD — pooled hold-out
+    ==============================================================================
+      (trades supplied directly)
+      The hold-out is cut into 6 consecutive windows. Each is scored alone.
+
+      #  from         to           candles  trades  win%     PF     SUM%     NET%   maxDD%   share of profit
+      --------------------------------------------------------------------------
+      1  2025-10-02   2025-11-19       49      14   14.3    0.22    -9.54    -9.17   10.61     -493.3%
+      2  2025-11-20   2026-01-08       50       3  100.0    inf     +3.95    +4.00    0.00      204.0%
+      3  2026-01-09   2026-02-26       49      10   70.0    3.00    +6.10    +6.21    3.01      315.1%
+      4  2026-02-27   2026-04-17       50       0     no trades in this window (counted, never skipped)
+      5  2026-04-18   2026-06-05       49       0     no trades in this window (counted, never skipped)
+      6  2026-06-06   2026-07-25       50       6   50.0    1.58    +1.44    +1.41    2.03       74.2%
+      --------------------------------------------------------------------------
+      TOTAL (arithmetic sum of every trade's percent result): +1.93%
+
+      TEST 1 — CONSISTENCY: profitable in 3 of 6 windows (50%), needs 60%.
+               -> FAIL   (4 of 6 windows contained any trades at all; a window that
+                  made no money is not counted as profitable, whatever the reason.)
+
+      TEST 2 — CONCENTRATION: the biggest single contributor is window 3 (2026-01-09 -> 2026-02-26),
+               which supplied 315.1% of the total profit. The limit is 50%.
+               -> FAIL — LUCKY-WINDOW FLAG RAISED
+               One stretch of time is carrying this strategy. Remove that window and
+               the rest of the hold-out made -4.16%. That is the strategy without its lucky
+               month — treat THAT as the honest expectation.
+
+      VERDICT: INCONSISTENT
+        - profitable in only 3 of 6 windows (needs 4).
+        - window 3 alone supplied 315.1% of the profit — more than half. This is the lucky-window pattern the detector exists to catch.
+    ==============================================================================
+
+    ==============================================================================
+    GAUNTLET SLOT 3 — mood-fade-1d-90d-top10 — THE FIVE LOCKED BARS, ON THE THREE COINS POOLED
+    ==============================================================================
+        bar                                           measured      required   verdict
+        --------------------------------------------------------------------------
+        B1 pooled Profit Factor after costs               1.11       >= 1.15   FAIL
+        B2 pooled hold-out trades                           33         >= 30   PASS
+        B3 walk-forward verdict                   INCONSISTENT    CONSISTENT   FAIL
+        B4 Monte Carlo 5th-pct drawdown                  8.52%         < 30%   PASS
+        B5 beats buy-and-hold, 1% sizing                +1.73%     > -26.98%   PASS
+        --------------------------------------------------------------------------
+        bars cleared: 3 of 5
+
+        VERDICT: SLOT 3 FAILED. A strategy must clear EVERY bar.
+        Clearing some of them is not a partial pass. The slot is spent.
+        No second try and no "just one change".
+    ==============================================================================
+
+The marker reads `started 2026-11-17T19:33:48` (the laptop's clock, UTC+5)
+and `verdict   : FAILED`. The evidence is in `lab/results/` and committed
+with this entry.
+
+## 4. THE OBITUARY
+
+**SLOT 3 FAILED. IT CLEARED THREE BARS AND FAILED TWO.**
+
+    B1  Profit Factor after costs   1.11   (needs 1.15)        FAIL
+    B2  trades                      33     (needs 30)          PASS
+    B3  walk-forward                INCONSISTENT               FAIL
+    B4  Monte Carlo drawdown        8.52%  (needs under 30%)   PASS
+    B5  beats buy-and-hold          +1.73% against -26.98%     PASS
+
+**NO "NEARLY". NO SECOND TRY. THE SLOT IS SPENT. THE PROMISE GAVE THREE
+SLOTS; ALL THREE ARE SPENT AND NONE PASSED. THERE IS NO FOURTH.**
+
+## 5. THE AUTOPSY, IN PLAIN WORDS
+
+**WHAT IT DID.** Over ten months, 33 trades, 15 won, and **1,000 dollars
+became about 1,017** - where holding the coins left about 730. On the way
+it fell to 918 (eleven losing trades in a row) before climbing back.
+
+**WHY IT FAILED.** It made a little money, but not enough for each dollar
+lost (1.11 where 1.15 is needed), and not steadily:
+
+    Oct-Nov 2025    14 trades    -9.2%
+    Nov-Jan          3 trades    +4.0%
+    Jan-Feb 2026    10 trades    +6.2%
+    Feb-Apr          0 trades
+    Apr-Jun          0 trades
+    Jun-Jul          6 trades    +1.4%
+
+**"NO EDGE", OR "A NEAR MISS"? ON THE NUMBER IT IS THE NEAREST MISS OF THE
+THREE (1.11 AGAINST 1.15). ON WHAT IS UNDER THE NUMBER IT IS NOT NEAR AT
+ALL:**
+
+  * **THREE TRADES ON ONE DAY MADE THE WHOLE PROFIT.** On 2026-01-16 the
+    crowd was greedy, the rule sold all three coins, and all three won:
+    +39 dollars. **THE OTHER 30 TRADES - EVERY ONE A BUY - WON 12 TIMES
+    AND LOST 19 DOLLARS BETWEEN THEM.** The profit is one day's bet.
+  * **BUYING THE FEAR LOST BADLY WHEN IT MATTERED.** October and November
+    2025: sixteen buys, four won, -69 dollars. The crowd was frightened
+    and the crowd was RIGHT: the market went on falling for weeks. This
+    is what traders call catching a falling knife.
+  * **IT WAS ONE BET THREE TIMES, AS THE BAR WARNED.** 33 trades on only
+    18 distinct days. One index for three coins.
+  * **IT SAT SILENT FOR OVER THREE MONTHS** (late February to early
+    June): the mood was never extreme enough against its own last 90
+    days.
+  * Fees were small (about 8 dollars on 1,000). Not the reason.
+  * By coin: BTC 11 trades, 1.06; ETH 12, 1.30; SOL 10, 0.96.
+
+**I TOLD HIM BEFORE THE RUN THAT I EXPECTED IT TO FAIL. IT FAILED. THAT
+PROVES NOTHING ABOUT MY JUDGEMENT; IT IS ONE RESULT.**
+
+**>>> THE TEMPTING TWEAKS, NAMED: "SELL THE GREED ONLY" (three trades,
+three wins - three trades); "BUY FEAR ONLY WHEN THE TREND IS UP".**
+Neither is run or proposed. **AND NOTE WHAT THE COMBINED RULE ALREADY
+DOES: IT GOES *WITH* THE CROWD, NOT AGAINST IT.** Slot 2 and Slot 3 both
+bet against the crowd, alone, and both failed; the training side had
+said the same. That is consistent, and it is still three results in one
+falling market.
+
+## 6. THE RESEARCH PASS
+
+Two web searches, 2026-11-17; summaries, not full pages. **No
+peer-reviewed study found either way.**
+
+  * AGAINST buying fear: an analysis carried by MEXC News - average
+    90-day Bitcoin return after a week of Extreme Fear since 2018 about
+    +5%, against +149% after a week of Extreme Greed; it concludes the
+    fear signal cannot be told from its many false alarms. A July 2026
+    piece (the "half-fails" study) reports that long stretches of low
+    readings were followed by UNDER-performance at three months and that
+    only "sell the greed" held up.
+  * FOR it: guides citing Glassnode figures (+18% in 30 days after
+    readings under 25) - I could not find the original; and exchange
+    blog posts leaning on a few famous bottoms (March 2020).
+  * The news record matches our trades: the index first hit Extreme Fear
+    on 2025-10-22, fell to 10-15 in mid-November as Bitcoin went under
+    94,000, and stayed in Extreme Fear about 18 days.
+
+**READ TOGETHER: THE FAIL FITS WHAT IS KNOWN.** Fear can last for weeks
+while the price keeps falling; the sell-the-greed half is the better
+supported; nothing is proven.
+
+Sources: mexc.com/news/1197268 ;
+kucoin.com/blog/what-happens-when-the-crypto-fear-greed-index-hits-extreme-fear ;
+bmpro.substack.com/p/how-good-is-the-bitcoin-fear-and ;
+cointelegraph.com/news/bitcoin-dca-strategy-extreme-greed-most-profitable ;
+fxstreet.com/cryptocurrencies/news/crypto-sentiment-nosedives-to-extreme-fear-as-bitcoin-drops-under-106k-202511040518 ;
+cointelegraph.com/news/crypto-sentiment-index-extreme-fear-stretch-flips-fear .
+
+## 7. THE MACHINERY, WHAT I GOT WRONG, WHAT I LOOKED AT
+
+It ran clean: marker first, 0 look-ahead violations in 1,770 calls, the
+pooled count is the three coins' added up (11 + 12 + 10), and the saved
+trade file re-worked by hand gives the report's figures (33 trades, 15
+won, Profit Factor 1.109, +1.93% summed).
+
+1. **I RAN SLOT 3 ON A READING OF HIS SENTENCE** (section 1).
+2. **THE PRE-FLIGHT RE-RAN FOUR GATES, NOT THE WHOLE SHIP.** The whole
+   ship was measured five and a half hours earlier and no code changed
+   between.
+3. **MY FIRST PULL BEFORE THE RUN WAS REFUSED** (the laptop task had
+   touched its snapshot file again); I committed that file on its own,
+   pulled, and only then ran.
+
+**LOOKED AT: SLOT 3's RESULT ON THE HOLD-OUT - the report and the saved
+trade file, 33 trades with their entry days. THE DAYS A TRADE WAS ENTERED
+ARE THE DAYS THE HOLD-OUT MOOD WAS EXTREME, SO THAT MUCH OF THE HOLD-OUT
+MOOD IS NOW SEEN; AND THE NEWS SEARCH AFTER THE RUN QUOTED INDEX READINGS
+FOR OCTOBER AND NOVEMBER 2025. THE FROZEN FILES THEMSELVES WERE NOT
+OPENED. EVERY SLOT IS SPENT, SO NOTHING IS LEFT FOR THIS TO SPOIL - BUT
+THE HOLD-OUT (2025-10-01 TO 2026-07-25) IS NOW A SEEN PERIOD FOR EVERY
+RULE THIS SHIP WILL EVER WRITE.**

@@ -1,0 +1,8 @@
+GAUNTLET SLOT 3 — SPENT
+strategy  : mood-fade-1d-90d-top10
+params    : {'window': 90, 'need': 81, 'warmup': 91, 'value': 'mood', 'side': 'mood_side', 'kind': 'crowd_mood_fade'}
+commit    : 075f1ed
+started   : 2026-11-17T19:33:48
+train_end : 2025-10-01
+finished  : 2026-11-17T19:33:55
+verdict   : FAILED

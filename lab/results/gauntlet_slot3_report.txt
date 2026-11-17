@@ -1,0 +1,109 @@
+GAUNTLET SLOT 3 — mood-fade-1d-90d-top10
+  marker written: C:\Users\hp\Downloads\zargul trader\zar-x\lab\results\GAUNTLET_SLOT_3_SPENT.txt
+  coins BTC-USD, ETH-USD, SOL-USD  timeframe 1d  hold-out line 2025-10-01
+
+  --- BTC-USD: INFORMATION ONLY. No bar reads this. ---
+  STAT CARD — HOLDOUT (2025-10-02 00:00:00 -> 2026-07-25 00:00:00)
+    strategy      : mood-fade-1d-90d-top10  [fingerprint c3d207594152  commit 075f1ed]
+    market        : BTC-USD 1d   candles in window: 297
+    trades        : 11   (10 long / 1 short)
+    wins / losses : 5 / 6   win rate 45.5%
+    profit factor : 1.06   (gross wins / gross losses, AFTER costs)
+    avg win       : +1.30% of equity
+    avg loss      : -1.02% of equity   (win/loss size ratio 1.27)
+    max drawdown  : 4.02%
+    NET RETURN    : +0.29%   (after every fee and every slippage)
+    gross return  : +0.62%   (the fantasy version, costs switched off)
+    COST DRAG     : 0.33 percentage points   ($28.10 paid in fees+slippage on $10,000)
+    time in market: 71.7%
+    exits         : stop=6, target=5
+    look-ahead audit: 538 strategy calls, 0 violations
+    buy-and-hold yardstick for this coin: -11.46%
+
+  --- ETH-USD: INFORMATION ONLY. No bar reads this. ---
+  STAT CARD — HOLDOUT (2025-10-02 00:00:00 -> 2026-07-25 00:00:00)
+    strategy      : mood-fade-1d-90d-top10  [fingerprint c3d207594152  commit 075f1ed]
+    market        : ETH-USD 1d   candles in window: 297
+    trades        : 12   (11 long / 1 short)
+    wins / losses : 6 / 6   win rate 50.0%
+    profit factor : 1.30   (gross wins / gross losses, AFTER costs)
+    avg win       : +1.31% of equity
+    avg loss      : -1.01% of equity   (win/loss size ratio 1.30)
+    max drawdown  : 3.99%
+    NET RETURN    : +1.74%   (after every fee and every slippage)
+    gross return  : +2.00%   (the fantasy version, costs switched off)
+    COST DRAG     : 0.26 percentage points   ($22.76 paid in fees+slippage on $10,000)
+    time in market: 47.8%
+    exits         : target=6, stop=6
+    look-ahead audit: 613 strategy calls, 0 violations
+    buy-and-hold yardstick for this coin: -10.19%
+
+  --- SOL-USD: INFORMATION ONLY. No bar reads this. ---
+  STAT CARD — HOLDOUT (2025-10-02 00:00:00 -> 2026-07-25 00:00:00)
+    strategy      : mood-fade-1d-90d-top10  [fingerprint c3d207594152  commit 075f1ed]
+    market        : SOL-USD 1d   candles in window: 297
+    trades        : 10   (9 long / 1 short)
+    wins / losses : 4 / 6   win rate 40.0%
+    profit factor : 0.96   (gross wins / gross losses, AFTER costs)
+    avg win       : +1.32% of equity
+    avg loss      : -0.92% of equity   (win/loss size ratio 1.43)
+    max drawdown  : 3.98%
+    NET RETURN    : -0.30%   (after every fee and every slippage)
+    gross return  : -0.12%   (the fantasy version, costs switched off)
+    COST DRAG     : 0.18 percentage points   ($14.70 paid in fees+slippage on $10,000)
+    time in market: 49.2%
+    exits         : stop=5, target=4, end of data (forced close)=1
+    look-ahead audit: 619 strategy calls, 0 violations
+    buy-and-hold yardstick for this coin: -8.16%
+
+  pooled hold-out trades: 33  (BTC-USD 11, ETH-USD 12, SOL-USD 10)
+==============================================================================
+WALK-FORWARD — pooled hold-out
+==============================================================================
+  (trades supplied directly)
+  The hold-out is cut into 6 consecutive windows. Each is scored alone.
+
+  #  from         to           candles  trades  win%     PF     SUM%     NET%   maxDD%   share of profit
+  --------------------------------------------------------------------------
+  1  2025-10-02   2025-11-19       49      14   14.3    0.22    -9.54    -9.17   10.61     -493.3% 
+  2  2025-11-20   2026-01-08       50       3  100.0    inf     +3.95    +4.00    0.00      204.0% 
+  3  2026-01-09   2026-02-26       49      10   70.0    3.00    +6.10    +6.21    3.01      315.1% 
+  4  2026-02-27   2026-04-17       50       0     no trades in this window (counted, never skipped)
+  5  2026-04-18   2026-06-05       49       0     no trades in this window (counted, never skipped)
+  6  2026-06-06   2026-07-25       50       6   50.0    1.58    +1.44    +1.41    2.03       74.2% 
+  --------------------------------------------------------------------------
+  TOTAL (arithmetic sum of every trade's percent result): +1.93%
+
+  TEST 1 — CONSISTENCY: profitable in 3 of 6 windows (50%), needs 60%.
+           -> FAIL   (4 of 6 windows contained any trades at all; a window that
+              made no money is not counted as profitable, whatever the reason.)
+
+  TEST 2 — CONCENTRATION: the biggest single contributor is window 3 (2026-01-09 -> 2026-02-26),
+           which supplied 315.1% of the total profit. The limit is 50%.
+           -> FAIL — LUCKY-WINDOW FLAG RAISED
+           One stretch of time is carrying this strategy. Remove that window and
+           the rest of the hold-out made -4.16%. That is the strategy without its lucky
+           month — treat THAT as the honest expectation.
+
+  VERDICT: INCONSISTENT
+    - profitable in only 3 of 6 windows (needs 4).
+    - window 3 alone supplied 315.1% of the profit — more than half. This is the lucky-window pattern the detector exists to catch.
+==============================================================================
+
+==============================================================================
+GAUNTLET SLOT 3 — mood-fade-1d-90d-top10 — THE FIVE LOCKED BARS, ON THE THREE COINS POOLED
+==============================================================================
+    bar                                           measured      required   verdict
+    --------------------------------------------------------------------------
+    B1 pooled Profit Factor after costs               1.11       >= 1.15   FAIL
+    B2 pooled hold-out trades                           33         >= 30   PASS
+    B3 walk-forward verdict                   INCONSISTENT    CONSISTENT   FAIL
+    B4 Monte Carlo 5th-pct drawdown                  8.52%         < 30%   PASS
+    B5 beats buy-and-hold, 1% sizing                +1.73%     > -26.98%   PASS
+    --------------------------------------------------------------------------
+    bars cleared: 3 of 5
+
+    VERDICT: SLOT 3 FAILED. A strategy must clear EVERY bar.
+    Clearing some of them is not a partial pass. The slot is spent.
+    No second try and no "just one change".
+==============================================================================
