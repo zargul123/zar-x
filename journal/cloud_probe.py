@@ -49,6 +49,102 @@ def ask(name, url, params=None):
         return f'{name:34s} FAILED  {type(exc).__name__}: {str(exc)[:70]}'
 
 
+def more_doors():
+    """Binance's public file archive and its website's own funding pages.
+    Statuses, row counts and the DATE of the newest row only."""
+    import io
+    import zipfile
+    from datetime import datetime, timezone
+    out = []
+    try:
+        import requests
+    except Exception as exc:
+        return [f'requests: {type(exc).__name__}: {exc}']
+    head = {'User-Agent': 'python'}
+
+    def newest(stamp_ms):
+        return datetime.fromtimestamp(int(stamp_ms) / 1000,
+                                      tz=timezone.utc).strftime('%Y-%m-%d')
+
+    # A. the archive: one file a month, and is there one a day?
+    base = 'https://data.binance.vision/data/futures/um'
+    for label, url in (
+            ('archive  monthly file (2026-10)',
+             f'{base}/monthly/fundingRate/BTCUSDT/'
+             f'BTCUSDT-fundingRate-2026-10.zip'),
+            ('archive  monthly file (2026-11)',
+             f'{base}/monthly/fundingRate/BTCUSDT/'
+             f'BTCUSDT-fundingRate-2026-11.zip'),
+            ('archive  daily file (2026-11-15)',
+             f'{base}/daily/fundingRate/BTCUSDT/'
+             f'BTCUSDT-fundingRate-2026-11-15.zip')):
+        try:
+            reply = requests.get(url, timeout=TIMEOUT, headers=head)
+            note = ''
+            if reply.status_code == 200:
+                with zipfile.ZipFile(io.BytesIO(reply.content)) as pack:
+                    text = pack.read(pack.namelist()[0]).decode('utf-8')
+                rows = [row for row in text.strip().split('\n')
+                        if row and row[0].isdigit()]
+                note = (f'  rows {len(rows)}  newest row '
+                        f'{newest(rows[-1].split(",")[0]) if rows else "-"}')
+            out.append(f'{label:34s} status {reply.status_code}{note}')
+        except Exception as exc:
+            out.append(f'{label:34s} FAILED  {type(exc).__name__}: '
+                       f'{str(exc)[:70]}')
+    try:
+        reply = requests.get(
+            'https://s3-ap-northeast-1.amazonaws.com/data.binance.vision',
+            params={'delimiter': '/', 'prefix': 'data/futures/um/daily/'},
+            timeout=TIMEOUT, headers=head)
+        kinds = sorted(set(part.split('</Prefix>')[0].rstrip('/')
+                           .split('/')[-1] for part in
+                           reply.text.split('<Prefix>')[2:]))
+        out.append(f'{"archive  what it has per DAY":34s} status '
+                   f'{reply.status_code}  {", ".join(kinds)[:150]}')
+    except Exception as exc:
+        out.append(f'{"archive  what it has per DAY":34s} FAILED  '
+                   f'{type(exc).__name__}: {str(exc)[:70]}')
+
+    # B. the website's own pages
+    for label, method, url, payload in (
+            ('website  www.binance.com/fapi', 'get',
+             'https://www.binance.com/fapi/v1/fundingRate',
+             {'symbol': 'BTCUSDT', 'limit': 5}),
+            ('website  funding-history page', 'post',
+             'https://www.binance.com/bapi/futures/v1/public/future/common/'
+             'get-funding-rate-history',
+             {'symbol': 'BTCUSDT', 'page': 1, 'rows': 5})):
+        try:
+            if method == 'get':
+                reply = requests.get(url, params=payload, timeout=TIMEOUT,
+                                     headers=head)
+            else:
+                reply = requests.post(url, json=payload, timeout=TIMEOUT,
+                                      headers=head)
+            note = ''
+            try:
+                body = reply.json()
+                rows = body if isinstance(body, list) else (
+                    body.get('data') if isinstance(body, dict) else None)
+                if isinstance(rows, list) and rows:
+                    stamp = max(int(row.get('fundingTime')
+                                    or row.get('calcTime') or 0)
+                                for row in rows if isinstance(row, dict))
+                    note = (f'  rows {len(rows)}  newest row '
+                            f'{newest(stamp) if stamp else "-"}')
+                elif isinstance(body, dict):
+                    note = (f"  message: "
+                            f"{str(body.get('msg') or body.get('message'))[:70]}")
+            except ValueError:
+                note = '  (not data)'
+            out.append(f'{label:34s} status {reply.status_code}{note}')
+        except Exception as exc:
+            out.append(f'{label:34s} FAILED  {type(exc).__name__}: '
+                       f'{str(exc)[:70]}')
+    return out
+
+
 def main():
     lines = ['ZAR X - THE CLOUD PROBE (statuses and counts only; no price, '
              'no rate)',
@@ -86,6 +182,9 @@ def main():
     lines.append(ask('funding  okx',
                      'https://www.okx.com/api/v5/public/funding-rate-history',
                      {'instId': 'BTC-USDT-SWAP', 'limit': 5}))
+
+    lines += ['', '2b. TWO MORE BINANCE DOORS FOR FUNDING (second probe)']
+    lines += more_doors()
 
     lines += ['', '3. DOES THIS MACHINE WORK THE LEDGER OUT IDENTICAL?']
     try:
