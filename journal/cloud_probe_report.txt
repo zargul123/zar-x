@@ -15,6 +15,14 @@ candles  api.binance.com           status 451  rows message: Service unavailable
 funding  bybit                     status 403  rows -
 funding  okx                       status 200  rows 5
 
+2b. TWO MORE BINANCE DOORS FOR FUNDING (second probe)
+archive  monthly file (2026-10)    status 200  rows 93  newest row 2026-10-31
+archive  monthly file (2026-11)    status 404
+archive  daily file (2026-11-15)   status 404
+archive  what it has per DAY       status 200  aggTrades, bookDepth, bookTicker, indexPriceKlines, klines, markPriceKlines, metrics, premiumIndexKlines, trades
+website  www.binance.com/fapi      status 200  rows 5  newest row 2026-11-17
+website  funding-history page      status 200  rows 5  newest row 2026-11-17
+
 3. DOES THIS MACHINE WORK THE LEDGER OUT IDENTICAL?
 YES - every written row comes out identical
    OPEN NOW - 26 trade(s) with at least one ending still open
@@ -23,4 +31,4 @@ YES - every written row comes out identical
 
 4. GATE 7.1 ON THIS MACHINE
 exit 0  GATE 7.1 PASSED — 106 checks, 0 red.
-probed 2026-11-17 16:27 UTC on a GitHub runner
+probed 2026-11-17 16:44 UTC on a GitHub runner
