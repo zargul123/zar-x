@@ -1,0 +1,109 @@
+GAUNTLET SLOT 1 — turtle-4h-20c-10w-adx25
+  marker written: C:\Users\hp\Downloads\zargul trader\zar-x\lab\results\GAUNTLET_SLOT_1_SPENT.txt
+  coins BTC-USD, ETH-USD, SOL-USD  timeframe 4h  hold-out line 2025-10-01
+
+  --- BTC-USD: INFORMATION ONLY. No bar reads this. ---
+  STAT CARD — HOLDOUT (2025-10-01 04:00:00 -> 2026-07-26 04:00:00)
+    strategy      : turtle-4h-20c-10w-adx25  [fingerprint 11346f9eadc8  commit 0ce4070]
+    market        : BTC-USD 4h   candles in window: 1,789
+    trades        : 25   (7 long / 18 short)
+    wins / losses : 11 / 14   win rate 44.0%
+    profit factor : 1.01   (gross wins / gross losses, AFTER costs)
+    avg win       : +1.26% of equity
+    avg loss      : -0.98% of equity   (win/loss size ratio 1.29)
+    max drawdown  : 4.02%
+    NET RETURN    : +0.02%   (after every fee and every slippage)
+    gross return  : +1.00%   (the fantasy version, costs switched off)
+    COST DRAG     : 0.98 percentage points   ($91.19 paid in fees+slippage on $10,000)
+    time in market: 51.4%
+    exits         : stop=14, target=11
+    look-ahead audit: 3,189 strategy calls, 0 violations
+    buy-and-hold yardstick for this coin: -10.94%
+
+  --- ETH-USD: INFORMATION ONLY. No bar reads this. ---
+  STAT CARD — HOLDOUT (2025-10-01 04:00:00 -> 2026-07-26 04:00:00)
+    strategy      : turtle-4h-20c-10w-adx25  [fingerprint 11346f9eadc8  commit 0ce4070]
+    market        : ETH-USD 4h   candles in window: 1,789
+    trades        : 26   (7 long / 19 short)
+    wins / losses : 9 / 17   win rate 34.6%
+    profit factor : 0.68   (gross wins / gross losses, AFTER costs)
+    avg win       : +1.31% of equity
+    avg loss      : -1.02% of equity   (win/loss size ratio 1.28)
+    max drawdown  : 7.40%
+    NET RETURN    : -5.60%   (after every fee and every slippage)
+    gross return  : -4.84%   (the fantasy version, costs switched off)
+    COST DRAG     : 0.75 percentage points   ($76.55 paid in fees+slippage on $10,000)
+    time in market: 64.6%
+    exits         : stop=16, target=9, stop+target same candle (loss counted)=1
+    look-ahead audit: 2,991 strategy calls, 0 violations
+    buy-and-hold yardstick for this coin: -9.26%
+
+  --- SOL-USD: INFORMATION ONLY. No bar reads this. ---
+  STAT CARD — HOLDOUT (2025-10-01 04:00:00 -> 2026-07-26 04:00:00)
+    strategy      : turtle-4h-20c-10w-adx25  [fingerprint 11346f9eadc8  commit 0ce4070]
+    market        : SOL-USD 4h   candles in window: 1,789
+    trades        : 21   (6 long / 15 short)
+    wins / losses : 10 / 11   win rate 47.6%
+    profit factor : 1.17   (gross wins / gross losses, AFTER costs)
+    avg win       : +1.31% of equity
+    avg loss      : -1.02% of equity   (win/loss size ratio 1.29)
+    max drawdown  : 3.02%
+    NET RETURN    : +1.82%   (after every fee and every slippage)
+    gross return  : +2.35%   (the fantasy version, costs switched off)
+    COST DRAG     : 0.53 percentage points   ($49.17 paid in fees+slippage on $10,000)
+    time in market: 62.1%
+    exits         : stop=11, target=10
+    look-ahead audit: 2,884 strategy calls, 0 violations
+    buy-and-hold yardstick for this coin: -7.76%
+
+  pooled hold-out trades: 72  (BTC-USD 25, ETH-USD 26, SOL-USD 21)
+==============================================================================
+WALK-FORWARD — pooled hold-out
+==============================================================================
+  (trades supplied directly)
+  The hold-out is cut into 6 consecutive windows. Each is scored alone.
+
+  #  from         to           candles  trades  win%     PF     SUM%     NET%   maxDD%   share of profit
+  --------------------------------------------------------------------------
+  1  2025-10-01   2025-11-19      298      20   40.0    0.84    -1.91    -2.02    6.43        -    
+  2  2025-11-19   2026-01-08      298       6   33.3    0.68    -1.25    -1.28    2.03        -    
+  3  2026-01-08   2026-02-27      298      19   57.9    1.79    +6.36    +6.43    3.99        -    
+  4  2026-02-27   2026-04-17      298       8   37.5    0.77    -1.19    -1.23    3.04        -    
+  5  2026-04-17   2026-06-06      298      13   46.2    1.09    +0.65    +0.56    3.03        -    
+  6  2026-06-06   2026-07-26      299       6    0.0    0.00    -6.13    -5.98    5.98        -    
+  --------------------------------------------------------------------------
+  TOTAL (arithmetic sum of every trade's percent result): -3.48%
+
+  TEST 1 — CONSISTENCY: profitable in 2 of 6 windows (33%), needs 60%.
+           -> FAIL   (6 of 6 windows contained any trades at all; a window that
+              made no money is not counted as profitable, whatever the reason.)
+
+  TEST 2 — CONCENTRATION: DOES NOT APPLY. The strategy finished the hold-out at
+           -3.48% — there is no profit to divide into shares, so asking
+           "which window carried the profit?" would be arithmetic on nothing.
+           No number is printed here because any number printed here would be
+           misleading. The verdict does not need it: a losing strategy is already
+           INCONSISTENT.
+
+  VERDICT: INCONSISTENT
+    - profitable in only 2 of 6 windows (needs 4).
+    - the hold-out total is -3.48% — the strategy lost money overall, so it is inconsistent by definition and the "one lucky window" test was not run (it needs a positive total to mean anything).
+==============================================================================
+
+==============================================================================
+GAUNTLET SLOT 1 — turtle-4h-20c-10w-adx25 — THE FIVE LOCKED BARS, ON THE THREE COINS POOLED
+==============================================================================
+    bar                                           measured      required   verdict
+    --------------------------------------------------------------------------
+    B1 pooled Profit Factor after costs               0.92       >= 1.15   FAIL
+    B2 pooled hold-out trades                           72         >= 30   PASS
+    B3 walk-forward verdict                   INCONSISTENT    CONSISTENT   FAIL
+    B4 Monte Carlo 5th-pct drawdown                 15.50%         < 30%   PASS
+    B5 beats buy-and-hold, 1% sizing                -3.86%     > -25.46%   PASS
+    --------------------------------------------------------------------------
+    bars cleared: 3 of 5
+
+    VERDICT: SLOT 1 FAILED. A strategy must clear EVERY bar.
+    Clearing some of them is not a partial pass. The slot is spent.
+    No second try and no "just one change".
+==============================================================================

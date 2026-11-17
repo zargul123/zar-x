@@ -20237,3 +20237,355 @@ combined the three on his order, and looked once at four unseen months.
 REVIEWED. R-088 TO R-093 ARE THE LIST OF WHERE I DID NOT LOOK. THE TWO
 THINGS THAT KEEP IT HONEST ARE: NOTHING IS EVER RE-TESTED ON DATA ALREADY
 SEEN, AND NO MONEY MOVES WITHOUT A LONG LIVE RECORD.**
+
+# 2026-11-17 - FABLE'S SESSION. **GAUNTLET SLOT 1, THE BREAKOUT, WAS RUN. ONCE. ON THE COMMANDER'S WORD. VERDICT: FAILED - THREE BARS OF FIVE. IT LOST MONEY. THE SLOT IS SPENT.**
+
+## 1. HOW THE SESSION OPENED, AND THE TWO ANSWERS
+
+His words: *"zarx fable here"*. Asked the one line the orders owe -
+*"The last builds were made by Fable. Do I skip attacking them, as you
+ruled on 14 November?"* - **HIS ANSWER: "Yes, skip it".** Asked, while the
+ship was being measured, whether to run idea 1 once if it came back all
+green - **HIS ANSWER: "Yes, run idea 1".** Both were given in this
+conversation, as buttons on a question I wrote. **PART 1 WAS THEREFORE
+SKIPPED FOR FABLE'S BUILDS, ON HIS WORD. NOTHING OF YESTERDAY'S WAS
+ATTACKED BY ANYBODY BUT ITS AUTHOR. R-088 TO R-093 STAND OPEN.**
+
+## 2. THE SHIP ALIVE - 36 INVOCATIONS, 08:47 TO 09:04 UTC
+
+One driver, output to files, read-only. Two streams side by side (the
+network and journal gates in one, the Lab's in the other) - **a change
+from "one after another", made to save twenty minutes; said here because
+it is a change to how the ship is measured.** Red counted by machine
+three ways: the cross mark, the first word of a line, "GATE ... FAILED".
+
+    01 cockpit/fear_greed.py            exit 0   64.2s   58 green
+    02 cockpit/funding.py               exit 0  125.7s   71
+    03 data/open_interest.py            exit 0   58.6s   88
+    04 data/open_interest.py     UTC0   exit 0   57.1s   88
+    05 data/collection_guard.py --gate  exit 0   11.4s   PASSED (29 OK lines)
+    06 cockpit/news.py --gate           exit 0    5.3s   54
+    07 cockpit/events.py --gate         exit 0    1.6s   69
+    08 cockpit/events.py --gate  UTC0   exit 0    1.4s   69
+    09 cockpit/whales.py --gate         exit 0   19.7s  111
+    10 cockpit/whales.py --gate  UTC0   exit 0   20.0s  111
+    11 cockpit/carry.py --gate          exit 0    4.9s   87
+    12 cockpit/carry.py --gate   UTC0   exit 0    4.3s   87
+    13 journal/log_trade.py --gate      exit 0    4.4s  101
+    14 journal/log_trade.py --gate UTC0 exit 0    3.4s  101
+    15 journal/mirror.py --gate         exit 0    3.5s   84
+    16 journal/mirror.py --gate  UTC0   exit 0    3.1s   84
+    17 signals/turtle.py --gate         exit 0    5.6s   39
+    18 signals/turtle.py --gate  UTC0   exit 0    5.9s   39
+    19 lab/gauntlet.py --gate           exit 0   23.5s   49
+    20 lab/gauntlet.py --gate    UTC0   exit 0   23.2s   49
+    21 lab/funding_vault.py --gate      exit 0    1.2s   52
+    22 lab/funding_vault.py --gate UTC0 exit 0    2.0s   52
+    23 signals/funding_fade.py --gate   exit 0    1.7s   44
+    24 signals/funding_fade.py --gate UTC0 exit 0  2.6s   44
+    25 lab/gauntlet_slot2.py --gate     exit 0  118.0s   40
+    26 lab/gauntlet_slot2.py --gate UTC0 exit 0 143.1s   40
+    27 lab/mood_vault.py --gate         exit 0    1.0s   42
+    28 lab/mood_vault.py --gate  UTC0   exit 0    1.8s   42
+    29 signals/mood_fade.py --gate      exit 0    2.8s   45
+    30 signals/mood_fade.py --gate UTC0 exit 0    2.6s   45
+    31 lab/gauntlet_slot3.py --gate     exit 0  141.2s   39
+    32 lab/gauntlet_slot3.py --gate UTC0 exit 0 146.5s   39
+    33 signals/confluence.py --gate     exit 0    1.7s   30
+    34 signals/confluence.py --gate UTC0 exit 0   2.6s   30
+    35 lab/forward_check.py --gate      exit 0  294.7s   34
+    36 lab/forward_check.py --gate UTC0 exit 0  283.8s   34
+    lab/verify_vault.py ....... VAULT INTACT - all 6 files
+    lab/funding_vault.py ...... FROZEN FUNDING INTACT - 3 of 3
+    lab/mood_vault.py ......... FROZEN MOOD INTACT - 1 of 1
+    cockpit/brief.py .......... 3/3 instruments reporting
+
+**THIRTY-SIX INVOCATIONS, ALL EXIT 0. 2,091 GREEN TICKS, 0 RED. Cross
+marks 0; "GATE ... FAILED" 0; first-word hits 3, each read by eye:** the
+funding gate's prose ("escaped the gate of 2026-07-26", the line that has
+now fooled four counters) and, twice, a wrapped sentence in the
+open-interest gate beginning "fail. B9 is now a REAL TEXT EDIT". Prose,
+not verdicts. `lab/forward_check.py --gate` at `TZ=UTC0` is now measured
+on its last version (it had not been). The only text on the error channel
+anywhere was the `pkg_resources` deprecation warning from `pandas_ta`.
+**The collection guard prints no tick marks; my counter showed it 0 green
+and I read its verdict line instead.**
+
+## 3. THE PRE-FLIGHT, 09:05 UTC, IMMEDIATELY BEFORE
+
+    git status ................. clean (only the untracked recorder log),
+                                 after the laptop task's snapshot rows
+                                 were committed on their own (0ce4070)
+    HEAD ....................... 0ce4070
+    vault 6 of 6 - frozen funding 3 of 3 - frozen mood 1 of 1
+    every gate green ........... section 2
+    lab/results/ ............... Slot 2's marker and Forward Check 1's;
+                                 NO marker for Slot 1
+
+## 4. THE RUN - `python lab/gauntlet.py --slot 1 --go`, ONCE, 09:05:59 UTC. EXIT CODE 1 (not PASSED). EVERYTHING IT PRINTED, UNEDITED:
+
+    GAUNTLET SLOT 1 — turtle-4h-20c-10w-adx25
+      marker written: C:\Users\hp\Downloads\zargul trader\zar-x\lab\results\GAUNTLET_SLOT_1_SPENT.txt
+      coins BTC-USD, ETH-USD, SOL-USD  timeframe 4h  hold-out line 2025-10-01
+
+      --- BTC-USD: INFORMATION ONLY. No bar reads this. ---
+      STAT CARD — HOLDOUT (2025-10-01 04:00:00 -> 2026-07-26 04:00:00)
+        strategy      : turtle-4h-20c-10w-adx25  [fingerprint 11346f9eadc8  commit 0ce4070]
+        market        : BTC-USD 4h   candles in window: 1,789
+        trades        : 25   (7 long / 18 short)
+        wins / losses : 11 / 14   win rate 44.0%
+        profit factor : 1.01   (gross wins / gross losses, AFTER costs)
+        avg win       : +1.26% of equity
+        avg loss      : -0.98% of equity   (win/loss size ratio 1.29)
+        max drawdown  : 4.02%
+        NET RETURN    : +0.02%   (after every fee and every slippage)
+        gross return  : +1.00%   (the fantasy version, costs switched off)
+        COST DRAG     : 0.98 percentage points   ($91.19 paid in fees+slippage on $10,000)
+        time in market: 51.4%
+        exits         : stop=14, target=11
+        look-ahead audit: 3,189 strategy calls, 0 violations
+        buy-and-hold yardstick for this coin: -10.94%
+
+      --- ETH-USD: INFORMATION ONLY. No bar reads this. ---
+      STAT CARD — HOLDOUT (2025-10-01 04:00:00 -> 2026-07-26 04:00:00)
+        strategy      : turtle-4h-20c-10w-adx25  [fingerprint 11346f9eadc8  commit 0ce4070]
+        market        : ETH-USD 4h   candles in window: 1,789
+        trades        : 26   (7 long / 19 short)
+        wins / losses : 9 / 17   win rate 34.6%
+        profit factor : 0.68   (gross wins / gross losses, AFTER costs)
+        avg win       : +1.31% of equity
+        avg loss      : -1.02% of equity   (win/loss size ratio 1.28)
+        max drawdown  : 7.40%
+        NET RETURN    : -5.60%   (after every fee and every slippage)
+        gross return  : -4.84%   (the fantasy version, costs switched off)
+        COST DRAG     : 0.75 percentage points   ($76.55 paid in fees+slippage on $10,000)
+        time in market: 64.6%
+        exits         : stop=16, target=9, stop+target same candle (loss counted)=1
+        look-ahead audit: 2,991 strategy calls, 0 violations
+        buy-and-hold yardstick for this coin: -9.26%
+
+      --- SOL-USD: INFORMATION ONLY. No bar reads this. ---
+      STAT CARD — HOLDOUT (2025-10-01 04:00:00 -> 2026-07-26 04:00:00)
+        strategy      : turtle-4h-20c-10w-adx25  [fingerprint 11346f9eadc8  commit 0ce4070]
+        market        : SOL-USD 4h   candles in window: 1,789
+        trades        : 21   (6 long / 15 short)
+        wins / losses : 10 / 11   win rate 47.6%
+        profit factor : 1.17   (gross wins / gross losses, AFTER costs)
+        avg win       : +1.31% of equity
+        avg loss      : -1.02% of equity   (win/loss size ratio 1.29)
+        max drawdown  : 3.02%
+        NET RETURN    : +1.82%   (after every fee and every slippage)
+        gross return  : +2.35%   (the fantasy version, costs switched off)
+        COST DRAG     : 0.53 percentage points   ($49.17 paid in fees+slippage on $10,000)
+        time in market: 62.1%
+        exits         : stop=11, target=10
+        look-ahead audit: 2,884 strategy calls, 0 violations
+        buy-and-hold yardstick for this coin: -7.76%
+
+      pooled hold-out trades: 72  (BTC-USD 25, ETH-USD 26, SOL-USD 21)
+    ==============================================================================
+    WALK-FORWARD — pooled hold-out
+    ==============================================================================
+      (trades supplied directly)
+      The hold-out is cut into 6 consecutive windows. Each is scored alone.
+
+      #  from         to           candles  trades  win%     PF     SUM%     NET%   maxDD%   share of profit
+      --------------------------------------------------------------------------
+      1  2025-10-01   2025-11-19      298      20   40.0    0.84    -1.91    -2.02    6.43        -
+      2  2025-11-19   2026-01-08      298       6   33.3    0.68    -1.25    -1.28    2.03        -
+      3  2026-01-08   2026-02-27      298      19   57.9    1.79    +6.36    +6.43    3.99        -
+      4  2026-02-27   2026-04-17      298       8   37.5    0.77    -1.19    -1.23    3.04        -
+      5  2026-04-17   2026-06-06      298      13   46.2    1.09    +0.65    +0.56    3.03        -
+      6  2026-06-06   2026-07-26      299       6    0.0    0.00    -6.13    -5.98    5.98        -
+      --------------------------------------------------------------------------
+      TOTAL (arithmetic sum of every trade's percent result): -3.48%
+
+      TEST 1 — CONSISTENCY: profitable in 2 of 6 windows (33%), needs 60%.
+               -> FAIL   (6 of 6 windows contained any trades at all; a window that
+                  made no money is not counted as profitable, whatever the reason.)
+
+      TEST 2 — CONCENTRATION: DOES NOT APPLY. The strategy finished the hold-out at
+               -3.48% — there is no profit to divide into shares, so asking
+               "which window carried the profit?" would be arithmetic on nothing.
+               No number is printed here because any number printed here would be
+               misleading. The verdict does not need it: a losing strategy is already
+               INCONSISTENT.
+
+      VERDICT: INCONSISTENT
+        - profitable in only 2 of 6 windows (needs 4).
+        - the hold-out total is -3.48% — the strategy lost money overall, so it is inconsistent by definition and the "one lucky window" test was not run (it needs a positive total to mean anything).
+    ==============================================================================
+
+    ==============================================================================
+    GAUNTLET SLOT 1 — turtle-4h-20c-10w-adx25 — THE FIVE LOCKED BARS, ON THE THREE COINS POOLED
+    ==============================================================================
+        bar                                           measured      required   verdict
+        --------------------------------------------------------------------------
+        B1 pooled Profit Factor after costs               0.92       >= 1.15   FAIL
+        B2 pooled hold-out trades                           72         >= 30   PASS
+        B3 walk-forward verdict                   INCONSISTENT    CONSISTENT   FAIL
+        B4 Monte Carlo 5th-pct drawdown                 15.50%         < 30%   PASS
+        B5 beats buy-and-hold, 1% sizing                -3.86%     > -25.46%   PASS
+        --------------------------------------------------------------------------
+        bars cleared: 3 of 5
+
+        VERDICT: SLOT 1 FAILED. A strategy must clear EVERY bar.
+        Clearing some of them is not a partial pass. The slot is spent.
+        No second try and no "just one change".
+    ==============================================================================
+
+The marker reads `started 2026-11-17T14:05:59` (the laptop's clock, UTC+5)
+and `verdict   : FAILED`. The evidence is in `lab/results/` and committed
+with this entry: the marker, the report, the three per-coin trade files
+and the pooled file.
+
+## 5. THE OBITUARY
+
+**SLOT 1 FAILED. IT CLEARED THREE BARS AND FAILED TWO, AND A STRATEGY MUST
+CLEAR EVERY ONE.**
+
+    B1  Profit Factor after costs   0.92   (needs 1.15)        FAIL
+    B2  trades                      72     (needs 30)          PASS
+    B3  walk-forward                INCONSISTENT               FAIL
+    B4  Monte Carlo drawdown        15.50% (needs under 30%)   PASS
+    B5  beats buy-and-hold          -3.86% against -25.46%     PASS
+
+**NO "NEARLY". NO SECOND TRY. THE SLOT IS SPENT.** It will not be run again
+on this data, with these numbers or any others.
+
+## 6. THE AUTOPSY - HIS RULING OF 2026-11-16, STEP 1. IN PLAIN WORDS.
+
+**WHAT IT DID.** Over ten months, on three coins, it took 72 trades, won
+30 and lost 42, and **1,000 dollars became about 961** - in a market where
+simply holding the coins (sized the same careful way) would have left
+about 745.
+
+**WHY IT FAILED.** Two bars, and the first is the plain one: **IT LOST
+MONEY.** For every dollar it lost it won back 92 cents; the bar asks for
+1.15. And of the six stretches the ten months are cut into, it made money
+in two:
+
+    Oct-Nov 2025    20 trades    -2.0%
+    Nov-Jan          6 trades    -1.3%
+    Jan-Feb 2026    19 trades    +6.4%
+    Feb-Apr          8 trades    -1.2%
+    Apr-Jun         13 trades    +0.6%
+    Jun-Jul          6 trades    -6.0%   (six trades, six lost)
+
+**"NO EDGE", OR "A NEAR MISS FOR A REASON WE CHOSE"? MY READING: NO EDGE
+SHOWN. THIS IS NOT A NEAR MISS AND NOT THE FEES.**
+
+  * **IT LOST EVEN WITH THE FEES SWITCHED OFF.** Re-worked from the saved
+    trade file: with no costs at all the 72 trades sum to -1.2% (Profit
+    Factor 0.97). The fees took it from -1.2% to -3.5%. **His real
+    Binance fee did not kill this idea; the idea did not make money to
+    begin with.**
+  * **IT WON 42 TIMES IN 100.** With a win 1.3 times the size of a loss
+    (after fees) it needed about 44 to break even and about 47 to clear
+    the bar. The orders I was handed say a coin flip is right 43 in this
+    test. **That is a coin flip's score.**
+  * **ONE MONTH MADE ALL THE GOOD NEWS.** January 2026: 11 sells, +9.8%.
+    Every other month's sells together lost.
+  * **THE TWO HALVES:**
+
+        SELLING a break downward:   52 trades, 24 won (46%), +2.9%,
+            Profit Factor 1.10
+        BUYING a break upward:      20 trades,  6 won (30%), -6.4%,
+            Profit Factor 0.54
+
+    **THE SAME PICTURE AS SLOT 2 AND AS FORWARD CHECK 1: THE MARKET FELL,
+    SO SELLING DID BETTER THAN BUYING, WHATEVER THE REASON FOR THE
+    TRADE.** And here even the selling half, in a market that fell 25%,
+    barely made anything - 1.10 is under the bar on its own.
+  * By coin (information; no bar reads it): BTC 25 trades, Profit Factor
+    1.01; ETH 26, 0.68; SOL 21, 1.17.
+  * A trade lasted a median of 4.75 days - what the bar said (about
+    four). 55 distinct entry moments for 72 trades. 0 look-ahead
+    violations in 9,064 strategy calls.
+
+**WAS THE TEST UNFAIR TO IT? IN ONE WAY IT MAY HAVE BEEN, AND IT IS SAID
+HERE SO THAT NOBODY MISTAKES IT FOR AN EXCUSE.** This test gives every
+trade a fixed target: a winner is closed at about 1.3 times a loss and
+can never become a big winner. The published work on breakouts (section
+7) says nearly all of their profit comes from a very few trades that run
+a long way. **A fixed target cuts those off by design.** So what failed
+is "the breakout with a fixed stop and target on 4-hour candles", which
+is what was declared, twice re-shaped, and frozen before the run. It is
+not proof that every kind of breakout trading is worthless. **AND IT
+CHANGES NOTHING: THE RESULT STANDS, THE SLOT IS SPENT.**
+
+**>>> THE TEMPTING TWEAKS, NAMED SO THAT NOBODY MAKES THEM QUIETLY:
+"SELLS ONLY"; "LET THE WINNERS RUN"; "DAILY CANDLES AFTER ALL".** Each is
+a rule chosen by looking at this result on the only data there is. None
+is run, tested or proposed for the gauntlet. **By his ruling the only
+road open to any of them is forward, on paper, on days nobody has seen -
+and the list of rules to watch allows AT MOST ONE changed version of a
+failed idea.**
+
+## 7. THE RESEARCH PASS - HIS RULING, STEP 2. WHAT IS KNOWN OUTSIDE THE SHIP.
+
+Three web searches, 2026-11-17. **I read search summaries, not the
+papers in full.**
+
+  * **THE ONE SERIOUS STUDY FOUND:** Zarattini, Pagani and Barbon,
+    "Catching Crypto Trends" (Swiss Finance Institute research paper
+    25-80, 2025). Breakout (Donchian) rules on Bitcoin and up to 20
+    coins, 2015 to early 2025: reported as clearly profitable after
+    costs. **BUT IT IS A DIFFERENT ANIMAL FROM OUR TEST IN FOUR WAYS:**
+    daily candles, not 4-hour; BUYING ONLY, never selling; a trailing
+    exit that lets a winner run, no fixed target; and ten years that
+    include three enormous bull runs. Its own summaries say **fewer
+    than 7 trades in 100 made the whole profit.**
+  * A practitioner walk-forward of a 30-day breakout on Bitcoin
+    (Cryptohopper's "Trader Series, part 2") - also daily, also with a
+    trend filter. I could not get its out-of-sample figures.
+  * Everything else found was sellers' strategy pages and trading-site
+    guides with no checkable numbers. One guide, on daily Bitcoin from
+    June to October 2025, describes the 20-day channel "whipsawing" -
+    breaks that fail and reverse - and admits it has no win-rate figure.
+  * **WHAT I COULD NOT FIND:** any independent, checkable result for a
+    4-hour breakout with a fixed stop and target, on any coin, in 2025
+    or 2026; or any measurement of whether breakouts fail more often
+    than they used to.
+
+**READ TOGETHER: THE FAIL FITS WHAT IS KNOWN.** Where breakouts are
+reported to work in crypto it is on daily candles, buying only, in
+rising years, living off a handful of huge winners. Our ten months fell
+25%, and our rule capped every winner. **Nothing found says this test
+was unfair to the rule AS DECLARED. What was found does say that the
+declared shape (fixed target, both directions, 4-hour) is not the shape
+the evidence supports** - which is information for the paper-watch list
+and for his open question about exits, and for nothing else.
+
+Sources: concretumgroup.com/catching-crypto-trends-a-tactical-approach-for-bitcoin-and-altcoins ;
+ideas.repec.org/p/chf/rpseri/rp2580.html ;
+cxoadvisory.com/technical-trading/crypto-asset-trend-following-strategies ;
+cryptohopper.com/news/exchange/binance/924-trader-series-part-2-trading-systems-for-cryptocurrencies ;
+therighttrader.com/learn/trading-strategies/turtle-trading ;
+altrady.com/academy/crypto-trading-tutorials .
+
+## 8. WHAT THE RUN SHOWED ABOUT THE MACHINERY
+
+It ran clean: the marker went down first, three coins loaded, 0 look-ahead
+violations, the pooled count is the three coins' added up (25 + 26 + 21 =
+72), and the report's figures match the saved trade file re-worked by
+hand afterwards (72 trades, 30 won, Profit Factor 0.918, -3.48% summed).
+
+## 9. WHAT I GOT WRONG, AND WHAT I LOOKED AT
+
+1. **I RAN THE SHIP'S GATES IN TWO STREAMS AT ONCE** instead of one after
+   another, without a bar for it. Nothing went red, so nothing had to be
+   re-run alone; had something gone red I could not have said whether
+   the crowding caused it.
+2. **MY RED-COUNTER SAW THE COLLECTION GUARD AS "0 GREEN"** because that
+   gate prints no ticks. Read by eye; its verdict line is PASSED.
+3. **I ASKED HIM FOR THE GO ON IDEA 1 BEFORE THE SHIP WAS PROVED ALIVE**,
+   as a conditional ("if it comes back all green"). The condition was
+   met and the pre-flight was done before the run. It is still a go
+   given ahead of the pre-flight rather than after it, and it is said.
+
+**LOOKED AT: SLOT 1's RESULT ON THE HOLD-OUT - the printed report and
+the saved trade file, which carries entry and exit prices of 72 trades
+on the three coins' 4-hour candles between 2025-10-01 and 2026-07-26.
+THE VAULT's OWN FILES WERE NOT OPENED. NOT ONE HOLD-OUT MOOD VALUE HAS
+BEEN LOOKED AT. SLOT 3 IS SET UP AND UNSPENT.**

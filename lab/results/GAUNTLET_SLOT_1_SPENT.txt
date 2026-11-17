@@ -1,0 +1,8 @@
+GAUNTLET SLOT 1 — SPENT
+strategy  : turtle-4h-20c-10w-adx25
+params    : {'entry_candles': 20, 'weeks': 10, 'week_candles': 42, 'adx_min': 25.0, 'adx_period': 14, 'adx_tail': 150, 'warmup': 379, 'kind': 'donchian_breakout'}
+commit    : 0ce4070
+started   : 2026-11-17T14:05:59
+train_end : 2025-10-01
+finished  : 2026-11-17T14:06:09
+verdict   : FAILED
