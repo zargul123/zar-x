@@ -21675,3 +21675,60 @@ first (its public file archive and its website's own funding endpoint);
 (c) the cloud for prices, mood and the trend rule, the laptop for
 funding; (d) a small rented machine outside the United States; (e) stay
 on the laptop with catch-up, as built.
+
+## >>> 2026-11-17 (NIGHT) - **THE SECOND CLOUD PROBE, ON HIS ORDER ("ok check binance source funding on 2 other places and then tell me first?"). MEASURED: BINANCE's OWN WEBSITE HOST SERVES THE FUNDING TO GITHUB's MACHINE, AND ITS ROWS ARE THE FUTURES API's ROWS, ROW FOR ROW. THE PAPER-WATCH WAS STILL NOT MOVED.**
+
+`journal/cloud_probe.py` gained a section (pushed, `92c451b`). The
+cloud's answer, 2026-11-17 16:44 UTC, the new lines unedited:
+
+    2b. TWO MORE BINANCE DOORS FOR FUNDING (second probe)
+    archive  monthly file (2026-10)    status 200  rows 93  newest row 2026-10-31
+    archive  monthly file (2026-11)    status 404
+    archive  daily file (2026-11-15)   status 404
+    archive  what it has per DAY       status 200  aggTrades, bookDepth, bookTicker, indexPriceKlines, klines, markPriceKlines, metrics, premiumIndexKlines, trades
+    website  www.binance.com/fapi      status 200  rows 5  newest row 2026-11-17
+    website  funding-history page      status 200  rows 5  newest row 2026-11-17
+
+(The rest as before: candles and mood 200; `fapi.binance.com` 451; the
+ledger identical; Gate 7.1, 106 checks, 0 red.)
+
+**WHAT IT SAYS:**
+
+  * **THE FILE ARCHIVE IS NO USE FOR A DAILY TRACKER.** It is served, but
+    funding comes one file a MONTH, after the month ends; there is no
+    daily funding file (the daily folders hold nine other kinds).
+  * **`https://www.binance.com/fapi/v1/fundingRate` ANSWERS FROM THE
+    CLOUD, WITH TODAY's ROWS.** It is the same address as the futures
+    API's with the website's host in front.
+  * **AND IT IS THE SAME DATA - MEASURED FROM THE LAPTOP, WHICH CAN REACH
+    BOTH:** for all thirteen coins, 990 settlements each over the last
+    330 days, the website's rows equal the futures API's in time and in
+    rate text: **12,870 OF 12,870 IDENTICAL.** No rate was printed.
+
+**SO THE CLOUD CAN HAVE EVERYTHING THE PAPER-WATCH NEEDS, UNCHANGED:**
+Binance spot candles, Binance funding by the website host, the mood.
+The frozen rules would be fed exactly what they are fed on the laptop.
+
+**WHAT I TOLD HIM WITH IT, AND WHAT IS FILED:**
+
+  * **IT IS NOT A DOCUMENTED DOOR.** Binance's published address for this
+    data is `fapi.binance.com`, and that one refuses GitHub's machines by
+    design ("restricted location"). The website host serving the same
+    public figures may be an oversight, and Binance can shut it any day
+    without a word. If it does, the cloud run will name funding as not
+    updated; the combined rule's funding reading goes empty for that day
+    and stays empty in its 91-day window (R-094 item 11) **UNLESS THE
+    STORE IS FILLED FROM THE LAPTOP FIRST** - which needs a rule about
+    who writes, and is not built.
+  * **IT IS PUBLIC MARKET DATA, READ ONLY, WITH NO ACCOUNT AND NO KEY**,
+    and he is in Pakistan, where Binance serves him. I still put the
+    point to him in plain words: the block exists because of where
+    GitHub's machines are, and going round it by another host is his
+    decision, not mine.
+  * One probe, one coin, one moment. **NOT MEASURED:** whether that host
+    serves a thousand rows a page there as it does here, whether it
+    limits how often it may be asked, and whether it answers every day.
+
+**NOT DONE, AND WAITING FOR HIS WORD:** moving the tracker. When it is
+done it is a build - a bar first - with the one-writer rule in the same
+change (R-094 item 6).
