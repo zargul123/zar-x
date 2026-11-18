@@ -1,8 +1,8 @@
 # Zar X — THE PAPER-WATCH, THE CLOUD's OWN RECORD.
 # PAPER ONLY. NO MONEY. It holds no key and sends no order anywhere.
 #
-# Three times each morning (00:07, 01:07 and 03:07 UTC = 05:07, 06:07 and
-# 08:07 in Pakistan) it works the cloud's paper record, journal/paper_cloud/,
+# Every hour, at seven minutes past, it asks GitHub to run (see the note above "on:"). When a run
+# happens it works the cloud's paper record, journal/paper_cloud/,
 # and commits it with two text reports. The second and third runs are there
 # in case the first is late or a source is down: a run with nothing new
 # writes nothing new to the record.
@@ -16,9 +16,17 @@
 
 name: Paper Watch (cloud record)
 
+# MEASURED 2026-11-18: GitHub's clock is NOT to be trusted on this repository.
+# The snapshot job is set for six runs a day and gets two or three, hours
+# late; the three morning times first set here (00:07, 01:07, 03:07 UTC)
+# produced no run at all by 05:40 UTC. So this job now ASKS EVERY HOUR, and
+# commits only when the record itself has something new (or something is
+# wrong). Whichever asking GitHub honours first after 00:00 UTC does the
+# morning's work; the rest find nothing to do.
+
 on:
   schedule:
-    - cron: '7 0,1,3 * * *'
+    - cron: '7 * * * *'
   push:
     paths:
       - '.github/workflows/paper_cloud.yml'
@@ -66,8 +74,12 @@ jobs:
         run: |
           git config user.name "zarx-cloud-watchman"
           git config user.email "actions@github.com"
-          git add journal/paper_cloud journal/paper_cloud_report.txt journal/paper_cloud_week.txt
-          git diff --cached --quiet && echo "Nothing new" && exit 0
+          git add journal/paper_cloud
+          if git diff --cached --quiet && [ "${{ steps.work.outputs.code }}" = "0" ]; then
+            echo "Nothing new in the record"
+            exit 0
+          fi
+          git add journal/paper_cloud_report.txt journal/paper_cloud_week.txt
           git commit -m "cloud: paper-watch $(date -u '+%Y-%m-%d %H:%M') UTC"
           git pull --rebase origin main
           git push origin main
