@@ -22024,3 +22024,32 @@ is given below.
     SOL-USD   1207 settlements, newest 2026-11-18 00:00 UTC
     UNI-USD   1207 settlements, newest 2026-11-18 00:00 UTC
     XRP-USD   1207 settlements, newest 2026-11-18 00:00 UTC
+
+## >>> 2026-11-18 - **HE ORDERED A DAILY CHECK OF THE CLOUD AND A REPORT AFTER TWO DAYS. TWO SCHEDULED TASKS ARE SET IN HIS CLAUDE APP. THEY READ; THEY CHANGE NOTHING. NO CODE CHANGED.**
+
+His words: "so you have to check daily the git that it is doing work or
+not that your job now. ok. and tell me after 2 days".
+
+    zarx-cloud-paper-daily-check     every day, about 11:00 Pakistan time
+    zarx-cloud-paper-two-day-report  once, 2026-11-20 11:30 Pakistan time
+
+Each run is a fresh session with no memory. Its instructions are in the
+task itself (`C:\Users\hp\.claude\scheduled-tasks\`, not in this repo):
+`git fetch`, GitHub's public list of runs, the cloud's report and its
+funding file; **READ ONLY - no commit, push, pull, merge or edit, never
+`--go`, never run the tracker, and report a fault without repairing it.**
+It reports, per day since 2026-11-18: how many of the hourly askings
+GitHub honoured, when the first run after 00:00 UTC came, whether funding
+arrived, whether the two records agree, any alarm.
+
+**WHAT HE WAS TOLD:** the tasks run only while his Claude app is open; if
+it is closed when one is due, it runs when he next opens it. They were
+saved in the app's Auto mode. **AND THE LIMIT: THIS WATCHES THE CLOUD, IT
+DOES NOT MAKE THE CLOUD RUN.** If the two-day report says GitHub's clock
+is not good enough, the choices already put to him stand: an outside
+daily trigger (its access code his to create and paste, never a
+session's to handle) or the laptop's 5:05 task set to wake the machine.
+
+**FOR THE NEXT ZAR X SESSION:** ask him what the two-day report said, or
+measure it again yourself (`SESSION_ORDERS.md`, job 3). The daily task
+keeps running until he switches it off in the app.
