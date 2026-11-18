@@ -21964,3 +21964,63 @@ in the reply this entry is written beside.
 
 **The cloud's first report (the same 26 signals already seen) and five
 file sizes and checksums. Nothing else.**
+
+## >>> 2026-11-18, 05:40 UTC - **HE ASKED WHETHER THE CLOUD GOT THE MORNING. IT HAD NOT: GITHUB's CLOCK GAVE THE PAPER JOB NO RUN AT ALL FOR 00:07, 01:07 OR 03:07 UTC. MEASURED, REPAIRED AS FAR AS IT CAN BE, AND THE MORNING WORKED BY A RUN I STARTED. THE RECORD ITSELF IS RIGHT.**
+
+His words: "just check everything is aright like git get the morning
+detail and whats s teh status now and does git get the funding rate from
+binance".
+
+**WHAT I FOUND, 05:42 UTC:** the last commit to the cloud's record was
+still last night's, 2026-11-17 17:01 UTC. GitHub's own list of runs
+(public, read without a key) showed NOT ONE scheduled run of "Paper
+Watch (cloud record)" - only the run my push started. **R-094 ITEM 30 HAD
+SAID "NOT MEASURED: ONE REAL SCHEDULED RUN". MEASURED NOW: NONE CAME.**
+
+**AND THE SAME LIST SHOWS IT IS NOT NEW:** the snapshot job is set for
+six runs a day (every four hours, five past) and its runs for ten days
+are two or three a day at times like 06:08, 18:19, 02:52, 13:05, 23:27 -
+hours after the times asked for, most of them never run at all. **THE
+"CLOUD WATCHMAN EVERY FOUR HOURS" THIS SHIP HAS DESCRIBED SINCE JULY HAS
+BEEN RUNNING ABOUT TWICE A DAY.** I told him yesterday the timer was
+"usually a few minutes late, sometimes up to an hour". **THAT WAS WRONG,
+AND I HAD NOT MEASURED IT.**
+
+**THE REPAIR (workflow only; not one line of the tracker):**
+`.github/workflows/paper_cloud.yml` now asks EVERY HOUR at seven past
+(`7 * * * *`) instead of three times a morning, and commits only when the
+record itself has something new, or something is wrong. Whichever asking
+GitHub honours first after 00:00 UTC does the morning's work. **THIS
+MAKES A RUN LIKELIER, NOT CERTAIN: IF GITHUB HONOURS ABOUT TWO ASKINGS IN
+SIX, THE FIRST AFTER MIDNIGHT MAY STILL BE HOURS LATE.** A row written
+more than six hours after its day opens says LATE, as built.
+
+**THE MORNING, WORKED BY THE RUN THAT PUSH STARTED - 2026-11-18 05:43:53
+UTC:**
+
+    last completed day in the store: 2026-11-17
+    NEW THIS RUN - 0 signal(s), 0 ending(s)
+    OPEN NOW - 26 trade(s) with at least one ending still open
+    THE TWO RECORDS AGREE: all 26 rows both hold are the same in the
+    cloud's record and the laptop's, and neither lacks a row dated up
+    to 2026-11-16
+
+Nothing ended on the 17th: no stop and no target was touched on any of
+the thirteen coins. No new signal: every rule already has its trade open
+on every coin. **THE FUNDING CAME THROUGH THE WEBSITE's DOOR AGAIN** - no
+"not updated" line for any coin; the newest settlement stored for each
+is given below.
+
+    AAVE-USD  1207 settlements, newest 2026-11-18 00:00 UTC
+    ADA-USD   1207 settlements, newest 2026-11-18 00:00 UTC
+    AVAX-USD  1207 settlements, newest 2026-11-18 00:00 UTC
+    BCH-USD   1207 settlements, newest 2026-11-18 00:00 UTC
+    BNB-USD   1207 settlements, newest 2026-11-18 00:00 UTC
+    BTC-USD   1207 settlements, newest 2026-11-18 00:00 UTC
+    DOGE-USD  1207 settlements, newest 2026-11-18 00:00 UTC
+    ETH-USD   1207 settlements, newest 2026-11-18 00:00 UTC
+    LINK-USD  1207 settlements, newest 2026-11-18 00:00 UTC
+    NEAR-USD  1207 settlements, newest 2026-11-18 00:00 UTC
+    SOL-USD   1207 settlements, newest 2026-11-18 00:00 UTC
+    UNI-USD   1207 settlements, newest 2026-11-18 00:00 UTC
+    XRP-USD   1207 settlements, newest 2026-11-18 00:00 UTC
