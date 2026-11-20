@@ -4,7 +4,7 @@ PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
 ==============================================================================
   THIS IS THE CLOUD's RECORD (journal/paper_cloud/)
   followed since 2026-11-16; last completed day in the store: 2026-11-19
-  this run: 2026-11-20 02:58:36 UTC
+  this run: 2026-11-20 11:18:46 UTC
 
 NEW THIS RUN - 0 signal(s), 0 ending(s)
 
@@ -63,7 +63,7 @@ THE PORTFOLIO LINE - the same trades under a limit (way B). Not used to judge a 
 HEALTH
   signals written ON TIME (within 6 hours of the entry day opening): 0
   signals written LATE (worked out afterwards): 26
-  THE TWO RECORDS AGREE: all 26 rows both hold are the same in the cloud's record and the laptop's, and neither lacks a row dated up to 2026-11-16
+  THE TWO RECORDS AGREE: all 26 rows both hold are the same in the cloud's record and the laptop's, and neither lacks a row dated up to 2026-11-18
 
 Not counted: funding paid or received while a position is held. Prices are spot.
 PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
