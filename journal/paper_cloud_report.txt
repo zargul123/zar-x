@@ -3,17 +3,17 @@ ZAR X - THE PAPER-WATCH
 PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
 ==============================================================================
   THIS IS THE CLOUD's RECORD (journal/paper_cloud/)
-  followed since 2026-11-16; last completed day in the store: 2026-11-19
-  this run: 2026-11-20 19:58:04 UTC
+  followed since 2026-11-16; last completed day in the store: 2026-11-20
+  this run: 2026-11-21 01:21:25 UTC
 
 NEW THIS RUN - 0 signal(s), 0 ending(s)
 
 OPEN NOW - 26 trade(s) with at least one ending still open
-  combined rule BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: stop 69,350.53 target 55,850.25 | trailing: stop now 69,350.53
-  combined rule ETH   SHORT since 2026-11-17 at 1,820.68 | fixed: stop 2,000.41 target 1,458.49 | trailing: stop now 2,000.41
+  combined rule BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: stop 69,350.53 target 55,850.25 | trailing: stop now 67,951.70
+  combined rule ETH   SHORT since 2026-11-17 at 1,820.68 | fixed: stop 2,000.41 target 1,458.49 | trailing: stop now 1,984.37
   combined rule SOL   SHORT since 2026-11-17 at 71.5800 | fixed: stop 78.9606 target 56.7114 | trailing: stop now 78.9606
   combined rule XRP   SHORT since 2026-11-17 at 0.9553 | fixed: stop 1.0539 target 0.7566 | trailing: stop now 1.0539
-  combined rule BNB   SHORT since 2026-11-17 at 591.24 | fixed: stop 630.32 target 512.19 | trailing: stop now 630.32
+  combined rule BNB   SHORT since 2026-11-17 at 591.24 | fixed: stop 630.32 target 512.19 | trailing: stop now 619.59
   combined rule DOGE  SHORT since 2026-11-17 at 0.0589 | fixed: stop 0.0650 target 0.0467 | trailing: stop now 0.0650
   combined rule NEAR  SHORT since 2026-11-17 at 3.1610 | fixed: stop 3.6338 target 2.2106 | trailing: stop now 3.6338
   combined rule UNI   SHORT since 2026-11-17 at 5.1690 | fixed: stop 6.0629 target 3.3735 | trailing: stop now 6.0629
@@ -22,11 +22,11 @@ OPEN NOW - 26 trade(s) with at least one ending still open
   combined rule ADA   SHORT since 2026-11-17 at 0.1532 | fixed: stop 0.1711 target 0.1172 | trailing: stop now 0.1711
   combined rule AAVE  SHORT since 2026-11-17 at 108.55 | fixed: stop 122.06 target 81.3736 | trailing: stop now 122.06
   combined rule BCH   SHORT since 2026-11-17 at 208.60 | fixed: stop 230.95 target 163.58 | trailing: stop now 230.95
-  trend alone   BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: stop 69,350.53 target 55,850.25 | trailing: stop now 69,350.53
-  trend alone   ETH   SHORT since 2026-11-17 at 1,820.68 | fixed: stop 2,000.41 target 1,458.49 | trailing: stop now 2,000.41
+  trend alone   BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: stop 69,350.53 target 55,850.25 | trailing: stop now 67,951.70
+  trend alone   ETH   SHORT since 2026-11-17 at 1,820.68 | fixed: stop 2,000.41 target 1,458.49 | trailing: stop now 1,984.37
   trend alone   SOL   SHORT since 2026-11-17 at 71.5800 | fixed: stop 78.9606 target 56.7114 | trailing: stop now 78.9606
   trend alone   XRP   SHORT since 2026-11-17 at 0.9553 | fixed: stop 1.0539 target 0.7566 | trailing: stop now 1.0539
-  trend alone   BNB   SHORT since 2026-11-17 at 591.24 | fixed: stop 630.32 target 512.19 | trailing: stop now 630.32
+  trend alone   BNB   SHORT since 2026-11-17 at 591.24 | fixed: stop 630.32 target 512.19 | trailing: stop now 619.59
   trend alone   DOGE  SHORT since 2026-11-17 at 0.0589 | fixed: stop 0.0650 target 0.0467 | trailing: stop now 0.0650
   trend alone   NEAR  SHORT since 2026-11-17 at 3.1610 | fixed: stop 3.6338 target 2.2106 | trailing: stop now 3.6338
   trend alone   UNI   SHORT since 2026-11-17 at 5.1690 | fixed: stop 6.0629 target 3.3735 | trailing: stop now 6.0629
