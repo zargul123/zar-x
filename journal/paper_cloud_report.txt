@@ -3,17 +3,27 @@ ZAR X - THE PAPER-WATCH
 PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
 ==============================================================================
   THIS IS THE CLOUD's RECORD (journal/paper_cloud/)
-  followed since 2026-11-16; last completed day in the store: 2026-11-20
-  this run: 2026-11-21 17:20:04 UTC
+  followed since 2026-11-16; last completed day in the store: 2026-11-21
+  this run: 2026-11-22 02:58:20 UTC
 
-NEW THIS RUN - 0 signal(s), 0 ending(s)
+NEW THIS RUN - 4 signal(s), 4 ending(s)
+  ENDED   combined rule BTC   SHORT fixed exit    on 2026-11-21 (target): +19.80 dollars
+  ENDED   combined rule BNB   SHORT fixed exit    on 2026-11-21 (target): +19.79 dollars
+  ENDED   trend alone   BTC   SHORT fixed exit    on 2026-11-21 (target): +19.80 dollars
+  ENDED   trend alone   BNB   SHORT fixed exit    on 2026-11-21 (target): +19.79 dollars
+  SIGNAL  combined rule BTC   SHORT entry 2026-11-22 at 60,215.78  stop 65,047.80  target 50,461.42  size 123.78 dollars  [ON TIME]
+  SIGNAL  combined rule BNB   SHORT entry 2026-11-22 at 548.61  stop 593.04  target 458.93  size 122.67 dollars  [ON TIME]
+  SIGNAL  trend alone   BTC   SHORT entry 2026-11-22 at 60,215.78  stop 65,047.80  target 50,461.42  size 123.78 dollars  [ON TIME]
+  SIGNAL  trend alone   BNB   SHORT entry 2026-11-22 at 548.61  stop 593.04  target 458.93  size 122.67 dollars  [ON TIME]
 
-OPEN NOW - 26 trade(s) with at least one ending still open
-  combined rule BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: stop 69,350.53 target 55,850.25 | trailing: stop now 67,951.70
+OPEN NOW - 30 trade(s) with at least one ending still open
+  combined rule BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: ended | trailing: stop now 67,951.70
+  combined rule BTC   SHORT since 2026-11-22 at 60,215.78 | fixed: stop 65,047.80 target 50,461.42 | trailing: stop now 65,047.80
   combined rule ETH   SHORT since 2026-11-17 at 1,820.68 | fixed: stop 2,000.41 target 1,458.49 | trailing: stop now 1,984.37
   combined rule SOL   SHORT since 2026-11-17 at 71.5800 | fixed: stop 78.9606 target 56.7114 | trailing: stop now 78.9606
   combined rule XRP   SHORT since 2026-11-17 at 0.9553 | fixed: stop 1.0539 target 0.7566 | trailing: stop now 1.0539
-  combined rule BNB   SHORT since 2026-11-17 at 591.24 | fixed: stop 630.32 target 512.19 | trailing: stop now 619.59
+  combined rule BNB   SHORT since 2026-11-17 at 591.24 | fixed: ended | trailing: stop now 619.59
+  combined rule BNB   SHORT since 2026-11-22 at 548.61 | fixed: stop 593.04 target 458.93 | trailing: stop now 593.04
   combined rule DOGE  SHORT since 2026-11-17 at 0.0589 | fixed: stop 0.0650 target 0.0467 | trailing: stop now 0.0650
   combined rule NEAR  SHORT since 2026-11-17 at 3.1610 | fixed: stop 3.6338 target 2.2106 | trailing: stop now 3.6338
   combined rule UNI   SHORT since 2026-11-17 at 5.1690 | fixed: stop 6.0629 target 3.3735 | trailing: stop now 6.0629
@@ -22,11 +32,13 @@ OPEN NOW - 26 trade(s) with at least one ending still open
   combined rule ADA   SHORT since 2026-11-17 at 0.1532 | fixed: stop 0.1711 target 0.1172 | trailing: stop now 0.1711
   combined rule AAVE  SHORT since 2026-11-17 at 108.55 | fixed: stop 122.06 target 81.3736 | trailing: stop now 122.06
   combined rule BCH   SHORT since 2026-11-17 at 208.60 | fixed: stop 230.95 target 163.58 | trailing: stop now 230.95
-  trend alone   BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: stop 69,350.53 target 55,850.25 | trailing: stop now 67,951.70
+  trend alone   BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: ended | trailing: stop now 67,951.70
+  trend alone   BTC   SHORT since 2026-11-22 at 60,215.78 | fixed: stop 65,047.80 target 50,461.42 | trailing: stop now 65,047.80
   trend alone   ETH   SHORT since 2026-11-17 at 1,820.68 | fixed: stop 2,000.41 target 1,458.49 | trailing: stop now 1,984.37
   trend alone   SOL   SHORT since 2026-11-17 at 71.5800 | fixed: stop 78.9606 target 56.7114 | trailing: stop now 78.9606
   trend alone   XRP   SHORT since 2026-11-17 at 0.9553 | fixed: stop 1.0539 target 0.7566 | trailing: stop now 1.0539
-  trend alone   BNB   SHORT since 2026-11-17 at 591.24 | fixed: stop 630.32 target 512.19 | trailing: stop now 619.59
+  trend alone   BNB   SHORT since 2026-11-17 at 591.24 | fixed: ended | trailing: stop now 619.59
+  trend alone   BNB   SHORT since 2026-11-22 at 548.61 | fixed: stop 593.04 target 458.93 | trailing: stop now 593.04
   trend alone   DOGE  SHORT since 2026-11-17 at 0.0589 | fixed: stop 0.0650 target 0.0467 | trailing: stop now 0.0650
   trend alone   NEAR  SHORT since 2026-11-17 at 3.1610 | fixed: stop 3.6338 target 2.2106 | trailing: stop now 3.6338
   trend alone   UNI   SHORT since 2026-11-17 at 5.1690 | fixed: stop 6.0629 target 3.3735 | trailing: stop now 6.0629
@@ -39,29 +51,29 @@ OPEN NOW - 26 trade(s) with at least one ending still open
 THE RECORD - every signal, the same 1% at risk each, on a pretend 1,000 dollars
   ("days" = different entry days: ten coins signalling on one day is one market move)
   record                                        trades  days   won     PF   1,000 became   worst dip
-  combined rule / fixed exit / 13 coins              0     0     0      -       1,000.00        0.0%
-  combined rule / fixed exit / original 3            0     0     0      -       1,000.00        0.0%
+  combined rule / fixed exit / 13 coins              2     1     2      -       1,039.99        0.0%
+  combined rule / fixed exit / original 3            1     1     1      -       1,019.80        0.0%
   combined rule / trailing exit / 13 coins           0     0     0      -       1,000.00        0.0%
   combined rule / trailing exit / original 3         0     0     0      -       1,000.00        0.0%
-  trend alone / fixed exit / 13 coins                0     0     0      -       1,000.00        0.0%
-  trend alone / fixed exit / original 3              0     0     0      -       1,000.00        0.0%
+  trend alone / fixed exit / 13 coins                2     1     2      -       1,039.99        0.0%
+  trend alone / fixed exit / original 3              1     1     1      -       1,019.80        0.0%
   trend alone / trailing exit / 13 coins             0     0     0      -       1,000.00        0.0%
   trend alone / trailing exit / original 3           0     0     0      -       1,000.00        0.0%
 
 THE PORTFOLIO LINE - the same trades under a limit (way B). Not used to judge a rule.
   limit on total open risk: 4% of the account (not final - his to change)
   record                                         1,000 became   full  reduced  not taken
-  combined rule / fixed exit / 13 coins              1,000.00      0       13          0
-  combined rule / fixed exit / original 3            1,000.00      3        0          0
-  combined rule / trailing exit / 13 coins           1,000.00      0       13          0
-  combined rule / trailing exit / original 3         1,000.00      3        0          0
-  trend alone / fixed exit / 13 coins                1,000.00      0       13          0
-  trend alone / fixed exit / original 3              1,000.00      3        0          0
-  trend alone / trailing exit / 13 coins             1,000.00      0       13          0
-  trend alone / trailing exit / original 3           1,000.00      3        0          0
+  combined rule / fixed exit / 13 coins              1,012.22      0       15          0
+  combined rule / fixed exit / original 3            1,019.80      4        0          0
+  combined rule / trailing exit / 13 coins           1,000.00      0       13          2
+  combined rule / trailing exit / original 3         1,000.00      4        0          0
+  trend alone / fixed exit / 13 coins                1,012.22      0       15          0
+  trend alone / fixed exit / original 3              1,019.80      4        0          0
+  trend alone / trailing exit / 13 coins             1,000.00      0       13          2
+  trend alone / trailing exit / original 3           1,000.00      4        0          0
 
 HEALTH
-  signals written ON TIME (within 6 hours of the entry day opening): 0
+  signals written ON TIME (within 6 hours of the entry day opening): 4
   signals written LATE (worked out afterwards): 26
   THE TWO RECORDS AGREE: all 26 rows both hold are the same in the cloud's record and the laptop's, and neither lacks a row dated up to 2026-11-18
 
