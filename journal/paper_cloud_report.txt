@@ -4,17 +4,9 @@ PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
 ==============================================================================
   THIS IS THE CLOUD's RECORD (journal/paper_cloud/)
   followed since 2026-11-16; last completed day in the store: 2026-11-21
-  this run: 2026-11-22 02:58:20 UTC
+  this run: 2026-11-22 11:02:12 UTC
 
-NEW THIS RUN - 4 signal(s), 4 ending(s)
-  ENDED   combined rule BTC   SHORT fixed exit    on 2026-11-21 (target): +19.80 dollars
-  ENDED   combined rule BNB   SHORT fixed exit    on 2026-11-21 (target): +19.79 dollars
-  ENDED   trend alone   BTC   SHORT fixed exit    on 2026-11-21 (target): +19.80 dollars
-  ENDED   trend alone   BNB   SHORT fixed exit    on 2026-11-21 (target): +19.79 dollars
-  SIGNAL  combined rule BTC   SHORT entry 2026-11-22 at 60,215.78  stop 65,047.80  target 50,461.42  size 123.78 dollars  [ON TIME]
-  SIGNAL  combined rule BNB   SHORT entry 2026-11-22 at 548.61  stop 593.04  target 458.93  size 122.67 dollars  [ON TIME]
-  SIGNAL  trend alone   BTC   SHORT entry 2026-11-22 at 60,215.78  stop 65,047.80  target 50,461.42  size 123.78 dollars  [ON TIME]
-  SIGNAL  trend alone   BNB   SHORT entry 2026-11-22 at 548.61  stop 593.04  target 458.93  size 122.67 dollars  [ON TIME]
+NEW THIS RUN - 0 signal(s), 0 ending(s)
 
 OPEN NOW - 30 trade(s) with at least one ending still open
   combined rule BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: ended | trailing: stop now 67,951.70
