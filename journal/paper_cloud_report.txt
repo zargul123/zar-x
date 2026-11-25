@@ -3,8 +3,8 @@ ZAR X - THE PAPER-WATCH
 PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
 ==============================================================================
   THIS IS THE CLOUD's RECORD (journal/paper_cloud/)
-  followed since 2026-11-16; last completed day in the store: 2026-11-23
-  this run: 2026-11-24 17:28:23 UTC
+  followed since 2026-11-16; last completed day in the store: 2026-11-24
+  this run: 2026-11-25 02:13:55 UTC
 
 NEW THIS RUN - 0 signal(s), 0 ending(s)
 
@@ -22,7 +22,7 @@ OPEN NOW - 30 trade(s) with at least one ending still open
   combined rule LINK  SHORT since 2026-11-17 at 9.1420 | fixed: stop 10.1305 target 7.1512 | trailing: stop now 10.1305
   combined rule AVAX  SHORT since 2026-11-17 at 7.1200 | fixed: stop 8.0465 target 5.2562 | trailing: stop now 8.0465
   combined rule ADA   SHORT since 2026-11-17 at 0.1532 | fixed: stop 0.1711 target 0.1172 | trailing: stop now 0.1711
-  combined rule AAVE  SHORT since 2026-11-17 at 108.55 | fixed: stop 122.06 target 81.3736 | trailing: stop now 122.06
+  combined rule AAVE  SHORT since 2026-11-17 at 108.55 | fixed: stop 122.06 target 81.3736 | trailing: stop now 121.19
   combined rule BCH   SHORT since 2026-11-17 at 208.60 | fixed: stop 230.95 target 163.58 | trailing: stop now 230.95
   trend alone   BTC   SHORT since 2026-11-17 at 64,882.88 | fixed: ended | trailing: stop now 67,951.70
   trend alone   BTC   SHORT since 2026-11-22 at 60,215.78 | fixed: stop 65,047.80 target 50,461.42 | trailing: stop now 65,047.80
@@ -37,7 +37,7 @@ OPEN NOW - 30 trade(s) with at least one ending still open
   trend alone   LINK  SHORT since 2026-11-17 at 9.1420 | fixed: stop 10.1305 target 7.1512 | trailing: stop now 10.1305
   trend alone   AVAX  SHORT since 2026-11-17 at 7.1200 | fixed: stop 8.0465 target 5.2562 | trailing: stop now 8.0465
   trend alone   ADA   SHORT since 2026-11-17 at 0.1532 | fixed: stop 0.1711 target 0.1172 | trailing: stop now 0.1711
-  trend alone   AAVE  SHORT since 2026-11-17 at 108.55 | fixed: stop 122.06 target 81.3736 | trailing: stop now 122.06
+  trend alone   AAVE  SHORT since 2026-11-17 at 108.55 | fixed: stop 122.06 target 81.3736 | trailing: stop now 121.19
   trend alone   BCH   SHORT since 2026-11-17 at 208.60 | fixed: stop 230.95 target 163.58 | trailing: stop now 230.95
 
 THE RECORD - every signal, the same 1% at risk each, on a pretend 1,000 dollars
