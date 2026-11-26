@@ -1,5 +1,5 @@
 ==============================================================================
-ZAR X - THE PAPER-WATCH - THE WEEK 2026-11-18 to 2026-11-24
+ZAR X - THE PAPER-WATCH - THE WEEK 2026-11-19 to 2026-11-25
 PAPER ONLY. NO MONEY. NO ORDER IS EVER SENT.
   THIS IS THE CLOUD's RECORD (journal/paper_cloud/)
 NUMBERS ONLY. The reading of them is done in a session: say "weekly autopsy".
@@ -28,21 +28,21 @@ THE TWO EXITS ON THE SAME TRADES (every trade both of whose endings have happene
   trend alone      0 trades: fixed     +0.00, trailing     +0.00 dollars; trailing did better on 0, worse on 0, the same on 0
 
 THE MARKET THIS WEEK
-  BTC     -7.88% over the week; below its 100-day average
-  ETH     -7.93% over the week; below its 100-day average
-  SOL     -7.31% over the week; below its 100-day average
-  XRP     -5.96% over the week; below its 100-day average
-  BNB     -8.18% over the week; below its 100-day average
-  DOGE    -8.01% over the week; below its 100-day average
-  NEAR   -14.90% over the week; below its 100-day average
-  UNI    -11.21% over the week; below its 100-day average
-  LINK    -5.10% over the week; below its 100-day average
-  AVAX    -9.89% over the week; below its 100-day average
-  ADA     -6.95% over the week; below its 100-day average
-  AAVE   -16.53% over the week; below its 100-day average
-  BCH     -6.96% over the week; below its 100-day average
+  BTC     -4.14% over the week; below its 100-day average
+  ETH     -4.76% over the week; below its 100-day average
+  SOL     -4.30% over the week; below its 100-day average
+  XRP     -3.08% over the week; below its 100-day average
+  BNB     -4.92% over the week; below its 100-day average
+  DOGE    -4.64% over the week; below its 100-day average
+  NEAR    -7.51% over the week; below its 100-day average
+  UNI     -8.44% over the week; below its 100-day average
+  LINK    -0.30% over the week; below its 100-day average
+  AVAX    -5.70% over the week; below its 100-day average
+  ADA     -3.63% over the week; below its 100-day average
+  AAVE   -12.80% over the week; below its 100-day average
+  BCH     -1.39% over the week; below its 100-day average
   above their 100-day average: 0; below: 13
-  mood index this week: from 10 to 12 (last: 11, Extreme Fear)
+  mood index this week: from 10 to 13 (last: 13, Extreme Fear)
 
 THE RECORD SINCE THE START
   record                                        trades  days   won     PF   1,000 became   worst dip
